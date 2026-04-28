@@ -90,24 +90,32 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
         for ci, cj, q_pair in pairs:
             centroid = CV[ci] + CV[cj]
             n = float(np.linalg.norm(centroid))
-            # Cast to float32: dividing float32 by Python float upcasts to float64,
-            # which causes hnswlib knn_query to silently under-return results.
-            centroid = (centroid / n).astype(np.float32) if n else centroid
-            labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
+            centroid = (centroid / n).astype(np.float32) if n else centroid.astype(np.float32)
+            try:
+                labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
+                cands_iter = (int(bi) for bi in labels[0])
+            except RuntimeError:
+                # Rare: hnswlib fails for this centroid — brute-force fallback
+                sims = BV @ centroid
+                top = np.argpartition(-sims, _K)[:_K]
+                cands_iter = (int(b) for b in top[np.argsort(-sims[top])])
             found = False
-            for bi in labels[0]:
-                bi = int(bi)
+            for bi in cands_iter:
                 if bi not in bridge_taken:
                     bridge_taken.add(bi)
                     triads.append((ci, cj, bi, q_pair))
                     found = True
                     break
             if not found:
-                # Rare: top-K all taken — expand search
-                labels2, _ = bidx.knn_query(centroid.reshape(1, -1),
-                                            k=_BRIDGE_K_EXPAND)
-                for bi in labels2[0]:
-                    bi = int(bi)
+                # All top-K taken — expand search
+                try:
+                    labels2, _ = bidx.knn_query(centroid.reshape(1, -1),
+                                                k=_BRIDGE_K_EXPAND)
+                    expand_iter = (int(bi) for bi in labels2[0])
+                except RuntimeError:
+                    sims = BV @ centroid
+                    expand_iter = (int(b) for b in np.argsort(-sims))
+                for bi in expand_iter:
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)
                         triads.append((ci, cj, bi, q_pair))
