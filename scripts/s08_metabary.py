@@ -76,9 +76,11 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
         # k=50 is sufficient — with 1.39M bridges and at most n_pairs taken,
         # the nearest untaken bridge is almost always in the top-50.
         _BRIDGE_K = min(50, n_bridges)
-        _bridge_ef_q = max(200, _BRIDGE_K * 4)
-        _log.info("building bridge HNSW index: n=%d ef_construction=%d M=%d k=%d",
-                  n_bridges, _BRIDGE_EF_C, ANN_M, _BRIDGE_K)
+        _BRIDGE_K_EXPAND = min(n_bridges, _BRIDGE_K * 10)  # used in fallback
+        # ef must exceed the largest k we'll ever query — set to 2× expand k.
+        _bridge_ef_q = max(200, _BRIDGE_K_EXPAND * 2)
+        _log.info("building bridge HNSW index: n=%d ef_construction=%d M=%d k=%d ef=%d",
+                  n_bridges, _BRIDGE_EF_C, ANN_M, _BRIDGE_K, _bridge_ef_q)
         bidx = hnswlib.Index(space="cosine", dim=BV.shape[1])
         bidx.init_index(max_elements=n_bridges, ef_construction=_BRIDGE_EF_C, M=ANN_M)
         bidx.add_items(BV)
@@ -101,9 +103,9 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
                     found = True
                     break
             if not found:
-                # Rare: top-K all taken — expand search up to 500
+                # Rare: top-K all taken — expand search
                 labels2, _ = bidx.knn_query(centroid.reshape(1, -1),
-                                            k=min(n_bridges, _BRIDGE_K * 10))
+                                            k=_BRIDGE_K_EXPAND)
                 for bi in labels2[0]:
                     bi = int(bi)
                     if bi not in bridge_taken:
