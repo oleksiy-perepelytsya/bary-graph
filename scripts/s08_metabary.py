@@ -88,7 +88,9 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
         for ci, cj, q_pair in pairs:
             centroid = CV[ci] + CV[cj]
             n = float(np.linalg.norm(centroid))
-            centroid = centroid / n if n else centroid
+            # Cast to float32: dividing float32 by Python float upcasts to float64,
+            # which causes hnswlib knn_query to silently under-return results.
+            centroid = (centroid / n).astype(np.float32) if n else centroid
             labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
             found = False
             for bi in labels[0]:
