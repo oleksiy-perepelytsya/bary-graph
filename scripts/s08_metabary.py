@@ -29,11 +29,13 @@ STAGE = "08_metabary"
 
 def _load_unparented_bes(coll, level: int) -> tuple[list, list[dict], np.ndarray]:
     """Return (ids, meta_list, V) for unparented BEs at level, streaming into pre-alloc numpy."""
+    query = {"doc_type": "baryedge", "level": level, "parent_edge_id": None}
+    n_docs = coll.count_documents(query)
     ids: list = []
     meta: list[dict] = []
-    V = np.empty((2_000_000, 768), dtype=np.float32)
+    V = np.empty((n_docs, 768), dtype=np.float32)
     for i, doc in enumerate(coll.find(
-        {"doc_type": "baryedge", "level": level, "parent_edge_id": None},
+        query,
         {"_id": 1, "vector": 1, "accumulated_weight": 1},
     )):
         ids.append(doc["_id"])
