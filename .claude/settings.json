@@ -1,11 +1,7 @@
 {
   "mcpServers": {
     "barygraph": {
-      "command": "python",
-      "args": ["-m", "scripts.mcp_server"]
-    },
-    "barygraph-remote": {
-      "command": "scripts/mcp_remote.sh"
+      "command": "/home/alex/Projects/bary-vector/scripts/mcp_remote.sh"
     }
   }
 }
