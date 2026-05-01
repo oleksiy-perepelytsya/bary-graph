@@ -5,13 +5,16 @@ services:
     # MongoDB Community 8.x + bundled mongot (Atlas Search / Vector Search local)
     image: mongodb/mongodb-atlas-local:8
     container_name: barygraph-mongo
+    hostname: barygraph-mongo  # fixed hostname so RS config survives container recreation
     mem_limit: 20g   # 10g→20g: mongot HNSW build on 5.6M+ 768-dim vectors peaks beyond 10g
+    restart: always
     ports:
       # Host port 27117 so tests/dev never collide with other local Mongos.
       - "27117:27017"
     volumes:
       - mongo_data:/data/db
       - mongo_configdb:/data/configdb
+      - mongot_data:/data/mongot
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ping:1}).ok"]
       interval: 5s
@@ -37,4 +40,5 @@ services:
 volumes:
   mongo_data:
   mongo_configdb:
+  mongot_data:
   ollama_models:

@@ -10,6 +10,8 @@ Safeguard: refuses to run if any L≤13 baryedge already exists.
 
 from __future__ import annotations
 
+import os
+import time
 from collections.abc import Sequence
 from datetime import datetime, timezone
 
@@ -77,49 +79,100 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
         # the nearest untaken bridge is almost always in the top-50.
         _BRIDGE_K = min(50, n_bridges)
         _BRIDGE_K_EXPAND = min(n_bridges, _BRIDGE_K * 10)  # used in fallback
-        # ef must exceed the largest k we'll ever query — set to 2× expand k.
-        _bridge_ef_q = max(200, _BRIDGE_K_EXPAND * 2)
-        _log.info("building bridge HNSW index: n=%d ef_construction=%d M=%d k=%d ef=%d",
-                  n_bridges, _BRIDGE_EF_C, ANN_M, _BRIDGE_K, _bridge_ef_q)
+        # Phase 1 only needs ef >= k=50; Phase 2 expand needs ef >= k=500.
+        _p1_ef = max(100, _BRIDGE_K + 1)
+        _bridge_ef_q = max(_BRIDGE_K_EXPAND, _BRIDGE_K + 1)
+        _log.info("building bridge HNSW index: n=%d ef_construction=%d M=%d k=%d p1_ef=%d p2_ef=%d",
+                  n_bridges, _BRIDGE_EF_C, ANN_M, _BRIDGE_K, _p1_ef, _bridge_ef_q)
         bidx = hnswlib.Index(space="cosine", dim=BV.shape[1])
         bidx.init_index(max_elements=n_bridges, ef_construction=_BRIDGE_EF_C, M=ANN_M)
         bidx.add_items(BV)
-        bidx.set_ef(_bridge_ef_q)
+        bidx.set_ef(_p1_ef)
         _log.info("bridge HNSW ready")
 
-        for ci, cj, q_pair in pairs:
-            centroid = CV[ci] + CV[cj]
-            n = float(np.linalg.norm(centroid))
-            centroid = (centroid / n).astype(np.float32) if n else centroid.astype(np.float32)
-            try:
-                labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
-                cands_iter = (int(bi) for bi in labels[0])
-            except RuntimeError:
-                # Rare: hnswlib fails for this centroid — brute-force fallback
-                sims = BV @ centroid
-                top = np.argpartition(-sims, _K)[:_K]
-                cands_iter = (int(b) for b in top[np.argsort(-sims[top])])
+        # Pre-compute all pair centroids for a batched knn_query.
+        # Chunked so we get progress logs and can see the query is making progress.
+        dim = BV.shape[1]
+        n_pairs = len(pairs)
+        centroids = np.empty((n_pairs, dim), dtype=np.float32)
+        for idx, (ci, cj, _) in enumerate(pairs):
+            c = CV[ci] + CV[cj]
+            nn = float(np.linalg.norm(c))
+            centroids[idx] = (c / nn if nn else c).astype(np.float32)
+
+        # Phase 1: chunked batched knn_query — parallelised per chunk, logged per chunk.
+        _BRIDGE_CHUNK = 50_000
+        _num_threads = os.cpu_count() or 4
+        _log.info("bridge knn_query: %d pairs k=%d ef=%d chunk=%d threads=%d",
+                  n_pairs, _BRIDGE_K, _p1_ef, _BRIDGE_CHUNK, _num_threads)
+        all_labels_chunks: list[np.ndarray] = []
+        phase1_ok = True
+        t0 = time.monotonic()
+        try:
+            for start in range(0, n_pairs, _BRIDGE_CHUNK):
+                end = min(start + _BRIDGE_CHUNK, n_pairs)
+                chunk_labels, _ = bidx.knn_query(
+                    centroids[start:end], k=_BRIDGE_K, num_threads=_num_threads)
+                all_labels_chunks.append(chunk_labels)
+                elapsed = time.monotonic() - t0
+                rate = end / elapsed if elapsed > 0 else 0
+                eta = (n_pairs - end) / rate if rate > 0 else float("inf")
+                _log.info("bridge knn_query: %d/%d (%.0f%%) elapsed=%.0fs rate=%.0f/s eta=%.0fs",
+                          end, n_pairs, 100 * end / n_pairs, elapsed, rate, eta)
+        except RuntimeError:
+            phase1_ok = False
+        all_labels = np.vstack(all_labels_chunks) if (phase1_ok and all_labels_chunks) else None
+
+        needs_expand: list[int] = []
+        for idx, (ci, cj, q_pair) in enumerate(pairs):
             found = False
-            for bi in cands_iter:
-                if bi not in bridge_taken:
-                    bridge_taken.add(bi)
-                    triads.append((ci, cj, bi, q_pair))
-                    found = True
-                    break
-            if not found:
-                # All top-K taken — expand search
-                try:
-                    labels2, _ = bidx.knn_query(centroid.reshape(1, -1),
-                                                k=_BRIDGE_K_EXPAND)
-                    expand_iter = (int(bi) for bi in labels2[0])
-                except RuntimeError:
-                    sims = BV @ centroid
-                    expand_iter = (int(b) for b in np.argsort(-sims))
-                for bi in expand_iter:
+            if phase1_ok:
+                for bi in all_labels[idx]:
+                    bi = int(bi)
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)
                         triads.append((ci, cj, bi, q_pair))
+                        found = True
                         break
+            else:
+                sims = BV @ centroids[idx]
+                top = np.argpartition(-sims, _K)[:_K]
+                for bi in top[np.argsort(-sims[top])]:
+                    bi = int(bi)
+                    if bi not in bridge_taken:
+                        bridge_taken.add(bi)
+                        triads.append((ci, cj, bi, q_pair))
+                        found = True
+                        break
+            if not found:
+                needs_expand.append(idx)
+
+        # Phase 2: expand query only for the rare pairs that exhausted top-50.
+        if needs_expand:
+            _log.info("expand batch knn_query: %d pairs k=%d ef=%d",
+                      len(needs_expand), _BRIDGE_K_EXPAND, _bridge_ef_q)
+            bidx.set_ef(_bridge_ef_q)
+            exp_centroids = centroids[needs_expand]
+            try:
+                exp_labels, _ = bidx.knn_query(exp_centroids, k=_BRIDGE_K_EXPAND, num_threads=_num_threads)
+                for i, idx in enumerate(needs_expand):
+                    ci, cj, q_pair = pairs[idx]
+                    for bi in exp_labels[i]:
+                        bi = int(bi)
+                        if bi not in bridge_taken:
+                            bridge_taken.add(bi)
+                            triads.append((ci, cj, bi, q_pair))
+                            break
+            except RuntimeError:
+                for idx in needs_expand:
+                    ci, cj, q_pair = pairs[idx]
+                    sims = BV @ centroids[idx]
+                    for bi in np.argsort(-sims):
+                        bi = int(bi)
+                        if bi not in bridge_taken:
+                            bridge_taken.add(bi)
+                            triads.append((ci, cj, bi, q_pair))
+                            break
     else:
         for ci, cj, q_pair in pairs:
             centroid = CV[ci] + CV[cj]
