@@ -1,6 +1,6 @@
 """BaryGraph MCP server — exposes the barygraph collection as Claude tools.
 
-Provides ten tools:
+Provides twelve tools:
   find_word        — look up word nodes (all POS variants)
   word_senses      — list all L15 sense glosses for a word
   word_edges       — L14 BaryEdges where the word is a CM
@@ -11,6 +11,8 @@ Provides ten tools:
   semantic_search  — $vectorSearch (requires mongot index from s10_index)
   graph_stats      — document counts by level / type
   orphan_stats     — orphan rates per level (parent_edge_id=null counts)
+  scan_unlabeled   — paginated MB scan for docs missing semantic_label
+  set_label        — write semantic_label + label_vector back to an MB
 
 Run via stdio transport (Claude Code + Claude Desktop both use stdio):
     python -m scripts.mcp_server
@@ -19,6 +21,7 @@ Run via stdio transport (Claude Code + Claude Desktop both use stdio):
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 from typing import Any
 
 from bson import ObjectId
@@ -521,6 +524,103 @@ def orphan_stats() -> str:
             "orphan_pct": round(100 * r["orphans"] / total, 1) if total else None,
         })
     return _fmt(result)
+
+
+@mcp.tool()
+def scan_unlabeled(level: int, limit: int = 50, offset: int = 0) -> str:
+    """Return MetaBary docs at the given level that have no semantic_label yet.
+
+    Designed for batch labelling workflows: call repeatedly with increasing
+    offset to page through all unlabeled MBs. Each doc includes its triad
+    structure so the caller has everything needed to generate a label without
+    a second round-trip.
+
+    level:  10–13 (MetaBary range).
+    limit:  docs per page, max 100 (default 50).
+    offset: number of docs to skip (for pagination).
+
+    Returns a summary header plus the list of docs:
+      { "level": 13, "returned": 50, "offset": 0, "items": [...] }
+    """
+    if not (10 <= level <= 13):
+        return "level must be between 10 and 13 (MetaBary range)."
+    limit = min(max(limit, 1), 100)
+
+    query = {"doc_type": "baryedge", "level": level, "semantic_label": {"$exists": False}}
+    total_unlabeled = _coll.count_documents(query)
+    docs = list(_coll.find(
+        query,
+        {"cm1_id": 1, "cm2_id": 1, "connection_strength": 1,
+         "accumulated_weight": 1, "parent_edge_id": 1},
+    ).skip(offset).limit(limit))
+
+    items = []
+    for doc in docs:
+        mb_id = doc["_id"]
+        items.append({
+            "id": str(mb_id),
+            "connection_strength": doc.get("connection_strength"),
+            "accumulated_weight": doc.get("accumulated_weight"),
+            "has_parent": doc.get("parent_edge_id") is not None,
+            "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"]),
+        })
+
+    return _fmt({
+        "level": level,
+        "total_unlabeled": total_unlabeled,
+        "offset": offset,
+        "returned": len(items),
+        "items": items,
+    })
+
+
+@mcp.tool()
+def set_label(edge_id: str, label: str, label_vector: list[float], model: str) -> str:
+    """Write a semantic label and its embedding vector back to a MetaBary document.
+
+    edge_id:      24-char hex ObjectId of the MetaBary (level ≤ 13).
+    label:        Short semantic phrase describing the MB cluster (e.g.
+                  "Toxic plants that kill livestock").
+    label_vector: 768-dim embedding of the label text, produced by the same
+                  nomic-embed-text model used for all other vectors so it is
+                  searchable via the existing $vectorSearch index.
+    model:        Name of the model that generated the label (for provenance).
+
+    Stores: semantic_label, label_vector, label_model, label_updated_at.
+    Returns a confirmation with the stored values (vector omitted for brevity).
+    """
+    try:
+        oid = ObjectId(edge_id)
+    except Exception:
+        return f"Invalid edge_id '{edge_id}' — must be a 24-char hex ObjectId string."
+
+    doc = _coll.find_one({"_id": oid}, {"doc_type": 1, "level": 1})
+    if not doc:
+        return f"No document with id {edge_id}."
+    if doc.get("doc_type") != "baryedge":
+        return f"Document {edge_id} is not a baryedge (doc_type={doc.get('doc_type')!r})."
+    if (doc.get("level") or 99) > 13:
+        return f"Document {edge_id} is at level {doc.get('level')} — set_label is for MetaBary (level ≤ 13) only."
+    if len(label_vector) != 768:
+        return f"label_vector must be 768-dimensional, got {len(label_vector)}."
+
+    now = datetime.now(timezone.utc)
+    _coll.update_one(
+        {"_id": oid},
+        {"$set": {
+            "semantic_label": label,
+            "label_vector": label_vector,
+            "label_model": model,
+            "label_updated_at": now,
+        }},
+    )
+    return _fmt({
+        "ok": True,
+        "edge_id": edge_id,
+        "semantic_label": label,
+        "label_model": model,
+        "label_updated_at": now.isoformat(),
+    })
 
 
 if __name__ == "__main__":
