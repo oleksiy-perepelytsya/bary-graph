@@ -1,12 +1,13 @@
 """BaryGraph MCP server — exposes the barygraph collection as Claude tools.
 
-Provides nine tools:
+Provides ten tools:
   find_word        — look up word nodes (all POS variants)
   word_senses      — list all L15 sense glosses for a word
   word_edges       — L14 BaryEdges where the word is a CM
   edge_info        — details + CM structure for any BE/MB by id
-  traverse_up      — walk parent_edge_id chain upward from any BE/MB
-  sample_metabary  — sample random MetaBary docs at a level with triad structure
+  traverse_up      — walk parent_edge_id chain upward; shows triad at each MB level
+  sample_metabary  — sample random MetaBary docs with triad + optional parent triad
+  leaf_nodes       — all L15 sense / L14 word docs reachable from a BE or MB
   semantic_search  — $vectorSearch (requires mongot index from s10_index)
   graph_stats      — document counts by level / type
   orphan_stats     — orphan rates per level (parent_edge_id=null counts)
@@ -29,6 +30,60 @@ from lib.db import cm_leaf_words, get_collection, vector_search
 from lib.embed import get_embedder
 from lib.log import setup_logging
 
+# -- helpers ------------------------------------------------------------------
+
+
+def _leaf_nodes(be_id: Any) -> dict[str, list]:
+    """BFS from a BE/MB down to all reachable L14/L15 node docs.
+
+    Returns {"senses": [...], "words": [...]} where senses are L15 sense nodes
+    (gloss, tags, topics) and words are L14 word nodes (pos, ipa, etymology).
+    """
+    frontier: set[Any] = {be_id}
+    visited: set[Any] = set()
+    senses: list[dict] = []
+    words: list[dict] = []
+
+    for _ in range(15):
+        to_fetch = frontier - visited
+        if not to_fetch:
+            break
+        visited |= to_fetch
+        next_frontier: set[Any] = set()
+        for doc in _coll.find(
+            {"_id": {"$in": list(to_fetch)}},
+            {"doc_type": 1, "cm1_id": 1, "cm2_id": 1,
+             "node_type": 1, "properties": 1},
+        ):
+            if doc.get("doc_type") == "node":
+                props = doc.get("properties", {})
+                nt = doc.get("node_type")
+                if nt == "sense":
+                    senses.append({
+                        "id": str(doc["_id"]),
+                        "word": props.get("word"),
+                        "pos": props.get("pos"),
+                        "gloss": props.get("gloss", ""),
+                        "tags": props.get("tags", []),
+                        "topics": props.get("topics", []),
+                    })
+                elif nt == "word":
+                    words.append({
+                        "id": str(doc["_id"]),
+                        "word": props.get("word"),
+                        "pos": props.get("pos"),
+                        "ipa": props.get("ipa"),
+                        "etymology": (props.get("etymology") or "")[:150] or None,
+                    })
+            else:
+                if doc.get("cm1_id"):
+                    next_frontier.add(doc["cm1_id"])
+                if doc.get("cm2_id"):
+                    next_frontier.add(doc["cm2_id"])
+        frontier = next_frontier
+
+    return {"senses": senses, "words": words}
+
 _settings = Settings.load()
 setup_logging(_settings.log_level)
 _coll = get_collection(_settings)
@@ -41,8 +96,10 @@ mcp = FastMCP(
         "(node_type='sense'). L15 BaryEdges pair sense nodes; L14 BaryEdges connect "
         "word nodes via kaikki relations (synonyms, antonyms, hypernyms…). "
         "L13–L10 are MetaBary triads: each MB has two children (cm1, cm2) and a "
-        "bridge — use sample_metabary to explore, edge_info for a specific MB's "
-        "triad structure, traverse_up to see where it sits in the hierarchy. "
+        "bridge — use sample_metabary (returns triad + parent triad) to explore, "
+        "edge_info for a specific MB's triad, traverse_up for the full ancestry chain "
+        "(shows triad at every MetaBary level), leaf_nodes to get all L15 sense glosses "
+        "and L14 word properties reachable from any BE or MB. "
         "graph_stats and orphan_stats show pipeline progress."
     ),
 )
@@ -226,9 +283,9 @@ def traverse_up(edge_id: str, max_levels: int = 6) -> str:
     """Walk the parent_edge_id chain upward from any BE or MB.
 
     Returns the ancestry chain from the starting edge to the root (or until
-    max_levels is reached / parent is null). Each step shows its level, leaf
-    words, and connection strength — useful for understanding where a specific
-    relationship sits in the MetaBary hierarchy.
+    max_levels is reached / parent is null). For MetaBary levels (≤13) each
+    step includes the full triad structure (child1, child2, bridge with their
+    word sets); for L14/L15 BaryEdges shows flat leaf words and edge_type.
     """
     try:
         current_id: Any = ObjectId(edge_id)
@@ -239,17 +296,23 @@ def traverse_up(edge_id: str, max_levels: int = 6) -> str:
     for _ in range(max_levels):
         doc = _coll.find_one(
             {"_id": current_id},
-            {"level": 1, "parent_edge_id": 1, "edge_type": 1, "connection_strength": 1},
+            {"level": 1, "parent_edge_id": 1, "edge_type": 1,
+             "connection_strength": 1, "cm1_id": 1, "cm2_id": 1},
         )
         if not doc:
             break
-        chain.append({
+        level = doc.get("level")
+        step: dict[str, Any] = {
             "id": str(doc["_id"]),
-            "level": doc.get("level"),
-            "edge_type": doc.get("edge_type"),
+            "level": level,
             "connection_strength": doc.get("connection_strength"),
-            "leaf_words": sorted(cm_leaf_words(_coll, doc["_id"])),
-        })
+        }
+        if level is not None and level <= 13:
+            step["triad"] = _triad_of(doc["_id"], doc["cm1_id"], doc["cm2_id"])
+        else:
+            step["edge_type"] = doc.get("edge_type")
+            step["leaf_words"] = sorted(cm_leaf_words(_coll, doc["_id"]))
+        chain.append(step)
         parent_id = doc.get("parent_edge_id")
         if not parent_id:
             break
@@ -259,11 +322,13 @@ def traverse_up(edge_id: str, max_levels: int = 6) -> str:
 
 
 @mcp.tool()
-def sample_metabary(level: int, n: int = 10) -> str:
+def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> str:
     """Sample N random MetaBary docs at the given level with full triad structure.
 
     level: 10–13 (13 = closest to individual senses, 10 = most abstract).
-    n: number to sample, max 20.
+    n: number to sample, max 20 (default 5 — triads are verbose).
+    with_parent: when True (default), include the parent MB's triad structure
+      if one exists, so you see both this level and the level above in one call.
 
     Each result shows the three constituents of the MetaBary triad:
     - child1 and child2: the two BEs/MBs being bridged
@@ -288,15 +353,57 @@ def sample_metabary(level: int, n: int = 10) -> str:
     results = []
     for doc in docs:
         mb_id = doc["_id"]
-        results.append({
+        entry: dict[str, Any] = {
             "id": str(mb_id),
             "level": level,
             "connection_strength": doc.get("connection_strength"),
             "accumulated_weight": doc.get("accumulated_weight"),
-            "has_parent": doc.get("parent_edge_id") is not None,
             "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"]),
-        })
+            "parent": None,
+        }
+        parent_oid = doc.get("parent_edge_id")
+        if with_parent and parent_oid:
+            pdoc = _coll.find_one(
+                {"_id": parent_oid},
+                {"level": 1, "cm1_id": 1, "cm2_id": 1,
+                 "connection_strength": 1, "parent_edge_id": 1},
+            )
+            if pdoc:
+                entry["parent"] = {
+                    "id": str(pdoc["_id"]),
+                    "level": pdoc.get("level"),
+                    "connection_strength": pdoc.get("connection_strength"),
+                    "has_grandparent": pdoc.get("parent_edge_id") is not None,
+                    "triad": _triad_of(pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"]),
+                }
+        results.append(entry)
     return _fmt(results)
+
+
+@mcp.tool()
+def leaf_nodes(edge_id: str) -> str:
+    """Get all L15 sense nodes and L14 word nodes reachable from a BE or MB.
+
+    Traverses the full CM lineage downward to leaf nodes and returns the
+    actual documents with semantic content — not just word strings:
+    - senses: L15 sense nodes with gloss, tags, and topics
+    - words:  L14 word nodes with pos, ipa, and etymology snippet
+
+    Use this to build full search context for a MB or BE found via
+    semantic_search or sample_metabary — see every sense and word the
+    edge encodes.
+    """
+    try:
+        oid = ObjectId(edge_id)
+    except Exception:
+        return f"Invalid edge_id '{edge_id}' — must be a 24-char hex ObjectId string."
+    if not _coll.find_one({"_id": oid}, {"_id": 1}):
+        return f"No document with id {edge_id}."
+    result = _leaf_nodes(oid)
+    result["edge_id"] = edge_id
+    result["sense_count"] = len(result["senses"])
+    result["word_count"] = len(result["words"])
+    return _fmt(result)
 
 
 @mcp.tool()

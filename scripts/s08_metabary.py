@@ -91,20 +91,21 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
             centroid = CV[ci] + CV[cj]
             n = float(np.linalg.norm(centroid))
             centroid = centroid / n if n else centroid
-            labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
             found = False
-            for bi in labels[0]:
-                bi = int(bi)
-                if bi not in bridge_taken:
-                    bridge_taken.add(bi)
-                    triads.append((ci, cj, bi, q_pair))
-                    found = True
-                    break
+            try:
+                labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
+                for bi in labels[0]:
+                    bi = int(bi)
+                    if bi not in bridge_taken:
+                        bridge_taken.add(bi)
+                        triads.append((ci, cj, bi, q_pair))
+                        found = True
+                        break
+            except RuntimeError:
+                pass  # M=16 graph too sparse for this query; fall through to brute force
             if not found:
-                # Rare: top-K all taken — brute-force scan over full BV matrix.
-                # hnswlib knn_query with large k is unreliable when graph
-                # connectivity (M=16) limits reachable nodes; O(n_bridges)
-                # numpy scan is correct and fast enough for this rare path.
+                # Brute-force fallback: covers both "all top-K taken" and hnswlib
+                # RuntimeError (M=16 connectivity insufficient for this query point).
                 for bi in (int(x) for x in np.argsort(-(BV @ centroid))):
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)

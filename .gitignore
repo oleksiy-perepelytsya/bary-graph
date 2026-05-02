@@ -23,3 +23,4 @@ pipeline_state/*.json
 .mypy_cache/
 .coverage
 htmlcov/
+.mcp.json
