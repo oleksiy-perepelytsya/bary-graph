@@ -5,7 +5,7 @@ __pycache__/
 *.egg-info/
 build/
 dist/
-
+.claude/
 .env
 
 data/*.jsonl
