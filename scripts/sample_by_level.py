@@ -1,92 +1,52 @@
-"""Sample N random MetaBary docs (L10-L13) per level and write to JSONL."""
-import json
-import sys
-import pathlib
-from datetime import datetime
-from bson import ObjectId
-from lib.db import get_collection
+"""Sample N random MetaBary docs (L10-L13) per level via MCP and write to JSONL.
 
-OUTPUT = pathlib.Path("data/sample_by_level.jsonl")
+Usage:
+    python scripts/sample_by_level.py [n_per_level] [output_path]
+
+Defaults: n=250, output=data/sample_by_level.jsonl
+"""
+import asyncio
+import json
+import pathlib
+import sys
+
+from mcp import ClientSession
+from mcp.client.stdio import StdioServerParameters, stdio_client
+
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 250
+OUTPUT = pathlib.Path(sys.argv[2] if len(sys.argv) > 2 else "data/sample_by_level.jsonl")
 LEVELS = [10, 11, 12, 13]
 
-
-def _serialize(obj):
-    if isinstance(obj, ObjectId):
-        return str(obj)
-    if isinstance(obj, datetime):
-        return obj.isoformat()
-    raise TypeError(f"Not serializable: {type(obj)}")
+SERVER = StdioServerParameters(
+    command="python",
+    args=["-m", "scripts.mcp_server"],
+)
 
 
-def _leaf_words(coll, be_id, max_depth=6):
-    """Collect representative words reachable from a BE/MB."""
-    frontier = {be_id}
-    visited: set = set()
-    words: list[str] = []
-    for _ in range(max_depth):
-        to_fetch = frontier - visited
-        if not to_fetch:
-            break
-        visited |= to_fetch
-        nxt: set = set()
-        for doc in coll.find(
-            {"_id": {"$in": list(to_fetch)}},
-            {"doc_type": 1, "cm1_id": 1, "cm2_id": 1, "properties": 1},
-        ):
-            if doc.get("doc_type") == "node":
-                w = doc.get("properties", {}).get("word")
-                if w:
-                    words.append(w)
-            else:
-                for k in ("cm1_id", "cm2_id"):
-                    v = doc.get(k)
-                    if v and v not in visited:
-                        nxt.add(v)
-        frontier = nxt
-    return sorted(set(words))[:8]
-
-
-def main():
-    coll = get_collection()
+async def main() -> None:
     OUTPUT.parent.mkdir(exist_ok=True)
     total = 0
-    with OUTPUT.open("w") as fh:
-        for level in LEVELS:
-            docs = list(coll.aggregate([
-                {"$match": {"doc_type": "baryedge", "level": level}},
-                {"$sample": {"size": N}},
-                {"$project": {
-                    "cm1_id": 1, "cm2_id": 1,
-                    "connection_strength": 1,
-                    "accumulated_weight": 1,
-                    "parent_edge_id": 1,
-                }},
-            ]))
-            for doc in docs:
-                mid = doc["_id"]
-                entry = {
-                    "id": str(mid),
-                    "level": level,
-                    "connection_strength": doc.get("connection_strength"),
-                    "accumulated_weight": doc.get("accumulated_weight"),
-                    "triad": {
-                        "child1": {
-                            "id": str(doc["cm1_id"]),
-                            "words": _leaf_words(coll, doc["cm1_id"]),
-                        },
-                        "child2": {
-                            "id": str(doc["cm2_id"]),
-                            "words": _leaf_words(coll, doc["cm2_id"]),
-                        },
-                    },
-                    "parent": str(doc["parent_edge_id"]) if doc.get("parent_edge_id") else None,
-                }
-                fh.write(json.dumps(entry, default=_serialize) + "\n")
-                total += 1
-            print(f"  level {level}: {len(docs)} docs", file=sys.stderr)
+
+    async with stdio_client(SERVER) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+
+            with OUTPUT.open("w") as fh:
+                for level in LEVELS:
+                    result = await session.call_tool(
+                        "sample_metabary",
+                        {"level": level, "n": N, "with_parent": False},
+                    )
+                    raw = result.content[0].text if result.content else "[]"
+                    records = json.loads(raw)
+                    for rec in records:
+                        fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    count = len(records)
+                    total += count
+                    print(f"  level {level}: {count} docs", file=sys.stderr)
+
     print(f"Wrote {total} records → {OUTPUT}", file=sys.stderr)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
