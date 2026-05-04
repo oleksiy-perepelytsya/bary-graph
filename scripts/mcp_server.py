@@ -329,7 +329,7 @@ def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> str:
     """Sample N random MetaBary docs at the given level with full triad structure.
 
     level: 10–13 (13 = closest to individual senses, 10 = most abstract).
-    n: number to sample, max 20 (default 5 — triads are verbose).
+    n: number to sample, max 1000 (default 5 — triads are verbose).
     with_parent: when True (default), include the parent MB's triad structure
       if one exists, so you see both this level and the level above in one call.
 
@@ -341,7 +341,7 @@ def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> str:
     """
     if not (10 <= level <= 13):
         return "level must be between 10 and 13 (MetaBary range)."
-    n = min(max(n, 1), 20)
+    n = min(max(n, 1), 1000)
 
     docs = list(_coll.aggregate([
         {"$match": {"doc_type": "baryedge", "level": level}},
