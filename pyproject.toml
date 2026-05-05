@@ -30,6 +30,10 @@ dev = [
 mcp = [
   "mcp>=1.0",
 ]
+vertex = [
+  "google-genai>=1.10",
+  "google-cloud-storage>=2.18",
+]
 
 [project.scripts]
 bary = "scripts._base:main"

@@ -81,6 +81,14 @@ class Settings:
     # --- L14 edge q_seeds (fermion order) ---
     q_seeds: dict[str, float] = field(default_factory=_load_q_seeds)
 
+    # --- Vertex AI ---
+    vertex_project: str = ""
+    vertex_location: str = "us-central1"
+    vertex_model: str = "gemini-2.5-pro-preview-05-06"
+    vertex_gcs_bucket: str = ""
+    vertex_temperature: float = 0.2
+    vertex_frequency_penalty: float = 0.0
+
     # --- Misc ---
     log_level: str = "INFO"
 
@@ -111,5 +119,13 @@ class Settings:
             polysemy_q_floor=_env_float("POLYSEMY_Q_FLOOR", cls.polysemy_q_floor),
             level_factor_alpha=_env_float("LEVEL_FACTOR_ALPHA", cls.level_factor_alpha),
             q_seeds=_load_q_seeds(),
+            vertex_project=_env_str("VERTEX_PROJECT", cls.vertex_project),
+            vertex_location=_env_str("VERTEX_LOCATION", cls.vertex_location),
+            vertex_model=_env_str("VERTEX_MODEL", cls.vertex_model),
+            vertex_gcs_bucket=_env_str("VERTEX_GCS_BUCKET", cls.vertex_gcs_bucket),
+            vertex_temperature=_env_float("VERTEX_TEMPERATURE", cls.vertex_temperature),
+            vertex_frequency_penalty=_env_float(
+                "VERTEX_FREQUENCY_PENALTY", cls.vertex_frequency_penalty
+            ),
             log_level=_env_str("LOG_LEVEL", cls.log_level),
         )
