@@ -40,18 +40,20 @@ def run(argv: Sequence[str] | None = None) -> None:
         defs = orjson.loads(VECTOR_INDEX_PATH.read_bytes())
         try:
             existing = {ix["name"] for ix in coll.list_search_indexes()}
+            # Drop existing indexes whose definition we want to update, then recreate.
+            for d in defs:
+                if d["name"] in existing:
+                    coll.drop_search_index(d["name"])
+                    log.info("dropped vector search index for recreation: %s", d["name"])
             models = [
                 SearchIndexModel(name=d["name"], type=d.get("type", "vectorSearch"),
                                  definition=d["definition"])
                 for d in defs
-                if d["name"] not in existing
             ]
             if models:
                 created = coll.create_search_indexes(models)
                 n_vec = len(created)
                 log.info("vector search indexes created: %s", created)
-            else:
-                log.info("vector search indexes already present: %s", sorted(existing))
         except OperationFailure as e:
             log.warning(
                 "vector index unsupported on this server (%s) — "
