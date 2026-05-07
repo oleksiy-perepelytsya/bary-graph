@@ -674,6 +674,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.transport == "sse":
-        mcp.run(transport="sse", host=args.host, port=args.port)
+        import uvicorn
+        uvicorn.run(mcp.sse_app(), host=args.host, port=args.port)
     else:
         mcp.run()
