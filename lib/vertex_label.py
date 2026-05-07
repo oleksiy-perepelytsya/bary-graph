@@ -120,9 +120,10 @@ class VertexBatchClient:
                 ],
                 "generationConfig": {
                     "responseMimeType": "application/json",
-                    "maxOutputTokens": 80,
+                    "maxOutputTokens": 1024,
                     "temperature": temperature,
                     "frequencyPenalty": frequency_penalty,
+                    "thinkingConfig": {"thinkingBudget": 0},
                 },
             },
         }
