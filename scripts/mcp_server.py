@@ -14,8 +14,15 @@ Provides twelve tools:
   scan_unlabeled   — paginated MB scan for docs missing semantic_label
   set_label        — write semantic_label + label_vector back to an MB
 
-Run via stdio transport (Claude Code + Claude Desktop both use stdio):
-    python -m scripts.mcp_server
+Transports:
+  stdio (default) — Claude Code / Claude Desktop:
+      python -m scripts.mcp_server
+
+  SSE — Claude mobile / Gemini / any HTTP MCP client:
+      python -m scripts.mcp_server --transport sse [--host 0.0.0.0] [--port 8000]
+
+  The SSE endpoint Claude mobile should point to:
+      http://<host>:<port>/sse
 """
 
 from __future__ import annotations
@@ -113,18 +120,55 @@ def _fmt(obj: Any) -> str:
 
 
 def _triad_of(mb_id: ObjectId, cm1_id: ObjectId, cm2_id: ObjectId) -> dict[str, Any]:
-    """Fetch the bridge doc and return triad structure with leaf words for all three."""
+    """Fetch the bridge doc and return triad structure with leaf words for all three.
+
+    Uses a single BFS across all three branches simultaneously instead of three
+    separate cm_leaf_words traversals — cuts MongoDB round trips by ~3x.
+    """
     bridge_doc = _coll.find_one(
         {"parent_edge_id": mb_id, "_id": {"$nin": [cm1_id, cm2_id]}},
         {"_id": 1},
     )
     bridge_id = bridge_doc["_id"] if bridge_doc else None
+
+    # origin maps each frontier id to its branch label; subtrees are disjoint
+    # in a forest so there are no conflicts when propagating to children.
+    origin: dict[Any, str] = {cm1_id: "child1", cm2_id: "child2"}
+    if bridge_id:
+        origin[bridge_id] = "bridge"
+
+    words: dict[str, set[str]] = {"child1": set(), "child2": set(), "bridge": set()}
+    visited: set[Any] = set()
+    frontier: set[Any] = set(origin)
+
+    for _ in range(15):
+        to_fetch = frontier - visited
+        if not to_fetch:
+            break
+        visited |= to_fetch
+        next_frontier: set[Any] = set()
+        for doc in _coll.find(
+            {"_id": {"$in": list(to_fetch)}},
+            {"doc_type": 1, "cm1_id": 1, "cm2_id": 1, "properties.word": 1},
+        ):
+            branch = origin[doc["_id"]]
+            if doc.get("doc_type") == "node":
+                w = doc.get("properties", {}).get("word")
+                if w:
+                    words[branch].add(w)
+            else:
+                for child_id in (doc.get("cm1_id"), doc.get("cm2_id")):
+                    if child_id and child_id not in visited:
+                        origin[child_id] = branch
+                        next_frontier.add(child_id)
+        frontier = next_frontier
+
     return {
-        "child1": {"id": str(cm1_id), "words": sorted(cm_leaf_words(_coll, cm1_id))},
-        "child2": {"id": str(cm2_id), "words": sorted(cm_leaf_words(_coll, cm2_id))},
+        "child1": {"id": str(cm1_id), "words": sorted(words["child1"])},
+        "child2": {"id": str(cm2_id), "words": sorted(words["child2"])},
         "bridge": {
             "id": str(bridge_id) if bridge_id else None,
-            "words": sorted(cm_leaf_words(_coll, bridge_id)) if bridge_id else [],
+            "words": sorted(words["bridge"]),
         },
     }
 
@@ -501,29 +545,24 @@ def orphan_stats() -> str:
     graph is still disconnected from the upper hierarchy. Lower orphan rates
     mean better coverage. Run after s08/s09 to gauge pipeline progress.
     """
-    orphan_rows = list(_coll.aggregate([
-        {"$match": {"parent_edge_id": None}},
-        {"$group": {"_id": {"doc_type": "$doc_type", "level": "$level"}, "orphans": {"$sum": 1}}},
+    rows = list(_coll.aggregate([
+        {"$group": {
+            "_id": {"doc_type": "$doc_type", "level": "$level"},
+            "total":   {"$sum": 1},
+            "orphans": {"$sum": {"$cond": [{"$eq": ["$parent_edge_id", None]}, 1, 0]}},
+        }},
         {"$sort": {"_id.doc_type": 1, "_id.level": 1}},
     ]))
-    total_rows = list(_coll.aggregate([
-        {"$group": {"_id": {"doc_type": "$doc_type", "level": "$level"}, "total": {"$sum": 1}}},
-    ]))
-    total_map = {(r["_id"]["doc_type"], r["_id"]["level"]): r["total"] for r in total_rows}
-
-    result = []
-    for r in orphan_rows:
-        dt = r["_id"]["doc_type"]
-        lv = r["_id"]["level"]
-        total = total_map.get((dt, lv), 0)
-        result.append({
-            "doc_type": dt,
-            "level": lv,
+    return _fmt([
+        {
+            "doc_type": r["_id"]["doc_type"],
+            "level": r["_id"]["level"],
             "orphans": r["orphans"],
-            "total": total,
-            "orphan_pct": round(100 * r["orphans"] / total, 1) if total else None,
-        })
-    return _fmt(result)
+            "total": r["total"],
+            "orphan_pct": round(100 * r["orphans"] / r["total"], 1) if r["total"] else None,
+        }
+        for r in rows
+    ])
 
 
 @mcp.tool()
@@ -540,16 +579,14 @@ def scan_unlabeled(level: int, limit: int = 50, offset: int = 0) -> str:
     offset: number of docs to skip (for pagination).
 
     Returns a summary header plus the list of docs:
-      { "level": 13, "returned": 50, "offset": 0, "items": [...] }
+      { "level": 13, "offset": 0, "returned": 50, "items": [...] }
     """
     if not (10 <= level <= 13):
         return "level must be between 10 and 13 (MetaBary range)."
     limit = min(max(limit, 1), 100)
 
-    query = {"doc_type": "baryedge", "level": level, "semantic_label": {"$exists": False}}
-    total_unlabeled = _coll.count_documents(query)
     docs = list(_coll.find(
-        query,
+        {"doc_type": "baryedge", "level": level, "semantic_label": {"$exists": False}},
         {"cm1_id": 1, "cm2_id": 1, "connection_strength": 1,
          "accumulated_weight": 1, "parent_edge_id": 1},
     ).skip(offset).limit(limit))
@@ -567,7 +604,6 @@ def scan_unlabeled(level: int, limit: int = 50, offset: int = 0) -> str:
 
     return _fmt({
         "level": level,
-        "total_unlabeled": total_unlabeled,
         "offset": offset,
         "returned": len(items),
         "items": items,
@@ -624,4 +660,20 @@ def set_label(edge_id: str, label: str, label_vector: list[float], model: str) -
 
 
 if __name__ == "__main__":
-    mcp.run()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="BaryGraph MCP server")
+    parser.add_argument(
+        "--transport",
+        choices=["stdio", "sse"],
+        default="stdio",
+        help="stdio (default, for Claude Code/Desktop) or sse (for mobile/HTTP clients)",
+    )
+    parser.add_argument("--host", default="0.0.0.0", help="SSE bind host (default: 0.0.0.0)")
+    parser.add_argument("--port", type=int, default=8000, help="SSE port (default: 8000)")
+    args = parser.parse_args()
+
+    if args.transport == "sse":
+        mcp.run(transport="sse", host=args.host, port=args.port)
+    else:
+        mcp.run()

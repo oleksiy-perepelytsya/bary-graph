@@ -123,6 +123,7 @@ class VertexBatchClient:
                     "maxOutputTokens": 1024,
                     "temperature": temperature,
                     "frequencyPenalty": frequency_penalty,
+                    "thinkingConfig": {"thinkingBudget": 0},
                 },
             },
         }
