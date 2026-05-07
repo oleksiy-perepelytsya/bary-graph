@@ -17,6 +17,179 @@ each other's nearest neighbours.
 
 ---
 
+BaryGraph: A Semantic Description of the Database
+
+  The Two Atoms
+
+  Everything in this database is one of two things: a node or a
+  baryedge. There are currently 6.66 million documents total.
+  That's it — no separate edge collections, no join tables, no
+  separate metadata stores. The choice to flatten both objects and
+  relationships into one collection is not an accident; it is the
+  entire point.
+
+  Nodes are things. At the bottom of the graph (level 15) they are
+  individual word senses — 1.74 million of them. Each sense is a
+  single gloss from the Wiktionary-derived Kaikki corpus: "a device
+   for turning a screw," or "a student at Oxford University." One
+  level up (level 14) sit 1.44 million word nodes, each
+  representing a (word, pos) pair like open/adj or run/verb. These
+  two levels are the only node levels in use. Everything above them
+   is composed entirely of edges.
+  Relationships as First-Class Citizens
+
+  A BaryEdge is a stored relationship that has its own identity,
+  its own 768-dimensional embedding vector, and can itself be
+  related to other BaryEdges. This is the central move: instead of
+  annotating an edge with metadata, you promote the edge to a
+  document that can be a child, a sibling, or a parent of other
+  documents.
+
+  At level 15 there are 1.11 million BaryEdges pairing sense nodes.   Two senses become a pair when their embedding vectors are close
+  enough (cosine ≥ 0.72) and neither is already paired. The
+  resulting BaryEdge vector is not the average of its two children
+  — it is an algebraic blend weighted by q (a connection strength    between 0 and 1) and a type vector derived from the lexical        neighborhood of the paired words. The type vector encodes what
+  kind of neighborhood this pair lives in: which antonyms and
+  synonyms the parent words carry. This means two senses that are
+  similar for different reasons can have different BaryEdge vectors
+   even if their raw embedding distance is identical.
+
+  At level 14 there are roughly 1.39 million BaryEdges pairing word
+   nodes, and here the semantics become explicit. Each L14 edge
+  carries an edge_type drawn from five named relations:
+
+  - contradicts (293k) — antonyms: the two words push against each
+  other
+  - extends (890k) — derivational and relational links: one word
+  grows out of the other
+  - is_instance_of (52k) — hypernym/hyponym: one is a species of
+  the other
+  - applies_to (4.5k) — meronymy: one is a part of the other
+  - same_phenomenon (151k) — synonyms and coordinate terms: both
+  words reach toward the same thing
+
+  The dramatic imbalance in these counts is real. extends dominates
+   because Wiktionary's derived[] and related[] fields are densely
+  populated; applies_to is rare because meronymy is rarely encoded.
+   The graph reflects what lexicographers chose to record.
+
+  The Forest Constraint
+
+  Every node and every BaryEdge has at most one parent_edge_id.
+  This unique-parent rule enforces a forest topology — a collection
+   of trees with no shared ancestry. It means the graph cannot
+  represent a sense that belongs equally to two different semantic
+  neighborhoods. It must choose. This is a deliberate
+  simplification: it makes traversal cheap and hierarchy
+  unambiguous, at the cost of forcing a commitment that natural
+  language often refuses to make.
+
+  MetaBary: Edges of Edges
+
+  Above level 14 the structure becomes recursive. A MetaBary at
+  level 13 is a BaryEdge whose two children (cm1, cm2) are
+  themselves L14 BaryEdges, held together by a third L14 BaryEdge
+  acting as a bridge. There are 495k such triads. Each one groups
+  two word-level relationships under a shared semantic roof.
+
+  A live example from the database illustrates this clearly. One
+
+  A live example from the database illustrates this clearly. One
+  L13 MetaBary has:
+  - child1: the edge between snow pentathlon and winter triathlon
+  (similar winter multi-sport events)
+  - child2: the edge between geschmozzle and snowboard cross (two
+  snowboard racing formats)
+  - bridge: the edge between pentathlon and snow pentathlon (a
+  hyponym link anchoring the cluster)
+
+  Together these four words and three relationships form a single
+  document representing the concept "competitive winter
+  multi-discipline sport." The MetaBary's own vector is an
+  algebraic blend of its children's vectors, re-weighted by a
+  rescaled connection strength q_MB that accounts for the
+  compounding of three q values. A strong MetaBary has children
+  This unique-parent rule enforces a forest topology — a collection
+   of trees with no shared ancestry. It means the graph cannot
+  represent a sense that belongs equally to two different semantic
+  neighborhoods. It must choose. This is a deliberate
+  simplification: it makes traversal cheap and hierarchy
+  unambiguous, at the cost of forcing a commitment that natural
+  language often refuses to make.
+
+  MetaBary: Edges of Edges
+
+  Above level 14 the structure becomes recursive. A MetaBary at
+  level 13 is a BaryEdge whose two children (cm1, cm2) are
+  themselves L14 BaryEdges, held together by a third L14 BaryEdge
+  acting as a bridge. There are 495k such triads. Each one groups
+
+  A live example from the database illustrates this clearly. One
+  L13 MetaBary has:
+  - child1: the edge between snow pentathlon and winter triathlon
+  (similar winter multi-sport events)
+  - child2: the edge between geschmozzle and snowboard cross (two
+  snowboard racing formats)
+  - bridge: the edge between pentathlon and snow pentathlon (a
+  This unique-parent rule enforces a forest topology — a collection
+   of trees with no shared ancestry. It means the graph cannot
+  represent a sense that belongs equally to two different semantic
+  neighborhoods. It must choose. This is a deliberate
+  simplification: it makes traversal cheap and hierarchy
+  unambiguous, at the cost of forcing a commitment that natural      language often refuses to make.
+
+  MetaBary: Edges of Edges                                         
+  Above level 14 the structure becomes recursive. A MetaBary at
+  level 13 is a BaryEdge whose two children (cm1, cm2) are
+  themselves L14 BaryEdges, held together by a third L14 BaryEdge
+  acting as a bridge. There are 495k such triads. Each one groups    two word-level relationships under a shared semantic roof.
+                                                                     A live example from the database illustrates this clearly. One
+  L13 MetaBary has:                                                  - child1: the edge between snow pentathlon and winter triathlon
+  (similar winter multi-sport events)
+  - child2: the edge between geschmozzle and snowboard cross (two
+  snowboard racing formats)
+  - bridge: the edge between pentathlon and snow pentathlon (a
+  hyponym link anchoring the cluster)
+
+  Together these four words and three relationships form a single
+  document representing the concept "competitive winter
+  multi-discipline sport." The MetaBary's own vector is an           algebraic blend of its children's vectors, re-weighted by a
+  rescaled connection strength q_MB that accounts for the
+  compounding of three q values. A strong MetaBary has children      with high mutual cosine similarity; a weak one (like the
+  jivanmukta/jism cluster at q=0.31) is a cosmological
+  neighbor-of-last-resort pairing, not a semantic insight.         
+  This recursion continues upward. L12 MetaBary edges pair L13       MetaBary edges (424k of them). L11 pairs L12 (35k). L10 pairs L11
+   (35k). At each level the vocabulary covered by a single document   grows — the software-testing cluster at L12 encompasses
+  Microspeak, bluelink, open beta, machete beta, alpha version, and   version under a single node — while the connection strength and
+  semantic precision generally decrease.
+                                                                     What the Vectors Encode                                          
+  Every document carries a 768-dimensional vector from the
+  nomic-embed-text-v1.5 model, but what each vector means differs
+  by level:
+
+  - L15 sense vectors: embed the gloss text plus up to two example   sentences. They encode what a specific usage of a word means in
+  context.                                                           - L14 word vectors: no embedding call. Computed as the normalized
+   sum of all BaryEdge vectors that hold that word's senses, plus    any unpaired sense vectors. A word's vector is literally the
+  center of mass of its relationships.                               - L14/L15 BaryEdge vectors: algebraically derived from children
+  and type. Never embedded directly.
+  - L13–L10 MetaBary vectors: algebraically derived from their
+  children. The embedding model is never called above L14.
+
+  This means the model runs for L15 sense text and L14 type          sentences only. Every higher-level structure is pure algebra on    top of those anchors.
+
+  The Practical Consequence                                                                                                             What you have is a six-million-document index where searching for
+   "fast-moving water" doesn't just find nodes whose text mentions
+  rapids or torrents — it can surface a BaryEdge that pairs rapids
+  with cataract, whose MetaBary parent groups that pair with
+  whitepool/maelstrom, under a grandparent spanning the whole
+  domain of turbulent water movement. Retrieval can return not just
+   words but the relationship between words, and that relationship
+  is itself a searchable, rankable object with a vector position in
+   the same 768-dimensional space as every sense and word in the
+  graph.
+
+---
+
 ## The Hypothesis
 
 > Including BaryEdge documents in vector search retrieval outperforms
