@@ -1,6 +1,6 @@
 """BaryGraph MCP server — exposes the barygraph collection as Claude tools.
 
-Provides twelve tools:
+Provides fourteen tools:
   find_word        — look up word nodes (all POS variants)
   word_senses      — list all L15 sense glosses for a word
   word_edges       — L14 BaryEdges where the word is a CM
@@ -9,8 +9,10 @@ Provides twelve tools:
   sample_metabary  — sample random MetaBary docs with triad + optional parent triad
   leaf_nodes       — all L15 sense / L14 word docs reachable from a BE or MB
   semantic_search  — $vectorSearch (requires mongot index from s10_index)
-  graph_stats      — document counts by level / type
-  orphan_stats     — orphan rates per level (parent_edge_id=null counts)
+  create_sense     — insert a new L15 sense node (same schema as pipeline)
+  create_word      — insert a new L14 word node; vector computed from sense/BE ids (s05 formula)
+  create_edge      — insert a BaryEdge between two same-level nodes
+  create_structure_meta_bary — form an SMB triad; allows already-parented CMs/bridge
   scan_unlabeled   — paginated MB scan for docs missing semantic_label
   set_label        — write semantic_label + label_vector back to an MB
 
@@ -28,15 +30,22 @@ Transports:
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from typing import Any
 
 from bson import ObjectId
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 from pymongo.errors import OperationFailure
 
+import numpy as np
+
+from lib.bary_vec import TYPE_SENTENCES, compute_bary_vec, compute_metabary_vec, cosine, level_factor, normalize as _norm_vec
 from lib.config import Settings
 from lib.db import cm_leaf_words, get_collection, vector_search
+from lib.docs import baryedge as _make_baryedge
+from lib.docs import metabary as _make_metabary
 from lib.embed import get_embedder
 from lib.log import setup_logging
 
@@ -98,6 +107,13 @@ _settings = Settings.load()
 setup_logging(_settings.log_level)
 _coll = get_collection(_settings)
 
+_public_host = os.environ.get("MCP_PUBLIC_HOST", "")
+_allowed_hosts = ["localhost:*", "127.0.0.1:*"]
+_allowed_origins = ["http://localhost:*", "http://127.0.0.1:*"]
+if _public_host:
+    _allowed_hosts.append(_public_host)
+    _allowed_origins.append(f"https://{_public_host}")
+
 mcp = FastMCP(
     "barygraph",
     instructions=(
@@ -110,7 +126,12 @@ mcp = FastMCP(
         "edge_info for a specific MB's triad, traverse_up for the full ancestry chain "
         "(shows triad at every MetaBary level), leaf_nodes to get all L15 sense glosses "
         "and L14 word properties reachable from any BE or MB. "
-        "graph_stats and orphan_stats show pipeline progress."
+        "Use semantic_search to find related words and concepts."
+    ),
+    transport_security=TransportSecuritySettings(
+        enable_dns_rebinding_protection=True,
+        allowed_hosts=_allowed_hosts,
+        allowed_origins=_allowed_origins,
     ),
 )
 
@@ -119,17 +140,28 @@ def _fmt(obj: Any) -> str:
     return json.dumps(obj, indent=2, default=str)
 
 
-def _triad_of(mb_id: ObjectId, cm1_id: ObjectId, cm2_id: ObjectId) -> dict[str, Any]:
+def _triad_of(
+    mb_id: ObjectId,
+    cm1_id: ObjectId,
+    cm2_id: ObjectId,
+    bridge_id: ObjectId | None = None,
+) -> dict[str, Any]:
     """Fetch the bridge doc and return triad structure with leaf words for all three.
 
     Uses a single BFS across all three branches simultaneously instead of three
     separate cm_leaf_words traversals — cuts MongoDB round trips by ~3x.
+
+    bridge_id: pre-resolved for SMBs (source='structural') which store it
+    explicitly because they do not set parent_edge_id on their children.
+    Falls back to the standard parent_edge_id reverse lookup for pipeline MBs.
     """
-    bridge_doc = _coll.find_one(
-        {"parent_edge_id": mb_id, "_id": {"$nin": [cm1_id, cm2_id]}},
-        {"_id": 1},
-    )
-    bridge_id = bridge_doc["_id"] if bridge_doc else None
+    if bridge_id is None:
+        # Pipeline MB: bridge is the third child whose parent_edge_id = mb_id
+        bridge_doc = _coll.find_one(
+            {"parent_edge_id": mb_id, "_id": {"$nin": [cm1_id, cm2_id]}},
+            {"_id": 1},
+        )
+        bridge_id = bridge_doc["_id"] if bridge_doc else None
 
     # origin maps each frontier id to its branch label; subtrees are disjoint
     # in a forest so there are no conflicts when propagating to children.
@@ -267,8 +299,12 @@ def word_edges(word: str, pos: str = "") -> str:
     all_cm_ids = list({e["cm1_id"] for e in edges} | {e["cm2_id"] for e in edges})
     id_to_label: dict[Any, str] = {}
     for d in _coll.find({"_id": {"$in": all_cm_ids}},
-                        {"properties.word": 1, "properties.pos": 1}):
-        id_to_label[d["_id"]] = f"{d['properties']['word']} ({d['properties']['pos']})"
+                        {"doc_type": 1, "properties.word": 1, "properties.pos": 1}):
+        props = d.get("properties") or {}
+        label = props.get("word") or d.get("doc_type", "?")
+        if props.get("pos"):
+            label += f" ({props['pos']})"
+        id_to_label[d["_id"]] = label
 
     return _fmt([
         {
@@ -313,7 +349,7 @@ def edge_info(edge_id: str) -> str:
 
     if level is not None and level <= 13:
         # MetaBary: show triad (child1, child2, bridge) with leaf words per branch.
-        result["triad"] = _triad_of(oid, doc["cm1_id"], doc["cm2_id"])
+        result["triad"] = _triad_of(oid, doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id"))
     else:
         # L14/L15 BaryEdge: flat leaf words + relation details.
         result["edge_type"] = doc.get("edge_type")
@@ -355,7 +391,7 @@ def traverse_up(edge_id: str, max_levels: int = 6) -> str:
             "connection_strength": doc.get("connection_strength"),
         }
         if level is not None and level <= 13:
-            step["triad"] = _triad_of(doc["_id"], doc["cm1_id"], doc["cm2_id"])
+            step["triad"] = _triad_of(doc["_id"], doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id"))
         else:
             step["edge_type"] = doc.get("edge_type")
             step["leaf_words"] = sorted(cm_leaf_words(_coll, doc["_id"]))
@@ -405,7 +441,7 @@ def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> str:
             "level": level,
             "connection_strength": doc.get("connection_strength"),
             "accumulated_weight": doc.get("accumulated_weight"),
-            "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"]),
+            "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id")),
             "parent": None,
         }
         parent_oid = doc.get("parent_edge_id")
@@ -421,7 +457,7 @@ def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> str:
                     "level": pdoc.get("level"),
                     "connection_strength": pdoc.get("connection_strength"),
                     "has_grandparent": pdoc.get("parent_edge_id") is not None,
-                    "triad": _triad_of(pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"]),
+                    "triad": _triad_of(pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"], pdoc.get("bridge_id")),
                 }
         results.append(entry)
     return _fmt(results)
@@ -500,7 +536,7 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
             r["accumulated_weight"] = d.get("accumulated_weight")
             if d.get("level") is not None and d["level"] <= 13:
                 r["triad_words"] = _triad_of(
-                    d["_id"], d["cm1_id"], d["cm2_id"]
+                    d["_id"], d["cm1_id"], d["cm2_id"], d.get("bridge_id")
                 )
             else:
                 r["cm_words"] = sorted(cm_leaf_words(_coll, d["_id"]))
@@ -509,60 +545,326 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
     return _fmt(results)
 
 
-@mcp.tool()
-def graph_stats() -> str:
-    """Return document counts broken down by doc_type, level, node_type, and edge_type.
+# q_seed lookup: edge_type → q_seeds key (same_phenomenon maps to synonyms tier)
+_EDGE_TYPE_Q_KEY: dict[str, str] = {
+    "contradicts":     "contradicts",
+    "applies_to":      "applies_to",
+    "is_instance_of":  "is_instance_of",
+    "extends":         "extends",
+    "same_phenomenon": "synonyms",
+}
 
-    Use this to check how much data has been ingested and what stages have run.
+
+@mcp.tool()
+def create_sense(
+    word: str,
+    pos: str,
+    gloss: str,
+    examples: list[str] | None = None,
+    tags: list[str] | None = None,
+    topics: list[str] | None = None,
+) -> str:
+    """Create a new L15 sense node, exactly as the ingestion pipeline would.
+
+    Embeds the gloss (+ up to 2 examples) via Ollama, then inserts a node
+    document with the standard schema. parent_edge_id is None (orphan) until
+    the node is paired via create_edge.
+
+    word does not need to exist as an L14 word node yet — properties.word is
+    a plain string, not a reference. Create senses first, then create_word.
+
+    Returns the new document's _id.
     """
-    pipeline: list[dict[str, Any]] = [
-        {"$group": {
-            "_id": {
-                "doc_type": "$doc_type",
-                "level": "$level",
-                "node_type": "$node_type",
-                "edge_type": "$edge_type",
-            },
-            "count": {"$sum": 1},
-        }},
-        {"$sort": {"_id.doc_type": 1, "_id.level": -1}},
-    ]
-    rows = list(_coll.aggregate(pipeline))
+    examples = examples or []
+    tags = tags or []
+    topics = topics or []
+
+    try:
+        embedder = get_embedder(_settings)
+        embed_text = (gloss + " " + " ".join(examples[:2])).strip()
+        vector = embedder.embed([embed_text])[0].tolist()
+    except Exception as e:
+        return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
+
+    ts = datetime.now(timezone.utc)
+    doc: dict[str, Any] = {
+        "doc_type": "node",          # always 'node' for sense/word docs
+        "node_type": "sense",        # L15 = sense (individual gloss); L14 = word
+        "level": 15,                 # bottom of the hierarchy; sense sits below word
+        "label": f"{word} ({pos}) [0]",  # human-readable; sense_idx hardcoded 0 for new nodes
+        "vector": vector,            # 768-dim nomic-embed-text of gloss + examples[:2]
+        "surface": 1,                # number of surface forms; 1 for a single new sense
+        "rotation": 0.0,             # reserved for future orientation encoding
+        "parent_edge_id": None,      # orphan until paired by create_edge / pipeline
+        "properties": {
+            "word": word,
+            "pos": pos,
+            "sense_id": None,        # kaikki stable sense id; None for manually created nodes
+            "sense_idx": 0,          # position within the word's sense list; 0 for new nodes
+            "gloss": gloss,
+            "examples": [{"text": e} for e in examples],
+            "tags": tags,            # kaikki tags e.g. ["informal", "archaic"]
+            "topics": topics,        # kaikki topics e.g. ["medicine", "computing"]
+            "wikidata": [],          # Wikidata QIDs; empty for manually created nodes
+        },
+        "created_at": ts,
+        "updated_at": ts,
+    }
+    result = _coll.insert_one(doc)
+    return _fmt({"ok": True, "id": str(result.inserted_id), "label": doc["label"]})
+
+
+@mcp.tool()
+def create_word(
+    word: str,
+    pos: str,
+    source_ids: list[str],
+    ipa: str = "",
+    etymology: str = "",
+) -> str:
+    """Create a new L14 word node, exactly as s03 + s05 would produce.
+
+    source_ids: mix of L15 sense node IDs and/or L15 BE IDs that cover this
+    word's senses. The word vector is the normalized centroid of their vectors —
+    the same formula s05_word_vectors.py uses:
+      v(word) = normalize( Σ v(BE_i) + Σ v(orphan_sense_j) )
+
+    Pass BE IDs for senses that were paired into a BE via create_edge, and
+    sense node IDs for any senses still unpaired (orphans). Mixed lists are fine.
+
+    ipa and etymology are optional metadata stored in properties.
+
+    Returns the new word node's _id.
+    """
+    if not source_ids:
+        return "source_ids must not be empty — provide at least one sense or BE id."
+
+    try:
+        oids = [ObjectId(sid) for sid in source_ids]
+    except Exception:
+        return "All source_ids must be 24-char hex ObjectId strings."
+
+    docs = list(_coll.find({"_id": {"$in": oids}}, {"vector": 1, "level": 1, "doc_type": 1}))
+    found = {d["_id"]: d for d in docs}
+    missing = [str(o) for o in oids if o not in found]
+    if missing:
+        return f"No documents found for ids: {missing}."
+
+    vecs = []
+    for oid in oids:
+        d = found[oid]
+        if not d.get("vector"):
+            return f"Document {d['_id']} has no vector."
+        vecs.append(np.asarray(d["vector"], dtype=np.float32))
+
+    from lib.bary_vec import normalize
+    word_vec = normalize(sum(vecs)).tolist()  # normalized centroid — matches s05 formula
+
+    ts = datetime.now(timezone.utc)
+    doc: dict[str, Any] = {
+        "doc_type": "node",       # always 'node'
+        "node_type": "word",      # L14 = word (aggregates its senses); L15 = sense
+        "level": 14,              # word level — above senses (L15), below L14 BEs
+        "label": f"{word} ({pos})",  # no sense_idx — word nodes are not indexed by sense
+        "vector": word_vec,       # normalized centroid of source_ids vectors (s05 formula)
+        "surface": len(source_ids),  # number of sense/BE sources; proxy for polysemy breadth
+        "rotation": 0.0,          # reserved for future orientation encoding
+        "parent_edge_id": None,   # orphan until paired by create_edge
+        "properties": {
+            "word": word,
+            "pos": pos,
+            "etymology": etymology,  # optional; empty string if not provided
+            "forms": [],             # kaikki inflected forms; empty for manually created words
+            "ipa": ipa,              # optional pronunciation string
+            "sense_ids": [],         # kaikki stable sense ids; empty for manually created words
+            "relations": [],         # kaikki word-level relations; empty for manually created words
+        },
+        "created_at": ts,
+        "updated_at": ts,
+    }
+    result = _coll.insert_one(doc)
+    return _fmt({"ok": True, "id": str(result.inserted_id), "label": doc["label"],
+                 "sources_used": len(vecs)})
+
+
+@mcp.tool()
+def create_edge(
+    cm1_id: str,
+    cm2_id: str,
+    edge_type: str | None = None,
+    q: float = 0.0,
+) -> str:
+    """Create a new BaryEdge between two same-level nodes, exactly as the pipeline would.
+
+    edge_type shapes the relational flavor of the BE vector via TYPE_SENTENCES embedding:
+      - same_phenomenon  — these two words describe the same concept  (q≈0.90)
+      - contradicts      — these two words have opposite meanings      (q≈0.85)
+      - extends          — one word is derived from or extends other   (q≈0.60)
+      - applies_to       — these two words share a common origin      (q≈0.55)
+      - is_instance_of   — specific instance of a broader relation    (q≈0.65)
+
+    Omit edge_type for L15 sense-to-sense BEs — bary_vec collapses to normalize(v1+v2).
+    q defaults to the pipeline q_seed for the edge_type, or 1.0 when edge_type is None.
+    Returns the new edge's _id.
+    """
+    if edge_type is not None and edge_type not in TYPE_SENTENCES:
+        return (f"edge_type must be one of: {', '.join(TYPE_SENTENCES)}"
+                " — or omit entirely for a type-neutral L15 BE.")
+
+    try:
+        oid1 = ObjectId(cm1_id)
+        oid2 = ObjectId(cm2_id)
+    except Exception:
+        return "cm1_id and cm2_id must be 24-char hex ObjectId strings."
+
+    cm1 = _coll.find_one({"_id": oid1}, {"vector": 1, "level": 1})
+    cm2 = _coll.find_one({"_id": oid2}, {"vector": 1, "level": 1})
+    if not cm1:
+        return f"No document with cm1_id {cm1_id}."
+    if not cm2:
+        return f"No document with cm2_id {cm2_id}."
+    if not cm1.get("vector") or not cm2.get("vector"):
+        return "Both CMs must have a stored vector."
+    if cm1.get("level") != cm2.get("level"):
+        return f"Both CMs must be at the same level (got {cm1.get('level')} vs {cm2.get('level')})."
+
+    v1 = np.asarray(cm1["vector"], dtype=np.float32)
+    v2 = np.asarray(cm2["vector"], dtype=np.float32)
+
+    if edge_type is not None:
+        if not q:
+            q = _settings.q_seeds.get(_EDGE_TYPE_Q_KEY[edge_type], 0.70)
+        try:
+            embedder = get_embedder(_settings)
+            type_vec = embedder.embed([TYPE_SENTENCES[edge_type]])[0]
+        except Exception as e:
+            return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
+        bv = compute_bary_vec(v1, v2, type_vec, q)
+    else:
+        # L15 sense-to-sense BE: no relational type, pure CM centroid
+        q = q if q else 1.0
+        type_vec = None
+        bv = _norm_vec(v1 + v2)
+
+    doc = _make_baryedge(
+        oid1, oid2,
+        level=cm1.get("level", 14),  # inherit level from cm1; both CMs are same level
+        vector=bv,                   # bary_vec: normalize(q·v1 + q·v2 + (1−q)·v_type)
+        q=q,                         # connection_strength and base accumulated_weight
+        edge_type=edge_type,         # None for L15; kaikki relation type for L14
+        type_vector=type_vec,        # None for L15; embed(TYPE_SENTENCES[edge_type]) for L14
+        source="ingested",           # matches pipeline — no staging distinction
+        confidence=1.0,
+    )
+    result = _coll.insert_one(doc)
     return _fmt({
-        "total_documents": _coll.estimated_document_count(),
-        "breakdown": [
-            {k: v for k, v in r["_id"].items() if v is not None} | {"count": r["count"]}
-            for r in rows
-        ],
+        "ok": True,
+        "id": str(result.inserted_id),
+        "edge_type": edge_type,
+        "level": doc["level"],
+        "q": q,
+        "cm1_id": cm1_id,
+        "cm2_id": cm2_id,
     })
 
 
 @mcp.tool()
-def orphan_stats() -> str:
-    """Return orphan rates (parent_edge_id=null) per doc_type and level.
+def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str) -> str:
+    """Create a Structure MetaBary (SMB) triad — cross-cutting, non-exclusive grouping.
 
-    Orphan BEs/MBs have no MetaBary parent yet — indicates how much of the
-    graph is still disconnected from the upper hierarchy. Lower orphan rates
-    mean better coverage. Run after s08/s09 to gauge pipeline progress.
+    SMB follows the same vector and level rules as a pipeline MetaBary (s08)
+    but relaxes the unique-parent constraint: cm1, cm2, and bridge may already
+    be parented nodes. The SMB does not take hierarchical ownership of its
+    children — parent_edge_id on the children is never modified.
+
+    Distinguishable from pipeline MBs via source='structural' and the explicit
+    bridge_id field (needed because the bridge is not re-parented, so the
+    standard parent_edge_id reverse-lookup used by _triad_of cannot find it).
+
+    Level rules (same as pipeline):
+      - cm1 and cm2 must be at the same level
+      - bridge must be at child_level - 1
+      - SMB is inserted at child_level - 2
+
+    Returns the new SMB's _id, level, q_mb_raw, accumulated_weight,
+    and the cosine between the two children (pipeline threshold is 0.90).
     """
-    rows = list(_coll.aggregate([
-        {"$group": {
-            "_id": {"doc_type": "$doc_type", "level": "$level"},
-            "total":   {"$sum": 1},
-            "orphans": {"$sum": {"$cond": [{"$eq": ["$parent_edge_id", None]}, 1, 0]}},
-        }},
-        {"$sort": {"_id.doc_type": 1, "_id.level": 1}},
-    ]))
-    return _fmt([
-        {
-            "doc_type": r["_id"]["doc_type"],
-            "level": r["_id"]["level"],
-            "orphans": r["orphans"],
-            "total": r["total"],
-            "orphan_pct": round(100 * r["orphans"] / r["total"], 1) if r["total"] else None,
-        }
-        for r in rows
-    ])
+    if len({cm1_id, cm2_id, bridge_id}) != 3:
+        return "cm1_id, cm2_id, and bridge_id must all be distinct."
+    try:
+        oid1 = ObjectId(cm1_id)
+        oid2 = ObjectId(cm2_id)
+        oid3 = ObjectId(bridge_id)
+    except Exception:
+        return "cm1_id, cm2_id, bridge_id must be 24-char hex ObjectId strings."
+
+    fields = {"vector": 1, "level": 1, "accumulated_weight": 1, "parent_edge_id": 1}
+    cm1    = _coll.find_one({"_id": oid1}, fields)
+    cm2    = _coll.find_one({"_id": oid2}, fields)
+    bridge = _coll.find_one({"_id": oid3}, fields)
+
+    if not cm1:
+        return f"No document with cm1_id {cm1_id}."
+    if not cm2:
+        return f"No document with cm2_id {cm2_id}."
+    if not bridge:
+        return f"No document with bridge_id {bridge_id}."
+
+    for label, doc in (("cm1", cm1), ("cm2", cm2), ("bridge", bridge)):
+        if not doc.get("vector"):
+            return f"{label} ({doc['_id']}) has no vector."
+
+    # Level invariants — identical to pipeline
+    child_level = cm1.get("level")
+    if cm2.get("level") != child_level:
+        return f"cm1 and cm2 must be the same level (got {child_level} vs {cm2.get('level')})."
+    if bridge.get("level") != child_level - 1:
+        return (
+            f"bridge must be at child_level - 1 = {child_level - 1} "
+            f"(got {bridge.get('level')})."
+        )
+    mb_level = child_level - 2
+    if mb_level < 1:
+        return f"child_level {child_level} would produce SMB at level {mb_level} — minimum is 1."
+
+    v1 = np.asarray(cm1["vector"],    dtype=np.float32)
+    v2 = np.asarray(cm2["vector"],    dtype=np.float32)
+    vb = np.asarray(bridge["vector"], dtype=np.float32)
+    w1 = float(cm1.get("accumulated_weight", 1.0))
+    w2 = float(cm2.get("accumulated_weight", 1.0))
+    w3 = float(bridge.get("accumulated_weight", 1.0))
+
+    child_cosine = round(cosine(v1, v2), 4)  # pipeline threshold is 0.90; reported, not enforced
+
+    vec, q_mb_raw = compute_metabary_vec(v1, v2, vb, w1, w2, w3)
+    acc_w = q_mb_raw * level_factor(mb_level, _settings.level_factor_alpha)
+
+    doc = _make_metabary(
+        oid1, oid2,
+        level=mb_level,           # child_level - 2; same rule as pipeline MB
+        vector=vec,               # normalize(w1·v1 + w2·v2 + w3·v_bridge)
+        q_mb_raw=q_mb_raw,        # Born rule: w3² / √(w1⁴+w2⁴+w3⁴); stored as connection_strength
+        accumulated_weight=acc_w, # q_mb_raw × level_factor; available for future upward propagation
+    )
+    # SMB-specific fields layered on top of the standard metabary schema
+    doc["source"] = "structural"  # distinguishes SMB from pipeline MBs ({source: 'structural'})
+    doc["bridge_id"] = oid3       # explicit bridge ref — bridge is not re-parented so reverse-lookup fails
+
+    result = _coll.insert_one(doc)
+    return _fmt({
+        "ok": True,
+        "id": str(result.inserted_id),
+        "level": mb_level,
+        "q_mb_raw": round(q_mb_raw, 6),
+        "accumulated_weight": round(acc_w, 6),
+        "child_cosine": child_cosine,
+        "cm1_parented": cm1.get("parent_edge_id") is not None,
+        "cm2_parented": cm2.get("parent_edge_id") is not None,
+        "bridge_parented": bridge.get("parent_edge_id") is not None,
+        "cm1_id": cm1_id,
+        "cm2_id": cm2_id,
+        "bridge_id": bridge_id,
+    })
 
 
 @mcp.tool()
@@ -599,7 +901,7 @@ def scan_unlabeled(level: int, limit: int = 50, offset: int = 0) -> str:
             "connection_strength": doc.get("connection_strength"),
             "accumulated_weight": doc.get("accumulated_weight"),
             "has_parent": doc.get("parent_edge_id") is not None,
-            "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"]),
+            "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id")),
         })
 
     return _fmt({
