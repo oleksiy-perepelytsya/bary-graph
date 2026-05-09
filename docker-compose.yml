@@ -5,6 +5,8 @@ services:
     # MongoDB Community 8.x + bundled mongot (Atlas Search / Vector Search local)
     image: mongodb/mongodb-atlas-local:8
     container_name: barygraph-mongo
+    hostname: barygraph-mongo
+    restart: unless-stopped
     mem_limit: 20g   # 10g→20g: mongot HNSW build on 5.6M+ 768-dim vectors peaks beyond 10g
     ports:
       # Host port 27117 so tests/dev never collide with other local Mongos.
@@ -12,6 +14,7 @@ services:
     volumes:
       - mongo_data:/data/db
       - mongo_configdb:/data/configdb
+      - mongot_data:/data/mongot
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ping:1}).ok"]
       interval: 5s
@@ -21,20 +24,14 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: barygraph-ollama
+    restart: unless-stopped
     ports:
       - "11434:11434"
     volumes:
       - ollama_models:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-    profiles: ["gpu"]
 
 volumes:
   mongo_data:
   mongo_configdb:
+  mongot_data:
   ollama_models:
