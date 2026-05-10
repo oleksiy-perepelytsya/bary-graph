@@ -24,6 +24,13 @@
 >   longer needed for vector computation).
 > - Removed: parameter R6 (λ tuning). Removed open question §19.8–9
 >   (word-length syllable counter, λ tuning).
+> - Stage 9 `s09_extend.py` added and run: MetaBary extension with
+>   per-level cosine threshold relaxation. Picks up where s08 left off,
+>   sweeping the threshold from the 0.9 base down to a per-level floor
+>   (`0.9 − child_level × 0.01`; L15 floor = 0.75). Single MongoDB
+>   fetch per child_level, then in-memory greedy sweep — 14× faster
+>   than re-fetching per threshold round. Repeats full descending passes
+>   until a complete pass produces zero new triads.
 
 > **Level orientation:** L1 = top (most abstract), L15 = bottom (most
 > concrete sense). MetaBary climbs from L to L-2 using L-1 as bridge.
@@ -591,7 +598,48 @@ while True:
 Pure geometry — no kaikki, no TYPE_SENTENCES. `accumulated_weight`
 compounds at each level via `level_factor`.
 
-### Stage 9 — Index
+### Stage 9 — MetaBary Extension (Threshold Relaxation)
+
+Picks up where Stage 8 left off (`s09_extend.py`). Rather than stopping
+at a fixed 0.9 cosine threshold, this stage sweeps the threshold down to
+a per-level floor until no new triads form:
+
+```python
+def _min_threshold(level: int) -> float:
+    """Floor per child_level: 0.9 - level × 0.01."""
+    return round(0.9 - level * 0.01, 2)
+    # L15 → 0.75, L14 → 0.76, L13 → 0.77, L12 → 0.78, …
+```
+
+For each child level, all unparented BEs and bridges are loaded from
+MongoDB **once**, then the full threshold sweep is applied in memory —
+14× faster than re-fetching per threshold round. Pairs are sorted
+cosine-descending so greedy selection is identical to a round-by-round
+approach.
+
+When the bridge count exceeds `ANN_THRESHOLD`, a **CPU HNSW index**
+(hnswlib) is built from bridge vectors to accelerate centroid lookup.
+Otherwise a brute-force dot product is used.
+
+The outer loop repeats full descending passes (L15 children first,
+upward) until a complete pass produces **zero new triads** across all
+levels — natural convergence, no hard cap.
+
+No embedding calls. **Resumable:** `parent_edge_id = None` is the
+ground truth for unparented BEs; the checkpoint records cumulative
+triads for observability but does not gate re-processing on resume.
+
+**Per-level floor table:**
+
+| child_level | floor threshold | bridge_level |
+|---|---|---|
+| L15 | 0.75 | L14 |
+| L14 | 0.76 | L13 |
+| L13 | 0.77 | L12 |
+| L12 | 0.78 | L11 |
+| L11 | 0.79 | L10 |
+
+### Stage 10 — Index
 
 - Build mongot vector index (~4–8 hours)
 
@@ -599,15 +647,16 @@ compounds at each level via `level_factor`.
 
 | Stage | Script | Duration | Blocking |
 |---|---|---|---|
-| 1–2. Parse + Embed | `s01_parse_embed.py` | ~20 min | Yes |
-| 3. Insert nodes | `s02_insert_nodes.py` | ~30 min | Yes |
-| 4. L15 BE formation | `s03_l15_edges.py` | ~45 min | Yes |
-| 5. L14 word vectors | `s04_word_vectors.py` | ~5 min | Yes |
-| 6. L14 BE formation | `s05_l14_edges.py` | ~30 min | Yes |
-| 7. L14 orphan re-entry | `s06_orphan_reentry.py` | ~10 min | Yes |
-| 8. L13 MetaBary | `s07_metabary_l13.py` | ~20 min | Yes |
-| 9. L12→L1 recursive | `s08_metabary_recursive.py` | ~1–2 hours | Yes |
-| 10. Index | `s09_index.py` | ~4–8 hours | Yes |
+| 1. Parse | `s01_parse.py` | ~10 min | Yes |
+| 2. Embed | `s02_embed.py` | ~20 min | Yes |
+| 3. Insert nodes | `s03_insert_nodes.py` | ~30 min | Yes |
+| 4. L15 BE formation | `s04_l15_edges.py` | ~45 min | Yes |
+| 5. L14 word vectors | `s05_word_vectors.py` | ~5 min | Yes |
+| 6. L14 BE formation | `s06_l14_edges.py` | ~30 min | Yes |
+| 7. L14 orphan re-entry | `s07_orphan_reentry.py` | ~10 min | Yes |
+| 8. MetaBary L13→L1 | `s08_metabary.py` | ~1–2 hours | Yes |
+| 9. MetaBary extension | `s09_extend.py` | ~variable | Yes |
+| 10. Index | `s10_index.py` | ~4–8 hours | Yes |
 
 **Queryable: ~7–12 hours.**
 
@@ -731,14 +780,16 @@ needed. Single `$graphLookup` walks from any node to root.
 
 | Stage | Duration | Blocking? |
 |---|---|---|
-| Parse + Embed | ~20 min | Yes |
+| Parse + Embed | ~30 min | Yes |
 | Insert nodes | ~30 min | Yes |
 | L15 BE formation | ~45 min | Yes |
 | L14 word vectors | ~5 min | Yes |
 | L14 BE formation | ~30 min | Yes |
-| L13+ MetaBary | ~1–2 hours | Yes |
+| L14 orphan re-entry | ~10 min | Yes |
+| MetaBary L13→L1 | ~1–2 hours | Yes |
+| MetaBary extension | ~variable | Yes |
 | Build indexes | ~4–8 hours | Yes |
-| **Queryable** | **~7–12 hours** | |
+| **Queryable** | **~8–14 hours** | |
 
 Hardware: 8–16 GB GPU VRAM, 32–64 GB RAM, 150–200 GB disk, 8+ cores.  
 Cost: zero (all open-source).
