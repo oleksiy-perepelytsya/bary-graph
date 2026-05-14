@@ -1,304 +1,211 @@
 # BaryGraph
 
-**A knowledge graph architecture where every relationship is a first-class object.**
+**A knowledge graph architecture for cross-domain relational retrieval, where every relationship is a first-class searchable object.**
 
-BaryGraph borrows a principle from physics: in any system of two masses,
-the barycenter — the shared center of mass — is as real as the masses
-themselves. It has a position, it has properties, and it governs how the
-two bodies relate.
+BaryGraph borrows a principle from physics: in any system of two
+masses, the barycenter — the shared center of mass — is as real as
+the masses themselves. It has a position, it has properties, and it
+governs how the two bodies relate.
 
-Standard knowledge graphs treat relationships as thin edges: a label and
-a weight connecting two nodes. BaryGraph promotes every relationship to a
-**BaryEdge** — a full document with its own embedding vector, its own
-semantic description, and its own position in a retrieval index. When you
-search, you find not just similar nodes but the *connections between
-nodes*, including connections between nodes that would never appear as
-each other's nearest neighbours.
+Standard vector retrieval treats relationships as thin edges: a label
+and a weight between two nodes. The relationship itself has no
+position in the retrieval space. BaryGraph promotes every relationship
+to a **BaryEdge** — a stored document with its own 768-dimensional
+embedding, its own structural position in a forest hierarchy, and its
+own behavior in nearest-neighbor search. Above the leaf levels,
+BaryEdges themselves recurse into higher-order triads (**MetaBary**),
+constructed algebraically without further embedding calls.
 
----
+The architecture is designed for **cross-domain bridging**: surfacing
+structural connections between concepts that flat vector search
+cannot construct, because the connection lives in a relational
+neighborhood the embedding model never sees. The proof-of-concept in
+this repository instantiates BaryGraph on the kaikki.org English
+Wiktionary corpus — chosen because it has pre-labeled relations,
+free ground truth, and human-readable results — but the architecture
+is corpus-agnostic.
 
-BaryGraph: A Semantic Description of the Database
-
-  The Two Atoms
-
-  Everything in this database is one of two things: a node or a
-  baryedge. There are currently 6.66 million documents total.
-  That's it — no separate edge collections, no join tables, no
-  separate metadata stores. The choice to flatten both objects and
-  relationships into one collection is not an accident; it is the
-  entire point.
-
-  Nodes are things. At the bottom of the graph (level 15) they are
-  individual word senses — 1.74 million of them. Each sense is a
-  single gloss from the Wiktionary-derived Kaikki corpus: "a device
-   for turning a screw," or "a student at Oxford University." One
-  level up (level 14) sit 1.44 million word nodes, each
-  representing a (word, pos) pair like open/adj or run/verb. These
-  two levels are the only node levels in use. Everything above them
-   is composed entirely of edges.
-  Relationships as First-Class Citizens
-
-  A BaryEdge is a stored relationship that has its own identity,
-  its own 768-dimensional embedding vector, and can itself be
-  related to other BaryEdges. This is the central move: instead of
-  annotating an edge with metadata, you promote the edge to a
-  document that can be a child, a sibling, or a parent of other
-  documents.
-
-  At level 15 there are 1.11 million BaryEdges pairing sense nodes.   Two senses become a pair when their embedding vectors are close
-  enough (cosine ≥ 0.72) and neither is already paired. The
-  resulting BaryEdge vector is not the average of its two children
-  — it is an algebraic blend weighted by q (a connection strength    between 0 and 1) and a type vector derived from the lexical        neighborhood of the paired words. The type vector encodes what
-  kind of neighborhood this pair lives in: which antonyms and
-  synonyms the parent words carry. This means two senses that are
-  similar for different reasons can have different BaryEdge vectors
-   even if their raw embedding distance is identical.
-
-  At level 14 there are roughly 1.39 million BaryEdges pairing word
-   nodes, and here the semantics become explicit. Each L14 edge
-  carries an edge_type drawn from five named relations:
-
-  - contradicts (293k) — antonyms: the two words push against each
-  other
-  - extends (890k) — derivational and relational links: one word
-  grows out of the other
-  - is_instance_of (52k) — hypernym/hyponym: one is a species of
-  the other
-  - applies_to (4.5k) — meronymy: one is a part of the other
-  - same_phenomenon (151k) — synonyms and coordinate terms: both
-  words reach toward the same thing
-
-  The dramatic imbalance in these counts is real. extends dominates
-   because Wiktionary's derived[] and related[] fields are densely
-  populated; applies_to is rare because meronymy is rarely encoded.
-   The graph reflects what lexicographers chose to record.
-
-  The Forest Constraint
-
-  Every node and every BaryEdge has at most one parent_edge_id.
-  This unique-parent rule enforces a forest topology — a collection
-   of trees with no shared ancestry. It means the graph cannot
-  represent a sense that belongs equally to two different semantic
-  neighborhoods. It must choose. This is a deliberate
-  simplification: it makes traversal cheap and hierarchy
-  unambiguous, at the cost of forcing a commitment that natural
-  language often refuses to make.
-
-  MetaBary: Edges of Edges
-
-  Above level 14 the structure becomes recursive. A MetaBary at
-  level 13 is a BaryEdge whose two children (cm1, cm2) are
-  themselves L14 BaryEdges, held together by a third L14 BaryEdge
-  acting as a bridge. There are 495k such triads. Each one groups
-  two word-level relationships under a shared semantic roof.
-
-  A live example from the database illustrates this clearly. One
-
-  A live example from the database illustrates this clearly. One
-  L13 MetaBary has:
-  - child1: the edge between snow pentathlon and winter triathlon
-  (similar winter multi-sport events)
-  - child2: the edge between geschmozzle and snowboard cross (two
-  snowboard racing formats)
-  - bridge: the edge between pentathlon and snow pentathlon (a
-  hyponym link anchoring the cluster)
-
-  Together these four words and three relationships form a single
-  document representing the concept "competitive winter
-  multi-discipline sport." The MetaBary's own vector is an
-  algebraic blend of its children's vectors, re-weighted by a
-  rescaled connection strength q_MB that accounts for the
-  compounding of three q values. A strong MetaBary has children
-  This unique-parent rule enforces a forest topology — a collection
-   of trees with no shared ancestry. It means the graph cannot
-  represent a sense that belongs equally to two different semantic
-  neighborhoods. It must choose. This is a deliberate
-  simplification: it makes traversal cheap and hierarchy
-  unambiguous, at the cost of forcing a commitment that natural
-  language often refuses to make.
-
-  MetaBary: Edges of Edges
-
-  Above level 14 the structure becomes recursive. A MetaBary at
-  level 13 is a BaryEdge whose two children (cm1, cm2) are
-  themselves L14 BaryEdges, held together by a third L14 BaryEdge
-  acting as a bridge. There are 495k such triads. Each one groups
-
-  A live example from the database illustrates this clearly. One
-  L13 MetaBary has:
-  - child1: the edge between snow pentathlon and winter triathlon
-  (similar winter multi-sport events)
-  - child2: the edge between geschmozzle and snowboard cross (two
-  snowboard racing formats)
-  - bridge: the edge between pentathlon and snow pentathlon (a
-  This unique-parent rule enforces a forest topology — a collection
-   of trees with no shared ancestry. It means the graph cannot
-  represent a sense that belongs equally to two different semantic
-  neighborhoods. It must choose. This is a deliberate
-  simplification: it makes traversal cheap and hierarchy
-  unambiguous, at the cost of forcing a commitment that natural      language often refuses to make.
-
-  MetaBary: Edges of Edges                                         
-  Above level 14 the structure becomes recursive. A MetaBary at
-  level 13 is a BaryEdge whose two children (cm1, cm2) are
-  themselves L14 BaryEdges, held together by a third L14 BaryEdge
-  acting as a bridge. There are 495k such triads. Each one groups    two word-level relationships under a shared semantic roof.
-                                                                     A live example from the database illustrates this clearly. One
-  L13 MetaBary has:                                                  - child1: the edge between snow pentathlon and winter triathlon
-  (similar winter multi-sport events)
-  - child2: the edge between geschmozzle and snowboard cross (two
-  snowboard racing formats)
-  - bridge: the edge between pentathlon and snow pentathlon (a
-  hyponym link anchoring the cluster)
-
-  Together these four words and three relationships form a single
-  document representing the concept "competitive winter
-  multi-discipline sport." The MetaBary's own vector is an           algebraic blend of its children's vectors, re-weighted by a
-  rescaled connection strength q_MB that accounts for the
-  compounding of three q values. A strong MetaBary has children      with high mutual cosine similarity; a weak one (like the
-  jivanmukta/jism cluster at q=0.31) is a cosmological
-  neighbor-of-last-resort pairing, not a semantic insight.         
-  This recursion continues upward. L12 MetaBary edges pair L13       MetaBary edges (424k of them). L11 pairs L12 (35k). L10 pairs L11
-   (35k). At each level the vocabulary covered by a single document   grows — the software-testing cluster at L12 encompasses
-  Microspeak, bluelink, open beta, machete beta, alpha version, and   version under a single node — while the connection strength and
-  semantic precision generally decrease.
-                                                                     What the Vectors Encode                                          
-  Every document carries a 768-dimensional vector from the
-  nomic-embed-text-v1.5 model, but what each vector means differs
-  by level:
-
-  - L15 sense vectors: embed the gloss text plus up to two example   sentences. They encode what a specific usage of a word means in
-  context.                                                           - L14 word vectors: no embedding call. Computed as the normalized
-   sum of all BaryEdge vectors that hold that word's senses, plus    any unpaired sense vectors. A word's vector is literally the
-  center of mass of its relationships.                               - L14/L15 BaryEdge vectors: algebraically derived from children
-  and type. Never embedded directly.
-  - L13–L10 MetaBary vectors: algebraically derived from their
-  children. The embedding model is never called above L14.
-
-  This means the model runs for L15 sense text and L14 type          sentences only. Every higher-level structure is pure algebra on    top of those anchors.
-
-  The Practical Consequence                                                                                                             What you have is a six-million-document index where searching for
-   "fast-moving water" doesn't just find nodes whose text mentions
-  rapids or torrents — it can surface a BaryEdge that pairs rapids
-  with cataract, whose MetaBary parent groups that pair with
-  whitepool/maelstrom, under a grandparent spanning the whole
-  domain of turbulent water movement. Retrieval can return not just
-   words but the relationship between words, and that relationship
-  is itself a searchable, rankable object with a vector position in
-   the same 768-dimensional space as every sense and word in the
-  graph.
+The current build contains **6.66 million documents**: 1.74M sense
+nodes, 1.44M word nodes, 2.50M leaf-level BaryEdges, and ~989k
+MetaBary triads spanning levels L13 to L10.
 
 ---
 
-## The Hypothesis
+## The Architecture in One Diagram
 
-> Including BaryEdge documents in vector search retrieval outperforms
-> flat nearest-neighbour search on the same corpus.
+Every connection is a triad of three entities: two CMs (knowledge
+nodes) and a BaryEdge between them. The BaryEdge's vector is a
+weighted blend of its two parent vectors plus a context vector.
 
-Concretely: given a query, a retrieval system that returns a mix of nodes
-and BaryEdges should recover more relevant items than one returning nodes
-alone — because BaryEdges act as bridges, pulling in both their parent
-nodes as implied context.
+**Panel A — atomic L15 BaryEdge construction:**
 
-This is falsifiable. We test it with held-out synonym links from a
-dictionary corpus. If BaryGraph recall@20 does not beat flat recall@20,
-the architecture does not justify its complexity.
+```mermaid
+graph LR
+    CM1["CM₁ (L15 sense)<br/>v(CM₁)"]
+    CM2["CM₂ (L15 sense)<br/>v(CM₂)"]
+    TYPE["v(type)<br/>= embed(lexical neighborhood)"]
+    BE["L15 BaryEdge<br/>v(BE) = normalize(q·v(CM₁) + q·v(CM₂) + (1−q)·v(type))<br/>accumulated_weight = q"]
+
+    CM1 -->|"q"| BE
+    CM2 -->|"q"| BE
+    TYPE -->|"1−q"| BE
+
+    style BE fill:#e8f0ff,stroke:#3366cc,stroke-width:2px
+    style CM1 fill:#fff,stroke:#666
+    style CM2 fill:#fff,stroke:#666
+    style TYPE fill:#fff,stroke:#999,stroke-dasharray: 3 3
+```
+
+Above L14, BaryEdges become CMs for new triads. Two BaryEdges are
+bridged by a third (the bridge), forming a MetaBary. The diagram
+shape is identical to panel A — the same `normalize(w₁·a + w₂·b +
+w₃·c)` construction — but the inputs are now stored BaryEdges rather
+than nodes and an external embed call.
+
+**Panel B — L13 MetaBary recursion:**
+
+```mermaid
+graph LR
+    BE1["L15 BaryEdge BE₁<br/>v(BE₁), w₁"]
+    BE2["L15 BaryEdge BE₂<br/>v(BE₂), w₂"]
+    BRIDGE["L14 BaryEdge (bridge)<br/>v(bridge), w₃"]
+    MB["L13 MetaBary<br/>v(MB) = normalize(w₁·v(BE₁) + w₂·v(BE₂) + w₃·v(bridge))<br/>accumulated_weight = (w₃² / √(w₁⁴+w₂⁴+w₃⁴)) · level_factor(13)"]
+
+    BE1 -->|"w₁"| MB
+    BE2 -->|"w₂"| MB
+    BRIDGE -->|"w₃"| MB
+
+    style MB fill:#ffe8e8,stroke:#cc3333,stroke-width:2px
+    style BE1 fill:#e8f0ff,stroke:#3366cc
+    style BE2 fill:#e8f0ff,stroke:#3366cc
+    style BRIDGE fill:#e8f0ff,stroke:#3366cc
+```
+
+Higher-level MetaBary construction is pure algebra on stored
+vectors — zero embedding calls — and authority compounds through
+each level via the `accumulated_weight` scaling.
+
+Full architecture specification: [`BaryGraph_Kaikki_PoC_v0_6.md`](BaryGraph_Kaikki_PoC_v0_6.md).
 
 ---
 
-## This Repository: Kaikki PoC
+## What This Buys You
 
-The proof-of-concept uses the English machine-readable dictionary from
-[kaikki.org](https://kaikki.org) (~800K headwords, ~2.5M senses).
+Three things flat vector search does not provide:
 
-A dictionary is an ideal first testbed because:
+**Relationships are retrievable as objects.** A query for *"the
+connection between river and floodplain"* can return the BaryEdge
+that pairs them, ranked in the same index as the words themselves.
 
-- **Relations are pre-labeled.** Synonyms, antonyms, derived forms,
-  etymology, and hypernyms are explicit in the data. BaryEdge types come
-  from the corpus, not a classifier.
-- **Ground truth is free.** Hold out 10% of synonym links before
-  ingestion. Measure whether BaryGraph retrieval recovers them better than
-  flat search. Zero human annotation required.
-- **Polysemy is rich.** Words like *bank*, *crane*, and *bark* have
-  senses so distant in meaning that no embedding will make them neighbours.
-  Yet they are deeply related. BaryGraph should surface that structure
-  through MetaBary triads — recursive relationships between relationships.
-- **Any bilingual person is an oracle.** Unlike scientific papers or legal
-  cases, evaluating whether two word senses are genuinely connected
-  requires no domain expertise. The results are immediately human-readable.
+**Cross-domain bridges are discoverable on demand.** Filter retrieval
+by MetaBary level (`level: 10..13`) and the result set contains
+triads that bridge different semantic neighborhoods. A live example:
+an L13 MetaBary collects three senses whose glosses all literally
+say *"in an opposite direction"* — `contraoriented`, `antialigning`
+(tagged *physics*), and `antialignment` — reifying *oppositional
+orientation as a kind*, a concept that has no single word in English.
+
+**Higher-order patterns exist as first-class documents.** An L11
+MetaBary at one coordinate of the index encodes a four-word,
+three-edge pattern as a single retrievable object. For example, one
+L11 MetaBary bridges biological taxis (`hydrotaxis`, `hydrotropism`,
+`rheotaxis` — tagged biology) with physical dynamics (`hydrodynamic`,
+`hydrophysics`, `water-powered`) under the bridge concept
+*aquiferous system / hydrophysics*. The two children share no
+vocabulary; a flat embedding model would never make them neighbors.
+The MetaBary's vector position encodes the relationship.
 
 ---
 
-## Core Concepts
+## The Live Graph
 
-### The Triad
+[Statistics from the production build, May 2026.]
 
-Every connection is three entities, not two:
+**Document counts:**
 
-```
-CM₁  →  BaryEdge  →  CM₂
-```
+| Level | Document type | Count |
+|---|---|---:|
+| 15 | Sense node | 1,737,696 |
+| 14 | Word node | 1,437,051 |
+| 15 | BaryEdge | 1,107,392 |
+| 14 | BaryEdge | 1,390,405 |
+| 13 | MetaBary | 495,641 |
+| 12 | MetaBary | 424,994 |
+| 11 | MetaBary | 34,894 |
+| 10 | MetaBary | 34,891 |
 
-`CM₁` and `CM₂` are knowledge nodes (senses, words, concepts). The
-`BaryEdge` sits between them as a stored document with its own vector:
+**L14 edge-type distribution** (what kaikki actually encodes):
 
-```
-bary_vec = normalize( q·v(CM₁) + q·v(CM₂) + (1−q)·v(type) )
-```
+| edge_type | count | share | kaikki source |
+|---|---:|---:|---|
+| `extends` | 889,819 | 64.0% | `derived[]`, `related[]` |
+| `contradicts` | 293,306 | 21.1% | `antonyms[]` |
+| `same_phenomenon` | 150,845 | 10.8% | `synonyms[]`, `coordinate_terms[]` |
+| `is_instance_of` | 51,964 | 3.7% | `hypernyms[]`, `hyponyms[]` |
+| `applies_to` | 4,471 | 0.3% | `meronyms[]`, `holonyms[]` |
 
-where `q` is connection quality (0–1) and `v(type)` is a level-dependent
-embedding that captures the relational context of the pairing. A strong
-connection (`q → 1`) produces a barycenter vector close to both parents
-simultaneously — meaning a query near either parent also lands near the
-BaryEdge, and vice versa.
+The 200× spread from `extends` to `applies_to` is what Wiktionary
+contributors record. The architecture does not balance it; balancing
+would falsify the corpus.
 
-### Forest Structure
+---
 
-BaryGraph organizes all nodes and BaryEdges into a forest with a
-unique-parent constraint: every CM has at most one `parent_edge_id`.
-This means:
+## Evaluation
 
-- **Triadic recursion:** at higher levels, BaryEdges act as CMs for new
-  connections. Two BaryEdges are bridged by a third, forming a MetaBary
-  triad that climbs the hierarchy.
-- **Single `$graphLookup`** walks from any node to root — no cycle
-  handling, no special traversal logic.
-- **Orphans are allowed** — a concept with no relationships simply has
-  no upward path.
+Two complementary evaluation modes, both with reproducible artifacts
+in the repository.
 
-### v(type) — Level-Dependent Context
+### Substrate Coherence (Standard Benchmarks)
 
-The third component of the bary_vec formula is not a fixed label. It
-varies by level:
+We ran SimLex-999, WordSim-353-Similarity, and WordSim-353-Relatedness
+against the graph to confirm it behaves coherently as a vector
+retrieval substrate. The headline finding (Spearman ρ vs gold):
 
-| Level | v(type) source | Why |
+| metric | SimLex-999 | WS-353-Sim | WS-353-Rel |
+|---|---:|---:|---:|
+| `mean_vec_score` (raw cosine) | −0.04 | +0.08 | −0.04 |
+| `edge_overlap` | **+0.32** | **+0.31** | +0.17 |
+| `word_overlap` | **+0.32** | **+0.53** | **+0.25** |
+
+Raw vector cosine does not predict human similarity judgment.
+*Structural* metrics — how many neighbors two words share in the
+graph — correlate substantially (p < 10⁻¹⁵). This is consistent with
+the cross-domain bridging design: the graph encodes structural
+relatedness through shared-neighborhood topology, not pointwise
+embedding proximity.
+
+Of 999 SimLex pairs, 22 are connected through a MetaBary triad
+(L11–L13). These are dominated by antonyms — `floor/ceiling`,
+`absence/presence`, `forget/learn`, `god/devil` — pairs that score
+low for *similarity* but are deeply *related*. Antonyms cluster
+tightly in distributional embedding space; only structural retrieval
+surfaces them as related.
+
+Raw CSVs: [`evaluation/results/`](evaluation/results/).
+
+### Cross-Domain Probe Traces
+
+Concept queries spanning unrelated domains, each evaluated by reading
+the top retrieved MetaBary and tracing the bridge mechanism. Examples:
+
+| Probe | MetaBary level | Bridge surfaced |
 |---|---|---|
-| L15 (senses) | Per-pair embed of both words' lexical neighborhoods (antonyms + synonyms) | Rich contextual signal per pairing |
-| L14 (words) | Fixed TYPE_SENTENCES per edge type | Kaikki relations provide structure |
-| L13+ (MetaBary) | Bridge BaryEdge vector directly | Already encodes relational info from below |
+| Trust in distributed systems | L13 | verificationism (philosophy) ↔ proof by exhaustion (logic), bridged by *trust, but verify* |
+| Grief vs depression | none | informative absence: clusters disjoint, matches DSM-5 |
+| Octopus and engineering sensors | L13 | *neuroarchitecture* / *smartdust* — biology to distributed engineering |
+| Collagen folding and linguistics | L13 | *plicature* (folding etymology) + *hypotaxis/parataxis* (structural motif) |
+| Radioactive decay and lost words | L10 | *collapsed/decayed/declined/demised/disintegrated/reduc't/reduced* — Poisson-process state loss across physics and historical linguistics |
 
-### The Registry
+The L10 case is architecturally distinctive: a bridge composed
+entirely of register-varied past-participle decay verbs names an
+abstract structural process that both physics and historical
+linguistics instantiate. No individual bridge word is remarkable; the
+cluster as a whole names a property that lives *between* domains.
+Flat vector retrieval cannot construct this kind of bridge — the
+embedding space has no axis for "verbs co-occurring with
+reduction-of-state across domains."
 
-Each BaryEdge stores a `registry.summary`: a one-sentence natural-language
-description of *what the connection means*, generated by a local LLM.
-This summary is embedded separately as `summary_vector` — a second signal
-independent of the structural `bary_vec`. The evaluation measures both
-signals independently before deciding whether to merge them.
-
-### Hierarchy
-
-Nodes and BaryEdges are organized into 15 levels from individual sense
-glosses (level 15) up to language family (level 1). BaryEdges connect
-nodes at the same level. Cross-level hierarchy emerges from MetaBary
-triads, where two BaryEdges at level L are bridged by a BaryEdge at
-level L-1, forming a MetaBary at level L-2.
-
-### Two Vectors Per BaryEdge
-
-| field | what it encodes | how produced |
-|---|---|---|
-| `vector` | structural position — weighted mixture of both parent vectors + type context | algebraic formula, zero embedding calls |
-| `summary_vector` | natural-language meaning of the connection | embed(`registry.summary`) |
+Probe details are in the companion paper (see [Citation](#citation)).
 
 ---
 
@@ -306,12 +213,14 @@ level L-1, forming a MetaBary at level L-2.
 
 Everything runs locally. Zero cloud dependencies. Zero cost.
 
-| component | role |
+| Component | Role |
 |---|---|
-| MongoDB Community 8.x + mongot | storage, graph traversal, vector search |
-| nomic-embed-text-v1.5 | 768-dim embeddings |
-| Llama 4 Scout Q4 | selective registry.summary generation |
-| llama.cpp / ollama | LLM + embedding runtime |
+| MongoDB Community 8.x + mongot | Storage, graph traversal, vector search |
+| nomic-embed-text-v1.5 | 768-dim embeddings (sense glosses, L14 type sentences only) |
+| llama.cpp / ollama | Embedding runtime |
+
+Hardware for full ingestion: 8–16 GB GPU VRAM, 32–64 GB RAM, 150–200
+GB disk, 8+ cores. Total cost: zero.
 
 ---
 
@@ -321,116 +230,27 @@ Everything runs locally. Zero cloud dependencies. Zero cost.
 kaikki-en.jsonl
       │
       ▼
-  1. Parse + Embed    extract senses, relations; embed sense glosses
-  2. Insert nodes     sense (L15) + word (L14) nodes → MongoDB
-  3. L15 BaryEdges    cosine-driven greedy matching of sense pairs
-  4. Word vectors     BE-centroid + orphan senses (no embedding call)
-  5. L14 BaryEdges    kaikki relations in fermion order (antonyms first)
-  6. Orphan re-entry  unpaired CMs absorbed into existing BEs
-  7. MetaBary         L13 triads + recursive L12→L1
-  8. Summarize        selective LLM registry.summary generation (~3 days, async)
-  9. Index            build mongot vector indexes
+  1. Parse              extract senses from JSONL
+  2. Embed              embed sense glosses → 768-dim vectors
+  3. Insert nodes       L15 sense + L14 word nodes → MongoDB
+  4. L15 BaryEdges      cosine-driven greedy matching + orphan re-entry
+  5. Word vectors       BE-centroid + orphan senses (no embedding call)
+  6. L14 BaryEdges      kaikki relations in fermion order (antonyms first)
+  7. L14 orphan re-entry  unpaired words absorbed into existing BEs
+  8. MetaBary L13→L1    bridge-driven triads, recursive
+  9. MetaBary extension  threshold relaxation, per-level floor
+ 10. Index               build mongot vector indexes
       │
       ▼
-  queryable in ~7–12 hours
-  fully enriched in ~4 days
+  queryable in ~8–14 hours
 ```
 
-The system is queryable after stage 9 without waiting for LLM summaries.
-BaryEdges are retrievable via `bary_vec` immediately; `summary_vector`
-enriches them asynchronously.
+The embedding model runs only at stages 2 and 6 — on L15 sense glosses
+and a fixed set of L14 type sentences. Every higher-level vector is
+algebra on those anchors. This is what makes the architecture cheap
+to scale.
 
----
-
-## Retrieval Difference
-
-**Standard vector search** — query returns 20 nodes ranked by cosine
-similarity. Finds things that *look like* the query.
-
-**BaryGraph retrieval** — query returns a mix of nodes and BaryEdges.
-Each BaryEdge result implies its two parent nodes as context. Effective
-retrieved context is 2–3x the raw top-20. Finds things that *connect to*
-what the query is about, not just things that resemble it.
-
-**Cross-domain bridge query** — filter for `edge_type: 'same_phenomenon'`.
-Returns only BaryEdges connecting nodes from different semantic fields.
-This is the retrieval that standard vector search cannot do: finding the
-structural bridge between two concepts that share no surface similarity.
-
----
-
-## Evaluation
-
-The primary test is simple and binary:
-
-1. Hold out 10% of explicit synonym links before ingestion
-2. Ingest the remaining 90%
-3. For each held-out pair, query the held-out word's gloss
-4. **Success:** the partner word appears in the CM lineage of any top-20 result
-5. Compare BaryGraph recall@20 vs. flat recall@20
-
-BaryGraph must beat flat retrieval to justify the architecture. If it
-does not, the `summary_vector` signal is tested as an alternative primary
-vector. If neither beats flat, the hypothesis is falsified.
-
----
-
-## Expansion Path
-
-If the PoC validates the hypothesis:
-
-1. **Multi-language** — add French, German, Japanese kaikki dumps.
-   Translation BaryEdges become cross-language bridges. MetaBary encodes
-   the same metaphor pattern across languages: *"il pleut des cordes"*
-   (French) <-> *"it's raining cats and dogs"* (English) — both encode
-   rainfall intensity through culturally-specific impossibility. This is
-   the original motivation for the architecture.
-
-2. **Atlas migration** — identical schema; `mongodump` / `mongorestore`
-
-3. **Other corpora** — the architecture is domain-agnostic. Immediate
-   candidates: legal case law (precedent chains), vessel tracking
-   (port-call anomaly detection), scientific papers (cross-domain
-   anomaly clustering).
-
-4. **RAG integration** — BaryGraph as a retrieval backend for an LLM
-   that returns relationship structures, not just similar documents.
-
----
-
-## Project Structure
-
-```
-barygraph-kaikki/
-├── CLAUDE.md                  # development guide for AI-assisted coding
-├── README.md                  # this file
-├── BaryGraph_v1.1.md          # parent architecture spec (v1.2)
-├── BaryGraph_Kaikki_PoC_v0.4.md  # full PoC spec (v0.4)
-├── pyproject.toml
-├── docker-compose.yml         # MongoDB (+ mongot) and ollama
-├── Makefile
-├── .env.example
-├── data/
-│   └── kaikki-en.jsonl        # download from kaikki.org (not in repo)
-├── pipeline_state/            # resumability checkpoints (gitignored)
-├── indexes/
-│   └── vector_index.json
-├── lib/
-│   ├── config.py  log.py  checkpoint.py  db.py
-│   ├── embed.py   llm.py
-│   ├── bary_vec.py            # bary_vec / metabary / word_vector formulas
-│   └── disambiguate.py        # _dis1 + cosine sense assignment
-├── scripts/
-│   ├── _base.py               # shared CLI bootstrap + `bary` dispatcher
-│   ├── s01_parse.py … s10_index.py
-│   ├── dev/make_fixture.py
-│   └── eval/
-│       ├── holdout.py  recall.py  ab_summary.py
-└── tests/
-    ├── fixtures/kaikki-sample.jsonl
-    ├── unit/
-    └── integration/
-```
+Full pipeline details: [`BaryGraph_Kaikki_PoC_v0_6.md` §8](BaryGraph_Kaikki_PoC_v0_6.md).
 
 ---
 
@@ -441,19 +261,18 @@ barygraph-kaikki/
 cp .env.example .env
 make install                    # pip install -e ".[dev]"
 
-# 2. Start local services (project-owned Mongo on port 27117 — won't touch
-#    any other Mongo you may have on 27017).
-make up                         # MongoDB Community 8 + mongot (atlas-local)
-make up-gpu                     # + ollama (requires NVIDIA GPU), optional
+# 2. Start local services (project-owned Mongo on port 27117)
+make up                         # MongoDB Community 8 + mongot
+make up-gpu                     # + ollama for GPU embedding, optional
 docker exec barygraph-ollama ollama pull nomic-embed-text:v1.5
 
-# 3. Download kaikki English dump (idempotent + resumable)
+# 3. Download kaikki English dump (idempotent, resumable)
 make fetch-kaikki
 
-# 4. Verify the environment before kicking off a multi-day ingest
-make preflight                  # mongo, ollama, embed dim, dump size, disk, dirs
+# 4. Preflight check
+make preflight                  # mongo, ollama, embed dim, dump size, disk
 
-# 5. Run ingestion stages in order
+# 5. Run ingestion stages
 python -m scripts.s01_parse
 python -m scripts.s02_embed
 python -m scripts.s03_insert_nodes
@@ -462,16 +281,76 @@ python -m scripts.s05_word_vectors
 python -m scripts.s06_l14_edges
 python -m scripts.s07_orphan_reentry
 python -m scripts.s08_metabary
-python -m scripts.s09_summarize    # async — system is queryable before this completes
+python -m scripts.s09_extend
 python -m scripts.s10_index
 # or: make pipeline
-
-# 6. Run evaluation
-python -m scripts.eval.holdout     # generate holdout set first
-python -m scripts.eval.recall      # measure BaryGraph vs flat recall@20
 ```
 
-### Development
+### Querying
+
+The simplest query — finding the structural connection between two
+concepts:
+
+```python
+from lib.db import db
+
+# Cross-domain MetaBary search at L13
+results = db.barygraph.aggregate([
+    { "$vectorSearch": {
+        "index": "barygraph_vector",
+        "path": "vector",
+        "queryVector": embed("structural property shared across domains"),
+        "numCandidates": 200,
+        "limit": 10,
+        "filter": { "doc_type": "baryedge", "level": { "$in": [10, 11, 12, 13] } }
+    }}
+])
+```
+
+Each result is a MetaBary triad. Walk the `cm1_id` and `cm2_id`
+fields (which may themselves be BaryEdges) to recover the four-word,
+three-edge structure. Walk `parent_edge_id` for upward hierarchy.
+
+---
+
+## Project Structure
+
+```
+bary-vector/
+├── README.md                          # this file
+├── BaryGraph_Kaikki_PoC_v0_6.md       # full architecture spec (canonical)
+├── CLAUDE.md                          # development guide for AI-assisted coding
+├── pyproject.toml
+├── docker-compose.yml                 # MongoDB (+ mongot) and ollama
+├── Makefile
+├── .env.example
+├── data/
+│   └── kaikki-en.jsonl                # download from kaikki.org (not in repo)
+├── pipeline_state/                    # resumability checkpoints (gitignored)
+├── indexes/
+│   └── vector_index.json
+├── lib/
+│   ├── config.py  log.py  checkpoint.py  db.py
+│   ├── embed.py
+│   ├── bary_vec.py                    # bary_vec / metabary / word_vector formulas
+│   └── disambiguate.py                # _dis1 + cosine sense assignment
+├── scripts/
+│   ├── _base.py                       # shared CLI bootstrap + `bary` dispatcher
+│   ├── s01_parse.py ... s10_index.py
+│   ├── dev/make_fixture.py
+│   └── eval/
+│       ├── simlex.py  wordsim.py      # benchmark scripts
+│       └── probe.py                   # cross-domain probe protocol
+├── evaluation/results/                # benchmark CSVs
+└── tests/
+    ├── fixtures/kaikki-sample.jsonl
+    ├── unit/
+    └── integration/
+```
+
+---
+
+## Development
 
 ```bash
 make lint        # ruff + mypy
@@ -479,37 +358,47 @@ make test        # unit tests (no services)
 make test-int    # integration tests (requires `make up`)
 ```
 
-CI (GitHub Actions) runs lint + unit on every push, and an integration
-smoke test against a MongoDB service container using fake embed/LLM
-backends — no GPU required.
-
-Hardware for full ingestion: 32 GB GPU VRAM (Llama Scout Q4), 32 GB+ RAM,
-150 GB disk.
-
----
-
-## Background
-
-BaryGraph is a proof-of-concept for an architecture derived from
-[CM Theory](https://github.com/), a unified physics framework in which
-every physical phenomenon emerges from hierarchical triads of centers of
-mass connected through barycenters. The insight that a barycenter is as
-real as the masses it connects — that the *relationship* is a first-class
-entity, not a thin pointer — transfers directly to knowledge representation.
-
-The name "BaryEdge" comes from this origin: an edge that is itself a
-barycenter, with position, weight, and semantic content of its own.
+CI (GitHub Actions) runs lint + unit on every push, and an
+integration smoke test against a MongoDB service container using fake
+embed backends — no GPU required.
 
 ---
 
 ## Status
 
-- [x] Architecture specification (BaryGraph v1.2)
-- [x] Kaikki PoC specification (v0.4)
-- [ ] Ingestion pipeline implementation
-- [ ] Evaluation harness
-- [ ] First results
+- [x] Architecture specification ([v0.6](BaryGraph_Kaikki_PoC_v0_6.md))
+- [x] Ingestion pipeline implementation
+- [x] Live build (6.66M documents)
+- [x] Substrate-coherence evaluation (SimLex, WordSim)
+- [x] Cross-domain probe protocol
+- [ ] Companion paper (Zenodo pilot, in progress)
+- [ ] Structure MetaBary primitive (Phase 2 — cross-cutting non-forest connections)
+- [ ] Multi-language extension (Phase 2)
 
 ---
 
-*BaryGraph Kaikki PoC · CM Theory Project · April 2026*
+## Background
+
+BaryGraph treats the connection between two entities as a first-class
+object — a barycenter in the geometric sense — with its own position,
+its own weight, and its own semantic content. The name "BaryEdge"
+comes from this: an edge that is itself a barycenter. The
+architecture is corpus-agnostic; this repository instantiates it on
+a dictionary because the relations are explicit and the ground truth
+is free, but the same primitive applies to any corpus with structured
+relations between entities.
+
+---
+
+## Citation
+
+If you use BaryGraph or build on this work, please cite the
+companion paper:
+
+> Perepelytsya, O. (2026). *BaryGraph: Relationships as First-Class
+> Vectors in a Lexical Knowledge Graph.* Zenodo.
+> [DOI to be assigned upon upload]
+
+---
+
+*BaryGraph · 2026*

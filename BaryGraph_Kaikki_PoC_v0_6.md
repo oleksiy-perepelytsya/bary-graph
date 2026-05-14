@@ -34,6 +34,12 @@
 >   the algebraic identity between L15 BaryEdge construction (panel
 >   A) and L13 MetaBary recursion (panel B). The visual parallel
 >   shows the recursion mechanic directly.
+> - **Same-level BE-to-CM pairing clarified** — §3 invariant 2,
+>   §6.2 schema, §8 Stages 4e and 7 are now explicit that L15 and
+>   L14 BaryEdges can pair a node with another same-level BaryEdge
+>   during orphan re-entry. v0.5 had this in the implementation but
+>   buried in substep prose; v0.6 promotes it to first-class
+>   architectural feature.
 > - **Forward references.** Structure MetaBary (cross-cutting non-forest
 >   connections) and a formal cross-domain bridging benchmark are
 >   identified as Phase 2 work, not v0.6 scope.
@@ -181,6 +187,13 @@ input at the base case into a stored object at the next level up; this
 is what makes higher-level MetaBary construction require zero
 embedding calls.
 
+Panel A shows the typical sense-sense case at L15 (or word-word at L14).
+A second variant exists at the same level: **orphan re-entry**, where
+an unpaired sense (or word) pairs with an existing same-level BaryEdge.
+The diagram structure is identical except that one of the two CM inputs
+is itself a BaryEdge rather than a node. See §8 Stage 4e (L15) and
+Stage 7 (L14) for details.
+
 ### 2.2 MetaBary Vector (L13 and above)
 
 MetaBary construction uses two separate computations per new MetaBary:
@@ -306,8 +319,14 @@ are finalized (including orphan re-entry). Strict stage boundary.
 1. **Unique parent (soft):** every CM has at most one `parent_edge_id`.
    Orphans allowed. `parent_edge_id` always references a `baryedge`
    document — nodes are CMs, never parent edges.
-2. **Triadic recursion only above L14.** No lateral edges, no
-   cross-level BEs outside triads.
+2. **Cross-level triadic recursion only above L14.** MetaBary
+   triads at L13 and above strictly cross levels (children at L,
+   bridge at L-1, output at L-2). At L14 and L15, BaryEdges are
+   horizontal (same-level pairings between two CMs at that level).
+   A BaryEdge at L14 or L15 may pair a node with another BaryEdge at
+   the same level — this is the orphan re-entry case (Stage 4e,
+   Stage 7). No lateral edges across levels outside the
+   bridge-children-output structure of MetaBary.
 3. **Forest structure** — single `$graphLookup` climbs to root.
    *This is a feature, not a limitation.* Forest topology forces the
    graph to commit each sense to one neighborhood; polysemous senses
@@ -474,8 +493,12 @@ Single collection `barygraph`. Two document types: `node`, `baryedge`.
 {
     '_id':                ObjectId(),
     'doc_type':           'baryedge',
-    'cm1_id':             ObjectId(),   # → node (L14/L15) or baryedge (L≤13)
-    'cm2_id':             ObjectId(),   # → node (L14/L15) or baryedge (L≤13)
+    'cm1_id':             ObjectId(),   # → node OR baryedge (any level)
+    'cm2_id':             ObjectId(),   # → node OR baryedge (any level)
+                                        # At L14/L15: typically two nodes (sense-sense
+                                        # or word-word). Orphan re-entry pairs a node
+                                        # with a same-level BaryEdge. At L13 and above:
+                                        # always two BaryEdges (MetaBary children).
     'level':              int,          # same as CMs at L14/L15;
                                         # = cm1.level - 2 for MetaBary (L≤13)
     'vector':             list[float],  # bary_vec — algebraic
@@ -586,8 +609,25 @@ raw cosine is low.
 4c. For each pair: build type_text (parent words + antonyms + synonyms),
     batch-embed → v(type)
 4d. Compute bary_vec, set q, set accumulated_weight = q, set parent_edge_id
-4e. Orphan re-entry: unpaired senses match with existing L15 BEs
+4e. Orphan re-entry: for each unpaired sense, find nearest existing
+    L15 BaryEdge by cosine to the BE's bary_vec. Create a new L15 BE
+    with the orphan sense as one CM and the existing L15 BE as the
+    other CM (BE-to-CM pairing within the same level). Fresh v(type)
+    embed against the orphan's word neighborhood. Same algebra,
+    same accumulated_weight = q.
 ```
+
+**Same-level BE-to-CM pairing is permitted at L14 and L15.** Unlike
+MetaBary (which always crosses levels — children at L, bridge at
+L-1, output at L-2), the orphan re-entry case produces a BaryEdge
+at the same level as its inputs, with one CM being a node and the
+other being a previously-formed BaryEdge. The schema (§6.2)
+explicitly allows `cm1_id` or `cm2_id` to reference a BaryEdge at
+L14 or L15, not only at MetaBary levels. This is what makes the
+forest extend smoothly across orphan re-entry — a sense or word
+that finds no sense-sense partner still gets a parent edge, and
+that parent edge can itself become a child of a MetaBary one level
+up.
 
 **Scale:** ~300K senses → use ANN (FAISS or hnswlib). Top-k neighbors
 per sense, then greedy match from ranked pairs.
@@ -617,9 +657,19 @@ No embedding call. Strict stage boundary — runs after L15 BE formation.
 
 ### Stage 7 — L14 Orphan Re-entry (`s07_orphan_reentry.py`)
 
-Each unpaired word matches the nearest existing L14 BE; new BE inherits
-that partner's `edge_type`, `type_vector`, `q`, and `accumulated_weight`
-(no new embedding call).
+Each unpaired word matches the nearest existing L14 BE by cosine and
+forms a new L14 BaryEdge with the orphan word as one CM and the
+existing L14 BE as the other CM. The new BE inherits the partner's
+`edge_type`, `type_vector`, `q`, and `accumulated_weight` (no new
+embedding call — the type vector is borrowed from the partner BE
+rather than computed fresh, since L14 v(type) is TYPE_SENTENCES-based
+and the orphan inherits the partner's relation type).
+
+This is the L14 analog of Stage 4e: a BE-to-CM pairing at the same
+level that gives orphan words a structural anchor for subsequent
+MetaBary formation. The empirical orphan rate at L14 is 4.0% (§11.3)
+— low because the kaikki corpus has dense relation coverage at the
+word level.
 
 ### Stage 8 — MetaBary L13→L1 (`s08_metabary.py`)
 
@@ -1092,7 +1142,7 @@ document (see §17). Deviations therefore reduce to:
 
 1. **L15 cosine matching at scale.** ~300K senses → 90B pairs brute-force. Use FAISS/hnswlib for ANN.
 2. **v(type) embedding calls at L15.** ~100–150K calls. Batchable at 1K → ~150 batches.
-3. **Orphan re-entry asymmetry.** Orphan sense paired with existing BE creates structurally asymmetric children. Algebraically fine, but needs a fresh v(type) embed call.
+3. **Orphan re-entry creates structurally asymmetric BaryEdges by design.** When an orphan sense (or word) pairs with an existing BaryEdge, the resulting BE has one CM that is a node and one CM that is itself a BaryEdge. This is architecturally correct: the schema permits BE-to-CM pairing at any level (§6.2), and orphan re-entry is the mechanism by which the forest extends to cover senses and words that lack same-class partners. The structural asymmetry is what allows otherwise-isolated nodes to participate in MetaBary formation at higher levels. The only cost is a fresh v(type) embed call at L15 (Stage 4e) — L14 orphan re-entry borrows the partner's type_vector and requires no embedding call.
 4. **L13 candidate search ambiguity.** Children must be near each other (cos > 0.9 mutual); bridge initiates search but doesn't constrain their mutual similarity. Stage 9 partially addresses this by lowering the per-level mutual-cosine floor.
 5. **Sparsity above L12.** Each level roughly halves the node count at the Stage 8 threshold. Stage 9 extends coverage at lower mutual cosines. Graph may still top out before L1.
 6. **`accumulated_weight` scale drift.** With α = 0.5, a chain of strong MBs from L13 to L1 could in principle reach `accumulated_weight` ~ 1.5⁶ ≈ 11. The current build only reaches L10 (level_factor 1.04), so observed values stay near unity. No cap currently applied; revisit if higher levels become populated.
