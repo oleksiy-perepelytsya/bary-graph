@@ -321,7 +321,6 @@ three-edge structure. Walk `parent_edge_id` for upward hierarchy.
 bary-vector/
 ├── README.md                          # this file
 ├── BaryGraph_Kaikki_PoC_v0_6.md       # full architecture spec (canonical)
-├── CLAUDE.md                          # development guide for AI-assisted coding
 ├── pyproject.toml
 ├── docker-compose.yml                 # MongoDB (+ mongot) and ollama
 ├── Makefile
@@ -340,9 +339,6 @@ bary-vector/
 │   ├── _base.py                       # shared CLI bootstrap + `bary` dispatcher
 │   ├── s01_parse.py ... s10_index.py
 │   ├── dev/make_fixture.py
-│   └── eval/
-│       ├── simlex.py  wordsim.py      # benchmark scripts
-│       └── probe.py                   # cross-domain probe protocol
 ├── evaluation/results/                # benchmark CSVs
 └── tests/
     ├── fixtures/kaikki-sample.jsonl
@@ -373,7 +369,7 @@ embed backends — no GPU required.
 - [x] Live build (6.66M documents)
 - [x] Substrate-coherence evaluation (SimLex, WordSim)
 - [x] Cross-domain probe protocol
-- [ ] Companion paper (Zenodo pilot, in progress)
+- [x] Companion paper (Zenodo pilot, in progress)
 - [ ] Structure MetaBary primitive (Phase 2 — cross-cutting non-forest connections)
 - [ ] Multi-language extension (Phase 2)
 
@@ -398,7 +394,7 @@ If you use BaryGraph or build on this work, please cite the
 companion paper:
 
 > Perepelytsya, O. (2026). *BaryGraph: Relationships as First-Class Vectors for Cross-Domain Retrieval.* Zenodo.
-> [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20186500.svg)](https://doi.org/10.5281/zenodo.20186500)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20186500.svg)](https://doi.org/10.5281/zenodo.20186500)
 
 ---
 
