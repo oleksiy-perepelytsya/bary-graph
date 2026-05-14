@@ -1,5 +1,7 @@
 # BaryGraph
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20186500.svg)]  (https://doi.org/10.5281/zenodo.20186500
+
 **A knowledge graph architecture for cross-domain relational retrieval, where every relationship is a first-class searchable object.**
 
 BaryGraph borrows a principle from physics: in any system of two
@@ -395,9 +397,8 @@ relations between entities.
 If you use BaryGraph or build on this work, please cite the
 companion paper:
 
-> Perepelytsya, O. (2026). *BaryGraph: Relationships as First-Class
-> Vectors in a Lexical Knowledge Graph.* Zenodo.
-> [DOI to be assigned upon upload]
+> Perepelytsya, O. (2026). *BaryGraph: Relationships as First-Class Vectors for Cross-Domain Retrieval.* Zenodo.
+> [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20186500.svg)]  (https://doi.org/10.5281/zenodo.20186500
 
 ---
 
