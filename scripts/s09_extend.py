@@ -128,6 +128,7 @@ def _form_level_sweep(
                     bi = int(bi)
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)
+                        bidx.mark_deleted(bi)
                         triads.append((ci, cj, bi, q_pair))
                         found = True
                         break
@@ -137,6 +138,7 @@ def _form_level_sweep(
                 for bi in (int(x) for x in np.argsort(-(BV @ centroid))):
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)
+                        bidx.mark_deleted(bi)
                         triads.append((ci, cj, bi, q_pair))
                         break
     else:

@@ -14,7 +14,7 @@ VECTOR_INDEX_NAME = "barygraph_vector"
 
 # Standard (non-vector) indexes — see CLAUDE.md.
 STANDARD_INDEXES: list[list[tuple[str, int]]] = [
-    [("doc_type", ASCENDING), ("level", ASCENDING)],
+    [("doc_type", ASCENDING), ("level", ASCENDING), ("parent_edge_id", ASCENDING)],
     [("cm1_id", ASCENDING)],
     [("cm2_id", ASCENDING)],
     [("node_type", ASCENDING)],

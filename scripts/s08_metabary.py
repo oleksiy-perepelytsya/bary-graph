@@ -98,6 +98,7 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
                     bi = int(bi)
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)
+                        bidx.mark_deleted(bi)
                         triads.append((ci, cj, bi, q_pair))
                         found = True
                         break
@@ -109,6 +110,7 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
                 for bi in (int(x) for x in np.argsort(-(BV @ centroid))):
                     if bi not in bridge_taken:
                         bridge_taken.add(bi)
+                        bidx.mark_deleted(bi)
                         triads.append((ci, cj, bi, q_pair))
                         break
     else:
