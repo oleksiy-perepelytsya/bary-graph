@@ -43,6 +43,9 @@ class ParsedSense:
     wikidata: list[str] = field(default_factory=list)
     # Sense-level relations (rare but authoritative when present)
     relations: list[ParsedSenseRelation] = field(default_factory=list)
+    # Source DOI(s) for senses ingested from the academic batch pipeline.
+    # Empty for kaikki-sourced senses.
+    doi: list[str] = field(default_factory=list)
     # Text used by stage 02 to produce the embedding
     embed_text: str = ""
     # Filled by stage 02 (embed)

@@ -45,6 +45,7 @@ def sense_node(s: ParsedSense, vector: np.ndarray | list[float]) -> dict[str, An
             "tags": s.tags,
             "topics": s.topics,
             "wikidata": s.wikidata,
+            "doi": s.doi,
         },
         "created_at": ts,
         "updated_at": ts,

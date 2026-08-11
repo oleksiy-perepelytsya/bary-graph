@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 import numpy as np
 from pymongo import UpdateOne
 
+from lib import doi_bridge
 from lib.bary_vec import build_l15_type_text, compute_bary_vec
 from lib.db import get_collection
 from lib.docs import baryedge
@@ -48,6 +49,7 @@ def _word_neighborhood(coll, word: str, pos: str) -> tuple[list[str], list[str]]
 
 def _run_orphan_reentry(
     coll,
+    bridge_coll,
     ids: list,
     words: list[tuple[str, str]],
     V: np.ndarray,
@@ -99,10 +101,11 @@ def _run_orphan_reentry(
         res = coll.insert_many(re_docs)
         ups = []
         now = datetime.now(timezone.utc)
-        for (oi, _bi), eid in zip(chunk, res.inserted_ids, strict=True):
+        for (oi, bi), eid in zip(chunk, res.inserted_ids, strict=True):
             ups.append(
                 UpdateOne({"_id": ids[oi]}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
             )
+            doi_bridge.propagate(bridge_coll, eid, [ids[oi], be_ids[bi]])
         coll.bulk_write(ups, ordered=False)
         n_reentry += len(re_docs)
 
@@ -113,6 +116,7 @@ def _run_orphan_reentry(
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
     coll = get_collection(settings)
+    bridge_coll = doi_bridge.get_bridge_collection(settings)
     log.info("start processed=%d dry_run=%s q_min=%.2f", cp.processed, args.dry_run,
              settings.q_min_l15)
 
@@ -254,6 +258,7 @@ def run(argv: Sequence[str] | None = None) -> None:
                 parent_updates.append(
                     UpdateOne({"_id": ids[j]}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
                 )
+                doi_bridge.propagate(bridge_coll, eid, [ids[i], ids[j]])
             cp.processed = start + len(chunk)
         if parent_updates and not args.dry_run:
             coll.bulk_write(parent_updates, ordered=False)
@@ -262,7 +267,8 @@ def run(argv: Sequence[str] | None = None) -> None:
     n_reentry = 0
     if not args.dry_run:
         n_reentry = _run_orphan_reentry(
-            coll, ids, words, V, be_ids, be_vecs, be_q, paired, batch_n, embedder, nb, log
+            coll, bridge_coll, ids, words, V, be_ids, be_vecs, be_q, paired, batch_n,
+            embedder, nb, log
         )
 
     cp.processed = n_pairs + n_reentry

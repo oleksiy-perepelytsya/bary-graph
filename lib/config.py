@@ -50,6 +50,7 @@ class Settings:
     mongo_uri: str = "mongodb://localhost:27117/?directConnection=true"
     mongo_db: str = "barygraph_poc"
     mongo_collection: str = "barygraph"
+    mongo_doi_bridges_collection: str = "doi_bridges"
     # Safety net for integration-test teardown: only DBs starting with this prefix
     # may be dropped by the test fixture. Changing this requires updating the
     # fixture guard in tests/conftest.py.
@@ -77,6 +78,7 @@ class Settings:
     meta_bary_cos_threshold: float = 0.90      # Stage 7: L13 triad formation
     polysemy_q_floor: float = 0.40             # open question; tune post L14
     level_factor_alpha: float = 0.5           # v0.5 R6: accumulated_weight amplification
+    batch_dup_threshold: float = 0.95         # academic batch: same-sense-reworded merge floor
 
     # --- L14 edge q_seeds (fermion order) ---
     q_seeds: dict[str, float] = field(default_factory=_load_q_seeds)
@@ -100,6 +102,9 @@ class Settings:
             mongo_uri=_env_str("MONGO_URI", cls.mongo_uri),
             mongo_db=_env_str("MONGO_DB", cls.mongo_db),
             mongo_collection=_env_str("MONGO_COLLECTION", cls.mongo_collection),
+            mongo_doi_bridges_collection=_env_str(
+                "MONGO_DOI_BRIDGES_COLLECTION", cls.mongo_doi_bridges_collection
+            ),
             mongo_test_db_prefix=_env_str("MONGO_TEST_DB_PREFIX", cls.mongo_test_db_prefix),
             ollama_url=_env_str("OLLAMA_URL", cls.ollama_url),
             embed_model=_env_str("EMBED_MODEL", cls.embed_model),
@@ -118,6 +123,7 @@ class Settings:
             ),
             polysemy_q_floor=_env_float("POLYSEMY_Q_FLOOR", cls.polysemy_q_floor),
             level_factor_alpha=_env_float("LEVEL_FACTOR_ALPHA", cls.level_factor_alpha),
+            batch_dup_threshold=_env_float("BATCH_DUP_THRESHOLD", cls.batch_dup_threshold),
             q_seeds=_load_q_seeds(),
             vertex_project=_env_str("VERTEX_PROJECT", cls.vertex_project),
             vertex_location=_env_str("VERTEX_LOCATION", cls.vertex_location),

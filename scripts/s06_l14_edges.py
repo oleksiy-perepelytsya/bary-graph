@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 import numpy as np
 from pymongo import UpdateOne
 
+from lib import doi_bridge
 from lib.bary_vec import TYPE_SENTENCES, compute_bary_vec
 from lib.db import get_collection
 from lib.docs import baryedge
@@ -31,6 +32,7 @@ STAGE = "06_l14_edges"
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
     coll = get_collection(settings)
+    bridge_coll = doi_bridge.get_bridge_collection(settings)
     log.info("start processed=%d dry_run=%s", cp.processed, args.dry_run)
 
     if not args.dry_run and not args.force:
@@ -129,6 +131,7 @@ def run(argv: Sequence[str] | None = None) -> None:
                                      {"$set": {"parent_edge_id": eid, "updated_at": now}}))
                 ups.append(UpdateOne({"_id": ids[b]},
                                      {"$set": {"parent_edge_id": eid, "updated_at": now}}))
+                doi_bridge.propagate(bridge_coll, eid, [ids[a], ids[b]])
             coll.bulk_write(ups, ordered=False)
         n_edges += len(edge_docs)
         log.info("tier %d (%s/%s): %d edges, %d words now paired",

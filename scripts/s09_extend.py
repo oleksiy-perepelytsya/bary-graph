@@ -36,6 +36,7 @@ import numpy as np
 from pymongo import UpdateOne
 
 from lib import checkpoint as cp_mod
+from lib import doi_bridge
 from lib.bary_vec import compute_metabary_vec, level_factor
 from lib.db import get_collection
 from lib.docs import metabary
@@ -57,6 +58,7 @@ def _min_threshold(level: int) -> float:
 
 def _form_level_sweep(
     coll,
+    bridge_coll,
     child_level: int,
     bridge_level: int,
     base_thr: float,
@@ -204,6 +206,9 @@ def _form_level_sweep(
         for (ci, cj, bi, _), eid in zip(batch, res.inserted_ids, strict=True):
             for cm_id in (child_ids[ci], child_ids[cj], bridge_ids[bi]):
                 ups.append(UpdateOne({"_id": cm_id}, {"$set": {"parent_edge_id": eid, "updated_at": now}}))
+            doi_bridge.propagate(
+                bridge_coll, eid, [child_ids[ci], child_ids[cj], bridge_ids[bi]]
+            )
         coll.bulk_write(ups, ordered=False)
 
     return len(triads)
@@ -212,6 +217,7 @@ def _form_level_sweep(
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
     coll = get_collection(settings)
+    bridge_coll = doi_bridge.get_bridge_collection(settings)
     base_thr = settings.meta_bary_cos_threshold
     alpha = settings.level_factor_alpha
 
@@ -233,7 +239,7 @@ def run(argv: Sequence[str] | None = None) -> None:
             min_thr = _min_threshold(child_level)
 
             n = _form_level_sweep(
-                coll, child_level, bridge_level,
+                coll, bridge_coll, child_level, bridge_level,
                 base_thr, min_thr, alpha, args.dry_run,
                 outer_pass,
             )

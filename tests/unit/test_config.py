@@ -66,3 +66,17 @@ def test_all_tunables_overridable(monkeypatch):
 def test_mongo_test_prefix_default():
     s = Settings.load()
     assert s.mongo_test_db_prefix == "barygraph_test_"
+
+
+def test_doi_bridges_collection_default_and_override(monkeypatch):
+    monkeypatch.delenv("MONGO_DOI_BRIDGES_COLLECTION", raising=False)
+    assert Settings.load().mongo_doi_bridges_collection == "doi_bridges"
+    monkeypatch.setenv("MONGO_DOI_BRIDGES_COLLECTION", "custom_bridges")
+    assert Settings.load().mongo_doi_bridges_collection == "custom_bridges"
+
+
+def test_batch_dup_threshold_default_and_override(monkeypatch):
+    monkeypatch.delenv("BATCH_DUP_THRESHOLD", raising=False)
+    assert Settings.load().batch_dup_threshold == 0.95
+    monkeypatch.setenv("BATCH_DUP_THRESHOLD", "0.9")
+    assert Settings.load().batch_dup_threshold == 0.9

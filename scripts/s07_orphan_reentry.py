@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 import numpy as np
 from pymongo import UpdateOne
 
+from lib import doi_bridge
 from lib.bary_vec import compute_bary_vec
 from lib.db import get_collection
 from lib.docs import baryedge
@@ -27,6 +28,7 @@ STAGE = "07_orphan_reentry"
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
     coll = get_collection(settings)
+    bridge_coll = doi_bridge.get_bridge_collection(settings)
     log.info("start processed=%d dry_run=%s", cp.processed, args.dry_run)
 
     orphan_ids: list = []
@@ -80,6 +82,7 @@ def run(argv: Sequence[str] | None = None) -> None:
         now = datetime.now(timezone.utc)
         batch_docs: list[dict] = []
         batch_oids: list = []
+        batch_partner_ids: list = []
         for idx in range(n_orphans):
             oid = orphan_ids[idx]
             bi = int(best_bi[idx])
@@ -95,19 +98,25 @@ def run(argv: Sequence[str] | None = None) -> None:
                          source="inferred", confidence=q)
             )
             batch_oids.append(oid)
+            batch_partner_ids.append(be_ids[bi])
             if len(batch_docs) >= batch_n:
                 res = coll.insert_many(batch_docs)
                 ups = [UpdateOne({"_id": o}, {"$set": {"parent_edge_id": e, "updated_at": now}})
                        for o, e in zip(batch_oids, res.inserted_ids, strict=True)]
                 coll.bulk_write(ups, ordered=False)
+                for o, p, e in zip(batch_oids, batch_partner_ids, res.inserted_ids, strict=True):
+                    doi_bridge.propagate(bridge_coll, e, [o, p])
                 n_written += len(batch_docs)
                 batch_docs = []
                 batch_oids = []
+                batch_partner_ids = []
         if batch_docs:
             res = coll.insert_many(batch_docs)
             ups = [UpdateOne({"_id": o}, {"$set": {"parent_edge_id": e, "updated_at": now}})
                    for o, e in zip(batch_oids, res.inserted_ids, strict=True)]
             coll.bulk_write(ups, ordered=False)
+            for o, p, e in zip(batch_oids, batch_partner_ids, res.inserted_ids, strict=True):
+                doi_bridge.propagate(bridge_coll, e, [o, p])
             n_written += len(batch_docs)
 
     cp.processed = n_written if not args.dry_run else n_orphans

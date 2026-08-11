@@ -47,6 +47,13 @@ def make_parser(stage: str) -> argparse.ArgumentParser:
     p.add_argument("--batch-size", type=int, default=None, help="override BATCH_SIZE")
     p.add_argument("--kaikki-path", type=str, default=None, help="override KAIKKI_PATH")
     p.add_argument(
+        "--word-ids-file",
+        type=str,
+        default=None,
+        help="(05_word_vectors only) JSON file of word _ids to scope the recompute to, "
+        "instead of scanning every L14 word doc — written by scripts.ingest_batch",
+    )
+    p.add_argument(
         "--force",
         action="store_true",
         help="bypass stage-order / already-done safeguards (use with care)",

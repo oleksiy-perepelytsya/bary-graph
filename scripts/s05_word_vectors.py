@@ -4,17 +4,29 @@
 
 No embedding call. Strict stage boundary: depends on the *finalized* L15
 BE set from stage 04 (including orphan re-entry). See v0.5 §2.4.
+
+``--word-ids-file`` (written by scripts.ingest_batch) scopes the recompute
+to a specific set of word docs instead of scanning the whole L14 word
+collection — a small academic-batch ingestion pass otherwise forces a full
+recompute over every kaikki word every time. A scoped run does not touch
+the shared stage checkpoint (it isn't a partial/resumable slice of the full
+recompute, so persisting its processed/total counts there would corrupt the
+"has 05_word_vectors completed" state used by the ordinary full-build path).
 """
 
 from __future__ import annotations
 
+import json
 from collections.abc import Sequence
 from datetime import datetime, timezone
+from pathlib import Path
 
 import numpy as np
+from bson import ObjectId
 from pymongo import UpdateOne
 
 from lib import checkpoint as cp_mod
+from lib import doi_bridge
 from lib.bary_vec import word_vector
 from lib.db import get_collection
 from scripts._base import bootstrap, finish
@@ -25,17 +37,26 @@ STAGE = "05_word_vectors"
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
     coll = get_collection(settings)
-    log.info("start processed=%d dry_run=%s", cp.processed, args.dry_run)
+    bridge_coll = doi_bridge.get_bridge_collection(settings)
+    log.info("start processed=%d dry_run=%s word_ids_file=%s",
+              cp.processed, args.dry_run, args.word_ids_file)
 
-    q = {"doc_type": "node", "node_type": "word", "level": 14}
-    if cp.last_id:
-        from bson import ObjectId
-        q["_id"] = {"$gt": ObjectId(cp.last_id)}
-    total = coll.count_documents({"doc_type": "node", "node_type": "word", "level": 14})
+    scoped = bool(args.word_ids_file)
+    if scoped:
+        word_ids = [ObjectId(i) for i in json.loads(Path(args.word_ids_file).read_text())]
+        q: dict = {"doc_type": "node", "node_type": "word", "level": 14,
+                   "_id": {"$in": word_ids}}
+        total = len(word_ids)
+        n = 0
+    else:
+        q = {"doc_type": "node", "node_type": "word", "level": 14}
+        if cp.last_id:
+            q["_id"] = {"$gt": ObjectId(cp.last_id)}
+        total = coll.count_documents({"doc_type": "node", "node_type": "word", "level": 14})
+        n = cp.processed
 
     batch_n = args.batch_size or settings.batch_size
     ops: list[UpdateOne] = []
-    n = cp.processed
 
     cur = coll.find(q, {"_id": 1, "properties": 1}).sort("_id", 1)
     for w in cur:
@@ -77,22 +98,28 @@ def run(argv: Sequence[str] | None = None) -> None:
                 {"$set": {"vector": vec.tolist(), "updated_at": datetime.now(timezone.utc)}},
             )
         )
+        if not args.dry_run:
+            doi_bridge.propagate(bridge_coll, w["_id"], [s["_id"] for s in sense_docs])
         n += 1
         cp.last_id = str(w["_id"])
         if len(ops) >= batch_n:
             if not args.dry_run:
                 coll.bulk_write(ops, ordered=False)
             ops = []
-            cp.processed = n
-            cp_mod.save(cp, settings)
+            if not scoped:
+                cp.processed = n
+                cp_mod.save(cp, settings)
             log.info("… %d/%d word vectors", n, total)
 
     if ops and not args.dry_run:
         coll.bulk_write(ops, ordered=False)
 
+    log.info("computed %d/%d L14 word vectors", n, total)
+    if scoped:
+        return  # scoped runs don't touch the shared stage checkpoint
+
     cp.processed = n
     cp.total = total
-    log.info("computed %d/%d L14 word vectors", n, total)
     if not args.dry_run:
         finish(cp, settings, log)
 

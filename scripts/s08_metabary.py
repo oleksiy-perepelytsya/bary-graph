@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 import numpy as np
 from pymongo import UpdateOne
 
+from lib import doi_bridge
 from lib.bary_vec import compute_metabary_vec, level_factor
 from lib.db import get_collection
 from lib.docs import metabary
@@ -45,7 +46,7 @@ def _load_unparented_bes(coll, level: int) -> tuple[list, list[dict], np.ndarray
     return ids, meta, V[:n]
 
 
-def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
+def _form_level(coll, bridge_coll, child_level: int, bridge_level: int, threshold: float,
                 alpha: float, dry_run: bool) -> int:
     """Form MetaBary at ``child_level - 2`` from children@L and bridges@L-1."""
     child_ids, child_meta, CV = _load_unparented_bes(coll, child_level)
@@ -163,6 +164,9 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
             for cm_id in (child_ids[ci], child_ids[cj], bridge_ids[bi]):
                 ups.append(UpdateOne({"_id": cm_id},
                                      {"$set": {"parent_edge_id": eid, "updated_at": now}}))
+            doi_bridge.propagate(
+                bridge_coll, eid, [child_ids[ci], child_ids[cj], bridge_ids[bi]]
+            )
         coll.bulk_write(ups, ordered=False)
     return len(triads)
 
@@ -170,6 +174,7 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
     coll = get_collection(settings)
+    bridge_coll = doi_bridge.get_bridge_collection(settings)
     thr = settings.meta_bary_cos_threshold
     alpha = settings.level_factor_alpha
     log.info("start processed=%d dry_run=%s cos_threshold=%.2f alpha=%.2f",
@@ -186,7 +191,7 @@ def run(argv: Sequence[str] | None = None) -> None:
     child_level = 15
     while child_level - 2 >= 1:
         bridge_level = child_level - 1
-        n = _form_level(coll, child_level, bridge_level, thr, alpha, args.dry_run)
+        n = _form_level(coll, bridge_coll, child_level, bridge_level, thr, alpha, args.dry_run)
         log.info("L%d MetaBary: children@L%d bridges@L%d → %d triads",
                  child_level - 2, child_level, bridge_level, n)
         total += n
