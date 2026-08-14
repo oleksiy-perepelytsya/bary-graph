@@ -130,6 +130,9 @@ def cm_leaf_words(
                 next_frontier.add(doc["cm1_id"])
                 next_frontier.add(doc["cm2_id"])
         if max_words is not None and len(words) >= max_words:
+            # Cap hit: stop descending rather than expanding next_frontier.
+            # The returned set has no truncated flag of its own — callers
+            # that care must infer it from len(result) >= max_words.
             break
         frontier = next_frontier
 

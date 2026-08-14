@@ -646,7 +646,14 @@ def _ancestry_chain(parent_id: Any, max_levels: int = 20) -> list[dict[str, Any]
             step["triad_words"] = _triad_of(pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"], pdoc.get("bridge_id"))
         else:
             step["edge_type"] = pdoc.get("edge_type")
-            step["leaf_words"] = sorted(cm_leaf_words(_coll, pdoc["_id"], max_words=200))
+            leaf_words_cap = 200
+            leaf_words = cm_leaf_words(_coll, pdoc["_id"], max_words=leaf_words_cap)
+            step["leaf_words"] = sorted(leaf_words)
+            # cm_leaf_words returns a bare set with no truncation signal of its own —
+            # hitting the cap exactly is the only way to tell "capped" from "this
+            # subtree genuinely has ~200 words" apart, so treat it as truncated.
+            if len(leaf_words) >= leaf_words_cap:
+                step["leaf_words_truncated"] = True
         chain.append(step)
         next_id = pdoc.get("parent_edge_id")
         if not next_id:
