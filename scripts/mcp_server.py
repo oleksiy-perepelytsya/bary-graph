@@ -32,6 +32,7 @@ Transports:
 from __future__ import annotations
 
 import json
+import logging
 import os
 from datetime import datetime, timezone
 from typing import Any
@@ -39,7 +40,7 @@ from typing import Any
 from bson import ObjectId
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
-from pymongo.errors import OperationFailure
+from pymongo.errors import PyMongoError
 
 import numpy as np
 
@@ -119,6 +120,7 @@ def _leaf_nodes(be_id: Any, cap: int | None = None) -> dict[str, Any]:
 
 _settings = Settings.load()
 setup_logging(_settings.log_level)
+_log = logging.getLogger(__name__)
 _coll = get_collection(_settings)
 
 _public_host = os.environ.get("MCP_PUBLIC_HOST", "")
@@ -520,6 +522,7 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
         embedder = get_embedder(_settings)
         qv = embedder.embed([query])[0].tolist()
     except Exception as e:
+        _log.exception("semantic_search: embedding failed for query=%r", query)
         return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
 
     try:
@@ -529,10 +532,14 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
             num_candidates=max(top_k * 10, 200),
             filter={"doc_type": doc_type},
         )
-    except OperationFailure as e:
+    except PyMongoError as e:
+        # Covers both a missing/still-building mongot index (OperationFailure)
+        # and a slow/overloaded one (ExecutionTimeout, ServerSelectionTimeoutError,
+        # ...) — narrowly catching OperationFailure let the latter escape uncaught.
+        _log.exception("semantic_search: vector_search failed for query=%r", query)
         return (
-            "Vector search unavailable — the mongot index may still be building.\n"
-            f"Error: {e}"
+            "Vector search failed — the mongot index may still be building, or "
+            f"the query timed out under load. Error: {type(e).__name__}: {e}"
         )
 
     if not docs:
@@ -713,6 +720,7 @@ def context_search(
         embedder = get_embedder(_settings)
         qv = embedder.embed([query])[0].tolist()
     except Exception as e:
+        _log.exception("context_search: embedding failed for query=%r", query)
         return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
 
     filt = {"doc_type": doc_type} if doc_type in ("node", "baryedge") else None
@@ -723,40 +731,64 @@ def context_search(
             num_candidates=max(top_k * 10, 200),
             filter=filt,
         )
-    except OperationFailure as e:
+    except PyMongoError as e:
+        # Covers both a missing/still-building mongot index (OperationFailure)
+        # and a slow/overloaded one (ExecutionTimeout, ServerSelectionTimeoutError,
+        # ...) — narrowly catching OperationFailure let the latter escape uncaught.
+        _log.exception("context_search: vector_search failed for query=%r", query)
         return (
-            "Vector search unavailable — the mongot index may still be building.\n"
-            f"Error: {e}"
+            "Vector search failed — the mongot index may still be building, or "
+            f"the query timed out under load. Error: {type(e).__name__}: {e}"
         )
     if not docs:
         return "No results returned. Index may still be building or corpus is empty."
 
-    results = []
-    for d in docs:
-        r: dict[str, Any] = {
-            "id": str(d["_id"]),
-            "score": round(float(d.get("_score", 0)), 4),
-            "doc_type": d.get("doc_type"),
-        }
-        # Per-hit try/except: one slow/broken hit (e.g. a mongo hiccup expanding
-        # a huge subtree) shouldn't take down every other hit in the batch —
-        # surface it as a partial result instead of a bare failed tool call.
-        try:
-            if d["doc_type"] == "node":
-                r.update(_node_context(d, max_leaves))
-            else:
-                r.update(_edge_context(d, max_leaves))
+    # Outer safety net: expanding hits (leaf traversal, ancestry chains, mongo
+    # round trips) touches enough moving parts that something not covered by
+    # the per-hit try/except below could still slip through. Rather than let
+    # that reach the caller as FastMCP's generic, undiagnosable "Error occurred
+    # during tool execution", log the real cause and return whatever partial
+    # results were already built.
+    results: list[dict[str, Any]] = []
+    try:
+        for d in docs:
+            r: dict[str, Any] = {
+                "id": str(d["_id"]),
+                "score": round(float(d.get("_score", 0)), 4),
+                "doc_type": d.get("doc_type"),
+            }
+            # Per-hit try/except: one slow/broken hit (e.g. a mongo hiccup expanding
+            # a huge subtree) shouldn't take down every other hit in the batch —
+            # surface it as a partial result instead of a bare failed tool call.
+            try:
+                if d["doc_type"] == "node":
+                    r.update(_node_context(d, max_leaves))
+                else:
+                    r.update(_edge_context(d, max_leaves))
 
-            if include_ancestry and d.get("parent_edge_id"):
-                r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"])
-        except Exception as e:
-            r["expansion_error"] = (
-                f"{type(e).__name__}: {e}. Retry with include_ancestry=False "
-                "and/or a lower max_leaves/top_k to avoid expanding this hit's "
-                "subtree, or call leaf_nodes/traverse_up on this id directly."
+                if include_ancestry and d.get("parent_edge_id"):
+                    r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"])
+            except Exception as e:
+                _log.exception("context_search: expansion failed for hit id=%s", d.get("_id"))
+                r["expansion_error"] = (
+                    f"{type(e).__name__}: {e}. Retry with include_ancestry=False "
+                    "and/or a lower max_leaves/top_k to avoid expanding this hit's "
+                    "subtree, or call leaf_nodes/traverse_up on this id directly."
+                )
+
+            results.append(r)
+    except Exception as e:
+        _log.exception("context_search: unhandled failure for query=%r", query)
+        if results:
+            return _fmt(results) + (
+                f"\n\n[Stopped early after {len(results)} hit(s): "
+                f"{type(e).__name__}: {e}. Retry with a lower top_k/max_leaves "
+                "or include_ancestry=False.]"
             )
-
-        results.append(r)
+        return (
+            f"context_search failed: {type(e).__name__}: {e}\n"
+            "Retry with a lower top_k/max_leaves and/or include_ancestry=False."
+        )
 
     return _fmt(results)
 
