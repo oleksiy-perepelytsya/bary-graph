@@ -626,13 +626,26 @@ def _edge_context(doc: dict[str, Any], max_leaves: int) -> dict[str, Any]:
     return ctx
 
 
-def _ancestry_chain(parent_id: Any, max_levels: int = 20) -> list[dict[str, Any]]:
+def _ancestry_chain(
+    parent_id: Any, expanded_ids: set[str], max_levels: int = 20
+) -> list[dict[str, Any]]:
     """Walk parent_edge_id all the way to the root — unlike leaf traversal this is a
     single linear chain (one parent per doc), never wide, so going the full distance
     is cheap. The one exception is the L14/L15 BE steps near the bottom of the
     chain: each of those still fans out downward via cm_leaf_words, so it's capped
     the same way _edge_context caps _leaf_nodes. Branches off the chain itself are
-    what leaf_nodes/context_search on a specific id are for."""
+    what leaf_nodes/context_search on a specific id are for.
+
+    ``expanded_ids`` is shared across every hit in one context_search call. Hits
+    close together in the graph routinely share lineage — one hit's ancestor is
+    often another hit itself, or two hits climb through the same lower-level MB.
+    Without this, each occurrence re-fetches and re-serializes an identical
+    triad/leaf-word structure, multiplying response size for zero new
+    information; a top_k of 6 on a tight cluster can trigger this several
+    times over and blow past a client-side payload limit. Once an id has been
+    fully rendered anywhere in the response (as a hit or as another chain's
+    step), later encounters stop and leave a pointer instead.
+    """
     chain: list[dict[str, Any]] = []
     current_id = parent_id
     for _ in range(max_levels):
@@ -643,8 +656,17 @@ def _ancestry_chain(parent_id: Any, max_levels: int = 20) -> list[dict[str, Any]
         )
         if not pdoc:
             break
+        id_str = str(pdoc["_id"])
+        if id_str in expanded_ids:
+            chain.append({
+                "id": id_str,
+                "level": pdoc.get("level"),
+                "already_shown_elsewhere_in_response": True,
+            })
+            break
+        expanded_ids.add(id_str)
         step: dict[str, Any] = {
-            "id": str(pdoc["_id"]),
+            "id": id_str,
             "level": pdoc.get("level"),
             "connection_strength": pdoc.get("connection_strength"),
         }
@@ -709,7 +731,12 @@ def context_search(
       partial "one level" option; you get the whole chain or none. If you
       instead need to explore sideways/downward from a specific ancestor id,
       call context_search or leaf_nodes on that id directly. Set False to
-      skip the chain for a faster, terser response.
+      skip the chain for a faster, terser response. Hits close together in
+      the graph often share lineage (one hit is literally another hit's
+      ancestor, or two hits climb through the same lower MB) — when an id
+      has already been fully shown elsewhere in the response, later
+      occurrences collapse to {"id", "level", "already_shown_elsewhere_in_response":
+      true} instead of repeating the same triad/leaf-word content.
     """
     if doc_type not in ("node", "baryedge", "any"):
         return "doc_type must be 'node', 'baryedge', or 'any'."
@@ -750,6 +777,11 @@ def context_search(
     # during tool execution", log the real cause and return whatever partial
     # results were already built.
     results: list[dict[str, Any]] = []
+    # Hits close together in the graph routinely share lineage — see
+    # _ancestry_chain's docstring. Seed with every hit's own id up front (not
+    # as each hit is processed) so the dedup works regardless of which hit's
+    # ancestor chain reaches a sibling hit first.
+    expanded_ids: set[str] = {str(d["_id"]) for d in docs}
     try:
         for d in docs:
             r: dict[str, Any] = {
@@ -767,7 +799,7 @@ def context_search(
                     r.update(_edge_context(d, max_leaves))
 
                 if include_ancestry and d.get("parent_edge_id"):
-                    r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"])
+                    r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"], expanded_ids)
             except Exception as e:
                 _log.exception("context_search: expansion failed for hit id=%s", d.get("_id"))
                 r["expansion_error"] = (
