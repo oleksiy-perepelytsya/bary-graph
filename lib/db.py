@@ -95,11 +95,18 @@ def cm_leaf_words(
     be_id: Any,
     *,
     max_depth: int = 15,
+    max_words: int | None = None,
 ) -> set[str]:
     """Return all words reachable via the CM lineage of a single BE/MB.
 
     Traverses cm1_id/cm2_id chains (BFS) until reaching node docs.
     Both L15 sense nodes and L14 word nodes carry properties.word.
+
+    ``max_words`` bounds the traversal itself (not just the returned set) —
+    a BE/MB near the root of the graph can fan out to a huge fraction of the
+    corpus, so callers on a latency budget (e.g. an MCP tool expanding many
+    hits) should pass a cap. The returned set may be a few docs over the cap
+    since the check runs once per BFS level, not per document.
     """
     frontier: set[Any] = {be_id}
     visited: set[Any] = set()
@@ -122,6 +129,8 @@ def cm_leaf_words(
             else:
                 next_frontier.add(doc["cm1_id"])
                 next_frontier.add(doc["cm2_id"])
+        if max_words is not None and len(words) >= max_words:
+            break
         frontier = next_frontier
 
     return words

@@ -54,16 +54,25 @@ from lib.log import setup_logging
 # -- helpers ------------------------------------------------------------------
 
 
-def _leaf_nodes(be_id: Any) -> dict[str, list]:
+def _leaf_nodes(be_id: Any, cap: int | None = None) -> dict[str, Any]:
     """BFS from a BE/MB down to all reachable L14/L15 node docs.
 
-    Returns {"senses": [...], "words": [...]} where senses are L15 sense nodes
-    (gloss, tags, topics) and words are L14 word nodes (pos, ipa, etymology).
+    Returns {"senses": [...], "words": [...], "truncated": bool} where senses
+    are L15 sense nodes (gloss, tags, topics) and words are L14 word nodes
+    (pos, ipa, etymology).
+
+    ``cap`` bounds the traversal itself, not just the returned lists — a BE/MB
+    near the root of the graph can fan out to a huge fraction of the corpus,
+    so callers on a latency budget (e.g. context_search expanding several
+    hits per call) should pass one. When the cap stops the walk early,
+    "truncated" is True and the returned lists (and their counts) are a
+    lower bound, not the full subtree.
     """
     frontier: set[Any] = {be_id}
     visited: set[Any] = set()
     senses: list[dict] = []
     words: list[dict] = []
+    truncated = False
 
     for _ in range(15):
         to_fetch = frontier - visited
@@ -101,9 +110,12 @@ def _leaf_nodes(be_id: Any) -> dict[str, list]:
                     next_frontier.add(doc["cm1_id"])
                 if doc.get("cm2_id"):
                     next_frontier.add(doc["cm2_id"])
+        if cap is not None and len(senses) + len(words) >= cap:
+            truncated = True
+            break
         frontier = next_frontier
 
-    return {"senses": senses, "words": words}
+    return {"senses": senses, "words": words, "truncated": truncated}
 
 _settings = Settings.load()
 setup_logging(_settings.log_level)
@@ -583,7 +595,10 @@ def _edge_context(doc: dict[str, Any], max_leaves: int) -> dict[str, Any]:
     """Expand a BE/MB hit with its triad (if MB) and full leaf senses/words."""
     level = doc.get("level")
     ctx: dict[str, Any] = {"level": level, "connection_strength": doc.get("connection_strength")}
-    leaves = _leaf_nodes(doc["_id"])
+    # Cap traversal, not just the returned list: a BE/MB near the root can fan out
+    # to a huge fraction of the corpus, and an oblique query is more likely to
+    # match one. Without this, one broad hit can blow the tool's response budget.
+    leaves = _leaf_nodes(doc["_id"], cap=max(max_leaves * 5, 300))
     if level is not None and level <= 13:
         ctx["semantic_label"] = doc.get("semantic_label")
         ctx["triad"] = _triad_of(doc["_id"], doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id"))
@@ -592,16 +607,25 @@ def _edge_context(doc: dict[str, Any], max_leaves: int) -> dict[str, Any]:
         ctx["q"] = doc.get("q")
     ctx["senses"] = leaves["senses"][:max_leaves]
     ctx["words"] = leaves["words"][:max_leaves]
-    ctx["sense_count"] = len(leaves["senses"])
-    ctx["word_count"] = len(leaves["words"])
+    # "at least N" when the traversal itself was cut short — don't report a
+    # partial count as if it were the true subtree size.
+    n_senses, n_words = len(leaves["senses"]), len(leaves["words"])
+    if leaves["truncated"]:
+        ctx["sense_count"] = f"at least {n_senses}"
+        ctx["word_count"] = f"at least {n_words}"
+    else:
+        ctx["sense_count"] = n_senses
+        ctx["word_count"] = n_words
     return ctx
 
 
 def _ancestry_chain(parent_id: Any, max_levels: int = 20) -> list[dict[str, Any]]:
     """Walk parent_edge_id all the way to the root — unlike leaf traversal this is a
     single linear chain (one parent per doc), never wide, so going the full distance
-    is cheap. Branches off that chain are what leaf_nodes/context_search on a
-    specific id are for."""
+    is cheap. The one exception is the L14/L15 BE steps near the bottom of the
+    chain: each of those still fans out downward via cm_leaf_words, so it's capped
+    the same way _edge_context caps _leaf_nodes. Branches off the chain itself are
+    what leaf_nodes/context_search on a specific id are for."""
     chain: list[dict[str, Any]] = []
     current_id = parent_id
     for _ in range(max_levels):
@@ -622,7 +646,7 @@ def _ancestry_chain(parent_id: Any, max_levels: int = 20) -> list[dict[str, Any]
             step["triad_words"] = _triad_of(pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"], pdoc.get("bridge_id"))
         else:
             step["edge_type"] = pdoc.get("edge_type")
-            step["leaf_words"] = sorted(cm_leaf_words(_coll, pdoc["_id"]))
+            step["leaf_words"] = sorted(cm_leaf_words(_coll, pdoc["_id"], max_words=200))
         chain.append(step)
         next_id = pdoc.get("parent_edge_id")
         if not next_id:
@@ -707,13 +731,23 @@ def context_search(
             "score": round(float(d.get("_score", 0)), 4),
             "doc_type": d.get("doc_type"),
         }
-        if d["doc_type"] == "node":
-            r.update(_node_context(d, max_leaves))
-        else:
-            r.update(_edge_context(d, max_leaves))
+        # Per-hit try/except: one slow/broken hit (e.g. a mongo hiccup expanding
+        # a huge subtree) shouldn't take down every other hit in the batch —
+        # surface it as a partial result instead of a bare failed tool call.
+        try:
+            if d["doc_type"] == "node":
+                r.update(_node_context(d, max_leaves))
+            else:
+                r.update(_edge_context(d, max_leaves))
 
-        if include_ancestry and d.get("parent_edge_id"):
-            r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"])
+            if include_ancestry and d.get("parent_edge_id"):
+                r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"])
+        except Exception as e:
+            r["expansion_error"] = (
+                f"{type(e).__name__}: {e}. Retry with include_ancestry=False "
+                "and/or a lower max_leaves/top_k to avoid expanding this hit's "
+                "subtree, or call leaf_nodes/traverse_up on this id directly."
+            )
 
         results.append(r)
 
