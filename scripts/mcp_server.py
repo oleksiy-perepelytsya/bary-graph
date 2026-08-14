@@ -1,6 +1,8 @@
 """BaryGraph MCP server — exposes the barygraph collection as Claude tools.
 
-Provides fourteen tools:
+Provides fifteen tools:
+  context_search   — MAIN entry point: $vectorSearch + full leaf content +
+                      full ancestor chain to root, merged into a single call
   find_word        — look up word nodes (all POS variants)
   word_senses      — list all L15 sense glosses for a word
   word_edges       — L14 BaryEdges where the word is a CM
@@ -122,11 +124,15 @@ mcp = FastMCP(
         "(node_type='sense'). L15 BaryEdges pair sense nodes; L14 BaryEdges connect "
         "word nodes via kaikki relations (synonyms, antonyms, hypernyms…). "
         "L13–L10 are MetaBary triads: each MB has two children (cm1, cm2) and a "
-        "bridge — use sample_metabary (returns triad + parent triad) to explore, "
-        "edge_info for a specific MB's triad, traverse_up for the full ancestry chain "
-        "(shows triad at every MetaBary level), leaf_nodes to get all L15 sense glosses "
-        "and L14 word properties reachable from any BE or MB. "
-        "Use semantic_search to find related words and concepts."
+        "bridge. "
+        "START WITH context_search for any meaning/concept lookup — it runs "
+        "$vectorSearch and returns each hit already expanded with its full leaf "
+        "content (senses/words) and its full ancestor chain to the root, so no "
+        "follow-up leaf_nodes or traverse_up call is needed. Reach for the other "
+        "tools only when you need something context_search doesn't cover: "
+        "sample_metabary to browse randomly, edge_info for a specific id, "
+        "leaf_nodes for a raw full-subtree dump on a specific id, find_word/"
+        "word_senses/word_edges for exact-string lookups rather than semantic ones."
     ),
     transport_security=TransportSecuritySettings(
         enable_dns_rebinding_protection=True,
@@ -540,6 +546,175 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
                 )
             else:
                 r["cm_words"] = sorted(cm_leaf_words(_coll, d["_id"]))
+        results.append(r)
+
+    return _fmt(results)
+
+
+def _node_context(doc: dict[str, Any], max_leaves: int) -> dict[str, Any]:
+    """Expand a node hit (word or sense) with everything context_search promises inline."""
+    props = doc.get("properties", {})
+    nt = doc.get("node_type")
+    ctx: dict[str, Any] = {"node_type": nt, "word": props.get("word"), "pos": props.get("pos")}
+    if nt == "sense":
+        ctx.update({
+            "gloss": props.get("gloss", ""),
+            "tags": props.get("tags", []),
+            "topics": props.get("topics", []),
+        })
+    elif nt == "word":
+        ctx.update({
+            "ipa": props.get("ipa"),
+            "etymology": (props.get("etymology") or "")[:150] or None,
+            "forms": (props.get("forms") or [])[:6],
+        })
+        sense_docs = list(_coll.find(
+            {"doc_type": "node", "node_type": "sense", "properties.word": props.get("word")},
+            {"properties.pos": 1, "properties.gloss": 1, "properties.sense_idx": 1},
+        ).sort("properties.sense_idx", 1).limit(max_leaves))
+        ctx["senses"] = [
+            {"id": str(s["_id"]), "pos": s["properties"].get("pos"), "gloss": s["properties"].get("gloss", "")}
+            for s in sense_docs
+        ]
+    return ctx
+
+
+def _edge_context(doc: dict[str, Any], max_leaves: int) -> dict[str, Any]:
+    """Expand a BE/MB hit with its triad (if MB) and full leaf senses/words."""
+    level = doc.get("level")
+    ctx: dict[str, Any] = {"level": level, "connection_strength": doc.get("connection_strength")}
+    leaves = _leaf_nodes(doc["_id"])
+    if level is not None and level <= 13:
+        ctx["semantic_label"] = doc.get("semantic_label")
+        ctx["triad"] = _triad_of(doc["_id"], doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id"))
+    else:
+        ctx["edge_type"] = doc.get("edge_type")
+        ctx["q"] = doc.get("q")
+    ctx["senses"] = leaves["senses"][:max_leaves]
+    ctx["words"] = leaves["words"][:max_leaves]
+    ctx["sense_count"] = len(leaves["senses"])
+    ctx["word_count"] = len(leaves["words"])
+    return ctx
+
+
+def _ancestry_chain(parent_id: Any, max_levels: int = 20) -> list[dict[str, Any]]:
+    """Walk parent_edge_id all the way to the root — unlike leaf traversal this is a
+    single linear chain (one parent per doc), never wide, so going the full distance
+    is cheap. Branches off that chain are what leaf_nodes/context_search on a
+    specific id are for."""
+    chain: list[dict[str, Any]] = []
+    current_id = parent_id
+    for _ in range(max_levels):
+        pdoc = _coll.find_one(
+            {"_id": current_id},
+            {"level": 1, "edge_type": 1, "semantic_label": 1, "parent_edge_id": 1,
+             "cm1_id": 1, "cm2_id": 1, "bridge_id": 1, "connection_strength": 1},
+        )
+        if not pdoc:
+            break
+        step: dict[str, Any] = {
+            "id": str(pdoc["_id"]),
+            "level": pdoc.get("level"),
+            "connection_strength": pdoc.get("connection_strength"),
+        }
+        if pdoc.get("level") is not None and pdoc["level"] <= 13:
+            step["semantic_label"] = pdoc.get("semantic_label")
+            step["triad_words"] = _triad_of(pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"], pdoc.get("bridge_id"))
+        else:
+            step["edge_type"] = pdoc.get("edge_type")
+            step["leaf_words"] = sorted(cm_leaf_words(_coll, pdoc["_id"]))
+        chain.append(step)
+        next_id = pdoc.get("parent_edge_id")
+        if not next_id:
+            break
+        current_id = next_id
+    return chain
+
+
+@mcp.tool()
+def context_search(
+    query: str,
+    doc_type: str = "any",
+    top_k: int = 5,
+    max_leaves: int = 40,
+    include_ancestry: bool = True,
+) -> str:
+    """Main entry point for meaning-based lookup — semantic search with full context inline.
+
+    Runs the same $vectorSearch as semantic_search, but each hit is returned
+    already expanded with everything you'd otherwise need leaf_nodes and
+    traverse_up follow-up calls to get:
+      - word node   → properties (ipa/etymology/forms) + all its senses (gloss list)
+      - sense node  → gloss/tags/topics
+      - L14/L15 BE  → edge_type + every sense/word reachable underneath (leaf_nodes)
+      - MetaBary (L10-L13) → semantic_label + triad (child1/child2/bridge word
+        sets) + every sense/word reachable underneath (leaf_nodes)
+    Use this first for any "find things related to X" question; reach for
+    semantic_search/leaf_nodes/traverse_up directly only when you need a raw
+    dump, a full multi-level ancestry chain, or to page through more hits than
+    context_search's caps allow.
+
+    doc_type: 'node' (words+senses only), 'baryedge' (BE/MB relations only),
+      or 'any' (default — no filter, so results are ranked across both
+      spaces together by the same HNSW index; the best default when you don't
+      know whether the answer is a word or a relation/cluster).
+    top_k: number of hits to return (max 20).
+    max_leaves: cap on senses/words listed per hit for BE/MB results, so a
+      broad L10 MetaBary doesn't dump its whole subtree (max 200). Totals are
+      still reported via sense_count/word_count even when truncated.
+    include_ancestry: when True (default), also includes the full ancestor_chain
+      from each hit up to the root — semantic_label/triad for MB ancestors,
+      edge_type/leaf_words for BE ancestors — so you see everything the hit
+      belongs to, all the way up, without a separate traverse_up call. This
+      is cheap because parent_edge_id is a single linear chain (one parent
+      per doc), unlike the fan-out you get traversing down — so there's no
+      partial "one level" option; you get the whole chain or none. If you
+      instead need to explore sideways/downward from a specific ancestor id,
+      call context_search or leaf_nodes on that id directly. Set False to
+      skip the chain for a faster, terser response.
+    """
+    if doc_type not in ("node", "baryedge", "any"):
+        return "doc_type must be 'node', 'baryedge', or 'any'."
+    top_k = min(max(top_k, 1), 20)
+    max_leaves = min(max(max_leaves, 1), 200)
+
+    try:
+        embedder = get_embedder(_settings)
+        qv = embedder.embed([query])[0].tolist()
+    except Exception as e:
+        return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
+
+    filt = {"doc_type": doc_type} if doc_type in ("node", "baryedge") else None
+    try:
+        docs = vector_search(
+            _coll, qv,
+            limit=top_k,
+            num_candidates=max(top_k * 10, 200),
+            filter=filt,
+        )
+    except OperationFailure as e:
+        return (
+            "Vector search unavailable — the mongot index may still be building.\n"
+            f"Error: {e}"
+        )
+    if not docs:
+        return "No results returned. Index may still be building or corpus is empty."
+
+    results = []
+    for d in docs:
+        r: dict[str, Any] = {
+            "id": str(d["_id"]),
+            "score": round(float(d.get("_score", 0)), 4),
+            "doc_type": d.get("doc_type"),
+        }
+        if d["doc_type"] == "node":
+            r.update(_node_context(d, max_leaves))
+        else:
+            r.update(_edge_context(d, max_leaves))
+
+        if include_ancestry and d.get("parent_edge_id"):
+            r["ancestor_chain"] = _ancestry_chain(d["parent_edge_id"])
+
         results.append(r)
 
     return _fmt(results)
