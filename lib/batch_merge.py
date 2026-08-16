@@ -54,24 +54,25 @@ def dedupe_exact(entries: list[Entry]) -> list[Entry]:
 
 
 def find_existing_word_candidates(coll: Collection, term: str) -> list[dict[str, Any]]:
-    """Point lookup on properties.word: as-is first, then lowercased.
+    """Exact, case-sensitive point lookup on properties.word.
 
-    Both hit the existing (properties.word, properties.pos) index — no new
+    Deliberately no case-folding: a case-insensitive fallback (e.g. "DoE" ->
+    "doe") produces false-positive homonym attachments where a domain
+    acronym happens to lowercase into an unrelated common word or proper
+    name (observed against production: "MEA" -> the given-name entry "Mea",
+    "DoE" -> "doe" the verb, "SAGE" -> "sage" the interjection). Exact match
+    only means "DoE" and "doe" are treated as different words, at the cost
+    of missing legitimate case-variant matches (e.g. "Lysine" vs kaikki's
+    lowercase "lysine") — precision over recall here, by design.
+
+    Hits the existing (properties.word, properties.pos) index — no new
     index or backfill needed. Multi-word phrase terms are expected to find
     nothing; that's the common case for this corpus (most terms are noun
     phrases with no kaikki entry).
     """
-    docs = list(
+    return list(
         coll.find({"doc_type": "node", "node_type": "word", "properties.word": term})
     )
-    if docs:
-        return docs
-    lower = term.lower()
-    if lower != term:
-        docs = list(
-            coll.find({"doc_type": "node", "node_type": "word", "properties.word": lower})
-        )
-    return docs
 
 
 def _word_vector_estimate(coll: Collection, candidate: dict[str, Any]) -> np.ndarray | None:
