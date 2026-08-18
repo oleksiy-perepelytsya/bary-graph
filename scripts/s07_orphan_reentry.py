@@ -43,17 +43,18 @@ def run(argv: Sequence[str] | None = None) -> None:
     n_orphans = len(orphan_ids)
     OV = OV[:n_orphans]
 
+    # Vectors only in this pass — metadata (type_vector etc.) is fetched below
+    # just for the BEs that actually win a match. Materializing type_vector
+    # (768 raw Python floats) for every existing L14 BE here would hold tens
+    # of GB for the full BE pool, when at most n_orphans of them are ever used.
     be_ids: list = []
-    be_meta: list[dict] = []  # edge_type, type_vector, q, accumulated_weight
     n_bes_count = coll.count_documents({"doc_type": "baryedge", "level": 14})
     BEV: np.ndarray = np.empty((n_bes_count, settings.embed_dim), dtype=np.float32)
     for i, doc in enumerate(coll.find(
         {"doc_type": "baryedge", "level": 14},
-        {"_id": 1, "vector": 1, "edge_type": 1, "type_vector": 1, "q": 1,
-         "accumulated_weight": 1},
+        {"_id": 1, "vector": 1},
     )):
         be_ids.append(doc["_id"])
-        be_meta.append(doc)
         BEV[i] = doc["vector"]
     n_bes = len(be_ids)
     BEV = BEV[:n_bes]
@@ -74,6 +75,18 @@ def run(argv: Sequence[str] | None = None) -> None:
         end = min(start + CHUNK, n_orphans)
         best_bi[start:end] = np.argmax(OV[start:end] @ BEV.T, axis=1)
 
+    # Now that we know which BEs actually won a match, fetch metadata
+    # (type_vector, edge_type, q, accumulated_weight) for just those —
+    # a small fraction of the full BE pool.
+    used_be_ids = [be_ids[bi] for bi in sorted(set(best_bi.tolist()))]
+    be_meta: dict = {
+        doc["_id"]: doc
+        for doc in coll.find(
+            {"_id": {"$in": used_be_ids}},
+            {"edge_type": 1, "type_vector": 1, "q": 1, "accumulated_weight": 1},
+        )
+    }
+
     # Stream inserts: building all 1.35M docs before inserting would hold ~66 GB of
     # Python-list float data in RAM (_vec() expands each 768-dim vector to a list of
     # Python floats at 32 bytes each × 2 vectors × 1.35M docs). Process batch_n at a time.
@@ -87,7 +100,7 @@ def run(argv: Sequence[str] | None = None) -> None:
         for idx in range(n_orphans):
             oid = orphan_ids[idx]
             bi = int(best_bi[idx])
-            partner = be_meta[bi]
+            partner = be_meta[be_ids[bi]]
             tv = np.asarray(partner["type_vector"], dtype=np.float32)
             q = float(partner["q"])
             acc_w = float(partner.get("accumulated_weight", q))
