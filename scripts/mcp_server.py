@@ -47,6 +47,7 @@ import numpy as np
 from lib.bary_vec import TYPE_SENTENCES, compute_bary_vec, compute_metabary_vec, cosine, level_factor, normalize as _norm_vec
 from lib.config import Settings
 from lib.db import cm_leaf_words, get_collection, vector_search
+from lib.doi_bridge import dois_for_node, dois_for_nodes, get_bridge_collection
 from lib.docs import baryedge as _make_baryedge
 from lib.docs import metabary as _make_metabary
 from lib.embed import get_embedder
@@ -122,6 +123,7 @@ _settings = Settings.load()
 setup_logging(_settings.log_level)
 _log = logging.getLogger(__name__)
 _coll = get_collection(_settings)
+_bridge_coll = get_bridge_collection(_settings)
 
 _public_host = os.environ.get("MCP_PUBLIC_HOST", "")
 _allowed_hosts = ["localhost:*", "127.0.0.1:*"]
@@ -267,16 +269,26 @@ def find_word(word: str) -> str:
 
 
 @mcp.tool()
-def word_senses(word: str) -> str:
-    """List all L15 sense nodes for a word — glosses, tags, and whether each sense is paired."""
+def word_senses(word: str, include_dois: bool = False) -> str:
+    """List all L15 sense nodes for a word — glosses, tags, and whether each sense is paired.
+
+    include_dois: when True, include each sense's source DOI(s) (academic-batch
+    provenance) — stored directly on the sense node, so this adds no extra
+    lookup. Most senses (plain kaikki dictionary data) have an empty list.
+    """
+    projection = {
+        "properties.sense_idx": 1, "properties.pos": 1, "properties.gloss": 1,
+        "properties.tags": 1, "properties.topics": 1, "parent_edge_id": 1,
+    }
+    if include_dois:
+        projection["properties.doi"] = 1
     docs = list(_coll.find(
         {"doc_type": "node", "node_type": "sense", "properties.word": word},
-        {"properties.sense_idx": 1, "properties.pos": 1, "properties.gloss": 1,
-         "properties.tags": 1, "properties.topics": 1, "parent_edge_id": 1},
+        projection,
     ).sort("properties.sense_idx", 1))
     if not docs:
         return f"No senses found for '{word}' (word may not be in the graph)."
-    return _fmt([
+    results = [
         {
             "id": str(d["_id"]),
             "sense_idx": d["properties"].get("sense_idx"),
@@ -287,7 +299,11 @@ def word_senses(word: str) -> str:
             "paired": d.get("parent_edge_id") is not None,
         }
         for d in docs
-    ])
+    ]
+    if include_dois:
+        for r, d in zip(results, docs):
+            r["dois"] = d["properties"].get("doi", [])
+    return _fmt(results)
 
 
 @mcp.tool()
@@ -340,13 +356,18 @@ def word_edges(word: str, pos: str = "") -> str:
 
 
 @mcp.tool()
-def edge_info(edge_id: str) -> str:
+def edge_info(edge_id: str, include_dois: bool = False) -> str:
     """Get full details about a BaryEdge or MetaBary by id.
 
     For L14/L15 BaryEdges: shows edge_type, q, and flat CM leaf words.
     For MetaBary (L13–L10): shows the triad structure — child1, child2, and
     bridge — each with their own word sets, so you can see what concepts
     each branch represents and how they are connected.
+
+    include_dois: when True, include the DOI(s) of every academic-batch
+    source whose provenance chain passes through this edge/triad (union of
+    its constituents' DOIs, via the doi_bridges reverse index) — empty for
+    edges built entirely from plain kaikki dictionary data.
     """
     try:
         oid = ObjectId(edge_id)
@@ -377,6 +398,9 @@ def edge_info(edge_id: str) -> str:
         result["cm1_id"] = str(doc.get("cm1_id"))
         result["cm2_id"] = str(doc.get("cm2_id"))
         result["cm_leaf_words"] = sorted(cm_leaf_words(_coll, oid))
+
+    if include_dois:
+        result["dois"] = dois_for_node(_bridge_coll, oid)
 
     return _fmt(result)
 
@@ -510,13 +534,20 @@ def leaf_nodes(edge_id: str) -> str:
 
 
 @mcp.tool()
-def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> str:
+def semantic_search(
+    query: str, doc_type: str = "baryedge", top_k: int = 10, include_dois: bool = False
+) -> str:
     """Semantic similarity search against the BaryGraph vector index (mongot).
 
     doc_type: 'baryedge' searches relationship vectors (default);
               'node' searches word/sense vectors.
     Requires s10_index to have completed. The HNSW index may take several
     minutes to build after creation.
+    include_dois: when True, attach each hit's DOI(s) — academic-batch source
+    provenance. Sense hits read this straight off their own properties.doi;
+    word/edge/MB hits use one batched doi_bridges lookup across all hits
+    (union of their constituents' DOIs). Empty for hits built entirely from
+    plain kaikki dictionary data.
     """
     try:
         embedder = get_embedder(_settings)
@@ -545,6 +576,14 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
     if not docs:
         return "No results returned. Index may still be building or corpus is empty."
 
+    # Hits needing the aggregated reverse lookup (everything above sense level);
+    # sense hits carry their own DOIs already, so they're excluded from the batch.
+    agg_lookup_ids = [
+        d["_id"] for d in docs
+        if not (d["doc_type"] == "node" and d.get("node_type") == "sense")
+    ] if include_dois else []
+    dois_by_id = dois_for_nodes(_bridge_coll, agg_lookup_ids) if agg_lookup_ids else {}
+
     results = []
     for d in docs:
         r: dict[str, Any] = {
@@ -565,6 +604,11 @@ def semantic_search(query: str, doc_type: str = "baryedge", top_k: int = 10) -> 
                 )
             else:
                 r["cm_words"] = sorted(cm_leaf_words(_coll, d["_id"]))
+        if include_dois:
+            if d["doc_type"] == "node" and d.get("node_type") == "sense":
+                r["dois"] = d.get("properties", {}).get("doi", [])
+            else:
+                r["dois"] = dois_by_id.get(d["_id"], [])
         results.append(r)
 
     return _fmt(results)

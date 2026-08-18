@@ -106,3 +106,20 @@ def propagate_up_chain(
 def dois_for_node(coll: Collection, node_id: Any) -> list[str]:
     """Reverse lookup for query-time use: which DOIs does this node trace to."""
     return [d["_id"] for d in coll.find({"node_ids": node_id}, {"_id": 1})]
+
+
+def dois_for_nodes(coll: Collection, node_ids: list[Any]) -> dict[Any, list[str]]:
+    """Batched reverse lookup for several nodes at once (e.g. a search result
+    page) — one query instead of one per node. A DOI's node_ids array can
+    span many unrelated docs, so this fans each matched DOI doc back out only
+    to the requested ids it actually contains, not its full node_ids list.
+    """
+    if not node_ids:
+        return {}
+    wanted = set(node_ids)
+    out: dict[Any, list[str]] = {nid: [] for nid in node_ids}
+    for doc in coll.find({"node_ids": {"$in": node_ids}}, {"node_ids": 1}):
+        for nid in doc["node_ids"]:
+            if nid in wanted:
+                out[nid].append(doc["_id"])
+    return out
