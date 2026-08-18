@@ -27,7 +27,48 @@ def test_parse_batch_entry_null_doi():
     obj = {"doi": None, "terms": [{"id": "t01", "term": "viscosity", "gloss": "g"}]}
     _, ps = parse_batch_entry(obj)[0]
     assert ps.doi == []
-    assert ps.sense_id == "batch:nodoi:t01"
+    assert ps.sense_id.startswith("batch:nodoi:t01:")
+
+
+def test_parse_batch_entry_no_doi_sentinel_treated_as_null():
+    """The extraction pipeline emits "(no doi)" rather than JSON null."""
+    obj = {"doi": "(no doi)", "terms": [{"id": "t01", "term": "viscosity", "gloss": "g"}]}
+    _, ps = parse_batch_entry(obj)[0]
+    assert ps.doi == []
+    assert ps.sense_id.startswith("batch:nodoi:t01:")
+
+
+def test_parse_batch_entry_null_doi_ids_dont_collide_across_papers():
+    """Two different doi-less papers sharing term_id "t01" must not collide."""
+    obj_a = {"doi": None, "terms": [{"id": "t01", "term": "viscosity", "gloss": "fluid property"}]}
+    obj_b = {"doi": None, "terms": [{"id": "t01", "term": "porosity", "gloss": "rock property"}]}
+    _, ps_a = parse_batch_entry(obj_a)[0]
+    _, ps_b = parse_batch_entry(obj_b)[0]
+    assert ps_a.sense_id != ps_b.sense_id
+
+
+def test_parse_batch_entry_wrapped_extraction_shape():
+    """data/extracted_terms.jsonl shape: real terms nested under "extracted",
+    outer doi authoritative even when it disagrees with the inner one."""
+    obj = {
+        "doi": "10.1/real",
+        "cost_usd": 0.01,
+        "duration_ms": 123,
+        "extracted": {
+            "doi": "10.1/stale-or-truncated",
+            "terms": [{"id": "t01", "term": "flue gas", "gloss": "exhaust stream"}],
+        },
+    }
+    out = parse_batch_entry(obj)
+    assert len(out) == 1
+    pw, ps = out[0]
+    assert ps.doi == ["10.1/real"]
+    assert ps.sense_id == "batch:10.1/real:t01"
+
+
+def test_parse_batch_entry_wrapped_shape_empty_terms():
+    obj = {"doi": "10.1/x", "extracted": {"doi": "10.1/x", "terms": []}}
+    assert parse_batch_entry(obj) == []
 
 
 def test_parse_batch_entry_skips_incomplete_terms():
