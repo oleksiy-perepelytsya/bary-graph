@@ -45,7 +45,8 @@ def run(argv: Sequence[str] | None = None) -> None:
 
     be_ids: list = []
     be_meta: list[dict] = []  # edge_type, type_vector, q, accumulated_weight
-    BEV: np.ndarray = np.empty((500_000, settings.embed_dim), dtype=np.float32)
+    n_bes_count = coll.count_documents({"doc_type": "baryedge", "level": 14})
+    BEV: np.ndarray = np.empty((n_bes_count, settings.embed_dim), dtype=np.float32)
     for i, doc in enumerate(coll.find(
         {"doc_type": "baryedge", "level": 14},
         {"_id": 1, "vector": 1, "edge_type": 1, "type_vector": 1, "q": 1,
