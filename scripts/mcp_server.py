@@ -1093,7 +1093,7 @@ def create_edge(
 
 
 @mcp.tool()
-def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str) -> str:
+def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str, author: str = "") -> str:
     """Create a Structure MetaBary (SMB) triad — cross-cutting, non-exclusive grouping.
 
     SMB follows the same vector and level rules as a pipeline MetaBary (s08)
@@ -1109,6 +1109,12 @@ def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str) -> str:
       - cm1 and cm2 must be at the same level
       - bridge must be at child_level - 1
       - SMB is inserted at child_level - 2
+
+    author: optional provenance signature stored verbatim on the document.
+      Convention: humans sign a nickname (e.g. "adseipsum"); models sign
+      model name with version (e.g. "big-pickle@opencode-0.5"). Omitted or
+      empty → the field is not stored and the SMB counts as anonymous
+      testimony ({author: {$exists: false}} finds those).
 
     Returns the new SMB's _id, level, q_mb_raw, accumulated_weight,
     and the cosine between the two children (pipeline threshold is 0.90).
@@ -1174,6 +1180,12 @@ def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str) -> str:
     doc["source"] = "structural"  # distinguishes SMB from pipeline MBs ({source: 'structural'})
     doc["bridge_id"] = oid3       # explicit bridge ref — bridge is not re-parented so reverse-lookup fails
 
+    signature = author.strip()
+    if signature:
+        if len(signature) > 200:
+            return "author must be at most 200 characters."
+        doc["author"] = signature
+
     result = _coll.insert_one(doc)
     return _fmt({
         "ok": True,
@@ -1185,6 +1197,7 @@ def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str) -> str:
         "cm1_parented": cm1.get("parent_edge_id") is not None,
         "cm2_parented": cm2.get("parent_edge_id") is not None,
         "bridge_parented": bridge.get("parent_edge_id") is not None,
+        "author": doc.get("author"),
         "cm1_id": cm1_id,
         "cm2_id": cm2_id,
         "bridge_id": bridge_id,
