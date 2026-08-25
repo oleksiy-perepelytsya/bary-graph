@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaryGraph — Relationships as First-Class Vectors</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        darkbg: '#0a0d14',
+                        cardbg: '#111726',
+                        bordercolor: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+        });
+    </script>
+    <!-- MathJax for Math Formatting -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-darkbg text-slate-300 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-darkbg/80 backdrop-blur-md border-b border-bordercolor">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-brand-500 animate-pulse"></span>
+                    BaryGraph[span_0](start_span)[span_0](end_span)
+                </span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-white transition">About</a>
+                <a href="#comparison" class="hover:text-white transition">Comparison</a>
+                <a href="#use-cases" class="hover:text-white transition">Use Cases</a>
+                <a href="#proof-of-concept" class="hover:text-white transition">PoC Metrics</a>
+                <a href="#quickstart" class="hover:text-white transition">Quickstart</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://doi.org/10.5281/zenodo.20186500" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition">
+                    DOI 10.5281/zenodo.20186500[span_1](start_span)[span_1](end_span)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 border-b border-bordercolor relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-900/20 via-transparent to-transparent pointer-events-none"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-500 border border-brand-500/20 mb-6">
+                Graph-and-Vector Architecture[span_2](start_span)[span_2](end_span)
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                BaryGraph turns relationships into <span class="bg-gradient-to-r from-brand-500 to-indigo-400 bg-clip-text text-transparent">searchable objects.</span>[span_3](start_span)[span_3](end_span)
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Find useful conceptual coordinates — not only <em>what is near a query</em>, but <em>what relation might connect two otherwise distant regions of a semantic space</em>.[span_4](start_span)[span_4](end_span)
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#quickstart" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-brand-600 text-white font-semibold hover:bg-brand-500 transition shadow-lg shadow-brand-600/30">
+                    Get Started
+                </a>
+                <a href="#about" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-slate-800 text-slate-200 font-semibold border border-slate-700 hover:bg-slate-700 transition">
+                    Explore Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Idea in One Minute Section -->
+    <section id="about" class="py-20 px-6 border-b border-bordercolor max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">The Idea in One Minute</h2>
+            <p class="text-slate-400">
+                In standard vector indices, relationships often remain implicit in text[span_5](start_span)[span_5](end_span). BaryGraph makes the relation itself a first-class vector object, called a <strong>BaryEdge</strong>[span_6](start_span)[span_6](end_span).
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-4">
+                <div class="p-4 rounded-xl bg-cardbg border border-bordercolor flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center font-bold shrink-0">1</div>
+                    <div>
+                        <h3 class="text-white font-semibold mb-1">BaryEdge Creation</h3>
+                        <p class="text-sm text-slate-400">Two concepts form the children of a BaryEdge[span_7](start_span)[span_7](end_span). The edge receives a normalized composition vector of its children and context[span_8](start_span)[span_8](end_span).</p>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl bg-cardbg border border-bordercolor flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center font-bold shrink-0">2</div>
+                    <div>
+                        <h3 class="text-white font-semibold mb-1">MetaBary Triads</h3>
+                        <p class="text-sm text-slate-400">BaryEdges become children of higher-order relational triads (MetaBary)[span_9](start_span)[span_9](end_span), recursing upward into abstract relational forests[span_10](start_span)[span_10](end_span).</p>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl bg-cardbg border border-bordercolor flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center font-bold shrink-0">3</div>
+                    <div>
+                        <h3 class="text-white font-semibold mb-1">Efficient Vector Algebra</h3>
+                        <p class="text-sm text-slate-400">Higher-level triads use vector algebra on stored vectors[span_11](start_span)[span_11](end_span). No new embedding calls required for recursive steps[span_12](start_span)[span_12](end_span).</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 rounded-xl bg-slate-900 border border-slate-800 text-center">
+                    <span class="text-xs text-slate-500 uppercase tracking-widest font-mono">Leaf-Level Vector Construction[span_13](start_span)[span_13](end_span)</span>
+                    <div class="text-lg text-brand-400 mt-2">
+                        $$\mathbf{v}_{\text{edge}} = \operatorname{normalize}\left(q\mathbf{v}_1 + q\mathbf{v}_2 + (1-q)\mathbf{v}_{\text{context}}\right)$$[span_14](start_span)[span_14](end_span)
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-cardbg border border-bordercolor flex justify-center">
+                <div class="mermaid text-center">
+                flowchart LR
+                    A[Concept A vector] --> R[BaryEdge<br/>relation vector]
+                    B[Concept B vector] --> R
+                    C[Relation context] --> R
+                    R --> M[MetaBary triad]
+                    S[Another BaryEdge] --> M
+                    T[Bridge BaryEdge] --> M
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="py-20 px-6 border-b border-bordercolor bg-slate-950/50">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-white text-center mb-4">Why This Is Different</h2>
+            <p class="text-slate-400 text-center max-w-2xl mx-auto mb-12">
+                BaryGraph makes relations, and relations between relations, addressable in the same semantic space as the concepts themselves[span_15](start_span)[span_15](end_span).
+            </p>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse rounded-xl overflow-hidden border border-bordercolor">
+                    <thead>
+                        <tr class="bg-slate-900 text-white border-b border-bordercolor">
+                            <th class="p-4 font-semibold w-1/2">Flat Vector Retrieval[span_16](start_span)[span_16](end_span)</th>
+                            <th class="p-4 font-semibold w-1/2 text-brand-400">BaryGraph Retrieval[span_17](start_span)[span_17](end_span)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-bordercolor bg-cardbg text-sm text-slate-300">
+                        <tr>
+                            <td class="p-4">Finds text or concepts near a query[span_18](start_span)[span_18](end_span)</td>
+                            <td class="p-4 font-medium text-white">Finds concepts, relations, and higher-order relation patterns[span_19](start_span)[span_19](end_span)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">Similarity is mostly attached to documents[span_20](start_span)[span_20](end_span)</td>
+                            <td class="p-4 font-medium text-white">Similarity is attached to the relationship between documents[span_21](start_span)[span_21](end_span)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">Strong for direct relevance[span_22](start_span)[span_22](end_span)</td>
+                            <td class="p-4 font-medium text-white">Designed to surface bridges and intermediate structure[span_23](start_span)[span_23](end_span)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">Often returns the familiar neighborhood[span_24](start_span)[span_24](end_span)</td>
+                            <td class="p-4 font-medium text-white">Exposes an unfamiliar but inspectable coordinate[span_25](start_span)[span_25](end_span)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="py-20 px-6 border-b border-bordercolor max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-white text-center mb-4">What It Can Be Used For</h2>
+        <p class="text-slate-400 text-center max-w-2xl mx-auto mb-16">
+            BaryGraph operates as an associative atlas or "de-cliche device" for humans and AI agents alike[span_26](start_span)[span_26](end_span).
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                <h3 class="text-xl font-bold text-white mb-2">1. Cross-Domain Research</h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    Identify analogies worth checking, shared mechanisms worth formalizing, or unexpected vocabulary across disciplines[span_27](start_span)[span_27](end_span).
+                </p>
+                <div class="bg-slate-900 p-3 rounded border border-slate-800 text-xs text-slate-300">
+                    <strong>Example query:</strong> Coral reefs, legal precedent, & error-correcting codes $\rightarrow$ resilience through redundancy[span_28](start_span)[span_28](end_span).
+                </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                <h3 class="text-xl font-bold text-white mb-2">2. Lateral Ideation</h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    Provides deliberate resistance to cliched continuations in creative writing, strategy, and design work[span_29](start_span)[span_29](end_span).
+                </p>
+                <div class="bg-slate-900 p-3 rounded border border-slate-800 text-xs text-slate-300">
+                    <strong>Example query:</strong> Treating uncertainty as material for designing resilient rituals or shared decisions[span_30](start_span)[span_30](end_span).
+                </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                <h3 class="text-xl font-bold text-white mb-2">3. Agentic Semantic Resistance</h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    Acts as an external coordinate system for LLMs, preventing overly smooth or conventional first-pass generations[span_31](start_span)[span_31](end_span).
+                </p>
+                <div class="bg-slate-900 p-3 rounded border border-slate-800 text-xs text-slate-300">
+                    Gives agents relations they did not generate themselves to justify, operationalize, or test[span_32](start_span)[span_32](end_span).
+                </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                <h3 class="text-xl font-bold text-white mb-2">4. Relational Terrain Exploration</h3>
+                <p class="text-slate-400 text-sm mb-4">
+                    Corpus-agnostic architecture expandable to scientific literature, software repos, legal precedent, or biological ontologies[span_33](start_span)[span_33](end_span).
+                </p>
+                <div class="bg-slate-900 p-3 rounded border border-slate-800 text-xs text-slate-300">
+                    Current PoC utilizes English Kaikki/Wiktionary ground-truth relations[span_34](start_span)[span_34](end_span).
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof of Concept Metrics Section -->
+    <section id="proof-of-concept" class="py-20 px-6 border-b border-bordercolor bg-slate-950/50">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Current Proof of Concept</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto mb-12">
+                Built locally using the Kaikki English corpus to evaluate relational indexing at scale[span_35](start_span)[span_35](end_span).
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                    <div class="text-3xl font-extrabold text-brand-400">6.66M</div>
+                    <div class="text-xs text-slate-400 mt-2 font-medium">Total Documents[span_36](start_span)[span_36](end_span)</div>
+                </div>
+                <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                    <div class="text-3xl font-extrabold text-brand-400">1.74M</div>
+                    <div class="text-xs text-slate-400 mt-2 font-medium">Sense Nodes[span_37](start_span)[span_37](end_span)</div>
+                </div>
+                <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                    <div class="text-3xl font-extrabold text-brand-400">1.44M</div>
+                    <div class="text-xs text-slate-400 mt-2 font-medium">Word Nodes[span_38](start_span)[span_38](end_span)</div>
+                </div>
+                <div class="p-6 rounded-xl bg-cardbg border border-bordercolor">
+                    <div class="text-3xl font-extrabold text-brand-400">2.50M</div>
+                    <div class="text-xs text-slate-400 mt-2 font-medium">Leaf BaryEdges[span_39](start_span)[span_39](end_span)</div>
+                </div>
+                <div class="p-6 rounded-xl bg-cardbg border border-bordercolor col-span-2 md:col-span-1">
+                    <div class="text-3xl font-extrabold text-brand-400">~989k</div>
+                    <div class="text-xs text-slate-400 mt-2 font-medium">MetaBary Triads (L13–L10)[span_40](start_span)[span_40](end_span)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup / Quickstart Section -->
+    <section id="quickstart" class="py-20 px-6 border-b border-bordercolor max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-4">Run the Kaikki Proof of Concept</h2>
+        <p class="text-slate-400 mb-8">
+            Requirements: Python 3.11+ and Docker[span_41](start_span)[span_41](end_span).
+        </p>
+
+        <div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+            <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                <span class="text-xs font-mono text-slate-400">Terminal</span>
+                <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                </div>
+            </div>
+            <pre class="p-6 text-sm font-mono text-slate-300 overflow-x-auto leading-relaxed">
+<span class="text-slate-500"># Install dependencies[span_42](start_span)[span_42](end_span)</span>
+pip install -r requirements.txt
+
+<span class="text-slate-500"># Start MongoDB service on port 27117[span_43](start_span)[span_43](end_span)</span>
+docker compose up -d
+
+<span class="text-slate-500"># Download Kaikki dump (idempotent/resumable)[span_44](start_span)[span_44](end_span)</span>
+make download
+
+<span class="text-slate-500"># Check environment[span_45](start_span)[span_45](end_span)</span>
+make preflight
+
+<span class="text-slate-500"># Run ingestion and graph construction[span_46](start_span)[span_46](end_span)</span>
+make pipeline</pre>
+        </div>
+    </section>
+
+    <!-- Footer / Citation Section -->
+    <footer class="py-16 px-6 bg-darkbg text-slate-400 text-sm">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-b border-bordercolor pb-12 mb-8">
+            <div>
+                <h3 class="text-white font-bold mb-2">Citation</h3>
+                <p class="text-xs text-slate-400 mb-3">If you use or discuss this work, please cite the Zenodo record[span_47](start_span)[span_47](end_span):</p>
+                <div class="bg-slate-900 p-3 rounded border border-slate-800 font-mono text-xs text-slate-300 select-all">
+                    BaryGraph: Relationships as First-Class Vectors for Cross-Domain Retrieval. Zenodo. https://doi.org/10.5281/zenodo.20186500[span_48](start_span)[span_48](end_span)
+                </div>
+            </div>
+            <div class="md:text-right">
+                <h3 class="text-white font-bold mb-2">License & Status</h3>
+                <p class="text-xs text-slate-400 mb-4">
+                    BaryGraph is an experimental architecture[span_49](start_span)[span_49](end_span). Released under standard open source license[span_50](start_span)[span_50](end_span).
+                </p>
+                <a href="https://doi.org/10.5281/zenodo.20186500" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 text-white text-xs font-semibold hover:bg-slate-700 transition border border-slate-700">
+                    View Zenodo Pilot Paper[span_51](start_span)[span_51](end_span)
+                </a>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto text-center text-xs text-slate-500">
+            &copy; 2026 BaryGraph Project. Designed for hosting on GitHub Pages[span_52](start_span)[span_52](end_span).
+        </div>
+    </footer>
+
+</body>
+</html>
