@@ -25,3 +25,5 @@ pipeline_state/*.json
 .coverage
 htmlcov/
 .mcp.json
+
+scripts/cekh/config.env

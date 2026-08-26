@@ -1,5 +1,6 @@
 .PHONY: install up up-gpu down lint test test-int pipeline pipeline-dev \
-        eval-holdout eval-recall mcp-install fixture fetch-kaikki preflight clean-state
+        eval-holdout eval-recall mcp-install fixture fetch-kaikki preflight clean-state \
+        cekh-tick cekh-bot papers-fetch
 
 PY ?= python3
 
@@ -70,3 +71,12 @@ preflight:
 clean-state:
 	rm -f pipeline_state/*.json
 	rm -f data/parsed/*.jsonl
+
+cekh-tick:
+	bash scripts/cekh/tick.sh
+
+cekh-bot:
+	$(PY) -m scripts.cekh.tg_bot
+
+papers-fetch:
+	$(PY) -m scripts.fetch_papers
