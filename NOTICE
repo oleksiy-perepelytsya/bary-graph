@@ -1,0 +1,22 @@
+BaryGraph
+Copyright 2026 Oleksiy Perepelytsya
+
+This product includes software developed as part of the BaryGraph project,
+released under the Apache License, Version 2.0.
+
+Data provenance
+---------------
+The lexical substrate of this project is derived from the English Wiktionary
+dictionary corpus published by kaikki.org (https://kaikki.org). Wiktionary
+content is dual-licensed under the Creative Commons Attribution-ShareAlike
+License (CC BY-SA 3.0) and, where applicable, the GNU Free Documentation
+License; graph documents derived from that corpus inherit those terms.
+Academic-term content ingested into the graph carries its source DOI(s) in
+the document itself and via the doi_bridges provenance index.
+
+Model testimony
+---------------
+Structure MetaBarys ("SMBs"), agent-created senses/words, paper claims and
+reviews carry an `author` signature field identifying their human or model
+origin. Signed testimony reflects the views of its author, not of this
+project.

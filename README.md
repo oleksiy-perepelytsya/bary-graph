@@ -238,4 +238,9 @@ Zenodo. https://doi.org/10.5281/zenodo.20186500
 
 ## License
 
-See [LICENSE](LICENSE).
+Code is released under the [Apache License, Version 2.0](LICENSE).
+
+Dictionary content originates from English Wiktionary via kaikki.org and
+carries its licenses (CC BY-SA; GFDL where applicable) — see [NOTICE](NOTICE).
+Signed model testimony in the graph reflects its authors' views, not this
+project's.
