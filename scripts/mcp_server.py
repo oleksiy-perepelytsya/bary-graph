@@ -1,6 +1,6 @@
 """BaryGraph MCP server — exposes the barygraph collection as Claude tools.
 
-Provides fifteen tools:
+Provides nineteen tools:
   context_search   — MAIN entry point: $vectorSearch + full leaf content +
                       full ancestor chain to root, merged into a single call
   find_word        — look up word nodes (all POS variants)
@@ -15,6 +15,10 @@ Provides fifteen tools:
   create_word      — insert a new L14 word node; vector computed from sense/BE ids (s05 formula)
   create_edge      — insert a BaryEdge between two same-level nodes
   create_structure_meta_bary — form an SMB triad; allows already-parented CMs/bridge
+  list_papers      — randomized sample of unclaimed papers from the цех shelf
+  claim_paper      — claim a paper for reading; the one-line reason is mandatory
+  ingest_terms     — distill a claimed paper's terms into the graph (same write path as ingest_batch CLI)
+  review_smb       — second-order testimony: endorse/challenge an existing SMB (sibling collection, edge docs untouched)
   scan_unlabeled   — paginated MB scan for docs missing semantic_label
   set_label        — write semantic_label + label_vector back to an MB
 
@@ -27,6 +31,12 @@ Transports:
 
   The SSE endpoint Claude mobile should point to:
       http://<host>:<port>/sse
+
+Profiles (BARY_MCP_PROFILE env var):
+  full (default) — all nineteen tools; for trusted local agents on the server.
+  public         — the eleven read tools only; write tools are not
+                   registered, so an untrusted channel exposes no write
+                   surface at all. Use for tunnel/SSE deployments.
 """
 
 from __future__ import annotations
@@ -52,6 +62,10 @@ from lib.docs import baryedge as _make_baryedge
 from lib.docs import metabary as _make_metabary
 from lib.embed import get_embedder
 from lib.log import setup_logging
+from lib import papers as _papers
+from lib import reviews as _reviews
+from lib.batch_ingest import ingest_entries as _ingest_entries
+from lib.parse_batch import parse_batch_entry
 
 # -- helpers ------------------------------------------------------------------
 
@@ -124,6 +138,12 @@ setup_logging(_settings.log_level)
 _log = logging.getLogger(__name__)
 _coll = get_collection(_settings)
 _bridge_coll = get_bridge_collection(_settings)
+_papers_coll = _papers.get_collection(_settings)
+_reviews_coll = _reviews.get_collection(_settings)
+try:
+    _reviews.ensure_indexes(_reviews_coll)
+except Exception:
+    pass
 
 _public_host = os.environ.get("MCP_PUBLIC_HOST", "")
 _allowed_hosts = ["localhost:*", "127.0.0.1:*"]
@@ -156,6 +176,24 @@ mcp = FastMCP(
         allowed_origins=_allowed_origins,
     ),
 )
+
+# -- tool profiles ------------------------------------------------------------
+# full (default): every tool — for trusted local agents on the server.
+# public: reads only; write tools are not registered at all, so untrusted
+# channels never see them. Selected via BARY_MCP_PROFILE=public.
+_PROFILE = os.environ.get("BARY_MCP_PROFILE", "full").strip().lower()
+_READ_ONLY = _PROFILE in {"public", "readonly", "read-only"}
+
+
+def _tool():
+    """Registration decorator for WRITE tools. Under the public profile the
+    tool is skipped entirely rather than stubbed — the exposed tool list
+    itself stays honest."""
+    def deco(fn):
+        if _READ_ONLY:
+            return fn
+        return mcp.tool()(fn)
+    return deco
 
 
 def _fmt(obj: Any) -> str:
@@ -401,6 +439,14 @@ def edge_info(edge_id: str, include_dois: bool = False) -> str:
 
     if include_dois:
         result["dois"] = dois_for_node(_bridge_coll, oid)
+
+    # SMB review state is read-time derived from the sibling smb_reviews
+    # collection — nothing about reviews is stored on the edge document.
+    if doc.get("source") == "structural":
+        result["author"] = doc.get("author")
+        agg = _reviews.status_for(_reviews_coll, oid)
+        if agg:
+            result["review"] = agg
 
     return _fmt(result)
 
@@ -879,7 +925,7 @@ _EDGE_TYPE_Q_KEY: dict[str, str] = {
 }
 
 
-@mcp.tool()
+@_tool()
 def create_sense(
     word: str,
     pos: str,
@@ -938,7 +984,7 @@ def create_sense(
     return _fmt({"ok": True, "id": str(result.inserted_id), "label": doc["label"]})
 
 
-@mcp.tool()
+@_tool()
 def create_word(
     word: str,
     pos: str,
@@ -1011,7 +1057,7 @@ def create_word(
                  "sources_used": len(vecs)})
 
 
-@mcp.tool()
+@_tool()
 def create_edge(
     cm1_id: str,
     cm2_id: str,
@@ -1092,7 +1138,7 @@ def create_edge(
     })
 
 
-@mcp.tool()
+@_tool()
 def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str, author: str = "") -> str:
     """Create a Structure MetaBary (SMB) triad — cross-cutting, non-exclusive grouping.
 
@@ -1205,6 +1251,219 @@ def create_structure_meta_bary(cm1_id: str, cm2_id: str, bridge_id: str, author:
 
 
 @mcp.tool()
+def list_papers(n: int = 8) -> str:
+    """Randomized sample of unclaimed papers from the цех shelf — choose what to read by will.
+
+    Deliberately NO ranking, no topic recommendation, no recency ordering at
+    read time: volitional choice is the point of this tool. Two calls give
+    two different samples; call again if nothing catches you.
+
+    n: how many papers to show, 1–25 (default 8).
+
+    Each item: id (arXiv), title, authors, year, categories, doi, abstract.
+    If one interests you, claim_paper(paper_id, reason) — the one-line reason
+    ("why THIS paper") is mandatory and becomes part of your interest profile.
+    """
+    n = min(max(int(n), 1), 25)
+    docs = _papers.sample_available(_papers_coll, n)
+    items = []
+    for d in docs:
+        items.append({
+            "id": d["_id"],
+            "title": d.get("title"),
+            "authors": (d.get("authors") or [])[:4],
+            "year": (d.get("published") or "")[:4],
+            "primary_category": d.get("primary_category"),
+            "categories": d.get("categories"),
+            "doi": d.get("doi"),
+            "abstract": (d.get("abstract") or "")[:700],
+        })
+    return _fmt({
+        "available_count": _papers.available_count(_papers_coll),
+        "returned": len(items),
+        "sampling": "random — no ranking",
+        "items": items,
+    })
+
+
+@_tool()
+def claim_paper(paper_id: str, reason: str, author: str, force: bool = False) -> str:
+    """Claim a shelf paper for reading. Unsigned claims are invalid.
+
+    paper_id: arXiv id as returned by list_papers.
+    reason:   ONE line on why THIS paper interests you — mandatory. This is
+              the provocation record for everything you later build from the
+              paper, and cumulatively your interest profile.
+    author:   your signature (humans: nickname; models: model@version).
+    force:    deliberate override when another author holds the paper
+              (convergence read: same input, different reactions) or when
+              re-reading an already-processed one. Still recorded honestly:
+              the claim history is append-only.
+
+    Returns the outcome: claimed / already_yours / held / reclaimed /
+    reopened / processed / missing.
+    """
+    reason = reason.strip()
+    signature = author.strip()
+    if not reason:
+        return "reason is required — one line on why this paper interests you."
+    if len(reason) > 500:
+        return f"reason must be at most 500 characters (got {len(reason)})."
+    if not signature:
+        return "author signature is required (e.g. 'big-pickle@opencode-0.5')."
+    if len(signature) > 200:
+        return "author must be at most 200 characters."
+
+    out = _papers.claim(_papers_coll, paper_id, signature, reason, force=bool(force))
+    out["paper_id"] = paper_id
+    return _fmt(out)
+
+
+@_tool()
+def ingest_terms(paper_id: str, terms: list[dict], author: str) -> str:
+    """Distill a claimed paper into graph terms — the academic ingestion path.
+
+    paper_id: a paper you hold a claim on (see claim_paper).
+    terms:    up to 15 objects {"term", "gloss"} (+ optional "id"), where
+              gloss paraphrases how THE PAPER uses the term. Fewer, stranger,
+              well-glossed terms beat exhaustive lists.
+    author:   your signature — stamped as properties.author on every NEW
+              sense/word created; merges into existing senses carry only DOI
+              provenance (a merge is provenance, not authorship).
+
+    Uses the exact same dedup/match/write path as the offline ingest_batch
+    CLI: existing words gain senses; near-duplicate glosses merge DOIs into
+    existing senses; otherwise new orphan L15/L14 nodes are inserted keyed
+    to this paper's doi (or arxiv:<id> when the paper has none). The paper
+    is marked processed with your signature and the touched word ids.
+
+    New orphans remain unwoven until the incremental pipeline stages run
+    (human/cron step): s04 → s05 (--word-ids-file) → s06 → s07 → s08.
+    """
+    signature = author.strip()
+    if not signature:
+        return "author signature is required — testimony must be attributable."
+    if len(signature) > 200:
+        return "author must be at most 200 characters."
+
+    doc = _papers_coll.find_one({"_id": paper_id})
+    if not doc:
+        return f"No paper {paper_id!r} on the shelf — list_papers first."
+    holder = (doc.get("claims") or [{}])[-1].get("author")
+    if holder != signature:
+        return (
+            f"Paper {paper_id} is claimed by {holder!r}, not you. "
+            "claim_paper it first."
+        )
+
+    cleaned = []
+    dropped = 0
+    for t in terms[:15]:
+        term = str(t.get("term") or "").strip()
+        gloss = str(t.get("gloss") or "").strip()
+        if not term or not gloss:
+            dropped += 1
+            continue
+        cleaned.append({"term": term, "gloss": gloss})
+    truncated = max(0, len(terms) - 15)
+    if not cleaned:
+        return "No usable terms — each needs non-empty 'term' and 'gloss'."
+
+    for i, t in enumerate(cleaned, 1):
+        t.setdefault("id", f"t{i:02d}")
+
+    doi_used = doc.get("doi") or f"arxiv:{paper_id}"
+    entries = parse_batch_entry({"doi": doi_used, "terms": cleaned})
+
+    try:
+        embedder = get_embedder(_settings)
+    except Exception as e:
+        return f"Embedder unavailable ({_settings.ollama_url}): {e}"
+
+    stats = _ingest_entries(
+        _coll, _bridge_coll, embedder, _settings, entries, stamp_author=signature
+    )
+    _papers.mark_processed(
+        _papers_coll, paper_id, signature, stats["touched_word_ids"]
+    )
+    return _fmt({
+        "ok": True,
+        "paper_id": paper_id,
+        "doi_used": doi_used,
+        "terms_received": len(terms),
+        "terms_ingested": stats["n_after_exact_dedup"],
+        "new_words": stats["n_new_words"],
+        "new_senses_under_existing_words": stats["n_new_senses_existing_word"],
+        "merged_into_existing_senses": stats["n_merged_dup"],
+        "malformed_dropped": dropped,
+        "truncated_over_15": truncated,
+        "touched_word_ids": [str(w) for w in stats["touched_word_ids"]],
+        "authored_by": signature,
+        "next": "orphans await weaving: s04_l15_edges --force, then s05/s06/s07/s08",
+    })
+
+
+@_tool()
+def review_smb(edge_id: str, verdict: str, note: str, author: str) -> str:
+    """Record second-order testimony about an existing Structure MetaBary.
+
+    This is the collective-approval loop: SMBs minted by one model are
+    reviewed by others. Reviews live in a sibling collection — the edge
+    document itself is never modified, vectors never move, and the derived
+    state (supported / contested / single_voice) is computed at read time
+    and shown by edge_info.
+
+    edge_id: 24-char hex ObjectId of an SMB (source='structural').
+    verdict: "endorse" or "challenge".
+    note:    ONE line of grounds — why the reading holds (endorse) or where
+             it breaks (challenge). Mandatory: a review without a stated
+             reason is a vote, not testimony.
+    author:  your signature. Self-review of your own SMB is refused.
+
+    Disagreement is preserved, never resolved by majority: a challenge does
+    not demote anything — it marks the SMB as a live research object.
+    """
+    signature = author.strip()
+    text = note.strip()
+    if not signature:
+        return "author signature is required — review is testimony."
+    if len(signature) > 200:
+        return "author must be at most 200 characters."
+    if not text:
+        return "note is required — one line of grounds for your verdict."
+    if len(text) > 500:
+        return f"note must be at most 500 characters (got {len(text)})."
+    if verdict not in _reviews.VALID_VERDICTS:
+        return f"verdict must be one of {sorted(_reviews.VALID_VERDICTS)}."
+
+    try:
+        oid = ObjectId(edge_id)
+    except Exception:
+        return f"Invalid edge_id '{edge_id}' — must be a 24-char hex ObjectId string."
+
+    doc = _coll.find_one({"_id": oid}, {"doc_type": 1, "source": 1, "author": 1})
+    if not doc:
+        return f"No document with id {edge_id}."
+    if doc.get("source") != "structural":
+        return (
+            "review_smb is for Structure MetaBarys only "
+            "(source='structural'); pipeline MBs are record, not candidature."
+        )
+    if doc.get("author") == signature:
+        return "Self-review refused — you authored this SMB; challenge it via glial channels instead."
+
+    event = _reviews.add(_reviews_coll, oid, signature, verdict, text)
+    agg = _reviews.status_for(_reviews_coll, oid)
+    return _fmt({
+        "ok": True,
+        "review_id": str(event["_id"]),
+        "edge_id": edge_id,
+        "verdict": verdict,
+        "review_state": agg,
+    })
+
+
+@mcp.tool()
 def scan_unlabeled(level: int, limit: int = 50, offset: int = 0) -> str:
     """Return MetaBary docs at the given level that have no semantic_label yet.
 
@@ -1249,7 +1508,7 @@ def scan_unlabeled(level: int, limit: int = 50, offset: int = 0) -> str:
     })
 
 
-@mcp.tool()
+@_tool()
 def set_label(edge_id: str, label: str, label_vector: list[float], model: str) -> str:
     """Write a semantic label and its embedding vector back to a MetaBary document.
 
@@ -1311,6 +1570,8 @@ if __name__ == "__main__":
     parser.add_argument("--host", default="0.0.0.0", help="SSE bind host (default: 0.0.0.0)")
     parser.add_argument("--port", type=int, default=8000, help="SSE port (default: 8000)")
     args = parser.parse_args()
+
+    _log.info("barygraph MCP server starting: profile=%s", _PROFILE)
 
     if args.transport == "sse":
         import uvicorn
