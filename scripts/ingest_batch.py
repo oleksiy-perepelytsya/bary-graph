@@ -18,43 +18,29 @@ ones through the same find_existing_word_candidates/near_duplicate_sense DB
 lookups used for anything already in the graph. This is why passing many
 files to one invocation (recommended for the initial corpus load) gets
 full-context dedup "for free" — there's exactly one ingestion mechanism,
-used at any batch size. Caveat: under --dry-run nothing is written, so
-duplicates that only appear later in the *same* dry-run invocation won't be
-cross-referenced against each other — dry-run merge counts are a lower
-bound.
+used at any batch size. The write path itself lives in lib.batch_ingest,
+shared verbatim with the цех ingest_terms MCP tool. Caveat: under --dry-run
+nothing is written, so duplicates that only appear later in the *same*
+dry-run invocation won't be cross-referenced against each other — dry-run
+merge counts are a lower bound.
 """
 
 from __future__ import annotations
 
 import argparse
-import dataclasses
 import json
 from collections.abc import Sequence
-from datetime import datetime, timezone
 from pathlib import Path
 
-import numpy as np
-
 from lib import doi_bridge
-from lib.batch_merge import (
-    dedupe_exact,
-    find_existing_word_candidates,
-    near_duplicate_sense,
-    resolve_pos,
-)
+from lib.batch_ingest import ingest_entries
 from lib.config import Settings
 from lib.db import get_collection
-from lib.docs import sense_node, word_node
 from lib.embed import get_embedder
 from lib.log import get_logger, setup_logging
 from lib.parse_batch import parse_batch_file
 
 WORD_IDS_FILENAME = "batch_word_ids.json"
-
-
-def _batched(seq, n):
-    for i in range(0, len(seq), n):
-        yield seq[i : i + n]
 
 
 def make_parser() -> argparse.ArgumentParser:
@@ -82,82 +68,37 @@ def run(argv: Sequence[str] | None = None) -> None:
         entries.extend(parse_batch_file(f))
     log.info("parsed %d term occurrences from %d file(s)", len(entries), len(args.files))
 
-    entries = dedupe_exact(entries)
-    log.info("after exact dedup: %d unique (term, gloss) pairs", len(entries))
-
     embedder = get_embedder(settings)
-    vectors: list[np.ndarray] = []
-    for chunk in _batched([ps.embed_text for _, ps in entries], settings.embed_batch_size):
-        vectors.extend(embedder.embed(chunk))
 
-    now = datetime.now(timezone.utc)
-    n_new_words = n_new_senses_existing_word = n_merged_dup = 0
-    touched_word_ids: list = []
+    if args.dry_run:
+        from lib.batch_merge import dedupe_exact
 
-    for (pw, ps), vec in zip(entries, vectors, strict=True):
-        candidates = find_existing_word_candidates(coll, ps.word)
-
-        if not candidates:
-            if args.dry_run:
-                n_new_words += 1
-                continue
-            sense_doc = sense_node(ps, vec)
-            sense_res = coll.insert_one(sense_doc)
-            word_doc = word_node(pw)
-            word_res = coll.insert_one(word_doc)
-            doi_bridge.register(bridge_coll, ps.doi, sense_res.inserted_id)
-            doi_bridge.register(bridge_coll, ps.doi, word_res.inserted_id)
-            touched_word_ids.append(word_res.inserted_id)
-            n_new_words += 1
-            continue
-
-        target = resolve_pos(coll, vec, candidates) or candidates[0]
-        word, pos = target["properties"]["word"], target["properties"]["pos"]
-
-        dup_id = near_duplicate_sense(coll, word, pos, vec, settings.batch_dup_threshold)
-        if dup_id is not None:
-            if not args.dry_run:
-                coll.update_one(
-                    {"_id": dup_id},
-                    {
-                        "$addToSet": {"properties.doi": {"$each": ps.doi}},
-                        "$set": {"updated_at": now},
-                    },
-                )
-                doi_bridge.propagate_up_chain(bridge_coll, coll, dup_id, ps.doi)
-                doi_bridge.propagate_up_chain(bridge_coll, coll, target["_id"], ps.doi)
-            n_merged_dup += 1
-            continue
-
-        if args.dry_run:
-            n_new_senses_existing_word += 1
-            continue
-        ps2 = dataclasses.replace(ps, word=word, pos=pos)
-        sense_doc = sense_node(ps2, vec)
-        sense_res = coll.insert_one(sense_doc)
-        coll.update_one(
-            {"_id": target["_id"]},
-            {
-                "$push": {"properties.sense_ids": ps2.sense_id},
-                "$inc": {"surface": 1},
-                "$set": {"updated_at": now},
-            },
-        )
-        doi_bridge.register(bridge_coll, ps2.doi, sense_res.inserted_id)
-        touched_word_ids.append(target["_id"])
-        n_new_senses_existing_word += 1
-
-    log.info(
-        "done: %d new words, %d new senses under existing words, %d merged into "
-        "near-duplicate existing senses",
-        n_new_words, n_new_senses_existing_word, n_merged_dup,
-    )
-
-    if not args.dry_run and touched_word_ids:
+        entries = dedupe_exact(entries)
+        n_new_words = n_merged_dup = 0
+        log.info("after exact dedup: %d unique (term, gloss) pairs", len(entries))
+        log.info("--dry-run: no writes; merge counts unavailable without embedding pass")
+        touched_word_ids: list = []
         out_path = Path(settings.pipeline_state_dir) / WORD_IDS_FILENAME
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(json.dumps([str(i) for i in set(touched_word_ids)]))
-        log.info("wrote %d touched word ids to %s", len(set(touched_word_ids)), out_path)
+    else:
+        stats = ingest_entries(coll, bridge_coll, embedder, settings, entries)
+        log.info(
+            "after exact dedup: %d unique (term, gloss) pairs",
+            stats["n_after_exact_dedup"],
+        )
+        log.info(
+            "done: %d new words, %d new senses under existing words, %d merged into "
+            "near-duplicate existing senses",
+            stats["n_new_words"], stats["n_new_senses_existing_word"], stats["n_merged_dup"],
+        )
+        touched_word_ids = stats["touched_word_ids"]
+        n_new_words = stats["n_new_words"]
+        n_merged_dup = stats["n_merged_dup"]
+
+        if touched_word_ids:
+            out_path = Path(settings.pipeline_state_dir) / WORD_IDS_FILENAME
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(json.dumps([str(i) for i in set(touched_word_ids)]))
+            log.info("wrote %d touched word ids to %s", len(set(touched_word_ids)), out_path)
 
     print()
     print("Next, weave the new orphans into the graph (safe to re-run; only")
