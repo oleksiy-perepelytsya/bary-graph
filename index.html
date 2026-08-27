@@ -1,87 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BaryGraph | Associative Atlas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BaryGraph — relationships as searchable objects</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#121724; --line:#242c40;
+    --text:#e6ebf5; --muted:#9aa6bf;
+    --blue:#5b8cff; --red:#ff6b6b; --accent:#7de2d1;
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;}
+  a{color:var(--blue)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  header{padding:80px 0 64px;border-bottom:1px solid var(--line);
+    background:radial-gradient(900px 400px at 20% -10%,rgba(91,140,255,.20),transparent 70%),
+               radial-gradient(700px 380px at 85% 0%,rgba(255,107,107,.14),transparent 70%);}
+  .logo {
+    max-width: 180px;
+    height: auto;
+    display: block;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 4px 12px rgba(91, 140, 255, 0.2));
+  }
+  .badge{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--line);border-radius:99px;padding:6px 14px;margin-bottom:22px}
+  h1{font-size:clamp(38px,6vw,68px);line-height:1.05;margin:0 0 18px;letter-spacing:-.02em}
+  h1 span{background:linear-gradient(90deg,var(--blue),var(--accent));-webkit-background-clip:text;
+    background-clip:text;color:transparent}
+  .lede{font-size:clamp(18px,2.3vw,22px);color:var(--muted);max-width:720px}
+  .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:600}
+  .btn.primary{background:var(--blue);color:#06090f}
+  .btn.ghost{border:1px solid var(--line);color:var(--text)}
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 12px;letter-spacing:-.01em}
+  .sub{color:var(--muted);max-width:760px;margin:0 0 34px}
+  .grid{display:grid;gap:20px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .card h3{margin:0 0 10px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .node{border-radius:10px;padding:12px 16px;font-size:14px;text-align:center;border:1px solid var(--line)}
+  .n-c{background:#161d2e}
+  .n-e{background:rgba(91,140,255,.16);border-color:var(--blue)}
+  .n-m{background:rgba(255,107,107,.14);border-color:var(--red)}
+  .arrow{color:var(--muted)}
+  .eq{background:#0f1420;border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:#cfe0ff;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#161d2e;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  blockquote{margin:0;color:var(--text)}
+  .quote{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);
+    border-radius:12px;padding:24px}
+  .quote p{margin:0 0 14px;font-size:16px}
+  .who{color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+  .stat .num{font-size:clamp(26px,3.6vw,38px);font-weight:700;color:var(--accent)}
+  .stat .lbl{color:var(--muted);font-size:14px}
+  code{background:#0f1420;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px}
+  .warn{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.35);
+    border-radius:14px;padding:24px}
+  footer{padding:56px 0 80px;color:var(--muted);font-size:14px}
+
+ .logo {
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 12px rgba(125, 226, 209, 0.25));
+}
+ @media(max-width:860px){.g3,.g2,.stats{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
-    <!-- Hero Section -->
-    <header class="bg-indigo-900 text-white py-24 px-6">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl font-bold mb-4 tracking-tight">BaryGraph</h1>
-            <p class="text-2xl font-light text-indigo-200 mb-6">BaryGraph turns relationships into searchable objects[span_0](start_span)[span_0](end_span).</p>
-            <p class="text-lg text-indigo-100 leading-relaxed max-w-3xl">
-                It is a graph-and-vector architecture for finding useful conceptual coordinates: not only what is near a query, but what relation might connect two otherwise distant regions of a semantic space[span_1](start_span)[span_1](end_span).
-            </p>
-        </div>
-    </header>
+<body>
 
-    <!-- Architecture Section -->
-    <main class="max-w-4xl mx-auto py-16 px-6">
-        <section class="mb-20">
-            <h2 class="text-3xl font-bold mb-6 text-slate-900 border-b pb-2">The Idea in One Minute</h2>
-            <p class="mb-6 text-lg leading-relaxed">
-                In an ordinary knowledge graph, nodes are usually the first-class objects and edges are lightweight annotations[span_2](start_span)[span_2](end_span). BaryGraph makes the relation itself a first-class vector object, called a BaryEdge[span_3](start_span)[span_3](end_span).
-            </p>
-            <ul class="list-disc pl-6 mb-8 space-y-3 text-lg">
-                <li>Two concepts are the children of a BaryEdge[span_4](start_span)[span_4](end_span).</li>
-                <li>The BaryEdge receives its own stored vector, which is a weighted, normalized composition of the child vectors and relation context[span_5](start_span)[span_5](end_span).</li>
-                <li>BaryEdges can become children of higher-order relational objects, forming MetaBary triads[span_6](start_span)[span_6](end_span).</li>
-                <li>Those triads can recurse upward, producing a forest of increasingly abstract relational patterns[span_7](start_span)[span_7](end_span).</li>
-            </ul>
-            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
-                <p class="italic text-indigo-900">
-                    The current Kaikki proof of concept contains approximately 6.66 million documents, including 1.74M sense nodes and 2.50M leaf-level BaryEdges[span_8](start_span)[span_8](end_span).
-                </p>
-            </div>
-        </section>
+<header>
+  <div class="wrap">
+    <img src="barygraph_logo_inverted.pnge" alt="BaryGraph Logo" class="logo">
+    <div class="badge">Proof of concept · Kaikki / Wiktionary build</div>
+    <h1>BaryGraph turns <span>relationships</span> into searchable objects.</h1>
+    <p class="lede">A graph-and-vector architecture for finding useful conceptual coordinates — not only what is
+      near a query, but what relation might connect two otherwise distant regions of a semantic space.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://doi.org/10.5281/zenodo.20186500">Read the pilot paper (DOI)</a>
+      <a class="btn ghost" href="#how">How it works</a>
+    </div>
+  </div>
+</header>
 
-        <!-- Feedback Section -->
-        <section>
-            <h2 class="text-3xl font-bold mb-10 text-slate-900 border-b pb-2">Field Reports & Explorations</h2>
-            <div class="space-y-8">
-                
-                <!-- Feedback 1: Boredom -->
-                <article class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">The Boredom & Ritual Probe</h3>
-                    <p class="mb-4 leading-relaxed">
-                        A query explored whether boredom is a prerequisite for the invention of ritual, art, and mathematics[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span). The graph refused to let boredom be an absence, pairing it with overstimulation and "stuplime[span_11](start_span)[span_12](start_span)"[span_11](end_span)[span_12](end_span). It framed boredom as input without gradient[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span).
-                    </p>
-                    <p class="leading-relaxed">
-                        Between the concepts of ritualizing and ritualistic, the graph supplied bridges like "cadenced," "foot-tapping," "mensural," and "time step[span_15](start_span)[span_16](start_span)"[span_15](end_span)[span_16](end_span). This generated the hypothesis that undifferentiated time creates an impulse to impose measure, with ritual and number as the exports of that measure[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span). Additionally, a contradictory edge between an "inactigram" and memory/blank suggested that recorded inactivity is no longer blank[span_19](start_span)[span_19](end_span)[span_20](start_span)[span_20](end_span).
-                    </p>
-                </article>
+<section>
+  <div class="wrap">
+    <h2>Most retrieval returns an answer. This returns somewhere to go.</h2>
+    <p class="sub">BaryGraph is built for the moment when a researcher, writer, agent, or tool needs a
+      <strong>productive unfamiliar adjacency</strong> — a connection that is not yet a conclusion, but gives
+      thinking a new direction.</p>
+    <div class="grid g3">
+      <div class="card"><h3>Relations are first-class</h3>
+        <p>Two concepts become the children of a <strong>BaryEdge</strong>, which receives its own stored vector.</p></div>
+      <div class="card"><h3>Relations of relations</h3>
+        <p>BaryEdges become children of higher-order <strong>MetaBary</strong> triads, recursing upward into a relational forest.</p></div>
+      <div class="card"><h3>All of it is retrievable</h3>
+        <p>Nodes, edges, and triads live in one index, reachable by ordinary nearest-neighbor search.</p></div>
+    </div>
+  </div>
+</section>
 
-                <!-- Feedback 2: Community Uncertainty -->
-                <article class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Designing for Uncertainty</h3>
-                    <p class="mb-4 leading-relaxed">
-                        Another probe asked how a community can treat uncertainty as a material for designing resilient rituals, institutions, or shared decisions[span_21](start_span)[span_21](end_span). A surprising bridge linked community and resistance with early-stage indirect microbiome modulation[span_22](start_span)[span_22](end_span).
-                    </p>
-                    <p class="leading-relaxed">
-                        This transposed into a practical design principle: under uncertainty, a community can run small, reversible interventions that change conditions rather than immediately committing to a permanent institution[span_23](start_span)[span_23](end_span). The graph acted as an associative instrument that provided a conceptual coordinate for models and users to operationalize[span_24](start_span)[span_24](end_span).
-                    </p>
-                </article>
+<section id="how">
+  <div class="wrap">
+    <h2>The idea in one minute</h2>
+    <p class="sub">The name borrows from the barycenter in physics: the shared center generated by two bodies is
+      treated as a real location with properties of its own. BaryGraph applies that intuition to semantic relations.</p>
 
-                <!-- Feedback 3: Redundancy -->
-                <article class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Resilience Through Redundancy</h3>
-                    <p class="mb-4 leading-relaxed">
-                        A final test spanned coral reefs, legal precedent, and error-correcting codes to explore resilience through redundancy[span_25](start_span)[span_25](end_span). The graph surfaced several senses of redundancy, including ecological functional overlap, duplicate components, repeated message structure, and legally removable surplus[span_26](start_span)[span_26](end_span).
-                    </p>
-                    <p class="leading-relaxed">
-                        A weak bridge involving the phrase "turn on" suggested that protective redundancy is often latent until a primary failure activates it[span_27](start_span)[span_27](end_span). The graph distinguished between useless repetition and diverse alternatives that fail independently, which can preserve a system's function[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span).
-                    </p>
-                </article>
+    <div class="flow">
+      <div class="node n-c">Concept A<br>vector</div>
+      <span class="arrow">→</span>
+      <div class="node n-e">BaryEdge<br>a retrievable relation vector</div>
+      <span class="arrow">←</span>
+      <div class="node n-c">Concept B<br>vector</div>
+      <span class="arrow">→</span>
+      <div class="node n-m">MetaBary<br>higher-order pattern</div>
+    </div>
 
-            </div>
-        </section>
-    </main>
+    <p class="sub" style="margin-top:28px">At the leaf level, a simplified construction is:</p>
+    <div class="eq">v_edge = normalize( q·v₁ + q·v₂ + (1 − q)·v_context )</div>
+    <p class="sub" style="margin-top:16px">At higher levels, construction is algebra on vectors already stored in
+      the graph — no new embedding call is required for each recursive step.</p>
+  </div>
+</section>
 
-    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
-        <p>BaryGraph Proof of Concept | Conceptual Coordinates for Models and Humans</p>
-    </footer>
+<section>
+  <div class="wrap">
+    <h2>Why this is different</h2>
+    <table>
+      <tr><th>Flat vector retrieval</th><th>BaryGraph retrieval</th></tr>
+      <tr><td>Finds text or concepts near a query</td><td>Finds concepts, relations, and higher-order relation patterns</td></tr>
+      <tr><td>Similarity is mostly attached to documents</td><td>Similarity can be attached to the relationship between documents</td></tr>
+      <tr><td>Strong for direct relevance</td><td>Designed to surface bridges and intermediate structure</td></tr>
+      <tr><td>Often returns the familiar neighborhood</td><td>Can expose an unfamiliar but inspectable coordinate</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What models said after testing it</h2>
+    <p class="sub">Four independent language models probed the Kaikki proof of concept with their own freestyle
+      questions and wrote up what came back. These are descriptions of an interaction pattern, not benchmark claims.</p>
+    <div class="grid g2">
+      <div class="quote">
+        <blockquote><p>“It behaves more like an <strong>associative atlas</strong> than a question-answering
+        system. It found a genuine invariant across unrelated domains.”</p></blockquote>
+        <div class="who">Tester probing coral reefs · legal precedent · error-correcting codes</div>
+      </div>
+      <div class="quote">
+        <blockquote><p>“The graph <strong>refused to let boredom be an absence.</strong> It paired it with
+        <code>overstimulation</code> on the same axis. That reframed my whole question — a much better
+        hypothesis than the one I started with.”</p></blockquote>
+        <div class="who">Tester probing boredom · ritual · mathematics</div>
+      </div>
+      <div class="quote">
+        <blockquote><p>“A weak lexical bridge — <code>turn on</code> — prompted a stronger functional reading:
+        redundancy is often <strong>latent until activated</strong>.”</p></blockquote>
+        <div class="who">On the value of an apparently noisy edge</div>
+      </div>
+      <div class="quote">
+        <blockquote><p>“A <strong>de-cliché device</strong>.”</p></blockquote>
+        <div class="who">On lateral ideation for writing and design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Examples from the proof of concept</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Measure between ritual and number</h3>
+        <p>A probe around boredom, ritual and counting returned <code>mensural</code>, <code>metrical</code>,
+        <code>cadenced</code>, <code>foot-tapping</code>, <code>time step</code>. The graph supplied the
+        unexpected hinge: <strong>meter</strong>.</p></div>
+      <div class="card"><h3>Redundancy as latent resilience</h3>
+        <p>Ecological overlap, duplicate components, repeated message structure and removable legal surplus
+        converged on one distinction: <strong>useful redundancy = multiplicity + failure independence</strong>.</p></div>
+      <div class="card"><h3>Networks across substrates</h3>
+        <p>Mycelial networks and internet architecture surfaced <code>anastomosis</code> beside interconnect
+        terms — precise vocabulary for asking which topological properties are substrate-independent.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The current build</h2>
+    <p class="sub">The Kaikki English proof of concept, built and queried locally.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">6.66M</div><div class="lbl">documents indexed</div></div>
+      <div class="stat"><div class="num">1.74M</div><div class="lbl">sense nodes</div></div>
+      <div class="stat"><div class="num">2.50M</div><div class="lbl">leaf BaryEdges</div></div>
+      <div class="stat"><div class="num">~989k</div><div class="lbl">MetaBary triads (L13–L10)</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How to think about results</h2>
+    <div class="grid g2" style="margin-bottom:24px">
+      <div class="card"><h3>1. Retrieve a coordinate</h3>
+        <p>Ask an open question. Inspect nodes, BaryEdges, MetaBary structure, parent chains — and the
+        apparently weak bridges.</p></div>
+      <div class="card"><h3>2. Do the real work</h3>
+        <p>Use domain knowledge, sources, experiments, formal models or human judgment to decide what that
+        coordinate is worth.</p></div>
+    </div>
+    <div class="warn">
+      <h3 style="margin:0 0 10px">What BaryGraph does not claim</h3>
+      <p style="margin:0;color:var(--muted)">A retrieved bridge is not asserted to be true, causal, or
+      explanatory. A BaryGraph result is a <strong>prompt for investigation, not a proof</strong>. Do not use it
+      alone when you need a verified fact, a causal conclusion, or a high-stakes recommendation in scientific,
+      clinical, legal or operational settings.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    BaryGraph · Kaikki English proof of concept ·
+    <a href="https://doi.org/10.5281/zenodo.20186500">10.5281/zenodo.20186500</a><br>
+    Architecture is corpus-agnostic. Each application needs its own evaluation.
+  </div>
+</footer>
+
 </body>
 </html>
