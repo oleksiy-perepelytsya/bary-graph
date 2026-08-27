@@ -39,7 +39,7 @@ flowchart LR
 At the leaf level, a simplified construction is:
 
 $$
-\mathbf{v}_{\text{edge}} = \operatorname{normalize}\left(q\mathbf{v}_1 + q\mathbf{v}_2 + (1-q)\mathbf{v}_{\text{context}}\right)
+\mathbf{v}_{\text{edge}} = \text{normalize}\!\left(q\,\mathbf{v}_1 + q\,\mathbf{v}_2 + (1-q)\,\mathbf{v}_{\text{context}}\right)
 $$
 
 At higher levels, construction is algebra on vectors already stored in the graph. No new embedding call is required for every recursive step.
