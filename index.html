@@ -45,13 +45,7 @@
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
   .card h3{margin:0 0 10px;font-size:18px}
   .card p{margin:0;color:var(--muted);font-size:15px}
-  .flow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
-    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
-  .node{border-radius:10px;padding:12px 16px;font-size:14px;text-align:center;border:1px solid var(--line)}
-  .n-c{background:#161d2e}
-  .n-e{background:rgba(91,140,255,.16);border-color:var(--blue)}
-  .n-m{background:rgba(255,107,107,.14);border-color:var(--red)}
-  .arrow{color:var(--muted)}
+  .schema{max-width:100%;width:min(760px,100%);height:auto;display:block;margin:0 auto}
   .eq{background:#0f1420;border:1px solid var(--line);border-radius:12px;padding:18px 20px;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:#cfe0ff;overflow-x:auto}
   table{width:100%;border-collapse:collapse;background:var(--panel);
@@ -113,10 +107,10 @@
     <div class="grid g2">
       <div class="card"><h3>Relations are first-class</h3>
         <p>Two concepts become the children of a <strong>BaryEdge</strong>, which receives its own stored vector.</p></div>
-      <div class="card"><h3>Contradictions are coordinates</h3>
-        <p>Synonyms show proximity. Opposing terms create direction. BaryGraph preserves some apparent mismatches as navigational tension worth inspecting.</p></div>
       <div class="card"><h3>Relations of relations</h3>
         <p>BaryEdges become children of higher-order <strong>MetaBary</strong> triads, recursing upward into a relational forest.</p></div>
+      <div class="card"><h3>Contradictions are coordinates</h3>
+        <p>Synonyms show proximity. Opposing terms create direction. BaryGraph preserves some apparent mismatches as navigational tension worth inspecting.</p></div>
       <div class="card"><h3>All of it is retrievable</h3>
         <p>Nodes, edges, contradictions, and triads live in one index, reachable by ordinary nearest-neighbor search.</p></div>
     </div>
@@ -130,15 +124,8 @@
       treated as a real location with properties of its own. BaryGraph applies that intuition to semantic relations.
       It gives models a space containing not only points of similarity, but relational directions and opposing terms.</p>
 
-    <div class="flow">
-      <div class="node n-c">Concept A<br>vector</div>
-      <span class="arrow">→</span>
-      <div class="node n-e">BaryEdge<br>a retrievable relation vector</div>
-      <span class="arrow">←</span>
-      <div class="node n-c">Concept B<br>vector</div>
-      <span class="arrow">→</span>
-      <div class="node n-m">MetaBary<br>higher-order pattern</div>
-    </div>
+    <!-- MetaBary = 2 children from L - 2 + 1 bridge from L - 1 -->
+    <img src="bary-graph-schema.png" alt="BaryGraph schema" class="schema">
 
     <p class="sub" style="margin-top:28px">At the leaf level, a simplified construction is:</p>
     <div class="eq">v_edge = normalize( q·v₁ + q·v₂ + (1 − q)·v_context )</div>
