@@ -1,0 +1,216 @@
+[
+  {
+    "problem": "carbon_capture",
+    "use_case_name": "Carbon Capture",
+    "terms_must_include": [
+      "amine",
+      "carbon capture",
+      "low temperature",
+      "solvent regeneration"
+    ],
+    "terms_exclude": [],
+    "queries": [
+      {
+        "qid": "statement",
+        "text": "Amine-based carbon capture technologies currently require high temperatures and incur high input chemical costs and high clean-up costs."
+      },
+      {
+        "qid": "objective",
+        "text": "Find amine-based carbon capture approaches that operate at lower temperatures without high chemical input or clean-up costs."
+      },
+      {
+        "qid": "must_terms",
+        "text": "amine, carbon capture, low temperature, solvent regeneration"
+      },
+      {
+        "qid": "rephrase_1",
+        "text": "Approaches and techniques relevant to: Find amine-based carbon capture approaches that operate at lower temperatures without high chemical input or clean-up costs."
+      },
+      {
+        "qid": "rephrase_2",
+        "text": "Research on: Amine-based carbon capture technologies currently require high temperatures and incur high input chemical costs and high clean-up costs."
+      }
+    ]
+  },
+  {
+    "problem": "cement_binders",
+    "use_case_name": "Low-carbon cement binders",
+    "terms_must_include": [
+      "geopolymer",
+      "calcined clay",
+      "LC3",
+      "alkali-activated"
+    ],
+    "terms_exclude": [
+      "dental cement",
+      "bone cement"
+    ],
+    "queries": [
+      {
+        "qid": "statement",
+        "text": "Reduce CO2 from clinker in structural concrete."
+      },
+      {
+        "qid": "objective",
+        "text": "Find alternative binder chemistries at TRL 4–8 cutting embodied carbon >50%."
+      },
+      {
+        "qid": "must_terms",
+        "text": "geopolymer, calcined clay, LC3, alkali-activated"
+      },
+      {
+        "qid": "rephrase_1",
+        "text": "Approaches and techniques relevant to: Find alternative binder chemistries at TRL 4–8 cutting embodied carbon >50%."
+      },
+      {
+        "qid": "rephrase_2",
+        "text": "Research on: Reduce CO2 from clinker in structural concrete."
+      }
+    ]
+  },
+  {
+    "problem": "ner",
+    "use_case_name": "Named Entity Recognition",
+    "terms_must_include": [
+      "Named Entity Recognition",
+      "NER",
+      "entity linking",
+      "disambiguation"
+    ],
+    "terms_exclude": [
+      "medical NER",
+      "clinical NER",
+      "biomedical entity recognition",
+      "gene entity recognition"
+    ],
+    "queries": [
+      {
+        "qid": "statement",
+        "text": "We operate a market intelligence platform and need NER and entity disambiguation tools, models, and techniques that work well on news-like text for entity types including companies, places, people, and products."
+      },
+      {
+        "qid": "objective",
+        "text": "Improve Precision, Recall, and F1 scores for named entity recognition and disambiguation on news-style content across entity types such as companies, places, people, and products."
+      },
+      {
+        "qid": "must_terms",
+        "text": "Named Entity Recognition, NER, entity linking, disambiguation"
+      },
+      {
+        "qid": "rephrase_1",
+        "text": "Approaches and techniques relevant to: Improve Precision, Recall, and F1 scores for named entity recognition and disambiguation on news-style content across entity types such as companies, places, people, and products."
+      },
+      {
+        "qid": "rephrase_2",
+        "text": "Research on: We operate a market intelligence platform and need NER and entity disambiguation tools, models, and techniques that work well on news-like text for entity types including companies, places, people, and products."
+      }
+    ]
+  },
+  {
+    "problem": "soil_microbiome",
+    "use_case_name": "High quality microbial and fungal community in Soil",
+    "terms_must_include": [
+      "soil microbial community",
+      "soil fungal community",
+      "soil health",
+      "crop production",
+      "heat stress resistance",
+      "flood stress resistance",
+      "soil microbial injection",
+      "soil fungal injection",
+      "soil microbial engineering",
+      "soil fungal engineering"
+    ],
+    "terms_exclude": [
+      "human microbiome"
+    ],
+    "queries": [
+      {
+        "qid": "statement",
+        "text": "Farmers across a range of scales (from private gardens to large farms) need better understanding, engineering, and injection of soil microbial and fungal communities in order to improve soil quality, crop production, and resilience to extreme weather events such as heat and flooding."
+      },
+      {
+        "qid": "objective",
+        "text": "Identify research on microbial and fungal community management strategies that enhance soil health, crop productivity, and resistance to extreme heat and flooding stress."
+      },
+      {
+        "qid": "must_terms",
+        "text": "soil microbial community, soil fungal community, soil health, crop production, heat stress resistance, flood stress resistance, soil microbial injection, soil fungal injection, soil microbial engineering, soil fungal engineering"
+      },
+      {
+        "qid": "rephrase_1",
+        "text": "Approaches and techniques relevant to: Identify research on microbial and fungal community management strategies that enhance soil health, crop productivity, and resistance to extreme heat and flooding stress."
+      },
+      {
+        "qid": "rephrase_2",
+        "text": "Research on: Farmers across a range of scales (from private gardens to large farms) need better understanding, engineering, and injection of soil microbial and fungal communities in order to improve soil quality, crop production, and resilience to extreme weather events such as heat and flooding."
+      }
+    ]
+  },
+  {
+    "problem": "solar_leo",
+    "use_case_name": "Solar Cells for Low Earth Orbit Satellites",
+    "terms_must_include": [
+      "perovskite solar cells",
+      "silicon-based solar cells"
+    ],
+    "terms_exclude": [],
+    "queries": [
+      {
+        "qid": "statement",
+        "text": "Solar cells for low earth orbit satellites must sustain high conversion efficiency under the radiation and thermal cycling conditions of that environment, and current incumbents leave room for improvement on both counts. Perovskite solar cells and silicon-based solar cells represent distinct paths toward that goal, but neither has yet displaced the other, and relevant advances continue to appear across the wider field."
+      },
+      {
+        "qid": "objective",
+        "text": "Scout perovskite solar cells and silicon-based solar cells — as well as the broader review literature on solar cells for low earth orbit satellites — to identify approaches that improve conversion efficiency and long-term stability beyond what incumbent technologies currently deliver, across maturity levels from early proof of concept through to flight-ready systems."
+      },
+      {
+        "qid": "must_terms",
+        "text": "perovskite solar cells, silicon-based solar cells"
+      },
+      {
+        "qid": "rephrase_1",
+        "text": "Approaches and techniques relevant to: Scout perovskite solar cells and silicon-based solar cells — as well as the broader review literature on solar cells for low earth orbit satellites — to identify approaches that improve conversion efficiency and long-term stability beyond what incumbent technologies currently deliver, across maturity levels from early proof of concept through to flight-ready systems."
+      },
+      {
+        "qid": "rephrase_2",
+        "text": "Research on: Solar cells for low earth orbit satellites must sustain high conversion efficiency under the radiation and thermal cycling conditions of that environment, and current incumbents leave room for improvement on both counts. Perovskite solar cells and silicon-based solar cells represent distinct paths toward that goal, but neither has yet displaced the other, and relevant advances continue to appear across the wider field."
+      }
+    ]
+  },
+  {
+    "problem": "tech_forecasting",
+    "use_case_name": "Predicting Technology Developments",
+    "terms_must_include": [
+      "knowledge graph",
+      "technology graph",
+      "graph reasoning",
+      "technology readiness level",
+      "breakthrough prediction",
+      "technology forecasting"
+    ],
+    "terms_exclude": [],
+    "queries": [
+      {
+        "qid": "statement",
+        "text": "Reasoning across a graph of technologies where nodes are technologies, edges are typed relationships, and the graph is decorated with extracted attributes such as technology readiness, costs, regulations, papers, and citations. The challenge is to predict where breakthroughs in technology readiness and cost will occur."
+      },
+      {
+        "qid": "objective",
+        "text": "Explore methods for predicting technological breakthroughs — in readiness, capability, or cost — by reasoning over heterogeneous, decorated technology knowledge graphs."
+      },
+      {
+        "qid": "must_terms",
+        "text": "knowledge graph, technology graph, graph reasoning, technology readiness level, breakthrough prediction, technology forecasting"
+      },
+      {
+        "qid": "rephrase_1",
+        "text": "Approaches and techniques relevant to: Explore methods for predicting technological breakthroughs — in readiness, capability, or cost — by reasoning over heterogeneous, decorated technology knowledge graphs."
+      },
+      {
+        "qid": "rephrase_2",
+        "text": "Research on: Reasoning across a graph of technologies where nodes are technologies, edges are typed relationships, and the graph is decorated with extracted attributes such as technology readiness, costs, regulations, papers, and citations. The challenge is to predict where breakthroughs in technology readiness and cost will occur."
+      }
+    ]
+  }
+]
