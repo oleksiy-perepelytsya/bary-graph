@@ -1,8 +1,11 @@
 """BaryGraph MCP server — exposes the barygraph collection as Claude tools.
 
-Provides fifteen tools:
+Provides sixteen tools:
   context_search   — MAIN entry point: $vectorSearch + full leaf content +
                       full ancestor chain to root, merged into a single call
+  human_readable_search — plain search across ALL vectors; top 3 hits rendered
+                      in human words only (glosses, relations, hierarchy) —
+                      no ids, no parameters, no scores
   find_word        — look up word nodes (all POS variants)
   word_senses      — list all L15 sense glosses for a word
   word_edges       — L14 BaryEdges where the word is a CM
@@ -37,6 +40,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 from datetime import datetime, timezone
 from typing import Any
 
@@ -1038,6 +1042,239 @@ def _context_search_body(
         )
 
     return _fmt(results)
+
+
+# --- human_readable_search: pure words + relations, hierarchy as text ---------
+
+
+def _hl_words(words, cap: int = 6) -> str:
+    """Compact human word list: 'a, b, c, …' — no ids, no parameters."""
+    ws = sorted({w for w in words if w})
+    shown = ws[:cap]
+    s = ", ".join(shown)
+    if len(ws) > cap:
+        s += f", … (+{len(ws) - cap})"
+    return s
+
+
+def _hl_ancestry(parent_id: Any, cap_words: int = 5) -> list[str]:
+    """Rendering of the upward chain (parent_edge_id) as readable one-liners.
+
+    Returns lines from the parent up to the root, each line just words and the
+    relation kind — levels L14/L15 BEs as 'type + words', MetaBary levels as
+    'child1 ↔ child2 via bridge' (words only, capped). Pure indexed lookups.
+    """
+    steps: list[str] = []
+    current = parent_id
+    for _ in range(12):
+        pdoc = _coll.find_one(
+            {"_id": current},
+            {"level": 1, "edge_type": 1, "parent_edge_id": 1,
+             "cm1_id": 1, "cm2_id": 1, "bridge_id": 1},
+        )
+        if not pdoc:
+            break
+        lvl = pdoc.get("level")
+        if lvl is not None and lvl <= 13:
+            tr = _triad_of(pdoc["_id"], pdoc.get("cm1_id"), pdoc.get("cm2_id"),
+                           pdoc.get("bridge_id"))
+            steps.append(
+                f"MetaBary L{lvl}: {{{_hl_words(tr['child1']['words'], cap_words)}}} "
+                f"↔ {{{_hl_words(tr['child2']['words'], cap_words)}}} "
+                f"via {{{_hl_words(tr['bridge']['words'], cap_words)}}}"
+            )
+        else:
+            wset = cm_leaf_words(_coll, pdoc["_id"], max_words=cap_words * 4)
+            steps.append(
+                f"L{lvl} {pdoc.get('edge_type') or 'relation'}: "
+                f"{{{_hl_words(wset, cap_words)}}}"
+            )
+        current = pdoc.get("parent_edge_id")
+        if not current:
+            break
+    return steps
+
+
+# When the query reads as a list of separate words ("science art music"), embed
+# each term on its own and show one block per word — a single whole-phrase
+# vector otherwise collapses every hit into whichever term dominates the blend.
+_MULTIWORD_STOP = {
+    "a", "an", "the", "and", "or", "nor", "but", "of", "to", "for", "in",
+    "on", "at", "by", "with", "from", "as", "into", "via", "vs", "over",
+    "under", "between",
+}
+_MULTIWORD_WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9'\-]*")
+
+
+def _search_terms(query: str) -> list[str]:
+    """Split into lowercased search terms — stopwords and dupes removed."""
+    seen: set[str] = set()
+    out: list[str] = []
+    for m in _MULTIWORD_WORD_RE.finditer(query):
+        t = m.group(0).lower()
+        if t in _MULTIWORD_STOP or t in seen:
+            continue
+        seen.add(t)
+        out.append(t)
+    return out
+
+
+def _word_hit_for(term: str, cap: int = 8) -> dict[str, Any] | None:
+    """Nearest node hit for a single term, preferring a literal word node.
+
+    Returns None if the embed or search fails — the whole-phrase fallback path
+    reports the real error instead.
+    """
+    try:
+        qv = get_embedder(_settings).embed([term])[0].tolist()
+    except Exception:
+        return None
+    try:
+        docs = vector_search(_coll, qv, limit=cap, num_candidates=200)
+    except PyMongoError:
+        return None
+    for d in docs:
+        if d.get("doc_type") == "node" and d.get("node_type") == "word":
+            if ((d.get("properties") or {}).get("word") or "").lower() == term:
+                return d
+    for d in docs:
+        if d.get("doc_type") == "node" and d.get("node_type") == "word":
+            return d
+    return docs[0] if docs else None
+
+
+def _hl_render_hit(d: dict[str, Any]) -> str:
+    """Render one vector-search hit as words + relations + hierarchy (no ids/params)."""
+    props = d.get("properties") or {}
+    lines: list[str] = []
+    if d.get("doc_type") == "node":
+        nt = d.get("node_type")
+        word = props.get("word", "?")
+        pos = props.get("pos")
+        lines.append(f"{nt}: {word}" + (f" ({pos})" if pos else ""))
+        if nt == "sense":
+            # sense hits: only the full gloss (per tool contract)
+            lines.append(f"gloss: {props.get('gloss', '')}")
+        elif nt == "word":
+            for i, s_ in enumerate(
+                _coll.find(
+                    {"doc_type": "node", "node_type": "sense",
+                     "properties.word": word},
+                    {"properties.gloss": 1},
+                ).sort("properties.sense_idx", 1).limit(3), 1
+            ):
+                lines.append(f"gloss {i}: {s_.get('properties', {}).get('gloss', '')}")
+        if d.get("parent_edge_id"):
+            anc = _hl_ancestry(d["parent_edge_id"])
+            if anc:
+                lines.append("  in: " + "\n  in: ".join(anc))
+        return "\n".join(lines)
+
+    lvl = d.get("level")
+    if lvl is not None and lvl <= 13:
+        try:
+            tr = _triad_of(d["_id"], d.get("cm1_id"), d.get("cm2_id"),
+                           d.get("bridge_id"))
+        except Exception:
+            tr = None
+        if tr:
+            lines.append(f"MetaBary L{lvl}")
+            lines.append(f"  child1: {{{_hl_words(tr['child1']['words'], 7)}}}")
+            lines.append(f"  child2: {{{_hl_words(tr['child2']['words'], 7)}}}")
+            lines.append(f"  bridge: {{{_hl_words(tr['bridge']['words'], 7)}}}")
+        else:
+            lines.append(f"MetaBary L{lvl}")
+    else:
+        wset = cm_leaf_words(_coll, d["_id"], max_words=32)
+        lines.append(
+            f"BaryEdge L{lvl}"
+            + (f" · {d.get('edge_type')}" if d.get("edge_type") else "")
+            + f" — {{{_hl_words(wset, 8)}}}"
+        )
+    if d.get("parent_edge_id"):
+        anc = _hl_ancestry(d["parent_edge_id"])
+        if anc:
+            lines.append("  in: " + "\n  in: ".join(anc))
+    return "\n".join(lines)
+
+
+@mcp.tool()
+async def human_readable_search(query: str) -> str:
+    """Plain-search the whole graph and answer in human words, with hierarchy.
+
+    Searches ALL indexed vectors at once — senses, words, BaryEdges and
+    MetaBary — via a single fast $vectorSearch, and returns the top 3 hits
+    rendered as words + relations + the ancestry chain they live in.
+
+    Queries consisting of several separate words ("science art music") are
+    embedded per term and rendered as one block per word, so each requested
+    word gets its own relation neighborhood rather than the whole phrase
+    collapsing into one dominant concept.
+
+    No ids, no parameters, no technical fields:
+      - sense hit   → just the full gloss
+      - word hit    → word with a few glosses, plus the relation it hangs off
+      - edge hit    → relation kind + the words it couples
+      - MetaBary    → child1 ↔ child2 via bridge, as word sets
+    The 'in: …' lines list the parent chain the hit is reachable in.
+    """
+    err = _validate_text(query, "query")
+    if err:
+        return err
+
+    return await _run_thr(_human_readable_search_body, query)
+
+
+def _human_readable_search_body(query: str) -> str:
+    # Multi-word query ("science art music") → one rendered block per term, so
+    # each requested word gets its own coordinates instead of the whole phrase
+    # collapsing into the single dominant neighborhood.
+    terms = _search_terms(query)
+    if len(terms) >= 2:
+        blocks: list[str] = []
+        seen: set[str] = set()
+        for term in terms:
+            hit = _word_hit_for(term)
+            if not hit or str(hit["_id"]) in seen:
+                continue
+            seen.add(str(hit["_id"]))
+            try:
+                body = _hl_render_hit(hit)
+            except Exception as e:
+                _log.exception("human_readable_search: render failed for id=%s", hit.get("_id"))
+                body = f"(could not expand this hit: {type(e).__name__}: {e})"
+            blocks.append(f"[{term}] {body.strip()}")
+        if len(blocks) >= 2:
+            return "\n\n".join(blocks)
+
+    try:
+        embedder = get_embedder(_settings)
+        qv = embedder.embed([query])[0].tolist()
+    except Exception as e:
+        _log.exception("human_readable_search: embedding failed for query=%r", query)
+        return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
+
+    top_k = 3
+    try:
+        docs = vector_search(_coll, qv, limit=top_k, num_candidates=max(top_k * 10, 100))
+    except PyMongoError as e:
+        _log.exception("human_readable_search: vector_search failed for query=%r", query)
+        return (
+            "Vector search failed — the mongot index may still be building, or "
+            f"the query timed out under load. Error: {type(e).__name__}: {e}"
+        )
+    if not docs:
+        return "No results returned. Index may still be building or corpus is empty."
+
+    blocks: list[str] = []
+    for i, d in enumerate(docs, 1):
+        try:
+            body = _hl_render_hit(d)
+        except Exception as e:
+            _log.exception("human_readable_search: render failed for id=%s", d.get("_id"))
+            body = f"(could not expand this hit: {type(e).__name__}: {e})"
+        blocks.append(f"[{i}] {body.strip()}")
+    return "\n\n".join(blocks)
 
 
 # q_seed lookup: edge_type → q_seeds key (same_phenomenon maps to synonyms tier)
