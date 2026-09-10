@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from collections.abc import Iterable, Mapping
 from functools import lru_cache
 from typing import Any
@@ -32,11 +33,15 @@ STANDARD_INDEXES: list[list[tuple[str, int]]] = [
 
 @lru_cache(maxsize=8)
 def _cached_client(uri: str) -> MongoClient:
+    # Long pipeline reads (e.g. streaming 12.7M L15 senses, orphan re-entry)
+    # exceed the 120s default when MongoDB is busy; stages opt into a longer
+    # timeout via PYMONGO_SOCKET_TIMEOUT_MS so cursors aren't killed mid-stream.
+    socket_ms = int(os.environ.get("PYMONGO_SOCKET_TIMEOUT_MS", "120000"))
     return MongoClient(
         uri,
         serverSelectionTimeoutMS=5000,
         connectTimeoutMS=10000,
-        socketTimeoutMS=120000,
+        socketTimeoutMS=socket_ms,
         waitQueueTimeoutMS=5000,
         maxPoolSize=100,
     )

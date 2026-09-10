@@ -92,6 +92,18 @@ class CachedEmbedder:
             out[i] = self._cache[h]
         return out
 
+    def vector_for(self, text: str) -> np.ndarray:
+        """Return the cached vector for one text (embedding it on a cold miss).
+
+        Unlike embed(), this returns a reference into the cache rather than a
+        copy, so callers that only need per-key reads (e.g. L15 orphan
+        re-entry) don't double the resident vector memory.
+        """
+        h = hashlib.sha256(text.encode("utf-8")).digest()
+        if h not in self._cache:
+            self.embed([text])
+        return self._cache[h]
+
 
 class OllamaEmbedder:
     def __init__(self, settings: Settings):
@@ -99,9 +111,10 @@ class OllamaEmbedder:
         self._url = settings.ollama_url.rstrip("/") + "/api/embed"
         self._model = settings.embed_model
         # Use a per-request client to avoid stale connection pool state
-        # on long-running jobs where ollama may restart.  180s allows for
-        # ollama cold-start (model load can take 60-120s after idle).
-        self._timeout = min(settings.embed_timeout_seconds, 180)
+        # on long-running jobs where ollama may restart.  600s covers
+        # ollama cold-start after idle (model load can take 60-120s+ on
+        # this CPU, and EMBED_BATCH_SIZE=512 batches add to it).
+        self._timeout = min(settings.embed_timeout_seconds, 600)
 
     def _client(self) -> httpx.Client:
         return httpx.Client(timeout=self._timeout)
@@ -114,7 +127,17 @@ class OllamaEmbedder:
             try:
                 client = self._client()
                 try:
-                    resp = client.post(self._url, json={"model": self._model, "input": texts})
+                    resp = client.post(self._url, json={
+                        "model": self._model,
+                        "input": texts,
+                        # Keep the model warm across long phases: without this,
+                        # any idle gap (e.g. between the ANN sweep and Phase A,
+                        # or between insert batches) longer than ollama's
+                        # default keep_alive (~5 min) makes the next request
+                        # race a cold reload that can outlast the transport
+                        # timeout. 6h >> any inter-phase gap we have.
+                        "keep_alive": "6h",
+                    })
                     resp.raise_for_status()
                 finally:
                     client.close()
@@ -140,6 +163,9 @@ class OllamaEmbedder:
         norms[norms == 0.0] = 1.0
         return arr / norms
 
+    def vector_for(self, text: str) -> np.ndarray:
+        return self.embed([text])[0]
+
 
 class FakeEmbedder:
     """Deterministic, offline embedder for CI and unit tests."""
@@ -157,6 +183,9 @@ class FakeEmbedder:
             rng = np.random.default_rng(seed)
             out[i] = normalize(rng.standard_normal(self.dim).astype(np.float32))
         return out
+
+    def vector_for(self, text: str) -> np.ndarray:
+        return self.embed([text])[0]
 
 
 def get_embedder(settings: Settings) -> Embedder:

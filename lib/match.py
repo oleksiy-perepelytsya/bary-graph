@@ -135,7 +135,9 @@ def _brute_force_pairs(
         yield int(iu[0][idx]), int(iu[1][idx]), float(scores[idx])
 
 
-def _ann_pairs(vectors: np.ndarray, k: int | None, min_score: float = 0.0) -> Iterable[tuple[int, int, float]]:
+def _ann_pairs(
+    vectors: np.ndarray, k: int | None, min_score: float = 0.0
+) -> Iterable[tuple[int, int, float]]:
     """ANN pair search via hnswlib HNSW index.
 
     hnswlib cosine space uses distance = 1 − cosine for normalised vectors,
@@ -202,6 +204,49 @@ def _ann_pairs(vectors: np.ndarray, k: int | None, min_score: float = 0.0) -> It
     if k is not None:
         pairs = pairs[:k]
     yield from pairs
+
+
+def project_match(vectors: np.ndarray) -> np.ndarray:
+    """Public alias for reducing ``vectors`` to MATCH_DIM (see _project_match)."""
+    return _project_match(vectors)
+
+
+def ann_index(
+    db: np.ndarray,
+    *,
+    preprojected: bool = False,
+    log_build: bool = True,
+    ef: int | None = None,
+):
+    """Build an hnswlib index over ``db`` for k-NN row searches.
+
+    ``db`` rows may be full embedding dim; unless ``preprojected`` they are
+    projected to MATCH_DIM first (callers that already hold the projected
+    matrix pass ``preprojected=True`` so the projection isn't duplicated).
+    Cosine space = rows are L2-normalised (project_match normalises). Returns
+    the index; query with ``index.knn_query(q, k=k)`` → (labels, dist).
+    """
+    import hnswlib  # optional at import time; always present in production
+
+    b = db if preprojected else _project_match(db)
+    n = b.shape[0]
+    index = hnswlib.Index(space="cosine", dim=b.shape[1])
+    index.init_index(max_elements=n, ef_construction=ANN_EF_CONSTRUCTION, M=ANN_M)
+    t_build_start = time.monotonic()
+    chunk = ANN_BUILD_CHUNK
+    for start in range(0, n, chunk):
+        end = min(start + chunk, n)
+        index.add_items(b[start:end], np.arange(start, end))
+        if log_build:
+            elapsed = time.monotonic() - t_build_start
+            rate = end / elapsed if elapsed > 0 else 0
+            eta = (n - end) / rate if rate > 0 else float("inf")
+            _log.info("HNSW build: %d/%d (%.0f%%) elapsed=%.0fs rate=%.0f/s eta=%.0fs",
+                      end, n, 100 * end / n, elapsed, rate, eta)
+    if log_build:
+        _log.info("HNSW build done in %.0fs", time.monotonic() - t_build_start)
+    index.set_ef(ef if ef is not None else max(ANN_EF, (ANN_K + 1) * 2))
+    return index
 
 
 def greedy_unique_match(
