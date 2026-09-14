@@ -1,10 +1,62 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama-local": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11435/v1",
+        "apiKey": "ollama",
+        "headerTimeout": 1800000,
+        "chunkTimeout": 1800000
+      },
+      "models": {
+        "qwen3-embedding:8b": {
+          "name": "Qwen3 8B Embedding (in-container)",
+          "tool_call": false,
+          "cost": { "input": 0, "output": 0 }
+        }
+      }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://ollama:11434/v1",
+        "apiKey": "ollama",
+        "headerTimeout": 1800000,
+        "chunkTimeout": 1800000
+      },
+      "models": {
+        "qwen3:14b": {
+          "name": "Qwen3 14B (GPU, RTX 3090)",
+          "tool_call": true,
+          "reasoning": true,
+          "temperature": false,
+          "cost": { "input": 0, "output": 0 }
+        },
+        "deepseek-r1:32b": {
+          "name": "DeepSeek-R1 Distill Qwen 32B",
+          "tool_call": true,
+          "reasoning": true,
+          "temperature": false,
+          "cost": { "input": 0, "output": 0 }
+        }
+      }
+    }
+  },
   "mcp": {
     "barygraph": {
       "type": "remote",
-      "url": "https://drill-camps-clinical-cooling.trycloudflare.com/mcp",
+      "url": "https://mild-infrastructure-should-batch.trycloudflare.com/mcp",
       "enabled": true
+    },
+    "cog": {
+      "type": "local",
+      "command": ["python3.11", "-m", "scripts.mcp_int_cog"],
+      "enabled": true,
+      "environment": {
+        "MCP_MONGO_DB": "barygraph_poc",
+        "COGNITIVE_BATCH_DIR": "/workspace/bary-vector/cognitive/batches"
+      }
     }
   }
 }

@@ -1556,12 +1556,12 @@ async def create_structure_meta_bary(
     and the cosine between the two children (pipeline threshold is 0.90).
     """
     return await _run_thr(
-        _create_structure_meta_bary_body, cm1_id, cm2_id, bridge_id
+        _create_structure_meta_bary_body, cm1_id, cm2_id, bridge_id, author
     )
 
 
 def _create_structure_meta_bary_body(
-    cm1_id: str, cm2_id: str, bridge_id: str,
+    cm1_id: str, cm2_id: str, bridge_id: str, author: str = "",
 ) -> str:
     if len({cm1_id, cm2_id, bridge_id}) != 3:
         return "cm1_id, cm2_id, and bridge_id must all be distinct."

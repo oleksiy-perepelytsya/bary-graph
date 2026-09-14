@@ -38,6 +38,8 @@ def unpack_vec(blob: Any, dim: int | None = None) -> np.ndarray:
     """
     if isinstance(blob, np.ndarray):
         return np.asarray(blob, dtype=_DTYPE)
+    if isinstance(blob, (list, tuple)):
+        return np.asarray(blob, dtype=_DTYPE)
     arr = np.frombuffer(blob, dtype=_DTYPE)
     if dim is not None:
         arr = arr.reshape(dim)

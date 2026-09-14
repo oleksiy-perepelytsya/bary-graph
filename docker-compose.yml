@@ -27,8 +27,17 @@ services:
     restart: unless-stopped
     ports:
       - "11434:11434"
+    environment:
+      - OLLAMA_LLM_LIBRARY=cuda_v13   # #17222: force CUDA over silent CPU fallback discovery
     volumes:
       - ollama_models:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
 volumes:
   mongo_data:

@@ -137,6 +137,7 @@ class OllamaEmbedder:
                         # race a cold reload that can outlast the transport
                         # timeout. 6h >> any inter-phase gap we have.
                         "keep_alive": "6h",
+                        "options": {"num_thread": 8, "num_gpu": 999},
                     })
                     resp.raise_for_status()
                 finally:

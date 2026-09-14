@@ -46,6 +46,8 @@ _ALLOWED_TOOLS = {
     # arXiv corpus search (BM25 on title+abstract)
     "arxiv_search",
     "arxiv_get_paper",
+    # extraction pipeline batch storage
+    "store_paper_extraction",
 }
 if not _READ_ONLY:
     # SMB-building write tools (pipeline schema). Omitted when MCP_READ_ONLY=1.
@@ -114,7 +116,9 @@ def _get_arxiv_coll():
             os.environ.get("MONGO_URI", "mongodb://mongodb:27017/?directConnection=true"),
             serverSelectionTimeoutMS=5_000,
         )
-        _arxiv_coll = client[srv._settings.mongo_db][_ARXIV_COLLECTION]
+        _arxiv_coll = client[os.environ.get("MCP_MONGO_DB", "barygraph_poc")][
+            _ARXIV_COLLECTION
+        ]
     return _arxiv_coll
 
 
@@ -130,9 +134,9 @@ def _arxiv_search_body(query: str, top_k: int = 5) -> str:
     try:
         cursor = coll.find(
             {"$text": {"$search": query}},
-            {"score": {"$meta": "textScore"}, "arxiv_id": 1, "title": 1, "abstract": 1,
+            {"arxiv_id": 1, "title": 1, "abstract": 1,
              "doi": 1, "categories": 1, "authors": 1},
-        ).sort([("score", {"$meta": "textScore"})]).limit(top_k)
+        ).limit(top_k)
         results = list(cursor)
     except pymongo.errors.OperationFailure as e:
         return f"search failed (is the text index built?): {e}"
@@ -155,6 +159,8 @@ def _arxiv_get_body(arxiv_id: str) -> str:
     if doc is None:
         return f"paper not found: {arxiv_id}"
     doc["_id"] = str(doc["_id"])
+    for _k in ("vector", "embedding"):
+        doc.pop(_k, None)
     return _json.dumps(doc, indent=2, default=str)
 
 
@@ -177,6 +183,140 @@ async def arxiv_get_paper(arxiv_id: str) -> str:
     Use after arxiv_search to read the full abstract before term extraction.
     """
     return await _run_thr(_arxiv_get_body, arxiv_id)
+
+
+# ── batch storage (extraction pipeline) ────────────────────────────────────────
+import json as _json_batch  # noqa: E402
+import re as _re  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+_BATCH_DIR = _Path(os.environ.get(
+    "COGNITIVE_BATCH_DIR",
+    _Path(__file__).resolve().parent.parent / "cognitive" / "batches",
+))
+_TERMS_FILE = _BATCH_DIR / "terms_batch.jsonl"
+_PAPERS_FILE = _BATCH_DIR / "papers_batch.jsonl"
+
+
+def _load_existing_dois(path: _Path) -> set[str]:
+    """Read existing DOIs from a JSONL file for dedup."""
+    dois: set[str] = set()
+    if not path.exists():
+        return dois
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        try:
+            rec = _json_batch.loads(line)
+            if rec.get("doi"):
+                dois.add(rec["doi"])
+        except _json_batch.JSONDecodeError:
+            pass
+    return dois
+
+
+def _store_extraction_body(
+    doi: str,
+    terms_json: str,
+    arxiv_id: str = "",
+    title: str = "",
+    abstract: str = "",
+    authors: str = "",
+    categories: str = "",
+) -> str:
+    """Store extracted terms and paper metadata into JSONL batch files.
+
+    Deduplicates by DOI: if a DOI already exists in either file, the store
+    is skipped and a message is returned.
+    """
+    if not doi or not doi.strip():
+        return "doi must be non-empty"
+
+    doi = doi.strip()
+
+    # a DOI must look like a DOI — reject arxiv IDs or other bare strings
+    if not _re.match(r"^10\.\S+$", doi):
+        return f"'{doi}' is not a valid DOI (must start with '10.'). If the paper is arXiv-only, use the 10.48550/arXiv.<id> form or skip it."
+
+    _BATCH_DIR.mkdir(parents=True, exist_ok=True)
+
+    # ensure the file ends with a newline so appends never glue onto a
+    # previous record (hand-written files or legacy records may lack one)
+    def _ensure_trailing_newline(path: _Path) -> None:
+        if path.exists() and path.stat().st_size > 0:
+            data = path.read_bytes()
+            if not data.endswith(b"\n"):
+                with path.open("ab") as fh:
+                    fh.write(b"\n")
+
+    _ensure_trailing_newline(_TERMS_FILE)
+    _ensure_trailing_newline(_PAPERS_FILE)
+
+    # dedup check
+    existing = _load_existing_dois(_TERMS_FILE) | _load_existing_dois(_PAPERS_FILE)
+    if doi in existing:
+        return f"doi {doi} already in batch files — skipped"
+
+    # parse terms
+    try:
+        terms = _json_batch.loads(terms_json)
+        if not isinstance(terms, list):
+            return "terms_json must be a JSON array"
+    except _json_batch.JSONDecodeError as e:
+        return f"invalid terms_json: {e}"
+
+    # write terms
+    terms_rec = {"doi": doi, "terms": terms}
+    with _TERMS_FILE.open("a") as fh:
+        fh.write(_json_batch.dumps(terms_rec, ensure_ascii=False) + "\n")
+
+    # write paper metadata
+    paper_rec = {
+        "doi": doi,
+        "arxiv_id": arxiv_id,
+        "title": title,
+        "abstract": abstract[:5000],  # cap abstract length
+        "authors": authors,
+        "categories": categories,
+    }
+    with _PAPERS_FILE.open("a") as fh:
+        fh.write(_json_batch.dumps(paper_rec, ensure_ascii=False) + "\n")
+
+    n_terms = len(terms)
+    log.info("stored extraction: doi=%s terms=%d", doi, n_terms)
+    return f"stored doi={doi} with {n_terms} terms"
+
+
+@mcp.tool()
+async def store_paper_extraction(
+    doi: str,
+    terms_json: str,
+    arxiv_id: str = "",
+    title: str = "",
+    abstract: str = "",
+    authors: str = "",
+    categories: str = "",
+) -> str:
+    """Store extracted terms and paper metadata into JSONL batch files.
+
+    This is the first step in the cognitive pipeline: after extracting terms
+    from a paper's abstract (using the extraction prompt), call this tool to
+    store the results. The terms file (terms_batch.jsonl) and paper metadata
+    file (papers_batch.jsonl) are used by downstream grounding steps.
+
+    Args:
+        doi: Paper DOI (bare, no https://doi.org/ prefix)
+        terms_json: JSON array of extracted terms, each with "id", "term", "gloss"
+        arxiv_id: Optional arXiv ID (e.g. '2301.07041')
+        title: Optional paper title
+        abstract: Optional paper abstract
+        authors: Optional authors string
+        categories: Optional categories string
+    """
+    return await _run_thr(
+        _store_extraction_body,
+        doi, terms_json, arxiv_id, title, abstract, authors, categories,
+    )
 
 
 def main() -> int:
