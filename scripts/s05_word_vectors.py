@@ -34,6 +34,48 @@ from scripts._base import bootstrap, finish
 
 STAGE = "05_word_vectors"
 
+BE_CHUNK = 2000   # _id $in chunks for BE / orphan-sense vector fetches
+
+
+def _process_window(coll, win: list[dict]) -> list[tuple[ObjectId, np.ndarray, list]]:
+    """Batch BE + orphan-sense vector fetches for *win* (list of records).
+
+    Returns a list of (word_id, vector, sense_ids) for every word whose
+    vector can be computed (skips words where both be_vecs and orphan_vecs
+    are empty — shouldn't happen post-stage-03).
+    """
+    want_be: set[ObjectId] = set()
+    want_orph: set[ObjectId] = set()
+    for rec in win:
+        want_be |= rec["be_ids"]
+        want_orph.update(rec["orphan_ids"])
+
+    be_cache: dict[ObjectId, np.ndarray] = {}
+    for i in range(0, len(want_be), BE_CHUNK):
+        for be in coll.find(
+            {"_id": {"$in": sorted(want_be)[i:i + BE_CHUNK]}},
+            {"vector": 1},
+        ):
+            be_cache[be["_id"]] = unpack_vec(be["vector"])
+
+    orph_cache: dict[ObjectId, np.ndarray] = {}
+    for i in range(0, len(want_orph), BE_CHUNK):
+        for s in coll.find(
+            {"_id": {"$in": sorted(want_orph)[i:i + BE_CHUNK]}},
+            {"vector": 1},
+        ):
+            orph_cache[s["_id"]] = unpack_vec(s["vector"])
+
+    out: list[tuple[ObjectId, np.ndarray, list]] = []
+    for rec in win:
+        be_vecs = [be_cache[i] for i in rec["be_ids"] if i in be_cache]
+        orphan_vecs = [orph_cache[i] for i in rec["orphan_ids"] if i in orph_cache]
+        if not be_vecs and not orphan_vecs:
+            continue
+        vec = word_vector(be_vecs, orphan_vecs)
+        out.append((rec["w_id"], vec, rec["sense_ids"]))
+    return out
+
 
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
@@ -51,23 +93,62 @@ def run(argv: Sequence[str] | None = None) -> None:
         n = 0
     else:
         q = {"doc_type": "node", "node_type": "word", "level": 14}
-        if cp.last_id:
-            q["_id"] = {"$gt": ObjectId(cp.last_id)}
         total = coll.count_documents({"doc_type": "node", "node_type": "word", "level": 14})
         n = cp.processed
 
     batch_n = args.batch_size or settings.batch_size
     ops: list[UpdateOne] = []
+    dois_active = not args.dry_run and bridge_coll.count_documents({}) > 0
+    if not dois_active:
+        log.info("doi_bridges absent/empty -> per-word DOI propagation skipped")
 
-    cur = coll.find(q, {"_id": 1, "properties": 1}).sort("_id", 1)
+    # Deterministic enumeration: sort by _id (head-anchored, monotonic; this
+    # mongot's unsorted "natural order" proved non-deterministic across runs).
+    # $gt / $in / $or on non-_id fields are unreliable here, so resume is a
+    # client-side _id <= last_id skip, and the BE + orphan-sense vector fetch
+    # is batched over a window of batch_n words (one $in per ~2000 ids,
+    # mirroring stage 04's proven pattern) instead of one $in round-trip per
+    # word.
+    skip_to = ObjectId(cp.last_id) if (cp.last_id and not scoped) else None
+    cur = coll.find(q, {"_id": 1, "properties": 1}).sort("_id", 1).batch_size(5000)
+    win: list[dict] = []
+    run_count = 0
+
+    def _drain() -> None:
+        nonlocal ops, n, win, run_count
+        for w_id, vec, sense_ids in _process_window(coll, win):
+            ops.append(
+                UpdateOne(
+                    {"_id": w_id},
+                    {"$set": {"vector": pack_vec(vec), "updated_at": datetime.now(timezone.utc)}},
+                )
+            )
+            if dois_active:
+                doi_bridge.propagate(bridge_coll, w_id, sense_ids)
+            n += 1
+            run_count += 1
+            cp.last_id = str(w_id)
+        if len(ops) >= batch_n:
+            if not args.dry_run:
+                coll.bulk_write(ops, ordered=False)
+            ops = []
+            if not scoped and not args.dry_run:
+                cp.processed = n
+                cp_mod.save(cp, settings)
+            log.info("… %d/%d word vectors", n, total)
+        win = []
+
     for w in cur:
-        if args.limit and n - cp.processed >= args.limit:
+        if args.limit and run_count >= args.limit:
             break
+        if skip_to is not None and w["_id"] <= skip_to:
+            continue
         props = w["properties"]
         word, pos = props["word"], props["pos"]
         lang = props.get("lang", "en")
 
-        # Senses of W and their parent BEs.
+        # Senses of W and their parent BEs (no vector payload — orphan senses
+        # are rare and their vectors are fetched batched per window below).
         sense_docs = list(
             coll.find(
                 {
@@ -77,43 +158,26 @@ def run(argv: Sequence[str] | None = None) -> None:
                     "properties.pos": pos,
                     "properties.lang": lang,
                 },
-                {"_id": 1, "vector": 1, "parent_edge_id": 1},
+                {"_id": 1, "parent_edge_id": 1},
             )
         )
         be_ids = {s["parent_edge_id"] for s in sense_docs if s.get("parent_edge_id")}
-        be_vecs = [
-            unpack_vec(be["vector"])
-            for be in coll.find({"_id": {"$in": list(be_ids)}}, {"vector": 1})
-        ]
-        orphan_vecs = [
-            unpack_vec(s["vector"])
-            for s in sense_docs
-            if not s.get("parent_edge_id")
-        ]
-        if not be_vecs and not orphan_vecs:
+        orphan_ids = [s["_id"] for s in sense_docs if not s.get("parent_edge_id")]
+        if not be_ids and not orphan_ids:
             continue  # word with zero senses (shouldn't happen post-stage-03)
-
-        vec = word_vector(be_vecs, orphan_vecs)
-
-        ops.append(
-            UpdateOne(
-                {"_id": w["_id"]},
-                {"$set": {"vector": pack_vec(vec), "updated_at": datetime.now(timezone.utc)}},
-            )
+        win.append(
+            {
+                "w_id": w["_id"],
+                "be_ids": be_ids,
+                "orphan_ids": orphan_ids,
+                "sense_ids": [s["_id"] for s in sense_docs],
+            }
         )
-        if not args.dry_run:
-            doi_bridge.propagate(bridge_coll, w["_id"], [s["_id"] for s in sense_docs])
-        n += 1
-        cp.last_id = str(w["_id"])
-        if len(ops) >= batch_n:
-            if not args.dry_run:
-                coll.bulk_write(ops, ordered=False)
-            ops = []
-            if not scoped:
-                cp.processed = n
-                cp_mod.save(cp, settings)
-            log.info("… %d/%d word vectors", n, total)
+        if len(win) >= batch_n:
+            _drain()
 
+    if win:
+        _drain()
     if ops and not args.dry_run:
         coll.bulk_write(ops, ordered=False)
 
@@ -123,7 +187,7 @@ def run(argv: Sequence[str] | None = None) -> None:
 
     cp.processed = n
     cp.total = total
-    if not args.dry_run:
+    if not args.dry_run and n >= total:
         finish(cp, settings, log)
 
 

@@ -26,15 +26,8 @@
         "chunkTimeout": 1800000
       },
       "models": {
-        "qwen3:14b": {
-          "name": "Qwen3 14B (GPU, RTX 3090)",
-          "tool_call": true,
-          "reasoning": true,
-          "temperature": false,
-          "cost": { "input": 0, "output": 0 }
-        },
-        "deepseek-r1:32b": {
-          "name": "DeepSeek-R1 Distill Qwen 32B",
+        "qwen3.6:27b-q4_K_M-ctx64k": {
+          "name": "Qwen3.6 27B Q4 64K ctx (GPU, RTX 3090)",
           "tool_call": true,
           "reasoning": true,
           "temperature": false,

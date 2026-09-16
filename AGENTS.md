@@ -19,3 +19,57 @@ Concretely:
   transient constraint, not a design driver).
 - No SMB coercion: proposals are coordinates to investigate, and only the user
   decides when proposals become real SMBs in Mongo.
+
+## SMB admission policy (user decision, Sep-16 2026)
+
+There is **no q rule** for SMBs. Value — the user/cognitive judgment that a
+triad is a productive adjacency — is the sole admission criterion. The pipeline
+0.90 child-cosine threshold governs *pipeline* MetaBary clustering only; it is
+**not** an SMB gate. When building an SMB:
+- Always record `child_cosine` on the candidate/manifest (diagnostic, never a
+  denial).
+- Low-q SMBs are created like any other; if `child_cosine < 0.20` (floor), note
+  them for later recheck — but create, never deny on q alone.
+- Built SMBs live in poc with `source='structural'`, the explicit `bridge_id`,
+  and `author` = the model/person signature. Build manifest:
+  `cognitive/batches/smb_builds.jsonl`.
+
+# Databases and .env files
+
+There are exactly **two live Mongo databases** plus a test prefix, selected by
+which env file the shell has sourced. `Settings.load()` reads the process
+environment; **if you don't source a `.env*` file, every probe/script silently
+targets `barygraph_poc`** — this mismatch caused a long "phantom last_id /
+mongot nondeterminism" rabbit hole (probes hitting poc while the pipeline wrote
+`barygraph_all`). Always source the matching env before probing.
+
+## Databases
+- **`barygraph_poc`** — the live, user-facing PoC index (what the MCP server and
+  the `cog`/`barygraph` MCP tools serve). Built from a single language
+  (`en`-style limited kaikki). Embeddings: `nomic-embed-text:v1.5`, dim **768**.
+  Word heads around `6a603105…` in `_id` space. Pipeline state:
+  `pipeline_state/`.
+- **`barygraph_all`** — the in-progress all-languages build (`KAIKKI_LANGS=*`;
+  counts mid-build, e.g. 10,256,975 L14 words / 12,718,626 senses as of the
+  Sep-16 2026 s05 run). Embeddings: `qwen3-embedding:8b`, dim **4096**. Word
+  heads around `6a9a2b40…` in `_id` space (different `_id` range from poc — do
+  not compare ids across DBs). Pipeline state: `pipeline_state_all/`. Serves no
+  user traffic; stages s01–s04 done, s05 running as of Sep-16.
+- **Test DBs** — `MONGO_TEST_DB_PREFIX=barygraph_test_`; integration tests
+  refuse to touch any DB name not matching this prefix (safety guard, do not
+  bypass).
+
+## .env files
+- **`.env`** — default (loaded when nothing else is sourced). Points at
+  `barygraph_poc`, `MONGO_COLLECTION=barygraph`, `EMBED_MODEL=nomic-embed-text:v1.5`,
+  `EMBED_DIM=768`, `BATCH_SIZE=512`, `PIPELINE_STATE_DIR=pipeline_state`.
+  The MCP server always runs with this config and must keep serving poc even
+  while the all-build runs.
+- **`.env.build-all`** — isolated config for the all-languages build; **sourced
+  by launch scripts only, never by the MCP server**. Points at `barygraph_all`,
+  `KAIKKI_LANGS=*`, `EMBED_MODEL=qwen3-embedding:8b`, `EMBED_DIM=4096`,
+  `BATCH_SIZE=2048`, `PIPELINE_STATE_DIR=pipeline_state_all`, plus
+  `EMBED_CACHE_FILE` (append-only JSONL embed cache on /storage; dedupes ~21% of
+  repeated sense texts). Key difference vs main env: **embed model/dim differ**
+  (768 vs 4096).
+- **`.env.example`** — template; never used at runtime.

@@ -40,6 +40,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import random
 import re
 from datetime import datetime, timezone
 from typing import Any
@@ -264,6 +265,8 @@ def _triad_of(
     cm1_id: ObjectId,
     cm2_id: ObjectId,
     bridge_id: ObjectId | None = None,
+    max_words_per_branch: int = 1000,
+    max_visited: int = 5000,
 ) -> dict[str, Any]:
     """Fetch the bridge doc and return triad structure with leaf words for all three.
 
@@ -273,6 +276,13 @@ def _triad_of(
     bridge_id: pre-resolved for SMBs (source='structural') which store it
     explicitly because they do not set parent_edge_id on their children.
     Falls back to the standard parent_edge_id reverse lookup for pipeline MBs.
+
+    max_words_per_branch / max_visited: budget caps so a sampled MB that fans
+    out to a huge fraction of the corpus (near-root L10/L11 clusters) does not
+    make the BFS traverse unbounded. When a branch fills its word budget, it
+    stops expanding through that branch; total visited docs is also capped.
+    Returned words are ordered by encounter; a branch with > max_words_per_branch
+    words reports a truncation flag instead of silently dropping the tail.
     """
     if bridge_id is None:
         # Pipeline MB: bridge is the third child whose parent_edge_id = mb_id
@@ -291,10 +301,11 @@ def _triad_of(
     words: dict[str, set[str]] = {"child1": set(), "child2": set(), "bridge": set()}
     visited: set[Any] = set()
     frontier: set[Any] = set(origin)
+    truncated: set[str] = set()
 
     for _ in range(15):
         to_fetch = frontier - visited
-        if not to_fetch:
+        if not to_fetch or len(visited) >= max_visited:
             break
         visited |= to_fetch
         next_frontier: set[Any] = set()
@@ -306,20 +317,29 @@ def _triad_of(
             if doc.get("doc_type") == "node":
                 w = doc.get("properties", {}).get("word")
                 if w:
-                    words[branch].add(w)
-            else:
+                    if len(words[branch]) >= max_words_per_branch:
+                        truncated.add(branch)
+                    else:
+                        words[branch].add(w)
+            elif len(words[branch]) < max_words_per_branch:
                 for child_id in (doc.get("cm1_id"), doc.get("cm2_id")):
                     if child_id and child_id not in visited:
                         origin[child_id] = branch
                         next_frontier.add(child_id)
         frontier = next_frontier
 
+    def _branch(branch: str) -> dict[str, Any]:
+        out: dict[str, Any] = {"words": sorted(words[branch])}
+        if branch in truncated:
+            out["truncated"] = True
+        return out
+
     return {
-        "child1": {"id": str(cm1_id), "words": sorted(words["child1"])},
-        "child2": {"id": str(cm2_id), "words": sorted(words["child2"])},
+        "child1": {"id": str(cm1_id), **_branch("child1")},
+        "child2": {"id": str(cm2_id), **_branch("child2")},
         "bridge": {
             "id": str(bridge_id) if bridge_id else None,
-            "words": sorted(words["bridge"]),
+            **_branch("bridge"),
         },
     }
 
@@ -583,18 +603,40 @@ async def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> s
     )
 
 
+def _random_metabary_docs(level: int, n: int) -> list[dict[str, Any]]:
+    """Sample n random MetaBary docs at the given level via count + random skip.
+
+    $sample on a multi-million-doc collection forces a full scan (40s+), and
+    _id-band probes land in build-batch gaps that the planner scans for seconds
+    per probe. Instead: count the level's docs (fast via the existing
+    doc_type+level index), pick a random offset into that count, then walk n
+    consecutive index entries from there with a single find + skip + limit(n)
+    — a cheap index-only walk, no new index required. Re-rolls if the offset
+    lands past the end.
+    """
+    filt = {"doc_type": "baryedge", "level": level}
+    count = _coll.count_documents(filt)
+    if count == 0:
+        return []
+    for _ in range(8):
+        k = random.randrange(count) if count > n else 0
+        docs = list(_coll.find(
+            filt,
+            {"cm1_id": 1, "cm2_id": 1, "bridge_id": 1,
+             "connection_strength": 1, "accumulated_weight": 1,
+             "parent_edge_id": 1},
+        ).skip(k).limit(n))
+        if docs:
+            return docs
+    return []
+
+
 def _sample_metabary_body(level: int, n: int, with_parent: bool) -> str:
     if not (10 <= level <= 13):
         return "level must be between 10 and 13 (MetaBary range)."
     n = min(max(n, 1), 1000)
 
-    docs = list(_coll.aggregate([
-        {"$match": {"doc_type": "baryedge", "level": level}},
-        {"$sample": {"size": n}},
-        {"$project": {"cm1_id": 1, "cm2_id": 1,
-                      "connection_strength": 1, "accumulated_weight": 1,
-                      "parent_edge_id": 1}},
-    ]))
+    docs = _random_metabary_docs(level, n)
     if not docs:
         return f"No MetaBary docs found at level {level}. Run graph_stats to check pipeline state."
 
@@ -606,7 +648,10 @@ def _sample_metabary_body(level: int, n: int, with_parent: bool) -> str:
             "level": level,
             "connection_strength": doc.get("connection_strength"),
             "accumulated_weight": doc.get("accumulated_weight"),
-            "triad": _triad_of(mb_id, doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id")),
+            "triad": _triad_of(
+                mb_id, doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id"),
+                max_words_per_branch=40, max_visited=2000,
+            ),
             "parent": None,
         }
         parent_oid = doc.get("parent_edge_id")
@@ -625,6 +670,7 @@ def _sample_metabary_body(level: int, n: int, with_parent: bool) -> str:
                     "triad": _triad_of(
                         pdoc["_id"], pdoc["cm1_id"], pdoc["cm2_id"],
                         pdoc.get("bridge_id"),
+                        max_words_per_branch=30, max_visited=1500,
                     ),
                 }
         results.append(entry)
@@ -765,6 +811,370 @@ def _semantic_search_body(
                 r["dois"] = dois_by_id.get(d["_id"], [])
         results.append(r)
 
+    return _fmt(results)
+
+
+def _content_terms(query: str) -> list[str]:
+    """Ordered content words — stopwords dropped, order and repeats kept.
+
+    Unlike _search_terms(), duplicates are preserved because chunk windows
+    depend on the surface order of the words (a repeated term is still a
+    position in a window).
+    """
+    out: list[str] = []
+    for m in _MULTIWORD_WORD_RE.finditer(query):
+        t = m.group(0).lower()
+        if t not in _MULTIWORD_STOP:
+            out.append(t)
+    return out
+
+
+def _chunk_request(query: str, max_probes: int) -> list[str]:
+    """Deterministic probe generation with guaranteed per-position coverage.
+
+    Two passes over the ordered content-word sequence, both fully
+    deterministic (input text in, same probes out — no model, no RNG):
+
+    1. Coverage: non-overlapping windows walked at a fixed stride choose the
+       most content per probe, so every content word of the request is
+       retrievable even in one probe budget (longest windows first).
+    2. Specificity: leftover slots fill with the longest remaining windows
+       (trigram > bigram > single), earliest start first, those not already
+       selected.
+
+    Stopwords are dropped first, so runs of content words are what get
+    windowed — a 2-3 word probe lands near the BEs/MBs that couple those
+    concepts rather than the node-proximal noise a single word retrieves.
+    """
+    terms = _content_terms(query)
+    if not terms:
+        return []
+    if max_probes < 1:
+        max_probes = 1
+
+    chosen: list[tuple[int, int]] = []  # (start, size) windows
+    positions: set[int] = set()
+
+    # Pass 1 — stride coverage: walk the whole sequence, no gap skipped.
+    size = min(3, len(terms))
+    i = 0
+    while i < len(terms) and len(chosen) < max_probes:
+        win = min(size, len(terms) - i)
+        chosen.append((i, win))
+        positions.update(range(i, i + win))
+        i += win
+
+    # Pass 2 — specificity: longest remaining windows, earliest start first.
+    leftovers: list[tuple[int, int]] = [
+        (start, lsize)
+        for lsize in (3, 2, 1)
+        for start in range(len(terms) - lsize + 1)
+    ]
+    leftovers.sort(key=lambda s: (-s[1], s[0]))
+    for st, sz in leftovers:
+        if len(chosen) >= max_probes:
+            break
+        if (st, sz) in chosen:
+            continue
+        chosen.append((st, sz))
+
+    return [" ".join(terms[st:st + sz]) for st, sz in chosen]
+
+
+@mcp.tool()
+async def enrich_request(
+    query: str,
+    top_k: int = 5,
+    max_probes: int = 8,
+    mb_only: bool = False,
+    with_bridges: bool = False,
+    precision: str = "full",
+    compactness: bool = False,
+) -> str:
+    """BE/MB-only raw-vector enrichment of a free-form request.
+
+    Chunks the query deterministically (no model, no randomness — repeated
+    calls with the same input return the same probes), embeds all probes in
+    one Ollama batch, and returns ONLY the adjacent raw vectors of the
+    nearest BaryEdges/MetaBary per probe — no ids, no level, no triads, no
+    scores unless asked.
+
+    Why chunks rather than word-by-word or whole-request: BaryEdge/MetaBary
+    vectors encode RELATIONS between concepts, so a 2-3 word probe lands in
+    the neighborhood of the BEs/MBs that couple those concepts, whereas a
+    single word retrieves the noisy neighborhood around one node label and a
+    whole-request embed collapses every facet into the single dominant
+    cluster. Chunks keep the request's facets separate while staying far
+    cheaper than word-by-word (≤max_probes vector searches, one embed call).
+
+    max_probes: cap on the number of probes/chunks (each gets its own
+      neighborhood, so it bounds both cost and response size). Default 8;
+      range [1, 16]. Chunking is a deterministic two-pass walk over the
+      query's content words: first a stride uniform walk (longest windows
+      first) so every content word is reachable even within one probe
+      budget, then the longest remaining windows (trigram > bigram > single)
+      — earliest start first, already-selected ones skipped — to fill the
+      rest. Same input always yields the same probes.
+
+    top_k: neighbors returned per probe (max 20).
+
+    mb_only: when True, restrict hits to MetaBary only (level ≤ 13).
+      Default False returns both BaryEdges (L14/L15) and MetaBary (L10-L13)
+      — everything with doc_type 'baryedge'. 'level' and 'doc_type' are the
+      only index filter fields used, so the filter is always mongot-native.
+
+    with_bridges: when True, each per-probe block also gets an aligned
+      "hits" list (hit i ↔ vectors[i], same rank order). Every hit carries
+      id/level/edge_type/q straight off the doc, and MetaBary hits (level ≤
+      13) additionally carry "triad": the child1/child2/bridge word sets —
+      the explicit bridge is the point. BaryEdge hits get triad=null (a BE
+      is itself the coupling, so it has no in-hierarchy bridge). Triad
+      expansion is bounded: only the nearest three MetaBary hits per probe,
+      twelve words max per branch, so payload and latency stay predictable
+      even at top_k=20, max_probes=16.
+
+    precision: vector payload format. "full" (default) is float32 per value
+      — the 768 floats of every hit, byte-identical to pre-quantization
+      output (reverse-mode verification needs this). "float16" rounds each
+      value to half precision (2 bytes/value, ~half the payload). "int8"
+      symmetrically quantizes each vector to the [-127, 127] range (1
+      byte/value, ~quarter of full): the block then carries "vector_scales"
+      (one scale per hit, parallel to vectors, scale = max(|v|)) and the
+      caller reconstructs with v ≈ values/127 * scale. Blocks only gain the
+      "vector_precision" key when precision is non-full, so default output
+      shape is unchanged.
+
+    compactness: when True, each per-probe block gains a "compactness"
+      descriptor telling you whether the hits under that probe agree with
+      each other: "n", "mean_cos" and "max_cos" (mean and max cosine over
+      all unordered hit pairs — low mean_cos means the probe's neighborhood
+      is diffuse/scatter, high means the hits are mutually consistent and
+      the probe is a stable coordinate), and "centroid" (the normalized
+      mean of the hit vectors — the point the neighborhood clusters
+      around). Geometry is always computed on the full float32 vectors;
+      only the centroid is emitted in the same encoding as precision (so
+      int8 emits centroid + centroid_scale, dequantized the same way as
+      hits). Omitted for probes that return no vectors.
+
+    Preferred usage for agent callers: precision="int8" (default payload for
+    conversational use; ~10x smaller, cos error < 1/127 — "full" only when
+    exact float32 reverse-mode verification is needed), with_bridges=True
+    and compactness=True (the triad words and the mean/max cosine are the
+    semantic cargo and the reliability signal; raw vectors alone are
+    opaque). Keep top_k small — the best results come from top_k=2 — and
+    max_probes in 2-4: probes bound cost, and going far beyond that blows
+    the payload even in int8. mb_only=True when abstract relation-clusters
+    (L10-L13) are wanted, else leave False to also see L14/L15 BaryEdges.
+
+    The result is a list of per-probe blocks, each a set of raw float32
+    vectors ordered nearest-first (rank 1 = closest BE/MB; ranks 2..top_k =
+    onward adjacency inside that neighborhood) when with_bridges is left
+    False — exactly the shape needed to ground a downstream model on the
+    request's relation-space coordinates without pulling in any document
+    metadata.
+    """
+    try:
+        return await _run_thr(
+            _enrich_request_body,
+            query, top_k, max_probes, mb_only, with_bridges, precision, compactness,
+        )
+    except Exception as e:  # pragma: no cover - defensive
+        _log.exception("enrich_request failed for query=%r", query)
+        return _fmt({"status": "error", "query": query, "message": str(e)})
+
+
+_BRIDGE_EXPAND_HITS = 3  # nearest MetaBary hits per probe that get triad expansion
+_BRIDGE_WORD_CAP = 12    # max words per triad branch (child1/child2/bridge)
+
+
+def _bridge_hit(doc: dict[str, Any], expand: bool) -> dict[str, Any]:
+    """One hit's bridge descriptor for enrich_request(with_bridges=True).
+
+    Labels (id/level/edge_type/q) come straight off the doc — zero queries.
+    The triad (child1/child2/bridge word sets) is fetched only for MetaBary
+    hits (level ≤ 13) that fall inside the expansion budget; everything else
+    carries triad=null. BaryEdges (L14/L15) are the coupling themselves, so
+    null is not a loss for them.
+    """
+    level = doc.get("level")
+    hit: dict[str, Any] = {
+        "id": str(doc["_id"]),
+        "level": level,
+        "edge_type": doc.get("edge_type"),
+        "q": doc.get("q") or doc.get("connection_strength"),
+    }
+    triad = None
+    if expand and level is not None and level <= 13:
+        cm1, cm2 = doc.get("cm1_id"), doc.get("cm2_id")
+        if cm1 and cm2:
+            tri = _triad_of(doc["_id"], cm1, cm2, doc.get("bridge_id"))
+            triad = {
+                k: {"id": v.get("id"), "words": list(v.get("words", []))[:_BRIDGE_WORD_CAP]}
+                for k, v in tri.items()
+            }
+    hit["triad"] = triad
+    return hit
+
+
+def _encode_vector(v: list[float], precision: str) -> tuple[list[Any], float | None]:
+    """Encode one float32 vector list per precision; returns (values, scale).
+
+    full → the float32 values untouched (no-op). float16 → rounded halfs.
+    int8 → symmetric quantization to [-127, 127] with scale = max(|v|)
+    (0-vector protected via scale=1.0); scale None for every mode except
+    int8 (int8 only because its consumer must dequantize).
+    """
+    if precision == "float16":
+        return np.asarray(v, dtype=np.float16).tolist(), None
+    if precision == "int8":
+        a = np.asarray(v, dtype=np.float32)
+        scale = float(np.max(np.abs(a))) or 1.0
+        return np.round(a / scale * 127.0).astype(np.int8).tolist(), scale
+    return v, None  # "full": byte-identical pass-through
+
+
+def _compactness(vectors: list[list[float]], precision: str) -> dict[str, Any]:
+    """Per-probe compactness descriptor: is this neighborhood tight or diffuse?
+
+    Geometry runs on the full float32 vectors regardless of precision (so the
+    numbers never depend on the payload encoding); only 'centroid' is emitted
+    in the caller's precision. mean_cos/max_cos are over all unordered hit
+    pairs; a single hit is trivially self-consistent (cos = 1.0).
+    """
+    a = np.asarray(vectors, dtype=np.float32)
+    n = a.shape[0]
+    cent = a.sum(axis=0)
+    norm = float(np.linalg.norm(cent))
+    centroid = (cent / norm).astype(np.float32).tolist() if norm else cent.tolist()
+    vals, scale = _encode_vector(centroid, precision)
+    cs = np.clip(
+        (a @ a.T) / np.outer(np.linalg.norm(a, axis=1), np.linalg.norm(a, axis=1)),
+        -1.0, 1.0,
+    )
+    iu = np.triu_indices(n, k=1)
+    pair_cos = cs[iu]
+    desc: dict[str, Any] = {
+        "n": n,
+        "mean_cos": float(pair_cos.mean()) if pair_cos.size else 1.0,
+        "max_cos": float(pair_cos.max()) if pair_cos.size else 1.0,
+        "centroid": vals,
+    }
+    if scale is not None:
+        desc["centroid_scale"] = scale
+    return desc
+
+
+def _enrich_probe(
+    chunk: str,
+    qv: np.ndarray,
+    top_k: int,
+    mb_only: bool,
+    with_bridges: bool,
+    precision: str,
+    compactness: bool,
+) -> dict[str, Any] | None:
+    """One probe's worth of enrich_request: search + encode + expand.
+
+    Standalone so `_enrich_request_body` can run probes in parallel — under
+    memory pressure each $vectorSearch can pay a multi-second cold-page load
+    (index pages evicted by other high-RSS processes), and serializing N of
+    those adds the penalties up. Pure function of its args (safe on threads).
+    """
+    filt: dict[str, Any] = {"doc_type": "baryedge"}
+    if mb_only:
+        filt["level"] = {"$lte": 13}
+    docs = vector_search(
+        _coll, qv.tolist(),
+        limit=top_k,
+        num_candidates=max(top_k * 10, 200),
+        filter=filt,
+    )
+    vectors: list[list[float]] = []
+    scales: list[float] = []
+    raw_vectors: list[list[float]] = []
+    hits: list[dict[str, Any]] = []
+    expanded = 0
+    for d in docs:
+        if d.get("vector") is None:
+            continue
+        raw = unpack_vec(d["vector"]).tolist()
+        if compactness:
+            raw_vectors.append(raw)
+        vec, scale = _encode_vector(raw, precision)
+        vectors.append(vec)
+        if scale is not None:
+            scales.append(scale)
+        if with_bridges:
+            is_mb = d.get("level") is not None and d["level"] <= 13
+            expand = is_mb and expanded < _BRIDGE_EXPAND_HITS
+            hits.append(_bridge_hit(d, expand))
+            if expand:
+                expanded += 1
+    if not vectors:
+        return None
+    block: dict[str, Any] = {"chunk": chunk, "vectors": vectors}
+    if precision != "full":
+        block["vector_precision"] = precision
+    if scales:
+        block["vector_scales"] = scales
+    if with_bridges:
+        block["hits"] = hits
+    if compactness:
+        block["compactness"] = _compactness(raw_vectors, precision)
+    return block
+
+
+def _enrich_request_body(
+    query: str, top_k: int, max_probes: int, mb_only: bool, with_bridges: bool,
+    precision: str, compactness: bool,
+) -> str:
+    if precision not in ("full", "float16", "int8"):
+        return f"precision must be one of 'full', 'float16', 'int8'; got {precision!r}."
+    err = _validate_text(query, "query")
+    if err:
+        return err
+    top_k = min(max(top_k, 1), 20)
+    max_probes = min(max(max_probes, 1), 16)
+
+    probes = _chunk_request(query, max_probes)
+    if not probes:
+        return "No usable terms in query (all stopwords?)."
+
+    try:
+        embedder = get_embedder(_settings)
+        qvs = embedder.embed(probes)
+    except Exception as e:
+        _log.exception("enrich_request: embedding failed for query=%r", query)
+        return f"Embedding failed — is Ollama running at {_settings.ollama_url}?\nError: {e}"
+
+    results: list[dict[str, Any]] = []
+    # Probes with no hits (or only vector-less docs) simply contribute nothing.
+    # Run searches concurrently so cold-page penalties overlap instead of summing.
+    try:
+        from concurrent.futures import ThreadPoolExecutor
+
+        with ThreadPoolExecutor(max_workers=min(len(probes) or 1, 8)) as ex:
+            futures = [
+                ex.submit(_enrich_probe, c, qv, top_k, mb_only, with_bridges, precision, compactness)
+                for c, qv in zip(probes, qvs, strict=True)
+            ]
+            for f in futures:
+                try:
+                    block = f.result()
+                except PyMongoError as e:
+                    _log.exception("enrich_request: vector_search failed for a probe")
+                    return (
+                        "Vector search failed — the mongot index may still be building, or "
+                        f"the query timed out under load. Error: {type(e).__name__}: {e}"
+                    )
+                if block is not None:
+                    results.append(block)
+    except Exception as e:
+        _log.exception("enrich_request: probe execution failed")
+        return f"Probe execution failed: {type(e).__name__}: {e}"
+
+    if not results:
+        return "No BE/MB vector results returned. Index may still be building or corpus is empty."
     return _fmt(results)
 
 
@@ -1880,11 +2290,42 @@ def _warmup_engine() -> None:
         _log.warning("warmup ensure_indexes failed: %s", e)
 
 
+_KEEPWARM_INTERVAL_S = 30
+
+
+def _keepwarm_loop() -> None:
+    """Periodically touch mongot's HNSW index pages to prevent OS eviction.
+
+    Under memory pressure from high-RSS processes (e.g. s04 during re-entry),
+    the OS pages out mongot's lazily-loaded index pages, causing the next
+    $vectorSearch to pay a 0.5–13 s cold penalty. Running a trivial search
+    every ``_KEEPWARM_INTERVAL_S`` seconds keeps the pages resident in the
+    page cache so tool calls hit the ~60 ms warm path every time.
+    """
+    import time as _time
+
+    # Wait for the boot warmup to finish so we don't fight it.
+    _time.sleep(5)
+
+    rng = np.random.default_rng(42)
+    while True:
+        try:
+            v = rng.normal(size=_settings.embed_dim)
+            v = (v / np.linalg.norm(v)).astype(np.float32).tolist()
+            vector_search(
+                _coll, v, limit=1, num_candidates=20, filter={"doc_type": "node"}
+            )
+        except Exception:
+            pass  # harmless; warmup thread is best-effort
+        _time.sleep(_KEEPWARM_INTERVAL_S)
+
+
 if __name__ == "__main__":
     import argparse
     import threading
 
     threading.Thread(target=_warmup_engine, daemon=True, name="mcp-warmup").start()
+    threading.Thread(target=_keepwarm_loop, daemon=True, name="mcp-keepwarm").start()
 
     parser = argparse.ArgumentParser(description="BaryGraph MCP server")
     parser.add_argument(
