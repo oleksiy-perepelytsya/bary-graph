@@ -1,0 +1,72 @@
+{
+  "seed": {
+    "id": "6a684e7f3b8893c8170928f0",
+    "level": 11,
+    "gloss": "L11 cluster centering on sand/soil: substrate, granular medium, formation",
+    "q_mb": 0.1514
+  },
+  "enrichment": {
+    "summary": "Three probes, three distinct neighborhoods. The l11_triad bridge ([sand bug, sand cricket, sand mason, sandman]) points to a domain that splits into (A) sand-dwelling fauna/ecology, (B) metal-casting mold tooling, and (C) granular-texture/areology. These converge on 'sand as functional granular medium': inhabited by organisms in one branch, shaped into forms in the other. The arenophile bridge is the conceptual connector — sand as both living substrate and moldable medium.",
+    "probes": [
+      {
+        "chunk": "sand bugs sand crickets sand masons sandman shaping",
+        "compactness": 0.8231,
+        "label": "diffuse fauna-craft bridge — sand as medium, not subject"
+      },
+      {
+        "chunk": "molding sands sand masons shaping",
+        "compactness": 0.9128,
+        "label": "tight metalcasting cluster — mold tooling"
+      },
+      {
+        "chunk": "arenophile granular substrate sand ecology",
+        "compactness": 0.6655,
+        "label": "scattered granular science — arenology, petrology"
+      }
+    ]
+  },
+  "branches": {
+    "branch_A": {
+      "label": "sand-dwelling fauna and arenic ecology",
+      "key_mb": "6a683a5ee2c945bda284334e",
+      "q_mb": 0.3010,
+      "triad": {
+        "child1": "[reticulogranular, semigranular]",
+        "child2": "[granulary, granulose, granulous]",
+        "bridge": "[granulary, granulose, subgranulose]"
+      },
+      "supporting": {
+        "id": "6a60eeab3b8893c8170a16c8",
+        "triad": {
+          "child1": "[arkose, subarkose]",
+          "child2": "[quartz arenite, sublitharenite]",
+          "bridge": "[anorthite, arkose, endmember]"
+        }
+      }
+    },
+    "branch_B": {
+      "label": "metal-casting mold tooling and friability",
+      "key_mb": "6a683a3fe2c945bda2840c71",
+      "q_mb": 0.3021,
+      "triad": {
+        "child1": "[cope, drag]",
+        "child2": "[sand-cast, sandbox]",
+        "bridge": "[cove molding, flaskless, molding]"
+      },
+      "supporting": {
+        "id": "6a60ede53b8893c8170928f2",
+        "triad": {
+          "child1": "[gagger, molding sand]",
+          "child2": "[friable]",
+          "bridge": "[loam, loamless, molding sand]"
+        }
+      }
+    }
+  },
+  "tension": "Branch A frames sand as a natural substrate for life — arenic organisms, granular soil textures, arenite geology. Branch B frames sand as an engineered medium — moldable, packable, friable metal-casting sand with precision tooling. The same word, 'sand', is the living floor in one and the workspace in the other.",
+  "candidate_bridge": "arenophile / molding sand / granular substrate — words that straddle the boundary: 'arenophile' describes organisms adapted to sand; 'molding sand' describes sand adapted for shaping; 'granular substrate' is the shared physical property. The tension is between sand-as-habitat and sand-as-medium.",
+  "proposal": "Cross-grain: natural granular ecology ↔ engineered granular craft via shared substrate physics. The SMB captures the duality of granular media — one branch lives in it, the other molds it. Seed level 11 suggests this is a mid-abstraction domain where material properties blur organism and artifact.",
+  "child_cosine": null,
+  "status": "candidate",
+  "created": "2026-09-17T02:11:00Z"
+}
