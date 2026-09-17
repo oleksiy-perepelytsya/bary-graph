@@ -90,6 +90,61 @@ NOT auto-launch on s05 completion without being asked.
   delete models whose blobs it references (deepseek `6150cb38…` already removed
   safely).
 
+# AUTHOR-LAYER EXPERIMENT — STRUCTURAL PROJECTION (design, folded 2026-09-17)
+
+Status: **STORED, not scheduled.** Manual trigger (user's word). Do not start
+automatically after s05/s06.
+
+**Hypothesis.** Encoding a person's works as structural SMBs on top of the
+dictionary graph yields a measurable associative signature ("way of thinking"
+as structure). Feynman = the controllable test case; the same construction is
+the intended mechanism for the user's own persona-projection layer (AGENTS.md
+goal). It is a *projection/atlas*, not a recreation of a person.
+
+**Prototype evidence already in poc.** The caterpillar/half-track SMB
+`6aaaec6b516170692834ab15` encodes the user's own idiosyncratic bridge —
+*erucism : skin :: half-track : tundra* (thin crust, extremely slow regrowth).
+A testimony-association the dictionary alone never produces; confirms SMB form
+carries individual associative data beyond the lexicon.
+
+**enrich_request grounding already gathered (poc, 2026-09-16):**
+- `path integral feynman` mean_cos 0.958 → L13 `path integral formalism ↔
+  Faddeev–Popov ghost` bridge `quantum gravity`
+- `diagram quantum electrodynamics` → L13 `Feynman diagram / spin network ↔
+  interaction picture` bridge `diagram, drawing`
+- `explanation analogy wonder` 0.929 → `analog/analogy` cluster; "wonder"
+  retrieves NO coordinate → affect/tone registers are invisible to the graph
+  (documented limit).
+
+**Method (per author, works as timestamped slivers).**
+1. Corpus: 3–4 short iconic Feynman texts ("The Value of Science" 1955,
+   Messenger Lecture segments) + a control author's analogous essays.
+2. Extract terms (existing `cog_store_paper_extraction` path) → ground each via
+   `enrich_request` (mb_only, with_bridges, compactness) → structural SMBs via
+   `_create_structure_meta_bary_body` (source='structural', manifest
+   `smb_builds.jsonl`).
+3. Grade via QC gates (distinctness cos(c1,c2)<0.92; mediation ≥0.50;
+   coherence soft-flag <0.70; novelty vs the 6+ built SMBs).
+4. Signature metrics: bridge-repertoire centroid, cross-region bridge density
+   (abstract↔concrete/analogy clusters), edge-type mix; Feynman vs control →
+   bridge-distance.
+5. Extensions: diachronic slivers by decade → structural biography; same
+   machinery on the user's own texts/notes → personal projection layer.
+
+**Boundaries.** Structure ≠ process (thinking = the multi-probe walk +
+bridge-collapse, the relational-compression axis). Lexicon-capped, affect-blind,
+no negation/irony/un-said. Output = atlas of couplings, coordinates for
+investigation only.
+
+**Sibling interest (user's, drives a parallel exploration):** what the *models*
+themselves produce — Qwen3.6's SMB bridges are also a projection (trained on
+lexicons whose siblings fed its corpus). Map Qwen3.6's semantic landscape from
+the candidate pool (see `cognitive/batches/smb_candidates.jsonl`,
+~173 qwen3.6 records as of 2026-09-17).
+
+**Artifacts when triggered:** `cognitive/author_feynman/` corpus+prompts,
+`cog_author.py` driver, manifest + QC sheets appended to shared batches.
+
 # ENRICH-REQUEST RELATIONAL COMPRESSION — FULL IMPLEMENTATION PLAN
 
 Status: **CONFIRMED by user, NOT yet implemented / stashed for implementation.**

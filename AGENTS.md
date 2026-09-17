@@ -4,6 +4,10 @@ The long-term aim of this whole effort — beyond any single feature, benchmark,
 batch run — is to **improve the agent's cognitive memory** and, ultimately, to give
 the agent a **personality-like layer built on BaryGraph Structure MetaBarys (SMBs)**.
 
+> Timezone: the user's local time is **UTC+2**. Pipeline/runbooks/logs use UTC
+> unless stated otherwise; convert user-reported "evening"/"morning" windows
+> accordingly.
+
 Concretely:
 - The cognitive-pipeline work (extraction, SMB analysis, proposals, batches,
   `cog_*` MCP tools, `opencode run` cycles with an ollama model) is a means to
