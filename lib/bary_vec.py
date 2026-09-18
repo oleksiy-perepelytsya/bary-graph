@@ -16,6 +16,9 @@ TYPE_SENTENCES: dict[str, str] = {
     "extends": "one word is derived from or extends the other",
     "applies_to": "these two words share a common origin or root",
     "is_instance_of": "this relationship is a specific instance of the broader relationship",
+    # s07b default pairing (general, complementary): no synonymy/antonymy claim.
+    "same_lang": "these two words are related and occur in the same language",
+    "cross_lang": "these two words name related concepts in different languages",
 }
 
 

@@ -102,21 +102,38 @@ def run(argv: Sequence[str] | None = None) -> None:
     if not dois_active:
         log.info("doi_bridges absent/empty -> per-word DOI propagation skipped")
 
-    # Deterministic enumeration: sort by _id (head-anchored, monotonic; this
-    # mongot's unsorted "natural order" proved non-deterministic across runs).
-    # $gt / $in / $or on non-_id fields are unreliable here, so resume is a
-    # client-side _id <= last_id skip, and the BE + orphan-sense vector fetch
-    # is batched over a window of batch_n words (one $in per ~2000 ids,
-    # mirroring stage 04's proven pattern) instead of one $in round-trip per
-    # word.
+    # Enumeration: natural (physical) order. Sorting by _id (the original
+    # design) forces the server to fully sort ~10M word docs — viable only
+    # while physical order still aligns with _id. Once a 10M-doc bulk vector
+    # pass has scrambled physical order, that sort cannot stream even its
+    # first batch within the client socket timeout, and every resume aborts
+    # with NetworkTimeout before processing anything. Natural order streams
+    # immediately, and resume correctness holds because the skip below is by
+    # _id VALUE (idempotent), not by stream position; the head is re-walked
+    # cheaply (no sense lookups for skipped words). A compound
+    # (doc_type, node_type, level, _id) index exists but this mongot treats
+    # $gt/$range seeks are unreliable here, so stay with full natural scans.
     skip_to = ObjectId(cp.last_id) if (cp.last_id and not scoped) else None
-    cur = coll.find(q, {"_id": 1, "properties": 1}).sort("_id", 1).batch_size(5000)
+    cur = coll.find(q, {"_id": 1}).batch_size(5000)
+    # Head words (≤ last_id) are skipped by _id value before their properties
+    # are ever needed, so stream only _id for the walk; fetch properties
+    # lazily (a handful of tail documents) instead of dragging 10M IPA/
+    # etymology blobs across the wire — ~30x faster resume walk.
     win: list[dict] = []
     run_count = 0
+    # Words that can never carry a vector (no senses, or no vector-able source)
+    # are skipped rather than counted in `n`; total() still counts them, so the
+    # completion gate `n >= total` would never fire and `done` stays False
+    # forever. Track them separately and gate on n + dead >= total. These are
+    # deterministic across resumes, so the count is idempotent.
+    dead = 0
 
     def _drain() -> None:
-        nonlocal ops, n, win, run_count
-        for w_id, vec, sense_ids in _process_window(coll, win):
+        nonlocal ops, n, win, run_count, dead
+        computed = _process_window(coll, win)
+        out_ids = set()
+        for w_id, vec, sense_ids in computed:
+            out_ids.add(w_id)
             ops.append(
                 UpdateOne(
                     {"_id": w_id},
@@ -128,6 +145,7 @@ def run(argv: Sequence[str] | None = None) -> None:
             n += 1
             run_count += 1
             cp.last_id = str(w_id)
+        dead += sum(1 for rec in win if rec["w_id"] not in out_ids)
         if len(ops) >= batch_n:
             if not args.dry_run:
                 coll.bulk_write(ops, ordered=False)
@@ -143,7 +161,7 @@ def run(argv: Sequence[str] | None = None) -> None:
             break
         if skip_to is not None and w["_id"] <= skip_to:
             continue
-        props = w["properties"]
+        props = coll.find_one({"_id": w["_id"]}, {"properties": 1, "_id": 0})["properties"]
         word, pos = props["word"], props["pos"]
         lang = props.get("lang", "en")
 
@@ -164,7 +182,8 @@ def run(argv: Sequence[str] | None = None) -> None:
         be_ids = {s["parent_edge_id"] for s in sense_docs if s.get("parent_edge_id")}
         orphan_ids = [s["_id"] for s in sense_docs if not s.get("parent_edge_id")]
         if not be_ids and not orphan_ids:
-            continue  # word with zero senses (shouldn't happen post-stage-03)
+            dead += 1  # word with zero senses (shouldn't happen post-stage-03)
+            continue
         win.append(
             {
                 "w_id": w["_id"],
@@ -181,13 +200,13 @@ def run(argv: Sequence[str] | None = None) -> None:
     if ops and not args.dry_run:
         coll.bulk_write(ops, ordered=False)
 
-    log.info("computed %d/%d L14 word vectors", n, total)
+    log.info("computed %d/%d L14 word vectors (dead=%d)", n, total, dead)
     if scoped:
         return  # scoped runs don't touch the shared stage checkpoint
 
     cp.processed = n
     cp.total = total
-    if not args.dry_run and n >= total:
+    if not args.dry_run and n + dead >= total:
         finish(cp, settings, log)
 
 

@@ -20,6 +20,7 @@ STAGES: dict[str, str] = {
     "05_word_vectors": "scripts.s05_word_vectors",
     "06_l14_edges": "scripts.s06_l14_edges",
     "07_orphan_reentry": "scripts.s07_orphan_reentry",
+    "07b_pair_orphans": "scripts.s07b_pair_orphans",
     "08_metabary": "scripts.s08_metabary",
     "09_extend": "scripts.s09_extend",
     "10_index": "scripts.s10_index",

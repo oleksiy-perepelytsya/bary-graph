@@ -243,3 +243,172 @@ the landmines are the full-dim materializations:
 - Warmup call earlier set qwen keep_alive=2h; 600s windows make re-cold-load a
   non-event.
 - gen7 embed ETA ~15:00 UTC+2. After that, ~1-day Phase A embed + insert loop.
+
+## s05 — stuck `done=false` / unresumable (FOUND 2026-09-17, FIXED but uncommitted; poc likely has the same latent bug)
+Symptom on barygraph_all: checkpoint `pipeline_state_all/05_word_vectors.json` frozen at
+`done=false, processed=10256384, last_id=6a9a5228c93bd9ae147a7aa2`; every resume printed
+only `start processed=10256384` then produced no further work/checkpoint change. Log showed
+the original run had actually reached `computed 10256974/10256975` at 04:26:14Z and then
+exited without flipping `done`.
+- ROOT CAUSE A (resume abort): the enumeration is `find(word).sort("_id",1)`. That sort can
+  only stream while physical slot order still aligns with `_id` (true at initial ingest).
+  After s05's 10.26M-row bulk `UpdateOne` vector pass scrambled physical order, the server
+  must fully sort ~10.26M docs before the first batch; that exceeds the client
+  socketTimeoutMS (120s) → each resume died with `pymongo.errors.NetworkTimeout`, having
+  written nothing. (Confirmed: forward `natural` streams its first batch in ~5s; `natural` +
+  `sort(_id)` blocks >50s. `_id:{$gt}` + the word filter also degrades to a full scan; a
+  pure `_id:{$gt}` seek does work. The same class as the s04 EOF-tail note below.)
+- ROOT CAUSE B (done never flips): completion gate is `n >= total`, but `total` is the count
+  of ALL L14 words while the loop `continue`s words with zero senses (`n` never counts them).
+  One dead word ⇒ `n == total-1` forever ⇒ `finish()` never called. This is why the original
+  04:26 run ended cleanly yet `done=false`.
+- Data reality (verified): the 590-word tail band `6a9a5228c93bd9ae147a7aa3 … 6a9a5229c93bd9ae147a7cf0`
+  is contiguous, and ALL 590 already carry vectors (written by the 04:26 run before it died).
+  The only vector-less "word" is the single zero-sense dead word (the `dead=1`). So s05's DATA
+  is effectively complete; only the checkpoint flag is stale. `data/s05_tail_word_ids.json`
+  was written as the would-be recompute list and is EMPTY (0 ids).
+- FIXES applied (uncommitted) in scripts/s05_word_vectors.py:
+  (1) natural-order enumeration (dropped `.sort("_id",1)`), still correct because resume
+      skips by `_id` VALUE (idempotent), not stream position;
+  (2) `_id`-only projection for the head walk (~30x faster: 83k/s vs 2.7k/s) with lazy
+      per-tail-word `properties` fetch;
+  (3) `dead` counter (zero-sense skips + empty-vector windows) and gate `n + dead >= total`,
+      so `done` can actually flip.
+- FIXES in scripts/s06_l14_edges.py (same db weaknesses): indexed pure-word count for sizing V
+  (the `vector:{$ne:None}`/`$exists` filter is an unindexable full scan that stalls),
+  natural-order loader, and client-side skip of vector-less words (the dead word previously
+  crashed `unpack_vec(None)`).
+- Ad-hoc index created on barygraph_all during diagnosis: `{doc_type,node_type,level,_id}`.
+  It did NOT help (planner won't seek/use it for the sorted enum) and s04 already found this
+  key wedges mongod (see s04 EOF-tail note) — candidate for DROP unless a future stage uses it.
+- POC follow-up (user recollection 2026-09-17): the same s05 symptom is believed to have hit
+  the poc build. poc is ~1.06M words (768-d), so the sort may have survived, but the
+  `n >= total` dead-word gate is size-independent and latent. TODO: check poc
+  `pipeline_state/05_word_vectors.json` (`done`/`processed`/`total`) and, if stale, either
+  re-run s05 with these fixes or finalize the checkpoint; backport the s05/s06 changes.
+
+## s06 + s07 completed on barygraph_all (2026-09-17) — final numbers
+- s05 checkpoint finalized by hand (mark_done, keep processed=10256384 re: earlier note;
+  `data/s05_tail_word_ids.json` = 0 ids; word data provably complete). LOOKED-AT: s06 ran to
+  completion against the finalized s05 WITHOUT --force (stage-order guard now clean).
+- s06 L14 edges: loaded 10,256,974 word vectors (dead=1) via 8-way parallel pure-`_id` block
+  scan (S06_WORD_LO/HI band, ~27 min); tiers t1 18,467 · t2 508 · t3 3,536 · t4 191,157 ·
+  t5 1,179 · t6 14,313 = 229,160 L14 BEs. checkpoints done=true. V memmap
+  /storage/bary/s06_V.mmap removed.
+- s06 quirks learned (again): `already_parented` =5;None preload scan crawls (~7 min) because it
+  walks the entire 10.25M null-parent index run — worthwhile later optimization to skip when
+  no L14 BEs exist; DOI propagate is per-edge 2-RTT (kept for now, did not throttle enough).
+- s07 L14 orphan re-entry: REWRITTEN to bounded subset per user decision — pair first
+  S07_ORPHAN_LIMIT orphans by _id (default 100,000) instead of all ~9.8M (which would mint
+  9.8M inferred edges and balloon s08's L14/L13 pass). OV memmapped on /storage
+  (s07_OV.mmap); orphan scan = pure `_id` block + client-side parent/vector filter + hint
+  (`_id_`); BE pool loaded via `_id >= ObjectId(2026-09-17T11:50Z)` band (s06 minted the L14
+  edges 12:00–13:12 UTC today) + sort/hint — the naive `find({doc_type,level}, {vector})`
+  stalls mongot (count works, fat projection getMore hangs). Chunked (CHUNK=1024) argmax
+  matmul 100k×229k×4096; streamed inserts batch_n=2048 with parent stamps + per-edge
+  doi_bridge.propagate (kept, ~151 edges/s steady).
+- s07 run: 14:48:49→15:10:53 UTC (~22 min), checkout done=true, processed=t=100,000 inferred
+  L14 BEs. L14 BE total now 329,160 (229,160 ingested + 100,000 inferred). OV mmap removed.
+- NEXT: s08_metabary._load_unparented_bes builds (n,4096) np.empty in RAM — 87GB for 5.33M
+  unparented L15 BEs (audit note). L15 BE total on the all-build is 12,051,296, so that
+  alloc would be ~197GB → must memmap before s08 runs. Also s08 writes MBs with per-doc
+  doi_bridge.propagate (same 2-RTT churn pattern; batch if it throttles).
+- s07b_pair_orphans REWRITTEN (2026-09-17, user decision): pair the WHOLE orphan pool
+  incrementally in consecutive _id-window rounds (S07B_WINDOW default 1,000,000), greedy
+  unique-match at a strict floor 0.70 with SAME-LANGUAGE candidate pairs drained first
+  (same_lang pairs get priority over cross_lang), then cross_lang fills within the window.
+  Restartable via a window ledger (pipeline_state_all/07b_rounds.json, resume _id per
+  round); --reset/--force/resume semantics documented in the stage docstring. No DOI
+  propagation anywhere in this stage (deleted) — the per-edge 2-RTT reverse lookups were
+  the write bottleneck; writes are batched (insert_many + bulk parent stamps). Resumed so
+  the 45,060 BEs from the earlier bounded 100k-cap run count as already-done (their words
+  are parented and skipped by the loader).
+- lang index experiment ABORTED: a partial index on properties.lang over the 35.4M-doc
+  all-build collection was ~3.8% after ~13 min (ETA ~6 h) and blocked per-language
+  count/find probes — killed via admin killOp and dropped. DB-native language rounds are
+  therefore not viable on this box; per-language priority is instead achieved inside each
+  _id window (same-lang pairs drained first in the greedy).
+- s07b full-pool run launched detached (log /tmp/opencode/s07b_full.log), window 1M,
+  min_cos 0.70, --force (stage checkpoint was done=true from the earlier capped run).
+- s08 REQUIREMENTS (user decisions 2026-09-17): (a) NO DOI/provenance propagation —
+  inferred MB triads over a pure-kaikki corpus carry no DOIs, and the per-MB 2-RTT
+  doi_bridge.reverse-chain lookups were the write throttle; (b) source="structural" SMBs
+  are EXCLUDED from s08 entirely — every load path, the count query, and the level<=13
+  safeguard carry {"source":{"$ne":"structural"}} while pipeline MBs keep no source field,
+  so the 3 SMBs minted 09-16 stay unparented for a later SMB rerun.
+- s08 MEMORY REDESIGN: L15 child pass is 12,051,296 BEs x 4096 x 4B = 197 GB — must never
+  touch RAM. Each level's children and bridges now load into DISK memmaps at full embed_dim
+  (s08_C15.mmap etc, for write) PLUS a projected+L2-normalised MATCH_DIM memmap (s08_C15_P.mmap,
+  using the same seeded _gaussian_projector as lib.match._project_match) for matching and
+  bridge selection. Child match runs top_k_pairs on the projected memmap (dim==MATCH_DIM
+  so no anonymous re-projection); child HNSW (~49 GB anon at 12M) is freed right after
+  greedy_unique_match; the bridge HNSW is built on the projected BVP (~10 GB anon at 2.4M
+  bridges) and centroids come from CVP rows so CV_full stays cold until write. Writes
+  re-read full-dim CV/BV rows in BATCH=1000 with posix_fadvise(POSIX_FADV_DONTNEED) on the
+  whole file after each batch, bounding write-phase RSS. Peak anon ~ max(49, 10) ≈ 60 GB,
+  sequential not additive (previous as-authored peak ~300 GB → OOM guard kill).
+- s08 --children-cap N (env S08_CHILDREN_CAP, default none = full pass): dev-only knob that
+  caps the pass-1 child pool and forces a single-threaded load scan, so the memmap
+  lifecycle / match / bridge-assign / dry-run write can be smoke-tested in minutes before
+  the full run. Stripped from argv like s07b's --window.
+- s08 deploy status: 00:03 UTC 09-18 smoke launched detached (PID 253370, log
+  /tmp/opencode/s08_smoke.log): --force --children-cap 50000 --dry-run (s07b mid-flight,
+  so the L14 bridge pool is the live ~2.4M pool). Once the smoke passes clean and s07b
+  finishes, launch full `python -m scripts.s08_metabary` (no --force needed; structural
+  guard patched).
+## Overnight 2026-09-17/18 — s07b crash + restart; s08 smoke PASSED
+- s08 SMOKE (--force --children-cap 50000 --dry-run, PID 254335) ran to COMPLETION:
+  - 50k L15 children loaded (dropped=0) in ~80s single-threaded cap scan;
+  - L14 bridge pool streamed to s08_B14.mmap (full pool, parallel 8 workers,
+    ~360/s under s07b contention — projection moved OUTSIDE the load lock after
+    the first attempt serialized at ~145/s aggregate, batch_size 5000→10000);
+  - bridge HNSW built on projected BVP (1024-dim) — "bridge HNSW ready" 04:02:49;
+  - greedy match → 15,142 pairs (from 50k children @ cos 0.90);
+  - bridge assignment from CVP centroids OK; dry-run wrote nothing;
+  - pass-2 (children@L14=50k cap, bridges@L13=0) → 0 triads → clean exit 04:45:29;
+  - ALL s08_*.mmap files cleaned up by the stage itself. Memmap lifecycle valid:
+    CV(full)+CVP(proj) children, BV+BVP bridges, child HNSW freed pre-bridge,
+    projected centroids, fadvise write path (dry-run so not exercised).
+- s07b CRASH: died 03:49 UTC with pymongo NetworkTimeout (120s socketTimeoutMS)
+  during round-3 write phase (~391k BEs of the round already inserted). Cause:
+  single write op exceeded 120s while s08 smoke was concurrently hammering reads.
+  mongod was alive the whole time (fat count_documents still stalls; stages don't
+  use it). Rounds 1–2 ledger intact; round-3 partial BEs + word stamps DID land,
+  so the resume window re-scans and skips the now-parented words (no double
+  parent). Restarted 06:14 UTC (PID 256446) with PYMONGO_SOCKET_TIMEOUT_MS=300000
+  (env knob honored by lib/db.py:39) so a slow write no longer kills the stage.
+  Stale 16GB s07b_OV.mmap removed before relaunch.
+- NEXT (on wake): s07b continues ~3h/window (~10 windows); when finished, RUN
+  FULL s08 (`python -m scripts.s08_metabary`, no --force needed — structural
+  guard patched, 08 checkpoint absent) detached; expect ≈6–7h. Full s08's L15
+  child pass loads 12,051,296 BEs → the load rate (~360/s observed under
+  contention) will be the pacing factor; alone on the box it should be faster.
+## s07b WRITE-PATH PERF PATCH (2026-09-18 ~07:00 UTC)
+- Microbenchmarked on barygraph_all (_perf_probe throwaway coll) with REAL wire
+  shapes (BE doc = 16KB float32 BinData vector + 16KB type_vector ≈ 32KB):
+    baseline ins2048 + ack stamps     191/s
+    ins2900 + ack stamps              267/s   (+40%)
+    ins2900 + UNACK stamps            378/s   (~2x)   <-- adopted
+    ins8192 + ack stamps              319/s (pymongo auto-splits >48MB msgs)
+    w=0 INSERTS                       no help (kept acked — BEs are the payload)
+  Live rate was ~57/s (cold/crowded WT cache on the 35M-doc collection); expect
+  roughly 1.5-2x lift after restart.
+- Patch in scripts/s07b_pair_orphans.py:
+  - batch_n = args.batch_size or S07B_WRITE_BATCH env (default 2900) — was
+    settings.batch_size (2048).
+  - _flush(..., stamps_unack=True): parent-word stamps run w=0 via
+    coll.with_options(write_concern=WriteConcern(w=0)) — idempotent bookkeeping;
+    a lost stamp leaves the word unparented and re-pair-able, round ledger is
+    the resume source of truth. BE insert_many stays acknowledged.
+  - Env switch S07B_STAMPS_UNACK=0 to restore acked stamps.
+- Rollout: manually-patched code is NOT picked up by the running stage (loading
+  its window since 06:14). Detached WATCHER (/tmp/opencode/s07b_watch.py,
+  PID 258000, action log /tmp/opencode/s07b_watch.log):
+  - detects the next "round N done:" line (byte-offset seeded at watcher start),
+    SIGTERMs the stage ~10s later (ledger is saved BEFORE that log line), then
+    relaunches -> patched code runs from the NEXT window onward.
+  - afterwards acts as crash-guard (relaunch w/ 180s backoff) until the log
+    shows "band exhausted" -> stops.
+  - Watch actions + the stage log /tmp/opencode/s07b_full.log (appended).
+- Also added earlier (06:14 restart): PYMONGO_SOCKET_TIMEOUT_MS=300000 so a slow
+  mongod write can't NetworkTimeout-kill the stage again (the 03:49 crash cause).

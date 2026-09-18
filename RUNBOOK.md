@@ -13,7 +13,8 @@ process/state map so nothing is lost on session compaction.
   `python3.11 -m scripts.<stage>` and keep logs under `/tmp/opencode/`.
 - Stage order (guard in `scripts/_base.py`, refuses out-of-order runs):
   s01_parse → s02_embed → s03_insert_nodes → s04_l15_edges → s05_word_vectors →
-  s06_l14_edges → s07_orphan_reentry → s08_metabary → s09_extend → s10_index.
+  s06_l14_edges → s07_orphan_reentry → s07b_pair_orphans → s08_metabary →
+  s09_extend → s10_index.
 
 ## Process map (as of 2026-09-16)
 
@@ -266,3 +267,55 @@ Preserved entries encode at **caller precision**, **promoted to "full"** when
 
 The full plan + design decisions live HERE, not just in conversation. Resume
 from this section.
+
+# S08 WRITE-PATH PATCH — PLAN (deferred, implement "a bit later")
+
+Status: **APPROVED for drafting, NOT yet implemented.** Decided 2026-09-18:
+let s07b roll as-is (A+B load parallelization rejected — 2–3h gain not worth
+new-bug risk). These s08 changes are queued; apply them as part of s08
+launch-readiness (before the full s08 run, i.e. after s07b band-exhaust +
+s07 sweep). s07 needs NO port — it already carries s07b's write tuning.
+
+## What to change in `scripts/s08_metabary.py`
+
+1. **Unacknowledged MB parent stamps** (the real win — same rationale as
+   s07b's `_flush`):
+   - Currently `:347` does `coll.bulk_write(ups, ordered=False)` acknowledged.
+   - Switch to `coll.with_options(write_concern=WriteConcern(w=0))`, default ON,
+     env switch `S08_STAMPS_UNACK=0` restores acked (mirror s07b).
+   - MB `insert_many` (`:340`) STAYS acknowledged — the MB docs are the durable
+     payload; stamps are idempotent bookkeeping.
+   - Safety: s08 does **3 stamps per triad** (2 children + bridge), so the
+     s07b-measured gain (~7s→0.2s per batch) scales ~3× here. Lost stamps are
+     harmless — a BE left unparented sits at a level no later pass consumes
+     (bridges selected at exact level, children only at that pass's child
+     level), so it cannot be re-consumed or double-parented. The `:379`
+     level≤13 guard still blocks bad re-runs.
+2. **Write `BATCH` 1000→2900** (`:324`) for all level passes — cuts
+   insert round-trips ~2.9×; keep the per-batch
+   `posix_fadvise(POSIX_FADV_DONTNEED)` (`:350-353`) so write-phase RSS stays
+   bounded (same as s07b's batch 2900).
+3. **Per-batch write progress log** — s08 logs nothing during the long L13
+   write; add a `log.info("  written %d triads (L%d)")` per batch like s07b's
+   "inserted %d BEs this round" so the multi-hour write can be monitored.
+
+## Launch-readiness sequence for s08 full run
+
+- s07b band exhausted (watcher stops; `07b_rounds.json` `resume` ≥ block_hi).
+- Run s07 sweep: `S07_ORPHAN_LIMIT=7000000` (absorb ALL remaining orphans,
+  no floor) — after an optional post-fix `--limit 4000 --dry-run` smoke that
+  shows `winning partners` in the hundreds (the pre-fix smoke printed `=1` =
+  the knn_query label bug's signature; check4 already proved the fix).
+- Apply this patch to s08, py_compile, then launch full
+  `python3.11 -m scripts.s08_metabary` (no --force; structurally-guarded,
+  no 08 checkpoint). Expect ≈6–7h+; L15 child pass = 12,051,296 BEs, load
+  rate (~360/s under contention, should improve alone on the box) paces it.
+
+## SMB candidates file (cognitive agent results)
+
+- Path: `/workspace/bary-vector/cognitive/batches/smb_candidates.jsonl`
+  (driver output of `cog_mb_loop.py`; 335 records as of 2026-09-18).
+- Copy placed at workspace root: `/workspace/bary-vector/smb_candidates.jsonl`
+  (identical content, per user request 2026-09-18).
+- Author mix: 311 `qwen3.6:27b-q4_K_M-ctx64k@opencode`, 24
+  `big-pickle@opencode-0.5`.
