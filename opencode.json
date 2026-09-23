@@ -50,6 +50,19 @@
         "MCP_MONGO_DB": "barygraph_poc",
         "COGNITIVE_BATCH_DIR": "/workspace/bary-vector/cognitive/batches"
       }
+    },
+    "mnemo": {
+      "type": "local",
+      "command": ["python3.11", "-m", "scripts.mcp_smem"],
+      "enabled": true,
+      "environment": {
+        "MONGO_DB": "barygraph_all",
+        "MONGO_COLLECTION": "barygraph",
+        "EMBED_MODEL": "qwen3-embedding:8b",
+        "EMBED_DIM": "4096",
+        "OLLAMA_URL": "http://ollama:11434",
+        "SMEM_POOL_FILE": "/workspace/bary-vector/cognitive/batches/smem_pool.jsonl"
+      }
     }
   }
 }
