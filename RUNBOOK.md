@@ -14,7 +14,7 @@ process/state map so nothing is lost on session compaction.
 - Stage order (guard in `scripts/_base.py`, refuses out-of-order runs):
   s01_parse → s02_embed → s03_insert_nodes → s04_l15_edges → s05_word_vectors →
   s06_l14_edges → s07_orphan_reentry → s07b_pair_orphans → s08_metabary →
-  s09_extend → s10_index.
+  s09_extend → s10b_projection (deferred) → s10_index.
 
 ## Process map (as of 2026-09-16)
 
@@ -319,3 +319,70 @@ s07 sweep). s07 needs NO port — it already carries s07b's write tuning.
   (identical content, per user request 2026-09-18).
 - Author mix: 311 `qwen3.6:27b-q4_K_M-ctx64k@opencode`, 24
   `big-pickle@opencode-0.5`.
+
+# S10 SERVING INDEX — 1024-DIM SCALAR-QUANTIZED (FEASIBILITY + DECISION)
+
+Status: **AGREED DIRECTION (2026-09-18), deferred-pending.** Do NOT run
+`s10_index` against `barygraph_all` until this is executed. Decided with user:
+full-corpus quick search must be 1024-dim scalar-quantized; the deferred
+decision was to keep building 7b/7/8 first (they run on host RAM, mongot-
+independent) and execute this at the clean break before s10.
+
+## Why the 4096 spec cannot serve
+
+- Final corpus ≈ 42–45M docs, each carrying a 4096-dim `vector` field.
+- Payload = 44M × 16 KB ≈ **700 GB** of float32 vector data. The POC anchor
+  (6.78M × 768-dim = 20.8 GB) is what forced `10g→20g`; scaling ~34× wants a
+  many-hundreds-of-GB container. Host: 251 GB total / ~230 GB available. Not
+  feasible — payload alone exceeds the box, before WT cache (9.5 GiB), the
+  HNSW graph, or build peak.
+- NOTE: mongot `scalar` quantization alone (without dim reduction, i.e. on the
+  existing 4096 field) still indexes 4096-d vectors → the ~700 GB graph/
+  traversal problem stays. The dim reduction must live in the stored field.
+
+## Scale anchors for the 1024 route
+
+| serving pack | payload | verdict |
+|---|---|---|
+| 4096 float32 (current spec) | ~700 GB | impossible |
+| 1024 float32 | ~176 GB | needs near-host-size container, no margin |
+| **1024 scalar (int8-style)** | **~45 GB** | **feasible** in 64–96 g container |
+| 512 scalar | ~22 GB | trivially feasible, more precision loss |
+
+Quality note: the graph was ALREADY built at 1024 — every pairing/bridge in
+s04/s07b/s08 chose parents via `lib/match._project_match` (seeded Gaussian,
+4096→1024, L2-normalized). Serving at 1024 is *more consistent* with the
+graph's own decision space than 4096.
+
+## mongot capability smoke test — PASSED (2026-09-18)
+
+On a scratch `barygraph_test_vector_smoke` collection (dropped after): local
+mongot 8.3.4 accepts 1024-dim vector indexes, both plain float32 and with
+`"quantization": "scalar"`. Both built to READY and answered `$vectorSearch`
+(note: option token is `scalar`, NOT `int8`). No dimension-support blocker.
+
+## Execution steps (at the clean break — post-s08, pre-s10)
+
+1. **Backfill stage (new, e.g. `s10b_projection`):** band-scan all docs by
+   pure `_id` windows (no fat scans; `count_documents` stalls at 35M+ docs).
+   Per doc: read `vector` (4096 f32) → `_project_match` → L2-normalize →
+   scalar-quantize to int8 with per-doc `vector_scale` (same convention as the
+   int8 payloads in `lib`/enrichment) → store as new field `vector_m`.
+   Writes: batch 2900, unacked-stamp style like s07b, resume-safe via
+   `pipeline_state_all/10b_projection.json` checkpoint.
+2. **Index spec edit:** `indexes/vector_index.json` → path `vector_m`,
+   `numDimensions: 1024`, `"quantization": "scalar"`, keep filter paths
+   (doc_type, level, edge_type, node_type).
+3. **Container memory:** raise docker-compose `mem_limit` 20g → **96 g** and
+   restart mongod — ONLY at the clean break, deliberately, never mid-s07b.
+4. **Run `s10_index`** — build on ~45 GB int8 payload; expect build peak
+   ~20–50 GB, fits 96 g.
+5. **Quality gate BEFORE wiring to MCP:** compare top-k neighbor agreement
+   (1024-scalar index vs a persisted offline 4096 HNSW over a query sample,
+   `MATCH_DIM=1024` cosine); MUST confirm rank overlap first.
+6. **MCP/`cog` query path:** embeds qwen3 4096 → project via the same seeded
+   projector → `$vectorSearch` on `vector_m`. Currently built for poc 768; the
+   all-build serving path is a config switch (EMBED_DIM + projection keyed off
+   env), not code surgery.
+7. **This section stays authoritative** for the s10 re-run; revisit before
+   executing if any step is stale.

@@ -7,7 +7,7 @@ services:
     container_name: barygraph-mongo
     hostname: barygraph-mongo
     restart: unless-stopped
-    mem_limit: 20g   # 10g→20g: mongot HNSW build on 5.6M+ 768-dim vectors peaks beyond 10g
+    mem_limit: 60g   # 20g→60g: barygraph_all HNSW/4096-dim serving-index build + WiredTiger cache headroom
     ports:
       # Host port 27117 so tests/dev never collide with other local Mongos.
       - "27117:27017"

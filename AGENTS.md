@@ -6,7 +6,9 @@ the agent a **personality-like layer built on BaryGraph Structure MetaBarys (SMB
 
 > Timezone: the user's local time is **UTC+2**. Pipeline/runbooks/logs use UTC
 > unless stated otherwise; convert user-reported "evening"/"morning" windows
-> accordingly.
+> accordingly. When stating any wall-clock time or ETA to the user in chat,
+> provide **only the UTC+2 time, already converted** (e.g. "18:32 your time") —
+> do not give both UTC and UTC+2.
 
 Concretely:
 - The cognitive-pipeline work (extraction, SMB analysis, proposals, batches,
