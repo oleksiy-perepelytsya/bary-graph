@@ -2,12 +2,15 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20186500.svg)](https://doi.org/10.5281/zenodo.20186500)
 
-> **BaryGraph turns relationships into searchable objects.**
-> It is a graph-and-vector architecture for finding useful conceptual coordinates: not only *what is near a query*, but *what relation might connect two otherwise distant regions of a semantic space*.
+> **BaryGraph: A Relational Geometry for Cognitive AI**
+> *BaryGraph turns relationships into searchable objects.*
+BaryGraph is a recursively constructed relational vector architecture for AI memory and reasoning. Starting from a flat semantic substrate, it forms triadic objects in which two concepts are joined by a stored relational vector. These objects then become the building blocks of higher-order structures, propagating meaning upward through a hierarchy entirely in vector space.
 
-Most retrieval systems return an answer, a document, or a neighbor. BaryGraph is built for a different moment: when a researcher, writer, agent, or tool needs a **productive unfamiliar adjacency** - a connection that is not yet a conclusion, but gives thinking somewhere new to go.
+The result is a deterministic, navigable semantic landscape: a structured latent memory of language movement, where concepts, bridges, tensions, contradictions, and relations of relations become retrievable coordinates. A model enters with a semantic query and traverses this landscape through coordinated message passing, exiting with a bounded semantic construction rather than merely the most fluent continuation.
 
-A model testing the Kaikki proof of concept described this role well: BaryGraph behaves less like an answer engine than an **associative atlas**. Another called it a "de-cliche device." These are not benchmark claims. They are descriptions of an interaction pattern: the system supplies a surprising coordinate; the user or model must still interpret, test, reject, or develop it.
+BaryGraph introduces structured resistance into cognition: distant connections and unresolved tensions can interrupt familiar associations and function as a de-cliché mechanism without acting as an external supervisor. This creates a framework for investigating a deeper question: whether persistent relational memory and self-consistent navigation can become foundations for world-model formation, personality projection, autonomous goal formation, and eventually more realistic forms of agency.
+
+BaryGraph does not claim to produce consciousness. It offers an architecture for experimentally studying the representational and memory conditions that might precede it.
 
 ## The idea in one minute
 
