@@ -37,8 +37,8 @@ flowchart LR
     S[Another BaryEdge] --> M
     T[Bridge BaryEdge] --> M
 
-    style R fill:#e8f0ff,stroke:#3366cc,stroke-width:2px
-    style M fill:#ffe8e8,stroke:#cc3333,stroke-width:2px, nodeTextColor:#000000
+    style R fill:#e8f0ff,stroke:#3366cc,stroke-width:2px,color:#000000
+    style M fill:#ffe8e8,stroke:#cc3333,stroke-width:2px,color:#000000
 ```
 
 At the leaf level, a simplified construction is:
@@ -191,8 +191,8 @@ flowchart LR
     D --> E[Vector index + forest traversal]
     E --> F[Retrieve nodes, relations,<br/>and higher-order patterns]
 
-    style C fill:#e8f0ff,stroke:#3366cc
-    style D fill:#ffe8e8,stroke:#cc3333
+    style C fill:#e8f0ff,stroke:#3366cc,color:#000000
+    style D fill:#ffe8e8,stroke:#cc3333,color:#000000
 ```
 
 The technical specification defines the exact vector equations, edge types, hierarchy mapping, weight propagation, indexing, construction stages, and known limitations.
