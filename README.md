@@ -38,7 +38,7 @@ flowchart LR
     T[Bridge BaryEdge] --> M
 
     style R fill:#e8f0ff,stroke:#3366cc,stroke-width:2px
-    style M fill:#ffe8e8,stroke:#cc3333,stroke-width:2px
+    style M fill:#ffe8e8,stroke:#cc3333,stroke-width:2px, nodeTextColor:#000000
 ```
 
 At the leaf level, a simplified construction is:
