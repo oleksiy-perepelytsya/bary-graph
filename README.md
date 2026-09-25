@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20186500.svg)](https://doi.org/10.5281/zenodo.20186500)
 
 > **BaryGraph: A Relational Geometry for Cognitive AI**
-> *BaryGraph turns relationships into searchable objects.*
+*BaryGraph turns relationships into searchable objects.*
 BaryGraph is a recursively constructed relational vector architecture for AI memory and reasoning. Starting from a flat semantic substrate, it forms triadic objects in which two concepts are joined by a stored relational vector. These objects then become the building blocks of higher-order structures, propagating meaning upward through a hierarchy entirely in vector space.
 
 The result is a deterministic, navigable semantic landscape: a structured latent memory of language movement, where concepts, bridges, tensions, contradictions, and relations of relations become retrievable coordinates. A model enters with a semantic query and traverses this landscape through coordinated message passing, exiting with a bounded semantic construction rather than merely the most fluent continuation.
