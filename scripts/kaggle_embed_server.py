@@ -104,13 +104,32 @@ class Handler(BaseHTTPRequestHandler):
         if not path.is_file():
             self._send(404, {"error": f"not found: {path.name}"})
             return
-        data = path.read_bytes()
+        size = path.stat().st_size
         self.send_response(200)
         self.send_header("Content-Type", "application/octet-stream")
-        self.send_header("Content-Length", str(len(data)))
+        self.send_header("Content-Length", str(size))
         self.send_header("Content-Disposition", f'attachment; filename="{path.name}"')
         self.end_headers()
-        self.wfile.write(data)
+        with open(path, "rb") as f:
+            while chunk := f.read(1 << 20):
+                self.wfile.write(chunk)
+
+    def do_HEAD(self) -> None:  # noqa: N802
+        if not self._auth_ok():
+            return
+        url = urlparse(self.path)
+        if url.path == "/v1/download":
+            qs = parse_qs(url.query)
+            p = (WORK / qs.get("path", [""])[0]).resolve()
+            if not str(p).startswith(str(WORK)) or not p.is_file():
+                self._send(404, {"error": "not found"})
+                return
+            self.send_response(200)
+            self.send_header("Content-Type", "application/octet-stream")
+            self.send_header("Content-Length", str(p.stat().st_size))
+            self.end_headers()
+        else:
+            self._send(405, {"error": "HEAD not supported here"})
 
     # ---- routes --------------------------------------------------------
     def do_GET(self) -> None:  # noqa: N802
