@@ -31,3 +31,6 @@ nohup.out
 
 # Local scratch (memmaps/pools) when /storage is absent
 .bary_scratch/
+
+# Kaggle runner artifacts
+kaggle_work/
