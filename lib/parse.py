@@ -116,6 +116,16 @@ def parse_entry(
         return None
 
     forms = [f.get("form", "") for f in (obj.get("forms") or []) if f.get("form")]
+    # kaikki puts synonyms/antonyms on *senses* far more often than on the
+    # word entry itself — union them up so word-level relation consumers
+    # (s06 fermion tiers) see them too.
+    word_rels = _extract_relations(obj)
+    seen_rels = {(r.kind, r.word) for r in word_rels}
+    for s in senses:
+        for r in s.relations:
+            if (r.kind, r.word) not in seen_rels:
+                word_rels.append(r)
+                seen_rels.add((r.kind, r.word))
     pw = ParsedWord(
         word=word,
         pos=pos,
@@ -124,6 +134,6 @@ def parse_entry(
         forms=forms,
         etymology=obj.get("etymology_text") or "",
         sense_ids=[s.sense_id for s in senses],
-        relations=_extract_relations(obj),
+        relations=word_rels,
     )
     return pw, senses

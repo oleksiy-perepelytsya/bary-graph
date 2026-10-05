@@ -148,7 +148,7 @@ def near_duplicate_sense(
         v = s.get("vector")
         if v is None:
             continue
-        cos = float(np.dot(gloss_vec, np.asarray(v, dtype=np.float32)))
+        cos = float(np.dot(gloss_vec, unpack_vec(v)))
         if cos > best_cos:
             best_cos = cos
             best_id = s["_id"]

@@ -7,14 +7,18 @@ process/state map so nothing is lost on session compaction.
 
 ## Environment
 
-- **barygraph_all** build env: source `.env.build-all` before any probe or launch
-  (default `.env` targets `barygraph_poc` — mismatch caused a long rabbit hole).
+- **Build profiles** (decouple "which build" from shell sourcing): every stage
+  and the `bary` CLI accept `--env NAME` (→ `.env.NAME`), equivalent to
+  `BARY_ENV=NAME`. Default (no flag) = `.env` = `barygraph_poc` (English PoC).
+  Multilingual build: `--env build-all` (→ `.env.build-all`, `barygraph_all`).
+  In a shell, `set -a; . ./.env.build-all; set +a` remains equivalent.
 - Pipeline state: `pipeline_state_all/*.json`; launch stages via
   `python3.11 -m scripts.<stage>` and keep logs under `/tmp/opencode/`.
 - Stage order (guard in `scripts/_base.py`, refuses out-of-order runs):
   s01_parse → s02_embed → s03_insert_nodes → s04_l15_edges → s05_word_vectors →
-  s06_l14_edges → s07_orphan_reentry → s07b_pair_orphans → s08_metabary →
-  s09_extend → s10b_projection (deferred) → s10_index.
+  s06_l14_edges → s07_orphan_reentry (pair + absorb phases) → s08_metabary →
+  s09_extend → s10_index. (s07b_pair_orphans was merged into s07_orphan_reentry
+  as its `pair` phase; `--phase absorb` runs only the nearest-BE sweep.)
 
 ## Process map (as of 2026-09-16)
 

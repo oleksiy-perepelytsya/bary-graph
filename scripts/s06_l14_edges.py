@@ -26,6 +26,7 @@ from pymongo import UpdateOne
 from lib import checkpoint as cp_mod
 from lib import doi_bridge
 from lib.bary_vec import TYPE_SENTENCES, compute_bary_vec
+from lib.config import scratch_dir
 from lib.db import get_collection
 from lib.docs import baryedge
 from lib.embed import OllamaEmbedder
@@ -39,7 +40,7 @@ STAGE = "06_l14_edges"
 # large to hold resident alongside the pairing working set. Back it by a disk
 # memmap in /storage (RAID, ~6 TB free) so only touched rows page into RAM;
 # the file is removed when the stage finishes. Mirrors s04's V handling.
-S06_MMAP_PATH = os.environ.get("S06_MMAP_PATH", "/storage/bary/s06_V.mmap")
+S06_MMAP_PATH = os.environ.get("S06_MMAP_PATH") or str(scratch_dir() / "s06_V.mmap")
 
 
 def _cleanup_mmap(log) -> None:
@@ -85,8 +86,23 @@ def run(argv: Sequence[str] | None = None) -> None:
     # ids[i] ↔ words[i] ↔ V[i] stay consistent regardless of completion order.
     # Non-words / dead (vector-less) words are filtered client-side. Bounds and
     # worker count are env-tunable.
-    block_lo = ObjectId(os.environ.get("S06_WORD_LO", "6a9a2b400000000000000000"))
-    block_hi = ObjectId(os.environ.get("S06_WORD_HI", "6a9a53000000000000000000"))
+    # _id scan band: env override, else derived from the corpus itself (first
+    # and last L14 word node) so the stage works on any build / fresh replay.
+    if os.environ.get("S06_WORD_LO") and os.environ.get("S06_WORD_HI"):
+        block_lo = ObjectId(os.environ["S06_WORD_LO"])
+        block_hi = ObjectId(os.environ["S06_WORD_HI"])
+    else:
+        _q = {"doc_type": "node", "node_type": "word", "level": 14}
+        _first = coll.find_one(_q, sort=[("_id", 1)], projection={"_id": 1})
+        _last = coll.find_one(_q, sort=[("_id", -1)], projection={"_id": 1})
+        if not _first or not _last:
+            log.info("no L14 word nodes found — nothing to pair")
+            cp.processed = 0
+            cp.total = 0
+            finish(cp, settings, log)
+            return
+        block_lo = _first["_id"]
+        block_hi = ObjectId((int.from_bytes(_last["_id"].binary, "big") + 1).to_bytes(12, "big"))
     load_workers = int(os.environ.get("S06_LOAD_WORKERS", "8"))
     lo = int.from_bytes(block_lo.binary, "big")
     hi = int.from_bytes(block_hi.binary, "big")
@@ -167,7 +183,14 @@ def run(argv: Sequence[str] | None = None) -> None:
     # init — dozens of minutes and tens of GB for five fixed strings. A direct
     # OllamaEmbedder (external ollama, dim 4096) embeds them in well under a
     # second.
-    embedder = OllamaEmbedder(settings)
+    if settings.fake_embed:
+        # Offline CI path matches get_embedder()'s fake behavior; the cache
+        # concern below doesn't apply to a FakeEmbedder (no disk cache).
+        from lib.embed import FakeEmbedder
+
+        embedder = FakeEmbedder(dim=settings.embed_dim)
+    else:
+        embedder = OllamaEmbedder(settings)
     et_keys = list(TYPE_SENTENCES)
     et_vecs = embedder.embed([TYPE_SENTENCES[k] for k in et_keys])
     type_vec: dict[str, np.ndarray] = dict(zip(et_keys, et_vecs, strict=True))

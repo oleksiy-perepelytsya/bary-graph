@@ -105,6 +105,8 @@ def test_type_sentences_keys():
         "extends",
         "applies_to",
         "is_instance_of",
+        "same_lang",
+        "cross_lang",
     }
 
 

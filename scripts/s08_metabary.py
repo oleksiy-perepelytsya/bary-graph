@@ -48,6 +48,7 @@ from bson import ObjectId
 from pymongo import UpdateOne
 
 from lib.bary_vec import compute_metabary_vec, level_factor
+from lib.config import scratch_dir
 from lib.db import get_collection
 from lib.docs import metabary
 from lib.match import (
@@ -65,15 +66,24 @@ _log = __import__("logging").getLogger(__name__)
 
 STAGE = "08_metabary"
 
-# L15 baryedges were minted by s04 (2026-09-04T06:00Z …) and sit below the
-# s06/s07 L14 band; everything s08 consumes above L15 was minted from the
-# s06 start onward, so a single _id floor covers all non-L15 children/bridges.
-# Verified on the all-build: count({_id: [09-04T06:00Z, 09-17T11:50Z)}) =
-# 12,051,299 ≈ 12,051,296 L15 unparented BEs (3 strays, client-filtered).
-_S08_BARY_LO = ObjectId.from_datetime(datetime(2026, 9, 4, 6, 0, tzinfo=timezone.utc))
-_S08_TODAY_LO = ObjectId.from_datetime(datetime(2026, 9, 17, 11, 50, tzinfo=timezone.utc))
+# Optional _id band floors. When set, they cut the stream to the all-build's
+# known mint ranges (skipping strays); when unset, the loader falls back to a
+# full-collection stream — corpus-agnostic. Values: ISO datetimes, e.g.
+# S08_BARY_LO=2026-09-04T06:00:00+00:00.
+def _s08_oid(env_key: str) -> ObjectId | None:
+    v = os.environ.get(env_key)
+    if not v:
+        return None
+    try:
+        return ObjectId(v)
+    except Exception:
+        return ObjectId.from_datetime(datetime.fromisoformat(v))
+
+
+_S08_BARY_LO = _s08_oid("S08_BARY_LO")
+_S08_TODAY_LO = _s08_oid("S08_TODAY_LO")
 _S08_LOAD_WORKERS = int(os.environ.get("S08_LOAD_WORKERS", "8"))
-_S08_MMAP_DIR = os.environ.get("S08_MMAP_DIR", "/storage/bary")
+_S08_MMAP_DIR = os.environ.get("S08_MMAP_DIR") or str(scratch_dir())
 _CHILDREN_CAP = os.environ.get("S08_CHILDREN_CAP")
 
 # Pipeline MBs carry no ``source`` field (or None); structural SMBs carry
@@ -129,6 +139,11 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     """
     band_lo, band_hi = (_S08_BARY_LO, _S08_TODAY_LO) if level == 15 \
         else (_S08_TODAY_LO, None)
+    if band_lo is None:
+        band_lo = ObjectId("000000000000000000000000")
+    if level != 15 and band_hi is None:
+        max_id = coll.find_one(sort=[("_id", -1)], projection={"_id": 1})
+        band_hi = max_id["_id"] if max_id else None
     v_path = Path(_S08_MMAP_DIR) / f"s08_{tag}.mmap"
     vp_path = Path(_S08_MMAP_DIR) / f"s08_{tag}_P.mmap"
     v_path.parent.mkdir(parents=True, exist_ok=True)

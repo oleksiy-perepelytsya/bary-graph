@@ -5,15 +5,19 @@ SMB proposal count to /tmp/opencode/s04_monitor.log every --interval seconds.
 Detached runner: setsid nohup python3.11 scripts/s04_monitor.py --hours 120
 """
 import argparse
-import json
-import subprocess
+import os
 import time
 from pathlib import Path
+
+from lib.config import scratch_dir
 
 LOG = Path("/tmp/opencode/s04_monitor.log")
 S04_LOG = Path("/tmp/opencode/s04_reentry.log")
 PROPOSALS = Path("/workspace/bary-vector/cognitive/batches/smb_proposals.jsonl")
-CACHE = Path("/storage/bary/s04_reentry_cache.jsonl")
+CACHE = Path(
+    os.environ.get("EMBED_CACHE_FILE")
+    or str(scratch_dir() / "s04_reentry_cache.jsonl")
+)
 
 
 def s04_progress() -> dict:

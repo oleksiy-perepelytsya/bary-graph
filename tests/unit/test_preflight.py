@@ -22,7 +22,7 @@ def test_embed_probe_dim(monkeypatch, tmp_path):
     s = _settings(monkeypatch, tmp_path / "x.jsonl", tmp_path / "p", tmp_path / "s")
     c = preflight._check_embed_dim(s)
     assert c.ok, c.detail
-    assert "768" in c.detail
+    assert "1024" in c.detail
 
 
 def test_kaikki_missing(monkeypatch, tmp_path):

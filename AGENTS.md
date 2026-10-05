@@ -47,12 +47,17 @@ which env file the shell has sourced. `Settings.load()` reads the process
 environment; **if you don't source a `.env*` file, every probe/script silently
 targets `barygraph_poc`** — this mismatch caused a long "phantom last_id /
 mongot nondeterminism" rabbit hole (probes hitting poc while the pipeline wrote
-`barygraph_all`). Always source the matching env before probing.
+`barygraph_all`). Always source the matching env before probing — or equivalently
+pass `--env build-all` / set `BARY_ENV=build-all` (every `bary` stage and each
+`python -m scripts.<stage>` entrypoint accepts `--env NAME`, which loads
+`.env.NAME`; unset/`poc` = the English PoC). Stage 07 is a single corpus-agnostic
+stage (`scripts/s07_orphan_reentry.py`, `--phase pair|absorb|both`); the old
+`s07b_pair_orphans` no longer exists.
 
 ## Databases
 - **`barygraph_poc`** — the live, user-facing PoC index (what the MCP server and
   the `cog`/`barygraph` MCP tools serve). Built from a single language
-  (`en`-style limited kaikki). Embeddings: `nomic-embed-text:v1.5`, dim **768**.
+  (`en`-style limited kaikki). Embeddings: `qwen3-embedding:0.6b`, dim **1024**.
   Word heads around `6a603105…` in `_id` space. Pipeline state:
   `pipeline_state/`.
 - **`barygraph_all`** — the in-progress all-languages build (`KAIKKI_LANGS=*`;
@@ -67,8 +72,8 @@ mongot nondeterminism" rabbit hole (probes hitting poc while the pipeline wrote
 
 ## .env files
 - **`.env`** — default (loaded when nothing else is sourced). Points at
-  `barygraph_poc`, `MONGO_COLLECTION=barygraph`, `EMBED_MODEL=nomic-embed-text:v1.5`,
-  `EMBED_DIM=768`, `BATCH_SIZE=512`, `PIPELINE_STATE_DIR=pipeline_state`.
+  `barygraph_poc`, `MONGO_COLLECTION=barygraph`, `EMBED_MODEL=qwen3-embedding:0.6b`,
+  `EMBED_DIM=1024`, `BATCH_SIZE=512`, `PIPELINE_STATE_DIR=pipeline_state`.
   The MCP server always runs with this config and must keep serving poc even
   while the all-build runs.
 - **`.env.build-all`** — isolated config for the all-languages build; **sourced

@@ -23,7 +23,7 @@ def settings(tmp_state_dir, monkeypatch) -> Settings:
 
 @pytest.fixture
 def fake_embedder() -> FakeEmbedder:
-    return FakeEmbedder(dim=768)
+    return FakeEmbedder()
 
 
 @pytest.fixture

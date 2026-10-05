@@ -40,6 +40,32 @@ _DEFAULT_Q_SEEDS: dict[str, float] = {
 }
 
 
+def _resolve_profile(dotenv_path: str | os.PathLike | None) -> str:
+    env = os.environ.get("BARY_ENV", "").strip()
+    if env:
+        return env
+    if dotenv_path is not None:
+        name = Path(str(dotenv_path)).name
+        if name.startswith(".env."):
+            return name[len(".env."):]
+    return "poc"
+
+
+def scratch_dir() -> Path:
+    """Directory for large scratch artifacts (memmaps, pool files, caches).
+
+    ``BARY_SCRATCH_DIR`` wins; otherwise ``/storage/bary`` when that volume
+    exists (the VPS layout), else a repo-local ``.bary_scratch`` so the
+    pipeline also runs on machines without the /storage mount.
+    """
+    env = os.environ.get("BARY_SCRATCH_DIR", "").strip()
+    if env:
+        return Path(env)
+    if Path("/storage").exists():
+        return Path("/storage/bary")
+    return Path(".bary_scratch")
+
+
 def _load_q_seeds() -> dict[str, float]:
     return {k: _env_float(f"Q_SEED_{k.upper()}", v) for k, v in _DEFAULT_Q_SEEDS.items()}
 
@@ -58,8 +84,8 @@ class Settings:
 
     # --- Models (Ollama) ---
     ollama_url: str = "http://localhost:11434"
-    embed_model: str = "nomic-embed-text:v1.5"
-    embed_dim: int = 768  # nomic-embed-text:v1.5 → 768; qwen3-embedding:8b → 4096
+    embed_model: str = "qwen3-embedding:0.6b"
+    embed_dim: int = 1024  # qwen3-embedding:0.6b → 1024; qwen3-embedding:8b → 4096
     embed_timeout_seconds: float = 600.0
     fake_embed: bool = False
     # Optional path of the disk-backed embed cache sidecar (see lib.embed.CachedEmbedder).
@@ -90,10 +116,30 @@ class Settings:
 
     # --- Misc ---
     log_level: str = "INFO"
+    # Which build profile this run targets ("poc" = English PoC,
+    # "build-all" = multilingual all-build, or whatever BARY_ENV names).
+    # Informational only — the actual behavior comes from the .env.<profile>
+    # values; this exists so logs and checkpoints record the target.
+    profile: str = "poc"
 
     @classmethod
     def load(cls, dotenv_path: str | os.PathLike | None = None) -> Settings:
-        """Load settings from environment, with optional .env file."""
+        """Load settings from environment, with optional .env file.
+
+        Profile selection (first match wins):
+          1. explicit ``dotenv_path`` argument
+          2. ``BARY_ENV`` variable → ``.env.<BARY_ENV>`` (``poc``/``default`` → ``.env``)
+          3. default dotenv discovery (plain ``.env``)
+        """
+        if dotenv_path is None:
+            profile = os.environ.get("BARY_ENV", "").strip()
+            if profile and profile not in ("poc", "default"):
+                candidate = Path(f".env.{profile}")
+                if not candidate.exists():
+                    raise FileNotFoundError(
+                        f"BARY_ENV={profile!r} but .env.{profile} not found in {Path.cwd()}"
+                    )
+                dotenv_path = candidate
         load_dotenv(dotenv_path, override=False)
         return cls(
             mongo_uri=_env_str("MONGO_URI", cls.mongo_uri),
@@ -127,4 +173,5 @@ class Settings:
             batch_dup_threshold=_env_float("BATCH_DUP_THRESHOLD", cls.batch_dup_threshold),
             q_seeds=_load_q_seeds(),
             log_level=_env_str("LOG_LEVEL", cls.log_level),
+            profile=_resolve_profile(dotenv_path),
         )

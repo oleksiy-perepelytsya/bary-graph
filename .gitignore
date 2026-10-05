@@ -28,3 +28,6 @@ pipeline_state_all/
 htmlcov/
 .mcp.json
 nohup.out
+
+# Local scratch (memmaps/pools) when /storage is absent
+.bary_scratch/

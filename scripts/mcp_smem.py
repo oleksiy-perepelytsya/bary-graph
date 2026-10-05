@@ -402,7 +402,11 @@ async def mnemo_reset(session_id: str) -> str:
 def main() -> int:
     _setup_logging()
     _load_pool()
-    db = os.environ.get("MONGO_DB", "barygraph_poc")
+    db = os.environ.get("MONGO_DB")
+    if not db:
+        from lib.config import Settings
+
+        db = Settings.load().mongo_db
     log.info(
         "mnemo MCP starting | db=%s tools=%d store=%s",
         db, len(_ALLOWED_TOOLS), _POOL_FILE,

@@ -8,7 +8,7 @@ def test_load_defaults(monkeypatch, tmp_path):
         monkeypatch.delenv(k, raising=False)
     s = Settings.load()
     assert s.mongo_db == "barygraph_poc"
-    assert s.embed_dim == 768
+    assert s.embed_dim == 1024
     assert s.fake_embed is False
 
 

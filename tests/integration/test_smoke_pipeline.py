@@ -83,9 +83,9 @@ def test_full_pipeline_end_to_end(mongo_test_db, tmp_state_dir):
         parent = coll.find_one({"_id": doc["parent_edge_id"]}, {"doc_type": 1})
         assert parent is not None and parent["doc_type"] == "baryedge"
 
-    # --- bary_vec invariant: all stored vectors are 768-dim ---
+    # --- bary_vec invariant: all stored vectors are embed_dim float32 packed ---
     sample = coll.find_one({"doc_type": "baryedge"}, {"vector": 1})
-    assert len(sample["vector"]) == s.embed_dim
+    assert len(sample["vector"]) == s.embed_dim * 4
 
     # --- Fermion order: with antonyms present, tier-1 'contradicts' fires ---
     assert coll.count_documents(

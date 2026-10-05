@@ -1,43 +1,34 @@
-"""Absorb orphan L14 word CMs into nearest existing L14 BE (bounded).
+"""Absorb orphan L14 word CMs into L14 BEs (corpus-agnostic).
 
-L15 orphan re-entry happens earlier, inside s04_l15_edges (it must
-precede s05_word_vectors). This stage handles L14 only.
+Two phases, run by default in sequence:
 
-Each orphan word is paired with its nearest existing L14 BE; the new BE
-inherits ``edge_type`` / ``type_vector`` / ``q`` from that partner (no new
-embedding call) — see CLAUDE.md Stage 6. Multiple orphans may absorb into
-the same partner BE (each picks its own nearest partner independently),
-matching the original exact-argmax semantics.
+Phase ``pair`` — pair unparented L14 words into new L14 BEs via incremental
+_id-window rounds (formerly s07b_pair_orphans). Strict cosine floor
+(``S07_MIN_COS``, default 0.70), same-language pairs drained first within
+each window. Edge type is ``same_lang`` / ``cross_lang`` by ``properties.lang``.
+q = measured pair cosine; no DOI/provenance propagation.
 
-This stage doubles as the post-s07b coverage sweep: after
-s07b_pair_orphans drains every _id window, ~5 % of words per window are left
-unpaired (plus band-tail words) because s07b applies a strict 0.70 cosine
-floor. Re-running this stage over the remaining orphans absorbs *all* of
-them (no similarity floor), so every word node ends up parented. Raise the
-cap with ``--limit N`` / ``S07_ORPHAN_LIMIT`` (default 100 000).
+Phase ``absorb`` — absorb every remaining orphan word into its nearest
+existing L14 BE with no similarity floor (formerly s07_orphan_reentry), so
+every word node ends up parented. The new BE inherits ``edge_type`` /
+``type_vector`` / ``q`` from that partner (no new embedding call).
 
-All-build fixes (patched 2026-09-18):
-  - NO DOI/provenance propagation (user decision; per-edge reverse lookups
-    were also the write throttle). Writes: insert_many acknowledged +
-    w=0 parent stamps, batch 2900 by default (S07_WRITE_BATCH / --batch-size).
-  - NO count_documents: mongot stalls on doc_type/level fat-counts on the
-    35M-doc collection. Both pools stream from the proven pure-``_id``
-    primitive (8-way id-sliced ranges, ``hint(_id_)``, client-side filters).
-    Orphan rows go to OV/OVP disk memmaps ((limit, embed_dim) sparse up
-    front, truncated to the real count). The L14 BE pool is streamed as
-    projected + L2-normalised rows into a binary file reopened as an exact-size
-    memmap — a ~5M-BE pool never materialises in RAM.
-  - Nearest-BE search is HNSW on the projected pool (k=1, no mark_deleted)
-    above ANN_THRESHOLD, exact chunked argmax below — the plain OV@BEV.T
-    argmax against a ~5M-BE pool would be ~1e16 MACs (~a day of CPU).
-  - The BE-pool scan filters ``doc_type == baryedge`` and
-    ``source != structural`` (words that fall above the BE floor must not
-    leak into the pool as fake partners).
+Corpus-agnostic: the L14 word-node _id band is discovered from the database
+when ``S07_WORD_LO``/``S07_WORD_HI`` are not set, and the L14 BE pool band
+defaults to the whole collection (``S07_BE_LO``/``S07_BE_HI`` override).
+
+Write tuning: acknowledged BE inserts + w=0 parent stamps, batch
+``S07_WRITE_BATCH`` (default 2900). Resume bookmark in
+``pipeline_state_dir/07_orphans.json`` (legacy ``07b_rounds.json`` is read
+if the new file is missing).
 """
 
 from __future__ import annotations
 
+import itertools
+import json
 import logging
+import operator
 import os
 import threading
 from collections.abc import Sequence
@@ -50,15 +41,19 @@ from bson import ObjectId
 from pymongo import UpdateOne
 from pymongo.write_concern import WriteConcern
 
-from lib.bary_vec import compute_bary_vec
+from lib.bary_vec import TYPE_SENTENCES, compute_bary_vec
+from lib.config import scratch_dir
 from lib.db import get_collection
 from lib.docs import baryedge
+from lib.embed import get_embedder
 from lib.match import (
     ANN_EF_CONSTRUCTION,
     ANN_M,
     ANN_THRESHOLD,
     MATCH_DIM,
     _gaussian_projector,
+    greedy_unique_match,
+    top_k_pairs,
 )
 from lib.vector import unpack_vec
 from scripts._base import bootstrap, finish
@@ -67,25 +62,26 @@ _log = logging.getLogger(__name__)
 
 STAGE = "07_orphan_reentry"
 
-S07_MMAP_PATH = os.environ.get("S07_MMAP_PATH", "/storage/bary/s07_OV.mmap")
-# Projected L14-BE pool binary file (reopened as an exact-size memmap).
-S07_BEV_PATH = os.environ.get("S07_BEV_PATH", "/storage/bary/s07_be_pool.bin")
-# Word _id block for this build — same bounds s06 uses (words are contiguous
-# in _id space; first word 6a9a2b40…, block ends before 6a9a53…).
-S07_WORD_LO = os.environ.get("S07_WORD_LO", "6a9a2b400000000000000000")
-S07_WORD_HI = os.environ.get("S07_WORD_HI", "6a9a53000000000000000000")
-S07_ORPHAN_LIMIT = int(os.environ.get("S07_ORPHAN_LIMIT", "100000"))
+# --- Config (env-overridable; empty = discover from the build's own data) ---
+S07_WORD_LO = os.environ.get("S07_WORD_LO", "")
+S07_WORD_HI = os.environ.get("S07_WORD_HI", "")
+S07_BE_LO = os.environ.get("S07_BE_LO", "")
+S07_BE_HI = os.environ.get("S07_BE_HI", "")
+S07_MIN_COS = float(os.environ.get("S07_MIN_COS", os.environ.get("S07B_MIN_COS", "0.70")))
+S07_WINDOW = int(os.environ.get("S07_WINDOW", os.environ.get("S07B_WINDOW", "1000000")))
+S07_MEM_SWITCH = int(os.environ.get("S07_MEM_SWITCH", os.environ.get("S07B_MEM_SWITCH", "300000")))
+S07_MMAP_PATH = os.environ.get("S07_MMAP_PATH") or str(scratch_dir() / "s07_OV.mmap")
+S07_BEV_PATH = os.environ.get("S07_BEV_PATH") or str(scratch_dir() / "s07_be_pool.bin")
+S07_ORPHAN_LIMIT = int(os.environ.get("S07_ORPHAN_LIMIT", "1000000"))
 S07_LOAD_WORKERS = int(os.environ.get("S07_LOAD_WORKERS", "8"))
 S07_WRITE_BATCH = int(os.environ.get("S07_WRITE_BATCH", "2900"))
-S07_STAMPS_UNACK = os.environ.get("S07_STAMPS_UNACK", "1") not in ("0", "false")
-# Nearest-BE query ef — k=1, so a generous ef keeps the top-1 close to exact.
+S07_STAMPS_UNACK = os.environ.get(
+    "S07_STAMPS_UNACK", os.environ.get("S07B_STAMPS_UNACK", "1")
+) not in ("0", "false")
 _S07_NN_EF = 400
 
-# L14 BE band floor for this build (s06/s07/s07b BEs all minted after it).
-_EDGE_LO_DEFAULT = ObjectId.from_datetime(
-    datetime(2026, 9, 17, 11, 50, tzinfo=timezone.utc))
-_S07_BE_LO = os.environ.get("S07_BE_LO")  # test override only
-_S07_BE_HI = os.environ.get("S07_BE_HI")  # test override only
+_LEDGER_NAME = "07_orphans.json"
+_LEGACY_LEDGER_NAME = "07b_rounds.json"
 
 
 def _id_int(oid: ObjectId) -> int:
@@ -105,14 +101,225 @@ def _split_ranges(lo: ObjectId, hi: ObjectId, n: int) -> list[tuple[ObjectId, Ob
     return out
 
 
-def _load_orphans(coll, limit: int, embed_dim: int, OV, OVP, proj,
-                  log: logging.Logger) -> tuple[list, int]:
-    """Stream up to ``limit`` unparented L14 words into OV/OVP memmaps.
+def _word_band(coll) -> tuple[ObjectId | None, ObjectId | None]:
+    """Derive the L14 word-node _id band from the DB when env vars are unset."""
+    q = {"doc_type": "node", "node_type": "word", "level": 14}
+    lo = coll.find_one(q, sort=[("_id", 1)], projection={"_id": 1})
+    hi = coll.find_one(q, sort=[("_id", -1)], projection={"_id": 1})
+    return (lo["_id"] if lo else None, hi["_id"] if hi else None)
 
-    Returns (orphan_ids, n_skipped). Each worker walks one _id slice of the
-    word block; rows land under a lock so the memmap fill is one shared
-    stream (order within the cap is irrelevant for nearest-BE absorption).
-    """
+
+# ---------------------------------------------------------------- ledger -----
+
+def _ledger_path(settings) -> Path:
+    return Path(settings.pipeline_state_dir) / _LEDGER_NAME
+
+
+def _load_ledger(settings) -> dict:
+    p = _ledger_path(settings)
+    if not p.exists():
+        legacy = p.parent / _LEGACY_LEDGER_NAME
+        p = legacy if legacy.exists() else p
+    if not p.exists():
+        return {}
+    try:
+        data = json.loads(p.read_text())
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def _save_ledger(settings, ledger: dict) -> None:
+    p = _ledger_path(settings)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    tmp = p.with_suffix(p.suffix + ".tmp")
+    tmp.write_text(json.dumps(ledger, indent=2, sort_keys=True))
+    tmp.replace(p)
+
+
+# ------------------------------------------------------------ pair phase -----
+
+def _load_window(
+    coll, start_id: ObjectId, block_hi: ObjectId, window: int,
+    embed_dim: int, log: logging.Logger,
+) -> tuple[list, list[str], np.ndarray, ObjectId | None, int]:
+    """Stream the next ``window`` orphans from ``start_id`` in _id order."""
+    big = window >= S07_MEM_SWITCH
+    mmap_path = Path(S07_MMAP_PATH)
+    if big:
+        mmap_path.parent.mkdir(parents=True, exist_ok=True)
+        OV = np.memmap(mmap_path, mode="w+", dtype=np.float32,
+                       shape=(window, embed_dim))
+    else:
+        OV = np.zeros((window, embed_dim), dtype=np.float32)
+
+    orphan_ids: list = []
+    langs: list[str] = []
+    examined = 0
+    n_collected = 0
+    resume: ObjectId | None = None
+    cur = coll.find(
+        {"doc_type": "node", "node_type": "word", "level": 14,
+         "_id": {"$gte": start_id, "$lt": block_hi}},
+        {"_id": 1, "vector": 1, "parent_edge_id": 1, "properties.lang": 1},
+    ).sort("_id", 1).hint("_id_")
+    try:
+        for doc in cur:
+            examined += 1
+            resume = doc["_id"]
+            if doc.get("parent_edge_id") is not None or doc.get("vector") is None:
+                continue
+            orphan_ids.append(doc["_id"])
+            langs.append(doc.get("properties", {}).get("lang", ""))
+            OV[n_collected] = unpack_vec(doc["vector"])
+            n_collected += 1
+            if n_collected >= window:
+                break
+    finally:
+        cur.close()
+
+    n = n_collected
+    OV = OV[:n]
+    log.info(
+        "window from %s: %d orphans (examined %d docs, %.0f%% skip)",
+        start_id, n, examined,
+        100.0 * (examined - n) / examined if examined else 0.0,
+    )
+    return orphan_ids, langs, OV, resume, examined
+
+
+def _flush(coll, docs: list[dict], pair_idxs: list[tuple[int, int]],
+           orphan_ids: list, now, stamps_unack: bool = True) -> int:
+    """Insert one batch of BEs and stamp both CM words' parent_edge_id."""
+    res = coll.insert_many(docs)
+    ups: list[UpdateOne] = []
+    for (i, j), eid in zip(pair_idxs, res.inserted_ids, strict=True):
+        ups.append(UpdateOne({"_id": orphan_ids[i]},
+                             {"$set": {"parent_edge_id": eid, "updated_at": now}}))
+        ups.append(UpdateOne({"_id": orphan_ids[j]},
+                             {"$set": {"parent_edge_id": eid, "updated_at": now}}))
+    target = coll
+    if stamps_unack:
+        target = coll.with_options(write_concern=WriteConcern(w=0))
+    target.bulk_write(ups, ordered=False)
+    return len(docs)
+
+
+def _phase_pair(settings, args, log, coll, block_lo, block_hi, window,
+                batch_n, stamps_unack, now) -> int:
+    """Strict-floor word↔word pairing rounds. Returns BEs written."""
+    embedder = get_embedder(settings)
+    tkeys = ["same_lang", "cross_lang"]
+    tvecs = embedder.embed([TYPE_SENTENCES[k] for k in tkeys])
+    type_vec: dict[str, np.ndarray] = dict(zip(tkeys, tvecs, strict=True))
+
+    ledger = _load_ledger(settings)
+    if args.reset:
+        resume = block_lo
+    elif ledger.get("resume"):
+        resume = ObjectId(ledger["resume"])
+    else:
+        resume = block_lo
+    log.info("pair phase: resuming from %s", resume)
+
+    budget = args.limit  # dev cap on TOTAL orphans across all rounds
+    n_rounds = 0
+    n_total = 0
+    n_words_pooled = 0
+
+    while resume is not None:
+        round_window = window
+        if budget is not None:
+            round_window = min(window, budget - n_words_pooled)
+        orphan_ids, langs, OV, next_resume, examined = _load_window(
+            coll, resume, block_hi, round_window, settings.embed_dim, log
+        )
+        n = len(orphan_ids)
+        if n < 2:
+            log.info("window yielded <2 orphans (%d) — parched; stopping", n)
+            OV = None
+            Path(S07_MMAP_PATH).unlink(missing_ok=True)
+            break
+
+        raw = list(top_k_pairs(OV, min_score=S07_MIN_COS))
+        raw.sort(key=operator.itemgetter(2), reverse=True)
+        same = [p for p in raw if langs[p[0]] == langs[p[1]]]
+        cross = [p for p in raw if langs[p[0]] != langs[p[1]]]
+        pairs = greedy_unique_match(
+            itertools.chain(same, cross), threshold=S07_MIN_COS
+        )
+        log.info(
+            "round match: %d pairs (floor %.2f, same_lang-first), "
+            "%d orphans left unpaired in this window",
+            len(pairs), S07_MIN_COS, n - 2 * len(pairs),
+        )
+        raw = same = cross = None
+
+        n_written = 0
+        if not args.dry_run and pairs:
+            docs: list[dict] = []
+            pair_idxs: list[tuple[int, int]] = []
+            for i, j, q_cos in pairs:
+                et = "same_lang" if langs[i] == langs[j] else "cross_lang"
+                tv = type_vec[et]
+                bv = compute_bary_vec(OV[i], OV[j], tv, q_cos)
+                docs.append(baryedge(orphan_ids[i], orphan_ids[j], 14, bv,
+                                     q_cos, accumulated_weight=q_cos,
+                                     edge_type=et, type_vector=tv,
+                                     source="inferred", confidence=q_cos))
+                pair_idxs.append((i, j))
+                if len(docs) >= batch_n:
+                    n_written += _flush(coll, docs, pair_idxs, orphan_ids, now,
+                                        stamps_unack)
+                    docs = []
+                    pair_idxs = []
+                    log.info("  inserted %d BEs this round", n_written)
+            if docs:
+                n_written += _flush(coll, docs, pair_idxs, orphan_ids, now,
+                                    stamps_unack)
+        else:
+            n_written = len(pairs)
+
+        n_rounds += 1
+        n_total += n_written
+        n_words_pooled += n
+        if not args.dry_run:
+            ledger[f"round_{n_rounds}"] = {
+                "words": n,
+                "pairs": n_written,
+                "examined": examined,
+                "at": datetime.now(timezone.utc).isoformat(),
+            }
+            ledger["resume"] = str(next_resume)
+            ledger["min_cos"] = S07_MIN_COS
+            _save_ledger(settings, ledger)
+        log.info("round %d done: %d BEs written (cum %d)", n_rounds, n_written, n_total)
+
+        OV = None
+        Path(S07_MMAP_PATH).unlink(missing_ok=True)
+
+        if not next_resume or next_resume >= block_hi:
+            log.info("band exhausted (%s)", next_resume)
+            resume = None
+        else:
+            resume = next_resume
+            if budget is not None and n_words_pooled >= budget:
+                log.info("--limit %d reached (pooled %d) — stopping", budget, n_words_pooled)
+                resume = None
+
+    unpaired = n_words_pooled - 2 * n_total
+    log.info("pair phase: %d rounds, %d BEs written, ~%d words pooled, "
+             "~%d words still unpaired",
+             n_rounds, n_total, n_words_pooled, unpaired)
+    return n_total
+
+
+# ----------------------------------------------------------- absorb phase ----
+
+def _load_orphans(coll, limit: int, embed_dim: int, OV, OVP, proj,
+                  block_lo: ObjectId, block_hi: ObjectId,
+                  log: logging.Logger) -> tuple[list, int]:
+    """Stream up to ``limit`` unparented L14 words into OV/OVP memmaps."""
     ids: list = []
     lock = threading.Lock()
     n = 0
@@ -143,8 +350,7 @@ def _load_orphans(coll, limit: int, embed_dim: int, OV, OVP, proj,
                 if n % 500_000 == 0:
                     log.info("  %d orphans loaded", n)
 
-    ranges = _split_ranges(ObjectId(S07_WORD_LO), ObjectId(S07_WORD_HI),
-                           S07_LOAD_WORKERS)
+    ranges = _split_ranges(block_lo, block_hi, S07_LOAD_WORKERS)
     with ThreadPoolExecutor(max_workers=S07_LOAD_WORKERS) as ex:
         list(ex.map(lambda r: _scan(*r), ranges))
     return ids, skipped
@@ -152,14 +358,13 @@ def _load_orphans(coll, limit: int, embed_dim: int, OV, OVP, proj,
 
 def _stream_be_pool(coll, embed_dim: int, proj, out_path: Path,
                     log: logging.Logger) -> list:
-    """Stream the L14 BE pool as projected-normalised rows into a binary file.
-
-    Returns the BE _ids (parallel to the rows written). The caller reopens
-    ``out_path`` as an exact-size (n, MATCH_DIM) memmap. No count_documents.
-    """
-    lo = ObjectId(_S07_BE_LO) if _S07_BE_LO else _EDGE_LO_DEFAULT
-    if _S07_BE_HI:
-        hi = ObjectId(_S07_BE_HI)
+    """Stream the L14 BE pool as projected-normalised rows into a binary file."""
+    if S07_BE_LO:
+        lo = ObjectId(S07_BE_LO)
+    else:
+        lo = ObjectId("000000000000000000000000")
+    if S07_BE_HI:
+        hi = ObjectId(S07_BE_HI)
     else:
         max_id = coll.find_one(sort=[("_id", -1)], projection={"_id": 1})
         hi = max_id["_id"] if max_id else None
@@ -196,22 +401,15 @@ def _stream_be_pool(coll, embed_dim: int, proj, out_path: Path,
     return ids
 
 
-def run(argv: Sequence[str] | None = None) -> None:
-    settings, args, log, cp = bootstrap(STAGE, argv)
-    coll = get_collection(settings)
+def _phase_absorb(settings, args, log, coll, block_lo, block_hi, now) -> int:
+    """Absorb remaining orphans into nearest existing L14 BE (no floor)."""
     limit = args.limit if args.limit is not None else S07_ORPHAN_LIMIT
     if limit < 1:
         log.info("orphan limit < 1 (%d) — nothing to do", limit)
-        cp.processed = 0
-        cp.total = 0
-        if not args.dry_run:
-            finish(cp, settings, log)
-        return
+        return 0
 
     embed_dim = settings.embed_dim
     proj = _gaussian_projector(embed_dim)
-    log.info("start processed=%d dry_run=%s orphan_limit=%d embed_dim=%d MATCH_DIM=%d",
-             cp.processed, args.dry_run, limit, embed_dim, MATCH_DIM)
 
     ov_path = Path(S07_MMAP_PATH)
     ovp_path = Path(f"{S07_MMAP_PATH}_P")
@@ -226,15 +424,11 @@ def run(argv: Sequence[str] | None = None) -> None:
         OVP = np.memmap(ovp_path, mode="w+", dtype=np.float32,
                         shape=(limit, MATCH_DIM))
         orphan_ids, n_skipped = _load_orphans(
-            coll, limit, embed_dim, OV, OVP, proj, log)
+            coll, limit, embed_dim, OV, OVP, proj, block_lo, block_hi, log)
         n_orphans = len(orphan_ids)
         if n_orphans == 0:
             log.info("no L14 orphans found (skipped=%d)", n_skipped)
-            cp.processed = 0
-            cp.total = 0
-            if not args.dry_run:
-                finish(cp, settings, log)
-            return
+            return 0
         OV = OV[:n_orphans]
         OVP = OVP[:n_orphans]
         log.info("L14 orphans=%d (skipped=%d)", n_orphans, n_skipped)
@@ -243,14 +437,9 @@ def run(argv: Sequence[str] | None = None) -> None:
         n_bes = len(be_ids)
         if n_bes == 0:
             log.info("no L14 BE pool — nothing to absorb into")
-            cp.processed = 0
-            cp.total = n_orphans
-            if not args.dry_run:
-                finish(cp, settings, log)
-            return
+            return 0
         log.info("L14 BE pool=%d", n_bes)
 
-        # Nearest-BE per orphan (k=1, no mark_deleted → independent absorption).
         if n_bes <= ANN_THRESHOLD:
             BVP = np.memmap(bev_path, dtype=np.float32, mode="r",
                             shape=(n_bes, MATCH_DIM))
@@ -291,8 +480,6 @@ def run(argv: Sequence[str] | None = None) -> None:
 
         used_be_ids = [be_ids[bi] for bi in sorted(set(best_bi.tolist()))]
         log.info("winning partners=%d", len(used_be_ids))
-        # Chunk the $in lookup — a single 2M-id query would exceed the 16 MB
-        # BSON document limit.
         be_meta: dict = {}
         _FIELDS = {"vector": 1, "edge_type": 1, "type_vector": 1,
                    "q": 1, "accumulated_weight": 1}
@@ -308,7 +495,6 @@ def run(argv: Sequence[str] | None = None) -> None:
         batch_n = args.batch_size or S07_WRITE_BATCH
         n_written = 0
         if not args.dry_run:
-            now = datetime.now(timezone.utc)
             stamps_coll = coll.with_options(
                 write_concern=WriteConcern(w=0)) if S07_STAMPS_UNACK else coll
             batch_docs: list[dict] = []
@@ -349,19 +535,70 @@ def run(argv: Sequence[str] | None = None) -> None:
         if args.dry_run:
             log.info("dry-run: would absorb %d orphan words into %d existing BEs",
                      n_orphans, n_bes)
+            n_written = n_orphans
         else:
             log.info("absorbed %d orphan words into %d existing BEs",
                      n_written, n_bes)
-        cp.processed = n_written if not args.dry_run else n_orphans
-        cp.total = n_orphans
-        if not args.dry_run:
-            finish(cp, settings, log)
+        return n_written
     finally:
         for p in (ov_path, ovp_path, bev_path):
             try:
                 p.unlink(missing_ok=True)
             except Exception:
                 log.warning("could not remove memmap file %s", p)
+
+
+# ------------------------------------------------------------------- run -----
+
+def run(argv: Sequence[str] | None = None) -> None:
+    settings, args, log, cp = bootstrap(STAGE, argv)
+    coll = get_collection(settings)
+    window = args.window if args.window is not None else S07_WINDOW
+    phase = args.phase
+    now = datetime.now(timezone.utc)
+
+    if S07_WORD_LO:
+        block_lo = ObjectId(S07_WORD_LO)
+    else:
+        block_lo = None
+    if S07_WORD_HI:
+        block_hi = ObjectId(S07_WORD_HI)
+    else:
+        block_hi = None
+    if block_lo is None or block_hi is None:
+        d_lo, d_hi = _word_band(coll)
+        block_lo = block_lo or d_lo
+        block_hi = block_hi or (
+            ObjectId((_id_int(d_hi) + 1).to_bytes(12, "big")) if d_hi else None)
+    if block_lo is None or block_hi is None or _id_int(block_hi) <= _id_int(block_lo):
+        log.info("no L14 word nodes found — nothing to do")
+        cp.processed = 0
+        cp.total = 0
+        if not args.dry_run:
+            finish(cp, settings, log)
+        return
+    log.info("word band [%s, %s)", block_lo, block_hi)
+
+    if window < 2:
+        log.warning("window < 2 (%d) — nothing to pair", window)
+        cp.processed = 0
+        cp.total = 0
+        if not args.dry_run:
+            finish(cp, settings, log)
+        return
+
+    n_written = 0
+    if phase in ("pair", "both"):
+        n_written += _phase_pair(
+            settings, args, log, coll, block_lo, block_hi, window,
+            args.batch_size or S07_WRITE_BATCH, S07_STAMPS_UNACK, now)
+    if phase in ("absorb", "both"):
+        n_written += _phase_absorb(settings, args, log, coll, block_lo, block_hi, now)
+
+    cp.processed = n_written
+    cp.total = n_written
+    if not args.dry_run:
+        finish(cp, settings, log)
 
 
 if __name__ == "__main__":

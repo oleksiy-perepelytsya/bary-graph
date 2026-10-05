@@ -31,6 +31,16 @@ import sys
 
 log = logging.getLogger("barygraph.cog")
 
+
+def _settings_db() -> str:
+    """Fallback DB name from the active profile (.env / BARY_ENV)."""
+    try:
+        from lib.config import Settings
+
+        return Settings.load().mongo_db
+    except Exception:
+        return "barygraph_poc"
+
 # ── allowed tool surface ───────────────────────────────────────────────────────
 _READ_ONLY = os.environ.get("MCP_READ_ONLY", "0").lower() in ("1", "true", "yes")
 
@@ -116,7 +126,7 @@ def _get_arxiv_coll():
             os.environ.get("MONGO_URI", "mongodb://mongodb:27017/?directConnection=true"),
             serverSelectionTimeoutMS=5_000,
         )
-        _arxiv_coll = client[os.environ.get("MCP_MONGO_DB", "barygraph_poc")][
+        _arxiv_coll = client[os.environ.get("MCP_MONGO_DB") or _settings_db()][
             _ARXIV_COLLECTION
         ]
     return _arxiv_coll
@@ -321,7 +331,7 @@ async def store_paper_extraction(
 
 def main() -> int:
     _setup_logging()
-    db = os.environ.get("MCP_MONGO_DB", "barygraph_poc")
+    db = os.environ.get("MCP_MONGO_DB") or _settings_db()
     log.info(
         "cognitive MCP starting | db=%s read_only=%s tools=%d",
         db, _READ_ONLY, len(_ALLOWED_TOOLS),

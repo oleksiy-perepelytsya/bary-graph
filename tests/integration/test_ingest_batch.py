@@ -112,7 +112,8 @@ def test_ingest_batch_merges_and_creates(mongo_test_db, tmp_state_dir):
     assert new_word_after["vector"] is not None
     assert new_word_after["parent_edge_id"] is not None  # absorbed via L14 orphan reentry
 
-    # --- doi now reachable at the new word's L14 BaryEdge too ---
-    assert "10.1/paperA" in doi_bridge.dois_for_node(
-        bridge_coll, new_word_after["parent_edge_id"]
-    )
+    # --- doi is deliberately NOT propagated into L14 absorption edges ---
+    # s07 performs no DOI/provenance propagation (throughput decision per
+    # all-build write tuning): the new word gets parented, but its L14 BE
+    # carries no doi_bridge entry. L15 BEs (s04) DO propagate, asserted above.
+    assert doi_bridge.dois_for_node(bridge_coll, new_word_after["parent_edge_id"]) == []

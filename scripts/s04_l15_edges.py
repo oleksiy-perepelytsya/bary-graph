@@ -27,6 +27,7 @@ from pymongo import UpdateOne
 
 from lib import doi_bridge
 from lib.bary_vec import build_l15_type_text, compute_bary_vec
+from lib.config import scratch_dir
 from lib.db import get_collection
 from lib.docs import baryedge
 from lib.embed import get_embedder
@@ -46,12 +47,12 @@ STAGE = "04_l15_edges"
 # large to hold resident alongside the ANN pairing working set. Back it by a
 # disk memmap in /storage (RAID, ~6 TB free) so only touched rows page into
 # RAM; the file is deleted when the stage finishes.
-S04_MMAP_PATH = os.environ.get("S04_MMAP_PATH", "/storage/bary/s04_V.mmap")
+S04_MMAP_PATH = os.environ.get("S04_MMAP_PATH") or str(scratch_dir() / "s04_V.mmap")
 
 # ids/words are ~5 GB of process-only state rebuilt by re-streaming all 12.7M
 # senses (~3.5 h). Persisting them lets a crashed resume skip that scan entirely.
-S04_SIDECAR_PATH = os.environ.get(
-    "S04_SIDECAR_PATH", "/storage/bary/s04_ids_words.pkl"
+S04_SIDECAR_PATH = os.environ.get("S04_SIDECAR_PATH") or str(
+    scratch_dir() / "s04_ids_words.pkl"
 )
 
 # Orphan re-entry picks each orphan's parent BE via projected-space ANN; refine
@@ -71,7 +72,7 @@ S04_MAX_SENSES_CAP = int(os.environ.get("S04_MAX_SENSES_CAP", 13_500_000))
 # embed+insert, skipping BE vector projection, the parented scan, the HNSW
 # build, and the ~37 min sweep (~2 h of wall time). Guarded by the sense-row
 # count and L15 BE count current at build time.
-S04_ANN_BUNDLE = os.environ.get("S04_ANN_BUNDLE", "/storage/bary/s04_ann_bundle.npz")
+S04_ANN_BUNDLE = os.environ.get("S04_ANN_BUNDLE") or str(scratch_dir() / "s04_ann_bundle.npz")
 
 
 def _ensure_cover_index(coll, log) -> bool:
@@ -117,24 +118,23 @@ def _count_filled_rows(dim: int) -> int:
 def _max_sense_id(coll, log):
     """Upper _id bound for the sense stream (index-free, deterministic).
 
-    The stream iterates senses sorted by _id, but the *full* collection
-    (28.3M) also holds L15 BEs with LATER _ids (inserted by s04 itself,
-    starting 2026-09-08). An unbounded _id scan must fetch+filter that entire
-    non-matching BE tail to prove EOF — a single getMore can then exceed any
-    client socket timeout. We avoid the tail altogether by capping the scan at
-    an ObjectId cutover:
-
-    - ObjectId embeds the insert timestamp immutably.
-    - s03 (word+sense insert) is the ONLY pass that ever wrote sense docs; it
-      finished 2026-09-04T05:07:53Z. So every sense doc has an _id timestamp
-      in [s02..Sep 4], and every BE/orphan/metabary doc has one >= 2026-09-08.
-    - Capping at 2026-09-04T12:00:00Z (7h past s03, days below the first BE)
-      restricts the scan to the words+senses region only. Order is unchanged,
-      so V-row determinism is preserved.
+    The stream iterates senses sorted by _id, but the *full* collection also
+    holds L15 BEs with LATER _ids (inserted by s04 itself). An unbounded _id
+    scan must fetch+filter that entire non-matching BE tail to prove EOF — a
+    single getMore can then exceed any client socket timeout. We avoid the
+    tail by capping the scan at the newest L15 sense doc's own _id: every
+    sense doc sits at or below it (s03 was the only pass that wrote senses),
+    and BEs inserted later are excluded by construction. Corpus-agnostic —
+    no hardcoded cutover date.
     """
-    return ObjectId.from_datetime(
-        datetime(2026, 9, 4, 12, 0, 0, tzinfo=timezone.utc)
+    doc = coll.find_one(
+        {"doc_type": "node", "node_type": "sense", "level": 15},
+        sort=[("_id", -1)],
+        projection={"_id": 1},
     )
+    if doc is None:
+        return ObjectId("000000000000000000000000")
+    return doc["_id"]
 
 
 def _word_neighborhood(coll, word: str, pos: str, lang: str) -> tuple[list[str], list[str]]:
@@ -661,6 +661,7 @@ def run(argv: Sequence[str] | None = None) -> None:
     paired: set[int] = set()
     n_pairs = 0
     orphan_BEVp: np.ndarray | None = None
+    ann_bundle: dict | None = None
 
     # --- --force with existing BEs: skip main pairing, resume orphan re-entry ---
     if args.force and existing_be_count:
@@ -671,6 +672,7 @@ def run(argv: Sequence[str] | None = None) -> None:
         # Guard against re-entry products (source="reentry") polluting the parent
         # pool: best_bi indices are positions into the pool as it was at sweep
         # time, so the count must only see non-reentry edges.
+        ann_bundle = None
         be_count_now = coll.count_documents(
             {"doc_type": "baryedge", "level": 15, "source": "inferred"}
         )

@@ -74,8 +74,12 @@ def _form_level_sweep(
     Pair selection is cosine-descending greedy — identical results to the
     original per-round approach because high-cosine pairs are claimed first.
     """
-    child_ids, child_meta, CV = _load_unparented_bes(coll, child_level, embed_dim)
-    bridge_ids, bridge_meta, BV = _load_unparented_bes(coll, bridge_level, embed_dim)
+    child_ids, child_meta, CV, _CVP, _cv_path, _cvp_path = _load_unparented_bes(
+        coll, child_level, embed_dim, f"C{child_level}"
+    )
+    bridge_ids, bridge_meta, BV, _BVP, _bv_path, _bvp_path = _load_unparented_bes(
+        coll, bridge_level, embed_dim, f"B{bridge_level}"
+    )
 
     def _log_zeros() -> None:
         thr = base_thr

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import logging
+import os
 import sys
 from collections.abc import Sequence
 
@@ -20,7 +21,6 @@ STAGES: dict[str, str] = {
     "05_word_vectors": "scripts.s05_word_vectors",
     "06_l14_edges": "scripts.s06_l14_edges",
     "07_orphan_reentry": "scripts.s07_orphan_reentry",
-    "07b_pair_orphans": "scripts.s07b_pair_orphans",
     "08_metabary": "scripts.s08_metabary",
     "09_extend": "scripts.s09_extend",
     "10_index": "scripts.s10_index",
@@ -55,6 +55,27 @@ def make_parser(stage: str) -> argparse.ArgumentParser:
         "instead of scanning every L14 word doc — written by scripts.ingest_batch",
     )
     p.add_argument(
+        "--window",
+        type=int,
+        default=None,
+        help="(07_orphan_reentry only) orphan words per pairing round",
+    )
+    p.add_argument(
+        "--phase",
+        choices=("pair", "absorb", "both"),
+        default="both",
+        help="(07_orphan_reentry only) which phase(s) to run (default: both)",
+    )
+    p.add_argument(
+        "--env",
+        type=str,
+        default=None,
+        metavar="NAME",
+        help="load .env.NAME instead of .env (e.g. --env build-all for the "
+        "multilingual build, --env poc or unset for the English PoC). "
+        "Defaults to the BARY_ENV environment variable, then .env.",
+    )
+    p.add_argument(
         "--force",
         action="store_true",
         help="bypass stage-order / already-done safeguards (use with care)",
@@ -77,7 +98,7 @@ def _enforce_order(stage: str, settings: Settings, force: bool, log: logging.Log
         return
     msg = (
         f"stage '{stage}' requires '{prev}' to be complete "
-        f"(pipeline_state/{prev}.json missing or done=false)"
+        f"({settings.pipeline_state_dir}/{prev}.json missing or done=false)"
     )
     if force:
         log.warning("STAGE-ORDER BYPASSED (--force): %s", msg)
@@ -94,11 +115,14 @@ def bootstrap(
     stage has already completed (re-running a completed stage requires
     ``--reset`` or ``--force`` to avoid accidental double-ingest).
     """
+    args = make_parser(stage).parse_args(argv)
+
+    if args.env:
+        os.environ["BARY_ENV"] = args.env
+
     settings = Settings.load()
     setup_logging(settings.log_level)
     log = get_logger(stage)
-
-    args = make_parser(stage).parse_args(argv)
 
     _enforce_order(stage, settings, args.force, log)
 
@@ -118,7 +142,8 @@ def bootstrap(
     cp_mod.save(cp, settings)  # write initial / touched checkpoint
 
     log.info(
-        "settings: db=%s coll=%s kaikki=%s fake_embed=%s",
+        "settings: profile=%s db=%s coll=%s kaikki=%s fake_embed=%s",
+        settings.profile,
         settings.mongo_db,
         settings.mongo_collection,
         args.kaikki_path or settings.kaikki_path,
@@ -155,6 +180,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     if stage not in STAGES:
         print(f"unknown stage: {stage}", file=sys.stderr)
         return 2
+    # Hoist --env so Settings.load() elsewhere (db handles, embedders
+    # constructed before bootstrap) also sees the right profile.
+    for i, a in enumerate(rest):
+        if a == "--env" and i + 1 < len(rest):
+            os.environ["BARY_ENV"] = rest[i + 1]
+        elif a.startswith("--env="):
+            os.environ["BARY_ENV"] = a.split("=", 1)[1]
     mod = importlib.import_module(STAGES[stage])
     mod.run(rest)
     return 0
