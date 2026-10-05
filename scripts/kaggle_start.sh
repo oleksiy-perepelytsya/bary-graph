@@ -14,11 +14,13 @@
 #       --token <token> upload data/parsed/senses.jsonl
 
 set -euo pipefail
-cd "$(dirname "$0")/.."
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_DIR"
+mkdir -p "$REPO_DIR/kaggle_work"
 
 export KAGGLE_API_TOKEN="${KAGGLE_API_TOKEN:-$(python3 -c 'import secrets;print(secrets.token_hex(16))')}"
 export KAGGLE_API_PORT="${KAGGLE_API_PORT:-8765}"
-export KAGGLE_WORK_DIR="${KAGGLE_WORK_DIR:-$PWD/kaggle_work}"
+export KAGGLE_WORK_DIR="${KAGGLE_WORK_DIR:-$REPO_DIR/kaggle_work}"
 export OLLAMA_URL="${OLLAMA_URL:-http://localhost:11434}"
 
 echo "== token: $KAGGLE_API_TOKEN (save this for the local driver) =="
