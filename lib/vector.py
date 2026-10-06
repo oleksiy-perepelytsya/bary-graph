@@ -14,6 +14,7 @@ blob into a 1-D vector.
 
 from __future__ import annotations
 
+import base64
 from typing import Any
 
 import numpy as np
@@ -44,3 +45,18 @@ def unpack_vec(blob: Any, dim: int | None = None) -> np.ndarray:
     if dim is not None:
         arr = arr.reshape(dim)
     return arr
+
+
+def encode_vec(v: np.ndarray | list[float]) -> str:
+    """JSON-safe vector: base64 of the packed float32 blob.
+
+    ``v.tolist()`` serializes a 1024-d vector as ~1024 JSON float strings
+    (~15 KB/row), blowing past disk budgets at scale; this is ~5.5 KB.
+    s03 (and any other consumer of ``senses_embedded.jsonl``) decodes with
+    :func:`decode_vec`.
+    """
+    return base64.b64encode(pack_vec(v)).decode("ascii")
+
+
+def decode_vec(s: str) -> np.ndarray:
+    return unpack_vec(base64.b64decode(s))

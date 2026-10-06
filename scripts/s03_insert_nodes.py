@@ -28,6 +28,7 @@ from lib.schema import (
     ParsedSenseRelation,
     ParsedWord,
 )
+from lib.vector import decode_vec
 from scripts._base import bootstrap, finish
 
 STAGE = "03_insert_nodes"
@@ -125,7 +126,7 @@ def run(argv: Sequence[str] | None = None) -> None:
         senses_path, cp.file_offset, skip_offsets, log
     ):
         ps = _load_sense(rec)
-        doc = sense_node(ps, rec["vector"])
+        doc = sense_node(ps, decode_vec(rec["vector"]))
         ops.append(
             UpdateOne(
                 {"doc_type": "node", "properties.sense_id": ps.sense_id},

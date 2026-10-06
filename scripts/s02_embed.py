@@ -23,6 +23,7 @@ import orjson
 from lib import checkpoint as cp_mod
 from lib.embed import get_embedder
 from lib.schema import SENSES_EMBEDDED_FILENAME, SENSES_FILENAME
+from lib.vector import encode_vec
 from scripts._base import bootstrap, finish
 
 STAGE = "02_embed"
@@ -97,7 +98,7 @@ def run(argv: Sequence[str] | None = None) -> None:
                 n += 1
                 if n <= skip:
                     continue
-                rec["vector"] = v.tolist()
+                rec["vector"] = encode_vec(v)
                 lines.append(orjson.dumps(rec) + b"\n")
             # Write whole batch atomically then save checkpoint — a crash
             # between these two leaves at most one batch of duplicates, which
