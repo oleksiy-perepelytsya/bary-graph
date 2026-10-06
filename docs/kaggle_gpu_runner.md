@@ -48,3 +48,16 @@ touches files under `kaggle_work/` and runs whitelisted stage modules.
 Security note: the tunnel URL is a bearer-token gate. Use a long random
 token (`kaggle_start.sh` generates one by default) and treat the URL like a
 password — no TLS client auth beyond that.
+
+## ⚠️ Session persistence
+
+The notebook's filesystem (`/kaggle/working`) is **ephemeral** — closing the
+tab, losing network, or a timeout deletes `kaggle_work/`, including
+checkpoints and any finished-but-not-downloaded artifacts. Rules:
+
+1. After each s02 half-job reaches `status=done`, immediately
+   `scripts.kaggle_remote ... download` its output.
+2. Do NOT rely on the Kaggle session surviving overnight; assume it can die.
+3. The retry path: new session → `kaggle_start.sh` → re-split input →
+   relaunch the job halves; each half resumes from its own checkpoint only
+   if the state dir survived (i.e. the session didn't die).
