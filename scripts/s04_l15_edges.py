@@ -25,6 +25,7 @@ import numpy as np
 from bson import ObjectId
 from pymongo import UpdateOne
 
+from lib import checkpoint as cp_mod
 from lib import doi_bridge
 from lib.bary_vec import build_l15_type_text, compute_bary_vec
 from lib.config import scratch_dir
@@ -73,6 +74,15 @@ S04_MAX_SENSES_CAP = int(os.environ.get("S04_MAX_SENSES_CAP", 13_500_000))
 # build, and the ~37 min sweep (~2 h of wall time). Guarded by the sense-row
 # count and L15 BE count current at build time.
 S04_ANN_BUNDLE = os.environ.get("S04_ANN_BUNDLE") or str(scratch_dir() / "s04_ann_bundle.npz")
+
+# Greedy-match output persisted the moment matching finishes: lets a crashed
+# run skip the HNSW build + knn sweep + dedup + sort + greedy (~43 min on the
+# T470s, ~4 h on the full build) and resume straight into embed+insert.
+# Guarded by the sense-row count and both matching thresholds — any of them
+# changes the pair set, so a mismatch forces a fresh match.
+S04_PAIRS_BUNDLE = os.environ.get("S04_PAIRS_BUNDLE") or str(
+    scratch_dir() / "s04_pairs.npz"
+)
 
 
 def _ensure_cover_index(coll, log) -> bool:
@@ -272,6 +282,117 @@ def _load_ann_bundle(n_senses: int, be_count: int, log) -> dict | None:
     except Exception as e:  # noqa: BLE001 — bundle failure must degrade to a sweep
         log.warning("could not load ANN bundle %s (%s) — resweeping", path, e)
         return None
+
+
+def _load_pairs_bundle(
+    n_senses: int, settings, log
+) -> list[tuple[int, int, float]] | None:
+    """Persisted greedy-match output, or None if absent/stale.
+
+    Guards: sense-row count and both matching thresholds must match the
+    current world — all three change which pairs greedy selects.
+    """
+    path = Path(S04_PAIRS_BUNDLE)
+    if not path.exists():
+        return None
+    try:
+        with np.load(path) as b:
+            if (
+                int(b["sense_rows"]) != n_senses
+                or float(b["q_min"]) != float(settings.q_min_l15)
+                or float(b["polysemy_floor"]) != float(settings.polysemy_q_floor)
+            ):
+                log.info(
+                    "pairs bundle %s stale (%s rows / q_min=%s / floor=%s vs "
+                    "%s / %s / %s) — re-matching",
+                    path, int(b["sense_rows"]), float(b["q_min"]),
+                    float(b["polysemy_floor"]), n_senses,
+                    settings.q_min_l15, settings.polysemy_q_floor,
+                )
+                return None
+            pairs = [
+                (int(a), int(c), float(q))
+                for a, c, q in zip(b["i"], b["j"], b["q"], strict=True)
+            ]
+        log.info(
+            "pairs bundle %s loaded (%d pairs; HNSW/knn/greedy skipped)",
+            path, len(pairs),
+        )
+        return pairs
+    except Exception as e:  # noqa: BLE001 — bundle failure degrades to a re-match
+        log.warning("could not load pairs bundle %s (%s) — re-matching", path, e)
+        return None
+
+
+def _save_pairs_bundle(
+    pairs: list[tuple[int, int, float]], n_senses: int, settings, log
+) -> None:
+    """Persist greedy-match output for crash resume (non-fatal on failure)."""
+    path = Path(S04_PAIRS_BUNDLE)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(
+            path,
+            i=np.fromiter((p[0] for p in pairs), dtype=np.int64, count=len(pairs)),
+            j=np.fromiter((p[1] for p in pairs), dtype=np.int64, count=len(pairs)),
+            q=np.fromiter((p[2] for p in pairs), dtype=np.float64, count=len(pairs)),
+            sense_rows=np.int64(n_senses),
+            q_min=np.float64(settings.q_min_l15),
+            polysemy_floor=np.float64(settings.polysemy_q_floor),
+        )
+        log.info("pairs bundle saved to %s (%d pairs)", path, len(pairs))
+    except Exception as e:  # noqa: BLE001 — non-fatal: next run just re-matches
+        log.warning("could not save pairs bundle (%s)", e)
+
+
+def _filter_pending(
+    pairs: list[tuple[int, int, float]],
+    coll,
+    ids: list,
+    paired: set[int],
+    be_ids: list,
+    be_q: list[float],
+    *,
+    adopt: bool,
+    log,
+) -> list[tuple[int, int, float]]:
+    """Drop pairs whose BaryEdge already exists in Mongo (crash resume).
+
+    A pair counts as done iff its (cm1_id, cm2_id) BE is present — this
+    catches the insert/stamp crash window too, where the BE exists but the
+    senses were never stamped. Matched pairs mark both senses ``paired`` (so
+    4e doesn't orphan them) and, when ``adopt`` (fresh-run path, be_ids empty),
+    register the existing BE in the parent pool. Returns the pairs still owed.
+    """
+    if not pairs:
+        return []
+    existing: dict[tuple, tuple] = {}
+    for be in coll.find(
+        {"doc_type": "baryedge", "level": 15, "source": "inferred"},
+        {"cm1_id": 1, "cm2_id": 1, "q": 1},
+    ):
+        existing[(be["cm1_id"], be["cm2_id"])] = (
+            be["_id"], float(be.get("q") or 0.5),
+        )
+    pending: list[tuple[int, int, float]] = []
+    n_done = 0
+    for i, j, q in pairs:
+        hit = existing.get((ids[i], ids[j])) or existing.get((ids[j], ids[i]))
+        if hit is None:
+            pending.append((i, j, q))
+            continue
+        n_done += 1
+        paired.add(i)
+        paired.add(j)
+        if adopt:
+            be_ids.append(hit[0])
+            be_q.append(hit[1])
+    if n_done:
+        log.info(
+            "pairs resume: %d/%d pairs already embedded — %d left to do",
+            n_done, len(pairs), len(pending),
+        )
+    return pending
 
 
 def _run_orphan_reentry(
@@ -505,6 +626,14 @@ def _run_orphan_reentry(
 
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
+    if args.reset:
+        # --reset means "start over": drop persisted match/sweep state too, or
+        # a re-match with unchanged thresholds would silently reuse it.
+        for stale in (S04_PAIRS_BUNDLE, S04_ANN_BUNDLE):
+            try:
+                Path(stale).unlink(missing_ok=True)
+            except OSError:
+                pass
     coll = get_collection(settings)
     bridge_coll = doi_bridge.get_bridge_collection(settings)
     log.info("start processed=%d dry_run=%s q_min=%.2f", cp.processed, args.dry_run,
@@ -662,6 +791,10 @@ def run(argv: Sequence[str] | None = None) -> None:
     n_pairs = 0
     orphan_BEVp: np.ndarray | None = None
     ann_bundle: dict | None = None
+    # Greedy-match output: filled by the resume/match branches below, consumed
+    # by the shared 4c/4d embed+insert loop. pending = pairs still owed here.
+    pairs: list[tuple[int, int, float]] = []
+    pending: list[tuple[int, int, float]] = []
 
     # --- --force with existing BEs: skip main pairing, resume orphan re-entry ---
     if args.force and existing_be_count:
@@ -702,67 +835,99 @@ def run(argv: Sequence[str] | None = None) -> None:
                 "loaded %d existing BEs, %d paired senses, %d orphans to process",
                 n_pairs, len(paired), n - len(paired),
             )
+        # A persisted greedy match means the main phase never finished — the
+        # "skip to orphan re-entry" shortcut would silently drop every pair
+        # that was never embedded. Resume those first.
+        pairs = _load_pairs_bundle(len(ids), settings, log)
+        if pairs is not None:
+            pending = _filter_pending(
+                pairs, coll, ids, paired, be_ids, be_q, adopt=False, log=log
+            )
+            log.info("--force: resuming main pairing (%d pairs left)", len(pending))
     else:
-        # --- Same-headword pairs get the polysemy q floor ---
-        by_word: dict[tuple[str, str, str], list[int]] = {}
-        for i, wp in enumerate(words):
-            by_word.setdefault(wp, []).append(i)
-        same_word: set[frozenset[int]] = set()
-        for idxs in by_word.values():
-            for a in range(len(idxs)):
-                for b in range(a + 1, len(idxs)):
-                    same_word.add(frozenset((idxs[a], idxs[b])))
+        pairs = _load_pairs_bundle(n, settings, log)
+        if pairs is None:
+            # --- Same-headword pairs get the polysemy q floor ---
+            by_word: dict[tuple[str, str, str], list[int]] = {}
+            for i, wp in enumerate(words):
+                by_word.setdefault(wp, []).append(i)
+            same_word: set[frozenset[int]] = set()
+            for idxs in by_word.values():
+                for a in range(len(idxs)):
+                    for b in range(a + 1, len(idxs)):
+                        same_word.add(frozenset((idxs[a], idxs[b])))
 
-        # --- 4a/4b: greedy highest-cosine matching ---
-        pairs = greedy_unique_match(
-            top_k_pairs(V),
-            threshold=settings.q_min_l15,
-            same_word=same_word,
-            polysemy_floor=settings.polysemy_q_floor,
-        )
-        log.info("greedy match: %d pairs from %d senses", len(pairs), n)
+            # --- 4a/4b: greedy highest-cosine matching ---
+            pairs = greedy_unique_match(
+                top_k_pairs(V),
+                threshold=settings.q_min_l15,
+                same_word=same_word,
+                polysemy_floor=settings.polysemy_q_floor,
+            )
+            log.info("greedy match: %d pairs from %d senses", len(pairs), n)
+            if not args.dry_run:
+                # Persist before the first embed call: a crash in 4c/4d (e.g.
+                # a dead embed endpoint) must not cost another HNSW pass.
+                _save_pairs_bundle(pairs, n, settings, log)
         n_pairs = len(pairs)
+        pending = _filter_pending(
+            pairs, coll, ids, paired, be_ids, be_q, adopt=True, log=log
+        )
 
+    # --- 4c/4d: build type_text per pair, batch-embed, compute bary_vec ---
+    # Shared by the fresh-match and both resume paths. Progress is durable
+    # per chunk: parents are stamped immediately after the insert, and the
+    # checkpoint is saved, so a crash loses at most one chunk of work.
+    inserted_any = False
+    for start in range(0, len(pending), batch_n):
+        chunk = pending[start : start + batch_n]
+        texts = []
+        for i, j, _q in chunk:
+            ant_a, syn_a = nb(words[i])
+            ant_b, syn_b = nb(words[j])
+            texts.append(
+                build_l15_type_text(words[i][0], ant_a, syn_a, words[j][0], ant_b, syn_b)
+            )
+        type_vecs = embedder.embed(texts)
+        edge_docs = []
+        for (i, j, q), tv in zip(chunk, type_vecs, strict=True):
+            bv = compute_bary_vec(V[i], V[j], tv, q)
+            edge_docs.append(
+                baryedge(ids[i], ids[j], 15, bv, q, accumulated_weight=q,
+                         edge_type=None, type_vector=tv,
+                         source="inferred", confidence=float(q))
+            )
+            paired.add(i)
+            paired.add(j)
+        if args.dry_run:
+            continue
+        res = coll.insert_many(edge_docs)
+        inserted_any = True
         parent_updates: list[UpdateOne] = []
+        for (i, j, q), eid, _doc in zip(chunk, res.inserted_ids, edge_docs, strict=True):
+            be_ids.append(eid)
+            be_q.append(q)
+            now = datetime.now(timezone.utc)
+            parent_updates.append(
+                UpdateOne({"_id": ids[i]}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
+            )
+            parent_updates.append(
+                UpdateOne({"_id": ids[j]}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
+            )
+            doi_bridge.propagate(bridge_coll, eid, [ids[i], ids[j]])
+        coll.bulk_write(parent_updates, ordered=False)
+        cp.processed = len(be_ids)
+        cp.total = len(be_ids) + len(pending) - (start + len(chunk))
+        cp_mod.save(cp, settings)
 
-        # --- 4c/4d: build type_text per pair, batch-embed, compute bary_vec ---
-        for start in range(0, len(pairs), batch_n):
-            chunk = pairs[start : start + batch_n]
-            texts = []
-            for i, j, _q in chunk:
-                ant_a, syn_a = nb(words[i])
-                ant_b, syn_b = nb(words[j])
-                texts.append(
-                    build_l15_type_text(words[i][0], ant_a, syn_a, words[j][0], ant_b, syn_b)
-                )
-            type_vecs = embedder.embed(texts)
-            edge_docs = []
-            for (i, j, q), tv in zip(chunk, type_vecs, strict=True):
-                bv = compute_bary_vec(V[i], V[j], tv, q)
-                edge_docs.append(
-                    baryedge(ids[i], ids[j], 15, bv, q, accumulated_weight=q,
-                             edge_type=None, type_vector=tv,
-                             source="inferred", confidence=float(q))
-                )
-                paired.add(i)
-                paired.add(j)
-            if args.dry_run:
-                continue
-            res = coll.insert_many(edge_docs)
-            for (i, j, q), eid, _doc in zip(chunk, res.inserted_ids, edge_docs, strict=True):
-                be_ids.append(eid)
-                be_q.append(q)
-                now = datetime.now(timezone.utc)
-                parent_updates.append(
-                    UpdateOne({"_id": ids[i]}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
-                )
-                parent_updates.append(
-                    UpdateOne({"_id": ids[j]}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
-                )
-                doi_bridge.propagate(bridge_coll, eid, [ids[i], ids[j]])
-            cp.processed = start + len(chunk)
-        if parent_updates and not args.dry_run:
-            coll.bulk_write(parent_updates, ordered=False)
+    if inserted_any:
+        # BEVp was built from the pre-existing BEs only; any BE added above is
+        # missing from its rows. Force a fresh projection in 4e rather than
+        # handing _run_orphan_reentry a matrix shorter than its index space.
+        if orphan_BEVp is not None:
+            log.info("new BEs inserted — dropping stale BE projection for 4e")
+            orphan_BEVp = None
+        n_pairs = len(be_ids)
 
     # --- 4e: L15 orphan re-entry ---
     n_reentry = 0
