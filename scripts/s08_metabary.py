@@ -3,7 +3,10 @@
 For each unparented bridge BE at level L-1, find two unparented BEs at
 level L with mutual cos > ``meta_bary_cos_threshold``. Form a MetaBary at
 L-2 using the Born-rule q_MB and set ``parent_edge_id`` on all three.
-Stop when a pass produces zero new triads.
+Stop when a pass produces zero new triads. Bridge assignment has NO
+brute-force rescue: only unparented top-window ANNs qualify (k=50, then
+a k=1 retry); exhausted pairs drop out and their children remain
+unparented for s09's relaxed rescue round.
 
 User decisions (2026-09-17):
   - No DOI/provenance propagation in this stage (the per-MB reverse lookups
@@ -219,7 +222,15 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
 def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
                 alpha: float, dry_run: bool, embed_dim: int,
                 children_cap: int | None = None) -> int:
-    """Form MetaBary at ``child_level - 2`` from children@L and bridges@L-1."""
+    """Form MetaBary at ``child_level - 2`` from children@L and bridges@L-1.
+
+    Bridge assignment (2026-10-07) accepts ONLY unparented top-window ANNs:
+    k=50 first, then a k=1 retry for regions with <50 available.  There is
+    no brute-force rescue in this stage — a pair whose window is exhausted
+    is DROPPED and both children stay unparented for s09's rescue round.
+    This keeps every MB's bridge a genuine ANN neighbour of the pair
+    centroid and leaves orphans available for upward propagation.
+    """
     child_ids, child_meta, CV, CVP, cv_path, cvp_path = _load_unparented_bes(
         coll, child_level, embed_dim, f"C{child_level}", cap=children_cap
     )
@@ -244,12 +255,16 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
 
     _log.info("greedy_unique_match: %d pairs from %d children", len(pairs), len(child_ids))
 
-    # 2. Assign each pair the nearest unused bridge (by projected centroid
-    #    cosine). Centroids come from CVP rows (full-dim CV stays cold until
-    #    write); the bridge HNSW is built on the projected memmap BVP.
+    # 2. Assign each pair the nearest still-unparented bridge (by projected
+    #    centroid cosine). The pools were loaded parent_edge_id=None and
+    #    every accepted bridge is mark_deleted immediately, so candidates
+    #    are unparented throughout the pass. Centroids come from CVP rows
+    #    (full-dim CV stays cold until write); the bridge HNSW is built on
+    #    the projected memmap BVP. Exhausted window → drop (no full scan).
     n_bridges = len(bridge_ids)
     _K = min(200, n_bridges)
     bridge_taken: set[int] = set()
+    dropped_no_bridge = 0
     triads: list[tuple[int, int, int, float]] = []  # (ci, cj, bi, q_pair)
 
     if n_bridges > ANN_THRESHOLD:
@@ -259,7 +274,9 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
         # to reliably satisfy knn_query when k is large.
         _BRIDGE_EF_C = 100
         # k=50 is sufficient — with 1.39M bridges and at most n_pairs taken,
-        # the nearest untaken bridge is almost always in the top-50.
+        # the nearest untaken bridge is almost always in the top-50; regions
+        # with <50 available are salvaged by the k=1 retry below, and a pair
+        # with zero reachable unparented bridges drops out (no full scan).
         _BRIDGE_K = min(50, n_bridges)
         _bridge_ef_q = max(200, _BRIDGE_K * 4)
         _log.info("building bridge HNSW index: n=%d dim=%d ef_construction=%d "
@@ -276,8 +293,17 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
             n = float(np.linalg.norm(centroid))
             centroid = centroid / n if n else centroid
             found = False
-            try:
-                labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=_BRIDGE_K)
+            # k=_BRIDGE_K first; a k=1 retry salvages the nearest
+            # unparented bridge in regions with <_BRIDGE_K available.
+            # No brute-force fallback: if both fail, the pair is dropped
+            # and its children stay unparented for s09.
+            for k in (_BRIDGE_K, 1):
+                try:
+                    labels, _ = bidx.knn_query(centroid.reshape(1, -1), k=k)
+                except RuntimeError:
+                    # fewer than k reachable unparented bridges (or ef/M too
+                    # sparse for this query point) — try a smaller window.
+                    continue
                 for bi in labels[0]:
                     bi = int(bi)
                     if bi not in bridge_taken:
@@ -286,17 +312,10 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
                         triads.append((ci, cj, bi, q_pair))
                         found = True
                         break
-            except RuntimeError:
-                pass  # M=16 graph too sparse for this query; fall through to brute force
+                if found:
+                    break
             if not found:
-                # Brute-force fallback: covers both "all top-K taken" and hnswlib
-                # RuntimeError (M=16 connectivity insufficient for this query point).
-                for bi in (int(x) for x in np.argsort(-(BVP @ centroid))):
-                    if bi not in bridge_taken:
-                        bridge_taken.add(bi)
-                        bidx.mark_deleted(bi)
-                        triads.append((ci, cj, bi, q_pair))
-                        break
+                dropped_no_bridge += 1
         del bidx
         gc.collect()
     else:
@@ -310,19 +329,21 @@ def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
                 order: np.ndarray = cands[np.argsort(-sims[cands])]
             else:
                 order = np.argsort(-sims)
-            found = False
+            # Same no-rescue rule as the ANN branch: only the top-_K window
+            # of unparented bridges is eligible; an exhausted window drops
+            # the pair (children stay unparented for s09).
             for bi in order:
-                if int(bi) not in bridge_taken:
-                    bridge_taken.add(int(bi))
-                    triads.append((ci, cj, int(bi), q_pair))
-                    found = True
+                bi = int(bi)
+                if bi not in bridge_taken:
+                    bridge_taken.add(bi)
+                    triads.append((ci, cj, bi, q_pair))
                     break
-            if not found:
-                for bi in np.argsort(-sims):
-                    if int(bi) not in bridge_taken:
-                        bridge_taken.add(int(bi))
-                        triads.append((ci, cj, int(bi), q_pair))
-                        break
+            else:
+                dropped_no_bridge += 1
+
+    _log.info("bridge assignment: %d triads from %d pairs, %d dropped "
+              "(no unparented bridge in window — children stay for s09)",
+              len(triads), len(pairs), dropped_no_bridge)
 
     # Projected memmaps done: drop them (and their pages) before the write
     # phase, which re-reads only the full-dim V/BV rows it needs.
