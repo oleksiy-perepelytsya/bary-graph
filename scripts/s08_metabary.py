@@ -178,9 +178,11 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
             # workers actually run in parallel (they used to serialize on the
             # lock, collapsing the bridge load to ~145 rows/s aggregate).
             row = unpack_vec(vec)
-            rp = row @ proj.T
+            rp = (row @ proj.T).astype(np.float32)  # float32! (float64 would
+            # corrupt the float32 memmap reopen below — see commit msg)
             norm = float(np.linalg.norm(rp))
             rp = rp / norm if norm else rp
+            assert rp.dtype == np.float32
             with lock:
                 if cap is not None and n >= cap:
                     break

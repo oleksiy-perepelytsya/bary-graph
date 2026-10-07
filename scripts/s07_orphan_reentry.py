@@ -386,9 +386,11 @@ def _stream_be_pool(coll, embed_dim: int, proj, out_path: Path,
                         or doc.get("vector") is None or doc.get("source") == "structural":
                     continue
                 row = unpack_vec(doc["vector"])
-                rp = row @ proj.T
+                rp = (row @ proj.T).astype(np.float32)  # float32! BVP is
+                # reopened as float32 memmap; float64 bytes corrupted it
                 norm = float(np.linalg.norm(rp))
                 rp = rp / norm if norm else rp
+                assert rp.dtype == np.float32
                 with lock:
                     ids.append(doc["_id"])
                     f.write(rp.tobytes())
