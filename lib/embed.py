@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import os
 import time
 from pathlib import Path
 from typing import Protocol
@@ -115,9 +116,13 @@ class OllamaEmbedder:
         # ollama cold-start after idle (model load can take 60-120s+ on
         # this CPU, and EMBED_BATCH_SIZE=512 batches add to it).
         self._timeout = min(settings.embed_timeout_seconds, 600)
+        self._headers = {}
+        token = os.environ.get("OLLAMA_API_KEY") or os.environ.get("OLLAMA_AUTH_TOKEN") or os.environ.get("KAGGLE_EMBED_TOKEN") or os.environ.get("KAGGLE_API_TOKEN")
+        if token:
+            self._headers["Authorization"] = f"Bearer {token}"
 
     def _client(self) -> httpx.Client:
-        return httpx.Client(timeout=self._timeout)
+        return httpx.Client(timeout=self._timeout, headers=self._headers if self._headers else None)
 
     def embed(self, texts: list[str]) -> np.ndarray:
         if not texts:
