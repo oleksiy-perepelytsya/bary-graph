@@ -24,7 +24,7 @@ else
   git -C "$REPO_DIR" fetch origin "$BRANCH" && git -C "$REPO_DIR" checkout "$BRANCH" && git -C "$REPO_DIR" pull --ff-only origin "$BRANCH" || true
 fi
 cd "$REPO_DIR"
-mkdir -p "$WORK" "$WORK/parsed" "$WORK/pipeline_state" "$WORK/a/parsed" "$WORK/a/state" "$WORK/b/parsed" "$WORK/b/state"
+mkdir -p "$WORK" "$WORK/parsed" "$WORK/pipeline_state"
 
 export KAGGLE_API_TOKEN="${KAGGLE_API_TOKEN:-$(python3 -c 'import secrets;print(secrets.token_hex(16))')}"
 export KAGGLE_API_PORT="${KAGGLE_API_PORT:-8765}"
@@ -54,14 +54,26 @@ if ! curl -sf -H "Authorization: Bearer $KAGGLE_API_TOKEN" "http://localhost:$KA
   sleep 3
 fi
 
-# 4. data
-KAIKKI="$WORK/kaikki.jsonl"
-if [ ! -f "$KAIKKI" ]; then
-  echo "== downloading kaikki-en =="
-  curl -fL -o "$KAIKKI" https://kaikki.org/dictionary/English/kaikki.org-dictionary-English.jsonl
-fi
-if [ ! -f "$WORK/parsed/senses.jsonl" ]; then
-  echo "== s01_parse =="
+# 4. data/parsed - skip s01/kaikki if parsed already present
+if [ -f "$WORK/parsed/senses.jsonl" ] && [ -f "$WORK/parsed/words.jsonl" ]; then
+  echo "== parsed files exist in $WORK/parsed, skipping s01_parse and kaikki download =="
+else
+  KAIKKI="${KAIKKI_PATH:-$WORK/kaikki.jsonl}"
+  if [ ! -f "$KAIKKI" ]; then
+    for cand in /kaggle/input/*/kaikki*.jsonl /kaggle/input/kaikki*/kaikki*.jsonl; do
+      if [ -f "$cand" ]; then
+        echo "== using existing kaikki: $cand =="
+        KAIKKI="$cand"
+        break
+      fi
+    done
+  fi
+  if [ ! -f "$KAIKKI" ]; then
+    echo "== downloading kaikki-en (only if needed) to $WORK/kaikki.jsonl =="
+    curl -fL -o "$WORK/kaikki.jsonl" https://kaikki.org/dictionary/English/kaikki.org-dictionary-English.jsonl
+    KAIKKI="$WORK/kaikki.jsonl"
+  fi
+  echo "== s01_parse using $KAIKKI =="
   KAIKKI_PATH="$KAIKKI" PARSED_DIR="$WORK/parsed" PIPELINE_STATE_DIR="$WORK/pipeline_state" \
     python3 -m scripts.s01_parse
 fi
