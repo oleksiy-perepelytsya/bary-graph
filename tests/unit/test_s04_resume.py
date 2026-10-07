@@ -108,3 +108,53 @@ def test_filter_adopt_false_leaves_pool_alone(log):
 def test_filter_empty_pairs_short_circuits(log):
     assert s04._filter_pending([], _FakeColl([]), [], set(), [], [],
                                 adopt=True, log=log) == []
+
+
+# --- _parallel_embed_batches -------------------------------------------------
+
+
+def test_parallel_batch_order_matches_sequential():
+    chunks = [[1, 2], [3, 4, 5], [6], [7, 8, 9, 10]]
+    fn = lambda ch: [x * 2 for x in ch]  # noqa: E731
+    seq = list(s04._parallel_embed_batches(chunks, fn, workers=1))
+    par = list(s04._parallel_embed_batches(chunks, fn, workers=4))
+    assert seq == par == [(c, fn(c)) for c in chunks]
+
+
+def test_parallel_empty_input():
+    assert list(s04._parallel_embed_batches([], lambda c: c, workers=4)) == []
+
+
+def test_parallel_overlaps_workers():
+    """With workers>1 more than one embed_fn must be in flight at once."""
+    import threading
+    import time
+
+    lock = threading.Lock()
+    in_flight = {"now": 0, "peak": 0}
+
+    def slow(_chunk):
+        with lock:
+            in_flight["now"] += 1
+            in_flight["peak"] = max(in_flight["peak"], in_flight["now"])
+        time.sleep(0.05)
+        with lock:
+            in_flight["now"] -= 1
+        return _chunk
+
+    out = list(s04._parallel_embed_batches(range(8), slow, workers=4))
+    assert [c for c, _ in out] == list(range(8))
+    assert in_flight["peak"] >= 2
+
+
+def test_parallel_propagates_worker_error():
+    def boom(chunk):
+        if chunk == 3:
+            raise RuntimeError("embed failed")
+        return chunk
+
+    gen = s04._parallel_embed_batches([1, 2, 3, 4], boom, workers=2)
+    assert next(gen) == (1, 1)
+    assert next(gen) == (2, 2)
+    with pytest.raises(RuntimeError, match="embed failed"):
+        next(gen)

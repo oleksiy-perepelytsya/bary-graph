@@ -17,9 +17,12 @@ from __future__ import annotations
 import gc
 import os
 import pickle
-from collections.abc import Sequence
+from collections import deque
+from collections.abc import Callable, Iterable, Iterator, Sequence
+from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import TypeVar
 
 import numpy as np
 from bson import ObjectId
@@ -395,6 +398,43 @@ def _filter_pending(
     return pending
 
 
+_T = TypeVar("_T")
+_R = TypeVar("_R")
+
+
+def _parallel_embed_batches(
+    chunks: Iterable[_T],
+    embed_fn: Callable[[_T], _R],
+    workers: int,
+) -> Iterator[tuple[_T, _R]]:
+    """Yield ``(chunk, result)`` in chunk order with ``workers`` embeds in flight.
+
+    Only the embed_fn calls overlap; the consumer (build docs → insert →
+    stamp parents → checkpoint) still runs strictly sequentially in chunk
+    order, so crash-resume semantics are byte-identical to the sequential
+    path. ``workers <= 1`` degrades to plain sequential iteration.
+    """
+    if workers <= 1:
+        for chunk in chunks:
+            yield chunk, embed_fn(chunk)
+        return
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futs: deque[tuple[_T, Future[_R]]] = deque()
+        it = iter(chunks)
+        while True:
+            # Refill the in-flight window before blocking on the oldest one,
+            # so a slow response never idles the other workers.
+            while len(futs) < workers:
+                chunk = next(it, None)
+                if chunk is None:
+                    break
+                futs.append((chunk, pool.submit(embed_fn, chunk)))
+            if not futs:
+                return
+            chunk, fut = futs.popleft()
+            yield chunk, fut.result()
+
+
 def _run_orphan_reentry(
     coll,
     bridge_coll,
@@ -409,6 +449,7 @@ def _run_orphan_reentry(
     embedder,
     nb,
     log,
+    workers: int = 1,
     ann_bundle: dict | None = None,
 ) -> int:
     """Pair unpaired senses with the nearest existing L15 BE (batched embed).
@@ -544,12 +585,18 @@ def _run_orphan_reentry(
     ]
 
     # --- A: embed once per distinct (word,pos,lang) ---
+    # The vectors are kept in key_vecs and read back per-orphan below. That
+    # read-back used to go through embedder.vector_for(), which re-embeds on
+    # a cold cache — with no EMBED_CACHE_FILE configured that meant one HTTP
+    # request *per orphan* (~488k requests). The dict (~keys × dim × 4 B,
+    # ~2 GB at poc scale) replaces both the disk cache and those re-embeds.
     keys = list({words[oi] for oi, _ in re_meta})
-    key_texts: dict[tuple[str, str, str], str] = {}
+    key_vecs: dict[tuple[str, str, str], np.ndarray] = {}
     n_keys_embedded = 0
+    next_log_at = 16384
     t0 = datetime.now(timezone.utc)
-    for start in range(0, len(keys), batch_n):
-        ks = keys[start : start + batch_n]
+
+    def _embed_key_batch(ks: list) -> tuple[list[str], np.ndarray]:
         nbs = _neighborhoods_for_keys(coll, ks)
         texts = [
             build_l15_type_text(
@@ -557,14 +604,22 @@ def _run_orphan_reentry(
             )
             for k in ks
         ]
-        for k, t in zip(ks, texts, strict=True):
-            key_texts[k] = t
-        embedder.embed(texts)  # populate cache; vectors are read back per-orphan
+        return texts, embedder.embed(texts)
+
+    key_batches = (
+        keys[start : start + batch_n] for start in range(0, len(keys), batch_n)
+    )
+    for ks, (texts, vecs) in _parallel_embed_batches(
+        key_batches, _embed_key_batch, workers
+    ):
+        for k, v in zip(ks, vecs, strict=True):
+            key_vecs[k] = v
         n_keys_embedded += len(texts)
-        if (start + batch_n) % 16384 < batch_n:
+        if n_keys_embedded >= next_log_at:
             log.info("  embedded %d/%d distinct keys (elapsed=%s)",
                      n_keys_embedded, len(keys),
                      datetime.now(timezone.utc) - t0)
+            next_log_at += 16384
     log.info("  embedded %d distinct word keys (vs %d orphans) in %s",
              n_keys_embedded, n_orphans, datetime.now(timezone.utc) - t0)
 
@@ -594,7 +649,7 @@ def _run_orphan_reentry(
         re_docs = []
         for (oi, bi), tv in zip(
             chunk,
-            [embedder.vector_for(key_texts[words[oi]]) for oi, _ in chunk],
+            [key_vecs[words[oi]] for oi, _ in chunk],
             strict=True,
         ):
             q = be_q[bi]
@@ -796,6 +851,29 @@ def run(argv: Sequence[str] | None = None) -> None:
     pairs: list[tuple[int, int, float]] = []
     pending: list[tuple[int, int, float]] = []
 
+    def _match_pairs(V: np.ndarray) -> list[tuple[int, int, float]]:
+        """4a/4b greedy match, persisting the bundle before any embed call."""
+        by_word: dict[tuple[str, str, str], list[int]] = {}
+        for i, wp in enumerate(words):
+            by_word.setdefault(wp, []).append(i)
+        same_word: set[frozenset[int]] = set()
+        for idxs in by_word.values():
+            for a in range(len(idxs)):
+                for b in range(a + 1, len(idxs)):
+                    same_word.add(frozenset((idxs[a], idxs[b])))
+        m = greedy_unique_match(
+            top_k_pairs(V),
+            threshold=settings.q_min_l15,
+            same_word=same_word,
+            polysemy_floor=settings.polysemy_q_floor,
+        )
+        log.info("greedy match: %d pairs from %d senses", len(m), n)
+        if not args.dry_run:
+            # Persist before the first embed call: a crash in 4c/4d (e.g.
+            # a dead embed endpoint) must not cost another HNSW pass.
+            _save_pairs_bundle(m, n, settings, log)
+        return m
+
     # --- --force with existing BEs: skip main pairing, resume orphan re-entry ---
     if args.force and existing_be_count:
         log.info(
@@ -844,31 +922,20 @@ def run(argv: Sequence[str] | None = None) -> None:
                 pairs, coll, ids, paired, be_ids, be_q, adopt=False, log=log
             )
             log.info("--force: resuming main pairing (%d pairs left)", len(pending))
+        else:
+            # No usable bundle (stale guard / deleted): silently skipping the
+            # main phase would strand every never-embedded pair as an orphan
+            # in 4e. Re-derive the match; _filter_pending drops the done ones.
+            log.warning("--force: no usable pairs bundle — re-running greedy match")
+            pairs = _match_pairs(V)
+            pending = _filter_pending(
+                pairs, coll, ids, paired, be_ids, be_q, adopt=False, log=log
+            )
+            log.info("--force: main pairing re-derived (%d pairs left)", len(pending))
     else:
         pairs = _load_pairs_bundle(n, settings, log)
         if pairs is None:
-            # --- Same-headword pairs get the polysemy q floor ---
-            by_word: dict[tuple[str, str, str], list[int]] = {}
-            for i, wp in enumerate(words):
-                by_word.setdefault(wp, []).append(i)
-            same_word: set[frozenset[int]] = set()
-            for idxs in by_word.values():
-                for a in range(len(idxs)):
-                    for b in range(a + 1, len(idxs)):
-                        same_word.add(frozenset((idxs[a], idxs[b])))
-
-            # --- 4a/4b: greedy highest-cosine matching ---
-            pairs = greedy_unique_match(
-                top_k_pairs(V),
-                threshold=settings.q_min_l15,
-                same_word=same_word,
-                polysemy_floor=settings.polysemy_q_floor,
-            )
-            log.info("greedy match: %d pairs from %d senses", len(pairs), n)
-            if not args.dry_run:
-                # Persist before the first embed call: a crash in 4c/4d (e.g.
-                # a dead embed endpoint) must not cost another HNSW pass.
-                _save_pairs_bundle(pairs, n, settings, log)
+            pairs = _match_pairs(V)
         n_pairs = len(pairs)
         pending = _filter_pending(
             pairs, coll, ids, paired, be_ids, be_q, adopt=True, log=log
@@ -878,9 +945,13 @@ def run(argv: Sequence[str] | None = None) -> None:
     # Shared by the fresh-match and both resume paths. Progress is durable
     # per chunk: parents are stamped immediately after the insert, and the
     # checkpoint is saved, so a crash loses at most one chunk of work.
+    # Embed calls may run concurrently (--embed-concurrency); everything from
+    # bary_vec computation downwards stays sequential in chunk order.
+    embed_workers = max(1, args.embed_concurrency)
     inserted_any = False
-    for start in range(0, len(pending), batch_n):
-        chunk = pending[start : start + batch_n]
+    consumed = 0  # pending pairs already through the loop (for cp.total)
+
+    def _embed_pair_chunk(chunk: list) -> np.ndarray:
         texts = []
         for i, j, _q in chunk:
             ant_a, syn_a = nb(words[i])
@@ -888,7 +959,15 @@ def run(argv: Sequence[str] | None = None) -> None:
             texts.append(
                 build_l15_type_text(words[i][0], ant_a, syn_a, words[j][0], ant_b, syn_b)
             )
-        type_vecs = embedder.embed(texts)
+        return embedder.embed(texts)
+
+    pair_batches = (
+        pending[start : start + batch_n]
+        for start in range(0, len(pending), batch_n)
+    )
+    for chunk, type_vecs in _parallel_embed_batches(
+        pair_batches, _embed_pair_chunk, embed_workers
+    ):
         edge_docs = []
         for (i, j, q), tv in zip(chunk, type_vecs, strict=True):
             bv = compute_bary_vec(V[i], V[j], tv, q)
@@ -917,8 +996,9 @@ def run(argv: Sequence[str] | None = None) -> None:
             doi_bridge.propagate(bridge_coll, eid, [ids[i], ids[j]])
         coll.bulk_write(parent_updates, ordered=False)
         cp.processed = len(be_ids)
-        cp.total = len(be_ids) + len(pending) - (start + len(chunk))
+        cp.total = len(be_ids) + len(pending) - (consumed + len(chunk))
         cp_mod.save(cp, settings)
+        consumed += len(chunk)
 
     if inserted_any:
         # BEVp was built from the pre-existing BEs only; any BE added above is
@@ -934,7 +1014,7 @@ def run(argv: Sequence[str] | None = None) -> None:
     if not args.dry_run:
         n_reentry = _run_orphan_reentry(
             coll, bridge_coll, ids, words, V, be_ids, be_q, orphan_BEVp, paired, batch_n,
-            embedder, nb, log, ann_bundle=ann_bundle
+            embedder, nb, log, workers=embed_workers, ann_bundle=ann_bundle
         )
 
     cp.processed = n_pairs + n_reentry

@@ -45,7 +45,17 @@ def make_parser(stage: str) -> argparse.ArgumentParser:
     p.add_argument("--reset", action="store_true", help="discard checkpoint and start over")
     p.add_argument("--limit", type=int, default=None, help="process at most N items (dev)")
     p.add_argument("--dry-run", action="store_true", help="do not write to MongoDB / disk")
-    p.add_argument("--batch-size", type=int, default=None, help="override BATCH_SIZE")
+    p.add_argument(
+        "--batch-size", type=int, default=None, help="override BATCH_SIZE"
+    )
+    p.add_argument(
+        "--embed-concurrency",
+        type=int,
+        default=1,
+        metavar="N",
+        help="(04_l15_edges only) embed requests to keep in flight; >1 only "
+        "makes sense against a load-balanced proxy with multiple GPUs",
+    )
     p.add_argument("--kaikki-path", type=str, default=None, help="override KAIKKI_PATH")
     p.add_argument(
         "--word-ids-file",

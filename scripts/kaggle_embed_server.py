@@ -10,8 +10,12 @@ Endpoints (all behind a bearer token):
     GET  /v1/download?path=relpath       → file bytes (under WORK_DIR only)
 
 Ollama proxy (also behind same bearer token):
-    GET  /api/*                          → forward to OLLAMA_URL_BASE/api/*
-    POST /api/*                          → forward to OLLAMA_URL_BASE/api/*
+    GET  /api/*                          → forward to next Ollama backend
+    POST /api/*                          → forward to next Ollama backend
+
+Backends come from OLLAMA_BACKENDS (comma-separated, round-robin per request,
+failover on connection errors); OLLAMA_FORWARD_URL / OLLAMA_URL_BASE keep
+working as the single-backend default.
 
 Runs stages as subprocesses; forwards Ollama API calls to the local Ollama
 on Kaggle so remote clients (e.g. s04 on laptop) can use GPU embeddings.
@@ -21,12 +25,14 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import threading
 import time
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.parse import parse_qs, urlparse
 from urllib.request import Request, urlopen
 
@@ -35,6 +41,33 @@ WORK = Path(os.environ.get("KAGGLE_WORK_DIR", "kaggle_work")).resolve()
 REPO = Path(os.environ.get("KAGGLE_REPO_DIR", Path(__file__).resolve().parent.parent))
 OLLAMA_URL_BASE = os.environ.get("OLLAMA_URL_BASE", "http://localhost:11434")
 OLLAMA_FORWARD_URL = os.environ.get("OLLAMA_FORWARD_URL", OLLAMA_URL_BASE)
+# Comma-separated Ollama backends, round-robined per /api/* request so two
+# GPU-bound Ollama instances (one per Kaggle T4) both take work.  Default is
+# the single OLLAMA_FORWARD_URL, preserving single-GPU behavior.
+OLLAMA_BACKENDS: list[str] = [
+    u.strip().rstrip("/")
+    for u in os.environ.get("OLLAMA_BACKENDS", OLLAMA_FORWARD_URL).split(",")
+    if u.strip()
+] or [OLLAMA_FORWARD_URL.rstrip("/")]
+
+_RR_IDX = 0
+_RR_LOCK = threading.Lock()
+
+
+def _backend_order() -> list[str]:
+    """Round-robin starting offset; concurrent requests spread across GPUs."""
+    global _RR_IDX
+    with _RR_LOCK:
+        start = _RR_IDX % len(OLLAMA_BACKENDS)
+        _RR_IDX += 1
+    return OLLAMA_BACKENDS[start:] + OLLAMA_BACKENDS[:start]
+
+
+def _tail(path: Path, n: int = 40) -> str:
+    try:
+        return "\n".join(path.read_text(errors="replace").splitlines()[-n:])
+    except OSError:
+        return ""
 
 WORK.mkdir(parents=True, exist_ok=True)
 REPO.mkdir(parents=True, exist_ok=True)
@@ -63,7 +96,8 @@ def _now() -> float:
 def _run_job(job_id: str, stage: str, args: list[str], extra_env: dict[str, str]) -> None:
     log_path = WORK / f"{job_id}.log"
     env = dict(os.environ)
-    env["OLLAMA_URL"] = f"{OLLAMA_FORWARD_URL}/api/embed"
+    # OllamaEmbedder appends /api/embed itself → give it the bare backend.
+    env["OLLAMA_URL"] = OLLAMA_BACKENDS[0]
     if (WORK / "kaikki.jsonl").exists():
         env["KAIKKI_PATH"] = str(WORK / "kaikki.jsonl")
     env["PARSED_DIR"] = str(WORK / "parsed")
@@ -120,30 +154,50 @@ class Handler(BaseHTTPRequestHandler):
         if not self._auth_ok():
             return
         url = urlparse(self.path)
-        target = f"{OLLAMA_FORWARD_URL}{url.path}"
-        if url.query:
-            target += f"?{url.query}"
         content_length = self.headers.get("Content-Length")
         data = None
         if content_length is not None and int(content_length) > 0:
             data = self.rfile.read(int(content_length))
-        req = Request(target, data=data, method=self.command)
-        for k, v in self.headers.items():
-            if k.lower() in ("host", "connection"):
-                continue
-            req.add_header(k, v)
-        try:
-            with urlopen(req, timeout=300) as resp:
-                self.send_response(resp.getcode())
-                for k, v in resp.headers.items():
-                    if k.lower() in ("connection", "transfer-encoding"):
-                        continue
-                    self.send_header(k, v)
+        last_err: Exception | None = None
+        for base in _backend_order():
+            target = f"{base}{url.path}"
+            if url.query:
+                target += f"?{url.query}"
+            req = Request(target, data=data, method=self.command)
+            for k, v in self.headers.items():
+                if k.lower() in ("host", "connection"):
+                    continue
+                req.add_header(k, v)
+            try:
+                with urlopen(req, timeout=300) as resp:
+                    self.send_response(resp.getcode())
+                    for k, v in resp.headers.items():
+                        if k.lower() in ("connection", "transfer-encoding"):
+                            continue
+                        self.send_header(k, v)
+                    self.end_headers()
+                    while chunk := resp.read(1 << 20):
+                        self.wfile.write(chunk)
+                    return
+            except HTTPError as e:
+                # The backend answered with an error status — forward it
+                # verbatim rather than retrying elsewhere.
+                err_body = e.read()
+                self.send_response(e.code)
+                self.send_header("Content-Type",
+                                 e.headers.get("Content-Type", "application/json"))
+                self.send_header("Content-Length", str(len(err_body)))
                 self.end_headers()
-                while chunk := resp.read(1 << 20):
-                    self.wfile.write(chunk)
-        except Exception as e:
-            self._send(502, {"error": str(e)})
+                self.wfile.write(err_body)
+                return
+            except Exception as e:  # noqa: BLE001 — connection refused/timeout
+                # Backend down (e.g. one Ollama restarting): try the next one.
+                last_err = e
+                continue
+        self._send(502, {
+            "error": f"all {len(OLLAMA_BACKENDS)} ollama backends failed: {last_err}",
+            "backends": OLLAMA_BACKENDS,
+        })
 
     def do_HEAD(self) -> None:  # noqa: N802
         if not self._auth_ok():
@@ -162,7 +216,9 @@ class Handler(BaseHTTPRequestHandler):
             self._proxy_ollama()
             return
         if url.path == "/v1/health":
-            self._send(200, {"ok": True, "ollama_url": f"{OLLAMA_FORWARD_URL}/api/embed", "repo": str(REPO)})
+            self._send(200, {"ok": True, "backends": OLLAMA_BACKENDS,
+                             "ollama_url": f"{OLLAMA_BACKENDS[0]}/api/embed",
+                             "repo": str(REPO)})
             return
         if url.path == "/v1/jobs":
             jobs = [dict(v) for v in JOBS.values()]
@@ -221,8 +277,11 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(400, {"error": f"unknown stage: {stage}"})
                 return
             jid = str(uuid.uuid4())
-            JOBS[jid] = dict(job_id=jid, stage=stage, status="queued", args=list(args), env=dict(extra_env), created=_now())
-            t = threading.Thread(target=_run_job, args=(jid, stage, list(args), dict(extra_env)), daemon=True)
+            JOBS[jid] = dict(job_id=jid, stage=stage, status="queued",
+                             args=list(args), env=dict(extra_env), created=_now())
+            t = threading.Thread(target=_run_job,
+                                 args=(jid, stage, list(args), dict(extra_env)),
+                                 daemon=True)
             t.start()
             self._send(200, {"job_id": jid})
             return
