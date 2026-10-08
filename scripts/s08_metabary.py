@@ -43,6 +43,7 @@ import sys
 import threading
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import nullcontext
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -131,14 +132,23 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     until write). ``cap`` (dev) bounds children and forces a single-threaded
     scan so a smoke run stops after a couple of minutes.
 
-    mongot's planner stalls BOTH fat-filter counts and fat-projection filter
-    finds on the big all-build collection (the ``count_documents`` below timed
-    out at 120 s), so this uses the s06/s07 pure-``_id`` primitive: disjoint
-    ``_id`` sub-ranges over the level's band, ``hint(_id_)`` cursors,
-    client-side level/parent/vector/source filtering. There is NO count: the
-    accepted rows stream as raw float32 into append-only binary files which
-    are reopened as exact-size memmaps at the end, so the L15 child pass
-    (12,051,296 × 4096 × 4B ≈ 197 GB) never touches RAM and needs no index.
+    Two-phase load (2026-10-08): mongot's planner stalls BOTH fat-filter
+    counts and fat-projection filter finds on the big all-build collection
+    (a ``count_documents`` timed out at 120 s), so PHASE 1 keeps the s06/s07
+    pure-``_id`` primitive — disjoint ``_id`` sub-ranges over the level's
+    band, ``hint(_id_)`` cursors, client-side level/parent/source filtering —
+    but projects ONLY the light fields. The previous single-phase version
+    also projected ``vector``, streaming ~4.2 kB per scanned doc for the
+    ~99.99% of docs the client-side filter drops (≈23 GB per load on PoC
+    bands = a fixed ~6 min/pass IO tax regardless of how few candidates the
+    level actually has). PHASE 2 then fetches vectors ONLY for the accepted
+    ids in chunked ``$in`` queries — both phases stay index-driven and
+    planner-proof — unpacks/projects them in parallel, and streams raw
+    float32 into append-only binary files which are reopened as exact-size
+    memmaps at the end, so the L15 child pass (12,051,296 × 4096 × 4B ≈
+    197 GB) never touches RAM. ``cap`` bounds phase-1 candidates (dev-only);
+    a candidate whose vector is missing is dropped in phase 2, so with
+    missing vectors the written count can land just under ``cap``.
     """
     band_lo, band_hi = (_S08_BARY_LO, _S08_TODAY_LO) if level == 15 \
         else (_S08_TODAY_LO, None)
@@ -154,13 +164,16 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     ids: list = []
     meta: list[dict] = []
     lock = threading.Lock()
-    n = 0
+    n_cand = 0
     dropped = 0
+    # Phase-1 projection: light fields only — NEVER ``vector``. Streaming the
+    # vector for docs the client-side filter then drops was the ~6 min/load
+    # IO tax this two-phase split exists to remove.
     proj_fields = {"_id": 1, "doc_type": 1, "level": 1, "parent_edge_id": 1,
-                   "vector": 1, "accumulated_weight": 1, "source": 1}
+                   "accumulated_weight": 1, "source": 1}
 
     def _scan(lo, hi):
-        nonlocal n, dropped
+        nonlocal n_cand, dropped
         q = {"_id": {"$gte": lo}}
         if hi is not None:
             q["_id"]["$lt"] = hi
@@ -170,46 +183,86 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
                     or doc.get("source") == "structural":
                 dropped += 1
                 continue
-            vec = doc.get("vector")
-            if vec is None:
-                dropped += 1
-                continue
-            # unpack + projection are CPU-heavy: do them OUTSIDE the lock so 8
-            # workers actually run in parallel (they used to serialize on the
-            # lock, collapsing the bridge load to ~145 rows/s aggregate).
-            row = unpack_vec(vec)
-            rp = (row @ proj.T).astype(np.float32)  # float32! (float64 would
-            # corrupt the float32 memmap reopen below — see commit msg)
-            norm = float(np.linalg.norm(rp))
-            rp = rp / norm if norm else rp
-            assert rp.dtype == np.float32
             with lock:
-                if cap is not None and n >= cap:
+                if cap is not None and n_cand >= cap:
                     break
                 ids.append(doc["_id"])
                 meta.append({"_id": doc["_id"],
                              "accumulated_weight": doc["accumulated_weight"]})
-                vf.write(row.tobytes())
-                pf.write(rp.tobytes())
-                n += 1
-                if n % 500_000 == 0:
-                    _log.info("  loaded %d unparented L%d (dropped=%d)", n, level, dropped)
+                n_cand += 1
+                if n_cand % 500_000 == 0:
+                    _log.info("  scanned %d unparented L%d candidates (dropped=%d)",
+                              n_cand, level, dropped)
 
-    with open(v_path, "wb") as vf, open(vp_path, "wb") as pf:
-        if cap is None and _S08_LOAD_WORKERS > 1 and band_hi is not None:
-            lo_i = int.from_bytes(band_lo.binary, "big")
-            hi_i = int.from_bytes(band_hi.binary, "big")
-            span = (hi_i - lo_i) // _S08_LOAD_WORKERS
-            ranges = []
-            for k in range(_S08_LOAD_WORKERS):
-                a = lo_i + k * span
-                b = lo_i + (k + 1) * span if k < _S08_LOAD_WORKERS - 1 else hi_i
-                ranges.append((ObjectId(a.to_bytes(12, "big")),
-                               ObjectId(b.to_bytes(12, "big"))))
-            with ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) as ex:
-                list(ex.map(lambda r: _scan(*r), ranges))
-        else:
-            _scan(band_lo, band_hi)
+    # PHASE 1 — light _id-band scan; accept ids only, no vector payload.
+    if cap is None and _S08_LOAD_WORKERS > 1 and band_hi is not None:
+        lo_i = int.from_bytes(band_lo.binary, "big")
+        hi_i = int.from_bytes(band_hi.binary, "big")
+        span = (hi_i - lo_i) // _S08_LOAD_WORKERS
+        ranges = []
+        for k in range(_S08_LOAD_WORKERS):
+            a = lo_i + k * span
+            b = lo_i + (k + 1) * span if k < _S08_LOAD_WORKERS - 1 else hi_i
+            ranges.append((ObjectId(a.to_bytes(12, "big")),
+                           ObjectId(b.to_bytes(12, "big"))))
+        with ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) as ex:
+            list(ex.map(lambda r: _scan(*r), ranges))
+    else:
+        _scan(band_lo, band_hi)
+
+    if not ids:
+        _cleanup_mmaps([v_path, vp_path], _log)
+        return [], [], np.empty((0, embed_dim), dtype=np.float32), \
+            np.empty((0, MATCH_DIM), dtype=np.float32), None, None
+
+    def _project_one(item):
+        """Phase-2 worker: (candidate idx, vector) -> (idx, V bytes, VP bytes).
+
+        ``vec is None`` (field missing / doc vanished between phases) returns
+        None bytes and the caller counts it ``dropped`` — the same net
+        filter the old single-phase scan applied inline. unpack + projection
+        are CPU-heavy, so this runs on the worker pool OUTSIDE any lock.
+        """
+        idx, vec = item
+        if vec is None:
+            return idx, None, None
+        row = unpack_vec(vec)
+        rp = (row @ proj.T).astype(np.float32)  # float32! (float64 would
+        # corrupt the float32 memmap reopen below — see commit 75efbd2)
+        norm = float(np.linalg.norm(rp))
+        rp = rp / norm if norm else rp
+        assert rp.dtype == np.float32
+        return idx, row.tobytes(), rp.tobytes()
+
+    # PHASE 2 — fetch vectors ONLY for accepted ids (chunked $in), writing in
+    # ids order so V/VP row i always belongs to ids[i]. Chunking bounds RAM
+    # (2_000 × 4.2 kB ≈ 8 MB per fetch) even for the all-build's 197 GB L15
+    # pool; ThreadPoolExecutor.map yields results in input order, so rows
+    # stay aligned without any lock.
+    _CHUNK = 2_000
+    n = 0
+    final_ids: list = []
+    final_meta: list[dict] = []
+    pool = ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) \
+        if _S08_LOAD_WORKERS > 1 else nullcontext()
+    with pool as ex, open(v_path, "wb") as vf, open(vp_path, "wb") as pf:
+        for start in range(0, len(ids), _CHUNK):
+            chunk = ids[start:start + _CHUNK]
+            vecs = {d["_id"]: d.get("vector")
+                    for d in coll.find({"_id": {"$in": list(chunk)}},
+                                       {"_id": 1, "vector": 1})}
+            items = [(start + i, vecs.get(oid)) for i, oid in enumerate(chunk)]
+            results = ex.map(_project_one, items) if ex is not None \
+                else map(_project_one, items)
+            for idx, row_b, rp_b in results:
+                if row_b is None:
+                    dropped += 1
+                    continue
+                vf.write(row_b)
+                pf.write(rp_b)
+                final_ids.append(ids[idx])
+                final_meta.append(meta[idx])
+                n += 1
     if n == 0:
         _cleanup_mmaps([v_path, vp_path], _log)
         return [], [], np.empty((0, embed_dim), dtype=np.float32), \
@@ -218,7 +271,7 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     VP = np.memmap(vp_path, mode="r+", dtype=np.float32, shape=(n, MATCH_DIM))
     _log.info("loaded %d unparented L%d BEs/MBs (dropped=%d, V %s, VP %s)",
               n, level, dropped, v_path, vp_path)
-    return ids, meta, V, VP, v_path, vp_path
+    return final_ids, final_meta, V, VP, v_path, vp_path
 
 
 def _form_level(coll, child_level: int, bridge_level: int, threshold: float,
