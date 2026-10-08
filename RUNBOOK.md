@@ -26,9 +26,9 @@ process/state map so nothing is lost on session compaction.
 |---|---|---|
 | 87969 | `s05_word_vectors` | full s05 run on barygraph_all (log `/tmp/opencode/s05.log`) |
 | 119884 | `cog_mb_loop --minutes 1440` | 24h cognitive loop, model `ollama/qwen3.6:27b-q4_K_M-ctx64k`, poll-timeout 600 (restarted to add author canonicalization + per-cycle session cleanup) |
-| 64552 | `mcp_server --port 8000` | barygraph MCP (poc), keep-warm; behind cloudflared tunnel |
+| 305392 | `mcp_server --transport streamable-http --port 8000` | barygraph MCP (poc), keep-warm; behind cloudflared tunnel (restarted 2026-10-08) |
 | 78171 | `mcp_int_cog` | local cog MCP (poc) |
-| 3242 | cloudflared tunnel | https://mild-infrastructure-should-batch.trycloudflare.com/mcp — do not restart casually |
+| 305683 | cloudflared tunnel (quick tunnel, binary `~/.local/bin/cloudflared`) | https://shake-insider-testing-coleman.trycloudflare.com/mcp — quick-tunnel URL is per-run random; update `opencode.json` on every restart |
 | 77601 | ollama serve | host ollama at `http://ollama:11434` |
 | 77747 | llama-server :36783 | keep-warm llama.cpp instance (blob ≠ deepseek; left alone) |
 
@@ -390,3 +390,25 @@ mongot 8.3.4 accepts 1024-dim vector indexes, both plain float32 and with
    env), not code surgery.
 7. **This section stays authoritative** for the s10 re-run; revisit before
    executing if any step is stale.
+
+## Dated findings (2026-10-08, poc s10 attempt)
+
+- `s10_index --force` ran on `barygraph_poc`: 10 standard indexes no-op, then
+  created `barygraph_vector` from `indexes/vector_index.json` — which still
+  carries the all-build spec (`numDimensions: 4096`, trace from commit
+  `a2eda39`, never restored for poc). Index reached READY but **indexed 0 of
+  ~6.78M docs**; dropped again the same evening.
+- Root cause (verified on scratch `barygraph_test_*` collections, all three
+  formats, 300 docs each): poc's `vector` field is **binary-packed float32**
+  (`pack_vec`, 4 KB/doc BSON binary), and the local mongot indexes **only
+  plain float arrays** — binary-packed → 0 hits, BSON subtype-0x09 vector
+  binary → 0 hits, float array → hits. So even a corrected 1024-dim spec
+  stays empty until the stored format changes.
+- Vector serving for poc is therefore a **data migration**, not config:
+  rewrite `vector` to float arrays (+55–60 GB, host had ~44 GB free on
+  2026-10-08 — check disk first) or back a `vector_m` int8 route per the plan
+  above. No mongot process exists outside the `barygraph-mongo` container;
+  search-index DDL inside it is what spawns/serves the index build.
+- MCP keepwarm/warmup `$vectorSearch` tolerates the missing index (returns 0
+  hits, no error) — same as before this attempt; no behavior change from the
+  drop.
