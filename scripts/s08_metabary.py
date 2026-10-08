@@ -565,8 +565,10 @@ def run(argv: Sequence[str] | None = None) -> None:
         log.info("L%d MetaBary: children@L%d bridges@L%d → %d triads",
                  child_level - 2, child_level, bridge_level, n)
         total += n
-        if n == 0:
-            break
+        # 2026-10-08: no break on zero yield — a zero at one gate (e.g. the
+        # L10 cosine gate) does not predict the next level's pools, which are
+        # independent (s08c: L10=1 yet L9=2416).  Deep passes are cheap
+        # (pools ≤ ~8k), so every round attempts the full descent to L1.
         child_level -= 1
 
     cp.processed = total

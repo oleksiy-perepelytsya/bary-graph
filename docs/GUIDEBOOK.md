@@ -62,6 +62,31 @@ grapheme families (amphi-, amino-, Ga-/Go-) all form spontaneously.
 
 ---
 
+### 1.2 s08 growth-round tuning: 0.85 scoped to s08 + full descent — 2026-10-08
+
+Context: rounds descend L13→L1 and used to `break` at the first zero-yield
+level; the L10 cosine gate (L12 children × L11 bridges) returned 32/1/0/0
+triads across s08b–s08e, so L9–L1 never ran since s08c despite healthy free
+pools (L13 119k, L11 9k, L10-gate children/bridges all present). Meanwhile
+L13 taper (13,499 → 967 → 238) threatened to drop rounds below MIN_YIELD=1000
+and jump straight to s09 with the root side untouched.
+
+Decisions (user, 2026-10-08, effective s08g):
+- **`META_BARY_COS_THRESHOLD=0.85`, scoped to s08 launches only** — env prefix
+  on the chain driver's s08 launch line; `.env` stays 0.90 because s09 reads
+  the same setting as the *base* of its descending sweep (`base_thr`), and
+  s10/MCP must not see a change. `load_dotenv(override=False)` makes the
+  process env win. Verified via `cos_threshold=0.85` in the s08g start line.
+- **Break-on-zero removed** in `run()`: every round attempts the full descent
+  to L1. A zero at one gate does not predict the next level (s08c: L10=1 yet
+  L9=2416); deep passes are cheap (pools ≤ ~8k). `_form_level` already
+  returns 0 on empty/small pools, so the descent is crash-safe.
+
+Caveats recorded: pipeline MB docs store `connection_strength` /
+`accumulated_weight` but **not** the match cosine, so pairs admitted below
+0.85 are not selectively reversible; this loosens *pipeline clustering*
+only — SMB admission remains value-based with `child_cosine` diagnostic.
+
 ## 2. Observations
 
 ### 2.1 s08b growth round — 2026-10-08
