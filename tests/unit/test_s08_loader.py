@@ -1,16 +1,27 @@
-"""Regression test for the two-phase s08/s09 pool loader (2026-10-08).
+"""Regression test for the s08/s09 pool loader (2026-10-08).
 
 The single-phase loader projected ``vector`` for EVERY doc in the level's
 ``_id`` band and filtered client-side — ~4.2 kB x 5.66M docs ~= 23 GB
 streamed per load (~6 min/pass) even when the level held only a few hundred
-candidates. The two-phase split (light band scan -> chunked ``$in`` vector
-fetch) must be behaviourally IDENTICAL to the old algorithm:
+candidates. The current loader has two paths that must BOTH be behaviourally
+IDENTICAL to that old algorithm:
 
-  * same accepted ids, same order (single-worker), same meta/dropped counts,
-  * byte-identical V rows and normalised float32 VP rows, row i <-> ids[i],
-  * cap and empty-band semantics,
-  * the perf contract itself: band-scan queries must never request
-    ``vector`` (that is the whole point of the split).
+FAST PATH (normal case) — ONE server-side-filtered find on the
+doc_type+level+parent_edge_id index with ``vector`` in the projection,
+hint-forced, streamed in ``_id`` order through the projector:
+
+  * exactly one ``find``, filtered in Mongo (no client-side band scan),
+  * hint-forced through the level index (planner-stall-proof),
+  * same accepted ids, same order, same meta, byte-identical rows.
+
+FALLBACK (ANY fast-path failure, e.g. missing index -> hint error) — the
+two-phase primitive: a light pure-``_id`` band scan (NEVER projects
+``vector`` — that is the ~23 GB dropped-doc payload tax) plus a chunked
+``$in`` vector fetch for accepted ids only. Same net output; on any
+failure the scratch files are truncated by the fallback's own reopen.
+
+Both paths: byte-identical V rows and normalised float32 VP rows,
+row i <-> ids[i], cap and empty-band semantics.
 
 ``_reference_load`` below is a faithful copy of the pre-fix loader.
 """
@@ -31,9 +42,10 @@ DIM = 8  # tiny embed dim; MATCH_DIM stays at its env default
 # ---------------------------------------------------------------- fake Mongo
 
 class _FakeCursor:
-    def __init__(self, docs, coll=None):
+    def __init__(self, docs, coll=None, entry=None):
         self._docs = docs
         self._coll = coll
+        self._entry = entry
 
     def sort(self, key, direction=1):
         assert key == "_id" and direction == 1
@@ -41,10 +53,12 @@ class _FakeCursor:
         return self
 
     def hint(self, name):
+        if self._entry is not None:
+            self._entry["hint"] = name
         if self._coll is not None:
             self._coll.hints.append(name)
             # simulate Mongo's "hint does not correspond to an existing
-            # index" for the phase-1a index (NOT for _id_, which always
+            # index" for the level index (NOT for _id_, which always
             # exists) so the fallback path can be tested.
             if self._coll.fail_index_hint \
                     and name == "doc_type_1_level_1_parent_edge_id_1":
@@ -62,20 +76,20 @@ class _FakeCursor:
 class _FakeColl:
     """Just enough Mongo: filtered/$in/_id-range find, max find_one.
 
-    Records band-scan projections (perf contract) and hint names (index
-    contract); ``fail_index_hint`` makes the phase-1a hint raise so the
-    loader's fallback is exercised.
+    Records every ``find`` as a ``{q, proj, hint}`` entry (query-shape
+    contract) and hint names (index contract); ``fail_index_hint`` makes
+    the level-index hint raise so the loader's fallback is exercised.
     """
 
     def __init__(self, docs):
         self.docs = docs
-        self.band_scan_projections: list[dict] = []
+        self.finds: list[dict] = []
         self.hints: list[str] = []
         self.fail_index_hint = False
 
     def find(self, q, proj=None):
         sel = list(self.docs)
-        # non-_id keys = the phase-1a server-side filter
+        # non-_id keys = the server-side filter
         # (doc_type/level/parent_edge_id/source equality + $ne)
         for k, v in q.items():
             if k == "_id":
@@ -92,8 +106,6 @@ class _FakeColl:
             else:
                 lo = rng.get("$gte")
                 hi = rng.get("$lt")
-                if lo is not None or hi is not None:
-                    self.band_scan_projections.append(dict(proj or {}))
                 sel = [d for d in sel
                        if (lo is None or d["_id"] >= lo)
                        and (hi is None or d["_id"] < hi)]
@@ -102,7 +114,9 @@ class _FakeColl:
             nd = {k: d[k] for k in d
                   if proj is None or k == "_id" or proj.get(k)}
             out.append(nd)
-        return _FakeCursor(out, self)
+        entry = {"q": dict(q), "proj": dict(proj or {}), "hint": None}
+        self.finds.append(entry)
+        return _FakeCursor(out, self, entry)
 
     def find_one(self, sort=None, projection=None):
         assert sort == [("_id", -1)]
@@ -206,8 +220,8 @@ def test_parity_with_single_phase_loader(loader_env):
     ids, meta, V, VP, v_path, vp_path = out
     try:
         # i=13 passes every client-side filter but has no vector: the old
-        # loader dropped it mid-scan, the new one in phase 2 — same net set,
-        # same order, same dropped total (both explore the same band once).
+        # loader dropped it mid-scan, the new one at write time — same net
+        # set, same order, byte-identical rows either way.
         assert ObjectId(f"{13:024x}") not in ids
         assert ids == ref_ids
         assert meta == ref_meta
@@ -225,23 +239,28 @@ def test_parity_with_single_phase_loader(loader_env):
         _cleanup([v_path, vp_path])
 
 
-def test_band_scans_never_request_vector(loader_env):
-    """Perf + index contract: phase 1 streams light fields via the index."""
+def test_fast_path_single_filtered_stream(loader_env):
+    """Perf + index contract: ONE server-side-filtered query with vector."""
     coll = _FakeColl(_corpus(all_vecs=True))
     out = s08._load_unparented_bes(coll, 7, DIM, "TESTPERF")
     try:
-        assert coll.band_scan_projections, "loader did not band-scan"
-        for proj in coll.band_scan_projections:
-            assert "vector" not in proj, \
-                f"band scan still streams vector payload: {proj}"
-        # fast path: the filtered find must go through the level index
-        assert "doc_type_1_level_1_parent_edge_id_1" in coll.hints
+        assert len(coll.finds) == 1, \
+            f"fast path must be a single find, got {len(coll.finds)}"
+        f = coll.finds[0]
+        # the level/parent/source predicate runs in Mongo, not client-side
+        assert f["q"]["doc_type"] == "baryedge"
+        assert f["q"]["level"] == 7
+        assert f["q"]["parent_edge_id"] is None
+        # fast path streams the vector payload — but only for filtered docs
+        assert "vector" in f["proj"]
+        # planner-stall-proof: forced through the level index
+        assert f["hint"] == "doc_type_1_level_1_parent_edge_id_1"
     finally:
         _cleanup(out[4:])
 
 
 def test_fallback_to_band_scan_when_index_missing(loader_env):
-    """Any phase-1a failure (e.g. missing index hint) -> pure-_id scan."""
+    """Any fast-path failure (e.g. missing index hint) -> two-phase fallback."""
     coll = _FakeColl(_corpus(all_vecs=False))
     coll.fail_index_hint = True
     ref_ids, ref_meta, ref_rows, ref_prows, _ = _reference_load(
@@ -254,14 +273,58 @@ def test_fallback_to_band_scan_when_index_missing(loader_env):
         assert meta == ref_meta
         assert _read_rows(v_path, len(ids), DIM) == ref_rows
         assert _read_rows(vp_path, len(ids), MATCH_DIM) == ref_prows
+        # the failed fast attempt went through the level index
         assert "doc_type_1_level_1_parent_edge_id_1" in coll.hints
+        # shape: light band scan(s) NEVER carry the vector payload ...
+        band = [f for f in coll.finds
+                if "parent_edge_id" not in f["q"]
+                and "$in" not in f["q"].get("_id", {})]
+        assert band, "fallback must fall back to a pure-_id band scan"
+        for f in band:
+            assert "vector" not in f["proj"], \
+                f"band scan still streams vector payload: {f['proj']}"
+        # ... while the accepted-ids $in fetch always does
+        ins = [f for f in coll.finds if "$in" in f["q"].get("_id", {})]
+        assert ins, "fallback must fetch accepted vectors via $in"
+        for f in ins:
+            assert "vector" in f["proj"]
+    finally:
+        _cleanup([v_path, vp_path])
+
+
+def test_fallback_multi_worker_set_parity(loader_env, monkeypatch):
+    """Range-split band scan + $in fetch (workers>1) agrees too."""
+    monkeypatch.setattr(s08, "_S08_LOAD_WORKERS", 2)
+    coll = _FakeColl(_corpus(all_vecs=True))
+    coll.fail_index_hint = True
+    ref_ids, ref_meta, ref_rows, ref_prows, _ = _reference_load(
+        _FakeColl(_corpus(all_vecs=True)), 7)
+    ref_by_id = dict(zip(ref_ids, zip(ref_rows, ref_prows)))
+
+    out = s08._load_unparented_bes(coll, 7, DIM, "TESTFMT")
+    ids, meta, V, VP, v_path, vp_path = out
+    try:
+        assert sorted(ids) == sorted(ref_ids), "id set must match"
+        v_rows = _read_rows(v_path, len(ids), DIM)
+        vp_rows = _read_rows(vp_path, len(ids), MATCH_DIM)
+        for i, oid in enumerate(ids):  # rows stay aligned with own ids
+            exp_v, exp_vp = ref_by_id[oid]
+            assert v_rows[i] == exp_v
+            assert vp_rows[i] == exp_vp
+        # one light band scan per _id range (disjoint split)
+        band = [f for f in coll.finds
+                if "parent_edge_id" not in f["q"]
+                and "$in" not in f["q"].get("_id", {})]
+        assert len(band) == 2
+        for f in band:
+            assert "vector" not in f["proj"]
     finally:
         _cleanup([v_path, vp_path])
 
 
 def test_cap_parity(loader_env):
     # cap parity needs ALL candidate vectors present (see module docstring):
-    # the old cap counted written rows, the new one counts phase-1 candidates.
+    # the old cap counted written rows, the new one counts streamed candidates.
     coll = _FakeColl(_corpus(all_vecs=True))
     ref_ids, ref_meta, ref_rows, ref_prows, _ = _reference_load(coll, 7, cap=2)
     out = s08._load_unparented_bes(coll, 7, DIM, "TESTCAP", cap=2)

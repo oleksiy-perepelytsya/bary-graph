@@ -132,24 +132,25 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     until write). ``cap`` (dev) bounds children and forces a single-threaded
     scan so a smoke run stops after a couple of minutes.
 
-    Phase 1 prefers a SERVER-SIDE filtered find on the
-    ``doc_type+level+parent_edge_id`` index (hint-forced, so the planner
-    that stalled on the all-build never runs; PoC explain: 704 keys / 704
-    docs / 25 ms instead of a ~6 min full-band scan) and falls back to the
-    s06/s07 pure-``_id`` primitive — disjoint ``_id`` sub-ranges over the
-    level's band, ``hint(_id_)`` cursors, client-side level/parent/source
-    filtering — on ANY failure. Both phases project ONLY light fields in
-    phase 1: the previous single-phase version also projected ``vector``,
-    streaming ~4.2 kB per scanned doc for the ~99.99% of docs the filter
-    drops (≈23 GB per load on PoC bands). PHASE 2 then fetches vectors
-    ONLY for the accepted ids in chunked ``$in`` queries — always
-    index-driven — unpacks/projects them in parallel, and streams raw
-    float32 into append-only binary files which are reopened as
-    exact-size memmaps at the end, so the L15 child pass (12,051,296 ×
-    4096 × 4B ≈ 197 GB) never touches RAM. ``cap`` bounds phase-1
+    FAST PATH: ONE SERVER-SIDE filtered find on the
+    ``doc_type+level+parent_edge_id`` index with ``vector`` in the
+    projection (hint-forced, so the planner that stalled on the all-build
+    never runs; PoC explain: 704 keys / 704 docs / 25 ms instead of a
+    ~6 min full-band scan). The server ships ONLY records that pass the
+    filter — no dropped-doc payload tax — and the cursor streams them in
+    ``_id`` order through the projector into the scratch files in bounded
+    batches (``_FLUSH`` docs × vector bytes of RAM), so row i of V/VP
+    always belongs to ``final_ids[i]``. Fallback on ANY fast-path
+    failure: the two-phase s06/s07 primitive — a light pure-``_id`` band
+    scan (NEVER projects ``vector``: ≈23 GB/load of dropped-doc payload
+    on PoC bands) plus a chunked ``$in`` vector fetch for the accepted
+    ids only — so both paths stay index-driven and stall-proof. Either
+    path streams raw float32 into append-only binary files which are
+    reopened as exact-size memmaps at the end, so the L15 child pass
+    (12,051,296 × 4096 × 4B ≈ 197 GB) never touches RAM. ``cap`` bounds
     candidates (dev-only); a candidate whose vector is missing is
-    dropped in phase 2, so with missing vectors the written count can
-    land just under ``cap``.
+    dropped, so with missing vectors the written count can land just
+    under ``cap``.
     """
     band_lo, band_hi = (_S08_BARY_LO, _S08_TODAY_LO) if level == 15 \
         else (_S08_TODAY_LO, None)
@@ -167,11 +168,12 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     lock = threading.Lock()
     n_cand = 0
     dropped = 0
-    # Phase-1 projection: light fields only — NEVER ``vector``. Streaming the
-    # vector for docs the client-side filter then drops was the ~6 min/load
-    # IO tax this two-phase split exists to remove.
+    # Fallback phase-1 projection: light fields only — NEVER ``vector``.
+    # Streaming the vector for docs the client-side filter then drops was
+    # the ~6 min/load IO tax; the fast path avoids that server-side.
     proj_fields = {"_id": 1, "doc_type": 1, "level": 1, "parent_edge_id": 1,
                    "accumulated_weight": 1, "source": 1}
+    fast_proj = dict(proj_fields, vector=1)
 
     def _scan(lo, hi):
         nonlocal n_cand, dropped
@@ -195,46 +197,99 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
                     _log.info("  scanned %d unparented L%d candidates (dropped=%d)",
                               n_cand, level, dropped)
 
-    # PHASE 1a — server-side filtered find on (doc_type, level,
-    # parent_edge_id): reads ONLY the kept keys/records (PoC explain:
-    # nReturned 704 / keysExamined 704 / 25 ms vs ~6 min full-band scan;
-    # the client-side checks below then are defense-in-depth). The forced
-    # hint also bypasses the planner that stalled on the all-build.
-    def _scan_filtered():
-        nonlocal n_cand, dropped
+    final_ids: list = []
+    final_meta: list[dict] = []
+    n = 0
+    _CHUNK = 2_000          # fallback $in size: 2_000 × 4.2 kB ≈ 8 MB
+    _FLUSH = 2_048          # fast-path batch: docs per project/write round
+
+    def _project_one(item):
+        """Worker: (candidate idx, vector) -> (idx, V bytes, VP bytes).
+
+        ``vec is None`` (field missing / doc vanished) returns None bytes
+        and the caller counts it ``dropped`` — the same net filter the old
+        single-phase scan applied inline. unpack + projection are
+        CPU-heavy, so this runs on the worker pool OUTSIDE any lock.
+        """
+        idx, vec = item
+        if vec is None:
+            return idx, None, None
+        row = unpack_vec(vec)
+        rp = (row @ proj.T).astype(np.float32)  # float32! (float64 would
+        # corrupt the float32 memmap reopen below — see commit 75efbd2)
+        norm = float(np.linalg.norm(rp))
+        rp = rp / norm if norm else rp
+        assert rp.dtype == np.float32
+        return idx, row.tobytes(), rp.tobytes()
+
+    def _pool():
+        return ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) \
+            if _S08_LOAD_WORKERS > 1 else nullcontext()
+
+    def _stream_filtered(ex, vf, pf):
+        """FAST PATH — one server-side-filtered cursor, vector included.
+
+        ``pend`` (oid + meta) stays index-aligned with ``items`` so the
+        ``ex.map`` order guarantee keeps row i of V/VP == final_ids[i]
+        without any lock. The client-side checks are defense-in-depth —
+        the server already filtered; the fake-collection parity tests
+        rely on them too.
+        """
+        nonlocal n_cand, dropped, n
         q = {"doc_type": "baryedge", "level": level, "parent_edge_id": None,
              "source": {"$ne": "structural"}}
         q["_id"] = {"$gte": band_lo}
         if band_hi is not None:
             q["_id"]["$lt"] = band_hi
-        for doc in coll.find(q, proj_fields).sort("_id", 1) \
-                .hint("doc_type_1_level_1_parent_edge_id_1") \
-                .batch_size(10_000):
+        cur = coll.find(q, fast_proj).sort("_id", 1) \
+            .hint("doc_type_1_level_1_parent_edge_id_1") \
+            .batch_size(_FLUSH)
+        pend: list = []
+        items: list = []
+
+        def flush():
+            nonlocal n, dropped
+            if not items:
+                return
+            results = ex.map(_project_one, items) if ex is not None \
+                else map(_project_one, items)
+            for idx, row_b, rp_b in results:
+                if row_b is None:
+                    dropped += 1
+                    continue
+                vf.write(row_b)
+                pf.write(rp_b)
+                final_ids.append(pend[idx][0])
+                final_meta.append(pend[idx][1])
+                n += 1
+            pend.clear()
+            items.clear()
+
+        for doc in cur:
             if doc.get("doc_type") != "baryedge" or doc.get("level") != level \
                     or doc.get("parent_edge_id") is not None \
                     or doc.get("source") == "structural":
                 dropped += 1
                 continue
-            with lock:
-                if cap is not None and n_cand >= cap:
-                    break
-                ids.append(doc["_id"])
-                meta.append({"_id": doc["_id"],
-                             "accumulated_weight": doc["accumulated_weight"]})
-                n_cand += 1
-                if n_cand % 500_000 == 0:
-                    _log.info("  scanned %d unparented L%d candidates (dropped=%d)",
-                              n_cand, level, dropped)
+            n_cand += 1
+            if n_cand % 500_000 == 0:
+                _log.info("  scanned %d unparented L%d candidates (dropped=%d)",
+                          n_cand, level, dropped)
+            items.append((len(pend), doc.get("vector")))
+            pend.append((doc["_id"],
+                         {"_id": doc["_id"],
+                          "accumulated_weight": doc["accumulated_weight"]}))
+            if len(items) >= _FLUSH:
+                flush()
+            if cap is not None and n_cand >= cap:
+                break
+        flush()
 
-    # PHASE 1 — candidates only, no vector payload, either way:
-    #   1a: filtered index find (fast path);
-    #   1b: pure-_id band scan fallback on ANY 1a failure (missing index,
-    #       planner/execution quirks on the all-build) — stall-proof.
-    try:
-        _scan_filtered()
-    except Exception as e:  # noqa: BLE001 — fallback must catch everything
-        _log.warning("phase-1a filtered find failed (%s); "
-                     "falling back to _id band scan", e)
+    def _fallback_two_phase():
+        """Stall-proof fallback: light band scan (never ``vector``) + chunked
+        ``$in`` vector fetch for accepted ids — the pre-fast-path two-phase
+        loader verbatim, same net output as the fast path."""
+        nonlocal n, dropped
         if cap is None and _S08_LOAD_WORKERS > 1 and band_hi is not None:
             lo_i = int.from_bytes(band_lo.binary, "big")
             hi_i = int.from_bytes(band_hi.binary, "big")
@@ -249,60 +304,45 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
                 list(ex.map(lambda r: _scan(*r), ranges))
         else:
             _scan(band_lo, band_hi)
+        if not ids:
+            return                      # caller sees n == 0 and cleans up
+        # Vector fetch for accepted ids only, writing in ids order so V/VP
+        # row i always belongs to ids[i]. Chunking bounds RAM; ex.map
+        # yields results in input order, so rows stay aligned lock-free.
+        with _pool() as ex, open(v_path, "wb") as vf, open(vp_path, "wb") as pf:
+            for start in range(0, len(ids), _CHUNK):
+                chunk = ids[start:start + _CHUNK]
+                vecs = {d["_id"]: d.get("vector")
+                        for d in coll.find({"_id": {"$in": list(chunk)}},
+                                           {"_id": 1, "vector": 1})}
+                items = [(start + i, vecs.get(oid)) for i, oid in enumerate(chunk)]
+                results = ex.map(_project_one, items) if ex is not None \
+                    else map(_project_one, items)
+                for idx, row_b, rp_b in results:
+                    if row_b is None:
+                        dropped += 1
+                        continue
+                    vf.write(row_b)
+                    pf.write(rp_b)
+                    final_ids.append(ids[idx])
+                    final_meta.append(meta[idx])
+                    n += 1
 
-    if not ids:
-        _cleanup_mmaps([v_path, vp_path], _log)
-        return [], [], np.empty((0, embed_dim), dtype=np.float32), \
-            np.empty((0, MATCH_DIM), dtype=np.float32), None, None
+    # FAST PATH — single filtered stream. The fallback reopens the scratch
+    # files with "wb", so a mid-stream failure leaves nothing stale.
+    try:
+        with _pool() as ex, open(v_path, "wb") as vf, open(vp_path, "wb") as pf:
+            _stream_filtered(ex, vf, pf)
+    except Exception as e:  # noqa: BLE001 — fallback must catch everything
+        _log.warning("fast filtered stream failed (%s); falling back to "
+                     "light band scan + $in vector fetch", e)
+        final_ids.clear()
+        final_meta.clear()
+        n_cand = 0
+        dropped = 0
+        n = 0
+        _fallback_two_phase()
 
-    def _project_one(item):
-        """Phase-2 worker: (candidate idx, vector) -> (idx, V bytes, VP bytes).
-
-        ``vec is None`` (field missing / doc vanished between phases) returns
-        None bytes and the caller counts it ``dropped`` — the same net
-        filter the old single-phase scan applied inline. unpack + projection
-        are CPU-heavy, so this runs on the worker pool OUTSIDE any lock.
-        """
-        idx, vec = item
-        if vec is None:
-            return idx, None, None
-        row = unpack_vec(vec)
-        rp = (row @ proj.T).astype(np.float32)  # float32! (float64 would
-        # corrupt the float32 memmap reopen below — see commit 75efbd2)
-        norm = float(np.linalg.norm(rp))
-        rp = rp / norm if norm else rp
-        assert rp.dtype == np.float32
-        return idx, row.tobytes(), rp.tobytes()
-
-    # PHASE 2 — fetch vectors ONLY for accepted ids (chunked $in), writing in
-    # ids order so V/VP row i always belongs to ids[i]. Chunking bounds RAM
-    # (2_000 × 4.2 kB ≈ 8 MB per fetch) even for the all-build's 197 GB L15
-    # pool; ThreadPoolExecutor.map yields results in input order, so rows
-    # stay aligned without any lock.
-    _CHUNK = 2_000
-    n = 0
-    final_ids: list = []
-    final_meta: list[dict] = []
-    pool = ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) \
-        if _S08_LOAD_WORKERS > 1 else nullcontext()
-    with pool as ex, open(v_path, "wb") as vf, open(vp_path, "wb") as pf:
-        for start in range(0, len(ids), _CHUNK):
-            chunk = ids[start:start + _CHUNK]
-            vecs = {d["_id"]: d.get("vector")
-                    for d in coll.find({"_id": {"$in": list(chunk)}},
-                                       {"_id": 1, "vector": 1})}
-            items = [(start + i, vecs.get(oid)) for i, oid in enumerate(chunk)]
-            results = ex.map(_project_one, items) if ex is not None \
-                else map(_project_one, items)
-            for idx, row_b, rp_b in results:
-                if row_b is None:
-                    dropped += 1
-                    continue
-                vf.write(row_b)
-                pf.write(rp_b)
-                final_ids.append(ids[idx])
-                final_meta.append(meta[idx])
-                n += 1
     if n == 0:
         _cleanup_mmaps([v_path, vp_path], _log)
         return [], [], np.empty((0, embed_dim), dtype=np.float32), \
