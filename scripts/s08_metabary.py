@@ -132,23 +132,24 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
     until write). ``cap`` (dev) bounds children and forces a single-threaded
     scan so a smoke run stops after a couple of minutes.
 
-    Two-phase load (2026-10-08): mongot's planner stalls BOTH fat-filter
-    counts and fat-projection filter finds on the big all-build collection
-    (a ``count_documents`` timed out at 120 s), so PHASE 1 keeps the s06/s07
-    pure-``_id`` primitive — disjoint ``_id`` sub-ranges over the level's
-    band, ``hint(_id_)`` cursors, client-side level/parent/source filtering —
-    but projects ONLY the light fields. The previous single-phase version
-    also projected ``vector``, streaming ~4.2 kB per scanned doc for the
-    ~99.99% of docs the client-side filter drops (≈23 GB per load on PoC
-    bands = a fixed ~6 min/pass IO tax regardless of how few candidates the
-    level actually has). PHASE 2 then fetches vectors ONLY for the accepted
-    ids in chunked ``$in`` queries — both phases stay index-driven and
-    planner-proof — unpacks/projects them in parallel, and streams raw
-    float32 into append-only binary files which are reopened as exact-size
-    memmaps at the end, so the L15 child pass (12,051,296 × 4096 × 4B ≈
-    197 GB) never touches RAM. ``cap`` bounds phase-1 candidates (dev-only);
-    a candidate whose vector is missing is dropped in phase 2, so with
-    missing vectors the written count can land just under ``cap``.
+    Phase 1 prefers a SERVER-SIDE filtered find on the
+    ``doc_type+level+parent_edge_id`` index (hint-forced, so the planner
+    that stalled on the all-build never runs; PoC explain: 704 keys / 704
+    docs / 25 ms instead of a ~6 min full-band scan) and falls back to the
+    s06/s07 pure-``_id`` primitive — disjoint ``_id`` sub-ranges over the
+    level's band, ``hint(_id_)`` cursors, client-side level/parent/source
+    filtering — on ANY failure. Both phases project ONLY light fields in
+    phase 1: the previous single-phase version also projected ``vector``,
+    streaming ~4.2 kB per scanned doc for the ~99.99% of docs the filter
+    drops (≈23 GB per load on PoC bands). PHASE 2 then fetches vectors
+    ONLY for the accepted ids in chunked ``$in`` queries — always
+    index-driven — unpacks/projects them in parallel, and streams raw
+    float32 into append-only binary files which are reopened as
+    exact-size memmaps at the end, so the L15 child pass (12,051,296 ×
+    4096 × 4B ≈ 197 GB) never touches RAM. ``cap`` bounds phase-1
+    candidates (dev-only); a candidate whose vector is missing is
+    dropped in phase 2, so with missing vectors the written count can
+    land just under ``cap``.
     """
     band_lo, band_hi = (_S08_BARY_LO, _S08_TODAY_LO) if level == 15 \
         else (_S08_TODAY_LO, None)
@@ -194,21 +195,60 @@ def _load_unparented_bes(coll, level: int, embed_dim: int, tag: str,
                     _log.info("  scanned %d unparented L%d candidates (dropped=%d)",
                               n_cand, level, dropped)
 
-    # PHASE 1 — light _id-band scan; accept ids only, no vector payload.
-    if cap is None and _S08_LOAD_WORKERS > 1 and band_hi is not None:
-        lo_i = int.from_bytes(band_lo.binary, "big")
-        hi_i = int.from_bytes(band_hi.binary, "big")
-        span = (hi_i - lo_i) // _S08_LOAD_WORKERS
-        ranges = []
-        for k in range(_S08_LOAD_WORKERS):
-            a = lo_i + k * span
-            b = lo_i + (k + 1) * span if k < _S08_LOAD_WORKERS - 1 else hi_i
-            ranges.append((ObjectId(a.to_bytes(12, "big")),
-                           ObjectId(b.to_bytes(12, "big"))))
-        with ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) as ex:
-            list(ex.map(lambda r: _scan(*r), ranges))
-    else:
-        _scan(band_lo, band_hi)
+    # PHASE 1a — server-side filtered find on (doc_type, level,
+    # parent_edge_id): reads ONLY the kept keys/records (PoC explain:
+    # nReturned 704 / keysExamined 704 / 25 ms vs ~6 min full-band scan;
+    # the client-side checks below then are defense-in-depth). The forced
+    # hint also bypasses the planner that stalled on the all-build.
+    def _scan_filtered():
+        nonlocal n_cand, dropped
+        q = {"doc_type": "baryedge", "level": level, "parent_edge_id": None,
+             "source": {"$ne": "structural"}}
+        q["_id"] = {"$gte": band_lo}
+        if band_hi is not None:
+            q["_id"]["$lt"] = band_hi
+        for doc in coll.find(q, proj_fields).sort("_id", 1) \
+                .hint("doc_type_1_level_1_parent_edge_id_1") \
+                .batch_size(10_000):
+            if doc.get("doc_type") != "baryedge" or doc.get("level") != level \
+                    or doc.get("parent_edge_id") is not None \
+                    or doc.get("source") == "structural":
+                dropped += 1
+                continue
+            with lock:
+                if cap is not None and n_cand >= cap:
+                    break
+                ids.append(doc["_id"])
+                meta.append({"_id": doc["_id"],
+                             "accumulated_weight": doc["accumulated_weight"]})
+                n_cand += 1
+                if n_cand % 500_000 == 0:
+                    _log.info("  scanned %d unparented L%d candidates (dropped=%d)",
+                              n_cand, level, dropped)
+
+    # PHASE 1 — candidates only, no vector payload, either way:
+    #   1a: filtered index find (fast path);
+    #   1b: pure-_id band scan fallback on ANY 1a failure (missing index,
+    #       planner/execution quirks on the all-build) — stall-proof.
+    try:
+        _scan_filtered()
+    except Exception as e:  # noqa: BLE001 — fallback must catch everything
+        _log.warning("phase-1a filtered find failed (%s); "
+                     "falling back to _id band scan", e)
+        if cap is None and _S08_LOAD_WORKERS > 1 and band_hi is not None:
+            lo_i = int.from_bytes(band_lo.binary, "big")
+            hi_i = int.from_bytes(band_hi.binary, "big")
+            span = (hi_i - lo_i) // _S08_LOAD_WORKERS
+            ranges = []
+            for k in range(_S08_LOAD_WORKERS):
+                a = lo_i + k * span
+                b = lo_i + (k + 1) * span if k < _S08_LOAD_WORKERS - 1 else hi_i
+                ranges.append((ObjectId(a.to_bytes(12, "big")),
+                               ObjectId(b.to_bytes(12, "big"))))
+            with ThreadPoolExecutor(max_workers=_S08_LOAD_WORKERS) as ex:
+                list(ex.map(lambda r: _scan(*r), ranges))
+        else:
+            _scan(band_lo, band_hi)
 
     if not ids:
         _cleanup_mmaps([v_path, vp_path], _log)

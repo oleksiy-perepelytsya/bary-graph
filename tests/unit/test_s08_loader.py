@@ -31,15 +31,25 @@ DIM = 8  # tiny embed dim; MATCH_DIM stays at its env default
 # ---------------------------------------------------------------- fake Mongo
 
 class _FakeCursor:
-    def __init__(self, docs):
+    def __init__(self, docs, coll=None):
         self._docs = docs
+        self._coll = coll
 
     def sort(self, key, direction=1):
         assert key == "_id" and direction == 1
         self._docs = sorted(self._docs, key=lambda d: d["_id"])
         return self
 
-    def hint(self, *_a, **_k):
+    def hint(self, name):
+        if self._coll is not None:
+            self._coll.hints.append(name)
+            # simulate Mongo's "hint does not correspond to an existing
+            # index" for the phase-1a index (NOT for _id_, which always
+            # exists) so the fallback path can be tested.
+            if self._coll.fail_index_hint \
+                    and name == "doc_type_1_level_1_parent_edge_id_1":
+                raise RuntimeError(
+                    "hint provided does not correspond to an existing index")
         return self
 
     def batch_size(self, *_a, **_k):
@@ -50,18 +60,30 @@ class _FakeCursor:
 
 
 class _FakeColl:
-    """Just enough Mongo: _id-range/$in find with projection, max find_one.
+    """Just enough Mongo: filtered/$in/_id-range find, max find_one.
 
-    Records every band-scan projection so tests can pin the perf contract
-    (no ``vector`` in phase-1 scans).
+    Records band-scan projections (perf contract) and hint names (index
+    contract); ``fail_index_hint`` makes the phase-1a hint raise so the
+    loader's fallback is exercised.
     """
 
     def __init__(self, docs):
         self.docs = docs
         self.band_scan_projections: list[dict] = []
+        self.hints: list[str] = []
+        self.fail_index_hint = False
 
     def find(self, q, proj=None):
         sel = list(self.docs)
+        # non-_id keys = the phase-1a server-side filter
+        # (doc_type/level/parent_edge_id/source equality + $ne)
+        for k, v in q.items():
+            if k == "_id":
+                continue
+            if isinstance(v, dict) and "$ne" in v:
+                sel = [d for d in sel if d.get(k) != v["$ne"]]
+            else:
+                sel = [d for d in sel if d.get(k) == v]
         if "_id" in q:
             rng = q["_id"]
             if "$in" in rng:
@@ -80,7 +102,7 @@ class _FakeColl:
             nd = {k: d[k] for k in d
                   if proj is None or k == "_id" or proj.get(k)}
             out.append(nd)
-        return _FakeCursor(out)
+        return _FakeCursor(out, self)
 
     def find_one(self, sort=None, projection=None):
         assert sort == [("_id", -1)]
@@ -204,7 +226,7 @@ def test_parity_with_single_phase_loader(loader_env):
 
 
 def test_band_scans_never_request_vector(loader_env):
-    """Perf contract: phase-1 band scans stream light fields only."""
+    """Perf + index contract: phase 1 streams light fields via the index."""
     coll = _FakeColl(_corpus(all_vecs=True))
     out = s08._load_unparented_bes(coll, 7, DIM, "TESTPERF")
     try:
@@ -212,8 +234,29 @@ def test_band_scans_never_request_vector(loader_env):
         for proj in coll.band_scan_projections:
             assert "vector" not in proj, \
                 f"band scan still streams vector payload: {proj}"
+        # fast path: the filtered find must go through the level index
+        assert "doc_type_1_level_1_parent_edge_id_1" in coll.hints
     finally:
         _cleanup(out[4:])
+
+
+def test_fallback_to_band_scan_when_index_missing(loader_env):
+    """Any phase-1a failure (e.g. missing index hint) -> pure-_id scan."""
+    coll = _FakeColl(_corpus(all_vecs=False))
+    coll.fail_index_hint = True
+    ref_ids, ref_meta, ref_rows, ref_prows, _ = _reference_load(
+        _FakeColl(_corpus(all_vecs=False)), 7)
+
+    out = s08._load_unparented_bes(coll, 7, DIM, "TESTFALL")
+    ids, meta, V, VP, v_path, vp_path = out
+    try:
+        assert ids == ref_ids
+        assert meta == ref_meta
+        assert _read_rows(v_path, len(ids), DIM) == ref_rows
+        assert _read_rows(vp_path, len(ids), MATCH_DIM) == ref_prows
+        assert "doc_type_1_level_1_parent_edge_id_1" in coll.hints
+    finally:
+        _cleanup([v_path, vp_path])
 
 
 def test_cap_parity(loader_env):
