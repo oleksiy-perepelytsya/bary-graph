@@ -391,7 +391,7 @@ mongot 8.3.4 accepts 1024-dim vector indexes, both plain float32 and with
 7. **This section stays authoritative** for the s10 re-run; revisit before
    executing if any step is stale.
 
-## Dated findings (2026-10-08, poc s10 attempt)
+## Dated findings (2026-10-08, poc s10 attempt) — ⚠️ SUPERSEDED, see 2026-10-09 below
 
 - `s10_index --force` ran on `barygraph_poc`: 10 standard indexes no-op, then
   created `barygraph_vector` from `indexes/vector_index.json` — which still
@@ -412,3 +412,131 @@ mongot 8.3.4 accepts 1024-dim vector indexes, both plain float32 and with
 - MCP keepwarm/warmup `$vectorSearch` tolerates the missing index (returns 0
   hits, no error) — same as before this attempt; no behavior change from the
   drop.
+
+# S10 — POC INDEX BUILD COMPLETE + SIZING LEDGER (2026-10-09)
+
+Status: **DONE / VERIFIED.** `barygraph_poc.barygraph_vector` is `READY`,
+`queryable=true`, `latestVersion=0`, committed generation `segments_60`.
+`$vectorSearch` verified end-to-end. This section supersedes the 2026-10-08
+findings above.
+
+## Storage-format resolution (corrects the 2026-10-08 root cause)
+
+- mongot **requires BSON binary subtype 9** (`BinaryVector`, dtype FLOAT32) on
+  the vector path. Verified on scratch `barygraph_test_*` collections:
+
+  | stored form | `$vectorSearch` |
+  |---|---|
+  | plain float array | hits |
+  | BSON binary subtype **9**, f32 | hits |
+  | subtype 9 f32 + `"quantization":"scalar"` | hits |
+  | BSON binary subtype **0** (generic binData), f32 bytes | **0 hits** |
+  | subtype 9 **int8** payload | **0 hits** |
+  | wrong `numDimensions` | query-time error |
+
+- So the 2026-10-08 conclusion ("mongot indexes only plain float arrays") was
+  **WRONG**. Generic binData (subtype 0) is silently ignored — index reports
+  READY but indexes zero docs. Subtype 9 is ingested.
+- Codec: `lib/vector.py` (`pack_vec`/`unpack_vec`, `VECTOR_SUBTYPE=9`).
+  Lossless/size-neutral: 4098 B vs 4096 B per 1024-d vector. `unpack_vec` still
+  reads legacy subtype-0 blobs, so pre-migration docs keep working.
+- Migration: `python3 -m scripts.migrate_vec_subtype9` (idempotent, resumable).
+  poc result: `scanned=5,940,944 converted=5,890,944 skipped=50,000 in
+  2361.8s`. All 5,940,944 docs now carry a subtype-9 `vector` (length 4098).
+- `quantization: "scalar"` is **index-side only** — the stored field stays
+  subtype-9 float32 (an int8 stored blob indexes 0 docs).
+
+## Index anatomy + sizing (corrects the "~55 GB / bigger than data" projection)
+
+Per doc, Lucene scalar-quantized HNSW (`Lucene99HnswScalarQuantizedVectorsFormat`):
+
+| file | bytes/vec | role |
+|---|---|---|
+| `.vec` full-precision f32 | `dim×4` = **4096** | **disk only** — rescore + merge re-quantization |
+| `.veq` quantized | `dim+4` = **1028** | **hot in RAM at query time** (7-bit stored 1 B/dim + 4 B corrective float) |
+| `.vex` HNSW graph | ~**42** | hot |
+| stored fields / doc-values / terms | <1 GB total | (no `storedSource`) |
+
+Totals for poc (5,940,944 × 1024-d, cosine, scalar):
+- disk ≈ 24.3 (raw) + 6.1 (quantized) + 0.25 (graph) ≈ **~31 GB** (measured 29 GiB)
+- hot RAM ≈ **~6.4 GB**; ratio ≈ **4.8:1** disk:RAM (MongoDB recommends ~4:1 scalar)
+- collection itself: 5,940,944 docs, `avgObjSize=5843`, logical 34.7 GB /
+  storage 40.6 GB — vectors are 24.3 GB of that. **Index < collection.**
+
+**The `.cfs` compound-file illusion:** the 14 GB of `.cfs` is not Lucene
+overhead — each compound segment packs its own `.vec/.veq/.vex` inside `_9x`…
+files (confirmed by reading each `.cfe`). Only 4 non-compound segments
+(`_2d/_2p/_87/_9x`, ~3.23M vectors) have standalone `.vec`; the other ~2.71M
+vectors live inside `.cfs`. The earlier "~55 GB / index bigger than data"
+projection **double-counted `.cfs`** and is retracted.
+
+**mongot has no `on_disk`/drop-raw mode** → ~30 GB scalar is the floor for this
+corpus; the only lever is `quantization: "binary"` (~0.8 GB hot, 5–10% recall
+cost). For contrast, FAISS `IndexHNSWSQ` stores quantized codes only, and
+OpenSearch exposes `mode: on_disk` — mongot does neither.
+
+Sources: MongoDB *Vector Quantization* (Size vs **Required Memory**) and
+*Deployment Options* (quantized in RAM / full-fidelity on disk; 125% free-disk
+rule); Elasticsearch Labs *scalar-quantization-in-lucene*; OpenSearch *Lucene
+scalar quantization*.
+
+## Build incident + fix
+
+- First `s10 --force` failed from host swap exhaustion / mongot silent OOM
+  (mongot stdout/stderr → `/dev/null`; Java `-XX:+ExitOnOutOfMemoryError`; no
+  logs).
+- mongod has no `--wiredTigerCacheSizeGB` flag and defaults to ~11 GB cache on a
+  23.8 GB host. Applied a **non-persistent runtime cap**:
+  `db.adminCommand({setParameter:1, wiredTigerEngineRuntimeConfig:"cache_size=3G"})`.
+- `docker-compose.yml` `mem_limit: 60g` is unreachable on this host — ignore.
+
+## Multilingual (`barygraph_all`) projection — decide before its s10
+
+12.7M senses × 4096-d: raw f32 ≈ **208 GB** on disk; scalar `.veq` ≈ **52 GB
+hot (will not fit RAM)**; binary ≈ **6.5 GB hot**. Two routes:
+1. The `vector_m` / `s10b_projection` 4096→1024 dim-reduction plan (section
+   above), keeping mongot.
+2. A separate vector engine — Postgres+**pgvector**/pgvectorscale (DiskANN),
+   Qdrant, Milvus, LanceDB — whose hot/disk shape (quantized in RAM,
+   full-precision on disk) matches what we want, at the cost of a second store
+   plus a Mongo→engine sync.
+
+## Verified
+
+- `$vectorSearch` end-to-end via the production path (`lib.embed.get_embedder`
+  → `lib.db.vector_search`): `"dog"` → *Russian Wolfhound / assistance animal /
+  canine madness*; definition query → *banxring / sarcophile*;
+  `filter {doc_type:{$eq:"node"}}` works. Scores ~0.91–0.95.
+- `$search`/`$searchMeta` **cannot** run on a `vectorSearch`-type index
+  (`Cannot execute $search over vectorSearch index 'barygraph_vector'`) — use
+  `$vectorSearch`.
+- `$sample` is badly biased here (3000-sample gave 96% baryedge vs true 45%) —
+  don't use it to spot-check coverage.
+
+# MCP + TUNNEL OPERATIONS (2026-10-09)
+
+- **MCP server**: `python3 -m scripts.mcp_server --transport streamable-http
+  --host 0.0.0.0 --port 8000`. Launched by `scripts/mcp_server_ctl.sh start`
+  with `MCP_PUBLIC=1` → read-only public mode (11 tools, no writes). The
+  opencode-integrated MCP (`opencode.json` → `barygraph`, `type: local`) is a
+  separate **stdio** instance spawned by opencode in full private mode
+  (17 tools) — no tunnel needed for the agent itself.
+- **Public URL (2026-10-09)**:
+  `https://prohibited-pmc-harry-thriller.trycloudflare.com/mcp` — account-less
+  quick tunnel. **URLs are per-run random**, and server-side revocation happens
+  without warning: on 2026-10-09 the old hostname (`shake-insider-…`) suddenly
+  NXDOMAIN'd globally while cloudflared stayed "up", logging
+  `Register tunnel error … Unauthorized: Tunnel not found` forever. A process
+  being alive ≠ the URL working — check with `nslookup <host> 1.1.1.1`.
+- **Ops (all via `scripts/mcp_server_ctl.sh`)**:
+  ```
+  MCP_PYTHON=python3 scripts/mcp_server_ctl.sh restart   # server + ensure tunnel
+  scripts/mcp_server_ctl.sh tunnel status                # pid/url/registered
+  scripts/mcp_server_ctl.sh tunnel restart               # ONLY cmd that kills cloudflared; mints fresh URL
+  scripts/mcp_server_ctl.sh tunnel url                   # current public URL to hand to clients
+  ```
+  `start`/`restart` never kill the tunnel; only `tunnel restart` does. After a
+  `tunnel restart`, external clients must be told the new `tunnel url`.
+- For a stable hostname, a **named tunnel** (Cloudflare account + domain,
+  `cloudflared tunnel create/login`) would be required — quick tunnels have no
+  uptime guarantee. Not done; revisit if the internet endpoint becomes critical.

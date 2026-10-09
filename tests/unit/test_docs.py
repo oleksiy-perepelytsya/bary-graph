@@ -14,7 +14,7 @@ def test_sense_node_schema():
     assert doc["level"] == 15 and doc["parent_edge_id"] is None
     assert doc["properties"]["sense_id"] == "cat-noun-0"
     assert doc["properties"]["lang"] == "en"
-    assert len(doc["vector"]) == 768 * 4  # float32 packed bytes
+    assert len(doc["vector"]) == 2 + 768 * 4  # subtype-9 header + float32 payload
 
 
 def test_word_node_placeholder_vector():

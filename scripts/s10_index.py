@@ -38,6 +38,13 @@ def run(argv: Sequence[str] | None = None) -> None:
     n_vec = 0
     if VECTOR_INDEX_PATH.exists():
         defs = orjson.loads(VECTOR_INDEX_PATH.read_bytes())
+        # numDimensions must match the stored vectors (embed_dim) or $vectorSearch
+        # fails with a dimension mismatch; the JSON is a template, so the build
+        # profile's real dim wins (poc=1024, all-build=4096).
+        for d in defs:
+            for field in d.get("definition", {}).get("fields", []):
+                if field.get("type") == "vector":
+                    field["numDimensions"] = settings.embed_dim
         try:
             existing = {ix["name"] for ix in coll.list_search_indexes()}
             # Drop existing indexes whose definition we want to update, then recreate.

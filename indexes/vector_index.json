@@ -4,7 +4,7 @@
     "type": "vectorSearch",
     "definition": {
       "fields": [
-        { "type": "vector", "path": "vector",       "numDimensions": 4096, "similarity": "cosine" },
+        { "type": "vector", "path": "vector",       "numDimensions": 1024, "similarity": "cosine", "quantization": "scalar" },
         { "type": "filter", "path": "doc_type" },
         { "type": "filter", "path": "level" },
         { "type": "filter", "path": "edge_type" },
