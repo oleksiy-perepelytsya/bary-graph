@@ -1,9 +1,9 @@
 {
- "cycles_done": 212,
- "last_commit_cycle": 212,
- "next_commit_cycle": 222,
+ "cycles_done": 224,
+ "last_commit_cycle": 224,
+ "next_commit_cycle": 234,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch R (197-212, 16-seed PLAIN draw, no automated filter): 1/16 built (sphenoid wedge: anatomy bone <-> crystallography, cos 0.6642). Composition: 8/16 proper-noun/surname/place-name clusters, 7/16 single word-family or idiom clusters, 1 build. Confirms the plain draw returns a lot of name clusters; per user guidance these are skipped by judgment and re-queried rather than filtered in code.",
+ "self_check": "batch S (213-224, 12-seed plain draw): 1/12 built (biological pigment: plant plastid <-> animal pigments, cos 0.8306). Composition: 5/12 name/place clusters, 4/12 word-family/idiom clusters, 2/12 glycosides, 1 build. Name/place clusters remain the dominant skip class; skipping by judgment works.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
