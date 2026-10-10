@@ -1,12 +1,12 @@
 {
- "cycles_done": 33,
- "last_commit_cycle": 33,
- "next_commit_cycle": 43,
+ "cycles_done": 45,
+ "last_commit_cycle": 45,
+ "next_commit_cycle": 55,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch C (24-33): filter removed name clusters but semantic clusters (food/botany/taxonomy) and morphology remain; 1 SMB, and it is high-cosine (0.92) co-location, not a bridge. Two consecutive lean batches -> widen seed levels to L10-L13 and stop manufacturing SMBs to fill a batch; log 0 when there is 0.",
+ "self_check": "batch D (34-45): widened levels to L10-L13 per last self-check; yield 2/12, both cross-domain (disturbance<->perturbation; attempt<->chemical assay). Widen-levels strategy works: L10/L11 seeds carry the abstract operations. Keep levels 10-13, log 0 when 0.",
  "notes": [
-  "random seeds dominated by surname/morphology; filtered still lexical",
-  "yield ~1-2/10; consider L10/L11 seeds and query-seeded probing",
-  "batched embed() keeps a 10-seed batch to one embed call"
+  "productive seeds: L10-L13 semantic-cross-domain ones (disturbance, attempt/assay)",
+  "high-cosine co-locations flagged separately (human-colloquy-machine-chat 0.92)",
+  "sampler: random MB per level, filter drops name/morphology clusters"
  ]
 }

@@ -28,3 +28,15 @@
 {"cycle": 31, "seed_mb_id": "6ac6e9a657152857838a37cf", "seed_level": 12, "outcome": "similarity-cluster", "note": "Asian noodle names (banmian/mi goreng)", "at": "2026-10-10T17:33:06.079389+00:00"}
 {"cycle": 32, "seed_mb_id": "6ac6e9c157152857838a51a5", "seed_level": 12, "outcome": "built", "note": "sociability seed -> conversation/mutual-knowledge SMB", "at": "2026-10-10T17:33:06.079389+00:00", "smb_ids": ["6aca769dee49e670bad2cf76"]}
 {"cycle": 33, "seed_mb_id": "6ac6e910571528578389901d", "seed_level": 12, "outcome": "no-adjacency", "note": "re- morphology (revises/reviseth)", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 34, "seed_mb_id": "6ac6e1a4571528578388976e", "seed_level": 13, "outcome": "similarity-cluster", "note": "'go down in flames' idiom + blaze variants", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 35, "seed_mb_id": "6ac6e1a45715285783889778", "seed_level": 13, "outcome": "no-adjacency", "note": "calf/calf-raises morphology", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 36, "seed_mb_id": "6ac6e1a4571528578388977e", "seed_level": 13, "outcome": "similarity-cluster", "note": "countertrend/antitrend/trend", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 37, "seed_mb_id": "6ac6e9a657152857838a3847", "seed_level": 12, "outcome": "similarity-cluster", "note": "flavonoid chemistry (mormin/tamarixetin/apiforol)", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 38, "seed_mb_id": "6ac6e9b657152857838a3ee3", "seed_level": 12, "outcome": "built", "note": "social disturbance -> physical perturbation", "at": "2026-10-10T17:46:29.921497+00:00", "smb_ids": ["6aca7985458fc4a7396a8688"]}
+{"cycle": 39, "seed_mb_id": "6ac6e8ea57152857838954b8", "seed_level": 12, "outcome": "no-adjacency", "note": "sun/sing-song morphology", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 40, "seed_mb_id": "6ac7cefb51ff4d8f79c88e07", "seed_level": 11, "outcome": "similarity-cluster", "note": "true-bug taxonomy (bryocorine/rhopalid families)", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 41, "seed_mb_id": "6ac7cefb51ff4d8f79c88e08", "seed_level": 11, "outcome": "built", "note": "attempt/endeavor -> chemical assay via trial", "at": "2026-10-10T17:46:29.921497+00:00", "smb_ids": ["6aca7985458fc4a7396a8689"]}
+{"cycle": 42, "seed_mb_id": "6ac7cefb51ff4d8f79c88e0a", "seed_level": 11, "outcome": "similarity-cluster", "note": "extinct megafauna (megalonyx/megathere)", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 43, "seed_mb_id": "6ac6f17957152857838b2fa0", "seed_level": 10, "outcome": "no-adjacency", "note": "sand- morphology (sandburr/sandwinner)", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 44, "seed_mb_id": "6ac6f17557152857838b0ea3", "seed_level": 10, "outcome": "similarity-cluster", "note": "immunology alloreactivity cluster", "at": "2026-10-10T17:46:29.921497+00:00"}
+{"cycle": 45, "seed_mb_id": "6ac6f17a57152857838b313a", "seed_level": 10, "outcome": "similarity-cluster", "note": "neuro-oncology (encephaloma/meningioma)", "at": "2026-10-10T17:46:29.921497+00:00"}
