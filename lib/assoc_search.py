@@ -338,7 +338,9 @@ def _seed_from_doc(coll: Any, d: dict[str, Any], qv: np.ndarray) -> Candidate | 
     v = d.get("vector")
     if v is None:
         return None
-    vec = np.asarray(v, dtype=np.float32)
+    vec = unpack_vec(v)
+    if vec.size == 0:
+        return None
     score = _clamp_sim(float(d.get("_score", cosine(qv, vec))))
     if d.get("doc_type") == "node":
         return _node_candidate(d, score, qv)
