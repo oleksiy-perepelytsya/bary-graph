@@ -1,9 +1,9 @@
 {
- "cycles_done": 173,
- "last_commit_cycle": 173,
- "next_commit_cycle": 183,
+ "cycles_done": 184,
+ "last_commit_cycle": 184,
+ "next_commit_cycle": 194,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch O (162-173): 0/12 built. No clean bridge docs for salvage (sea vs scrap) or migration (human vs bird); the rest are name/lexical clusters. Logged 0 rather than manufacture - consistent with the batch-I discipline. Yield is drifting down; the random L10-L13 draw increasingly hits morphological/name/name-science clusters. Will keep drawing (per policy) but flag: if two more batches yield <=1, consider a targeted 'abstract-operation' seed draw to keep the loop productive.",
+ "self_check": "batch P (174-184, 11 seeds): 2/11 built (-machy staged-combat suffix; detritivory across organism/cell scale). Recovery from batch O's 0. Flags: P2 child_cosine 0.878 (high but <0.90, no flag); keyboard homograph refused for lack of pivot doc. 29 distinct threads, no fixation. Continue - no need yet for a targeted abstract-op draw.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",

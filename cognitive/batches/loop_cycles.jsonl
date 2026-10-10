@@ -168,3 +168,14 @@
 {"cycle": 171, "seed_mb_id": "6ac6f17a57152857838b351e", "seed_level": 10, "outcome": "no-adjacency", "note": "m- words (Mills' Mess/milksopish)", "at": "2026-10-10T20:04:27.253739+00:00"}
 {"cycle": 172, "seed_mb_id": "6ac6f17957152857838b2a98", "seed_level": 10, "outcome": "similarity-cluster", "note": "-ite rocks (tektites/taconites)", "at": "2026-10-10T20:04:27.253739+00:00"}
 {"cycle": 173, "seed_mb_id": "6ac6f17b57152857838b39d4", "seed_level": 10, "outcome": "similarity-cluster", "note": "containers (Bambi bucket/baby cage)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 174, "seed_mb_id": "6ac7e89cba547869367bda8a", "seed_level": 13, "outcome": "built", "note": "bullfight/cockfight (-machy) -> -machy SMB", "at": "2026-10-10T20:14:34.456929+00:00", "smb_ids": ["6aca9c97508e8d30ba6c7b81"]}
+{"cycle": 175, "seed_mb_id": "6ac7e89cba547869367bda8b", "seed_level": 13, "outcome": "no-adjacency", "note": "relational adverbs (obversely/secundum)", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 176, "seed_mb_id": "6ac7e89cba547869367bda8c", "seed_level": 13, "outcome": "similarity-cluster", "note": "teaching words (tachydidaxy/drop science)", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 177, "seed_mb_id": "6ac6e9d357152857838a686f", "seed_level": 12, "outcome": "no-adjacency", "note": "time bomb/garget odd mix", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 178, "seed_mb_id": "6ac6e8af571528578388d555", "seed_level": 12, "outcome": "similarity-cluster", "note": "arteries (carotid/labyrinthine)", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 179, "seed_mb_id": "6ac6e8b4571528578388dbff", "seed_level": 12, "outcome": "no-adjacency", "note": "keyboards - musical<->computer lacks pivot doc", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 180, "seed_mb_id": "6ac74c3ad5a0900502ad50a9", "seed_level": 11, "outcome": "similarity-cluster", "note": "cardiac glycosides", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 181, "seed_mb_id": "6ac74c3bd5a0900502ad5514", "seed_level": 11, "outcome": "similarity-cluster", "note": "cardiac glycosides (convallamaroside)", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 182, "seed_mb_id": "6ac6f17657152857838b1a00", "seed_level": 10, "outcome": "similarity-cluster", "note": "behavioral idioms (put oneself out)", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 183, "seed_mb_id": "6ac6f17657152857838b14a0", "seed_level": 10, "outcome": "similarity-cluster", "note": "-ard agent pejoratives (dynamitard/God-botherer)", "at": "2026-10-10T20:14:34.456929+00:00"}
+{"cycle": 184, "seed_mb_id": "6ac6f17957152857838b287f", "seed_level": 10, "outcome": "built", "note": "saprotrophy/myzocytosis -> detritivory SMB", "at": "2026-10-10T20:14:34.456929+00:00", "smb_ids": ["6aca9c97508e8d30ba6c7b82"]}
