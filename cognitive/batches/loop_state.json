@@ -1,11 +1,12 @@
 {
- "cycles_done": 23,
- "last_commit_cycle": 23,
- "next_commit_cycle": 33,
+ "cycles_done": 33,
+ "last_commit_cycle": 33,
+ "next_commit_cycle": 43,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch B (14-23) = 0/10 productive: random L12/L13 seeds are dominated by morphological/nickname clusters. Action: add a sampler filter that drops proper-noun-dominant and stem-dominated seeds, keeping the draw random within the filtered population.",
+ "self_check": "batch C (24-33): filter removed name clusters but semantic clusters (food/botany/taxonomy) and morphology remain; 1 SMB, and it is high-cosine (0.92) co-location, not a bridge. Two consecutive lean batches -> widen seed levels to L10-L13 and stop manufacturing SMBs to fill a batch; log 0 when there is 0.",
  "notes": [
-  "random seeds dominated by surname/morphology clusters",
-  "embeddings consumed via batched embed() in one call (~30-60s)"
+  "random seeds dominated by surname/morphology; filtered still lexical",
+  "yield ~1-2/10; consider L10/L11 seeds and query-seeded probing",
+  "batched embed() keeps a 10-seed batch to one embed call"
  ]
 }

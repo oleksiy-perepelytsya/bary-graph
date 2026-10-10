@@ -18,3 +18,13 @@
 {"cycle": 21, "seed_mb_id": "6ac6e8cc5715285783891550", "seed_level": 12, "outcome": "no-adjacency", "note": "Latin plurals (emerita/emeriti)", "at": "2026-10-10T17:24:12.483167+00:00"}
 {"cycle": 22, "seed_mb_id": "6ac6e96f571528578389fb0b", "seed_level": 12, "outcome": "no-adjacency", "note": "emeritus/emerita morphology", "at": "2026-10-10T17:24:12.483167+00:00"}
 {"cycle": 23, "seed_mb_id": "6ac6e8ff571528578389793e", "seed_level": 12, "outcome": "no-adjacency", "note": "re- morphology (recapitalising/recapacitating)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 24, "seed_mb_id": "6ac6df2a5715285783866d6d", "seed_level": 13, "outcome": "similarity-cluster", "note": "cutoff/definitive/terminate synonym cluster", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 25, "seed_mb_id": "6ac6de75571528578385da74", "seed_level": 13, "outcome": "no-adjacency", "note": "arterio- morphology", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 26, "seed_mb_id": "6ac6e118571528578388125d", "seed_level": 13, "outcome": "no-adjacency", "note": "single-word slang cluster (bovvered/ruffled)", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 27, "seed_mb_id": "6ac6de70571528578385d37f", "seed_level": 13, "outcome": "no-adjacency", "note": "botany seed anatomy (perisperm/endosperm)", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 28, "seed_mb_id": "6ac6e16557152857838858dd", "seed_level": 13, "outcome": "similarity-cluster", "note": "extinct-mammal taxonomy (machairodontine/caprinid)", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 29, "seed_mb_id": "6ac6e9bf57152857838a489f", "seed_level": 12, "outcome": "similarity-cluster", "note": "berry names (goosegob/heathberry)", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 30, "seed_mb_id": "6ac6e96c571528578389f3f9", "seed_level": 12, "outcome": "no-adjacency", "note": "Chinese dishes; spurious hot- match on 'hototay'", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 31, "seed_mb_id": "6ac6e9a657152857838a37cf", "seed_level": 12, "outcome": "similarity-cluster", "note": "Asian noodle names (banmian/mi goreng)", "at": "2026-10-10T17:33:06.079389+00:00"}
+{"cycle": 32, "seed_mb_id": "6ac6e9c157152857838a51a5", "seed_level": 12, "outcome": "built", "note": "sociability seed -> conversation/mutual-knowledge SMB", "at": "2026-10-10T17:33:06.079389+00:00", "smb_ids": ["6aca769dee49e670bad2cf76"]}
+{"cycle": 33, "seed_mb_id": "6ac6e910571528578389901d", "seed_level": 12, "outcome": "no-adjacency", "note": "re- morphology (revises/reviseth)", "at": "2026-10-10T17:33:06.079389+00:00"}
