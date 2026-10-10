@@ -8,3 +8,13 @@
 {"cycle": 11, "seed_mb_id": "6ac7aa68112894eba076288d", "seed_level": 13, "outcome": "no-adjacency", "note": "Peron surname cluster", "at": "2026-10-10T17:17:39.627491+00:00"}
 {"cycle": 12, "seed_mb_id": "6ac7aa68112894eba0762721", "seed_level": 13, "outcome": "no-adjacency", "note": "Acme/breaker name cluster", "at": "2026-10-10T17:17:39.627491+00:00"}
 {"cycle": 13, "seed_mb_id": "6ac7aa68112894eba07627b0", "seed_level": 13, "outcome": "no-adjacency", "note": "Audubon/backscratcher name cluster", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 14, "seed_mb_id": "6ac6e0155715285783872c53", "seed_level": 13, "outcome": "similarity-cluster", "note": "single idiom 'change horses in midstream' + variants", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 15, "seed_mb_id": "6ac6e10c57152857838806af", "seed_level": 13, "outcome": "similarity-cluster", "note": "same idiom cluster", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 16, "seed_mb_id": "6ac6e14557152857838835f9", "seed_level": 13, "outcome": "no-adjacency", "note": "re- morphology (resaid/reslew/resaw)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 17, "seed_mb_id": "6ac6e1b7571528578388a198", "seed_level": 13, "outcome": "no-adjacency", "note": "re- morphology (reslain/resailed)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 18, "seed_mb_id": "6ac6deef571528578386301d", "seed_level": 13, "outcome": "no-adjacency", "note": "TV/tele- abbreviations (telvsn/telegenic)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 19, "seed_mb_id": "6ac6e8c45715285783890503", "seed_level": 12, "outcome": "no-adjacency", "note": "profanity morphology (shite variants)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 20, "seed_mb_id": "6ac6e98257152857838a14bd", "seed_level": 12, "outcome": "no-adjacency", "note": "shr- morphology (shrieves/shrithes)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 21, "seed_mb_id": "6ac6e8cc5715285783891550", "seed_level": 12, "outcome": "no-adjacency", "note": "Latin plurals (emerita/emeriti)", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 22, "seed_mb_id": "6ac6e96f571528578389fb0b", "seed_level": 12, "outcome": "no-adjacency", "note": "emeritus/emerita morphology", "at": "2026-10-10T17:24:12.483167+00:00"}
+{"cycle": 23, "seed_mb_id": "6ac6e8ff571528578389793e", "seed_level": 12, "outcome": "no-adjacency", "note": "re- morphology (recapitalising/recapacitating)", "at": "2026-10-10T17:24:12.483167+00:00"}

@@ -1,9 +1,9 @@
 {
- "cycles_done": 13,
- "last_commit_cycle": 13,
- "next_commit_cycle": 23,
+ "cycles_done": 23,
+ "last_commit_cycle": 23,
+ "next_commit_cycle": 33,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "random-seed yield ~2/10 productive; 3 taxis SMBs already -> deliberately picked re-operator and motility/mobility to avoid fixating on taxis",
+ "self_check": "batch B (14-23) = 0/10 productive: random L12/L13 seeds are dominated by morphological/nickname clusters. Action: add a sampler filter that drops proper-noun-dominant and stem-dominated seeds, keeping the draw random within the filtered population.",
  "notes": [
   "random seeds dominated by surname/morphology clusters",
   "embeddings consumed via batched embed() in one call (~30-60s)"
