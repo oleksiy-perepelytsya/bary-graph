@@ -124,3 +124,14 @@
 {"cycle": 127, "seed_mb_id": "6ac6f17657152857838b155d", "seed_level": 10, "outcome": "similarity-cluster", "note": "sailors/seafarers", "at": "2026-10-10T19:10:49.688825+00:00"}
 {"cycle": 128, "seed_mb_id": "6ac6f17957152857838b2a97", "seed_level": 10, "outcome": "no-adjacency", "note": "langooty/l\u016b'au l- names", "at": "2026-10-10T19:10:49.688825+00:00"}
 {"cycle": 129, "seed_mb_id": "6ac6f17357152857838b0598", "seed_level": 10, "outcome": "no-adjacency", "note": "archaic government spellings (Parlyament/musaeum)", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 130, "seed_mb_id": "6ac7441ad5a0900502ad17e3", "seed_level": 13, "outcome": "no-adjacency", "note": "glycoside names (erysimosol/gypsobioside)", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 131, "seed_mb_id": "6ac74425d5a0900502ad361b", "seed_level": 13, "outcome": "no-adjacency", "note": "glycoside names (ajugasalicioside)", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 132, "seed_mb_id": "6ac6e9c057152857838a4bda", "seed_level": 12, "outcome": "no-adjacency", "note": "card homograph (payment/sharp) no clean bridge", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 133, "seed_mb_id": "6ac6e9d057152857838a628d", "seed_level": 12, "outcome": "built", "note": "radoub/retouch seed -> refit/photoedit SMB", "at": "2026-10-10T19:27:34.671413+00:00", "smb_ids": ["6aca917bded213cd0b4714cb"]}
+{"cycle": 134, "seed_mb_id": "6ac6e8fc571528578389710e", "seed_level": 12, "outcome": "similarity-cluster", "note": "advance/retreat motion polarity (antegrade/retrograde)", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 135, "seed_mb_id": "6ac7cefb51ff4d8f79c88ce6", "seed_level": 11, "outcome": "built", "note": "obscuring seed -> mask/obfuscation SMB", "at": "2026-10-10T19:27:34.671413+00:00", "smb_ids": ["6aca917bded213cd0b4714ca"]}
+{"cycle": 136, "seed_mb_id": "6ac7cefb51ff4d8f79c88ce7", "seed_level": 11, "outcome": "no-adjacency", "note": "game homograph (hunting/chess endgame) no bridge", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 137, "seed_mb_id": "6ac7cefb51ff4d8f79c88ce8", "seed_level": 11, "outcome": "no-adjacency", "note": "macronuclear/nucleal cell biology", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 138, "seed_mb_id": "6ac6f17757152857838b1ef0", "seed_level": 10, "outcome": "similarity-cluster", "note": "flight/aviation (swing-by/air bridge)", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 139, "seed_mb_id": "6ac6f17557152857838b1383", "seed_level": 10, "outcome": "no-adjacency", "note": "vulgar slang (frig/plonker)", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 140, "seed_mb_id": "6ac6f17a57152857838b313d", "seed_level": 10, "outcome": "no-adjacency", "note": "oil/ester names (mirbane/alantol)", "at": "2026-10-10T19:27:34.671413+00:00"}
