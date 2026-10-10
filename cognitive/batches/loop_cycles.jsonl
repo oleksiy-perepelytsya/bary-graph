@@ -112,3 +112,15 @@
 {"cycle": 115, "seed_mb_id": "6ac6f17657152857838b1b89", "seed_level": 10, "outcome": "built", "note": "velocimetry seed -> speed-measurement SMB", "at": "2026-10-10T18:57:04.233573+00:00", "smb_ids": ["6aca8a6f78dff9f402e6a023"]}
 {"cycle": 116, "seed_mb_id": "6ac6f17557152857838b0ec1", "seed_level": 10, "outcome": "similarity-cluster", "note": "fibroblast/tenocyte cell family", "at": "2026-10-10T18:57:04.233573+00:00"}
 {"cycle": 117, "seed_mb_id": "6ac6f17757152857838b1de3", "seed_level": 10, "outcome": "no-adjacency", "note": "taxon names (ophiuran/ixodoid)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 118, "seed_mb_id": "6ac6df41571528578386768d", "seed_level": 13, "outcome": "built", "note": "adverse-possession seed -> possession law/demonology SMB", "at": "2026-10-10T19:10:49.688825+00:00", "smb_ids": ["6aca8d8d16681e4a18d68590"]}
+{"cycle": 119, "seed_mb_id": "6ac6e02a57152857838747c2", "seed_level": 13, "outcome": "similarity-cluster", "note": "beg/cadge/panhandling", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 120, "seed_mb_id": "6ac6e08857152857838790cd", "seed_level": 13, "outcome": "no-adjacency", "note": "yard homographs (nautical/measure/lawn)", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 121, "seed_mb_id": "6ac7c59851ff4d8f79c82e17", "seed_level": 12, "outcome": "no-adjacency", "note": "omasa/omenta anatomy plurals", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 122, "seed_mb_id": "6ac7c59a51ff4d8f79c83405", "seed_level": 12, "outcome": "no-adjacency", "note": "atraments/atria morph", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 123, "seed_mb_id": "6ac6e97c57152857838a07d5", "seed_level": 12, "outcome": "similarity-cluster", "note": "arc minutes/seconds angular measure", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 124, "seed_mb_id": "6ac7cef451ff4d8f79c86be8", "seed_level": 11, "outcome": "similarity-cluster", "note": "polyphase power (Scott/delta connection)", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 125, "seed_mb_id": "6ac7cef451ff4d8f79c86be9", "seed_level": 11, "outcome": "similarity-cluster", "note": "drinking register (Jimmy Woodser/sherbet)", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 126, "seed_mb_id": "6ac7cef451ff4d8f79c86bea", "seed_level": 11, "outcome": "built", "note": "disgust/revolt seed -> revolt SMB", "at": "2026-10-10T19:10:49.688825+00:00", "smb_ids": ["6aca8d8d16681e4a18d68591"]}
+{"cycle": 127, "seed_mb_id": "6ac6f17657152857838b155d", "seed_level": 10, "outcome": "similarity-cluster", "note": "sailors/seafarers", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 128, "seed_mb_id": "6ac6f17957152857838b2a97", "seed_level": 10, "outcome": "no-adjacency", "note": "langooty/l\u016b'au l- names", "at": "2026-10-10T19:10:49.688825+00:00"}
+{"cycle": 129, "seed_mb_id": "6ac6f17357152857838b0598", "seed_level": 10, "outcome": "no-adjacency", "note": "archaic government spellings (Parlyament/musaeum)", "at": "2026-10-10T19:10:49.688825+00:00"}
