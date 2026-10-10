@@ -88,3 +88,15 @@
 {"cycle": 91, "seed_mb_id": "6ac6f16f57152857838afa3e", "seed_level": 10, "outcome": "similarity-cluster", "note": "plant saponins/glycosides", "at": "2026-10-10T18:34:57.189124+00:00"}
 {"cycle": 92, "seed_mb_id": "6ac6f16f57152857838afa61", "seed_level": 10, "outcome": "similarity-cluster", "note": "glycoside names", "at": "2026-10-10T18:34:57.189124+00:00"}
 {"cycle": 93, "seed_mb_id": "6ac6f16f57152857838af687", "seed_level": 10, "outcome": "similarity-cluster", "note": "cardiac glycosides/toxins", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 94, "seed_mb_id": "6ac7e8d2ba547869367c2644", "seed_level": 13, "outcome": "similarity-cluster", "note": "cheese dishes (raclette/r\u00f6sti/tyro-)", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 95, "seed_mb_id": "6ac7e8d2ba547869367c2645", "seed_level": 13, "outcome": "no-adjacency", "note": "'harsh mistress' phrase + ovaries (odd mix)", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 96, "seed_mb_id": "6ac7e8d2ba547869367c2647", "seed_level": 13, "outcome": "similarity-cluster", "note": "unfashionable/cavil + trendiness", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 97, "seed_mb_id": "6ac6e9b957152857838a455c", "seed_level": 12, "outcome": "no-adjacency", "note": "lid idioms (flip one's lid), no clean bridge doc", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 98, "seed_mb_id": "6ac7c58851ff4d8f79c7f458", "seed_level": 12, "outcome": "no-adjacency", "note": "index morphology (deindexing/reindexing)", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 99, "seed_mb_id": "6ac7c58551ff4d8f79c7eaef", "seed_level": 12, "outcome": "no-adjacency", "note": "de- removal op (denazify/denasalize) - noted, thin", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 100, "seed_mb_id": "6ac7cefa51ff4d8f79c888b5", "seed_level": 11, "outcome": "similarity-cluster", "note": "service/attendant jobs (bell boy/stock boy)", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 101, "seed_mb_id": "6ac7cefa51ff4d8f79c888b6", "seed_level": 11, "outcome": "built", "note": "mixing seed -> agents/machines SMB", "at": "2026-10-10T18:46:25.449568+00:00", "smb_ids": ["6aca87dc346d22b93d671adb"]}
+{"cycle": 102, "seed_mb_id": "6ac7cefa51ff4d8f79c888b7", "seed_level": 11, "outcome": "no-adjacency", "note": "shell (ammo casing vs mollusk) - no clean bridge", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 103, "seed_mb_id": "6ac6f17857152857838b2543", "seed_level": 10, "outcome": "similarity-cluster", "note": "pleura anatomy", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 104, "seed_mb_id": "6ac6f17657152857838b149b", "seed_level": 10, "outcome": "similarity-cluster", "note": "cardiomyopathy/myocytolysis", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 105, "seed_mb_id": "6ac6f17957152857838b2cd7", "seed_level": 10, "outcome": "similarity-cluster", "note": "heart anomalies (acardiotrophy/megalocardia)", "at": "2026-10-10T18:46:25.449568+00:00"}

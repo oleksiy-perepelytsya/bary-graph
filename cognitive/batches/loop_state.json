@@ -1,9 +1,9 @@
 {
- "cycles_done": 93,
- "last_commit_cycle": 93,
- "next_commit_cycle": 103,
+ "cycles_done": 105,
+ "last_commit_cycle": 105,
+ "next_commit_cycle": 115,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch H (82-93): 2/12 built (fire<->inflammation etymology-doubling; sacrifice<->roast burnt-offering seam). Both horizontal (cos 0.49/0.59) - no co-locations this batch. 18 distinct threads, no fixation; continuing.",
+ "self_check": "batch I (94-105): 1/12 built (merging-agents<->mixing-machines). 19 distinct threads, no fixation. Batch lean but honest - several seeds had near-misses (lid idioms, de- op, ammo/mollusk shell) that lacked clean bridge docs; refused forced builds. Continue.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",
