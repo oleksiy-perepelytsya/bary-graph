@@ -52,3 +52,15 @@
 {"cycle": 55, "seed_mb_id": "6ac6f17857152857838b26a8", "seed_level": 10, "outcome": "similarity-cluster", "note": "math topology (nonprojective/unramified)", "at": "2026-10-10T18:02:14.977088+00:00"}
 {"cycle": 56, "seed_mb_id": "6ac6f17157152857838b0058", "seed_level": 10, "outcome": "similarity-cluster", "note": "turtle-shell bones (epiplastra/xiphiplastron)", "at": "2026-10-10T18:02:14.977088+00:00"}
 {"cycle": 57, "seed_mb_id": "6ac6f17a57152857838b345b", "seed_level": 10, "outcome": "built", "note": "nuclear/electrical inertness -> unreactiveness SMB", "at": "2026-10-10T18:02:14.977088+00:00", "smb_ids": ["6aca7c05192e749ffb46131a"]}
+{"cycle": 58, "seed_mb_id": "6ac6de5b571528578385cab6", "seed_level": 13, "outcome": "no-adjacency", "note": "suwarree/suwar/swara morphology", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 59, "seed_mb_id": "6ac6de5b571528578385cad2", "seed_level": 13, "outcome": "similarity-cluster", "note": "ancient vessels (kero/pututu/aryballos)", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 60, "seed_mb_id": "6ac6de5b571528578385cad4", "seed_level": 13, "outcome": "similarity-cluster", "note": "carefree/lightheartedness", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 61, "seed_mb_id": "6ac7c59951ff4d8f79c832c9", "seed_level": 12, "outcome": "similarity-cluster", "note": "darkness/obscurity words", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 62, "seed_mb_id": "6ac7c58551ff4d8f79c7ea49", "seed_level": 12, "outcome": "built", "note": "archaic remnant/remembre -> memory-residual SMB", "at": "2026-10-10T18:14:51.876032+00:00", "smb_ids": ["6aca8080bfc78f47d064a654"]}
+{"cycle": 63, "seed_mb_id": "6ac7c59551ff4d8f79c82107", "seed_level": 12, "outcome": "no-adjacency", "note": "wine morphology (vintaged/vanned)", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 64, "seed_mb_id": "6ac7cf1051ff4d8f79c8eb08", "seed_level": 11, "outcome": "built", "note": "predict/presage/weird -> omen-nowcast SMB", "at": "2026-10-10T18:14:51.876032+00:00", "smb_ids": ["6aca8080bfc78f47d064a653"]}
+{"cycle": 65, "seed_mb_id": "6ac7cf1051ff4d8f79c8eb09", "seed_level": 11, "outcome": "similarity-cluster", "note": "pharma INN suffixes (-tin/-gliptin)", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 66, "seed_mb_id": "6ac7cf1051ff4d8f79c8eb0a", "seed_level": 11, "outcome": "no-adjacency", "note": "lin- morphology (linarias/liniments)", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 67, "seed_mb_id": "6ac6f17557152857838b11fd", "seed_level": 10, "outcome": "similarity-cluster", "note": "cell membrane/periplasm", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 68, "seed_mb_id": "6ac6f17657152857838b17f7", "seed_level": 10, "outcome": "similarity-cluster", "note": "familial/defamilialization (not cross-domain)", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 69, "seed_mb_id": "6ac6f17957152857838b2ae2", "seed_level": 10, "outcome": "similarity-cluster", "note": "hockey variants", "at": "2026-10-10T18:14:51.876032+00:00"}
