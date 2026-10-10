@@ -1,0 +1,10 @@
+{"cycle": 4, "seed_mb_id": "6ac7aa68112894eba0762989", "seed_level": 13, "outcome": "no-adjacency", "note": "own-name cluster (Birchard/Boyar) + pipe", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 5, "seed_mb_id": "6ac7aa68112894eba0762787", "seed_level": 13, "outcome": "no-adjacency", "note": "surname cluster; '-opsis' morphological", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 6, "seed_mb_id": "6ac6e8eb5715285783895bee", "seed_level": 12, "outcome": "built", "note": "motility/sessility -> mobility (self-motion)", "at": "2026-10-10T17:17:39.627491+00:00", "smb_ids": ["6aca7314353fb6b5afc71339"]}
+{"cycle": 7, "seed_mb_id": "6ac7c58951ff4d8f79c7f7be", "seed_level": 12, "outcome": "no-adjacency", "note": "look-alike words (loumas/louages/Lougheeds)", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 8, "seed_mb_id": "6ac7c58551ff4d8f79c7ebe1", "seed_level": 12, "outcome": "similarity-cluster", "note": "satisfied/dissatisfied morphology; no cross-domain middle term", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 9, "seed_mb_id": "6ac7c59151ff4d8f79c81177", "seed_level": 12, "outcome": "built", "note": "re- re-application operator (renormalization<->rerender)", "at": "2026-10-10T17:17:39.627491+00:00", "smb_ids": ["6aca72353497ad8ef25c17bc"]}
+{"cycle": 10, "seed_mb_id": "6ac7c59651ff4d8f79c826ca", "seed_level": 12, "outcome": "no-adjacency", "note": "re- morphological (refetches/refingers)", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 11, "seed_mb_id": "6ac7aa68112894eba076288d", "seed_level": 13, "outcome": "no-adjacency", "note": "Peron surname cluster", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 12, "seed_mb_id": "6ac7aa68112894eba0762721", "seed_level": 13, "outcome": "no-adjacency", "note": "Acme/breaker name cluster", "at": "2026-10-10T17:17:39.627491+00:00"}
+{"cycle": 13, "seed_mb_id": "6ac7aa68112894eba07627b0", "seed_level": 13, "outcome": "no-adjacency", "note": "Audubon/backscratcher name cluster", "at": "2026-10-10T17:17:39.627491+00:00"}
