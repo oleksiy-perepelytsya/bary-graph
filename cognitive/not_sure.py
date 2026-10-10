@@ -27,7 +27,8 @@ Two ways to ask
                      "criteria":{"cm-a":"...","cm-b":"..."}}}'
 
 STATE may be inline text, a file path, or '-' for stdin.
-Model: --model, else $JEV_MODEL, else 'nimble'.
+Model: --model, else $JEV_MODEL, else 'tev1:0.8b' (Together AI's tiny decision
+model; `nimble` from Bespoke Labs is a larger drop-in).
 Host:  --host, else $JEV_HOST, else http://127.0.0.1:11435.
 """
 from __future__ import annotations
@@ -40,7 +41,7 @@ import urllib.error
 import urllib.request
 
 DEFAULT_HOST = os.environ.get("JEV_HOST") or "http://127.0.0.1:11435"
-DEFAULT_MODEL = os.environ.get("JEV_MODEL") or "nimble"
+DEFAULT_MODEL = os.environ.get("JEV_MODEL") or "tev1:0.8b"
 
 
 def read_state(arg: str | None) -> str:

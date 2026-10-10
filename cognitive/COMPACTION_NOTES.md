@@ -53,19 +53,26 @@ resuming the loop.
   retained and should be re-consulted on new searches — e.g. noticing that a
   previously near-miss candidate now has its missing bridge ("aha" catch).
 
-## Jev oracle — `cognitive/not_sure.py` (tool exists; model tag pending)
+## Jev oracle — `cognitive/not_sure.py`
 
 - Tool: `cognitive/not_sure.py`. Call it when a retrieval/judgment is uncertain.
-  Free parameters by design: pass `--data` (text/file/stdin), `--ask`, optional
-  `--options`. Fixed output envelope only:
-  `{choice, scores:{opt:0..1}, confidence, reasons}`. Override `--system` to
-  impose a stricter contract (e.g. rule-set labeling of SMB candidates) without
-  editing the script.
-- Model: `--model`, else `$JEV_MODEL`, else `jev:latest`. Host: `$OLLAMA_HOST`
-  or `http://127.0.0.1:11434`.
-- **Pending:** no Jev model is deployed on ollama yet (only `qwen3-embedding:8b`
-  and `:0.6b`). Plumbing verified (clean HTTP 404 path). Awaiting the ollama
-  model tag to pull/deploy.
+  It speaks the **Jev API** (`POST /v1/systemone`): pass `--state` (the text to
+  judge) and either a quick `--ask`/`--options` or a full `--questions-json`
+  with typed `choice` questions + `criteria`; it returns `{choice, probabilities}`
+  per question. Override `--system` to impose a stricter contract (e.g. rule-set
+  labeling of SMB candidates) without editing the script.
+- Model: `--model`, else `$JEV_MODEL`, else `tev1:0.8b` (Together AI's tiny
+  decision model — the chosen Jev stand-in, small enough for this link).
+  `nimble` (Bespoke Labs 9B) is a drop-in when bandwidth allows.
+  Host: `$JEV_HOST` or `http://127.0.0.1:11435`.
+- **Blocker / status:** decision models need ollama **≥0.35**; the embedding
+  server on `:11434` is the old container (0.21.0) and is left untouched. A
+  *separate* newer ollama runs on `:11435` (install `/tmp/opencode/ollama_040`,
+  models `/tmp/opencode/jev_models`). Deployment in progress: egress is
+  ~150 KB/s and flaky, so the 1.44 GB ollama binary is a slow **resumable**
+  background download (`/tmp/opencode/ollama.tar.zst`); a watcher
+  (`/tmp/opencode/setup_jev2.sh`) then extracts, serves on :11435 and pulls
+  `tev1:0.8b`. Plumbing already verified end-to-end (clean model-404 path).
 - Intended loop use: fast-check a seed/retrieval, and label SMB candidates
   against a rule set as a second estimation for candidate review / schema
   inclusion / revision iterations. Never a coercion — another estimation.
