@@ -1,9 +1,9 @@
 {
- "cycles_done": 236,
- "last_commit_cycle": 236,
- "next_commit_cycle": 246,
+ "cycles_done": 248,
+ "last_commit_cycle": 248,
+ "next_commit_cycle": 258,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch T (225-236, 12-seed plain draw): 1/12 built (yarn: spun thread <-> 'spin a yarn'). Composition: ~9/12 single-domain/idiom clusters, 2/12 name clusters, 1 build. Cross-domain doubling again came from a shared pivot word ('yarn').",
+ "self_check": "batch U (237-248, 12-seed plain draw): 0/12 built (honest lean batch). All seeds were single-domain / morphological / name clusters (antimalarials, -cele terms, -graphy, paleo- proxies, out- verbs, SCOTUS case names). No shared-pivot doubling appeared.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
