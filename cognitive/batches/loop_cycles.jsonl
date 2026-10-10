@@ -179,3 +179,15 @@
 {"cycle": 182, "seed_mb_id": "6ac6f17657152857838b1a00", "seed_level": 10, "outcome": "similarity-cluster", "note": "behavioral idioms (put oneself out)", "at": "2026-10-10T20:14:34.456929+00:00"}
 {"cycle": 183, "seed_mb_id": "6ac6f17657152857838b14a0", "seed_level": 10, "outcome": "similarity-cluster", "note": "-ard agent pejoratives (dynamitard/God-botherer)", "at": "2026-10-10T20:14:34.456929+00:00"}
 {"cycle": 184, "seed_mb_id": "6ac6f17957152857838b287f", "seed_level": 10, "outcome": "built", "note": "saprotrophy/myzocytosis -> detritivory SMB", "at": "2026-10-10T20:14:34.456929+00:00", "smb_ids": ["6aca9c97508e8d30ba6c7b82"]}
+{"cycle": 185, "seed_mb_id": "6ac6dcd557152857838464b2", "seed_level": 13, "outcome": "similarity-cluster", "note": "tropical ulcer terms", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 186, "seed_mb_id": "6ac6dcf057152857838491b4", "seed_level": 13, "outcome": "similarity-cluster", "note": "drug names (fluspiperone/perimetazine)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 187, "seed_mb_id": "6ac6dd01571528578384b9f8", "seed_level": 13, "outcome": "similarity-cluster", "note": "drug names (amicarbalide/azaquinzole)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 188, "seed_mb_id": "6ac6e98757152857838a181d", "seed_level": 12, "outcome": "similarity-cluster", "note": "sausages (kubasa/droewors/salami)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 189, "seed_mb_id": "6ac6e9a557152857838a3394", "seed_level": 12, "outcome": "similarity-cluster", "note": "sausages (Vienna/boerewors)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 190, "seed_mb_id": "6ac6e9095715285783898201", "seed_level": 12, "outcome": "similarity-cluster", "note": "-ian mineral suffixes (bismuthian/niobian)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 191, "seed_mb_id": "6ac74c3ad5a0900502ad4e43", "seed_level": 11, "outcome": "similarity-cluster", "note": "cardiac glycosides", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 192, "seed_mb_id": "6ac74c3bd5a0900502ad5203", "seed_level": 11, "outcome": "similarity-cluster", "note": "glycosides (digiproside)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 193, "seed_mb_id": "6ac74c3ad5a0900502ad50a1", "seed_level": 11, "outcome": "similarity-cluster", "note": "glycosides/toxins (hemisine)", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 194, "seed_mb_id": "6ac6f17757152857838b1c43", "seed_level": 10, "outcome": "no-adjacency", "note": "-rackers name cluster", "at": "2026-10-10T20:19:02.271652+00:00"}
+{"cycle": 195, "seed_mb_id": "6ac6f17b57152857838b3c24", "seed_level": 10, "outcome": "built", "note": "vital/supravital -> vitality/essentiality SMB", "at": "2026-10-10T20:19:02.271652+00:00", "smb_ids": ["6aca9d9fe62d335e1dad2a9f"]}
+{"cycle": 196, "seed_mb_id": "6ac6f17557152857838b125a", "seed_level": 10, "outcome": "similarity-cluster", "note": "plant nicknames (Mickey Mouse plants)", "at": "2026-10-10T20:19:02.271652+00:00"}

@@ -1,9 +1,9 @@
 {
- "cycles_done": 184,
- "last_commit_cycle": 184,
- "next_commit_cycle": 194,
+ "cycles_done": 196,
+ "last_commit_cycle": 196,
+ "next_commit_cycle": 206,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch P (174-184, 11 seeds): 2/11 built (-machy staged-combat suffix; detritivory across organism/cell scale). Recovery from batch O's 0. Flags: P2 child_cosine 0.878 (high but <0.90, no flag); keyboard homograph refused for lack of pivot doc. 29 distinct threads, no fixation. Continue - no need yet for a targeted abstract-op draw.",
+ "self_check": "batch Q (185-196): 1/12 built (vitality<->essentiality via 'vital'). Batch dominated by chemical/compound name clusters (drugs, cardiac glycosides) and sausages - persistent low-yield classes in the random L10-L13 draw. 30 distinct threads, no fixation. Note for sampler: chemical compound-name clusters recur ~2-3x per batch; could filter via a Glycoside/-oside/-prazole style word detector, but leaving the random draw intact per policy for now.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",
