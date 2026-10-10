@@ -1,12 +1,12 @@
 {
- "cycles_done": 45,
- "last_commit_cycle": 45,
- "next_commit_cycle": 55,
+ "cycles_done": 57,
+ "last_commit_cycle": 57,
+ "next_commit_cycle": 67,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch D (34-45): widened levels to L10-L13 per last self-check; yield 2/12, both cross-domain (disturbance<->perturbation; attempt<->chemical assay). Widen-levels strategy works: L10/L11 seeds carry the abstract operations. Keep levels 10-13, log 0 when 0.",
+ "self_check": "batch E (46-57): yield 2/12. Both productive-but-flagged: crack-up wordplay (cos 0.65) is strong; inertness SMB has cm<->cm cos 0.907 (co-location-prone, value in psychological bridge). THREADS NOW COVERED: taxis, heraldry/wordplay, re-operator/fold, motility/mobility, disturbance/perturbation, attempt/assay, conversation/mutual-knowledge, inertness, crack-up. No single thread exceeded ~3 SMBs -> no fixation observed; continue widening levels 10-13 and log 0 when 0.",
  "notes": [
-  "productive seeds: L10-L13 semantic-cross-domain ones (disturbance, attempt/assay)",
-  "high-cosine co-locations flagged separately (human-colloquy-machine-chat 0.92)",
-  "sampler: random MB per level, filter drops name/morphology clusters"
+  "commit cadence: every ~10 cycles (13,23,33,45,57)",
+  "self-check at each commit: continue thread vs new random seed",
+  "2 high-cosine co-location SMBs flagged for recheck (conversation 0.92, inertness 0.907)"
  ]
 }
