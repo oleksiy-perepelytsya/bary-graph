@@ -76,3 +76,15 @@
 {"cycle": 79, "seed_mb_id": "6ac6f17257152857838b02fe", "seed_level": 10, "outcome": "similarity-cluster", "note": "caterpillar pests (cabbage worms/weevils)", "at": "2026-10-10T18:24:39.933911+00:00"}
 {"cycle": 80, "seed_mb_id": "6ac6f17557152857838b1009", "seed_level": 10, "outcome": "similarity-cluster", "note": "earthworms/worms", "at": "2026-10-10T18:24:39.933911+00:00"}
 {"cycle": 81, "seed_mb_id": "6ac6f17457152857838b0aa2", "seed_level": 10, "outcome": "no-adjacency", "note": "sn- morphology (snaffles/snuffles)", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 82, "seed_mb_id": "6ac7c2d551ff4d8f79c78b37", "seed_level": 13, "outcome": "similarity-cluster", "note": "horsemanship (canter/pirouette)", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 83, "seed_mb_id": "6ac7c31551ff4d8f79c7ccd9", "seed_level": 13, "outcome": "similarity-cluster", "note": "hackney/horsesona morphology", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 84, "seed_mb_id": "6ac7c23251ff4d8f79c6d1f8", "seed_level": 13, "outcome": "similarity-cluster", "note": "circle geometry", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 85, "seed_mb_id": "6ac6e8fd5715285783897483", "seed_level": 12, "outcome": "similarity-cluster", "note": "poo/laxativeness (childish register)", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 86, "seed_mb_id": "6ac6e93d571528578389c8b4", "seed_level": 12, "outcome": "similarity-cluster", "note": "brothel euphemisms (not built)", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 87, "seed_mb_id": "6ac6e8b8571528578388e461", "seed_level": 12, "outcome": "no-adjacency", "note": "archaic science spellings (cyence/scioun)", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 88, "seed_mb_id": "6ac7cef351ff4d8f79c867be", "seed_level": 11, "outcome": "similarity-cluster", "note": "early X-ray vocab (roentgenograph/sciagraph)", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 89, "seed_mb_id": "6ac7cef351ff4d8f79c867c3", "seed_level": 11, "outcome": "built", "note": "flammation -> fire/inflammation SMB", "at": "2026-10-10T18:34:57.189124+00:00", "smb_ids": ["6aca852eae78b0212f58abf0"]}
+{"cycle": 90, "seed_mb_id": "6ac7cef351ff4d8f79c867c4", "seed_level": 11, "outcome": "built", "note": "hecatomb/nidor -> sacrifice/roast SMB", "at": "2026-10-10T18:34:57.189124+00:00", "smb_ids": ["6aca852eae78b0212f58abf1"]}
+{"cycle": 91, "seed_mb_id": "6ac6f16f57152857838afa3e", "seed_level": 10, "outcome": "similarity-cluster", "note": "plant saponins/glycosides", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 92, "seed_mb_id": "6ac6f16f57152857838afa61", "seed_level": 10, "outcome": "similarity-cluster", "note": "glycoside names", "at": "2026-10-10T18:34:57.189124+00:00"}
+{"cycle": 93, "seed_mb_id": "6ac6f16f57152857838af687", "seed_level": 10, "outcome": "similarity-cluster", "note": "cardiac glycosides/toxins", "at": "2026-10-10T18:34:57.189124+00:00"}
