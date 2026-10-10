@@ -1,9 +1,9 @@
 {
- "cycles_done": 149,
- "last_commit_cycle": 149,
- "next_commit_cycle": 159,
+ "cycles_done": 161,
+ "last_commit_cycle": 161,
+ "next_commit_cycle": 171,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch M (141-149, 9 seeds): 2/9 built (prudence<->guile via cautel; agro-fungicide<->clinical-antifungal biocide op). Thin batch - chemistry names, garden flowers, eye-dialect. Two homograph/morph seeds refused. 26 distinct threads, no fixation. Continue.",
+ "self_check": "batch N (150-161): 1/12 built (election-poll<->opinion-poll via 'poll'). Thin batch - parrots, drugs, timber, old-words. hack homograph refused (computing sense has no co-locating bridge doc). 27 distinct threads, no fixation. Yield drifting down as random L10-L13 draws hit lexical/name clusters; consider biasing the draw toward op-type docs or continue random per policy. Continue.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",

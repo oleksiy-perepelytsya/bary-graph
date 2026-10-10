@@ -144,3 +144,15 @@
 {"cycle": 147, "seed_mb_id": "6ac6f17b57152857838b3834", "seed_level": 10, "outcome": "similarity-cluster", "note": "garden flowers (pinks/primroses)", "at": "2026-10-10T19:36:35.025559+00:00"}
 {"cycle": 148, "seed_mb_id": "6ac6f17a57152857838b36fc", "seed_level": 10, "outcome": "no-adjacency", "note": "egg homograph (yoni/eggs Benny) no clean bridge", "at": "2026-10-10T19:36:35.025559+00:00"}
 {"cycle": 149, "seed_mb_id": "6ac6f17b57152857838b3cf7", "seed_level": 10, "outcome": "similarity-cluster", "note": "wildflowers (salsify/stonecrop)", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 150, "seed_mb_id": "6ac7c2f651ff4d8f79c7accd", "seed_level": 13, "outcome": "no-adjacency", "note": "hack homograph (cut/cough/computer) no bridge doc", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 151, "seed_mb_id": "6ac7c23b51ff4d8f79c6d5cf", "seed_level": 13, "outcome": "similarity-cluster", "note": "parrot/parakeet taxonomy", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 152, "seed_mb_id": "6ac7c1e051ff4d8f79c655f6", "seed_level": 13, "outcome": "no-adjacency", "note": "chemistry names (glycineamide/cymaroside)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 153, "seed_mb_id": "6ac6e92f571528578389afb3", "seed_level": 12, "outcome": "similarity-cluster", "note": "sermon vocabulary (action sermons/quadragesimalia)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 154, "seed_mb_id": "6ac6e924571528578389a499", "seed_level": 12, "outcome": "similarity-cluster", "note": "drug names (guanabenz/eburnamine)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 155, "seed_mb_id": "6ac6e94d571528578389d87e", "seed_level": 12, "outcome": "similarity-cluster", "note": "drug metabolites (norcocaine/MEGX)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 156, "seed_mb_id": "6ac6ee2257152857838aac60", "seed_level": 11, "outcome": "similarity-cluster", "note": "timber trees (sengon/yellowwood)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 157, "seed_mb_id": "6ac6ee2257152857838ab1a3", "seed_level": 11, "outcome": "no-adjacency", "note": "voting cluster (elector/votress)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 158, "seed_mb_id": "6ac6ee2c57152857838ae41a", "seed_level": 11, "outcome": "built", "note": "suffrage/pollers seed -> election/opinion-poll SMB", "at": "2026-10-10T19:47:48.987437+00:00", "smb_ids": ["6aca9653768dd23fca9c35fd"]}
+{"cycle": 159, "seed_mb_id": "6ac6f17357152857838b084a", "seed_level": 10, "outcome": "similarity-cluster", "note": "old men (senex/grand old men)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 160, "seed_mb_id": "6ac6f17a57152857838b30d7", "seed_level": 10, "outcome": "similarity-cluster", "note": "old-words (old masters/old-timers)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 161, "seed_mb_id": "6ac6f17357152857838b0634", "seed_level": 10, "outcome": "no-adjacency", "note": "organic acids (butadienoate/isobutyric)", "at": "2026-10-10T19:47:48.987437+00:00"}
