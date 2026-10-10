@@ -100,3 +100,15 @@
 {"cycle": 103, "seed_mb_id": "6ac6f17857152857838b2543", "seed_level": 10, "outcome": "similarity-cluster", "note": "pleura anatomy", "at": "2026-10-10T18:46:25.449568+00:00"}
 {"cycle": 104, "seed_mb_id": "6ac6f17657152857838b149b", "seed_level": 10, "outcome": "similarity-cluster", "note": "cardiomyopathy/myocytolysis", "at": "2026-10-10T18:46:25.449568+00:00"}
 {"cycle": 105, "seed_mb_id": "6ac6f17957152857838b2cd7", "seed_level": 10, "outcome": "similarity-cluster", "note": "heart anomalies (acardiotrophy/megalocardia)", "at": "2026-10-10T18:46:25.449568+00:00"}
+{"cycle": 106, "seed_mb_id": "6ac6e0155715285783872a08", "seed_level": 13, "outcome": "similarity-cluster", "note": "horseshoe/life ring (ring shapes)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 107, "seed_mb_id": "6ac7c2d751ff4d8f79c79060", "seed_level": 13, "outcome": "similarity-cluster", "note": "doughnut/horseshoe/life ring (toroidal shapes)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 108, "seed_mb_id": "6ac7c1bb51ff4d8f79c6034e", "seed_level": 13, "outcome": "similarity-cluster", "note": "unwary/surprise polarity (single cluster)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 109, "seed_mb_id": "6ac6e930571528578389b24b", "seed_level": 12, "outcome": "no-adjacency", "note": "mahajangasuchids/majillions morph", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 110, "seed_mb_id": "6ac6e8be571528578388f532", "seed_level": 12, "outcome": "similarity-cluster", "note": "money boxes (cashbox/banker's box)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 111, "seed_mb_id": "6ac6e8de5715285783893b4a", "seed_level": 12, "outcome": "no-adjacency", "note": "koshary/sheesham recipe-name morph", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 112, "seed_mb_id": "6ac7cef251ff4d8f79c86467", "seed_level": 11, "outcome": "similarity-cluster", "note": "insult vocabulary (amerifat/cumbrain)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 113, "seed_mb_id": "6ac7cef251ff4d8f79c86468", "seed_level": 11, "outcome": "similarity-cluster", "note": "sunstar/sunspot solar terms", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 114, "seed_mb_id": "6ac7cef251ff4d8f79c86469", "seed_level": 11, "outcome": "similarity-cluster", "note": "engine revving (rev up/soup up)", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 115, "seed_mb_id": "6ac6f17657152857838b1b89", "seed_level": 10, "outcome": "built", "note": "velocimetry seed -> speed-measurement SMB", "at": "2026-10-10T18:57:04.233573+00:00", "smb_ids": ["6aca8a6f78dff9f402e6a023"]}
+{"cycle": 116, "seed_mb_id": "6ac6f17557152857838b0ec1", "seed_level": 10, "outcome": "similarity-cluster", "note": "fibroblast/tenocyte cell family", "at": "2026-10-10T18:57:04.233573+00:00"}
+{"cycle": 117, "seed_mb_id": "6ac6f17757152857838b1de3", "seed_level": 10, "outcome": "no-adjacency", "note": "taxon names (ophiuran/ixodoid)", "at": "2026-10-10T18:57:04.233573+00:00"}

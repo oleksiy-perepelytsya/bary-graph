@@ -1,9 +1,9 @@
 {
- "cycles_done": 105,
- "last_commit_cycle": 105,
- "next_commit_cycle": 115,
+ "cycles_done": 117,
+ "last_commit_cycle": 117,
+ "next_commit_cycle": 127,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch I (94-105): 1/12 built (merging-agents<->mixing-machines). 19 distinct threads, no fixation. Batch lean but honest - several seeds had near-misses (lid idioms, de- op, ammo/mollusk shell) that lacked clean bridge docs; refused forced builds. Continue.",
+ "self_check": "batch J (106-117): 1/12 built (speed-measurement: speedometer/trochometer <-> Doppler velocimetry/DOVAP via tacho-/dromo-). 20 distinct threads, no fixation. Seed space continues to be dominated by morphology/taxonomy clusters; abstract-operation seeds still ~1/batch. Continue.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",
