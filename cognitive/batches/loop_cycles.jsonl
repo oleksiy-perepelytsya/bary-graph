@@ -156,3 +156,15 @@
 {"cycle": 159, "seed_mb_id": "6ac6f17357152857838b084a", "seed_level": 10, "outcome": "similarity-cluster", "note": "old men (senex/grand old men)", "at": "2026-10-10T19:47:48.987437+00:00"}
 {"cycle": 160, "seed_mb_id": "6ac6f17a57152857838b30d7", "seed_level": 10, "outcome": "similarity-cluster", "note": "old-words (old masters/old-timers)", "at": "2026-10-10T19:47:48.987437+00:00"}
 {"cycle": 161, "seed_mb_id": "6ac6f17357152857838b0634", "seed_level": 10, "outcome": "no-adjacency", "note": "organic acids (butadienoate/isobutyric)", "at": "2026-10-10T19:47:48.987437+00:00"}
+{"cycle": 162, "seed_mb_id": "6ac6e0625715285783877231", "seed_level": 13, "outcome": "no-adjacency", "note": "abbreviations (bkg./denom) + backcalculate", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 163, "seed_mb_id": "6ac6e0625715285783877243", "seed_level": 13, "outcome": "similarity-cluster", "note": "CS patterns (copy-on-write/defensive copy)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 164, "seed_mb_id": "6ac6e0625715285783877250", "seed_level": 13, "outcome": "no-adjacency", "note": "salvage law (salvor/salvee) - no sea<->scrap bridge doc", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 165, "seed_mb_id": "6ac6e9a957152857838a3ba6", "seed_level": 12, "outcome": "no-adjacency", "note": "exodus/abmigrate - human<->bird migration lacks pivot doc", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 166, "seed_mb_id": "6ac6e9a957152857838a3d0f", "seed_level": 12, "outcome": "no-adjacency", "note": "un- negation pairs (coacted/consoled)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 167, "seed_mb_id": "6ac6e98f57152857838a1d86", "seed_level": 12, "outcome": "similarity-cluster", "note": "custom/habit idioms (to the manner born)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 168, "seed_mb_id": "6ac7cf1151ff4d8f79c8f26e", "seed_level": 11, "outcome": "similarity-cluster", "note": "analog media degradation (print-through/laser rot)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 169, "seed_mb_id": "6ac7cf1151ff4d8f79c8f270", "seed_level": 11, "outcome": "no-adjacency", "note": "neuroanatomical connections (striatopallidal)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 170, "seed_mb_id": "6ac7cf1151ff4d8f79c8f273", "seed_level": 11, "outcome": "no-adjacency", "note": "h- name cluster (Hareidim/hareems)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 171, "seed_mb_id": "6ac6f17a57152857838b351e", "seed_level": 10, "outcome": "no-adjacency", "note": "m- words (Mills' Mess/milksopish)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 172, "seed_mb_id": "6ac6f17957152857838b2a98", "seed_level": 10, "outcome": "similarity-cluster", "note": "-ite rocks (tektites/taconites)", "at": "2026-10-10T20:04:27.253739+00:00"}
+{"cycle": 173, "seed_mb_id": "6ac6f17b57152857838b39d4", "seed_level": 10, "outcome": "similarity-cluster", "note": "containers (Bambi bucket/baby cage)", "at": "2026-10-10T20:04:27.253739+00:00"}

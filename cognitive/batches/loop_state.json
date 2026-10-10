@@ -1,9 +1,9 @@
 {
- "cycles_done": 161,
- "last_commit_cycle": 161,
- "next_commit_cycle": 171,
+ "cycles_done": 173,
+ "last_commit_cycle": 173,
+ "next_commit_cycle": 183,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch N (150-161): 1/12 built (election-poll<->opinion-poll via 'poll'). Thin batch - parrots, drugs, timber, old-words. hack homograph refused (computing sense has no co-locating bridge doc). 27 distinct threads, no fixation. Yield drifting down as random L10-L13 draws hit lexical/name clusters; consider biasing the draw toward op-type docs or continue random per policy. Continue.",
+ "self_check": "batch O (162-173): 0/12 built. No clean bridge docs for salvage (sea vs scrap) or migration (human vs bird); the rest are name/lexical clusters. Logged 0 rather than manufacture - consistent with the batch-I discipline. Yield is drifting down; the random L10-L13 draw increasingly hits morphological/name/name-science clusters. Will keep drawing (per policy) but flag: if two more batches yield <=1, consider a targeted 'abstract-operation' seed draw to keep the loop productive.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",
