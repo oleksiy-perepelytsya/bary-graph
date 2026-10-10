@@ -84,3 +84,14 @@ stage (`scripts/s07_orphan_reentry.py`, `--phase pair|absorb|both`); the old
   repeated sense texts). Key difference vs main env: **embed model/dim differ**
   (768 vs 4096).
 - **`.env.example`** — template; never used at runtime.
+
+# Native cognitive loop — continuity
+
+- **Schema:** the old `cog` schema (`cog_cycle.py` / `cog_mb_loop` era) is
+  **legacy**; do not treat it as the reference. The authoritative schema is what
+  the native loop uses now: structural SMBs (`source='structural'`, explicit
+  `bridge_id`, author `big-pickle@opencode-0.5`, `smb_builds.jsonl`). See
+  `BaryGraph_Architecture_v1_0.md`.
+- **Standing context survives compaction** in `cognitive/COMPACTION_NOTES.md`
+  (corrected Requirements/Blocked, sampler policy, Jev plan, candidate
+  retention). Read it first when resuming the loop.
