@@ -1,17 +1,17 @@
 {
- "cycles_done": 196,
- "last_commit_cycle": 196,
- "next_commit_cycle": 206,
+ "cycles_done": 212,
+ "last_commit_cycle": 212,
+ "next_commit_cycle": 222,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch Q (185-196): 1/12 built (vitality<->essentiality via 'vital'). Batch dominated by chemical/compound name clusters (drugs, cardiac glycosides) and sausages. 30 distinct threads, no fixation. Per user guidance the automated sampler filter is dropped: the loop now takes a plain random draw and skips unproductive retrievals by judgment (re-query), instead of baking filter rules in.",
+ "self_check": "batch R (197-212, 16-seed PLAIN draw, no automated filter): 1/16 built (sphenoid wedge: anatomy bone <-> crystallography, cos 0.6642). Composition: 8/16 proper-noun/surname/place-name clusters, 7/16 single word-family or idiom clusters, 1 build. Confirms the plain draw returns a lot of name clusters; per user guidance these are skipped by judgment and re-queried rather than filtered in code.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
   "sampler: plain random draw (no automated cluster filter); skip-and-requery by judgment.",
   "candidates (smb_candidates.jsonl) are retained and should be re-consulted on new searches for near-miss catches.",
-  "commit cadence: every ~10 cycles (13,23,33,45,57,...)",
+  "Jev oracle tool: cognitive/not_sure.py (decision model via /v1/systemone). Stand-in model = nimble (Bespoke Labs 9B decision model) on ollama :11435; nimble needs ollama>=0.35 (embedding server on :11434 stays on old image).",
+  "commit cadence: every ~10-16 cycles (one batch per commit).",
   "self-check at each commit: continue thread vs new random seed",
-  "planned: Jev model fast-check + candidate labeling (rule set) — not yet wired (no endpoint/creds)",
   "2 high-cosine co-location SMBs flagged for recheck (conversation 0.92, inertness 0.907)"
  ]
 }

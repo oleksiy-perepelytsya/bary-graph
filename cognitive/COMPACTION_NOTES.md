@@ -53,13 +53,19 @@ resuming the loop.
   retained and should be re-consulted on new searches — e.g. noticing that a
   previously near-miss candidate now has its missing bridge ("aha" catch).
 
-## Planned: Jev fast-check + candidate labeling (NOT yet wired)
+## Jev oracle — `cognitive/not_sure.py` (tool exists; model tag pending)
 
-- Integrate a call to the **Jev model** (`jev-latest`; hosted
-  `api.typesafe.ai/v1/systemone` or self-hosted) at the seed/candidate stage to:
-  - fast-check a retrieval/seed, and
-  - label SMB candidates against a specific **rule set**, giving a second
-    estimation used for candidate review, inclusion into the schema, or
-    revision with further iterations.
-- No endpoint/credentials present in env or `opencode.json` yet. Wire it when
-  the endpoint + rule set are supplied.
+- Tool: `cognitive/not_sure.py`. Call it when a retrieval/judgment is uncertain.
+  Free parameters by design: pass `--data` (text/file/stdin), `--ask`, optional
+  `--options`. Fixed output envelope only:
+  `{choice, scores:{opt:0..1}, confidence, reasons}`. Override `--system` to
+  impose a stricter contract (e.g. rule-set labeling of SMB candidates) without
+  editing the script.
+- Model: `--model`, else `$JEV_MODEL`, else `jev:latest`. Host: `$OLLAMA_HOST`
+  or `http://127.0.0.1:11434`.
+- **Pending:** no Jev model is deployed on ollama yet (only `qwen3-embedding:8b`
+  and `:0.6b`). Plumbing verified (clean HTTP 404 path). Awaiting the ollama
+  model tag to pull/deploy.
+- Intended loop use: fast-check a seed/retrieval, and label SMB candidates
+  against a rule set as a second estimation for candidate review / schema
+  inclusion / revision iterations. Never a coercion — another estimation.
