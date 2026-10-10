@@ -135,3 +135,12 @@
 {"cycle": 138, "seed_mb_id": "6ac6f17757152857838b1ef0", "seed_level": 10, "outcome": "similarity-cluster", "note": "flight/aviation (swing-by/air bridge)", "at": "2026-10-10T19:27:34.671413+00:00"}
 {"cycle": 139, "seed_mb_id": "6ac6f17557152857838b1383", "seed_level": 10, "outcome": "no-adjacency", "note": "vulgar slang (frig/plonker)", "at": "2026-10-10T19:27:34.671413+00:00"}
 {"cycle": 140, "seed_mb_id": "6ac6f17a57152857838b313d", "seed_level": 10, "outcome": "no-adjacency", "note": "oil/ester names (mirbane/alantol)", "at": "2026-10-10T19:27:34.671413+00:00"}
+{"cycle": 141, "seed_mb_id": "6ac6e9e157152857838a721b", "seed_level": 12, "outcome": "no-adjacency", "note": "enviers/senvies envy morph", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 142, "seed_mb_id": "6ac6e8fc57152857838970a3", "seed_level": 12, "outcome": "built", "note": "cautel seed -> prudence/guile SMB", "at": "2026-10-10T19:36:35.025559+00:00", "smb_ids": ["6aca93b1932b6cbea1059650"]}
+{"cycle": 143, "seed_mb_id": "6ac7c58c51ff4d8f79c804ed", "seed_level": 12, "outcome": "similarity-cluster", "note": "info- compounds (infobahn/infocast)", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 144, "seed_mb_id": "6ac74c3bd5a0900502ad5303", "seed_level": 11, "outcome": "built", "note": "fungicide seed -> fungicide/antifungal SMB", "at": "2026-10-10T19:36:35.025559+00:00", "smb_ids": ["6aca93b1932b6cbea1059651"]}
+{"cycle": 145, "seed_mb_id": "6ac74c3bd5a0900502ad5868", "seed_level": 11, "outcome": "similarity-cluster", "note": "fungicide chemistry (dinocap/polyoxorim)", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 146, "seed_mb_id": "6ac74c3bd5a0900502ad5841", "seed_level": 11, "outcome": "no-adjacency", "note": "eye-dialect respellings (readin'/libary/whuzzit)", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 147, "seed_mb_id": "6ac6f17b57152857838b3834", "seed_level": 10, "outcome": "similarity-cluster", "note": "garden flowers (pinks/primroses)", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 148, "seed_mb_id": "6ac6f17a57152857838b36fc", "seed_level": 10, "outcome": "no-adjacency", "note": "egg homograph (yoni/eggs Benny) no clean bridge", "at": "2026-10-10T19:36:35.025559+00:00"}
+{"cycle": 149, "seed_mb_id": "6ac6f17b57152857838b3cf7", "seed_level": 10, "outcome": "similarity-cluster", "note": "wildflowers (salsify/stonecrop)", "at": "2026-10-10T19:36:35.025559+00:00"}
