@@ -1,9 +1,9 @@
 {
- "cycles_done": 69,
- "last_commit_cycle": 69,
- "next_commit_cycle": 79,
+ "cycles_done": 81,
+ "last_commit_cycle": 81,
+ "next_commit_cycle": 91,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch F (58-69): 2/12 built, both cross-domain (omen/augury<->nowcast/hindcast; memory<->residual via remanent). Threads now: taxis, heraldry, re-operator, movement, disturbance, trial, conversation, inertness, crack-up, prophecy/forecast, memory/remnant. Still no thread >3. Yield ~15% with L10-L13 filtered random draw; continue.",
+ "self_check": "batch G (70-81): 2/12 built (purge medicine/politics; telephony/electronic music). Threads remain diverse (13 distinct), none >3 SMBs. Yield stable ~15-20% with filtered L10-L13 draw.",
  "notes": [
   "commit cadence: every ~10 cycles (13,23,33,45,57)",
   "self-check at each commit: continue thread vs new random seed",

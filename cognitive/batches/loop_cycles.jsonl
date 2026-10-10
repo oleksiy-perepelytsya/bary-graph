@@ -64,3 +64,15 @@
 {"cycle": 67, "seed_mb_id": "6ac6f17557152857838b11fd", "seed_level": 10, "outcome": "similarity-cluster", "note": "cell membrane/periplasm", "at": "2026-10-10T18:14:51.876032+00:00"}
 {"cycle": 68, "seed_mb_id": "6ac6f17657152857838b17f7", "seed_level": 10, "outcome": "similarity-cluster", "note": "familial/defamilialization (not cross-domain)", "at": "2026-10-10T18:14:51.876032+00:00"}
 {"cycle": 69, "seed_mb_id": "6ac6f17957152857838b2ae2", "seed_level": 10, "outcome": "similarity-cluster", "note": "hockey variants", "at": "2026-10-10T18:14:51.876032+00:00"}
+{"cycle": 70, "seed_mb_id": "6ac6df1e5715285783865e63", "seed_level": 13, "outcome": "built", "note": "comms-tech seed -> telephony/electronic-music SMB", "at": "2026-10-10T18:24:39.933911+00:00", "smb_ids": ["6aca82ca8920c5efe4b5c0f3"]}
+{"cycle": 71, "seed_mb_id": "6ac6de48571528578385af69", "seed_level": 13, "outcome": "no-adjacency", "note": "boo-hoos onomatopoeia morphology", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 72, "seed_mb_id": "6ac6dd48571528578384f282", "seed_level": 13, "outcome": "similarity-cluster", "note": "red-* woodpecker species", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 73, "seed_mb_id": "6ac6e971571528578389ff29", "seed_level": 12, "outcome": "similarity-cluster", "note": "destroying angel/Apollyon doubling (co-location, not built)", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 74, "seed_mb_id": "6ac7c59b51ff4d8f79c8391a", "seed_level": 12, "outcome": "similarity-cluster", "note": "embryology germ layers", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 75, "seed_mb_id": "6ac6e90e5715285783898d7e", "seed_level": 12, "outcome": "built", "note": "purge seed -> purgative/political-purge SMB", "at": "2026-10-10T18:24:39.933911+00:00", "smb_ids": ["6aca82ca8920c5efe4b5c0f2"]}
+{"cycle": 76, "seed_mb_id": "6ac7cef251ff4d8f79c8656d", "seed_level": 11, "outcome": "similarity-cluster", "note": "whaling gear (harpoon/toggle iron)", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 77, "seed_mb_id": "6ac7cef251ff4d8f79c8656e", "seed_level": 11, "outcome": "similarity-cluster", "note": "box-bed/cabin furniture", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 78, "seed_mb_id": "6ac7cef251ff4d8f79c8656f", "seed_level": 11, "outcome": "similarity-cluster", "note": "surface coatings (clearcoat/suffusion)", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 79, "seed_mb_id": "6ac6f17257152857838b02fe", "seed_level": 10, "outcome": "similarity-cluster", "note": "caterpillar pests (cabbage worms/weevils)", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 80, "seed_mb_id": "6ac6f17557152857838b1009", "seed_level": 10, "outcome": "similarity-cluster", "note": "earthworms/worms", "at": "2026-10-10T18:24:39.933911+00:00"}
+{"cycle": 81, "seed_mb_id": "6ac6f17457152857838b0aa2", "seed_level": 10, "outcome": "no-adjacency", "note": "sn- morphology (snaffles/snuffles)", "at": "2026-10-10T18:24:39.933911+00:00"}
