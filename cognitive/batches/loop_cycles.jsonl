@@ -335,3 +335,13 @@
 {"cycle": 338, "seed_mb_id": "6ac7c27951ff4d8f79c725b2", "seed_level": 13, "outcome": "similarity-cluster", "note": "dickass/hee-haw/jack donkey/pace - jack donkey", "at": "2026-10-11T07:07:15.513276+00:00"}
 {"cycle": 339, "seed_mb_id": "6ac6e0fa571528578387f031", "seed_level": 13, "outcome": "similarity-cluster", "note": "spaid/spud/turf spade - spud tool", "at": "2026-10-11T07:07:15.513276+00:00"}
 {"cycle": 340, "seed_mb_id": "6ac6e1cc571528578388b429", "seed_level": 13, "outcome": "similarity-cluster", "note": "Spanish potato/batata/kumera - potato/spud veg", "at": "2026-10-11T07:07:15.513276+00:00"}
+{"cycle": 341, "seed_mb_id": "6ac7e87aba547869367ba94c", "seed_level": 13, "outcome": "built", "note": "spud SMB 6acb36201826ebcca5f36aa3: potato<->spud-tool pivot (child_cosine 0.5584, q 0.6978)", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 342, "seed_mb_id": "6ac6e0fa571528578387f031", "seed_level": 13, "outcome": "pivot-half", "note": "spaid/spud/turf spade - the spud digging tool half", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 343, "seed_mb_id": "6ac6e94d571528578389d85c", "seed_level": 12, "outcome": "bridge", "note": "apple scoop/bark spud/scoop/spud - the L12 pivot-word bridge", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 344, "seed_mb_id": "6ac6ddd557152857838560e8", "seed_level": 13, "outcome": "similarity-cluster", "note": "Irish fruit/Rusticoat - potato cultivars", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 345, "seed_mb_id": "6ac6df065715285783864e9d", "seed_level": 13, "outcome": "similarity-cluster", "note": "Dremel/pickler/pickwork - tool neighborhood", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 346, "seed_mb_id": "6ac6e0545715285783875f67", "seed_level": 13, "outcome": "similarity-cluster", "note": "mandolin/salad shooter/wedger - kitchen/tool items", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 347, "seed_mb_id": "6ac7c29a51ff4d8f79c75135", "seed_level": 13, "outcome": "candidate", "note": "demijohn/flask/pony glass - the drink 'pony' sense", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 348, "seed_mb_id": "6ac6dd20571528578384e138", "seed_level": 13, "outcome": "similarity-cluster", "note": "glass shots/shot glasses - pony glass/drink", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 349, "seed_mb_id": "6ac7e8c8ba547869367c14c3", "seed_level": 13, "outcome": "candidate", "note": "he-ass/jackass/jennet/she-ass - the 'jack' animal side", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 350, "seed_mb_id": "6ac7c1ff51ff4d8f79c69180", "seed_level": 13, "outcome": "similarity-cluster", "note": "ketch/tanker/yawl - naval terms", "at": "2026-10-11T07:09:58.664947+00:00"}
