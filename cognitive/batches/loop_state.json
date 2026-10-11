@@ -1,9 +1,9 @@
 {
- "cycles_done": 320,
- "last_commit_cycle": 320,
- "next_commit_cycle": 330,
+ "cycles_done": 330,
+ "last_commit_cycle": 330,
+ "next_commit_cycle": 340,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AA (309-320): 2 builds (ram, child_cosine 0.5518; goose, 0.4927). Seven builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571, gin 0.555, ram 0.552, goose 0.493). The 'machine word = another life' vein keeps paying: ram (male sheep / hydraulic ram), goose (waterfowl / tailor's smoothing iron). dog has a clean pivot (animal|latch 0.563) but the machine cluster does not carry the word 'dog', so it is held (with camel) rather than coerced. goose's bridge leans bird-side (cosA 0.82/cosB 0.61) - the weakest bridge built, noted. Next: mine the sibling rigging/machinery words (jigger, boom, luff, polyspast, bull wheel, sand reel, monkey, donkey engine) and the 'tool = animal' set (horse, mule, jack, dolly).",
+ "self_check": "batch AB (321-330): 1 build (dog, child_cosine 0.5626, q 0.2756). Eight builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571, gin 0.555, ram 0.552, goose 0.493, dog 0.563). dog built after finding the machine-side pivot-word bridge 'dogbone' (the latch cluster does not carry 'dog'). monkey (cos 0.69) and the textile 'mule' (cos 0.549) lack suitable pivot-word bridges; jigger falls into an existing machinery cluster - held. Next: continue to mine rigging/tool words (pony/glass vs horse; spud; jack; cat/dog machine parts) and only build when there is a literal pivot-word bridge.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
