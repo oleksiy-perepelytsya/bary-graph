@@ -1,9 +1,9 @@
 {
- "cycles_done": 472,
- "last_commit_cycle": 472,
- "next_commit_cycle": 475,
+ "cycles_done": 484,
+ "last_commit_cycle": 484,
+ "next_commit_cycle": 495,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AI (461-472): 12 draws, 0 builds (honest HOLD). Seed texture blobby again (Korean surnames, de-/re-/peri- forms, idioms). word_pivot surfaced only colour-named-after-object pairs (coral 0.38, vermilion 0.35) whose 'lives' are naming derivations; gate-checked, child_cosine 0.52/0.62 is above the accepted band (lawn 0.42, carbuncle 0.45, algebra 0.37) -> not built. yestermorrow is a nonce blend. Calibration consistent; nothing coerced.",
+ "self_check": "batch AJ (473-484): 12 draws, 1 build. seed 473 yielded 'spar' - a homonymy with four unrelated lives (mineral/pole/fight/friend); mineral<->combat built (rubric 4/5/5/4, child_cosine 0.3914). Other spar axes held (wood<->mineral 0.65). Rest of the batch was morphology/taxa chemistry. Near-miss: directly (immediacy/honesty, close senses). Calibration holds.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
