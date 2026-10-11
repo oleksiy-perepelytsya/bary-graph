@@ -1,9 +1,9 @@
 {
- "cycles_done": 448,
- "last_commit_cycle": 448,
- "next_commit_cycle": 455,
+ "cycles_done": 460,
+ "last_commit_cycle": 460,
+ "next_commit_cycle": 465,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AG (437-448): 12 draws, 1 build. Same seed texture as AF7 (onomastic/inflectional blobs), but word_pivot on each blade anchor surfaced one clean two-lives: carbuncle (gemstone<->abscess, min_inter 0.269) -> built L13 SMB (rubric 3/5/5/5, gate pass, child_cosine 0.4537). Near-misses filed: pop (42 senses, 0.127 noisy), quorum (law->computing mechanism loan), afterclap ('the clap' pun), syncopated (one-root derivation). Calibration holds: real two-lives land low vs lawn 0.205 / crane 0.235 / tanker 0.239. No fixation; nothing coerced.",
+ "self_check": "batch AH (449-460): 12 draws, 2 builds. Seed texture still blobby (acronyms, morphology, mineral/given names), but seed 456 alone yielded algebra (al-jabr math<->orthopedics, rubric 4/5/5/5) and ring (circle<->sound homonymy, 3/5/5/5) - both gate-passed and built. Near-misses: image (likeness/disk-copy), hearing (perception->law), drum (instrument->promote). Calibration holds (0.373/0.494 within the accepted band). No coercion.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
