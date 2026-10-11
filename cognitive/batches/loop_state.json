@@ -1,9 +1,9 @@
 {
- "cycles_done": 435,
- "last_commit_cycle": 435,
- "next_commit_cycle": 445,
- "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF7 (424-435): 12 draws, 0 builds. First batch using the word-anchored scan (cognitive/word_pivot.py) per user direction: for each fresh seed (20261013) take its leaf-words and enumerate each word's own L15 senses, ranking by the most distant substantive sense pair (the lawn shape: L15 sense-lives -> L14 word-node bridge). Seed leaf-words were again same-domain/morphological (shock/stun; Greek surnames; protest slogans; hormone names; cis-centric variants; bespatter forms; tank compounds; blasto- family; boy/girl bands). Of 46 distinct words only 4 had >=2 substantive senses and all were literal-vs-figurative of the SAME word (fall out 0.227, stun 0.287 general/billiards, shocked 0.422, declare war 0.475) - no cross-domain two-lives -> 0 builds, correct HOLD. Word-scan calibration: known builds land low (lawn 0.205 grass/linen, crane 0.235 bird/machine, tanker 0.239 crew/refuel, part 0.16, grommet 0.19), so the tool does rank real two-lives; the batch simply had none. Self-check: no fixation (12 unrelated domains); the seed draw is the weak link (random L12/L13 edges are homogeneous), not the word scan. Next: source candidate words from real common-word anchors (candidates/near-misses) rather than random seed texture, or move to multi-hop chains as the standing direction.",
+ "cycles_done": 448,
+ "last_commit_cycle": 448,
+ "next_commit_cycle": 455,
+ "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
+ "self_check": "batch AG (437-448): 12 draws, 1 build. Same seed texture as AF7 (onomastic/inflectional blobs), but word_pivot on each blade anchor surfaced one clean two-lives: carbuncle (gemstone<->abscess, min_inter 0.269) -> built L13 SMB (rubric 3/5/5/5, gate pass, child_cosine 0.4537). Near-misses filed: pop (42 senses, 0.127 noisy), quorum (law->computing mechanism loan), afterclap ('the clap' pun), syncopated (one-root derivation). Calibration holds: real two-lives land low vs lawn 0.205 / crane 0.235 / tanker 0.239. No fixation; nothing coerced.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
