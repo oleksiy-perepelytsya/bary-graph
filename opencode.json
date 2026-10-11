@@ -38,8 +38,8 @@
   },
   "mcp": {
     "barygraph": {
-      "type": "remote",
-      "url": "https://mild-infrastructure-should-batch.trycloudflare.com/mcp",
+      "type": "local",
+      "command": ["python3", "-m", "scripts.mcp_server"],
       "enabled": true
     },
     "cog": {
