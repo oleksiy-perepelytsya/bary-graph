@@ -114,8 +114,13 @@ def main():
         save_state(st)
 
         msg = f"loop: batch {batch_id} ({start_cycle}-{st['cycles_done']}) — builds={builds_in_batch}"
-        git_commit_push(msg)
-        print(f"[{utcnow()}] DONE {msg}", flush=True)
+        # commit only, no push
+        try:
+            run([GIT, "add", "cognitive/batches/loop_cycles.jsonl", "cognitive/batches/instigations.jsonl", "cognitive/batches/smb_builds.jsonl", "cognitive/batches/loop_state.json", "opencode.json"])
+            run([GIT, "commit", "-q", "-m", msg])
+        except Exception as e:
+            print(f"commit err {e}", flush=True)
+        print(f"[{utcnow()}] DONE {msg} (no push)", flush=True)
         time.sleep(5)
 
 if __name__ == "__main__":
