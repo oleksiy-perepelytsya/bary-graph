@@ -134,3 +134,15 @@ resuming the loop.
 - **Rules for loop use:** always feed a *fixed, neutral* state template (never
   leading) so runs are comparable; treat "no" as a prompt to re-examine, not a
   denial; never let it override value judgment (no coercion).
+- **Full-history read (Oct-11; 55 structural SMBs — random 25 + all 55):** with
+  the fixed term-list template it said **yes to 1/55 (2%)**, mean p(yes) 0.32,
+  corr(child_cosine, p(yes)) ≈ 0. So it does **not** single out the recent
+  animal↔machine builds — it (near-constantly) says no to essentially everything,
+  the earlier "sophisticated" builds included (possession-law-demonology,
+  laughter-fracture, renormalization, omen-augury, …). p(yes) barely moves with
+  content ⇒ **tev1:0.8b is not yet a usable discriminator at this framing**, and
+  the earlier "no to 10/11" was *not* evidence about those specific SMBs.
+  Next: same sample under a *prose* framing and/or a forced-choice/comparative
+  question, to separate template effect from model capability; then consider
+  `nimble`. (Note: `smb_builds.jsonl` is heterogeneous — 55 structural entries +
+  6 legacy DOI/proposal records; filter on `name`+`cm1_terms`.)

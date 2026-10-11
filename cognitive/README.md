@@ -125,6 +125,25 @@ python3 cognitive/find_bridge.py PIVOT SEED_ID [SEED_ID ...] \
 # prints MATCH <doc_id> [leaf words...]
 ```
 
+### `oracle_read.py` — formalized oracle reads over the manifest
+
+Runs `not_sure.py` over the SMB manifest with a **fixed** template + question (so
+runs are comparable) and appends every read to a durable ledger
+`cognitive/batches/oracle_reads.jsonl`.
+
+```bash
+python3 cognitive/oracle_read.py --all --template both      # all 55, both framings
+python3 cognitive/oracle_read.py --sample 25 --seed 20261011 --template term
+```
+
+Records: `at, model, template, question, criteria, name, smb_id, author,
+child_cosine, choice, p_yes, probabilities, confidence`.
+
+> **Result (Oct-11, full 55):** term-list framing → **yes 1/55 (2%)**, mean
+> p(yes) 0.32; prose framing on the same 25 → **yes 7/25 (28%)**. The oracle is
+> **framing-dominated and near-constant**, so absolute yes/no is meaningless and
+> it must never gate admission. See `COMPACTION_NOTES.md`.
+
 ### `scripts/mcp_server_ctl.sh` — serve/restart the MCP (repo root)
 
 The streamable-http MCP server sits behind a cloudflared quick tunnel. The tunnel
@@ -150,6 +169,7 @@ an `OLLAMA_URL` change requires a restart.
 | `loop_cycles.jsonl` | 357 | per-cycle ledger (seed + outcome) |
 | `loop_state.json` | — | cycle counter, commit watermark, self-check |
 | `smb_candidates.jsonl` | 366 | candidate notes (rationale + probes), re-consult on search |
+| `oracle_reads.jsonl` | — | oracle reads over the manifest (append-only; see `oracle_read.py`) |
 | `smb_proposals.jsonl` | 23 | DOI-anchored proposals (older pipeline) |
 | `smb_validation.jsonl` | 9 | proposal grounding checks |
 | `terms_batch.jsonl` | 21 | paper → terms extraction |
