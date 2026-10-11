@@ -345,3 +345,13 @@
 {"cycle": 348, "seed_mb_id": "6ac6dd20571528578384e138", "seed_level": 13, "outcome": "similarity-cluster", "note": "glass shots/shot glasses - pony glass/drink", "at": "2026-10-11T07:09:58.664947+00:00"}
 {"cycle": 349, "seed_mb_id": "6ac7e8c8ba547869367c14c3", "seed_level": 13, "outcome": "candidate", "note": "he-ass/jackass/jennet/she-ass - the 'jack' animal side", "at": "2026-10-11T07:09:58.664947+00:00"}
 {"cycle": 350, "seed_mb_id": "6ac7c1ff51ff4d8f79c69180", "seed_level": 13, "outcome": "similarity-cluster", "note": "ketch/tanker/yawl - naval terms", "at": "2026-10-11T07:09:58.664947+00:00"}
+{"cycle": 351, "seed_mb_id": "6ac7e85cba547869367b3f81", "seed_level": 13, "outcome": "built", "note": "cat SMB 6acb4180963165b818f7a8b4: feline<->nautical-catfall pivot (child_cosine 0.5563, q 0.2501)", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 352, "seed_mb_id": "6ac6dfe457152857838709c9", "seed_level": 13, "outcome": "pivot-half", "note": "cat-block/controller/tug - catfall neighborhood (machine half)", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 353, "seed_mb_id": "6ac6e8dc5715285783893826", "seed_level": 12, "outcome": "bridge", "note": "cat o' nine tails/cat's chance in hell/cat-man/kitkat - L12 pivot-word bridge (whip/tool sense of 'cat')", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 354, "seed_mb_id": "6ac6df5b571528578386946f", "seed_level": 13, "outcome": "similarity-cluster", "note": "catlike/cattish/catty - feline descriptors", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 355, "seed_mb_id": "6ac7c1bb51ff4d8f79c604cb", "seed_level": 13, "outcome": "similarity-cluster", "note": "cat/catfall - the more literal 'cat/catfall' cluster", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 356, "seed_mb_id": "6ac6e12b5715285783882290", "seed_level": 13, "outcome": "similarity-cluster", "note": "cathead/catstick/toodlum buck - rigging terms", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 357, "seed_mb_id": "6ac6dd20571528578384e138", "seed_level": 13, "outcome": "candidate", "note": "glass shots/shot glasses - pony/drink sense", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 358, "seed_mb_id": "6ac7c29a51ff4d8f79c75135", "seed_level": 13, "outcome": "similarity-cluster", "note": "demijohn/flask/pony glass", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 359, "seed_mb_id": "6ac6dfad571528578386e251", "seed_level": 13, "outcome": "similarity-cluster", "note": "chockablock/monkey wheel/swig - rigging neighborhood", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 360, "seed_mb_id": "6ac6e08a5715285783879359", "seed_level": 13, "outcome": "similarity-cluster", "note": "c@/catvertising/pspsps - feline internet terms", "at": "2026-10-11T07:59:07.987132+00:00"}
