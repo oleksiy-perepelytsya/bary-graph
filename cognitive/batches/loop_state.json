@@ -1,9 +1,9 @@
 {
- "cycles_done": 616,
- "last_commit_cycle": 616,
- "next_commit_cycle": 617,
+ "cycles_done": 628,
+ "last_commit_cycle": 628,
+ "next_commit_cycle": 629,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AU (605-616): 12 draws, 1 build (thin). orthography built (correct spelling <-> orthographic projection; both orthos+graphein, 0.5026 at the accepted edge). Rest was places/surnames/idiom-inflections. Band rule now explicit: build genuine two-lives <=~0.51; hold naming derivations and >~0.51 (colostrum 0.5158 held).",
+ "self_check": "batch AV (617-628): 12 draws, 2 builds - chair is a spectacular radiating cluster (furniture, professorship, electric chair, sedan chair, railway chair, cyclohexane conformer). Built furniture<->professorship (0.3999) and furniture<->cyclohexane-chair-conformer (0.4765). Filed a software module-coupling taxonomy. Rest was forms/names.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
