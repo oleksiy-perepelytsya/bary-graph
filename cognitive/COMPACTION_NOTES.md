@@ -85,9 +85,17 @@ resuming the loop.
   call (the ollama runner + mongot dominate). So: (a) never embed per-word in a
   loop — batch or avoid; (b) everything that uses a STORED vector
   (`$vectorSearch` with an existing doc vector, DB reads, `cm_leaf_words`) is
-  fast (~0.1-0.3 s) and is the right toolkit for discovery; (c) the tev/decision
-  model lives on a separate ollama at :11435 (`/tmp/opencode/ollama_040`,
-  models in `/tmp/opencode/jev_models`), so it does not disturb :11434.
+  fast (~0.1-0.3 s) and is the right toolkit for discovery; (c) **all embeddings
+  now come from the new ollama at :11435** (`/tmp/opencode/ollama_040`, models
+  in `/tmp/opencode/jev_models`). Both `qwen3-embedding:0.6b` (1024) and `:8b`
+  (4096) were copied out of the old container and verified (cos ≈ 0.9997 vs the
+  old vectors — same model, tiny version/CPU numerics). `.env` `OLLAMA_URL` is
+  now `http://localhost:11435`; the old `barygraph-ollama` container was
+  **stopped** (freed ~6.5 GiB; host avail 3.4→9.8 GiB). The running barygraph
+  MCP server loads `.env` once at startup, so it must be **restarted** to use
+  :11435. `.env.build-all` is unchanged (`OLLAMA_URL=http://ollama:11434` is part
+  of a docker-network bundle that also uses `mongodb:` service names) — the
+  all-build is not running; revisit before the next all-build stage.
 
 ## Jev oracle — `cognitive/not_sure.py`
 
@@ -95,20 +103,34 @@ resuming the loop.
   It speaks the **Jev API** (`POST /v1/systemone`): pass `--state` (the text to
   judge) and either a quick `--ask`/`--options` or a full `--questions-json`
   with typed `choice` questions + `criteria`; it returns `{choice, probabilities}`
-  per question. Override `--system` to impose a stricter contract (e.g. rule-set
-  labeling of SMB candidates) without editing the script.
+  per question. Importable for loop use: `from cognitive.not_sure import judge,
+  ask`. Extras: `--check` (verify the model is served), `--short` (one line per
+  question), `--retries`.
 - Model: `--model`, else `$JEV_MODEL`, else `tev1:0.8b` (Together AI's tiny
   decision model — the chosen Jev stand-in, small enough for this link).
   `nimble` (Bespoke Labs 9B) is a drop-in when bandwidth allows.
   Host: `$JEV_HOST` or `http://127.0.0.1:11435`.
-- **Blocker / status:** decision models need ollama **≥0.35**; the embedding
-  server on `:11434` is the old container (0.21.0) and is left untouched. A
-  *separate* newer ollama runs on `:11435` (install `/tmp/opencode/ollama_040`,
-  models `/tmp/opencode/jev_models`). Deployment in progress: egress is
-  ~150 KB/s and flaky, so the 1.44 GB ollama binary is a slow **resumable**
-  background download (`/tmp/opencode/ollama.tar.zst`); a watcher
-  (`/tmp/opencode/setup_jev2.sh`) then extracts, serves on :11435 and pulls
-  `tev1:0.8b`. Plumbing already verified end-to-end (clean model-404 path).
-- Intended loop use: fast-check a seed/retrieval, and label SMB candidates
-  against a rule set as a second estimation for candidate review / schema
-  inclusion / revision iterations. Never a coercion — another estimation.
+- **Status (Oct-11): WORKING end-to-end.** `tev1:0.8b` is pulled and served on
+  `:11435` (ollama 0.40.2 host binary, `/tmp/opencode/ollama_040`, models
+  `/tmp/opencode/jev_models`). All three input shapes verified: `--raw`,
+  single-question, multi-question — each returns `{choice, probabilities,
+  confidence}`. `--check` confirms the model is present.
+- **How it behaves (measured Oct-11, must inform any use):**
+  * **Deterministic** — the same state+questions returns the same numbers
+    (token scoring, no sampling): repeated crab call gave p(yes)=0.440 ×3.
+  * **Highly framing-sensitive / suggestible.** Same crab candidate: terse
+    term-list → no (p(yes) 0.145); plain prose → yes (0.652); rich context →
+    no (0.476); leading/flattering phrasing → yes (0.803). The oracle *agrees
+    with how you talk to it*.
+  * **Criteria wording shifts the answer too**: same state, "distinct senses"
+    → no (0.440) vs "worth recording as a structural SMB" → yes (0.595).
+  * **`confidence` is NOT reliability** — it ranged 0.000–0.435 in these runs
+    and did not track agreement with my admissions.
+  * With one *neutral* template it said **no to 10 of my 11 session SMBs**
+    (crab/crane/gin/ram/goose/dog/horse/spud/cat/hurdy-gurdy; only tanker was
+    a marginal yes). Treat that as a second estimation, not a veto — but note
+    it is consistent with the user's Oct-11 critique that recent builds drifted
+    into trivial animal↔machine analogies.
+- **Rules for loop use:** always feed a *fixed, neutral* state template (never
+  leading) so runs are comparable; treat "no" as a prompt to re-examine, not a
+  denial; never let it override value judgment (no coercion).
