@@ -26,23 +26,31 @@ bridge     = L - 1  (a doc that itself carries the pivot word)
 SMB        = L - 2
 ```
 
-**Cycle protocol**
+**Cycle protocol** (analysis method: `prompts/native_loop.md`)
 
 1. **Seed** — draw a random MetaBary/BaryEdge (L12/L13) as a starting point.
 2. **Probe** — vector-search its neighbourhood; keep neighbours that **share a
    leaf word** with the seed, ranked by ascending cosine. (`loop_pivot.py`)
 3. **Cosine check** — confirm the two clusters are actually distant
    (target ≈ 0.5–0.65).
-4. **Bridge hunt** — search the L-1 neighbourhoods of *both* clusters for a doc
+4. **Thin by judgment, not by filter** — read the hits: same-domain blob?
+   component-word coincidence? genuine two-lives? Skip blobs *as blobs*
+   (recorded, not committed); carry ≤1–2 threads forward. The oracle
+   (`not_sure.py`) may help at a genuine fork — never as a validator.
+5. **Bridge hunt** — search the L-1 neighbourhoods of *both* clusters for a doc
    carrying the pivot word. (`find_bridge.py`)
-5. **Build** — only if a real pivot-word bridge exists (see the admission
-   rule). **Every insert passes the strict schema gate first**
+6. **Analyze** — one-pass analysis rubric (`cognitive/build_rubric.py`):
+   distance / distinctness / mechanism / grounding evidence + scores, recorded
+   in the build's `analysis` block. It is a decision aid, **never a gate**.
+7. **Build** — only if a real pivot-word bridge exists (see the admission
+   rule). **Every insert passes the strict schema gate**
    (`cognitive/build_gate.py` — same invariants the MCP builder
    enforces: levels L/L-1/L-2, references resolve, vectors present,
    ids distinct). GATE FAIL ⇒ do not insert, record the outcome.
-   Then append to the manifest.
-6. **Record** — append the cycle outcome to `loop_cycles.jsonl`, update
-   `loop_state.json`.
+   Then append to the manifest via `ledger.record_build(...)`.
+8. **Verify + record** — `smb_audit.py` after insert; append the cycle to
+   `loop_cycles.jsonl` (with `probes_run` + `rationale` — see schema below) and
+   update `loop_state.json`.
 
 ### Admission rule (user decision — no coercion)
 
@@ -132,6 +140,54 @@ python3 cognitive/find_bridge.py PIVOT SEED_ID [SEED_ID ...] \
 # prints MATCH <doc_id> [leaf words...]
 ```
 
+### `build_rubric.py` — one-pass pre-build analysis rubric
+
+A light analysis-quality check run *before* a build is decided. Computes
+mechanical evidence from the graph (child cosine, cos(bridge↔each child),
+shared leaf words, pivot presence) and scores four axes 0–5 —
+**distance / distinctness / mechanism / grounding**. It is a **decision aid
+for value judgment, explicitly NOT a gate and NOT an oracle**: it never
+blocks, it has no q threshold, and its scores land in the build's
+`analysis` block so near-misses stay auditable.
+
+```bash
+python3 cognitive/build_rubric.py CM1 CM2 BRIDGE [--pivot WORD] \
+        [--cm1-terms a,b,c] [--bridge-terms x,y] [--cm2-terms p,q] [--json]
+```
+
+Importable: `rubric(coll, cm1_id, cm2_id, bridge_id, pivot, terms=...)`
+→ `{"scores": {...0-5}, "evidence": {...}, "mechanism_test": "..."}`.
+
+> **Calibration (Oct-11):** lawn (built) → distance 4 / distinctness 5 /
+> mechanism 5 — the two-lives-with-bridge signal; bandicoot (HOLD) → mechanism
+> 2 (pivot absent from the bridge, bridge lopsided toward one life — exactly
+> why it was held); coven blob → distance 1 (cos 0.85, a seam not a triad —
+> read mechanism "5" there as the bridge being *part of* the cluster).
+
+### `ledger.py` — durable record writers
+
+Formalized append-only writers for the loop records, so every entry carries
+**analysis, not just a verdict**:
+
+```python
+from cognitive.ledger import record_cycle, record_build
+
+record_cycle(412, seed_id, 13, "similarity-cluster",
+             probes_run=["loop_pivot: 14 seeds '13,12'", "leaf: X<->Y same-domain"],
+             rationale="All neighbours share the cluster's own texture; one "
+                       "cluster with a seam, not two lives.",
+             note="<short label>")
+record_build(name="...", smb_id="...", cm1_id="...", cm2_id="...", bridge_id="...",
+             cm1_terms=[...], bridge_terms=[...], cm2_terms=[...],
+             child_cosine=0.42, levels={"children":15,"bridge":14,"smb":13},
+             cycle=406, seed_mb_id="...", rationale="...",
+             analysis={"distance":4,"distinctness":5,"mechanism":5,
+                       "grounding":3, "mechanism_note":"..."})
+```
+
+Appends only (never rewrites/dedupes); state rolling stays with the caller /
+`loop_state.json`.
+
 ### `oracle_read.py` — calibration experiment (negative result)
 
 Runs `not_sure.py` over the SMB manifest with a **fixed** template + question and
@@ -206,10 +262,10 @@ an `OLLAMA_URL` change requires a restart.
 
 | file | lines | what |
 |---|---|---|
-| `smb_builds.jsonl` | 61 | **build manifest** — every SMB minted (see schema below) |
-| `loop_cycles.jsonl` | 357 | per-cycle ledger (seed + outcome) |
+| `smb_builds.jsonl` | 62 | **build manifest** — every SMB minted (see schema below) |
+| `loop_cycles.jsonl` | 408 | per-cycle ledger (seed + outcome + probes + rationale) |
 | `loop_state.json` | — | cycle counter, commit watermark, self-check |
-| `smb_candidates.jsonl` | 366 | candidate notes (rationale + probes), re-consult on search |
+| `smb_candidates.jsonl` | 369 | candidate notes (rationale + probes), re-consult on search |
 | `oracle_reads.jsonl` | — | oracle reads over the manifest (append-only; see `oracle_read.py`) |
 | `smb_proposals.jsonl` | 23 | DOI-anchored proposals (older pipeline) |
 | `smb_validation.jsonl` | 9 | proposal grounding checks |
@@ -220,7 +276,7 @@ an `OLLAMA_URL` change requires a restart.
 
 ### Schemas
 
-**`smb_builds.jsonl`** — *heterogeneous*: 55 structural entries + 6 older
+**`smb_builds.jsonl`** — *heterogeneous*: 56 structural entries + 6 older
 DOI/proposal records. Structural shape:
 
 ```jsonc
@@ -236,18 +292,27 @@ DOI/proposal records. Structural shape:
   "child_cosine": 0.5563,               // DIAGNOSTIC ONLY (never a denial)
   "low_q_flag": false,                  // true iff child_cosine < 0.20
   "source": "structural", "built_at": "...", "seed_mb_id": "...",
-  "cycle": 355, "note": "feline ↔ nautical catfall"
+  "cycle": 355, "note": "feline ↔ nautical catfall",
+  "levels": {"children": 15, "bridge": 14, "smb": 13},  // newer rows
+  "analysis": {                          // rubric scores that informed the build
+    "distance": 4, "distinctness": 5, "mechanism": 5, "grounding": 3,
+    "mechanism_note": "..."              // 1-sentence mechanism test
+  },
+  "rationale": "..."                     // 1-2 sentences: why value admitted it
 }
 ```
 
 The 6 legacy entries carry `doi/verdict/status/proposal_index/reason` and no
 name/terms — filter on `name` + `cm1_terms` before treating the file as uniform.
 
-**`loop_cycles.jsonl`**: `{cycle, seed_mb_id, seed_level, outcome, note, at}`.
-`outcome` ∈ `similarity-cluster`, `no-adjacency`, `built`, `pivot-half`,
-`candidate`, `bridge`, `held`, `rejected`, `proper-noun-cluster`,
-`morphological-cluster`, … (observed distribution ≈ 45% similarity-cluster,
-19% no-adjacency, 11% built).
+**`loop_cycles.jsonl`**:
+`{cycle, seed_mb_id, seed_level, outcome, probes_run, rationale, note, at}`.
+`probes_run` is the list of probes actually fired for that draw; `rationale`
+is the 1–2 sentence analysis — **required even for skips** (a skip without a
+reason is noise). `outcome` ∈ `similarity-cluster`, `no-adjacency`, `built`,
+`pivot-half`, `candidate`, `bridge`, `held`, `rejected`,
+`proper-noun-cluster`, `morphological-cluster`, … (observed distribution ≈
+45% similarity-cluster, 19% no-adjacency, 11% built).
 
 **`loop_state.json`**:
 `{cycles_done, last_commit_cycle, next_commit_cycle, loop, self_check, notes}`.

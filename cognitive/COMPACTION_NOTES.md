@@ -155,7 +155,7 @@ resuming the loop.
   `cognitive/batches/oracle_reads.jsonl` (110 reads: term+prose × 55), tool
   `cognitive/oracle_read.py` (marked as a calibration experiment). They prove
   the tiny model must not gate SMBs; they are not a validation channel. (Note:
-  `smb_builds.jsonl` is heterogeneous — 55 structural entries + 6 legacy
+  `smb_builds.jsonl` is heterogeneous — 56 structural entries + 6 legacy
   DOI/proposal records; filter on `name`+`cm1_terms`.)
 
 ## Bridges structural audit (Oct-11) — tool: `cognitive/smb_audit.py`
@@ -183,3 +183,45 @@ Full audit of every manifest structural row vs `barygraph_poc`:
   warnings (child_cosine < 0.20, pivot missing from bridge leaves) never do.
   The loop inserts an SMB only through `create_structural(...)`; GATE FAIL ⇒
   record the outcome, do not force. `smb_audit.py --all` afterwards must agree.
+
+## Analysis method folded back from the legacy cog flow (Oct-11)
+
+The native loop was scanning well but *analyzing* thin: it had no written
+method for what a scan hit means, skips carried no reasons, and nothing
+captured the pre-build analysis. The legacy 3-stage `cog` flow worked because
+its prompts taught **tension-hunting** and each decision carried written
+analysis. Four things were folded back (user-approved); three are new tools,
+one is a "keep, don't break" rule.
+
+1. **`cognitive/prompts/native_loop.md` — the written analysis method.** The
+   pattern is **tension between two styles joined by a middle mechanism**, NOT
+   a similarity cluster. Contains: the lawn worked example (native, built,
+   audit-clean); the older checkpoint/stamp canonical; anti-patterns
+   (same-domain blob / component-word coincidence / two-lives-no-bridge);
+   the **polarity trigger** ("X rather than Y" ⇒ retrieve *both* poles, drop
+   invented emphasis); the **5-point quality bar** (two distinct branches;
+   distant before analysis; real geometry not invented; mechanism not comment;
+   fewer stronger); the **L10/L11 noise rule** (discount unrelated residue).
+   Read at the start of every batch, and whenever a batch comes up
+   all-similarity — that is usually a *method* failure, not a graph failure.
+2. **Rich ledger records — `cognitive/ledger.py`.** Every new
+   `loop_cycles.jsonl` entry carries **`probes_run`** (probes actually fired)
+   + **`rationale`** (1–2 sentences — *including for skips*; a skip without a
+   reason is noise). Every new `smb_builds.jsonl` row carries an **`analysis`**
+   block (the rubric scores + a one-sentence `mechanism_note`) + `rationale`.
+   Writers are append-only (`record_cycle` / `record_build`); state rolling
+   stays with the caller / `loop_state.json`. Forward-only: the 411 existing
+   cycle rows keep the old `{...note}` shape.
+3. **`cognitive/build_rubric.py` — one-pass pre-build analysis.** Scores
+   distance / distinctness / mechanism / grounding 0–5 from mechanical
+   evidence (child cosine, cos(bridge↔each child), shared leaves, pivot
+   presence). **A decision aid, never a gate, never an oracle** (no q rule;
+   value judgment stays the sole admission criterion). Calibrated Oct-11:
+   lawn (built) → 4/5/5/3; bandicoot (HOLD) → mechanism 2 (pivot absent from
+   bridge, bridge lopsided toward one life — flags exactly why it was held);
+   coven blob → distance 1 (cos 0.85 = a seam, not a triad).
+4. **Pipeline order (keep, don't break):** rubric (analysis) → `build_gate.py`
+   (strict schema) → insert via `create_structural(...)` → `smb_audit.py`
+   (structural verify) → record in ledgers. The rubric informs value
+   judgment; the gate enforces schema; neither decides value. Standing
+   direction unchanged: multi-hop chains over animal↔machine mining.
