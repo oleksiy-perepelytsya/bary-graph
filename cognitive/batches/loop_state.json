@@ -1,9 +1,9 @@
 {
- "cycles_done": 360,
- "last_commit_cycle": 360,
- "next_commit_cycle": 370,
+ "cycles_done": 368,
+ "last_commit_cycle": 368,
+ "next_commit_cycle": 378,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AE (351-360): 1 build (cat, child_cosine 0.5563, q 0.2501). Eleven builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571, gin 0.555, ram 0.552, goose 0.493, dog 0.563, horse 0.676, spud 0.558, cat 0.556). Built 'cat' (feline <-> nautical catfall/cathead rigging) using a pivot-word bridge ('cat o' nine tails' = 'the cat') even though the machine cluster did not literally contain 'cat'. The rule is: build if there is a meaningful pivot-word bridge connecting the two distant lives; we note when cm2 doesn't carry the word.",
+ "self_check": "batch AF (361-368): 8 draws, 1 near-miss candidate held (knuckleball/unpredictability, cos 0.92, no pivot bridge), 0 builds. Oracle used per corrected role - choice aid for thread selection (knuckleball thread 0.967), never as an SMB validator. Standing direction: multi-hop chains, not animal<->machine mining.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",

@@ -355,3 +355,11 @@
 {"cycle": 358, "seed_mb_id": "6ac7c29a51ff4d8f79c75135", "seed_level": 13, "outcome": "similarity-cluster", "note": "demijohn/flask/pony glass", "at": "2026-10-11T07:59:07.987132+00:00"}
 {"cycle": 359, "seed_mb_id": "6ac6dfad571528578386e251", "seed_level": 13, "outcome": "similarity-cluster", "note": "chockablock/monkey wheel/swig - rigging neighborhood", "at": "2026-10-11T07:59:07.987132+00:00"}
 {"cycle": 360, "seed_mb_id": "6ac6e08a5715285783879359", "seed_level": 13, "outcome": "similarity-cluster", "note": "c@/catvertising/pspsps - feline internet terms", "at": "2026-10-11T07:59:07.987132+00:00"}
+{"cycle": 361, "seed_mb_id": "6ac7c26751ff4d8f79c70c8a", "seed_level": 13, "outcome": "similarity-cluster", "note": "raise hell/raise Cain/raise hob idiomatic cluster", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 362, "seed_mb_id": "6ac6e0c8571528578387c601", "seed_level": 13, "outcome": "similarity-cluster", "note": "morning/night person + daysleeper - same-domain lifestyle cluster", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 363, "seed_mb_id": "6ac6e8d357152857838922e2", "seed_level": 12, "outcome": "similarity-cluster", "note": "blood tofu / blutwurst blood-food cluster", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 364, "seed_mb_id": "6ac6e98757152857838a18eb", "seed_level": 12, "outcome": "candidate", "note": "knuckleball/unpredictability near-miss: oracle choice aid (knuckleball 0.967) -> probed, HOLD (cos 0.92, no pivot bridge); to candidate ledger", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 365, "seed_mb_id": "6ac6df5557152857838689d6", "seed_level": 13, "outcome": "similarity-cluster", "note": "metastasis/metastatic - same-domain oncology", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 366, "seed_mb_id": "6ac6e95f571528578389ec24", "seed_level": 12, "outcome": "similarity-cluster", "note": "blab school/popcorn reading - memorization cluster", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 367, "seed_mb_id": "6ac6df495715285783867f86", "seed_level": 13, "outcome": "proper-noun-cluster", "note": "Chels/chelams/cheelams name cluster", "at": "2026-10-11T09:22:21.944203+00:00"}
+{"cycle": 368, "seed_mb_id": "6ac6e9b657152857838a41e8", "seed_level": 12, "outcome": "proper-noun-cluster", "note": "Ilsas/Elsas/Elsassers name cluster", "at": "2026-10-11T09:22:21.944203+00:00"}
