@@ -67,6 +67,27 @@ resuming the loop.
   returns `n` consecutive index entries — one contiguous content cluster — so
   repeated draws / seed batches collapse onto near-duplicate seeds.
   `loop_batch3.py` now passes `independent=True`.
+- **Pivot-build pipeline (batches V/W/X).** To turn a pivot into an SMB:
+  1. **Scan** (`cognitive/loop_pivot.py`): draw independent seeds, vector-search
+     each, keep neighbours that SHARE a leaf word but sit far away.
+  2. **Probe** (`loop_probe_word.py`, one-off): embed the pivot word (or a
+     sense description) to locate the FAR cluster of the other life.
+  3. **Cosine** (`childcos.py` / inline): confirm the two clusters are distant
+     (target ~0.5-0.65; the good ones so far: yarn 0.514, tanker 0.617,
+     hurdy-gurdy 0.610, crab 0.627).
+  4. **Bridge hunt** (`cognitive/find_bridge.py`): the bridge is an L12 doc
+     containing the pivot word, or a shared-concept doc *equidistant* from both
+     clusters. Take the union of the two clusters' L12 neighbourhoods and keep
+     docs whose leaf words contain the pivot word.
+  Then build via `_create_structure_meta_bary_body` and record.
+- **Environment caveat (Oct-11).** While the all-build runs, the host is CPU
+  saturated (load ~2-7 on 4 cores) and the poc embedder answers in ~20 s per
+  call (the ollama runner + mongot dominate). So: (a) never embed per-word in a
+  loop — batch or avoid; (b) everything that uses a STORED vector
+  (`$vectorSearch` with an existing doc vector, DB reads, `cm_leaf_words`) is
+  fast (~0.1-0.3 s) and is the right toolkit for discovery; (c) the tev/decision
+  model lives on a separate ollama at :11435 (`/tmp/opencode/ollama_040`,
+  models in `/tmp/opencode/jev_models`), so it does not disturb :11434.
 
 ## Jev oracle — `cognitive/not_sure.py`
 
