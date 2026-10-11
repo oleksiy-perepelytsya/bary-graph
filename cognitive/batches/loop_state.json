@@ -1,18 +1,17 @@
 {
- "cycles_done": 423,
- "last_commit_cycle": 423,
- "next_commit_cycle": 433,
+ "cycles_done": 435,
+ "last_commit_cycle": 435,
+ "next_commit_cycle": 445,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF6 (412-423): 12 draws, 0 builds. First batch run on the folded-back analysis method (prompts/native_loop.md) with the richer ledger (probes_run + rationale per cycle). All 12 seeds had shared-word neighbours but every min cosine landed 0.839-0.986 - uniformly same-domain: 5 similarity-clusters (coenzyme-Q biochem; named graphs; sailing rigging; shipping/refueling; idioms), 4 proper-noun clusters (language names; Coriolis/Cornu eponyms; Indian-history names; surnames), 3 morphological families (dispon- variants; dumb- compounds; eusporangiate/leptosporangiate). No distant second life in any draw -> 0 builds, correctly HOLD. Extra probes during the batch: 'part' polysemy (noun vs verb word nodes cos 0.851; part-adj 0.747) = same-domain, not two lives; 'tanker' two-lives confirmed already built (SMB 6acad257, cycle 249); no coral-reef life in the rigging draw. Self-check: no fixation - the 12 draws spanned 8+ unrelated domains; no thread to continue, so take fresh random seeds next batch. Note: the seeded run (--seed 20261011, 129 pairs) supersedes an earlier unseeded draw from the same session; only the seeded batch is filed. loop_pivot.py gained --top N (default 24) and now emits every drawn seed to stderr, so per-seed outcomes are fully recordable.",
+ "self_check": "batch AF7 (424-435): 12 draws, 0 builds. First batch using the word-anchored scan (cognitive/word_pivot.py) per user direction: for each fresh seed (20261013) take its leaf-words and enumerate each word's own L15 senses, ranking by the most distant substantive sense pair (the lawn shape: L15 sense-lives -> L14 word-node bridge). Seed leaf-words were again same-domain/morphological (shock/stun; Greek surnames; protest slogans; hormone names; cis-centric variants; bespatter forms; tank compounds; blasto- family; boy/girl bands). Of 46 distinct words only 4 had >=2 substantive senses and all were literal-vs-figurative of the SAME word (fall out 0.227, stun 0.287 general/billiards, shocked 0.422, declare war 0.475) - no cross-domain two-lives -> 0 builds, correct HOLD. Word-scan calibration: known builds land low (lawn 0.205 grass/linen, crane 0.235 bird/machine, tanker 0.239 crew/refuel, part 0.16, grommet 0.19), so the tool does rank real two-lives; the batch simply had none. Self-check: no fixation (12 unrelated domains); the seed draw is the weak link (random L12/L13 edges are homogeneous), not the word scan. Next: source candidate words from real common-word anchors (candidates/near-misses) rather than random seed texture, or move to multi-hop chains as the standing direction.",
  "notes": [
-  "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
-  "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity; read each batch. Pipeline now: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> record (ledger.py: probes_run + rationale + analysis).",
-  "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
-  "sampler: plain random draw (no content filter). loop_pivot.py now emits all drawn seeds to stderr and takes --top N (default 24 = most distant pairs) so a batch is fully recordable.",
-  "pivot detector: the productive unit is a pivot word shared by two docs that are DISTANT in vector space (low child_cosine). cm1/cm2 same level L, bridge at L-1, SMB at L-2.",
-  "candidates (smb_candidates.jsonl) are retained and should be re-consulted on new searches for near-miss catches.",
-  "Jev oracle tool: cognitive/not_sure.py (decision aid only; never an SMB validator). Model tev1:0.8b on :11435.",
-  "loop_pivot.py: pivot-scan enrich - independent seed draw + vector_search, keep shared-word neighbours ranked by cosine asc.",
-  "find_bridge.py: L-1 bridge hunt - union of the two clusters' neighbourhoods, filtered to docs whose leaf words contain the pivot word."
+  "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
+  "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
+  "WORD-ANCHORED SCAN (Oct-11): cognitive/word_pivot.py - given a word, enumerate its L15 senses (properties.word is indexed), cluster by cosine, rank by most-distant substantive sense pair. The L14 word node is the natural bridge (L15 children -> L14 bridge -> L13 SMB). Use it on seed leaf-words or candidate words; random --draw is noisy on this dump (rare-word dominated).",
+  "schema: old cog schema LEGACY; structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5) is authoritative. Manifest smb_builds.jsonl.",
+  "sampler: plain random draw. loop_pivot.py emits all drawn seeds to stderr, --top N (default 24). word_pivot.py takes explicit words (primary) or --draw N.",
+  "pivot detector: a pivot word shared by two DISTANT docs (low child_cosine). cm1/cm2 L, bridge L-1, SMB L-2. In the word-anchored shape: L15 sense-lives, L14 word-node bridge, L13 SMB.",
+  "candidates (smb_candidates.jsonl) retained; re-consult on new searches for near-miss catches.",
+  "Jev oracle tool: cognitive/not_sure.py (decision aid only; never an SMB validator). Model tev1:0.8b on :11435."
  ]
 }

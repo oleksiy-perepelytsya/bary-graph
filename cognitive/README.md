@@ -133,6 +133,37 @@ python3 cognitive/loop_pivot.py [N=15] [LEVELS="13,12"] [--seed N] [--top N]
 # batch is fully recordable even when a seed yields no shared-word neighbour.
 ```
 
+### `word_pivot.py` — word-anchored scan ("one word, two lives")
+
+Alternative to `loop_pivot.py`. Where that scan looks at docs *near* a random
+seed (so the shared words are the cluster's own texture, cosine ≥ 0.84), this
+scan anchors on a **word** and enumerates the word's own lives directly:
+
+1. take a word (a seed leaf-word, a candidate, or any list — **primary mode**),
+2. load every L15 sense node of the word (`properties.word` is indexed),
+3. cluster senses by cosine and find the most distant pair of **substantive**
+   senses (drops obsolete/archaic/rare/slang, names, inflected forms),
+4. rank by that distance (low = a real two-lives spread).
+
+The word's L14 word node is reported as `bridge`: if two sense-lives are
+distant, that node literally carries the word and sits between them — the same
+shape as the accepted `lawn` SMB (L15 sense-lives → L14 word node → L13 SMB).
+
+```bash
+python3 cognitive/word_pivot.py WORD [WORD ...]     # primary: explicit words
+python3 cognitive/word_pivot.py --draw 12 [--seed N] # random words (noisy)
+# JSON lines: {word, senses, substantive, clusters, min_inter, A, B, bridge_id,
+#              A_sense_id, B_sense_id}
+# --thr F (cluster cosine, default 0.80), --max-skew N (cap senses, default 60)
+```
+
+> **Calibration (Oct-11):** known builds land low — lawn 0.205 (grass/linen),
+> crane 0.235 (bird/machine), tanker 0.239 (crew/refuel), part 0.16, grommet
+> 0.19 — so the tool does rank real two-lives. A scan hit is a **candidate**,
+> not a build: still judge substantiveness, hunt the two lives as graph
+> clusters, then `build_rubric` → `build_gate`. Random `--draw` is noisy on this
+> dump (rare-word dominated); prefer explicit seed/candidate words.
+
 ### `find_bridge.py` — bridge hunt
 
 Given a pivot word and the two child clusters' representative ids, take the union
