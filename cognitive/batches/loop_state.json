@@ -1,9 +1,9 @@
 {
- "cycles_done": 399,
- "last_commit_cycle": 399,
- "next_commit_cycle": 409,
+ "cycles_done": 411,
+ "last_commit_cycle": 411,
+ "next_commit_cycle": 421,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF4 (389-399): 11 draws, 0 builds, 1 near-miss candidate retained (cycle 394: bandicoot marsupial <-> garden-theft verb, cos 0.42, no L-1 pivot bridge - HOLD per admission rule; recorded in smb_candidates.jsonl with grounding probes). Other threads all same-domain or component coincidence. Probing was targeted: only threads with a real two-lives signal got probes (ADA - no 'ada' L14 node in graph; bandicoot - verb life confirmed distant; coven/karass - same-domain). Gate untouched this batch (0 builds); build_gate.py + smb_audit.py remain the mandatory pre/post checks.",
+ "self_check": "batch AF5 (400-411): 12 draws, 1 BUILD (cycle 406: SMB 'lawn' grass-ground <-> thin-linen two-lives, smb_id 6acb626ce0ea65ab7696467f, child_cosine 0.4212, children L15/bridge L14/SMB L13, pivot 'lawn' on the L14 word-node bridge). First build since the schema-gate went mandatory: build_gate.py GATE PASS before insert, smb_audit.py ALL CONSISTENT after. Unlike the matriculation/knuckleball near-misses, both lives of 'lawn' exist in the graph - that was the admission condition (no coercion: the graph supplied the bridge). Other draws all same-domain. Oracle: no genuine choicepoint needed the coin-flip; lawn was unambiguous both-lives.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
