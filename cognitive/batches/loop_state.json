@@ -1,9 +1,9 @@
 {
- "cycles_done": 580,
- "last_commit_cycle": 580,
- "next_commit_cycle": 585,
+ "cycles_done": 592,
+ "last_commit_cycle": 592,
+ "next_commit_cycle": 595,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AR (569-580): 12 draws, 1 build (thin). pudding built on its widest gap: boiled dish <-> slang 'overweight person' (rubric 5/5/5/4, 0.2937); its savoury/sweet food-family lives sit close (0.59-0.66, below band). batman held (weight senses obscure). Rest of the batch was morphology/places/names.",
+ "self_check": "batch AS (581-592): 12 draws, 2 builds. bath (bathtub<->Hebrew liquid unit ~23 L, 0.4709) and coyote (canine<->to prospect for gold by digging, 0.3748; the smuggler life 0.5167 sits above band). Held gated (electronics/community 0.58) and kula (tower/exchange 0.55). Filed the kula/moka gift-economy cluster and the 40-sense 'wash'. Note: word_pivot min_inter screens on glosses; edge-level child_cosine runs ~0.15-0.25 higher.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
