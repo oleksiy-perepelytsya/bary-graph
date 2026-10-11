@@ -1,9 +1,9 @@
 {
- "cycles_done": 296,
- "last_commit_cycle": 296,
- "next_commit_cycle": 306,
+ "cycles_done": 308,
+ "last_commit_cycle": 308,
+ "next_commit_cycle": 318,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch Y (285-296): 1 build (crane SMB, child_cosine 0.5706, q 0.3066). Four builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571) — the pivot pipeline is now reliable: scan for a shared word across distant neighbours, probe to find the far cluster, cosine-check, find an L12 bridge (pivot-word doc or equidistant concept doc), build. Yield is limited by the CPU-starved embedder (word probes cost ~20s/embed while the all-build runs), not by the graph. Crane was found cheaply because its L12 pivot doc surfaced during the crab bridge hunt.",
+ "self_check": "batch Z (297-308): 1 build (gin, child_cosine 0.5554, q 0.3200). Five builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571, gin 0.555). The richest vein is 'machinery word = another life': the crane probe's machinery list alone yielded gin (gin/glossocomon/trispast/windlass). donkey was rejected (engine|animal cos 0.80 - the word dominates); camel has a very distant pair (0.440) but no L12 doc carries the machine 'camel', so it is held rather than coerced. Next: mine the sibling words in the machinery clusters (jigger, boom, luff, polyspast, bull wheel, sand reel, donkey engine) for more two-lives pivots.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
