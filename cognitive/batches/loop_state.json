@@ -1,9 +1,9 @@
 {
- "cycles_done": 556,
- "last_commit_cycle": 556,
- "next_commit_cycle": 565,
+ "cycles_done": 568,
+ "last_commit_cycle": 568,
+ "next_commit_cycle": 575,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AP (545-556): 12 draws, 3 builds - the richest batch yet. A choking blade yielded a mechanism cluster: strangle (finance<->choke, 0.4328) and throttle (engine<->choke, 0.4879) - two words already sharing an L15 edge {strangle,throttle}, realizing 'constricting a flow' across anatomy/engineering/finance; plus formal (methodological<->evening gown, 0.4205). Filed rig verbs and sugarcoat. This is the multi-domain mechanism shape the loop seeks.",
+ "self_check": "batch AQ (557-568): 12 draws, 3 builds. rook (corvid<->chess castle, 0.4211), flicker (woodpecker<->wavering light, 0.5003), savour (reputation<->taste via Latin sapere, 0.3461). Held vivid (brand genericization). Filed employ (hire/occupy). rook is a four-life homonymy whose swindler/rookie slang both track the 'green' bird.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
