@@ -35,9 +35,12 @@ SMB        = L - 2
    (target ≈ 0.5–0.65).
 4. **Bridge hunt** — search the L-1 neighbourhoods of *both* clusters for a doc
    carrying the pivot word. (`find_bridge.py`)
-5. **Build** — only if a real pivot-word bridge exists (see the admission rule).
-   Build via `scripts/mcp_server._create_structure_meta_bary_body`, then append
-   to the manifest.
+5. **Build** — only if a real pivot-word bridge exists (see the admission
+   rule). **Every insert passes the strict schema gate first**
+   (`cognitive/build_gate.py` — same invariants the MCP builder
+   enforces: levels L/L-1/L-2, references resolve, vectors present,
+   ids distinct). GATE FAIL ⇒ do not insert, record the outcome.
+   Then append to the manifest.
 6. **Record** — append the cycle outcome to `loop_cycles.jsonl`, update
    `loop_state.json`.
 
@@ -148,6 +151,22 @@ child_cosine, choice, p_yes, probabilities, confidence`.
 > → yes 15/55 (27%) on the same candidates — framing-dominated and near-constant,
 > so it must never gate admission. The oracle's real role is agent decision
 > support (see `not_sure.py` above). See `COMPACTION_NOTES.md`.
+
+### `build_gate.py` — strict pre-creation schema gate
+
+Run before EVERY SMB insert (the loop builds with direct lib calls, not
+the MCP server, so the check must not rely on it). Mirrors the invariants
+of `scripts/mcp_server._create_structure_meta_bary_body`:
+**errors block the build** (bad ids / missing docs / no vector / level
+mismatch), **warnings never block** (`child_cosine < 0.20` flag, pivot not
+found in bridge leaves — value judgment is the sole admission criterion).
+
+```bash
+python3 cognitive/build_gate.py --check CM1 CM2 BRIDGE --pivot WORD   # dry run
+python3 cognitive/build_gate.py CM1 CM2 BRIDGE --pivot WORD           # check + insert
+```
+
+Importable: `gate(...)` / `create_structural(...)`.
 
 ### `smb_audit.py` — structural consistency audit
 

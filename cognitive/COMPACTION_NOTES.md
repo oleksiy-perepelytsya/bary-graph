@@ -177,3 +177,9 @@ Full audit of every manifest structural row vs `barygraph_poc`:
 - Doc-type nuance learned: SMBs built at L13 (e.g. the two `biternary` SMBs)
   have L15 sense / L14 word *node* docs as children — `doc_type` must accept
   `baryedge` | `node`; the audit now does.
+- **Build gate (Oct-11):** `cognitive/build_gate.py` — strict pre-insert schema
+  check mirroring the MCP builder (children same level L, bridge L-1, SMB L-2,
+  refs resolve, vectors present, ids distinct). Errors BLOCK the insert;
+  warnings (child_cosine < 0.20, pivot missing from bridge leaves) never do.
+  The loop inserts an SMB only through `create_structural(...)`; GATE FAIL ⇒
+  record the outcome, do not force. `smb_audit.py --all` afterwards must agree.
