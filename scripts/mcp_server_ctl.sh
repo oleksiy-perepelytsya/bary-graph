@@ -51,8 +51,10 @@
 #
 # 5. Env & cwd.
 #    Run from the repo root so `scripts.mcp_server` and the .env
-#    (MONGO_DB=barygraph_poc, EMBED_DIM=768, MONGO_URI=...) resolve. The embed
-#    model lives at http://ollama:11434 (docker network sibling).
+#    (MONGO_DB=barygraph_poc, EMBED_DIM=1024, MONGO_URI=...) resolve. Since
+#    2026-10-11 embeddings come from the host ollama at http://localhost:11435
+#    (the old `ollama:11434` docker sibling container was retired). The server
+#    loads .env ONCE at startup, so changing OLLAMA_URL requires a restart.
 #
 # Usage:
 #   scripts/mcp_server_ctl.sh status          # is it up + warm? tunnel up? which URL?
@@ -71,7 +73,20 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LOG="${MCP_LOG:-/tmp/opencode/mcp_server.log}"
 PORT="${MCP_PORT:-8000}"
-PYTHON="${MCP_PYTHON:-python3.11}"
+# Interpreter: MCP_PYTHON wins; otherwise the first of python3.11/python3 that
+# can `import mcp`. Hardcoding python3.11 was a real outage here (this host is
+# python3 = 3.10.12 + mcp 1.30.0; python3.11 does not exist), so auto-detect.
+if [[ -n "${MCP_PYTHON:-}" ]]; then
+  PYTHON="$MCP_PYTHON"
+else
+  PYTHON=""
+  for c in python3.11 python3 python; do
+    if command -v "$c" >/dev/null 2>&1 && "$c" -c 'import mcp' >/dev/null 2>&1; then
+      PYTHON="$c"; break
+    fi
+  done
+  PYTHON="${PYTHON:-python3}"
+fi
 TUNNEL_LOG="${TUNNEL_LOG:-/tmp/cloudflared.log}"
 CLOUDFLARED_BIN="${CLOUDFLARED_BIN:-$HOME/.local/bin/cloudflared}"
 

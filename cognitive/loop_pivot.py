@@ -7,6 +7,7 @@ A shared word + low cosine = a pivot word with two lives (the productive signal
 found in batch V: yarn 0.514, tanker 0.617).
 
   argv[1] = seeds (default 15), argv[2] = levels (default "13,12")
+  --seed N = seed the RNG so a run is reproducible (for replay/diff)
 """
 import sys, json, random
 import numpy as np
@@ -16,8 +17,17 @@ from lib.config import Settings
 from lib.db import get_collection, vector_search, cm_leaf_words
 from lib.vector import unpack_vec
 
-N = int(sys.argv[1]) if len(sys.argv) > 1 else 15
-LEVELS = [int(x) for x in (sys.argv[2].split(",") if len(sys.argv) > 2 else ["13", "12"])]
+_argv = list(sys.argv[1:])
+_rng_seed = None
+if "--seed" in _argv:
+    _i = _argv.index("--seed")
+    _rng_seed = int(_argv[_i + 1])
+    del _argv[_i:_i + 2]
+if _rng_seed is not None:
+    random.seed(_rng_seed)
+
+N = int(_argv[0]) if len(_argv) > 0 else 15
+LEVELS = [int(x) for x in (_argv[1].split(",") if len(_argv) > 1 else ["13", "12"])]
 K = 50
 s = Settings.load(); c = get_collection(s)
 
