@@ -1,9 +1,9 @@
 {
- "cycles_done": 284,
- "last_commit_cycle": 284,
- "next_commit_cycle": 294,
+ "cycles_done": 296,
+ "last_commit_cycle": 296,
+ "next_commit_cycle": 306,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch X (273-284): 1 build (crab SMB, child_cosine 0.6267, q 0.2219). Seven builds now across the session's pivot era (tanker 0.617, hurdy-gurdy 0.610, crab 0.627). The pipeline for a pivot build is now: (1) pivot scan (cases where a seed's neighbour shares a leaf word), (2) word probe to locate the far cluster, (3) cosine check, (4) L12 bridge hunt (a doc containing the pivot word, or a shared-concept doc equidistant from both clusters). Note the environment: the embedder is CPU-starved (~20s/embed) while the all-build runs, so word probes must be one-off and batched; stored-vector operations ($vectorSearch with an existing vector, DB reads) are fast.",
+ "self_check": "batch Y (285-296): 1 build (crane SMB, child_cosine 0.5706, q 0.3066). Four builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571) — the pivot pipeline is now reliable: scan for a shared word across distant neighbours, probe to find the far cluster, cosine-check, find an L12 bridge (pivot-word doc or equidistant concept doc), build. Yield is limited by the CPU-starved embedder (word probes cost ~20s/embed while the all-build runs), not by the graph. Crane was found cheaply because its L12 pivot doc surfaced during the crab bridge hunt.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
