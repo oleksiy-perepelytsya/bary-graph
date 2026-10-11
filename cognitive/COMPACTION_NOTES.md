@@ -157,3 +157,23 @@ resuming the loop.
   the tiny model must not gate SMBs; they are not a validation channel. (Note:
   `smb_builds.jsonl` is heterogeneous — 55 structural entries + 6 legacy
   DOI/proposal records; filter on `name`+`cm1_terms`.)
+
+## Bridges structural audit (Oct-11) — tool: `cognitive/smb_audit.py`
+
+Full audit of every manifest structural row vs `barygraph_poc`:
+- **All 47 SMB docs that exist in the DB are structurally consistent**: children
+  same level L, bridge L-1, SMB L-2, explicit `bridge_id`, distinct ids,
+  references resolve, vectors present, manifest ids match doc ids. 100% pass.
+- **11 of 58 manifest rows are PHANTOM claims — no doc in the DB (direct _id
+  lookup NOT FOUND).** Three clusters: (1) 3 early qwen3.6:27b rows
+  (caterpillar/half-track, flag/anthem, GH/TNF, Oct-01 era id space
+  `6aaaec6b…`); (2) 3 legacy DOI-schema rows (no name, source=None,
+  `6aab0db7/8…`); (3) 5 rows with sequential ids `6aab426fb6c3fc4deb254b82–86`
+  (scale-ladders, embryo-segment/phonology, nucleation-and-growth/rumour,
+  topology/surveying, value-appraisal) — smells like a batch insert that never
+  landed in poc (possible wrong-env insert; cf. the phantom-id rabbit hole in
+  AGENTS.md). **Decision pending (user): rebuild the 11 into poc if the analysis
+  still stands, or strike/flag them in the manifest — do NOT silently edit.**
+- Doc-type nuance learned: SMBs built at L13 (e.g. the two `biternary` SMBs)
+  have L15 sense / L14 word *node* docs as children — `doc_type` must accept
+  `baryedge` | `node`; the audit now does.
