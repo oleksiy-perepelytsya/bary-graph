@@ -1,9 +1,9 @@
 {
- "cycles_done": 378,
- "last_commit_cycle": 378,
- "next_commit_cycle": 388,
+ "cycles_done": 388,
+ "last_commit_cycle": 388,
+ "next_commit_cycle": 398,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF2 (369-378): 10 draws, 2 near-miss candidates held (knuckleball/unpredictability, matriculation academia<->heraldry), 0 builds. Oracle used strictly as coin-flip choice aid (thread selection), never as an SMB validator. No builds this batch: the good leads lacked a pivot-word bridge / second life in the graph (no coercion).",
+ "self_check": "batch AF3 (379-388): 10 draws, 0 builds, 0 near-miss candidates. All three scan passes (af4/af5/af6, 24 hits each) landed in same-domain clusters: bad-boy characters, ACE2 variants, optics, miso-family, immunology, parallel-computing, ice-motorsport, BSM particle physics, anti-doping agencies, geometry. No pivot-bridge two-lives signal anywhere; ADA probe confirmed the graph lacks an 'ada' L14 word node (no second life). No coercion - HOLD all. Tooling hardened this batch: build_gate.py (strict pre-insert schema check, errors block/warnings never) + smb_audit.py (structural audit) both committed; audit shows 47/47 existing SMB docs structurally consistent, 11 phantom manifest rows flagged for user decision.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
