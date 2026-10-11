@@ -110,10 +110,12 @@ edge can be a productive prompt; an *empty* or *generic* cluster is not.
 ## Cycle procedure (the loop, with analysis in the right places)
 
 > **The loop is a thinking loop, not a build loop.** Retrieval is a *kindle*;
-> the primary act is introspection (what does this fire in my own abstract
-> BaryGraph?), recorded in `instigations.jsonl`. Building in the substrate is a
-> possible, optional, downstream *share*, not the goal. A cycle with a strong
-> instigation and zero builds is a good cycle. See `agent_memory/README.md`.
+> the primary act is introspection, done **in the graph's own terms** — where a
+> *relation is a self-sustaining entity*, so the thinking is carried as
+> **duplets** and **triplets**, recorded in `instigations.jsonl`. Building in
+> the substrate is a possible, optional, downstream *share*, not the goal. A
+> cycle with a strong instigation and zero builds is a good cycle. See
+> `prompts/relational_thinking.md`.
 
 1. **Seed** — random L12/L13 draw (`loop_pivot.py`). Do not prejudge the
    seed; it is a coordinate.

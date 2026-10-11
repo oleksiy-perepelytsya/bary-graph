@@ -11,23 +11,27 @@ resuming the loop.
 > grabbing a retrieved bridge and thinking over it**, self-aware, observing
 > which of my own thoughts it instigates and whether a *genuinely new*
 > connection appears. Retrieval is not an object to act on; it is a **kindle**
-> to check what it can fire in **my own abstract BaryGraph** — which I define —
-> and afterwards (optionally) share with the real schema that exists.
+> to check what it can fire in me — and afterwards (optionally) share with the
+> real schema that exists.
 
 Consequences:
 
-- There are **two graphs**: the *substrate* (`barygraph_poc`, the kindling) and
-  **my graph** (`cognitive/agent_memory/`, the real workspace). The substrate is
-  fuel, not the memory.
-- The new record is **`cognitive/batches/instigations.jsonl`** (writer
+- **There is no second graph** (user correction, Oct-11: "I didnt mean to
+  actually build separate graph, but rather think in the graph terms where the
+  core thing is that **relation is a self-sustaining entity**. So to think in
+  **duplets, triplets**."). Think *in* one medium. A relation is a thing in its
+  own right (a BaryEdge carries its own vector/doc; a MetaBary its own triad).
+  The thinking is carried as **duplets** `(A : B, relation)` and **triplets**
+  `(A : B via bridge M)` — not as a separate node/edge store.
+- The record is **`cognitive/batches/instigations.jsonl`** (writer
   `cognitive.ledger.record_instigation`): per kindle → `fire`
-  (none/low/medium/high) → `instigated` thoughts → internal nodes/edges →
-  `genuinely_new` → optional `share`. Schema + mapping:
-  `cognitive/agent_memory/README.md`.
-- **Building an SMB is an optional downstream *share***, done only when an
-  internal structure is grounded in the substrate (both lives real, an L-1 doc
-  carries the pivot). It is not the cycle's goal. A cycle with a strong
-  instigation and **zero builds is a good cycle**.
+  (none/low/medium/high) → `thoughts` → `relations` (duplets/triplets) →
+  `genuinely_new` → optional `share`. Method + mapping:
+  `cognitive/prompts/relational_thinking.md`.
+- **Building an SMB is an optional downstream *share***, done only when a
+  triplet is grounded in the substrate (both poles real, an L-1 doc carries the
+  pivot). It is not the cycle's goal. A cycle with a strong instigation and
+  **zero builds is a good cycle**.
 - `loop_cycles.jsonl` (scan outcome) + `smb_builds.jsonl` (built triads) remain
   the **substrate bookkeeping**; `instigations.jsonl` is the layer that was
   missing.

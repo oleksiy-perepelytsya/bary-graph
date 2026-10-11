@@ -100,18 +100,28 @@ def record_build(*, name: str, smb_id: str, cm1_id: str, cm2_id: str,
 
 
 def record_instigation(*, cycle: int, kindle: dict, fire: str,
-                       instigated: list[str], internal_nodes: list[dict] = (),
-                       internal_edges: list[dict] = (), genuinely_new: str | None = None,
+                       thoughts: list[str], relations: list[dict] = (),
+                       genuinely_new: str | None = None,
                        share: dict | None = None, note: str = "") -> dict:
-    """Append one INSTIGATION record — what a retrieved coordinate (kindle)
-    fired in the agent's own associative graph.
+    """Append one INSTIGATION record — the relations a retrieved coordinate
+    (kindle) fired in me.
 
-    Retrieval is a *kindle*, not an object to build. The record captures the
-    thoughts it instigated, the internal nodes/edges it activated in the
-    agent's abstract BaryGraph, any genuinely-new connection, and (if an
-    internal structure is grounded in the substrate) a `share` block saying
-    how it would be expressed in the real schema. See
-    cognitive/agent_memory/README.md.
+    Retrieval is a *kindle*, not an object to build; and the thinking is done
+    *in the graph's own terms*, where **a relation is a self-sustaining
+    entity**. So the record carries **duplets** and **triplets**, not a
+    separate node/edge store:
+
+      duplet  = {kind:"duplet",  poles:[A,B],             relation:"…"}
+      triplet = {kind:"triplet", poles:[A,B], bridge:"M", relation:"…"}
+
+    A duplet's entity-content is the relation binding its two poles; a
+    triplet's is the bridge M that mediates A and B (structurally a MetaBary:
+    cm1 ↔ cm2 via bridge). A retrieved kindle is itself such a relation-entity.
+
+    The record also holds the `thoughts` it instigated, any `genuinely_new`
+    relation, and (if a triplet is grounded in the substrate) a `share` block
+    saying how it would be expressed in the real schema. See
+    cognitive/prompts/relational_thinking.md.
 
     `fire` ∈ "none" | "low" | "medium" | "high" is the agent's honest reading
     of how strongly the kindle activated its graph. A "none"/"low" record is
@@ -122,9 +132,8 @@ def record_instigation(*, cycle: int, kindle: dict, fire: str,
         "at": _utcnow(),
         "kindle": kindle,
         "fire": fire,
-        "instigated": instigated,
-        "internal_nodes": list(internal_nodes),
-        "internal_edges": list(internal_edges),
+        "thoughts": thoughts,
+        "relations": list(relations),
         "genuinely_new": genuinely_new,
         "share": share,
         "note": note,

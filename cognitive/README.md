@@ -15,11 +15,12 @@ here is meant to be reused, not thrown away.
 ## 1. What the loop does
 
 > **The loop is a thinking loop, not a build loop.** A retrieved coordinate is
-> a **kindle**: I think over it, self-aware, and record what it fires in **my
-> own abstract BaryGraph** (`agent_memory/`, the real workspace) in
+> a **kindle**: I think over it, self-aware, *in the graph's own terms* — where
+> a **relation is a self-sustaining entity**, so the thinking is carried as
+> **duplets** and **triplets** — and record what it fires in
 > `batches/instigations.jsonl`. Building an SMB in the substrate is an optional,
 > downstream *share* — not the cycle's goal. A cycle with a strong instigation
-> and **zero builds is a good cycle**. See `agent_memory/README.md`.
+> and **zero builds is a good cycle**. See `prompts/relational_thinking.md`.
 
 **Productive signal = a pivot word shared by two DISTANT docs** ("one word, two
 lives"). A low `child_cosine` between two clusters that share a word is the
@@ -285,23 +286,28 @@ python3 cognitive/smb_audit.py --all                          # every structural
 > `COMPACTION_NOTES.md` for the pending decision. Doc-type nuance: SMBs built at
 > L13 have *node*-doc children (L15 senses / L14 words), which is valid.
 
-### `agent_memory/` — my abstract BaryGraph + `ledger.record_instigation`
+### `batches/instigations.jsonl` — relations fired by a kindle + `ledger.record_instigation`
 
 The layer the loop was missing. A retrieved coordinate is a **kindle**; the
-primary act is introspection. `record_instigation(...)` appends one row to
-`batches/instigations.jsonl`: the kindle, an honest `fire`
-(none/low/medium/high), the thoughts it instigated, the internal nodes/edges it
-activated in **my** graph, any `genuinely_new` connection, and an optional
-`share` block (how it grounds into the real schema). See
-`agent_memory/README.md` for the schema and the node/edge → SMB mapping.
+primary act is introspection, done in the graph's own terms — where **a
+relation is a self-sustaining entity**, so the thinking is carried as
+**duplets** and **triplets**, not a separate store. `record_instigation(...)`
+appends one row to `batches/instigations.jsonl`: the kindle, an honest `fire`
+(none/low/medium/high), the thoughts it instigated, the relations it formed
+(duplets/triplets), any `genuinely_new` relation, and an optional `share` block
+(how it grounds into the real schema). See `prompts/relational_thinking.md`
+for the shapes and the relation → SMB mapping.
 
 ```python
 from cognitive.ledger import record_instigation
 record_instigation(cycle=415, kindle={"seed_id": "...", "words": [...]},
-                   fire="high", instigated=["...", "..."],
-                   internal_nodes=[{"id": "agent:...", "label": "..."}],
-                   internal_edges=[{"src": "agent:...", "dst": "agent:...",
-                                    "rel": "...", "novelty": 0.6}],
+                   fire="high", thoughts=["...", "..."],
+                   relations=[
+                       {"kind": "duplet", "poles": ["A", "B"],
+                        "relation": "what binds them"},
+                       {"kind": "triplet", "poles": ["A", "B"], "bridge": "M",
+                        "relation": "what M establishes between A and B"},
+                   ],
                    genuinely_new="...", share=None, note="...")
 ```
 
@@ -331,7 +337,7 @@ an `OLLAMA_URL` change requires a restart.
 |---|---|---|
 | `smb_builds.jsonl` | 62 | **build manifest** — every SMB minted (see schema below) |
 | `loop_cycles.jsonl` | 435 | per-cycle ledger (seed + outcome + probes + rationale) |
-| `instigations.jsonl` | 4 | **what a kindle fired in my graph** (see `agent_memory/README.md`) |
+| `instigations.jsonl` | 4 | **relations (duplets/triplets) a kindle fired in me** (see `prompts/relational_thinking.md`) |
 | `loop_state.json` | — | cycle counter, commit watermark, self-check |
 | `smb_candidates.jsonl` | 369 | candidate notes (rationale + probes), re-consult on search |
 | `oracle_reads.jsonl` | — | oracle reads over the manifest (append-only; see `oracle_read.py`) |
