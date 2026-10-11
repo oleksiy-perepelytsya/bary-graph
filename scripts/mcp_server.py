@@ -603,7 +603,9 @@ async def sample_metabary(level: int, n: int = 5, with_parent: bool = True) -> s
     )
 
 
-def _random_metabary_docs(level: int, n: int) -> list[dict[str, Any]]:
+def _random_metabary_docs(
+    level: int, n: int, *, independent: bool = False
+) -> list[dict[str, Any]]:
     """Sample n random MetaBary docs at the given level via count + random skip.
 
     $sample on a multi-million-doc collection forces a full scan (40s+), and
@@ -613,19 +615,32 @@ def _random_metabary_docs(level: int, n: int) -> list[dict[str, Any]]:
     consecutive index entries from there with a single find + skip + limit(n)
     — a cheap index-only walk, no new index required. Re-rolls if the offset
     lands past the end.
+
+    `independent=True` instead draws n SEPARATE random offsets (n index-only
+    find+skip+limit(1) probes). Use it when the caller needs genuinely
+    independent random docs rather than a contiguous window: because same-level
+    docs were built in content clusters, the window walk returns a single
+    cluster, so repeated draws (or the seed sampling for the discovery loop)
+    collapse onto near-duplicate seeds.
     """
     filt = {"doc_type": "baryedge", "level": level}
+    proj = {"cm1_id": 1, "cm2_id": 1, "bridge_id": 1,
+            "connection_strength": 1, "accumulated_weight": 1,
+            "parent_edge_id": 1}
     count = _coll.count_documents(filt)
     if count == 0:
         return []
+    if independent:
+        out: list[dict[str, Any]] = []
+        for _ in range(n):
+            k = random.randrange(count) if count > 1 else 0
+            doc = next(iter(_coll.find(filt, proj).skip(k).limit(1)), None)
+            if doc:
+                out.append(doc)
+        return out
     for _ in range(8):
         k = random.randrange(count) if count > n else 0
-        docs = list(_coll.find(
-            filt,
-            {"cm1_id": 1, "cm2_id": 1, "bridge_id": 1,
-             "connection_strength": 1, "accumulated_weight": 1,
-             "parent_edge_id": 1},
-        ).skip(k).limit(n))
+        docs = list(_coll.find(filt, proj).skip(k).limit(n))
         if docs:
             return docs
     return []

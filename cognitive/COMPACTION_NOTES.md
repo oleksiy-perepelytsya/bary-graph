@@ -52,6 +52,21 @@ resuming the loop.
 - **Keep candidates in context**: `cognitive/batches/smb_candidates.jsonl` is
   retained and should be re-consulted on new searches — e.g. noticing that a
   previously near-miss candidate now has its missing bridge ("aha" catch).
+- **Productive signal (KEY, batch V).** Random MetaBary seeds are homogeneous:
+  a seed's *own* child_cosine (cosine of its `cm1`/`cm2` vectors) runs min ~0.79,
+  median ~0.92 — i.e. a random seed almost never straddles two distant branches,
+  which is why random draws yield so little. The productive unit is a **pivot
+  word shared by two docs that are DISTANT in vector space** (low child_cosine):
+  `yarn` thread/tale (0.514), `tanker` military crewman / liquid-cargo vessel
+  (0.617). Find it while enriching a seed: look for neighbours that share a word
+  with the seed but sit far from it. Children at the same level L, bridge at
+  L-1, SMB at L-2. Well-formed SMBs sit at child_cosine ~0.24-0.62; >0.9 = the
+  two children are co-located (flag for recheck, still buildable).
+- **Sampler fix.** `_random_metabary_docs(level, n, independent=True)` now draws
+  n *separate* random offsets (n index-only probes). The default window walk
+  returns `n` consecutive index entries — one contiguous content cluster — so
+  repeated draws / seed batches collapse onto near-duplicate seeds.
+  `loop_batch3.py` now passes `independent=True`.
 
 ## Jev oracle — `cognitive/not_sure.py`
 

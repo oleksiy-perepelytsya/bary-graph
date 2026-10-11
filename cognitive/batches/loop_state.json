@@ -1,17 +1,15 @@
 {
- "cycles_done": 248,
- "last_commit_cycle": 248,
- "next_commit_cycle": 258,
+ "cycles_done": 260,
+ "last_commit_cycle": 260,
+ "next_commit_cycle": 270,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch U (237-248, 12-seed plain draw): 0/12 built (honest lean batch). All seeds were single-domain / morphological / name clusters (antimalarials, -cele terms, -graphy, paleo- proxies, out- verbs, SCOTUS case names). No shared-pivot doubling appeared.",
+ "self_check": "batch V (249-260, 12 seeds): 1 build (tanker SMB, child_cosine 0.6175). KEY FINDING: random MB seeds are homogeneous - the seed's OWN child_cosine has min 0.79 / median 0.92 - so the productive signal is a PIVOT WORD shared by two distant docs (like yarn: thread/tale), not the seed's own children. Also fixed the sampler bias: _random_metabary_docs walks n CONSECUTIVE docs from one offset (a contiguous cluster), so 'random' batches were near-duplicate seeds; independent-offset draws fix it. Continuing on the pivot-word signal.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
-  "sampler: plain random draw (no automated cluster filter); skip-and-requery by judgment.",
+  "sampler: plain random draw (no content filter). loop_batch3.py should use independent offsets per seed (fixed in this commit) - the shared _random_metabary_docs window-walk returns near-duplicate seeds.",
+  "pivot detector: the productive unit is a pivot word shared by two docs that are DISTANT in vector space (low child_cosine). cm1/cm2 same level L, bridge at L-1, SMB at L-2.",
   "candidates (smb_candidates.jsonl) are retained and should be re-consulted on new searches for near-miss catches.",
-  "Jev oracle tool: cognitive/not_sure.py (decision model via /v1/systemone). Stand-in model = nimble (Bespoke Labs 9B decision model) on ollama :11435; nimble needs ollama>=0.35 (embedding server on :11434 stays on old image).",
-  "commit cadence: every ~10-16 cycles (one batch per commit).",
-  "self-check at each commit: continue thread vs new random seed",
-  "2 high-cosine co-location SMBs flagged for recheck (conversation 0.92, inertness 0.907)"
+  "Jev oracle tool: cognitive/not_sure.py (decision model via /v1/systemone). Stand-in model = tev1:0.8b on :11435 (new ollama 0.40.2); old :11434 = embeddings only."
  ]
 }
