@@ -107,6 +107,13 @@ resuming the loop.
   **Use it where the AGENT is genuinely unsure**: which seed/thread/bridge to
   pursue, continue this line vs re-query, which of several fine options to take.
   Advisory and suggestible — a second estimation, never a veto, never a gate.
+- **Coin-flip principle (endorsed by user, Oct-11):** the oracle is a *mirror*,
+  not a decision-maker. Flip it, see the answer, and read **your own reaction**
+  to that possible decision: if the oracle's pick is one you'd be happy with,
+  go there; if it makes you uneasy, go the other way (or re-think) — the point
+  is a cheap second point of view on a decision you were already about to make.
+  Prefer it over exhaustive analysis of *every* direction: quick test first,
+  dive deep only into the one thread it surfaces (still not forced to follow it).
 - Tool: `cognitive/not_sure.py`. Call it at a decision point where the agent is
   torn. It speaks the **Jev API** (`POST /v1/systemone`): pass `--state` (the text to
   judge) and either a quick `--ask`/`--options` or a full `--questions-json`

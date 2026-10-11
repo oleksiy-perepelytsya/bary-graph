@@ -1,9 +1,9 @@
 {
- "cycles_done": 368,
- "last_commit_cycle": 368,
- "next_commit_cycle": 378,
+ "cycles_done": 378,
+ "last_commit_cycle": 378,
+ "next_commit_cycle": 388,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF (361-368): 8 draws, 1 near-miss candidate held (knuckleball/unpredictability, cos 0.92, no pivot bridge), 0 builds. Oracle used per corrected role - choice aid for thread selection (knuckleball thread 0.967), never as an SMB validator. Standing direction: multi-hop chains, not animal<->machine mining.",
+ "self_check": "batch AF2 (369-378): 10 draws, 2 near-miss candidates held (knuckleball/unpredictability, matriculation academia<->heraldry), 0 builds. Oracle used strictly as coin-flip choice aid (thread selection), never as an SMB validator. No builds this batch: the good leads lacked a pivot-word bridge / second life in the graph (no coercion).",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
