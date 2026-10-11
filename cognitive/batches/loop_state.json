@@ -1,9 +1,9 @@
 {
- "cycles_done": 592,
- "last_commit_cycle": 592,
- "next_commit_cycle": 595,
+ "cycles_done": 604,
+ "last_commit_cycle": 604,
+ "next_commit_cycle": 605,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AS (581-592): 12 draws, 2 builds. bath (bathtub<->Hebrew liquid unit ~23 L, 0.4709) and coyote (canine<->to prospect for gold by digging, 0.3748; the smuggler life 0.5167 sits above band). Held gated (electronics/community 0.58) and kula (tower/exchange 0.55). Filed the kula/moka gift-economy cluster and the 40-sense 'wash'. Note: word_pivot min_inter screens on glosses; edge-level child_cosine runs ~0.15-0.25 higher.",
+ "self_check": "batch AT (593-604): 12 draws, 1 build (thin). nardus built (the aromatic ointment nard <-> matgrass, Nardus spp.; 0.4386). Held colostrum (first milk <-> a turpentine-egg-yolk varnish; a genuine homonymy but 0.5158, just above band). Filed Kodak-genericization photographer terms and a 'tele-' linkage cluster.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
