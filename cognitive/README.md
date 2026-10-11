@@ -124,9 +124,13 @@ Randomly draw seeds, vector-search each neighbourhood, and print the neighbours
 that share a leaf word (ascending cosine = most distant first).
 
 ```bash
-python3 cognitive/loop_pivot.py [N=15] [LEVELS="13,12"] [--seed N]
+python3 cognitive/loop_pivot.py [N=15] [LEVELS="13,12"] [--seed N] [--top N]
 # JSON lines: {"cos","shared","seed":{id,lvl,w},"nb":{id,lvl,w}}
 # --seed makes a draw reproducible for replay/diff.
+# --top N = print the N most distant pairs (default 24); use a large N to see
+#           every shared-word pair (needed to file per-seed outcomes).
+# Every drawn seed is also emitted to stderr as {"drawn": true, ...} so a
+# batch is fully recordable even when a seed yields no shared-word neighbour.
 ```
 
 ### `find_bridge.py` — bridge hunt

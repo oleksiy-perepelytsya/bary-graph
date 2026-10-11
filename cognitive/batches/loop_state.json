@@ -1,17 +1,18 @@
 {
- "cycles_done": 411,
- "last_commit_cycle": 411,
- "next_commit_cycle": 421,
+ "cycles_done": 423,
+ "last_commit_cycle": 423,
+ "next_commit_cycle": 433,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF5 (400-411): 12 draws, 1 BUILD (cycle 406: SMB 'lawn' grass-ground <-> thin-linen two-lives, smb_id 6acb626ce0ea65ab7696467f, child_cosine 0.4212, children L15/bridge L14/SMB L13, pivot 'lawn' on the L14 word-node bridge). First build since the schema-gate went mandatory: build_gate.py GATE PASS before insert, smb_audit.py ALL CONSISTENT after. Unlike the matriculation/knuckleball near-misses, both lives of 'lawn' exist in the graph - that was the admission condition (no coercion: the graph supplied the bridge). Other draws all same-domain. Oracle: no genuine choicepoint needed the coin-flip; lawn was unambiguous both-lives.",
+ "self_check": "batch AF6 (412-423): 12 draws, 0 builds. First batch run on the folded-back analysis method (prompts/native_loop.md) with the richer ledger (probes_run + rationale per cycle). All 12 seeds had shared-word neighbours but every min cosine landed 0.839-0.986 - uniformly same-domain: 5 similarity-clusters (coenzyme-Q biochem; named graphs; sailing rigging; shipping/refueling; idioms), 4 proper-noun clusters (language names; Coriolis/Cornu eponyms; Indian-history names; surnames), 3 morphological families (dispon- variants; dumb- compounds; eusporangiate/leptosporangiate). No distant second life in any draw -> 0 builds, correctly HOLD. Extra probes during the batch: 'part' polysemy (noun vs verb word nodes cos 0.851; part-adj 0.747) = same-domain, not two lives; 'tanker' two-lives confirmed already built (SMB 6acad257, cycle 249); no coral-reef life in the rigging draw. Self-check: no fixation - the 12 draws spanned 8+ unrelated domains; no thread to continue, so take fresh random seeds next batch. Note: the seeded run (--seed 20261011, 129 pairs) supersedes an earlier unseeded draw from the same session; only the seeded batch is filed. loop_pivot.py gained --top N (default 24) and now emits every drawn seed to stderr, so per-seed outcomes are fully recordable.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
+  "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity; read each batch. Pipeline now: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> record (ledger.py: probes_run + rationale + analysis).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
-  "sampler: plain random draw (no content filter). loop_batch3.py should use independent offsets per seed (fixed in this commit) - the shared _random_metabary_docs window-walk returns near-duplicate seeds.",
+  "sampler: plain random draw (no content filter). loop_pivot.py now emits all drawn seeds to stderr and takes --top N (default 24 = most distant pairs) so a batch is fully recordable.",
   "pivot detector: the productive unit is a pivot word shared by two docs that are DISTANT in vector space (low child_cosine). cm1/cm2 same level L, bridge at L-1, SMB at L-2.",
   "candidates (smb_candidates.jsonl) are retained and should be re-consulted on new searches for near-miss catches.",
-  "Jev oracle tool: cognitive/not_sure.py (decision model via /v1/systemone). Stand-in model = tev1:0.8b on :11435 (new ollama 0.40.2); old :11434 = embeddings only.",
-  "loop_pivot.py (batch W): pivot-scan enrich - independent seed draw + vector_search, keep shared-word neighbours ranked by cosine asc.",
-  "find_bridge.py: L12 bridge hunt - union of the two clusters' L12 neighbourhoods, filtered to docs whose leaf words contain the pivot word."
+  "Jev oracle tool: cognitive/not_sure.py (decision aid only; never an SMB validator). Model tev1:0.8b on :11435.",
+  "loop_pivot.py: pivot-scan enrich - independent seed draw + vector_search, keep shared-word neighbours ranked by cosine asc.",
+  "find_bridge.py: L-1 bridge hunt - union of the two clusters' neighbourhoods, filtered to docs whose leaf words contain the pivot word."
  ]
 }

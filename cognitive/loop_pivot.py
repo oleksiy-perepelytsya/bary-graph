@@ -8,6 +8,10 @@ found in batch V: yarn 0.514, tanker 0.617).
 
   argv[1] = seeds (default 15), argv[2] = levels (default "13,12")
   --seed N = seed the RNG so a run is reproducible (for replay/diff)
+  --top N  = print the N most distant pairs (default 24; use a large N to
+             see every shared-word pair, needed to file per-seed outcomes)
+  All drawn seeds are emitted to stderr as {"drawn": true, ...} lines so a
+  batch is fully recordable even when a seed yields no shared-word neighbour.
 """
 import sys, json, random
 import numpy as np
@@ -25,6 +29,11 @@ if "--seed" in _argv:
     del _argv[_i:_i + 2]
 if _rng_seed is not None:
     random.seed(_rng_seed)
+_TOP = 24
+if "--top" in _argv:
+    _i = _argv.index("--top")
+    _TOP = int(_argv[_i + 1])
+    del _argv[_i:_i + 2]
 
 N = int(_argv[0]) if len(_argv) > 0 else 15
 LEVELS = [int(x) for x in (_argv[1].split(",") if len(_argv) > 1 else ["13", "12"])]
@@ -63,6 +72,8 @@ for lvl in LEVELS:
 hits = []
 for lvl, d in seeds:
     sid = str(d["_id"]); sv = vec(sid)
+    print(json.dumps({"drawn": True, "seed": {"id": sid, "lvl": lvl},
+                      "words": words(sid)}), file=sys.stderr)
     if sv is None: continue
     sw = set(words(sid))
     if not sw: continue
@@ -75,7 +86,7 @@ for lvl, d in seeds:
         hits.append((round(cc, 3), sorted(shared), lvl, sid, h.get("level"), nid, words(sid), words(nid)))
 
 hits.sort()
-for cc, shared, sl, sid, nl, nid, sw, nw in hits[:24]:
+for cc, shared, sl, sid, nl, nid, sw, nw in hits[:_TOP]:
     print(json.dumps({"cos": cc, "shared": shared, "seed": {"id": sid, "lvl": sl, "w": sw},
                       "nb": {"id": nid, "lvl": nl, "w": nw}}, ensure_ascii=False))
 print(f"# seeds={len(seeds)} shared-word neighbour pairs={len(hits)}", file=sys.stderr)
