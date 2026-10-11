@@ -149,6 +149,23 @@ child_cosine, choice, p_yes, probabilities, confidence`.
 > so it must never gate admission. The oracle's real role is agent decision
 > support (see `not_sure.py` above). See `COMPACTION_NOTES.md`.
 
+### `smb_audit.py` — structural consistency audit
+
+Verifies the *mechanics* of built SMBs (no content judgment): leveling rule
+(children same level L, bridge L-1, SMB L-2), referenced ids resolve to real
+docs, ids distinct, explicit `bridge_id`, `source='structural'`. Also reports
+manifest-vs-DB drift (rows claiming SMBs that are not in the DB).
+
+```bash
+python3 cognitive/smb_audit.py --sample 10 --seed 20261011   # random 10
+python3 cognitive/smb_audit.py --all                          # every structural row
+```
+
+> **Result (Oct-11):** 47/58 manifest rows exist in the DB and pass 100% of
+> checks; 11 rows are phantom claims (no doc by direct `_id` lookup) — see
+> `COMPACTION_NOTES.md` for the pending decision. Doc-type nuance: SMBs built at
+> L13 have *node*-doc children (L15 senses / L14 words), which is valid.
+
 ### `scripts/mcp_server_ctl.sh` — serve/restart the MCP (repo root)
 
 The streamable-http MCP server sits behind a cloudflared quick tunnel. The tunnel
