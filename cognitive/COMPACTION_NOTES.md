@@ -4,6 +4,43 @@ Carried into the next session/compaction so the loop's correct context survives.
 This mirrors (and corrects) the conversation checkpoint. Read this first when
 resuming the loop.
 
+## What the loop IS (corrected Oct-11 2026 — read before anything else)
+
+> The loop is **not** about building bridges from the substrate, mimicking an
+> algebraic process on the graph. It is about **me as a thinking entity
+> grabbing a retrieved bridge and thinking over it**, self-aware, observing
+> which of my own thoughts it instigates and whether a *genuinely new*
+> connection appears. Retrieval is not an object to act on; it is a **kindle**
+> to check what it can fire in **my own abstract BaryGraph** — which I define —
+> and afterwards (optionally) share with the real schema that exists.
+
+Consequences:
+
+- There are **two graphs**: the *substrate* (`barygraph_poc`, the kindling) and
+  **my graph** (`cognitive/agent_memory/`, the real workspace). The substrate is
+  fuel, not the memory.
+- The new record is **`cognitive/batches/instigations.jsonl`** (writer
+  `cognitive.ledger.record_instigation`): per kindle → `fire`
+  (none/low/medium/high) → `instigated` thoughts → internal nodes/edges →
+  `genuinely_new` → optional `share`. Schema + mapping:
+  `cognitive/agent_memory/README.md`.
+- **Building an SMB is an optional downstream *share***, done only when an
+  internal structure is grounded in the substrate (both lives real, an L-1 doc
+  carries the pivot). It is not the cycle's goal. A cycle with a strong
+  instigation and **zero builds is a good cycle**.
+- `loop_cycles.jsonl` (scan outcome) + `smb_builds.jsonl` (built triads) remain
+  the **substrate bookkeeping**; `instigations.jsonl` is the layer that was
+  missing.
+- **Calibration warning:** the substrate's min-sense-cosine metric ranks dead
+  homonymy (`shock` 0.15 = lapdog vs geologic deformation; `strain` 0.166 =
+  deer track vs stretch) as eagerly as productive common-domain two-lives
+  (`lawn` 0.205 = grass/linen). Low min_inter is not the signal. The recent
+  low-yield batches were diagnosed as this, not bad luck. Do not let a number
+  stand in for a thought.
+- Method doc updated accordingly: `cognitive/prompts/native_loop.md`
+  (cycle procedure restated as kindle → think → thin → optional grounded share
+  → record).
+
 ## Schema — authoritative (old `cog` schema is LEGACY)
 
 - The **old `cog` schema is legacy** (the `cog_cycle.py` / `cog_mb_loop` era and

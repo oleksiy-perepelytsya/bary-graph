@@ -41,6 +41,7 @@ from pathlib import Path
 BATCH_DIR = Path(__file__).resolve().parent / "batches"
 CYCLES = BATCH_DIR / "loop_cycles.jsonl"
 BUILDS = BATCH_DIR / "smb_builds.jsonl"
+INSTIGATIONS = BATCH_DIR / "instigations.jsonl"
 DEFAULT_AUTHOR = "big-pickle@opencode-0.5"
 
 
@@ -96,3 +97,38 @@ def record_build(*, name: str, smb_id: str, cm1_id: str, cm2_id: str,
     with BUILDS.open("a") as fh:
         fh.write(json.dumps(row, ensure_ascii=False) + "\n")
     return row
+
+
+def record_instigation(*, cycle: int, kindle: dict, fire: str,
+                       instigated: list[str], internal_nodes: list[dict] = (),
+                       internal_edges: list[dict] = (), genuinely_new: str | None = None,
+                       share: dict | None = None, note: str = "") -> dict:
+    """Append one INSTIGATION record — what a retrieved coordinate (kindle)
+    fired in the agent's own associative graph.
+
+    Retrieval is a *kindle*, not an object to build. The record captures the
+    thoughts it instigated, the internal nodes/edges it activated in the
+    agent's abstract BaryGraph, any genuinely-new connection, and (if an
+    internal structure is grounded in the substrate) a `share` block saying
+    how it would be expressed in the real schema. See
+    cognitive/agent_memory/README.md.
+
+    `fire` ∈ "none" | "low" | "medium" | "high" is the agent's honest reading
+    of how strongly the kindle activated its graph. A "none"/"low" record is
+    valuable: it documents that a coordinate was inert (self-aware skip)."""
+    rec = {
+        "instigation": f"agent-inst-{cycle}",
+        "cycle": cycle,
+        "at": _utcnow(),
+        "kindle": kindle,
+        "fire": fire,
+        "instigated": instigated,
+        "internal_nodes": list(internal_nodes),
+        "internal_edges": list(internal_edges),
+        "genuinely_new": genuinely_new,
+        "share": share,
+        "note": note,
+    }
+    with INSTIGATIONS.open("a") as fh:
+        fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    return rec

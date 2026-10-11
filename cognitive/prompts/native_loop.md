@@ -109,6 +109,12 @@ edge can be a productive prompt; an *empty* or *generic* cluster is not.
 
 ## Cycle procedure (the loop, with analysis in the right places)
 
+> **The loop is a thinking loop, not a build loop.** Retrieval is a *kindle*;
+> the primary act is introspection (what does this fire in my own abstract
+> BaryGraph?), recorded in `instigations.jsonl`. Building in the substrate is a
+> possible, optional, downstream *share*, not the goal. A cycle with a strong
+> instigation and zero builds is a good cycle. See `agent_memory/README.md`.
+
 1. **Seed** — random L12/L13 draw (`loop_pivot.py`). Do not prejudge the
    seed; it is a coordinate.
 2. **Scan** — shared-leaf neighbours ascending cosine.
@@ -134,3 +140,17 @@ edge can be a productive prompt; an *empty* or *generic* cluster is not.
 Standing direction: prefer **multi-hop chains** (two distant lives joined
 by a real mechanism) over animal↔machine mining. No SMB coercion: a
 proposal is a coordinate to investigate; only value judgment admits a build.
+Above all, do not reduce the loop to an algebraic build on the substrate — it
+is the agent thinking, with the graph as kindling.
+
+## Calibration warning (Oct-11) — what the substrate metric actually ranks
+
+The substrate's "one word, two lives" metric (min sense cosine, `word_pivot.py`)
+turns out to rank **dead homonymy** at least as eagerly as the productive
+common-domain two-lives: `shock` 0.15 (shaggy lapdog vs geological deformation),
+`strain` 0.166 (a deer's track vs to stretch), `taut` 0.171 (nautical discipline
+vs a wine term) score lower than `lawn` 0.205 (grass/linen). So low min_inter is
+**not** the productive signal by itself; the productive signal is *metaphorical
+migration between common domains*, which needs a commonness/domain judgement the
+metric lacks. Recent low-yield batches were diagnosed as exactly this, not bad
+luck. Do not let a low number stand in for a thought.
