@@ -1,9 +1,9 @@
 {
- "cycles_done": 330,
- "last_commit_cycle": 330,
- "next_commit_cycle": 340,
+ "cycles_done": 340,
+ "last_commit_cycle": 340,
+ "next_commit_cycle": 350,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AB (321-330): 1 build (dog, child_cosine 0.5626, q 0.2756). Eight builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571, gin 0.555, ram 0.552, goose 0.493, dog 0.563). dog built after finding the machine-side pivot-word bridge 'dogbone' (the latch cluster does not carry 'dog'). monkey (cos 0.69) and the textile 'mule' (cos 0.549) lack suitable pivot-word bridges; jigger falls into an existing machinery cluster - held. Next: continue to mine rigging/tool words (pony/glass vs horse; spud; jack; cat/dog machine parts) and only build when there is a literal pivot-word bridge.",
+ "self_check": "batch AC (331-340): 1 build (horse, child_cosine 0.6755, q 0.2295). Nine builds this session (tanker 0.617, hurdy-gurdy 0.610, crab 0.627, crane 0.571, gin 0.555, ram 0.552, goose 0.493, dog 0.563, horse 0.676). 'horse/sawhorse' is a clean two-lives (sawhorse literally named after the trestle shape). The 'spud' (potato vs spud tool) has both clusters close; will hunt for a literal pivot-word bridge if it exists. 'jack' (animal/tool) falls into donkey neighborhoods. 'pony' (animal/drink glass) has distant pairs but no clean pivot-word bridge.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
