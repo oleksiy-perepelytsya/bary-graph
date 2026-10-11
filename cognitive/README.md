@@ -68,9 +68,13 @@ searches so near-misses are not lost.
 
 ### `not_sure.py` — uncertainty oracle
 
-A **decision model** (Jev API, `POST /v1/systemone`) that returns a choice +
-probabilities for a given state. Use it when a judgment is uncertain — a *second
-estimation*, never a coercion or a fact.
+A **decision aid for the agent's own choices** (Jev API, `POST /v1/systemone`)
+that returns a choice + probabilities for a given state. Use it where the **agent**
+is genuinely unsure — which seed/thread/bridge to pursue, continue vs re-query,
+which of several fine options to take. It is **not** a validator of SMBs: an SMB
+is a product of analysis admitted by value judgment, not something to check
+deterministically (asking it "is this SMB productive?" was measured near-constant,
+2% yes under a term-list framing, 27% under prose — see `oracle_read.py`).
 
 ```bash
 # single question
@@ -125,11 +129,10 @@ python3 cognitive/find_bridge.py PIVOT SEED_ID [SEED_ID ...] \
 # prints MATCH <doc_id> [leaf words...]
 ```
 
-### `oracle_read.py` — formalized oracle reads over the manifest
+### `oracle_read.py` — calibration experiment (negative result)
 
-Runs `not_sure.py` over the SMB manifest with a **fixed** template + question (so
-runs are comparable) and appends every read to a durable ledger
-`cognitive/batches/oracle_reads.jsonl`.
+Runs `not_sure.py` over the SMB manifest with a **fixed** template + question and
+appends every read to `cognitive/batches/oracle_reads.jsonl`.
 
 ```bash
 python3 cognitive/oracle_read.py --all --template both      # all 55, both framings
@@ -139,11 +142,12 @@ python3 cognitive/oracle_read.py --sample 25 --seed 20261011 --template term
 Records: `at, model, template, question, criteria, name, smb_id, author,
 child_cosine, choice, p_yes, probabilities, confidence`.
 
-> **Result (Oct-11, full 55):** term-list framing → **yes 1/55 (2%)**, mean
-> p(yes) 0.32; prose framing → **yes 15/55 (27%)**, mean p(yes) 0.443. Same
-> candidates, 13× the yes-rate from phrasing alone. The oracle is
-> **framing-dominated and near-constant**, so absolute yes/no is meaningless and
-> it must never gate admission. See `COMPACTION_NOTES.md`.
+> **DEPRECATED use — kept as the negative-result ledger.** Asking tev1 to
+> validate SMBs is a category error (SMBs are analysis products, not oracle
+> subjects). The run proved the point: term-list framing → yes 1/55 (2%), prose
+> → yes 15/55 (27%) on the same candidates — framing-dominated and near-constant,
+> so it must never gate admission. The oracle's real role is agent decision
+> support (see `not_sure.py` above). See `COMPACTION_NOTES.md`.
 
 ### `scripts/mcp_server_ctl.sh` — serve/restart the MCP (repo root)
 

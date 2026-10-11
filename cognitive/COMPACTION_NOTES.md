@@ -99,8 +99,16 @@ resuming the loop.
 
 ## Jev oracle — `cognitive/not_sure.py`
 
-- Tool: `cognitive/not_sure.py`. Call it when a retrieval/judgment is uncertain.
-  It speaks the **Jev API** (`POST /v1/systemone`): pass `--state` (the text to
+- **ROLE — CORRECTED by user (Oct-11).** The oracle is a **decision aid for the
+  agent's own choices**, never a validator of SMBs. An SMB is a *product of
+  analysis*, admitted by value judgment — the sole admission criterion; it is
+  not something to check deterministically, and asking a small decision model
+  "is this SMB productive?" is a category error (measured near-constant, below).
+  **Use it where the AGENT is genuinely unsure**: which seed/thread/bridge to
+  pursue, continue this line vs re-query, which of several fine options to take.
+  Advisory and suggestible — a second estimation, never a veto, never a gate.
+- Tool: `cognitive/not_sure.py`. Call it at a decision point where the agent is
+  torn. It speaks the **Jev API** (`POST /v1/systemone`): pass `--state` (the text to
   judge) and either a quick `--ask`/`--options` or a full `--questions-json`
   with typed `choice` questions + `criteria`; it returns `{choice, probabilities}`
   per question. Importable for loop use: `from cognitive.not_sure import judge,
@@ -126,26 +134,19 @@ resuming the loop.
     → no (0.440) vs "worth recording as a structural SMB" → yes (0.595).
   * **`confidence` is NOT reliability** — it ranged 0.000–0.435 in these runs
     and did not track agreement with my admissions.
-  * With one *neutral* template it said **no to 10 of my 11 session SMBs**
-    (crab/crane/gin/ram/goose/dog/horse/spud/cat/hurdy-gurdy; only tanker was
-    a marginal yes). Treat that as a second estimation, not a veto — but note
-    it is consistent with the user's Oct-11 critique that recent builds drifted
-    into trivial animal↔machine analogies.
-- **Rules for loop use:** always feed a *fixed, neutral* state template (never
-  leading) so runs are comparable; treat "no" as a prompt to re-examine, not a
-  denial; never let it override value judgment (no coercion).
-- **Full-history read (Oct-11; 55 structural SMBs — random 25, then all 55):**
-  with the fixed **term-list** template it said **yes to 1/55 (2%)**, mean p(yes)
-  0.32, corr(child_cosine, p(yes)) ≈ 0. So it does **not** single out the recent
-  animal↔machine builds — it (near-constantly) says no to essentially everything,
-  the earlier "sophisticated" builds included (possession-law-demonology,
-  laughter-fracture, renormalization, omen-augury, …). **Prose framing on the
-  full 55 → yes 15/55 (27%), mean p(yes) 0.443** — same candidates, 13× the
-  yes-rate, purely from phrasing. p(yes) barely moves with content ⇒
-  **tev1:0.8b is framing-dominated and not a usable discriminator on this
-  question**, and the earlier "no to 10/11" was *not* evidence about those
-  specific SMBs. Ledger: `cognitive/batches/oracle_reads.jsonl` (110 reads),
-  tool `cognitive/oracle_read.py`. Next: a forced-choice/comparative question to
-  see if *any* framing separates; then consider `nimble`. (Note:
+  * Calibration (full history, 55 structural SMBs): term-list framing →
+    **yes 1/55 (2%)**; prose framing → **yes 15/55 (27%)**; corr(child_cosine,
+    p(yes)) ≈ 0. **Near-constant** ⇒ it cannot discriminate SMB quality at all.
+    My earlier "no to 10/11 of my builds" was this same misuse — it said no to
+    *everything*, so it never confirmed the user's critique either way.
+- **Rules:** when consulted at a genuine decision point, feed a *fixed, neutral*
+  template (the oracle is suggestible — phrasing moved the same candidates
+  2%↔27% yes), treat "no" as "re-examine / re-ask with crisper options", and
+  never let it override value judgment or replace analysis. If a consult
+  influenced a decision, note it in the loop ledger.
+- **Artifacts (negative result):** the Oct-11 calibration reads live in
+  `cognitive/batches/oracle_reads.jsonl` (110 reads: term+prose × 55), tool
+  `cognitive/oracle_read.py` (marked as a calibration experiment). They prove
+  the tiny model must not gate SMBs; they are not a validation channel. (Note:
   `smb_builds.jsonl` is heterogeneous — 55 structural entries + 6 legacy
   DOI/proposal records; filter on `name`+`cm1_terms`.)

@@ -23,9 +23,14 @@ Usage
 Only manifest entries with the structural shape (name + cm1_terms + cm2_terms)
 are read; the 6 legacy DOI records are skipped.
 
-NOTE ON INTERPRETATION: tev1:0.8b is framing-dominated (the same candidate flips
-with phrasing) and near-constant on this question. Use this ledger to study
-*relative* behaviour under ONE fixed template — never to admit/deny an SMB.
+NOTE ON STATUS (MISUSE, KEPT AS CALIBRATION): this tool was built to validate
+SMBs with tev1:0.8b — that use is a category error, superseded by the user's
+correction (Oct-11): SMBs are products of analysis admitted by value judgment
+and are NOT to be checked deterministically; the oracle is a decision aid for
+the agent's own choices only. This tool is retained because its output is the
+negative-result ledger (framing-dominated: 2% yes term-list vs 27% prose)
+proving the tiny model cannot gate SMBs. Do not extend it — it exists as
+evidence.
 """
 from __future__ import annotations
 
