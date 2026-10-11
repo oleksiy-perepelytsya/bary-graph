@@ -1,9 +1,9 @@
 {
- "cycles_done": 484,
- "last_commit_cycle": 484,
- "next_commit_cycle": 495,
+ "cycles_done": 496,
+ "last_commit_cycle": 496,
+ "next_commit_cycle": 505,
  "loop": "native: random L12/L13 MB seed -> word_pivot on the blade anchor -> senses/parent-edge lives -> interpret -> build if a real two-lives -> ledgers",
- "self_check": "batch AJ (473-484): 12 draws, 1 build. seed 473 yielded 'spar' - a homonymy with four unrelated lives (mineral/pole/fight/friend); mineral<->combat built (rubric 4/5/5/4, child_cosine 0.3914). Other spar axes held (wood<->mineral 0.65). Rest of the batch was morphology/taxa chemistry. Near-miss: directly (immediacy/honesty, close senses). Calibration holds.",
+ "self_check": "batch AK (485-496): 12 draws, 0 builds (HOLD). Thin batch: morphology, Islamic/religious terms, drug names. Only condition (0.263) and behavior (0.328) surfaced and both are same-word POS/general-vs-technical splits, not two lives. Filed eponymous minerals (khinite< Khin, sabatierite< Sabatier) and 'show' (animal/fashion exhibition) as low instigations. No coercion.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md.",
   "ANALYSIS METHOD (Oct-11): cognitive/prompts/native_loop.md - tension-not-similarity. Pipeline: build_rubric.py (analysis) -> build_gate.py (schema) -> create_structural (insert) -> smb_audit.py (verify) -> ledger.py (record: probes_run + rationale + analysis).",
