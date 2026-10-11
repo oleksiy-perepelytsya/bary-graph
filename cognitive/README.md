@@ -140,7 +140,8 @@ Records: `at, model, template, question, criteria, name, smb_id, author,
 child_cosine, choice, p_yes, probabilities, confidence`.
 
 > **Result (Oct-11, full 55):** term-list framing → **yes 1/55 (2%)**, mean
-> p(yes) 0.32; prose framing on the same 25 → **yes 7/25 (28%)**. The oracle is
+> p(yes) 0.32; prose framing → **yes 15/55 (27%)**, mean p(yes) 0.443. Same
+> candidates, 13× the yes-rate from phrasing alone. The oracle is
 > **framing-dominated and near-constant**, so absolute yes/no is meaningless and
 > it must never gate admission. See `COMPACTION_NOTES.md`.
 
