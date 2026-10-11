@@ -1,9 +1,9 @@
 {
- "cycles_done": 388,
- "last_commit_cycle": 388,
- "next_commit_cycle": 398,
+ "cycles_done": 399,
+ "last_commit_cycle": 399,
+ "next_commit_cycle": 409,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch AF3 (379-388): 10 draws, 0 builds, 0 near-miss candidates. All three scan passes (af4/af5/af6, 24 hits each) landed in same-domain clusters: bad-boy characters, ACE2 variants, optics, miso-family, immunology, parallel-computing, ice-motorsport, BSM particle physics, anti-doping agencies, geometry. No pivot-bridge two-lives signal anywhere; ADA probe confirmed the graph lacks an 'ada' L14 word node (no second life). No coercion - HOLD all. Tooling hardened this batch: build_gate.py (strict pre-insert schema check, errors block/warnings never) + smb_audit.py (structural audit) both committed; audit shows 47/47 existing SMB docs structurally consistent, 11 phantom manifest rows flagged for user decision.",
+ "self_check": "batch AF4 (389-399): 11 draws, 0 builds, 1 near-miss candidate retained (cycle 394: bandicoot marsupial <-> garden-theft verb, cos 0.42, no L-1 pivot bridge - HOLD per admission rule; recorded in smb_candidates.jsonl with grounding probes). Other threads all same-domain or component coincidence. Probing was targeted: only threads with a real two-lives signal got probes (ADA - no 'ada' L14 node in graph; bandicoot - verb life confirmed distant; coven/karass - same-domain). Gate untouched this batch (0 builds); build_gate.py + smb_audit.py remain the mandatory pre/post checks.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
