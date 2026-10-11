@@ -1,9 +1,9 @@
 {
- "cycles_done": 272,
- "last_commit_cycle": 272,
- "next_commit_cycle": 282,
+ "cycles_done": 284,
+ "last_commit_cycle": 284,
+ "next_commit_cycle": 294,
  "loop": "native: random L12/L13 MB seed -> batched enrich -> interpret -> build if productive -> ledgers",
- "self_check": "batch W (261-272): 1 build (hurdy-gurdy SMB, child_cosine 0.6102, q 0.5686). Introduced the PIVOT SCAN enrich step (cognitive/loop_pivot.py): vector-search each independent seed and keep neighbours that SHARE a leaf word but sit far away. This is the productive lens from batch V (pivot word = one word, two lives), and it delivered: 'hurdy-gurdy' (instrument / ship's winch). Two builds across batches V+W (tanker 0.617, hurdy-gurdy 0.610). Still only ~1 build per batch; the pivot scan's net is narrow (nearest neighbours sit at cos>0.8), so widen it or drive off words directly.",
+ "self_check": "batch X (273-284): 1 build (crab SMB, child_cosine 0.6267, q 0.2219). Seven builds now across the session's pivot era (tanker 0.617, hurdy-gurdy 0.610, crab 0.627). The pipeline for a pivot build is now: (1) pivot scan (cases where a seed's neighbour shares a leaf word), (2) word probe to locate the far cluster, (3) cosine check, (4) L12 bridge hunt (a doc containing the pivot word, or a shared-concept doc equidistant from both clusters). Note the environment: the embedder is CPU-starved (~20s/embed) while the all-build runs, so word probes must be one-off and batched; stored-vector operations ($vectorSearch with an existing vector, DB reads) are fast.",
  "notes": [
   "STANDING CONTEXT: see cognitive/COMPACTION_NOTES.md (schema legacy note, corrected Requirements/Blocked, Jev plan, candidate retention).",
   "schema: the old cog schema is LEGACY; the current structural-SMB schema (source='structural', bridge_id, author big-pickle@opencode-0.5, smb_builds.jsonl) is the authoritative one.",
@@ -11,6 +11,7 @@
   "pivot detector: the productive unit is a pivot word shared by two docs that are DISTANT in vector space (low child_cosine). cm1/cm2 same level L, bridge at L-1, SMB at L-2.",
   "candidates (smb_candidates.jsonl) are retained and should be re-consulted on new searches for near-miss catches.",
   "Jev oracle tool: cognitive/not_sure.py (decision model via /v1/systemone). Stand-in model = tev1:0.8b on :11435 (new ollama 0.40.2); old :11434 = embeddings only.",
-  "loop_pivot.py (batch W): pivot-scan enrich - independent seed draw + vector_search, keep shared-word neighbours ranked by cosine asc."
+  "loop_pivot.py (batch W): pivot-scan enrich - independent seed draw + vector_search, keep shared-word neighbours ranked by cosine asc.",
+  "find_bridge.py: L12 bridge hunt - union of the two clusters' L12 neighbourhoods, filtered to docs whose leaf words contain the pivot word."
  ]
 }
