@@ -116,6 +116,12 @@ class OllamaEmbedder:
         # ollama cold-start after idle (model load can take 60-120s+ on
         # this CPU, and EMBED_BATCH_SIZE=512 batches add to it).
         self._timeout = min(settings.embed_timeout_seconds, 600)
+        # Threads for the embed runner. Default to the host core count:
+        # requesting MORE threads than cores oversubscribes and is drastically
+        # slower (measured on a 4-core host: 8 threads ≈ 8.6s/call warm vs
+        # 0.6s with 4). Override with EMBED_NUM_THREAD.
+        self._num_thread = settings.embed_num_thread or (os.cpu_count() or 4)
+        self._options = {"num_thread": self._num_thread, "num_gpu": 999}
         self._headers = {}
         token = os.environ.get("OLLAMA_API_KEY") or os.environ.get("OLLAMA_AUTH_TOKEN") or os.environ.get("KAGGLE_EMBED_TOKEN") or os.environ.get("KAGGLE_API_TOKEN")
         if token:
@@ -142,7 +148,7 @@ class OllamaEmbedder:
                         # race a cold reload that can outlast the transport
                         # timeout. 6h >> any inter-phase gap we have.
                         "keep_alive": "6h",
-                        "options": {"num_thread": 8, "num_gpu": 999},
+                        "options": self._options,
                     })
                     resp.raise_for_status()
                 finally:

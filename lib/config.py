@@ -102,6 +102,11 @@ class Settings:
     # --- Batching ---
     batch_size: int = 512          # generic ingest / bulk-write batch
     embed_batch_size: int = 16     # texts-per-request to Ollama (CPU-safe)
+    # Threads handed to the Ollama embed runner. 0 = auto (host CPU count).
+    # Never set this above the host core count — oversubscription makes
+    # embedding ~10-30x slower (measured: 8 threads on 4 cores = 8.6s/call
+    # vs 0.6s with 4).
+    embed_num_thread: int = 0
 
     # --- Tunable thresholds (pipeline) ---
     q_min_l15: float = 0.72                    # Stage 3b greedy-match floor
@@ -163,6 +168,7 @@ class Settings:
             pipeline_state_dir=Path(_env_str("PIPELINE_STATE_DIR", "pipeline_state")),
             batch_size=_env_int("BATCH_SIZE", cls.batch_size),
             embed_batch_size=_env_int("EMBED_BATCH_SIZE", cls.embed_batch_size),
+            embed_num_thread=_env_int("EMBED_NUM_THREAD", cls.embed_num_thread),
             q_min_l15=_env_float("Q_MIN_L15", cls.q_min_l15),
             disambig_threshold=_env_float("DISAMBIG_THRESHOLD", cls.disambig_threshold),
             meta_bary_cos_threshold=_env_float(
