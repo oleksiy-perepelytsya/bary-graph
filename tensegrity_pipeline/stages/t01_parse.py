@@ -1,7 +1,10 @@
-"""t01_parse — segment an input document into L15 sentences and L14 titles.
+"""t01_parse — segment input documents into L15 sentences and L14 titles.
 
-Reads a single text/markdown file, runs :func:`tensegrity_pipeline.parse.parse_document`,
-and writes ``sentences.jsonl`` / ``titles.jsonl`` under ``Settings.parsed_dir``.
+Reads one or more text/markdown files (``--doc`` is repeatable), runs
+:func:`tensegrity_pipeline.parse.parse_documents`, and writes
+``sentences.jsonl`` / ``titles.jsonl`` under ``Settings.parsed_dir``. Every
+document keeps a distinct ``doc_id`` (its filename stem) so a multi-document
+run preserves source identity; output order follows command-line order.
 No MongoDB contact. Output is written to ``*.tmp`` and atomically renamed so a
 crash never leaves a half-written file for t02 to consume.
 """
@@ -15,29 +18,40 @@ from pathlib import Path
 import orjson
 
 from tensegrity_pipeline._base import bootstrap, finish
-from tensegrity_pipeline.parse import parse_document
+from tensegrity_pipeline.parse import parse_documents
 from tensegrity_pipeline.schema import SENTENCES_FILENAME, TITLES_FILENAME
 
 STAGE = "01_parse"
 
 
+def _resolve_inputs(args, settings) -> list[Path]:
+    """--doc args win; fall back to the TENSEGRITY_DOC env default."""
+    if args.doc:
+        return [Path(p) for p in args.doc]
+    if settings.tensegrity_doc is not None:
+        return [Path(settings.tensegrity_doc)]
+    raise SystemExit(
+        "no input document: pass --doc PATH (repeatable for multiple docs) "
+        "or set TENSEGRITY_DOC in the env"
+    )
+
+
 def run(argv: Sequence[str] | None = None) -> None:
     settings, args, log, cp = bootstrap(STAGE, argv)
 
-    src: Path | None = Path(args.doc) if args.doc else settings.tensegrity_doc
-    if src is None:
-        raise SystemExit(
-            "no input document: pass --doc PATH (or set TENSEGRITY_DOC in the env)"
-        )
-    if not src.exists():
-        raise FileNotFoundError(f"input document not found: {src}")
+    paths = _resolve_inputs(args, settings)
+    docs: list[tuple[str, str]] = []
+    for path in paths:
+        if not path.exists():
+            raise FileNotFoundError(f"input document not found: {path}")
+        docs.append((path.stem, path.read_text(encoding="utf-8")))
+        log.info("input doc: %s (doc_id=%s)", path, path.stem)
 
-    text = src.read_text(encoding="utf-8")
-    doc_id = src.stem
-    log.info("start doc=%s doc_id=%s dry_run=%s", src, doc_id, args.dry_run)
-
-    titles, sentences = parse_document(text, doc_id)
-    log.info("parsed %d sentences and %d titles", len(sentences), len(titles))
+    titles, sentences = parse_documents(docs)
+    log.info(
+        "parsed %d sentences and %d titles across %d documents",
+        len(sentences), len(titles), len(docs),
+    )
 
     out_dir = Path(settings.parsed_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

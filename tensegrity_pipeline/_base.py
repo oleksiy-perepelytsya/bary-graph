@@ -73,7 +73,9 @@ def make_parser(stage: str) -> argparse.ArgumentParser:
         "--doc",
         type=str,
         default=None,
-        help="(01_parse only) input text/markdown file to ingest",
+        action="append",
+        metavar="PATH",
+        help="(01_parse only) input text/markdown file; repeatable for multiple documents",
     )
     p.add_argument(
         "--level",

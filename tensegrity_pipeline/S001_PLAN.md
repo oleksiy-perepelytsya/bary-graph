@@ -1,7 +1,8 @@
 # S001 — GovKM continuity test: run plan (tensegrity pipeline)
 
-Status: **PLANNED — not run.** Fixture verified; live prerequisites verified;
-code untouched beyond the pipeline as built. Decision to proceed: user (later).
+Status: **PLANNED — not run.** Fixture verified; live prerequisites verified.
+Change #1 of 3 (multi-doc t01) is **implemented**; #2 (front-matter) and #3
+(freeze tooling) remain. Run decision: user (later).
 
 ## What the test is
 
@@ -57,6 +58,8 @@ from supplied edges (none supplied).
 1. **t01 multi-doc** — repeatable `--doc P01… --doc P02… --doc P03…` with
    distinct `doc_id`s into one parsed set; t02–t10 already operate corpus-wide
    (cross-doc pairing is native and desirable here). ~15 lines + test.
+   **DONE** (`parse_documents` in `parse.py`, `--doc` repeatable, unit +
+   integration tests).
 2. **t01 front-matter** — parse `Document type:/Document ID:/Date:/Author:/
    Subject:` keys into structured node properties (`source_event_id`,
    `document_type`, `event_time_utc`, `actor_id/name`, `authority_scope`);

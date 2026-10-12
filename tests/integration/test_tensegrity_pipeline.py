@@ -111,3 +111,35 @@ def test_pipeline_end_to_end(tens_env):
     for e in l15_edges[:3]:
         assert coll.count_documents({"_id": e["cm1_id"]}) == 1
         assert coll.count_documents({"_id": e["cm2_id"]}) == 1
+
+
+def test_multi_doc_ingestion_preserves_source_identity(tens_env_vars, mongo_test_db):
+    """Two documents in one t01 run → distinct doc_ids in the collection."""
+    tmp = tens_env_vars
+    alpha = tmp / "alpha.md"
+    alpha.write_text("# Alpha Doc\n\nFirst sentence.\nSecond sentence.\n", encoding="utf-8")
+    beta = tmp / "beta.md"
+    beta.write_text("# Beta Doc\n\nThird sentence.\n", encoding="utf-8")
+
+    assert main(["01_parse", "--doc", str(alpha), "--doc", str(beta)]) == 0
+    assert main(["02_embed"]) == 0
+    assert main(["03_insert_nodes"]) == 0
+
+    coll = mongo_test_db
+    sentences = list(coll.find({"doc_type": "node", "node_type": "sentence", "level": 15}))
+    titles = list(coll.find({"doc_type": "node", "node_type": "title", "level": 14}))
+
+    docs = {s["properties"]["doc_id"] for s in sentences}
+    assert docs == {"alpha", "beta"}
+    assert {t["properties"]["doc_id"] for t in titles} == {"alpha", "beta"}
+
+    counts: dict[str, int] = {}
+    for s in sentences:
+        counts[s["properties"]["doc_id"]] = counts.get(s["properties"]["doc_id"], 0) + 1
+    assert counts == {"alpha": 2, "beta": 1}
+
+    # Labels embed doc identity; no collisions across documents.
+    labels = [s["properties"]["sentence_id"] for s in sentences]
+    assert len(labels) == len(set(labels))
+    assert any(label.startswith("alpha:") for label in labels)
+    assert any(label.startswith("beta:") for label in labels)

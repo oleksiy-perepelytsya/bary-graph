@@ -15,6 +15,7 @@ is what the architecture spec asks of a segmentation policy.
 from __future__ import annotations
 
 import re
+from collections.abc import Sequence
 from dataclasses import dataclass
 
 from tensegrity_pipeline.schema import ParsedSentence, ParsedTitle
@@ -247,3 +248,27 @@ def parse_document(
 
     flush_paragraph()
     return titles, sentences
+
+
+def parse_documents(
+    docs: Sequence[tuple[str, str]],
+) -> tuple[list[ParsedTitle], list[ParsedSentence]]:
+    """Segment multiple ``(doc_id, text)`` pairs, preserving doc order.
+
+    Each document keeps its own ``doc_id`` lineage — L15 sentence and L14 title
+    labels embed it — so a multi-document run preserves distinct source
+    identity (viz. the GovKM S001 requirement "keep P01/P02/P03 as distinct
+    source events"). Raises ``ValueError`` on duplicate ``doc_id`` because node
+    labels would collide.
+    """
+    titles_all: list[ParsedTitle] = []
+    sentences_all: list[ParsedSentence] = []
+    seen: set[str] = set()
+    for doc_id, text in docs:
+        if doc_id in seen:
+            raise ValueError(f"duplicate doc_id {doc_id!r} in multi-document input")
+        seen.add(doc_id)
+        titles, sentences = parse_document(text, doc_id)
+        titles_all.extend(titles)
+        sentences_all.extend(sentences)
+    return titles_all, sentences_all

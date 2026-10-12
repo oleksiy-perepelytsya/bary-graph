@@ -41,8 +41,9 @@ python -m tensegrity_pipeline 10_index
 
 Common flags (every stage): `--reset`, `--limit N`, `--dry-run`,
 `--batch-size N`, `--force`, `--env NAME`.
-Stage-specific: `--doc PATH` (t01), `--phase pair|absorb|both` (t07),
-`--max-level N` (t08/t09).
+Stage-specific: `--doc PATH` (t01, **repeatable** — pass multiple documents in
+one run; each keeps its filename stem as `doc_id`), `--phase pair|absorb|both`
+(t07), `--max-level N` (t08/t09).
 
 Offline / CI: set `BARY_FAKE_EMBED=1` (deterministic vectors) and
 `BARY_FAKE_DECISION=1` (deterministic tev1 roles). No ollama needed.
@@ -51,7 +52,7 @@ Offline / CI: set `BARY_FAKE_EMBED=1` (deterministic vectors) and
 
 | Stage | Does |
 | ----- | ---- |
-| `01_parse` | split the input document into L15 sentences + L14 titles (`parse.py`) |
+| `01_parse` | split the input document(s) into L15 sentences + L14 titles (`parse.py`; `--doc` repeatable, per-doc `doc_id` from filename stem) |
 | `02_embed` | embed **sentence texts only**; titles get no embedding |
 | `03_insert_nodes` | upsert L15 sentence nodes + L14 title nodes (`vector=None` placeholder) |
 | `04_l15_edges` | cosine-match L15 sentences → BaryEdges, classify role with tev1 |

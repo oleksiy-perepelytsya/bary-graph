@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import pytest
+
 from tensegrity_pipeline.parse import (
     is_title_line,
     parse_document,
+    parse_documents,
     split_sentences,
     split_sentences_with_spans,
 )
@@ -107,3 +110,29 @@ def test_parse_document_strips_heading_markers():
     titles, _ = parse_document("# Title\n\nBody.\n", "d")
     assert titles[0].text == "Title"
     assert titles[0].title_level == 1
+
+
+def test_parse_documents_preserves_doc_identity_and_order():
+    titles, sentences = parse_documents(
+        [
+            ("P01", FIXTURE_DOC),
+            ("P02", "Supplier B is recommended.\nThis note is advisory."),
+        ]
+    )
+    # Doc order preserved, per-doc identity intact.
+    assert [s.doc_id for s in sentences] == ["P01"] * 4 + ["P02"] * 2
+    assert [t.doc_id for t in titles] == ["P01", "P01"]
+    # Sentence ids stay unique across documents.
+    ids = [s.sentence_id for s in sentences]
+    assert len(ids) == len(set(ids))
+
+
+def test_parse_documents_duplicate_doc_id_raises():
+    with pytest.raises(ValueError, match="duplicate doc_id 'P01'"):
+        parse_documents([("P01", "text one."), ("P01", "text two.")])
+
+
+def test_parse_documents_empty_input_is_empty():
+    titles, sentences = parse_documents([])
+    assert titles == []
+    assert sentences == []
