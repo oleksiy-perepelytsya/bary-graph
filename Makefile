@@ -1,5 +1,6 @@
 .PHONY: install up up-gpu down lint test test-int pipeline pipeline-dev \
-        eval-holdout eval-recall mcp-install fixture fetch-kaikki preflight clean-state
+        eval-holdout eval-recall mcp-install fixture fetch-kaikki preflight clean-state \
+        tensegrity tensegrity-dev clean-state-tensegrity
 
 PY ?= python3
 
@@ -79,3 +80,44 @@ clean-state:
 clean-state-all:
 	rm -f pipeline_state_all/*.json
 	rm -f data/parsed_all/*.jsonl
+
+# ---------------------------------------------------------------------------
+# Tensegrity pipeline — document ingestion into the `tensegrity` DB/collection.
+# L15 = sentences, L14 = titles, role-tagged (tev1 complement/contradict) edges.
+# Profile is always `tensegrity` (.env.tensegrity); DOC is the input file.
+# ---------------------------------------------------------------------------
+TSTAGES = 01_parse 02_embed 03_insert_nodes 04_l15_edges 05_title_vectors \
+          06_l14_edges 07_orphan_reentry 08_metabary 09_extend 10_index
+
+# Usage: make tensegrity DOC=path/to/file.md
+tensegrity:
+	@test -n "$(DOC)" || (echo "set DOC=path/to/file.md" && exit 1)
+	@for s in $(TSTAGES); do \
+	  echo "== $$s =="; \
+	  if [ "$$s" = "01_parse" ]; then \
+	    $(PY) -m tensegrity_pipeline.$$s --doc "$(DOC)" || exit 1; \
+	  else \
+	    $(PY) -m tensegrity_pipeline.$$s || exit 1; \
+	  fi; \
+	done
+
+# Small-corpus smoke test: parse the doc, then embed/pair only the first 200
+# sentences (dev only; the real run drops --limit).
+tensegrity-dev:
+	@test -n "$(DOC)" || (echo "set DOC=path/to/file.md" && exit 1)
+	$(PY) -m tensegrity_pipeline.01_parse --doc "$(DOC)"
+	$(PY) -m tensegrity_pipeline.02_embed --limit 200
+	$(PY) -m tensegrity_pipeline.03_insert_nodes
+	$(PY) -m tensegrity_pipeline.04_l15_edges
+	$(PY) -m tensegrity_pipeline.05_title_vectors
+	$(PY) -m tensegrity_pipeline.06_l14_edges
+	$(PY) -m tensegrity_pipeline.07_orphan_reentry
+	$(PY) -m tensegrity_pipeline.08_metabary
+	$(PY) -m tensegrity_pipeline.09_extend
+	$(PY) -m tensegrity_pipeline.10_index
+
+clean-state-tensegrity:
+	rm -f pipeline_state_tensegrity/*.json
+	rm -f data/parsed_tensegrity/*.jsonl
+	rm -f data/parsed_tensegrity/*.tmp
+	rm -f data/parsed_tensegrity/missed.txt

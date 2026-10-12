@@ -69,6 +69,16 @@ stage (`scripts/s07_orphan_reentry.py`, `--phase pair|absorb|both`); the old
 - **Test DBs** — `MONGO_TEST_DB_PREFIX=barygraph_test_`; integration tests
   refuse to touch any DB name not matching this prefix (safety guard, do not
   bypass).
+- **`tensegrity`** — a **separate** document-ingestion build (branch
+  `tensegrity-pipeline`, package `tensegrity_pipeline/`). Database *and*
+  collection are both named `tensegrity`. L15 = document sentences (embedded,
+  qwen0.6/1024), L14 = section/paragraph titles (vector derived, not embedded),
+  L≤13 = MetaBarys. Every BaryEdge carries a tev1-decided `role`
+  (`complement`/`contradict`) + `role_probability` (winning prob only) and a
+  signed-role barycentric vector. Stages `t01..t10`, entrypoint
+  `python -m tensegrity_pipeline <stage>` (default profile `--env tensegrity`),
+  `make tensegrity DOC=…`. See `tensegrity_pipeline/README.md`. The MCP server
+  and the PoC stages are untouched by it.
 
 ## .env files
 - **`.env`** — default (loaded when nothing else is sourced). Points at
@@ -83,6 +93,11 @@ stage (`scripts/s07_orphan_reentry.py`, `--phase pair|absorb|both`); the old
   `EMBED_CACHE_FILE` (append-only JSONL embed cache on /storage; dedupes ~21% of
   repeated sense texts). Key difference vs main env: **embed model/dim differ**
   (768 vs 4096).
+- **`.env.tensegrity`** — config for the document-ingestion build only. Points
+  at `MONGO_DB=tensegrity`, `MONGO_COLLECTION=tensegrity`, `EMBED_DIM=1024`,
+  `PARSED_DIR=data/parsed_tensegrity`, `PIPELINE_STATE_DIR=pipeline_state_tensegrity`,
+  plus `TEV1_URL`/`TEV1_MODEL` (`tev1:0.8b` on the ollama host) and
+  `BARY_FAKE_DECISION`. Never sourced by the MCP server.
 - **`.env.example`** — template; never used at runtime.
 
 # Native cognitive loop — continuity
