@@ -3,7 +3,12 @@
 The local box can't run embedding-heavy pipeline stages (s02_embed, s04's
 type-text phase) over the full kaikki corpus on CPU. Kaggle gives free GPU
 (T4/P100), so the same stages can run there behind a small HTTP job API,
-reached through a cloudflared tunnel.
+reached through a cloudflared tunnel **created by the Kaggle notebook itself**.
+
+> This is **not** the host's MCP endpoint. The barygraph MCP server is published
+> on a stable ngrok dev domain — see RUNBOOK.md → "MCP + TUNNEL OPERATIONS". The
+> Kaggle tunnel below is a separate, per-run random URL by design (the notebook
+> is ephemeral), which is why it stays `https://<random>.trycloudflare.com`.
 
 ## On the Kaggle notebook
 

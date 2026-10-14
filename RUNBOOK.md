@@ -20,15 +20,15 @@ process/state map so nothing is lost on session compaction.
   s09_extend → s10_index. (s07b_pair_orphans was merged into s07_orphan_reentry
   as its `pair` phase; `--phase absorb` runs only the nearest-BE sweep.)
 
-## Process map (as of 2026-09-16)
+## Process map (as of 2026-09-16; MCP + tunnel rows updated 2026-10-13)
 
 | PID | process | role |
 |---|---|---|
 | 87969 | `s05_word_vectors` | full s05 run on barygraph_all (log `/tmp/opencode/s05.log`) |
 | 119884 | `cog_mb_loop --minutes 1440` | 24h cognitive loop, model `ollama/qwen3.6:27b-q4_K_M-ctx64k`, poll-timeout 600 (restarted to add author canonicalization + per-cycle session cleanup) |
-| 305392 | `mcp_server --transport streamable-http --port 8000` | barygraph MCP (poc), keep-warm; behind cloudflared tunnel (restarted 2026-10-08) |
+| unit | `barygraph-mcp.service` (`mcp_server --transport streamable-http --host 0.0.0.0 --port 8000`) | barygraph MCP (poc), keep-warm; `MCP_PUBLIC=1`, systemd-supervised (`Restart=always`) since 2026-10-13 |
 | 78171 | `mcp_int_cog` | local cog MCP (poc) |
-| 305683 | cloudflared tunnel (quick tunnel, binary `~/.local/bin/cloudflared`) | https://shake-insider-testing-coleman.trycloudflare.com/mcp — quick-tunnel URL is per-run random; update `opencode.json` on every restart |
+| unit | `ngrok-barygraph.service` (ngrok, binary `~/.local/bin/ngrok`) | static dev domain `https://prancing-dry-malformed.ngrok-free.dev/mcp` — URL is **fixed** across restarts (ngrok free dev domain). cloudflared quick tunnel retired 2026-10-13 |
 | 77601 | ollama serve | host ollama at `http://ollama:11434` |
 | 77747 | llama-server :36783 | keep-warm llama.cpp instance (blob ≠ deepseek; left alone) |
 
@@ -513,30 +513,51 @@ hot (will not fit RAM)**; binary ≈ **6.5 GB hot**. Two routes:
 - `$sample` is badly biased here (3000-sample gave 96% baryedge vs true 45%) —
   don't use it to spot-check coverage.
 
-# MCP + TUNNEL OPERATIONS (2026-10-09)
+# MCP + TUNNEL OPERATIONS (rewritten 2026-10-13 — ngrok + systemd)
 
 - **MCP server**: `python3 -m scripts.mcp_server --transport streamable-http
-  --host 0.0.0.0 --port 8000`. Launched by `scripts/mcp_server_ctl.sh start`
-  with `MCP_PUBLIC=1` → read-only public mode (11 tools, no writes). The
-  opencode-integrated MCP (`opencode.json` → `barygraph`, `type: local`) is a
-  separate **stdio** instance spawned by opencode in full private mode
-  (17 tools) — no tunnel needed for the agent itself.
-- **Public URL (2026-10-09)**:
-  `https://prohibited-pmc-harry-thriller.trycloudflare.com/mcp` — account-less
-  quick tunnel. **URLs are per-run random**, and server-side revocation happens
-  without warning: on 2026-10-09 the old hostname (`shake-insider-…`) suddenly
-  NXDOMAIN'd globally while cloudflared stayed "up", logging
-  `Register tunnel error … Unauthorized: Tunnel not found` forever. A process
-  being alive ≠ the URL working — check with `nslookup <host> 1.1.1.1`.
-- **Ops (all via `scripts/mcp_server_ctl.sh`)**:
+  --host 0.0.0.0 --port 8000`, run as the systemd **user** unit
+  `barygraph-mcp.service` (`WorkingDirectory` = repo root, so `Settings.load()`
+  discovers the plain `.env`; `MCP_PUBLIC=1`). Supervised with
+  `Restart=always`. The opencode-integrated MCP (`opencode.json` → `barygraph`,
+  `type: local`) is a separate **stdio** instance in full private mode — no
+  tunnel needed for the agent itself.
+- **Public URL (stable, since 2026-10-13)**:
+  `https://prancing-dry-malformed.ngrok-free.dev/mcp`
+  Served by the systemd user unit `ngrok-barygraph.service`, which runs the
+  `barygraph-mcp` tunnel from `~/.config/ngrok/ngrok.yml`. That hostname is the
+  account's free **dev domain**, which is immutable on the free plan — so the
+  URL does **not** change across agent/service/laptop restarts. Clients are
+  configured **once**.
+  - `loginctl enable-linger` is on, so both units come back at boot with no
+    login. Unit files: `~/.config/systemd/user/{barygraph-mcp,ngrok-barygraph}.service`.
+  - ngrok's free plan shows a browser interstitial for HTML requests; MCP/JSON
+    clients are unaffected (verified), but a human opening the URL in a browser
+    sees a warning page.
+- **Public surface = read-only.** `MCP_PUBLIC=1` in the unit drops the
+  `create_*` write tools: the tunnel serves **12 tools** (was 18 when a
+  hand-launched, non-public server was leaking writes). Verify anytime with
+  `scripts/mcp_server_ctl.sh tunnel check`, which performs a real MCP handshake
+  through the public URL and fails if a write tool is visible.
+- **Why cloudflared was retired (2026-10-12/13)**: account-less *quick* tunnels
+  get their hostname **revoked server-side without warning**. Observed **3× in
+  24 h**, with shrinking lifetimes (~28 h → ~6 h → ~3 h): the process stayed
+  "up" while the hostname NXDOMAIN'd globally (check `nslookup <host> 1.1.1.1`)
+  and the log looped
+  `Register tunnel error … Unauthorized: Tunnel not found`. Recovery required
+  killing cloudflared to mint a **new random** hostname, which broke every
+  external client each time. The cloudflared quick tunnel is no longer run.
+- **Ops (all via `scripts/mcp_server_ctl.sh`, now a `systemctl --user` wrapper)**:
   ```
-  MCP_PYTHON=python3 scripts/mcp_server_ctl.sh restart   # server + ensure tunnel
-  scripts/mcp_server_ctl.sh tunnel status                # pid/url/registered
-  scripts/mcp_server_ctl.sh tunnel restart               # ONLY cmd that kills cloudflared; mints fresh URL
-  scripts/mcp_server_ctl.sh tunnel url                   # current public URL to hand to clients
+  scripts/mcp_server_ctl.sh status           # server + warmup + tunnel + real public handshake
+  scripts/mcp_server_ctl.sh restart          # restart the server unit
+  scripts/mcp_server_ctl.sh tunnel status    # ngrok unit + URL + config path
+  scripts/mcp_server_ctl.sh tunnel check     # MCP handshake through the public URL (fails on write-tool leak)
+  scripts/mcp_server_ctl.sh tunnel url       # current public URL to hand to clients
+  scripts/mcp_server_ctl.sh logs [N]         # journal of the server unit
+  scripts/mcp_server_ctl.sh env              # effective env of the running unit
   ```
-  `start`/`restart` never kill the tunnel; only `tunnel restart` does. After a
-  `tunnel restart`, external clients must be told the new `tunnel url`.
-- For a stable hostname, a **named tunnel** (Cloudflare account + domain,
-  `cloudflared tunnel create/login`) would be required — quick tunnels have no
-  uptime guarantee. Not done; revisit if the internet endpoint becomes critical.
+  Note: the script no longer launches processes itself — systemd owns the
+  server and the tunnel. `tunnel restart` restarts the ngrok unit (the URL does
+  **not** change). To change ngrok domains/tunnels, edit
+  `~/.config/ngrok/ngrok.yml` and `systemctl --user restart ngrok-barygraph`.

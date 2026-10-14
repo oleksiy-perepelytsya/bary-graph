@@ -11,13 +11,25 @@ request/response pattern the FastMCP server reliably serves:
 
 Alternatives that DON'T work reliably here:
   - Op/baking a second persistent SSE GET stream (FastMCP routes some replies to
-    it; over the cloudflared tunnel that stream may never deliver a byte).
+    it; over the public tunnel that stream may never deliver a byte).
   - The official `mcp` SDK client streamable_http_client (v1.29): its GET attach
     races initialize session-id extraction, so its notifications/initialized POST
     loses the session id and the server answers 400 "Missing session ID".
 
+NOTE (2026-10-13) — the :8000 unit runs MCP_PUBLIC=1, which HIDES the two
+read-only associative tools (associative_search, associative_progressive) along
+with the create_* writers: that endpoint exposes 12 tools, and this client's
+default --tool is unavailable there ("Unknown tool: associative_search"). No
+HTTP endpoint exposes the associative tools (opencode's private MCP instance is
+stdio). To use this client as designed, run a private-mode server and point
+--url at it:
+
+    MCP_PUBLIC=0 python3 -m scripts.mcp_server \
+        --transport streamable-http --host 127.0.0.1 --port 8001
+
 Usage:
-  python3 mcp_tunnel_client.py --url https://<tunnel>.trycloudflare.com/mcp \
+  python3 mcp_tunnel_client.py \
+      --url http://127.0.0.1:8001/mcp \
       --query "How does curiosity become a durable research process?" \
       --seed-top-k 24 --bridge-top-k 12 --result-top-k 6 --max-hops 5 \
       --target-levels 10 11 12 --min-convergence 1
@@ -30,7 +42,7 @@ import time
 import urllib.error
 import urllib.request
 
-DEFAULT_URL = "https://arg-abstracts-counseling-contacted.trycloudflare.com/mcp"
+DEFAULT_URL = "https://prancing-dry-malformed.ngrok-free.dev/mcp"
 
 
 def _post(url: str, sid: str | None, payload: dict, read_timeout: float) -> tuple[int, str, dict]:
@@ -127,8 +139,32 @@ def main() -> None:
         {"jsonrpc": "2.0", "id": "call", "method": "tools/call", "params": full},
         sid, args.connect_timeout, args.read_timeout)
     j = parse_result(body)
-    txt = j["result"]["content"][0]["text"]
-    print(json.dumps(json.loads(txt), indent=2)[:4000])
+    if j.get("error"):
+        print(f"jsonrpc error: {j['error']}", file=sys.stderr)
+        sys.exit(1)
+    res = j.get("result") or {}
+    txt = (res.get("content") or [{}])[0].get("text", "") or ""
+    if res.get("isError"):
+        print(f"tool error: {txt}", file=sys.stderr)
+        if args.tool.startswith("associative_"):
+            print(
+                "hint: associative_search / associative_progressive are HIDDEN on this\n"
+                "      endpoint — the server runs MCP_PUBLIC=1 (12 public tools, no\n"
+                "      associative, no create_*). See RUNBOOK 'MCP + TUNNEL OPERATIONS'.\n"
+                "      There is no HTTP endpoint that exposes them (opencode's private\n"
+                "      MCP instance is stdio). To use the associative flow over HTTP,\n"
+                "      run a private-mode server and point --url at it, e.g.:\n"
+                "        MCP_PUBLIC=0 python3 -m scripts.mcp_server \\\n"
+                "          --transport streamable-http --host 127.0.0.1 --port 8001\n"
+                "        python3 mcp_tunnel_client.py --url http://127.0.0.1:8001/mcp ...",
+                file=sys.stderr,
+            )
+        sys.exit(1)
+    # Tool text is usually a JSON payload, but not guaranteed (plain-text tools).
+    try:
+        print(json.dumps(json.loads(txt), indent=2)[:4000])
+    except (ValueError, TypeError):
+        print(txt[:4000])
 
 
 if __name__ == "__main__":

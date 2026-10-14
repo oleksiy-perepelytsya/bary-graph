@@ -1,81 +1,85 @@
 #!/usr/bin/env bash
 # =============================================================================
-# BaryGraph MCP server control script (streamable-http over cloudflared).
+# BaryGraph MCP server control script (streamable-http over ngrok).
 #
-# WHY THIS SCRIPT EXISTS
-# ---------------------
-# For a long time "restart the MCP" was tribal knowledge living in prior-summary
-# files: kill the PID, relaunch with setsid/nohup/disown, don't touch the tunnel,
-# tail a log and wait for the warmup line. This script encodes that archaeology
-# so any future agent/user session can recover the server in one command.
+# ARCHITECTURE (rewritten 2026-10-13 — was cloudflared + hand-launched python)
+# ---------------------------------------------------------------------------
+# The server and the public tunnel are now BOTH systemd **user** units:
 #
-# THE LOAD-BEARING DETAILS (read before "fixing" anything here):
+#   barygraph-mcp.service     python3 -m scripts.mcp_server --transport
+#                             streamable-http --host 0.0.0.0 --port 8000
+#                             WorkingDirectory = repo root, MCP_PUBLIC=1
+#   ngrok-barygraph.service   ngrok start barygraph-mcp   (static free dev
+#                             domain, defined in ~/.config/ngrok/ngrok.yml)
 #
-# 1. The tunnel is sacred — but a dead tunnel is worse than no tunnel.
-#    cloudflared (`cloudflared tunnel --url http://127.0.0.1:8000`) forwards
-#    public traffic to this server. This script NEVER kills it implicitly.
-#    Since 2026-10-09 (user: keep the MCP endpoint reachable from the
-#    internet), `start`/`restart` ALSO ensure the cloudflared quick tunnel is
-#    up (idempotent `tunnel start`: no-op if already running). This matters
-#    because ACCOUNT-LESS quick tunnels get their hostname revoked server-side
-#    without warning — the process stays "up" but every request 404s/NXDOMAINs,
-#    with the log filling `Register tunnel error ... Unauthorized: Tunnel not
-#    found`. Recovery is `tunnel restart` (the ONLY command that kills
-#    cloudflared), which mints a FRESH random hostname; then tell any external
-#    client the new `tunnel url`.
+# This script is now a thin controller/status wrapper over `systemctl --user`.
+# linger is enabled (`loginctl enable-linger "$USER"`), so both units come back
+# at boot without a login. Unit files live in ~/.config/systemd/user/.
 #
-# 2. setsid + nohup + disown is REQUIRED, not style.
-#    A plain `& background & disown` is NOT enough: when the launching shell is
-#    killed (opencode/bash tool timeouts kill the whole process group) the
-#    naive child dies with it. setsid detaches the process from the controlling
-#    terminal/session so it survives the shell's death. This exact failure
-#    happened in session history (first launch died with the 30s shell timeout).
-#    Redirect stdin from /dev/null too — a stray open FD on the tty keeps the
-#    shell "running" and the bash tool hangs until ITS timeout instead of the
-#    command returning.
+# WHY THE OLD SETSID/NOHUP + QUICK-TUNNEL ARCHAEOLOGY IS GONE
+# -----------------------------------------------------------
+# Until 2026-10-13 the server was launched with `setsid nohup ... & disown` and
+# the public endpoint came from a cloudflared *quick* tunnel. Quick tunnels are
+# account-less and Cloudflare revokes their hostname server-side without
+# warning — observed 3x in 24h on 2026-10-12/13 with shrinking lifetimes
+# (~28h, ~6h, ~3h). Each time the process stayed "up" but every request was
+# NXDOMAIN, the log filling with
+#     ERR Register tunnel error ... error="Unauthorized: Tunnel not found"
+# and recovery required killing cloudflared to mint a NEW random hostname,
+# which broke every external client. systemd now supervises the process
+# (Restart=always) and ngrok provides a stable, non-revocable hostname: the
+# free plan includes one immutable dev domain, so the URL never changes.
 #
-# 3. mcp (PyPI) MUST be >= 1.30.0.
+# THE STILL-LOAD-BEARING DETAILS (read before "fixing" anything here)
+# ------------------------------------------------------------------
+# 1. mcp (PyPI) MUST be >= 1.30.0.
 #    mcp==1.29.0 crashes long-running calls with
 #        AssertionError: Request already responded to   (mcp/shared/session.py)
 #    on the streamable-http 202-async path: enrich_request is the FIRST tool
 #    slow enough (embed + sequential $vectorSearches) to cross the async
 #    threshold, so it kills the session with "MCP error -32001: Request timed
-#    out". Upgrade: `pip install "mcp==1.30.0"` then restart. Verify there is
-#    no "Session ... crashed" line in the log after restart.
+#    out". Upgrade: `pip install "mcp==1.30.0"` then restart.
 #
-# 4. Warmup is real.
+# 2. Warmup is real.
 #    On boot the server runs a warm $vectorSearch + ensure_indexes and logs
 #    "warmup: $vectorSearch got ... hits / ensure_indexes done". A bare
 #    "Uvicorn running" line does NOT mean it can serve vector queries yet.
-#    `status`/`wait` below check for the warmup-done line, not for the process.
+#    `status` checks the journal for the warmup-done line, not just the unit
+#    state.
 #
-# 5. Env & cwd.
-#    Run from the repo root so `scripts.mcp_server` and the .env
-#    (MONGO_DB=barygraph_poc, EMBED_DIM=1024, MONGO_URI=...) resolve. Since
-#    2026-10-11 embeddings come from the host ollama at http://localhost:11435
-#    (the old `ollama:11434` docker sibling container was retired). The server
-#    loads .env ONCE at startup, so changing OLLAMA_URL requires a restart.
+# 3. cwd & env.
+#    The unit runs with WorkingDirectory=<repo root> so `scripts.mcp_server`
+#    and the plain .env (MONGO_DB=barygraph_poc, EMBED_DIM=1024, OLLAMA_URL,
+#    MONGO_URI) resolve — Settings.load() discovers .env from the cwd. The
+#    server loads .env ONCE at startup, so changing any of it needs a restart.
+#
+# 4. MCP_PUBLIC=1 is set in the unit (public read-only surface).
+#    The tunnel must NOT expose the create_* write tools. `tunnel check` does a
+#    real MCP handshake through the public URL and fails if any write tool is
+#    visible.
 #
 # Usage:
-#   scripts/mcp_server_ctl.sh status          # is it up + warm? tunnel up? which URL?
-#   scripts/mcp_server_ctl.sh start           # start (no-op if already running) + ensure tunnel
-#   scripts/mcp_server_ctl.sh stop            # stop only the python MCP server
-#   scripts/mcp_server_ctl.sh restart         # stop + start (tunnel never killed here)
-#   scripts/mcp_server_ctl.sh tunnel status   # cloudflared up? URL?
-#   scripts/mcp_server_ctl.sh tunnel start    # idempotent: start quick tunnel if down
-#   scripts/mcp_server_ctl.sh tunnel restart  # kill + mint fresh URL (revoked-hostname recovery)
-#   scripts/mcp_server_ctl.sh tunnel url      # print current public URL
-#   scripts/mcp_server_ctl.sh logs            # tail the server log
+#   scripts/mcp_server_ctl.sh status                 # unit + warmup + tunnel + public check
+#   scripts/mcp_server_ctl.sh start|stop|restart     # the server unit
+#   scripts/mcp_server_ctl.sh enable|disable         # boot enablement (server + tunnel)
+#   scripts/mcp_server_ctl.sh tunnel status|url|check
+#   scripts/mcp_server_ctl.sh tunnel start|stop|restart
+#   scripts/mcp_server_ctl.sh logs [N]               # journal of the server (default 50)
+#   scripts/mcp_server_ctl.sh env                    # effective env of the running unit
 # =============================================================================
 
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-LOG="${MCP_LOG:-/tmp/opencode/mcp_server.log}"
+MCP_UNIT="${MCP_UNIT:-barygraph-mcp.service}"
+TUNNEL_UNIT="${TUNNEL_UNIT:-ngrok-barygraph.service}"
+NGROK_CONFIG="${NGROK_CONFIG:-$HOME/.config/ngrok/ngrok.yml}"
+NGROK_API="${NGROK_API:-http://127.0.0.1:4040}"
 PORT="${MCP_PORT:-8000}"
-# Interpreter: MCP_PYTHON wins; otherwise the first of python3.11/python3 that
-# can `import mcp`. Hardcoding python3.11 was a real outage here (this host is
-# python3 = 3.10.12 + mcp 1.30.0; python3.11 does not exist), so auto-detect.
+TUNNEL_LOG="${TUNNEL_LOG:-/tmp/opencode/ngrok.log}"
+
+# Interpreter used only for the mcp version probe / public check (the unit
+# owns the real server process). MCP_PYTHON wins; else python3.11/python3.
 if [[ -n "${MCP_PYTHON:-}" ]]; then
   PYTHON="$MCP_PYTHON"
 else
@@ -87,175 +91,160 @@ else
   done
   PYTHON="${PYTHON:-python3}"
 fi
-TUNNEL_LOG="${TUNNEL_LOG:-/tmp/cloudflared.log}"
-CLOUDFLARED_BIN="${CLOUDFLARED_BIN:-$HOME/.local/bin/cloudflared}"
 
-proc_regex='[m]cp_server --transport'
+sc() { systemctl --user "$@"; }
 
-pid() {
-  pgrep -f "$proc_regex" | head -1 || true
-}
-
-tunnel_pid() {
-  pgrep -f '[c]loudflared tunnel --url' | head -1 || true
-}
-
-tunnel_url() {
-  grep -oE 'https://[a-z0-9-]+\.trycloudflare\.com' "$TUNNEL_LOG" 2>/dev/null | tail -1 || true
-}
-
-tunnel_registered() {
-  # NOTE: same grep -q / SIGPIPE / pipefail trap as is_warm — consume stdout.
-  local n
-  n="$(tail -n 60 "$TUNNEL_LOG" 2>/dev/null | grep -ac "Registered tunnel connection" || true)"
-  [[ "${n:-0}" -gt 0 ]]
-}
-
-# Track the byte offset the CURRENT run appends at, so warm detection only
-# sees this run's "warmup ... done" line, not leftover ones from prior boots.
-_LOG_MARK=0
-
-log_mark() {
-  if [[ -f "$LOG" ]]; then _LOG_MARK="$(wc -c <"$LOG")"; else _LOG_MARK=0; fi
-}
+unit_active() { sc is-active -q "$1" 2>/dev/null; }
+unit_enabled() { sc is-enabled -q "$1" 2>/dev/null; }
 
 is_warm() {
-  # NOTE: must NOT use grep -q here — with `set -o pipefail`, grep -q exits at
-  # the first match, the upstream `tail` gets SIGPIPE, and the pipeline returns
-  # 141 even on a successful match. grep -c consumes everything instead.
+  # NOTE: grep -q is avoided here on purpose — with `set -o pipefail` the
+  # upstream journalctl gets SIGPIPE and the pipeline returns 141 even on a
+  # successful match. grep -c consumes everything instead.
   local n
-  n="$(tail -c +$((_LOG_MARK + 1)) "$LOG" 2>/dev/null | grep -ac "warmup: ensure_indexes done" || true)"
+  n="$(journalctl --user -u "$MCP_UNIT" --since "-15min" --no-pager 2>/dev/null \
+        | grep -ac "warmup: ensure_indexes done" || true)"
   [[ "${n:-0}" -gt 0 ]]
+}
+
+mcp_version() {
+  "$PYTHON" -c 'import importlib.metadata as m; print(m.version("mcp"))' 2>/dev/null || echo unknown
+}
+
+mcp_version_ok() {
+  "$PYTHON" -c 'import importlib.metadata as m, sys; v=[int(x) for x in m.version("mcp").split(".")[:3]]; sys.exit(0 if v >= [1,30,0] else 1)' 2>/dev/null
+}
+
+# --- tunnel URL discovery: live ngrok agent API first, config file fallback ---
+config_domain() {
+  local d
+  d="$(sed -nE 's/^[[:space:]]*domain:[[:space:]]*//p' "$NGROK_CONFIG" 2>/dev/null | head -1 | tr -d '"' || true)"
+  [[ -n "$d" ]] && printf 'https://%s' "$d" || true
+}
+
+ngrok_url() {
+  local u
+  u="$(curl -s -m 3 "$NGROK_API/api/tunnels" 2>/dev/null \
+        | "$PYTHON" -c 'import sys,json
+try:
+    d=json.load(sys.stdin)
+    ts=[t.get("public_url","") for t in d.get("tunnels",[]) if str(t.get("public_url","")).startswith("https")]
+    print(ts[0] if ts else "", end="")
+except Exception:
+    pass' 2>/dev/null || true)"
+  [[ -z "$u" ]] && u="$(config_domain)"
+  printf '%s' "$u"
+}
+
+# Real end-to-end MCP handshake through the public URL. Prints a one-line
+# verdict; returns non-zero if unreachable or if write tools are exposed.
+public_check() {
+  local url="${1:-$(ngrok_url)}"
+  [[ -z "$url" ]] && { echo "  public check: SKIPPED (no tunnel URL known)"; return 1; }
+  "$PYTHON" - "$url" <<'PY' || return 1
+import json, sys, urllib.request
+url = sys.argv[1].rstrip("/") + "/mcp"
+H = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"}
+def parse(b):
+    for ln in b.splitlines():
+        if ln.strip().startswith("data:"):
+            try: return json.loads(ln.strip()[5:].strip())
+            except Exception: pass
+    try: return json.loads(b)
+    except Exception: return None
+def post(payload, extra=None):
+    h = dict(H); h.update(extra or {})
+    req = urllib.request.Request(url, data=json.dumps(payload).encode(), headers=h, method="POST")
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return r.status, r.headers.get("mcp-session-id"), r.read().decode()
+try:
+    st, sid, body = post({"jsonrpc":"2.0","id":1,"method":"initialize",
+        "params":{"protocolVersion":"2025-06-18","capabilities":{},
+                  "clientInfo":{"name":"ctl-check","version":"1"}}})
+    m = parse(body) or {}
+    si = (m.get("result") or {}).get("serverInfo") or {}
+    if not si:
+        print(f"  public check: FAILED (initialize {st}: {body[:120].replace(chr(10),' ')})"); sys.exit(1)
+    hdr = {"Mcp-Session-Id": sid} if sid else {}
+    post({"jsonrpc":"2.0","method":"notifications/initialized"}, hdr)
+    st2, _, b2 = post({"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}, hdr)
+    tools = [t["name"] for t in (parse(b2) or {}).get("result",{}).get("tools",[])]
+    write = sorted({"create_sense","create_edge","create_word","create_structure_meta_bary"} & set(tools))
+    print(f"  public check: OK — {si.get('name')} {si.get('version')}, {len(tools)} tools, url={url}")
+    if write:
+        print(f"  public check: !! WRITE TOOLS EXPOSED: {', '.join(write)} (MCP_PUBLIC=1 not in effect)")
+        sys.exit(1)
+except Exception as e:
+    print(f"  public check: FAILED ({type(e).__name__}: {e})"); sys.exit(1)
+PY
 }
 
 cmd_status() {
-  local p
-  p="$(pid)"
-  if [[ -z "$p" ]]; then
-    echo "MCP server: DOWN"
-  elif is_warm; then
-    echo "MCP server: UP (pid $p, warm)"
+  if unit_active "$MCP_UNIT"; then
+    local p; p="$(sc show -p MainPID --value "$MCP_UNIT" 2>/dev/null || echo '?')"
+    if is_warm; then echo "MCP server: UP (pid $p, warm)  [unit $MCP_UNIT]"
+    else echo "MCP server: UP (pid $p, warming up — wait for 'ensure_indexes done')"; fi
   else
-    echo "MCP server: UP (pid $p, warming up — wait for 'ensure_indexes done' in the log)"
+    echo "MCP server: DOWN  [unit $MCP_UNIT] (run 'start')"
   fi
-  if pgrep -f '[c]loudflared tunnel' >/dev/null; then
-    echo "cloudflared tunnel: UP ($(tunnel_url))"
+
+  if unit_active "$TUNNEL_UNIT"; then
+    echo "ngrok tunnel: UP ($(ngrok_url))  [unit $TUNNEL_UNIT]"
   else
-    echo "cloudflared tunnel: DOWN (the public URL is NOT working — run 'tunnel start')"
+    echo "ngrok tunnel: DOWN (public URL will NOT work — run 'tunnel start')"
   fi
-  local mcp_ver
-  mcp_ver="$("$PYTHON" -c 'import importlib.metadata; print(importlib.metadata.version("mcp"))' 2>/dev/null || echo unknown)"
-  if "$PYTHON" -c 'import importlib.metadata,sys; sys.exit(0 if importlib.metadata.version("mcp").split(".") >= ["1","30","0"] else 1)' 2>/dev/null; then
-    echo "mcp pkg: $mcp_ver (>=1.30.0 OK)"
-  else
-    echo "mcp pkg: $mcp_ver  <-- BUGGY (<1.30.0, see header comment)"
-  fi
+
+  local v; v="$(mcp_version)"
+  if mcp_version_ok; then echo "mcp pkg: $v (>=1.30.0 OK)"
+  else echo "mcp pkg: $v  <-- BUGGY (<1.30.0, see header comment)"; fi
+
+  unit_enabled "$MCP_UNIT" || echo "note: $MCP_UNIT is NOT enabled at boot"
+  unit_enabled "$TUNNEL_UNIT" || echo "note: $TUNNEL_UNIT is NOT enabled at boot"
+
+  public_check || true
 }
 
-cmd_start() {
-  if [[ -n "$(pid)" ]]; then
-    echo "already running (pid $(pid)); use restart to bounce it"
-    return 0
-  fi
-  echo "starting MCP server (log: $LOG) ..."
-  # See header: setsid+nohup+</dev/null+disown. Do NOT 'simplify' this.
-  # The FD juggling (1>&- during nohup, then setsid re-points via the
-  # outer redirection) guarantees the daemon does not keep the caller's
-  # stdout pipe open — otherwise this script never returns to an agent shell.
-  log_mark
-  (
-    cd "$REPO_ROOT" || exit 1
-    MCP_PUBLIC=1 setsid nohup "$PYTHON" -m scripts.mcp_server \
-      --transport streamable-http --host 0.0.0.0 --port "$PORT" \
-      </dev/null >>"$LOG" 2>&1 &
-    disown
-    exit 0
-  ) >/dev/null 2>&1
-  echo "launched (pid $(pid)); waiting for warmup ..."
-  for _ in $(seq 1 60); do
-    if is_warm; then echo "warm (pid $(pid))"; break; fi
-    sleep 2
-  done
-  echo "ensuring public tunnel ..."
-  cmd_tunnel_start
+cmd_start()   { sc start "$MCP_UNIT";  echo "started $MCP_UNIT"; }
+cmd_stop()    { sc stop "$MCP_UNIT";   echo "stopped $MCP_UNIT"; }
+cmd_restart() { sc restart "$MCP_UNIT"; echo "restarted $MCP_UNIT"; }
+
+cmd_enable()  { sc enable "$MCP_UNIT" "$TUNNEL_UNIT"; loginctl enable-linger "$USER" 2>/dev/null || true; echo "enabled at boot: $MCP_UNIT $TUNNEL_UNIT (linger on)"; }
+cmd_disable() { sc disable "$MCP_UNIT" "$TUNNEL_UNIT"; echo "disabled at boot: $MCP_UNIT $TUNNEL_UNIT"; }
+
+cmd_tunnel() {
+  case "${1:-status}" in
+    status)
+      echo "ngrok unit: $TUNNEL_UNIT ($(sc is-active "$TUNNEL_UNIT" 2>/dev/null || echo inactive))"
+      echo "tunnel url: $(ngrok_url)"
+      echo "ngrok config: $NGROK_CONFIG"
+      ;;
+    url)     ngrok_url; echo ;;
+    check)   public_check ;;
+    start)   sc start "$TUNNEL_UNIT";  echo "started $TUNNEL_UNIT" ;;
+    stop)    sc stop "$TUNNEL_UNIT";   echo "stopped $TUNNEL_UNIT" ;;
+    restart) sc restart "$TUNNEL_UNIT"; echo "restarted $TUNNEL_UNIT ($(ngrok_url))" ;;
+    *) echo "usage: $0 tunnel {status|url|check|start|stop|restart}"; exit 2 ;;
+  esac
 }
 
-
-cmd_tunnel_start() {
-  local p
-  p="$(tunnel_pid)"
-  if [[ -n "$p" ]]; then
-    echo "tunnel already running (pid $p): $(tunnel_url)"
-    if tunnel_registered; then return 0; fi
-    echo "  but no 'Registered tunnel connection' recently — hostname may be revoked;"
-    echo "  run 'tunnel restart' to mint a fresh URL"
-    return 1
-  fi
-  echo "starting cloudflared quick tunnel (log: $TUNNEL_LOG) ..."
-  (
-    setsid nohup "$CLOUDFLARED_BIN" tunnel --url "http://localhost:$PORT" \
-      </dev/null >>"$TUNNEL_LOG" 2>&1 &
-    disown
-    exit 0
-  ) >/dev/null 2>&1
-  local i
-  for i in $(seq 1 40); do
-    if tunnel_registered; then
-      echo "tunnel registered: $(tunnel_url)"
-      return 0
-    fi
-    sleep 2
-  done
-  echo "warning: tunnel not registered yet — URL so far: $(tunnel_url); tail $TUNNEL_LOG"
-  return 1
+cmd_logs() {
+  journalctl --user -u "$MCP_UNIT" -n "${1:-50}" --no-pager
 }
 
-
-cmd_tunnel_restart() {
-  local p
-  p="$(tunnel_pid)"
-  if [[ -n "$p" ]]; then
-    echo "stopping tunnel pid $p ..."
-    kill "$p" 2>/dev/null || true
-    for _ in $(seq 1 10); do
-      [[ -z "$(tunnel_pid)" ]] && break
-      sleep 1
-    done
-    kill -9 "$p" 2>/dev/null || true
-  fi
-  cmd_tunnel_start
-}
-
-cmd_stop() {
-  local p
-  p="$(pid)"
-  if [[ -z "$p" ]]; then
-    echo "not running"
-    return 0
-  fi
-  echo "stopping pid $p ..."
-  kill "$p"
-  for _ in $(seq 1 15); do
-    [[ -z "$(pid)" ]] && { echo "stopped"; return 0; }
-    sleep 1
-  done
-  echo "did not exit gracefully; killing ..."
-  kill -9 "$p" || true
+cmd_env() {
+  sc show -p Environment --value "$MCP_UNIT" 2>/dev/null | tr ' ' '\n'
+  echo "WorkingDirectory=$(sc show -p WorkingDirectory --value "$MCP_UNIT" 2>/dev/null)"
 }
 
 case "${1:-status}" in
-  status) cmd_status ;;
-  start)  cmd_start ;;
-  stop)   cmd_stop ;;
-  restart) cmd_stop; sleep 2; cmd_start ;;
-  tunnel)
-    case "${2:-status}" in
-      status) echo "tunnel pid: $(tunnel_pid || echo '(down)')"; echo "tunnel url: $(tunnel_url)"; tunnel_registered && echo "tunnel registered: yes" || echo "tunnel registered: no" ;;
-      start) cmd_tunnel_start ;;
-      restart) cmd_tunnel_restart ;;
-      url) echo "$(tunnel_url)" ;;
-      *) echo "usage: $0 tunnel {status|start|restart|url}"; exit 2 ;;
-    esac ;;
-  logs)   tail -n 50 "$LOG" ;;
-  *) echo "usage: $0 {status|start|stop|restart|tunnel|logs}"; exit 2 ;;
+  status)  cmd_status ;;
+  start)   cmd_start ;;
+  stop)    cmd_stop ;;
+  restart) cmd_restart ;;
+  enable)  cmd_enable ;;
+  disable) cmd_disable ;;
+  tunnel)  shift; cmd_tunnel "${1:-status}" ;;
+  logs)    shift; cmd_logs "${1:-50}" ;;
+  env)     cmd_env ;;
+  *) echo "usage: $0 {status|start|stop|restart|enable|disable|tunnel|logs|env}"; exit 2 ;;
 esac
