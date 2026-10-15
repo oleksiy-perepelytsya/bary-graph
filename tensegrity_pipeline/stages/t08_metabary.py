@@ -20,6 +20,7 @@ from __future__ import annotations
 import logging
 from collections.abc import Sequence
 from datetime import datetime, timezone
+from itertools import islice
 
 import numpy as np
 from pymongo import UpdateOne
@@ -30,8 +31,12 @@ from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import get_collection
 from tensegrity_pipeline.docs import metabary
-from tensegrity_pipeline.pairing import load_unparented_bes, text_resolver
-from tensegrity_pipeline.tev1 import classify_role, get_decision_model
+from tensegrity_pipeline.pairing import (
+    classify_states,
+    load_unparented_bes,
+    text_resolver,
+)
+from tensegrity_pipeline.tev1 import get_decision_model
 from tensegrity_pipeline.tg_vec import compute_metabary_vec
 
 STAGE = "08_metabary"
@@ -52,6 +57,7 @@ def _form_level(
     bridge_coll,
     dry_run: bool,
     log: logging.Logger,
+    workers: int = 1,
 ) -> int:
     """Form MetaBary at ``child_level - 2`` from children@L and bridges@L-1."""
     child_ids, child_w, CV = load_unparented_bes(coll, child_level)
@@ -99,19 +105,26 @@ def _form_level(
 
     mb_level = child_level - 2
     now = datetime.now(timezone.utc)
+    states = [
+        "\n".join(
+            [
+                f"A: {resolve(child_ids[ci])}",
+                f"B: {resolve(child_ids[cj])}",
+                f"BRIDGE: {resolve(bridge_ids[bi])}",
+            ]
+        )
+        for ci, cj, bi in triads
+    ]
+    workers = max(1, workers)
+    log.info("L%d MetaBary: classifying %d triads (workers=%d)", mb_level, len(states), workers)
+    classified = classify_states(model, states, workers=workers)
+
     total = 0
     for start in range(0, len(triads), 1000):
         batch = triads[start : start + 1000]
+        batch_cls = list(islice(classified, len(batch)))
         docs = []
-        for ci, cj, bi in batch:
-            state = "\n".join(
-                [
-                    f"A: {resolve(child_ids[ci])}",
-                    f"B: {resolve(child_ids[cj])}",
-                    f"BRIDGE: {resolve(bridge_ids[bi])}",
-                ]
-            )
-            cls = classify_role(model, state)
+        for (ci, cj, bi), cls in zip(batch, batch_cls, strict=True):
             role = cls["role"]
             vec, q_mb_raw = compute_metabary_vec(
                 CV[ci], CV[cj], BV[bi],
@@ -177,6 +190,7 @@ def run(argv: Sequence[str] | None = None) -> None:
             coll, child_level, bridge_level, thr, alpha,
             model=model, resolve=resolve, bridge_coll=bridge_coll,
             dry_run=args.dry_run, log=log,
+            workers=max(1, int(getattr(settings, "tev1_workers", 1))),
         )
         log.info("L%d MetaBary: children@L%d bridges@L%d → %d triads",
                  child_level - 2, child_level, bridge_level, n)
