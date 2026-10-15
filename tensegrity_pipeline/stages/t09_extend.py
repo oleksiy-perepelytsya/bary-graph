@@ -60,6 +60,7 @@ def run(argv: Sequence[str] | None = None) -> None:
                     coll, child_level, bridge_level, thr, alpha,
                     model=model, resolve=resolve, bridge_coll=bridge_coll,
                     dry_run=False, log=log,
+                    workers=max(1, int(getattr(settings, "tev1_workers", 1))),
                 )
                 level_total += n
                 rounds += 1
