@@ -46,7 +46,7 @@ _log = logging.getLogger(__name__)
 
 ROLE_FIELD = "role"
 ROLE_INSTRUCTION = (
-    "Decide which single relation best describes how the two statements in the "
+    "Decide which single relation best describes how the two sentences in the "
     "state are related to each other."
 )
 # One criterion per relation, keyed in ROLES (fermion priority) order. The
@@ -55,23 +55,25 @@ ROLE_INSTRUCTION = (
 # "specific case of a broader kind").
 ROLE_CRITERIA: dict[str, str] = {
     CONTRADICTS: (
-        "the two statements are mutually exclusive: one denies what the other "
+        "the two sentences are mutually exclusive: one denies what the other "
         "asserts"
     ),
     APPLIES_TO: (
-        "one statement names a part, component or member of the whole named by "
-        "the other (part-of)"
+        "one sentence names a part, component or member of the whole named by "
+        "the other sentence (part-of)"
     ),
     IS_INSTANCE_OF: (
         "the same subject appears in a narrower and a broader category: the "
-        "specific case belongs to the general kind named by the other (kind-of)"
+        "specific sentence states a case of the general kind the other states "
+        "(kind-of)"
     ),
     EXTENDS: (
-        "one statement is derived from, elaborates or continues the other"
+        "one sentence is derived from, elaborates or continues the other "
+        "sentence"
     ),
     SAME_PHENOMENON: (
-        "the statements describe the same concept and differ only in wording or "
-        "viewpoint"
+        "the two sentences describe the same concept and differ only in wording "
+        "or viewpoint"
     ),
 }
 
@@ -173,7 +175,7 @@ def role_questions() -> dict:
 
 
 def classify_role(model: DecisionModel, state: str) -> dict:
-    """Ask ``model`` for the relation (``role``) holding between the statements
+    """Ask ``model`` for the relation (``role``) holding between the sentences
     in ``state``.
 
     Never raises: transport failures are logged and returned as

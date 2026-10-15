@@ -77,8 +77,11 @@ bary = normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_type )
 
 Tensegrity keeps the PoC's shape but names the relation term a **role** — decided
 by tev1 and given a **sign**. `v_role` is the embedding of a fixed per-relation
-sentence (embedded once per run), taken verbatim from the PoC's `TYPE_SENTENCES`,
-and `q` is still the embedding cosine of the two participants:
+sentence (embedded once per run). Unlike the PoC's word-oriented sentences,
+tensegrity's speak about **sentences**, because sentences are what its BaryEdges
+pair; the relation *semantics* are the same kaikki types, so a role vector is
+semantically aligned with — though not identical to — the PoC's `v_type`. `q` is
+still the embedding cosine of the two participants:
 
 ```
 any relation except `contradicts`:
@@ -90,13 +93,13 @@ any relation except `contradicts`:
 The relation vocabulary is the PoC's kaikki-derived edge-type set, in fermion
 priority order (rarer, more informative first):
 
-| # | role | kaikki field | v_role sentence (`TYPE_SENTENCES`) |
+| # | role | kaikki field | v_role sentence (`ROLE_SENTENCES`) |
 | - | ---- | ------------ | ---------------------------------- |
-| 1 | `contradicts` | `antonyms[]` | these two words have opposite meanings |
-| 2 | `applies_to` | `meronyms[]`, `holonyms[]` | these two words share a common origin or root |
-| 3 | `is_instance_of` | `hypernyms[]`, `hyponyms[]` | this relationship is a specific instance of the broader relationship |
-| 4 | `extends` | `derived[]`, `related[]` | one word is derived from or extends the other |
-| 5 | `same_phenomenon` | `coordinate_terms[]`, `synonyms[]` | these two words describe the same concept |
+| 1 | `contradicts` | `antonyms[]` | these two sentences contradict each other: one denies what the other asserts |
+| 2 | `applies_to` | `meronyms[]`, `holonyms[]` | one sentence names a part, component or member of the whole named by the other sentence |
+| 3 | `is_instance_of` | `hypernyms[]`, `hyponyms[]` | one sentence states a specific instance of the broader kind stated by the other sentence |
+| 4 | `extends` | `derived[]`, `related[]` | one sentence is derived from, elaborates or continues the other sentence |
+| 5 | `same_phenomenon` | `coordinate_terms[]`, `synonyms[]` | these two sentences describe the same phenomenon, differing only in wording or viewpoint |
 
 There is no `complement` role: `same_phenomenon` plays the affirmative/default
 part it used to, and it is the fallback vector for an unclassified edge.
@@ -193,11 +196,13 @@ without `--force`, so that means a drop-and-rebuild).
   set (`ROLES` in `tg_vec.py`). `role_probability` is the **winning probability
   only** (the losing probabilities are not stored).
 * The question is a plain 5-way Jev choice with one criterion per relation
-  (`ROLE_CRITERIA`). The model separates `contradicts`, `applies_to`, `extends`
-  and `same_phenomenon` reliably, but `is_instance_of` vs `applies_to`
-  (kind-of vs part-of) is its weakest distinction — expect those two to trade
-  places on ambiguous pairs, with a visibly low `role_probability`. The
-  probability is recorded as data; it is not used to overrule the model.
+  (`ROLE_CRITERIA`), worded about **sentences** because that is what gets
+  classified. On a one-example-per-relation probe (tev1:0.8b) the model picked
+  the intended relation every time: `contradicts` 0.78, `applies_to` 0.83,
+  `is_instance_of` 0.60, `extends` 0.47, `same_phenomenon` 0.84.
+  `is_instance_of` and `extends` are the least confident, so check
+  `role_probability` on real pairs rather than trusting the label alone; the
+  probability is recorded as data and is not used to overrule the model.
 * If tev1 is unreachable, `role=None`, `role_probability=0.0`,
   `role_source="unclassified"` — the pipeline records the gap, it never invents
   a relation. The vector then falls back to the `same_phenomenon` role term with

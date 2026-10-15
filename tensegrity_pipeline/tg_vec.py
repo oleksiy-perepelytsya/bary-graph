@@ -14,11 +14,15 @@ itself encodes attraction ("compression") or repulsion ("tension"):
     ``contradicts``:
         normalize( q·v_cm1 + q·v_cm2 − (1 − q)·v_role )
 
-``v_role`` is the embedding of a fixed per-relation sentence, taken verbatim
-from the PoC's :data:`lib.bary_vec.TYPE_SENTENCES` — so for a given relation the
-tensegrity role term *is* the PoC's ``v_type`` and the two stay comparable. ``q``
-remains the embedding cosine of the two participants; the relation itself — and
-its probability — come from the tev1 decision model.
+``v_role`` is the embedding of a fixed per-relation sentence, embedded once per
+run. Unlike the PoC's word-oriented ``TYPE_SENTENCES``, tensegrity's role
+sentences speak about **sentences**, because sentences are what its BaryEdges
+actually pair (L15 sentence ↔ sentence, L14 title ↔ title). The relation
+*semantics* remain the PoC's kaikki-derived five — only the participants are
+re-worded — so a tensegrity role vector is semantically aligned with, but not
+identical to, the PoC's ``v_type``. ``q`` remains the embedding cosine of the two
+participants; the relation itself — and its probability — come from the tev1
+decision model.
 
 The vocabulary is the PoC's kaikki-derived edge-type set (fermion order):
 ``contradicts``, ``applies_to``, ``is_instance_of``, ``extends``,
@@ -36,7 +40,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from lib.bary_vec import TYPE_SENTENCES, level_factor, normalize  # noqa: F401  (re-exported)
+from lib.bary_vec import level_factor, normalize  # noqa: F401  (re-exported)
 
 # Relation vocabulary — the PoC's kaikki-derived edge types, in fermion priority
 # order (spec §7.1: rarer, more informative relations matched first). Every
@@ -57,10 +61,31 @@ ROLES: tuple[str, ...] = (
     SAME_PHENOMENON,
 )
 
-# ``v_role`` per relation: the PoC's own L14 type sentences, imported verbatim
-# rather than re-worded, so a tensegrity role vector is the same vector the PoC
-# stores as ``v_type`` for that relation.
-ROLE_SENTENCES: dict[str, str] = {role: TYPE_SENTENCES[role] for role in ROLES}
+# ``v_role`` per relation — embedded once per run. Written about **sentences**,
+# the participants tensegrity actually pairs, rather than the PoC's words (the
+# relation semantics are the same kaikki types). See the module docstring.
+ROLE_SENTENCES: dict[str, str] = {
+    CONTRADICTS: (
+        "these two sentences contradict each other: one denies what the other "
+        "asserts"
+    ),
+    APPLIES_TO: (
+        "one sentence names a part, component or member of the whole named by "
+        "the other sentence"
+    ),
+    IS_INSTANCE_OF: (
+        "one sentence states a specific instance of the broader kind stated by "
+        "the other sentence"
+    ),
+    EXTENDS: (
+        "one sentence is derived from, elaborates or continues the other "
+        "sentence"
+    ),
+    SAME_PHENOMENON: (
+        "these two sentences describe the same phenomenon, differing only in "
+        "wording or viewpoint"
+    ),
+}
 
 
 def role_sign(role: str | None) -> float:

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import numpy as np
 
-from lib.bary_vec import TYPE_SENTENCES
 from tensegrity_pipeline.tg_vec import (
     APPLIES_TO,
     CONTRADICTS,
@@ -28,11 +27,14 @@ def test_roles_are_the_kaikki_relation_types_in_fermion_order():
     )
 
 
-def test_role_sentences_are_the_poc_type_sentences_verbatim():
-    # Parity guarantee: v_role is the PoC's v_type for the same relation, so the
-    # role term stays comparable across the PoC and tensegrity graphs.
-    assert ROLE_SENTENCES == {role: TYPE_SENTENCES[role] for role in ROLES}
+def test_role_sentences_are_written_about_sentences():
+    # The participants tensegrity pairs are sentences, so v_role is embedded
+    # from sentence-oriented text, not the PoC's word-oriented sentences.
+    assert set(ROLE_SENTENCES) == set(ROLES)
     assert len(set(ROLE_SENTENCES.values())) == len(ROLES)
+    for text in ROLE_SENTENCES.values():
+        assert "sentence" in text  # singular or plural
+        assert "words" not in text
 
 
 def test_role_sign_is_negative_only_for_contradicts():
