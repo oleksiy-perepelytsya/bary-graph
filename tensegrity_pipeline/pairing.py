@@ -10,6 +10,7 @@ the kaikki relation types).
 from __future__ import annotations
 
 import logging
+import time
 from datetime import datetime, timezone
 
 import numpy as np
@@ -149,7 +150,8 @@ def form_level_edges(
         docs = []
         pair_idx = []
 
-    for i, j, q in pairs:
+    t0 = time.monotonic()
+    for n, (i, j, q) in enumerate(pairs, 1):
         cls = classify_role(model, f"{texts[i]}\n{texts[j]}")
         role = cls["role"]
         v_role = role_vecs.get(role or SAME_PHENOMENON, role_vecs[SAME_PHENOMENON])
@@ -169,6 +171,12 @@ def form_level_edges(
         pair_idx.append((i, j))
         if len(docs) >= batch_n:
             _flush()
+        if n % 250 == 0:
+            rate = n / max(time.monotonic() - t0, 1e-9)
+            log.info(
+                "L%d: classified %d/%d pairs (%.2f/s, eta %.0f min)",
+                level, n, len(pairs), rate, (len(pairs) - n) / max(rate, 1e-9) / 60,
+            )
     _flush()
     log.info("L%d: wrote %d BaryEdges", level, n_written)
     return n_written

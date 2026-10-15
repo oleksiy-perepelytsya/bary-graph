@@ -240,4 +240,5 @@ def get_decision_model(settings: Settings) -> DecisionModel:
         settings.tev1_url,  # type: ignore[attr-defined]
         settings.tev1_model,  # type: ignore[attr-defined]
         timeout=getattr(settings, "tev1_timeout_seconds", 300.0),
+        retries=getattr(settings, "tev1_retries", 2),
     )

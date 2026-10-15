@@ -42,6 +42,10 @@ class TensegritySettings(Settings):
     tev1_url: str = "http://localhost:11435"
     tev1_model: str = "tev1:0.8b"
     tev1_timeout_seconds: float = 300.0
+    # Transport retries per decision. The default (2, ~6s of patience) suits a
+    # local endpoint; a run riding an external tunnel (Kaggle) wants more —
+    # TEV1_RETRIES=6 gives ~2min of backoff before a stage aborts.
+    tev1_retries: int = 2
     fake_decision: bool = False
 
     # --- Sibling collection holding document -> node provenance ---
@@ -67,6 +71,7 @@ class TensegritySettings(Settings):
             tev1_timeout_seconds=_env_float(
                 "TEV1_TIMEOUT_SECONDS", cls.tev1_timeout_seconds
             ),
+            tev1_retries=int(_env_float("TEV1_RETRIES", cls.tev1_retries)),
             fake_decision=_env_bool("BARY_FAKE_DECISION", False),
             doc_bridges_collection=_env_str(
                 "MONGO_DOC_BRIDGES_COLLECTION", cls.doc_bridges_collection

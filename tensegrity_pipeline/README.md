@@ -270,7 +270,11 @@ Role classification goes through `POST /v1/systemone` on the ollama host
 (`TEV1_URL`, model `TEV1_MODEL`), the same Jev TypeSafe wire format
 `cognitive/not_sure.py` uses. `TEV1_URL` may point at the Kaggle GPU tunnel
 (the job API proxies `/v1/systemone` and `/api/*` — see
-`docs/kaggle_gpu_runner.md`). `tev1.py` exposes:
+`docs/kaggle_gpu_runner.md`); the proxy is bearer-gated, so export the printed
+`KAGGLE_API_TOKEN` and `Tev1Client` attaches it automatically. A remote run
+wants more transport patience than the local default — `TEV1_RETRIES` (default
+2, ≈6 s of backoff) buys ~2 min at 6. Measured on the T4 tunnel: 0.55 s/call
+warm vs 10.92 s local for the same sentence states (≈20×). `tev1.py` exposes:
 
 * `Tev1Client` — transport client with retries;
 * `FakeDecision` — deterministic offline stand-in;
