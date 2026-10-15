@@ -99,3 +99,68 @@ run-dependent at the margin.
 * Gold archive (`gold.jsonl`, `gold_matrices.csv`, `score.py`) validated
   100/100 with 0 FAILED, and its texts are sha256-identical to the input
   corpus — it stays available as an independent benchmark for this graph.
+
+## Benchmark: three extraction arms
+
+Harness: `scripts/eval/us_matrix_common.py` +
+`scripts/eval/run_eval_us_matrix.py`; scored with the archive's own `score.py`.
+
+| arm | model? | what it sees |
+| --- | --- | --- |
+| `graph_regex` | no | `cases.csv` + the graph's L15 sentence index + regex harvesters |
+| `llm_fulltext` | yes | `TASK.md` + `cases.csv` row + whole opinion text |
+| `llm_graph` | yes | the same, plus a graph overlay (L14 outline, intra-opinion role-tagged relations, cross-opinion parallels); quotes snapped to graph sentences |
+
+All arms get `cases.csv`, because the task hands it to testers.
+
+### Arm A (`graph_regex`, all 100, ~3 s)
+
+| metric | value |
+| --- | --- |
+| missing_fields | 0.000 |
+| court_level | 0.980 |
+| jurisdiction | 0.930 |
+| date_decided | 0.950 |
+| procedure_type / area_of_law / standard_of_review / disposition / winning_party | 0.000 |
+| quotes_verbatim | 1.000 |
+| cit_recall / cit_precision | 0.400 / 0.409 |
+| stat_recall / stat_precision | 0.434 / 0.591 |
+
+`quotes_verbatim = 1.0` is structural: the graph's L15 nodes *are* the opinion's
+sentences, so evidence picked from the graph is verbatim by construction.
+
+### Two findings that matter for interpreting any score
+
+1. **`cases.csv` answers 3 of the 8 EXACT fields.** It ships with the task and
+   carries `court_level`, `court`, `case_name`, `date_filed`, `docket_number`.
+   Its `court_level` uses CourtListener's vocabulary (`fed_appellate`), not the
+   template's (`federal_appellate`): copying it verbatim scores 43/100, but a
+   one-line mapping scores **98/100**. With `date_filed` and a state-list
+   derivation, `court_level`/`date_decided`/`jurisdiction` reach 0.98/0.95/0.93
+   with no model at all. The discriminating fields are the five semantic ones
+   (`procedure_type`, `area_of_law`, `standard_of_review`, `disposition`,
+   `winning_party`).
+2. **The graph is a lossy index of the corpus.** Comparing non-whitespace
+   characters of the graph's L15 text against the source files: **97.59%
+   corpus-wide**, with **35 of 100 documents below 98%** (worst 89%). Case
+   `26133` lost 26 of its 28 reporter citations — verified absent from the
+   database, not merely unmatched. Arm A inherits this; the LLM arms see the
+   full file text instead, so the two are not reading quite the same document.
+
+### GPU-side execution
+
+The LLM arms never ran through the tunnel. A Cloudflare-fronted request to
+`qwen3:14b` returned HTTP 524 at ~126 s on every real payload: prompt eval is
+fast (555 tok/s), the model stays in VRAM (13.03 GB, ctx 24576) and eval runs at
+~13 tok/s, but ~110 s of wall time was unaccounted for and arrived ~2.75 s per
+streamed chunk (`scripts/kaggle_embed_server.py` forwards with `resp.read(1<<20)`,
+i.e. up to 1 MB blocking reads, and strips `transfer-encoding`). Small prompts
+passed; real ones did not. The arms are therefore packaged as a self-contained
+bundle (cases + precomputed overlays + harness, no Mongo, no gold) and run
+against `http://localhost:11434` on the GPU host — see the bundle's
+`README_KAGGLE.md`.
+
+Harness details worth keeping: `sentence_id` is a string (`26133:p100:s0`), so
+document order requires parsing the integers out — sorting the ids directly
+scrambles the text; and the overlay is trimmed, never the opinion, when a prompt
+would exceed the context budget.
