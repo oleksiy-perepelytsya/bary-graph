@@ -251,15 +251,26 @@ Programmatic, no model call (`parse.py`):
   punctuation);
 * Title-Case short lines (no terminal punctuation, ≥ 60 % capitalised words).
 
-Sentence splitting is a deterministic scanner with a common-abbreviation guard
-(`Dr.`, `e.g.`, `U.S.`, initials). `section_idx` on each sentence records which
-title it belongs to — membership is **metadata**, not pairwise edges.
+Sentence splitting is a deterministic scanner with an abbreviation guard:
+common English (`Dr.`, `e.g.`), initials/acronyms (`U.S.`, `J.`), and the
+legal/citation domain measured on court opinions (`See id.`, `4th Cir.`,
+no-space compounds such as `F.Supp.`, Roman section numerals `II.`).
+Ellipsis runs (`. . .`, `...`) never end a sentence, and segments with no
+letters at all (star-page `*173`, footnote numbers, bare punctuation) are
+dropped instead of stored as sentences. `_TERMINAL_PUNCT` is a **tuple** on
+purpose: passed as a plain string, `str.endswith` matches only its literal
+suffix and the guard never fires — that bug is what let 2,820
+punctuation-terminated lines through as titles. `section_idx` on each
+sentence records which title it belongs to — membership is **metadata**, not
+pairwise edges.
 
 ## tev1 decision model
 
 Role classification goes through `POST /v1/systemone` on the ollama host
 (`TEV1_URL`, model `TEV1_MODEL`), the same Jev TypeSafe wire format
-`cognitive/not_sure.py` uses. `tev1.py` exposes:
+`cognitive/not_sure.py` uses. `TEV1_URL` may point at the Kaggle GPU tunnel
+(the job API proxies `/v1/systemone` and `/api/*` — see
+`docs/kaggle_gpu_runner.md`). `tev1.py` exposes:
 
 * `Tev1Client` — transport client with retries;
 * `FakeDecision` — deterministic offline stand-in;

@@ -8,8 +8,13 @@ headings, numbered headings, ALL-CAPS short lines, and Title-Case short lines
 without terminal punctuation. No model call is involved.
 
 Sentence splitting is a small deterministic scanner with a common-abbreviation
-guard, not a statistical segmenter. The policy is documented and stable, which
-is what the architecture spec asks of a segmentation policy.
+guard, not a statistical segmenter. The guard covers general English
+abbreviations plus the legal/citation domain ("See id.", "4th Cir.",
+"(Tex. App.)"), ellipsis runs (``. . .`` / ``...``) never end a sentence, and
+segments carrying no letters at all (star-pagination " *173 ", footnote
+numbers, bare punctuation) are dropped rather than stored as sentences. The
+policy is documented and stable, which is what the architecture spec asks of a
+segmentation policy.
 """
 
 from __future__ import annotations
@@ -27,7 +32,10 @@ _SETEXT_UNDERLINE = re.compile(r"^\s{0,3}(=+|-{2,})\s*$")
 _NUMBERED_HEADING = re.compile(
     r"^\s{0,3}(?:(\d+(?:\.\d+)*)[.)]?|([IVXLC]+)[.)]|([A-Z])[.)])\s+\S"
 )
-_TERMINAL_PUNCT = ".!?,;:"
+# A *tuple*, so str.endswith() checks membership per character. As a plain
+# string it would only match the literal suffix ".!?,;:" — a guard that never
+# fired and let body lines ("State v. Spaulding,") through as titles.
+_TERMINAL_PUNCT = (".", "!", "?", ",", ";", ":")
 # Lines longer than this are never treated as titles.
 _TITLE_MAX_CHARS = 100
 _TITLE_MAX_WORDS = 14
@@ -42,6 +50,20 @@ _ABBREVIATIONS = {
     "e.g", "i.e", "fig", "no", "vol", "al", "inc", "ltd", "co", "dept",
     "univ", "approx", "est", "min", "max", "cf", "ca", "p", "pp", "ch",
     "sec", "art", "eq", "nr", "ed", "eds", "op", "cit", "ibid",
+} | {
+    # Legal / citation domain (measured on court-opinion text): case reporter
+    # and court tokens ("See id.", "4th Cir.", "913 F.Supp."), pleading/brief
+    # names ("App.", "Cmplt.", "Pet. for Cert."), state citation codes
+    # ("(Tex. App.)", "64 Conn."), and Roman section numerals ("II.
+    # Discussion") — all measured as sentence-boundary false positives.
+    "v", "id", "app", "cir", "ct", "supp", "fed", "stat", "reg", "cert",
+    "ann", "civ", "corp", "compl", "dist", "rev", "tr", "bd",
+    "ins", "am", "br", "pet", "sgt", "mot", "rep", "auto", "rem", "maj",
+    "cmplt", "crim", "nos", "rel", "proc", "balt", "stmt", "const", "gen",
+    "hosp", "mem", "ex", "objs", "cmt", "comm",
+    "tex", "ga", "va", "md", "mass", "kan", "wis", "conn", "ore", "la",
+    "colo", "pa",
+    "ii", "iii", "iv", "vi", "vii", "viii", "ix", "xi", "xii",
 }
 _ACRONYM = re.compile(r"^(?:[A-Za-z]\.){2,}$")  # "U.S.", "e.g."
 
@@ -57,16 +79,52 @@ def _word_before(text: str, end: int) -> str:
 def _is_abbreviation(text: str, start: int, period_idx: int) -> bool:
     # Include the terminating period so acronym tokens like "U.S." are intact.
     tok = _word_before(text, period_idx + 1).strip()
+    # Openers travel with the token — "(Tex.", "(U.S.", "'Id.", "{Id.", "[v." —
+    # so strip them before the abbreviation / acronym / initial tests below.
+    tok = tok.lstrip("(\"'‘’«{[")
     if not tok:
         return False
     low = tok.lower().rstrip(".")
     if low in _ABBREVIATIONS:
+        return True
+    # Dotted compounds written without spaces — "F.Supp.", "S.Ct.",
+    # "Fed.R.Civ.P." — the final component carries the abbreviation.
+    if "." in low and low.rsplit(".", 1)[-1] in _ABBREVIATIONS:
         return True
     # "U.S." / "e.g." style: the token already contains internal periods.
     if _ACRONYM.match(tok):
         return True
     # Single-letter initials (e.g. "J.").
     return len(tok) == 2 and tok[0].isalpha() and tok[1] == "."
+
+
+def _is_ellipsis(text: str, period_idx: int) -> bool:
+    """True when the '.' at ``period_idx`` belongs to an ellipsis run.
+
+    Covers attached (``held... next``) and spaced (``held . . . next``)
+    ellipses: a period with another period immediately before or after it —
+    whitespace aside — never ends a sentence. Without this guard a spaced
+    ellipsis shatters a paragraph into lone "." fragments.
+    """
+    j = period_idx - 1
+    while j >= 0 and text[j].isspace():
+        j -= 1
+    if j >= 0 and text[j] == ".":
+        return True
+    k = period_idx + 1
+    while k < len(text) and text[k].isspace():
+        k += 1
+    return k < len(text) and text[k] == "."
+
+
+def _has_letters(s: str) -> bool:
+    """Segment guard: pure digits/punctuation/markers are not sentences.
+
+    Star-pagination ("*173"), footnote numbers ("173"), ellipsis-only spans
+    and paragraph-mark crumbs carry no words; storing them as L15 nodes would
+    only buy the pipeline junk embeddings and junk edge candidates.
+    """
+    return any(c.isalpha() for c in s)
 
 
 @dataclass(frozen=True)
@@ -94,9 +152,12 @@ def split_sentences_with_spans(text: str) -> list[Span]:
             while j < n and text[j] in _CLOSERS:
                 j += 1
             at_boundary = j >= n or text[j].isspace()
-            if at_boundary and not (c == "." and _is_abbreviation(text, start, i)):
+            if at_boundary and not (
+                c == "."
+                and (_is_abbreviation(text, start, i) or _is_ellipsis(text, i))
+            ):
                 seg = text[start:j].strip()
-                if seg:
+                if seg and _has_letters(seg):
                     # Recover trimmed offsets.
                     lead = len(text[start:j]) - len(text[start:j].lstrip())
                     s = start + lead
@@ -110,7 +171,7 @@ def split_sentences_with_spans(text: str) -> list[Span]:
                 continue
         i += 1
     tail = text[start:].strip()
-    if tail:
+    if tail and _has_letters(tail):
         lead = len(text[start:]) - len(text[start:].lstrip())
         s = start + lead
         spans.append(Span(tail, s, s + len(tail)))

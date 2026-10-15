@@ -58,6 +58,89 @@ def test_is_title_line_rejects_sentences():
     )
 
 
+def test_is_title_line_terminal_punct_guard_actually_fires():
+    # Regression: _TERMINAL_PUNCT used to be a plain string handed to
+    # str.endswith(), which matches only the literal suffix ".!?,;:" — the
+    # guard never fired and body lines streamed through as titles.
+    assert not is_title_line("State v. Spaulding,")
+    assert not is_title_line("2011 MT 204, 361 Mont. 445, 259 P.3d 793;")
+    assert not is_title_line("ANDREW J. GUILFORD, District Judge.")
+    # Numbered body sentences ending in punctuation are rejected too…
+    assert not is_title_line("1. In this appeal the claim fails.")
+    # …while real headings still pass.
+    assert is_title_line("STANDARD OF REVIEW")
+    assert is_title_line("3.2 Methods")
+
+
+def test_split_sentences_keeps_legal_citations_intact():
+    text = "See id. at 413. The court affirmed. State v. Lovegren (Tex. App. 2019)."
+    assert split_sentences(text) == [
+        "See id. at 413.",
+        "The court affirmed.",
+        "State v. Lovegren (Tex. App. 2019).",
+    ]
+    assert split_sentences("affirmed (4th Cir. 2019). The petition was denied.") == [
+        "affirmed (4th Cir. 2019).",
+        "The petition was denied.",
+    ]
+    # Openers ride along with the token, so "(U.S." must still be recognised
+    # as an acronym (it previously split at the second period).
+    assert split_sentences("relying on (U.S. Const.). Denied.") == [
+        "relying on (U.S. Const.).",
+        "Denied.",
+    ]
+
+
+def test_split_sentences_compound_reporters_and_section_numerals():
+    # Dotted compounds written without spaces: the last component carries the
+    # abbreviation, so the final period must not split ("F.Supp." → "supp").
+    assert split_sentences("913 F.Supp. 256 (1996). Next case.") == [
+        "913 F.Supp. 256 (1996).",
+        "Next case.",
+    ]
+    assert split_sentences("99 S.Ct. 2106 (citations omitted). Next.") == [
+        "99 S.Ct. 2106 (citations omitted).",
+        "Next.",
+    ]
+    # Roman section numerals are crumbs, not sentence ends.
+    assert split_sentences("II. Ineffective Assistance. In so much as argued.") == [
+        "II. Ineffective Assistance.",
+        "In so much as argued.",
+    ]
+    # Pleading/brief furniture.
+    assert split_sentences("affirmed. See Pet. for Cert. in No. 93-108.") == [
+        "affirmed.",
+        "See Pet. for Cert. in No. 93-108.",
+    ]
+
+
+def test_split_sentences_ellipsis_never_ends_a_sentence():
+    assert split_sentences("The record is silent . . . and stays so. Next one.") == [
+        "The record is silent . . . and stays so.",
+        "Next one.",
+    ]
+    assert split_sentences("held... then denied. Done.") == [
+        "held... then denied.",
+        "Done.",
+    ]
+
+
+def test_split_sentences_drops_letterless_segments():
+    # Star-pagination, footnote numbers and bare punctuation are markers, not
+    # sentences: they would become junk L15 nodes (and junk edge candidates).
+    assert split_sentences("173. Real content. *259") == ["Real content."]
+    assert split_sentences("*173") == []
+    assert split_sentences(".....") == []
+
+
+def test_split_sentences_with_spans_keeps_offsets_after_drops():
+    text = "173. Real content stays aligned. *259"
+    spans = split_sentences_with_spans(text)
+    assert [s.text for s in spans] == ["Real content stays aligned."]
+    for s in spans:
+        assert text[s.start : s.end] == s.text
+
+
 FIXTURE_DOC = """\
 # Neural Networks
 
