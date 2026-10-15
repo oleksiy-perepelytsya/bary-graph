@@ -10,11 +10,12 @@ ingests **documents** and builds a BaryGraph-shaped graph out of them:
 | **L14** | section / paragraph **titles** | detected heuristically; **no native embedding** — vectors derived in t05 |
 | **L13…L1** | **MetaBary** triads | built recursively from role-tagged BaryEdges |
 
-Every BaryEdge carries a **role** — `complement` (attraction / "compression") or
-`contradict` (repulsion / "tension") — decided by the **tev1** decision model,
-and a modified barycentric vector whose *sign* encodes that role. That signed
-role is what makes this a *tensegrity* structure rather than a plain similarity
-graph.
+Every BaryEdge carries a **role** — one of the kaikki relation types
+(`contradicts`, `applies_to`, `is_instance_of`, `extends`, `same_phenomenon`) —
+decided by the **tev1** decision model, and a modified barycentric vector whose
+*sign* encodes that role (`contradicts` repels / "tension"; the other four
+attract / "compression"). That signed role is what makes this a *tensegrity*
+structure rather than a plain similarity graph.
 
 Storage: a dedicated Mongo database **and** collection, both named
 `tensegrity` (see `.env.tensegrity`). The MCP server never sources this profile;
@@ -74,23 +75,31 @@ PoC BaryEdge vector:
 bary = normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_type )
 ```
 
-Tensegrity replaces the edge-type term with a **signed role term**. `v_role` is
-the embedding of a fixed per-role sentence (embedded once per run), and `q` is
-still the embedding cosine of the two participants:
+Tensegrity keeps the PoC's shape but names the relation term a **role** — decided
+by tev1 and given a **sign**. `v_role` is the embedding of a fixed per-relation
+sentence (embedded once per run), taken verbatim from the PoC's `TYPE_SENTENCES`,
+and `q` is still the embedding cosine of the two participants:
 
 ```
-complement:  bary = normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_role )
-contradict:  bary = normalize( q·v_cm1 + q·v_cm2 − (1 − q)·v_role )
+any relation except `contradicts`:
+    bary = normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_role )
+`contradicts`:
+    bary = normalize( q·v_cm1 + q·v_cm2 − (1 − q)·v_role )
 ```
 
-`ROLE_SENTENCES` (`tg_vec.py`):
+The relation vocabulary is the PoC's kaikki-derived edge-type set, in fermion
+priority order (rarer, more informative first):
 
-```
-complement: "these two statements are complementary: they are consistent with
-             each other and reinforce the same meaning"
-contradict: "these two statements are contradictory: they are mutually
-             exclusive and cannot both be true"
-```
+| # | role | kaikki field | v_role sentence (`TYPE_SENTENCES`) |
+| - | ---- | ------------ | ---------------------------------- |
+| 1 | `contradicts` | `antonyms[]` | these two words have opposite meanings |
+| 2 | `applies_to` | `meronyms[]`, `holonyms[]` | these two words share a common origin or root |
+| 3 | `is_instance_of` | `hypernyms[]`, `hyponyms[]` | this relationship is a specific instance of the broader relationship |
+| 4 | `extends` | `derived[]`, `related[]` | one word is derived from or extends the other |
+| 5 | `same_phenomenon` | `coordinate_terms[]`, `synonyms[]` | these two words describe the same concept |
+
+There is no `complement` role: `same_phenomenon` plays the affirmative/default
+part it used to, and it is the fallback vector for an unclassified edge.
 
 MetaBary keeps the PoC "Born rule" for `q_mb_raw` but applies the role sign to
 the bridge term:
@@ -134,7 +143,8 @@ BaryEdges / MetaBarys:
   "connection_strength": 0.83,   // == q == embedding cosine
   "accumulated_weight": 0.83,
   "q": 0.83, "type_vector": BinData(9, …),
-  "role": "complement" | "contradict" | null,   // tev1 argmax
+  "role": "contradicts" | "applies_to" | "is_instance_of" | "extends"
+          | "same_phenomenon" | null,           // tev1 argmax
   "role_probability": 0.91,                     // WINNING probability only
   "role_source": "tev1" | "fake" | "unclassified",
   "source": "inferred" | "reentry", "confidence": 0.83 }
@@ -179,11 +189,19 @@ without `--force`, so that means a drop-and-rebuild).
 
 ### Role semantics
 
-* `role` is the **argmax** of the tev1 probabilities. `role_probability` is the
-  **winning probability only** (the losing probability is not stored).
+* `role` is the **argmax** of the tev1 probabilities over the kaikki relation
+  set (`ROLES` in `tg_vec.py`). `role_probability` is the **winning probability
+  only** (the losing probabilities are not stored).
+* The question is a plain 5-way Jev choice with one criterion per relation
+  (`ROLE_CRITERIA`). The model separates `contradicts`, `applies_to`, `extends`
+  and `same_phenomenon` reliably, but `is_instance_of` vs `applies_to`
+  (kind-of vs part-of) is its weakest distinction — expect those two to trade
+  places on ambiguous pairs, with a visibly low `role_probability`. The
+  probability is recorded as data; it is not used to overrule the model.
 * If tev1 is unreachable, `role=None`, `role_probability=0.0`,
   `role_source="unclassified"` — the pipeline records the gap, it never invents
-  a stance. The vector then falls back to the attractive (`+`) sign.
+  a relation. The vector then falls back to the `same_phenomenon` role term with
+  the attractive (`+`) sign.
 
 ## Title detection (t01)
 

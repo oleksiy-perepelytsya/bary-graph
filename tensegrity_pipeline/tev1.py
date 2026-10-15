@@ -1,20 +1,24 @@
-"""tev1 decision model client — the complement/contradict role classifier.
+"""tev1 decision model client — the relation (role) classifier.
 
 The model is served by ollama on the Jev TypeSafe endpoint ``POST
 /v1/systemone`` (the same wire format :mod:`cognitive.not_sure` uses). It reads
-a STATE once and scores the allowed answer tokens directly.
+a STATE once and scores the allowed answer tokens directly, so the question is
+a plain N-way choice — one criterion per relation.
 
 Role contract used throughout the pipeline::
 
     {
-      "role": "complement" | "contradict" | None,   # argmax of probabilities
-      "role_probability": 0.0 .. 1.0,                # winning probability only
-      "confidence": ... | None,                      # model-reported confidence
+      "role": "contradicts" | "applies_to" | "is_instance_of"
+              | "extends" | "same_phenomenon" | None,   # argmax of probabilities
+      "role_probability": 0.0 .. 1.0,                   # winning probability only
+      "confidence": ... | None,                         # model-reported confidence
       "role_source": "tev1" | "fake" | "unclassified",
     }
 
-An unreachable model yields ``role=None`` with ``role_source="unclassified"`` —
-the pipeline records the gap rather than inventing a stance.
+The vocabulary is the PoC's kaikki-derived edge-type set (see
+:mod:`tensegrity_pipeline.tg_vec`). An unreachable model yields ``role=None``
+with ``role_source="unclassified"`` — the pipeline records the gap rather than
+inventing a relation.
 """
 
 from __future__ import annotations
@@ -29,19 +33,46 @@ import urllib.request
 from typing import Protocol
 
 from lib.config import Settings
-from tensegrity_pipeline.tg_vec import COMPLEMENT, CONTRADICT, ROLES
+from tensegrity_pipeline.tg_vec import (
+    APPLIES_TO,
+    CONTRADICTS,
+    EXTENDS,
+    IS_INSTANCE_OF,
+    ROLES,
+    SAME_PHENOMENON,
+)
 
 _log = logging.getLogger(__name__)
 
 ROLE_FIELD = "role"
 ROLE_INSTRUCTION = (
-    "Decide the logical relationship between the statements in the state: do "
-    "they complement each other (consistent, mutually supporting) or "
-    "contradict each other (mutually exclusive, one negates the other)?"
+    "Decide which single relation best describes how the two statements in the "
+    "state are related to each other."
 )
+# One criterion per relation, keyed in ROLES (fermion priority) order. The
+# part-of / kind-of pair is the one the model separates least reliably, so both
+# criteria spell out the distinguishing test ("part, component or member" vs
+# "specific case of a broader kind").
 ROLE_CRITERIA: dict[str, str] = {
-    COMPLEMENT: "the statements are consistent and reinforce the same meaning",
-    CONTRADICT: "the statements are mutually exclusive and cannot both be true",
+    CONTRADICTS: (
+        "the two statements are mutually exclusive: one denies what the other "
+        "asserts"
+    ),
+    APPLIES_TO: (
+        "one statement names a part, component or member of the whole named by "
+        "the other (part-of)"
+    ),
+    IS_INSTANCE_OF: (
+        "the same subject appears in a narrower and a broader category: the "
+        "specific case belongs to the general kind named by the other (kind-of)"
+    ),
+    EXTENDS: (
+        "one statement is derived from, elaborates or continues the other"
+    ),
+    SAME_PHENOMENON: (
+        "the statements describe the same concept and differ only in wording or "
+        "viewpoint"
+    ),
 }
 
 
@@ -113,18 +144,19 @@ class FakeDecision:
     source = "fake"
 
     def decide(self, state: str, questions: dict) -> dict:
+        # Deterministic pseudo-probabilities over the relation set, summed to 1.
         h = int.from_bytes(hashlib.sha256(state.encode("utf-8")).digest()[:8], "big")
-        p_complement = 0.05 + 0.90 * ((h % 10_000) / 10_000.0)
+        raw = [((h >> (8 * i)) & 0xFFFF) + 1 for i in range(len(ROLES))]
+        total = float(sum(raw))
+        probs = {role: r / total for role, r in zip(ROLES, raw, strict=True)}
+        winner = max(ROLES, key=lambda r: probs[r])
         answers: dict[str, dict] = {}
         for field in questions:
             answers[field] = {
                 "type": "choice",
-                "choice": COMPLEMENT if p_complement >= 0.5 else CONTRADICT,
-                "probabilities": {
-                    COMPLEMENT: p_complement,
-                    CONTRADICT: 1.0 - p_complement,
-                },
-                "confidence": abs(p_complement - 0.5) * 2.0,
+                "choice": winner,
+                "probabilities": dict(probs),
+                "confidence": probs[winner],
             }
         return {"model": "fake", "answers": answers}
 
@@ -141,7 +173,8 @@ def role_questions() -> dict:
 
 
 def classify_role(model: DecisionModel, state: str) -> dict:
-    """Ask ``model`` for the complement/contradict role of ``state``.
+    """Ask ``model`` for the relation (``role``) holding between the statements
+    in ``state``.
 
     Never raises: transport failures are logged and returned as
     ``role_source="unclassified"`` so the caller can keep going.

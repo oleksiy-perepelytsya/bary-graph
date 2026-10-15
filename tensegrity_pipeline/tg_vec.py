@@ -5,16 +5,25 @@ The PoC barycentric vector is::
     bary_vec = normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_type )
 
 where ``v_type`` encodes the *edge type* and ``q`` the connection strength. The
-tensegrity version replaces the edge-type term with a **signed role term** so
-the vector itself encodes whether the relation is complementary (attraction /
-"compression") or contradictory (repulsion / "tension"):
+tensegrity version keeps that shape, calls the relation term a **role** (decided
+per edge by the tev1 decision model), and gives it a **sign** so the vector
+itself encodes attraction ("compression") or repulsion ("tension"):
 
-    complement:  normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_role )
-    contradict:  normalize( q·v_cm1 + q·v_cm2 − (1 − q)·v_role )
+    any relation except ``contradicts``:
+        normalize( q·v_cm1 + q·v_cm2 + (1 − q)·v_role )
+    ``contradicts``:
+        normalize( q·v_cm1 + q·v_cm2 − (1 − q)·v_role )
 
-``v_role`` is the embedding of a fixed per-role sentence (embedded once per
-run). ``q`` remains the embedding cosine of the two participants; the role
-itself — and its probability — come from the tev1 decision model.
+``v_role`` is the embedding of a fixed per-relation sentence, taken verbatim
+from the PoC's :data:`lib.bary_vec.TYPE_SENTENCES` — so for a given relation the
+tensegrity role term *is* the PoC's ``v_type`` and the two stay comparable. ``q``
+remains the embedding cosine of the two participants; the relation itself — and
+its probability — come from the tev1 decision model.
+
+The vocabulary is the PoC's kaikki-derived edge-type set (fermion order):
+``contradicts``, ``applies_to``, ``is_instance_of``, ``extends``,
+``same_phenomenon``. ``contradicts`` is the only relation that inverts the
+relation term; the other four are attractive, as in the PoC's unsigned form.
 
 MetaBary keeps the PoC "Born rule" for ``q_mb_raw`` but applies the same role
 sign to the bridge term::
@@ -27,32 +36,37 @@ from __future__ import annotations
 
 import numpy as np
 
-from lib.bary_vec import level_factor, normalize  # noqa: F401  (re-exported)
+from lib.bary_vec import TYPE_SENTENCES, level_factor, normalize  # noqa: F401  (re-exported)
 
-COMPLEMENT = "complement"
-CONTRADICT = "contradict"
-ROLES: tuple[str, ...] = (COMPLEMENT, CONTRADICT)
+# Relation vocabulary — the PoC's kaikki-derived edge types, in fermion priority
+# order (spec §7.1: rarer, more informative relations matched first). Every
+# tensegrity BaryEdge's ``role`` is one of these. There is deliberately no
+# "complement" role: it was tensegrity's own invention, and ``same_phenomenon``
+# now plays the affirmative/default part it used to.
+CONTRADICTS = "contradicts"
+APPLIES_TO = "applies_to"
+IS_INSTANCE_OF = "is_instance_of"
+EXTENDS = "extends"
+SAME_PHENOMENON = "same_phenomenon"
 
-# Fixed role sentences — embedded once, used as v_role. Kept deliberately
-# parallel in structure so the only difference the embedder sees is the
-# complementary/contradictory stance.
-ROLE_SENTENCES: dict[str, str] = {
-    COMPLEMENT: (
-        "these two statements are complementary: they are consistent with each "
-        "other and reinforce the same meaning"
-    ),
-    CONTRADICT: (
-        "these two statements are contradictory: they are mutually exclusive "
-        "and cannot both be true"
-    ),
-}
+ROLES: tuple[str, ...] = (
+    CONTRADICTS,
+    APPLIES_TO,
+    IS_INSTANCE_OF,
+    EXTENDS,
+    SAME_PHENOMENON,
+)
+
+# ``v_role`` per relation: the PoC's own L14 type sentences, imported verbatim
+# rather than re-worded, so a tensegrity role vector is the same vector the PoC
+# stores as ``v_type`` for that relation.
+ROLE_SENTENCES: dict[str, str] = {role: TYPE_SENTENCES[role] for role in ROLES}
 
 
 def role_sign(role: str | None) -> float:
-    """+1 for complement (or unknown), −1 for contradict."""
-    if role == CONTRADICT:
-        return -1.0
-    return 1.0
+    """+1 for every relation except ``contradicts`` (−1); +1 for an unknown or
+    absent role, so an unclassified edge stays attractive."""
+    return -1.0 if role == CONTRADICTS else 1.0
 
 
 def compute_bary_vec(
@@ -60,7 +74,7 @@ def compute_bary_vec(
     v_cm2: np.ndarray,
     v_role: np.ndarray,
     q: float,
-    role: str | None = COMPLEMENT,
+    role: str | None = SAME_PHENOMENON,
 ) -> np.ndarray:
     """Signed-role BaryEdge vector (L14/L15)."""
     v_cm1 = np.asarray(v_cm1, dtype=np.float32)
@@ -77,7 +91,7 @@ def compute_metabary_vec(
     w1: float,
     w2: float,
     w3: float,
-    role: str | None = COMPLEMENT,
+    role: str | None = SAME_PHENOMENON,
 ) -> tuple[np.ndarray, float]:
     """MetaBary (L≤13): role-signed direction + Born-rule ``q_mb_raw``.
 

@@ -9,7 +9,7 @@ from tensegrity_pipeline.docs import (
     title_node,
 )
 from tensegrity_pipeline.schema import ParsedSentence, ParsedTitle
-from tensegrity_pipeline.tg_vec import COMPLEMENT, CONTRADICT
+from tensegrity_pipeline.tg_vec import CONTRADICTS, EXTENDS
 
 
 def _vec(dim: int = 4) -> np.ndarray:
@@ -44,12 +44,12 @@ def test_title_node_has_placeholder_vector():
 def test_tensegrity_baryedge_carries_role_fields():
     doc = tensegrity_baryedge(
         "a", "b", 15, _vec(), 0.83,
-        role=CONTRADICT, role_probability=0.91, role_source="tev1",
+        role=CONTRADICTS, role_probability=0.91, role_source="tev1",
         type_vector=_vec(),
     )
     assert doc["doc_type"] == "baryedge"
     assert doc["level"] == 15
-    assert doc["role"] == CONTRADICT
+    assert doc["role"] == CONTRADICTS
     assert doc["role_probability"] == 0.91
     assert doc["role_source"] == "tev1"
     assert doc["q"] == 0.83
@@ -66,10 +66,10 @@ def test_unclassified_baryedge_has_none_role_and_zero_probability():
 
 
 def test_metabary_shape():
-    doc = metabary("x", "y", 13, _vec(), 0.6, 0.72, role=COMPLEMENT,
+    doc = metabary("x", "y", 13, _vec(), 0.6, 0.72, role=EXTENDS,
                    role_probability=0.77, role_source="tev1")
     assert doc["level"] == 13
     assert doc["connection_strength"] == 0.6
     assert doc["accumulated_weight"] == 0.72
-    assert doc["role"] == COMPLEMENT
+    assert doc["role"] == EXTENDS
     assert doc["role_probability"] == 0.77

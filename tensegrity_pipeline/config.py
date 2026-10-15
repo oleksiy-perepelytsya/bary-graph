@@ -38,7 +38,7 @@ def _env_bool(key: str, default: bool = False) -> bool:
 class TensegritySettings(Settings):
     """PoC settings + the tev1 decision model and the input document."""
 
-    # --- tev1 decision model (complement / contradict) ---
+    # --- tev1 decision model (kaikki relation set) ---
     tev1_url: str = "http://localhost:11435"
     tev1_model: str = "tev1:0.8b"
     tev1_timeout_seconds: float = 300.0

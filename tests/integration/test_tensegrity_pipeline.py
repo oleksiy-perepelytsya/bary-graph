@@ -22,6 +22,7 @@ import pytest
 from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import main
 from tensegrity_pipeline.config import TensegritySettings
+from tensegrity_pipeline.tg_vec import ROLES
 
 FIXTURE_DOC = """\
 # Neural Networks
@@ -98,7 +99,7 @@ def test_pipeline_end_to_end(tens_env):
     assert len(l15_edges) >= 1
     assert len(l14_edges) >= 1
     for e in l15_edges + l14_edges:
-        assert e["role"] in ("complement", "contradict", None)
+        assert e["role"] in (*ROLES, None)
         assert 0.0 <= e["role_probability"] <= 1.0
         assert e["vector"] is not None
 
@@ -107,7 +108,7 @@ def test_pipeline_end_to_end(tens_env):
                           "source": {"$ne": "structural"}}))
     assert len(mbs) >= 1
     for mb in mbs:
-        assert mb["role"] in ("complement", "contradict", None)
+        assert mb["role"] in (*ROLES, None)
         assert mb["vector"] is not None
         assert mb["connection_strength"] >= 0.0
 

@@ -3,8 +3,8 @@
 Mirrors s08's algorithm (unparented children at level L, unparented bridge at
 L-1, mutual-cosine child matching, nearest-available-bridge assignment, Born-rule
 ``q_mb_raw``) with one tensegrity addition: the tev1 decision model classifies
-each MetaBary's **bridge** as complementary or contradictory (Step IV), and that
-role sign is applied to the bridge term of the MetaBary vector.
+each MetaBary's **bridge** into one of the kaikki relation types (Step IV), and
+that role sign is applied to the bridge term of the MetaBary vector.
 
 Differences from s08, by design:
 

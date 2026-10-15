@@ -2,7 +2,7 @@
 
 Mirrors s04's pairing core: embedding-cosine ANN → greedy unique matching →
 signed-role barycentric vector. Each pair is additionally classified by tev1
-into ``complement`` / ``contradict``. Both participant sentences are stamped
+into one of the kaikki relation types. Both participant sentences are stamped
 with the new BaryEdge's ``parent_edge_id`` (unique-parent).
 
 Safeguard: refuses to run if any L15 BaryEdge already exists.

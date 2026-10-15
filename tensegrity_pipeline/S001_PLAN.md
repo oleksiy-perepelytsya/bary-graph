@@ -41,8 +41,18 @@ SHA256s verified against `MANIFEST-SHA256.txt`):
 
 ## tev1 relational finding (live probe — architectural boundary)
 
+> **Update (Oct 15 2026).** The role vocabulary was extended from the original
+> two-class model (`complement` / `contradict`) to the five kaikki relation
+> types — `contradicts`, `applies_to`, `is_instance_of`, `extends`,
+> `same_phenomenon` (see `tg_vec.ROLES`). The readings below were taken with the
+> **old two-class model** and are kept for the record; the S001 corpus should be
+> re-probed with the five-way question before any of these readings is relied
+> on. Note that under the new vocabulary "supersession" is more likely to land
+> as `extends` (one statement continues/elaborates the other) than as
+> `same_phenomenon`.
+
 Binary role model (complement/contradict) only — no SUPERSEDES/CONTRADICTS
-taxonomy. Observed on this corpus:
+taxonomy. Observed on this corpus (old 2-class model):
 
 | Pair | role | p | reading |
 |---|---|---|---|
@@ -85,4 +95,6 @@ from supplied edges (none supplied).
 - No operative-state resolution engine (out of scope; graph preserves the
   evidence, resolution is a query-era concern).
 - Two-class role surface; supersession lands as complement on this corpus.
+  *(Superseded: the role surface is now the five kaikki relation types; see the
+  update note above.)*
 - Estimated effort for the three changes: ~2–4 h including tests; live run minutes.

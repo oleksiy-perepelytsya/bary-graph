@@ -6,8 +6,9 @@ text documents into a BaryGraph-shaped collection:
 * L15 = document sentences (source-bearing records, embedded).
 * L14 = paragraph/section titles (aggregation nodes, derived vectors).
 * BaryEdges between nodes at each level, tagged with a tev1-decided
-  ``role`` (``complement`` / ``contradict``) and a signed-role barycentric
-  vector.
+  ``role`` (one of the kaikki relation types: ``contradicts``, ``applies_to``,
+  ``is_instance_of``, ``extends``, ``same_phenomenon``) and a signed-role
+  barycentric vector.
 * MetaBary hierarchy built recursively from those BaryEdges.
 
 See ``tensegrity_pipeline/README.md`` for the stage map and the modified

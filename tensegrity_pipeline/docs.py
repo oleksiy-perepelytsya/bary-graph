@@ -103,7 +103,8 @@ def tensegrity_baryedge(
     """L14/L15 BaryEdge carrying a signed tev1 role.
 
     ``connection_strength``/``q`` remain the embedding cosine; ``role`` is the
-    tev1 argmax and ``role_probability`` its winning probability only.
+    tev1 argmax over the kaikki relation set and ``role_probability`` its
+    winning probability only.
     """
     ts = _now()
     acc_w = accumulated_weight if accumulated_weight is not None else q

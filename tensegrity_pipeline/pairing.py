@@ -3,8 +3,8 @@
 Used by t04 (L15 sentence edges), t06 (L14 title edges), and t07 (orphan
 re-entry). Mirrors the PoC's ``lib.match`` + s04/s06 flow — ANN/brute-force
 ``top_k_pairs`` → ``greedy_unique_match`` → signed-role barycentric vector —
-but additionally asks the tev1 decision model for the complement/contradict
-role of every pair.
+but additionally asks the tev1 decision model for the role of every pair (one of
+the kaikki relation types).
 """
 
 from __future__ import annotations
@@ -23,9 +23,9 @@ from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline.docs import tensegrity_baryedge
 from tensegrity_pipeline.tev1 import DecisionModel, classify_role
 from tensegrity_pipeline.tg_vec import (
-    COMPLEMENT,
     ROLE_SENTENCES,
     ROLES,
+    SAME_PHENOMENON,
     compute_bary_vec,
 )
 
@@ -71,7 +71,7 @@ def load_level_nodes(
 
 
 def role_type_vectors(embedder) -> dict[str, np.ndarray]:
-    """``v_role`` per role — embed the two fixed role sentences once."""
+    """``v_role`` per relation — embed the fixed role sentences once."""
     out: dict[str, np.ndarray] = {}
     for role in ROLES:
         out[role] = np.asarray(embedder.embed([ROLE_SENTENCES[role]])[0], dtype=np.float32)
@@ -152,7 +152,7 @@ def form_level_edges(
     for i, j, q in pairs:
         cls = classify_role(model, f"{texts[i]}\n{texts[j]}")
         role = cls["role"]
-        v_role = role_vecs.get(role or COMPLEMENT, role_vecs[COMPLEMENT])
+        v_role = role_vecs.get(role or SAME_PHENOMENON, role_vecs[SAME_PHENOMENON])
         bv = compute_bary_vec(V[i], V[j], v_role, q, role)
         docs.append(
             tensegrity_baryedge(

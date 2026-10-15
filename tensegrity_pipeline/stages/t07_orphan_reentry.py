@@ -35,7 +35,7 @@ from tensegrity_pipeline.pairing import (
     text_resolver,
 )
 from tensegrity_pipeline.tev1 import classify_role, get_decision_model
-from tensegrity_pipeline.tg_vec import COMPLEMENT, compute_bary_vec
+from tensegrity_pipeline.tg_vec import SAME_PHENOMENON, compute_bary_vec
 
 STAGE = "07_orphan_reentry"
 LEVELS = (15, 14)
@@ -110,7 +110,7 @@ def absorb_orphans(
         state = "\n".join(t for t in (texts[k], resolve(be_id)) if t)
         cls = classify_role(model, state)
         role = cls["role"]
-        v_role = role_vecs.get(role or COMPLEMENT, role_vecs[COMPLEMENT])
+        v_role = role_vecs.get(role or SAME_PHENOMENON, role_vecs[SAME_PHENOMENON])
         bv = compute_bary_vec(qv, be_vecs[be_id], v_role, q, role)
         docs.append(
             tensegrity_baryedge(
