@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import logging
 import time
+from collections.abc import Sequence
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 import numpy as np
@@ -77,6 +79,30 @@ def role_type_vectors(embedder) -> dict[str, np.ndarray]:
     for role in ROLES:
         out[role] = np.asarray(embedder.embed([ROLE_SENTENCES[role]])[0], dtype=np.float32)
     return out
+
+
+def classify_pairs(
+    model: DecisionModel, texts: list[str], pairs: Sequence[tuple], *, workers: int = 1
+):
+    """Yield each pair's role contract, strictly in pair order.
+
+    ``workers > 1`` fans the (network-bound) ``/v1/systemone`` calls out to a
+    thread pool; results are yielded in submission order, so the pairing and
+    the written edges are identical to a serial run. A remote tunnel run is
+    dominated by per-call latency, so a handful of workers is most of the
+    speedup.
+    """
+
+    def one(k: int) -> dict:
+        i, j = pairs[k][0], pairs[k][1]
+        return classify_role(model, f"{texts[i]}\n{texts[j]}")
+
+    if workers <= 1:
+        for k in range(len(pairs)):
+            yield one(k)
+        return
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        yield from pool.map(one, range(len(pairs)))
 
 
 def form_level_edges(
@@ -151,8 +177,10 @@ def form_level_edges(
         pair_idx = []
 
     t0 = time.monotonic()
-    for n, (i, j, q) in enumerate(pairs, 1):
-        cls = classify_role(model, f"{texts[i]}\n{texts[j]}")
+    workers = max(1, int(getattr(settings, "tev1_workers", 1)))
+    log.info("L%d: classifying %d pairs (workers=%d)", level, len(pairs), workers)
+    classified = classify_pairs(model, texts, pairs, workers=workers)
+    for n, ((i, j, q), cls) in enumerate(zip(pairs, classified, strict=True), 1):
         role = cls["role"]
         v_role = role_vecs.get(role or SAME_PHENOMENON, role_vecs[SAME_PHENOMENON])
         bv = compute_bary_vec(V[i], V[j], v_role, q, role)

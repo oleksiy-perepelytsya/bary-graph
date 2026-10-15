@@ -274,7 +274,11 @@ Role classification goes through `POST /v1/systemone` on the ollama host
 `KAGGLE_API_TOKEN` and `Tev1Client` attaches it automatically. A remote run
 wants more transport patience than the local default — `TEV1_RETRIES` (default
 2, ≈6 s of backoff) buys ~2 min at 6. Measured on the T4 tunnel: 0.55 s/call
-warm vs 10.92 s local for the same sentence states (≈20×). `tev1.py` exposes:
+warm vs 10.92 s local for the same sentence states (≈20×). Each call is short
+and latency-dominated, so the GPU idles between them: `TEV1_WORKERS` (default
+1) fans the per-pair decisions out to a thread pool while preserving pair
+order — 8 workers measured **4.7×** (0.55 → 0.12 s/pair) on the tunnel.
+`tev1.py` exposes:
 
 * `Tev1Client` — transport client with retries;
 * `FakeDecision` — deterministic offline stand-in;

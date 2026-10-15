@@ -46,6 +46,10 @@ class TensegritySettings(Settings):
     # local endpoint; a run riding an external tunnel (Kaggle) wants more —
     # TEV1_RETRIES=6 gives ~2min of backoff before a stage aborts.
     tev1_retries: int = 2
+    # Concurrent decision calls. The work is network-bound (one 0.55s GPU call
+    # per pair, serialised), so a handful of workers keeps the GPU busy without
+    # changing result order: 5989 pairs at workers=1 ≈ 1h, at 8 ≈ minutes.
+    tev1_workers: int = 1
     fake_decision: bool = False
 
     # --- Sibling collection holding document -> node provenance ---
@@ -72,6 +76,7 @@ class TensegritySettings(Settings):
                 "TEV1_TIMEOUT_SECONDS", cls.tev1_timeout_seconds
             ),
             tev1_retries=int(_env_float("TEV1_RETRIES", cls.tev1_retries)),
+            tev1_workers=int(_env_float("TEV1_WORKERS", cls.tev1_workers)),
             fake_decision=_env_bool("BARY_FAKE_DECISION", False),
             doc_bridges_collection=_env_str(
                 "MONGO_DOC_BRIDGES_COLLECTION", cls.doc_bridges_collection
