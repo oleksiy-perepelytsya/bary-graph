@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 # One-shot bootstrap: Kaggle GPU notebook → BaryGraph job API + Ollama proxy
-# Paste entire file into a %%bash cell on Kaggle (GPU T4 x2).
+# (tensegrity variant: ollama + qwen0.6 + tev1 + proxy + tunnel, no kaikki/s01;
+#  the laptop drives the tensegrity stages and only models ride the tunnel.)
+# Typical use from a %%bash cell:
+#   curl -fsSL https://raw.githubusercontent.com/oleksiy-perepelytsya/bary-graph/tensegrity-pipeline/scripts/kaggle_start.sh -o /tmp/s.sh
+#   bash /tmp/s.sh
 
 set -euo pipefail
 
 REPO_URL="${REPO_URL:-https://github.com/oleksiy-perepelytsya/bary-graph}"
-BRANCH="${BRANCH:-academic-evaluation}"
+BRANCH="${BRANCH:-tensegrity-pipeline}"
 REPO_DIR="${REPO_DIR:-/kaggle/working/bary-graph}"
 WORK="${KAGGLE_WORK_DIR:-$REPO_DIR/kaggle_work}"
 
 # 0. packages
-if ! command -v git >/dev/null || ! command -v zstd >/dev/null; then
+if ! command -v git >/dev/null || ! command -v curl >/dev/null; then
   echo "== installing deps =="
-  apt-get update -qq && apt-get install -y -qq git zstd curl
+  apt-get update -qq && apt-get install -y -qq git curl
 fi
 
 # 1. repo
@@ -24,7 +28,7 @@ else
   git -C "$REPO_DIR" fetch origin "$BRANCH" && git -C "$REPO_DIR" checkout "$BRANCH" && git -C "$REPO_DIR" pull --ff-only origin "$BRANCH" || true
 fi
 cd "$REPO_DIR"
-mkdir -p "$WORK" "$WORK/parsed" "$WORK/pipeline_state"
+mkdir -p "$WORK"
 
 export KAGGLE_API_TOKEN="${KAGGLE_API_TOKEN:-$(python3 -c 'import secrets;print(secrets.token_hex(16))')}"
 export KAGGLE_API_PORT="${KAGGLE_API_PORT:-8765}"
@@ -63,31 +67,9 @@ if ! curl -sf -H "Authorization: Bearer $KAGGLE_API_TOKEN" "http://localhost:$KA
   sleep 3
 fi
 
-# 4. data/parsed - skip s01/kaikki if parsed already present
-if [ -f "$WORK/parsed/senses.jsonl" ] && [ -f "$WORK/parsed/words.jsonl" ]; then
-  echo "== parsed files exist in $WORK/parsed, skipping s01_parse and kaikki download =="
-else
-  KAIKKI="${KAIKKI_PATH:-$WORK/kaikki.jsonl}"
-  if [ ! -f "$KAIKKI" ]; then
-    for cand in /kaggle/input/*/kaikki*.jsonl /kaggle/input/kaikki*/kaikki*.jsonl; do
-      if [ -f "$cand" ]; then
-        echo "== using existing kaikki: $cand =="
-        KAIKKI="$cand"
-        break
-      fi
-    done
-  fi
-  if [ ! -f "$KAIKKI" ]; then
-    echo "== downloading kaikki-en (only if needed) to $WORK/kaikki.jsonl =="
-    curl -fL -o "$WORK/kaikki.jsonl" https://kaikki.org/dictionary/English/kaikki.org-dictionary-English.jsonl
-    KAIKKI="$WORK/kaikki.jsonl"
-  fi
-  echo "== s01_parse using $KAIKKI =="
-  KAIKKI_PATH="$KAIKKI" PARSED_DIR="$WORK/parsed" PIPELINE_STATE_DIR="$WORK/pipeline_state" \
-    python3 -m scripts.s01_parse
-fi
-
-# 5. tunnel
+# 4. tunnel
+# (no kaikki/s01 step: the tensegrity stages run on the laptop; t01 is already
+#  done there and only embed/tev1 model calls go through this tunnel)
 if ! command -v cloudflared >/dev/null; then
   curl -fsSL -o /tmp/cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
   dpkg -i /tmp/cloudflared.deb || apt-get install -f -y -qq
@@ -102,5 +84,6 @@ echo "=================================================="
 echo "  token:  $KAGGLE_API_TOKEN"
 echo "  tunnel: $TUNNEL"
 echo "  API:    ${TUNNEL:-http://localhost:$KAGGLE_API_PORT}/v1/health"
-echo "  OLLAMA_PROXY (for s04 etc): ${TUNNEL:-http://localhost:$KAGGLE_API_PORT}/api/embed"
+echo "  embed (tensegrity t02): OLLAMA_URL=${TUNNEL:-http://localhost:$KAGGLE_API_PORT}"
+echo "  tev1   (tensegrity t04+): TEV1_URL=${TUNNEL:-http://localhost:$KAGGLE_API_PORT} (via /v1/systemone)"
 echo "=================================================="
