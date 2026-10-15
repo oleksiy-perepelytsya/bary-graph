@@ -5,6 +5,11 @@ them as ``doc_type='node'`` documents. Upsert keys are the stable sentence /
 title ids so re-running is idempotent. Titles are inserted with a ``vector=None``
 placeholder (filled by t05), mirroring the PoC's word nodes.
 
+This is also the *root* of document provenance: every source document is
+registered in the sibling ``doc_bridges`` collection together with the nodes it
+produced (``doc_bridge.register_nodes_for_docs``), so upper levels can be
+propagated later by ``doc_bridge.propagate``.
+
 Safeguard: refuses to run against a collection that already contains
 ``baryedge`` documents unless ``--force`` is given — re-inserting nodes under
 existing edges would orphan every ``parent_edge_id`` reference.
@@ -19,6 +24,7 @@ import orjson
 from pymongo import UpdateOne
 
 from lib.vector import decode_vec
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import ensure_indexes, get_collection
 from tensegrity_pipeline.docs import sentence_node, title_node
@@ -56,8 +62,12 @@ def run(argv: Sequence[str] | None = None) -> None:
                 "corrupt parent_edge_id references. Drop the collection or use --force."
             )
         ensure_indexes(coll)
+        doc_bridge.ensure_indexes(doc_bridge.get_bridge_collection(settings))
 
     batch_n = args.batch_size or settings.batch_size
+    bridge_coll = doc_bridge.get_bridge_collection(settings)
+    # Source documents of this run — the root registrations below.
+    doc_ids: set[str] = set()
 
     # --- L15 sentence nodes ---
     ops: list[UpdateOne] = []
@@ -72,6 +82,7 @@ def run(argv: Sequence[str] | None = None) -> None:
                 upsert=True,
             )
         )
+        doc_ids.add(ps.doc_id)
         n_sentences += 1
         if len(ops) >= batch_n:
             if not args.dry_run:
@@ -93,6 +104,7 @@ def run(argv: Sequence[str] | None = None) -> None:
                 upsert=True,
             )
         )
+        doc_ids.add(pt.doc_id)
         n_titles += 1
         if len(ops) >= batch_n:
             if not args.dry_run:
@@ -101,6 +113,18 @@ def run(argv: Sequence[str] | None = None) -> None:
     if ops and not args.dry_run:
         coll.bulk_write(ops, ordered=False)
     log.info("upserted %d L14 title nodes", n_titles)
+
+    # --- doc_bridges: root registration (document -> every node under it) ---
+    # The tensegrity equivalent of ingest_batch's doi_bridge.register: each
+    # source document gets one entry listing the nodes it produced. Edges and
+    # MetaBarys are added to those same entries by doc_bridge.propagate in the
+    # edge-building stages (t04/t06/t07/t08/t09).
+    if not args.dry_run:
+        n_reg = doc_bridge.register_nodes_for_docs(bridge_coll, coll, doc_ids)
+        log.info(
+            "registered %d nodes under %d documents in %s",
+            n_reg, len(doc_ids), settings.doc_bridges_collection,
+        )
 
     cp.processed = n_sentences + n_titles
     cp.total = cp.processed

@@ -26,6 +26,7 @@ from pymongo import UpdateOne
 
 from lib.bary_vec import level_factor
 from lib.match import greedy_unique_match, top_k_pairs
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import get_collection
 from tensegrity_pipeline.docs import metabary
@@ -48,6 +49,7 @@ def _form_level(
     *,
     model,
     resolve,
+    bridge_coll,
     dry_run: bool,
     log: logging.Logger,
 ) -> int:
@@ -132,6 +134,11 @@ def _form_level(
                 ups.append(
                     UpdateOne({"_id": cm_id}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
                 )
+            # A MetaBary traces to the union of both children's and the bridge's
+            # documents (doc_bridge.propagate, mirroring doi_bridge in s08).
+            doc_bridge.propagate(
+                bridge_coll, eid, [child_ids[ci], child_ids[cj], bridge_ids[bi]]
+            )
         coll.bulk_write(ups, ordered=False)
         total += len(docs)
     return total
@@ -160,6 +167,7 @@ def run(argv: Sequence[str] | None = None) -> None:
 
     model = get_decision_model(settings)
     resolve = text_resolver(coll)
+    bridge_coll = doc_bridge.get_bridge_collection(settings)
 
     total = 0
     child_level = 15
@@ -167,7 +175,7 @@ def run(argv: Sequence[str] | None = None) -> None:
         bridge_level = child_level - 1
         n = _form_level(
             coll, child_level, bridge_level, thr, alpha,
-            model=model, resolve=resolve,
+            model=model, resolve=resolve, bridge_coll=bridge_coll,
             dry_run=args.dry_run, log=log,
         )
         log.info("L%d MetaBary: children@L%d bridges@L%d → %d triads",

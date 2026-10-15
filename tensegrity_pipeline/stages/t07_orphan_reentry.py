@@ -24,6 +24,7 @@ from pymongo import UpdateOne
 
 from lib.embed import get_embedder
 from lib.vector import unpack_vec
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import get_collection
 from tensegrity_pipeline.docs import tensegrity_baryedge
@@ -52,6 +53,7 @@ def absorb_orphans(
 ) -> int:
     """Attach each orphan at ``level`` to its nearest existing BaryEdge."""
     log = log or logging.getLogger(__name__)
+    bridge_coll = doc_bridge.get_bridge_collection(settings)
     ids, texts, V = load_level_nodes(coll, level, parents_only=True)
     if not ids:
         log.info("L%d: no orphans to absorb", level)
@@ -76,23 +78,28 @@ def absorb_orphans(
     now = datetime.now(timezone.utc)
     docs: list[dict] = []
     orphan_ids: list = []
+    orphan_bes: list = []
     n = 0
 
     def _flush() -> None:
-        nonlocal docs, orphan_ids
+        nonlocal docs, orphan_ids, orphan_bes
         if not docs:
             return
         if not dry_run:
             res = coll.insert_many(docs)
-            coll.bulk_write(
-                [
+            ups: list[UpdateOne] = []
+            for oid, be, eid in zip(
+                orphan_ids, orphan_bes, res.inserted_ids, strict=True
+            ):
+                ups.append(
                     UpdateOne({"_id": oid}, {"$set": {"parent_edge_id": eid, "updated_at": now}})
-                    for oid, eid in zip(orphan_ids, res.inserted_ids, strict=True)
-                ],
-                ordered=False,
-            )
+                )
+                # The new (orphan, BaryEdge) edge inherits both sides' documents.
+                doc_bridge.propagate(bridge_coll, eid, [oid, be])
+            coll.bulk_write(ups, ordered=False)
         docs = []
         orphan_ids = []
+        orphan_bes = []
 
     for k, oid in enumerate(ids):
         qv = V[k]
@@ -122,6 +129,7 @@ def absorb_orphans(
             )
         )
         orphan_ids.append(oid)
+        orphan_bes.append(be_id)
         n += 1
         if len(docs) >= settings.batch_size:
             _flush()

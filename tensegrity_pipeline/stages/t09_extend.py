@@ -13,6 +13,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import get_collection
 from tensegrity_pipeline.pairing import text_resolver
@@ -43,6 +44,7 @@ def run(argv: Sequence[str] | None = None) -> None:
 
     model = get_decision_model(settings)
     resolve = text_resolver(coll)
+    bridge_coll = doc_bridge.get_bridge_collection(settings)
 
     total = 0
     child_level = 15
@@ -56,7 +58,8 @@ def run(argv: Sequence[str] | None = None) -> None:
             while rounds < _MAX_ROUNDS_PER_THRESHOLD:
                 n = _form_level(
                     coll, child_level, bridge_level, thr, alpha,
-                    model=model, resolve=resolve, dry_run=False, log=log,
+                    model=model, resolve=resolve, bridge_coll=bridge_coll,
+                    dry_run=False, log=log,
                 )
                 level_total += n
                 rounds += 1

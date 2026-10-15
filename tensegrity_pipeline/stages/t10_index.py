@@ -18,6 +18,7 @@ import orjson
 from pymongo.errors import OperationFailure
 from pymongo.operations import SearchIndexModel
 
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import ensure_indexes, get_collection
 
@@ -31,11 +32,16 @@ def run(argv: Sequence[str] | None = None) -> None:
     log.info("start dry_run=%s dim=%d", args.dry_run, settings.embed_dim)
 
     if args.dry_run:
-        log.info("dry-run: would create %d standard indexes + vector index", 9)
+        log.info("dry-run: would create %d standard indexes + doc_bridges index + vector index", 9)
         return
 
     names = ensure_indexes(coll)
     log.info("standard indexes: %s", names)
+
+    # Sibling provenance collection (doc_bridge) — idempotent; keeps reverse
+    # lookups indexed even if the collection was dropped between runs.
+    bridge_names = doc_bridge.ensure_indexes(doc_bridge.get_bridge_collection(settings))
+    log.info("%s indexes: %s", settings.doc_bridges_collection, bridge_names)
 
     n_vec = 0
     if VECTOR_INDEX_PATH.exists():

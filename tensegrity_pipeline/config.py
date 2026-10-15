@@ -44,6 +44,14 @@ class TensegritySettings(Settings):
     tev1_timeout_seconds: float = 300.0
     fake_decision: bool = False
 
+    # --- Sibling collection holding document -> node provenance ---
+    # The tensegrity analogue of the PoC's doi_bridges collection
+    # (lib.doi_bridge): one doc per ingested document, listing every
+    # node/edge/triad that traces back to it. Deliberately a *different* name
+    # from Settings.mongo_doi_bridges_collection — this build's keys are
+    # document names, not paper DOIs.
+    doc_bridges_collection: str = "doc_bridges"
+
     # --- Input document (t01 only). CLI --doc overrides this. ---
     tensegrity_doc: Path | None = None
 
@@ -60,5 +68,8 @@ class TensegritySettings(Settings):
                 "TEV1_TIMEOUT_SECONDS", cls.tev1_timeout_seconds
             ),
             fake_decision=_env_bool("BARY_FAKE_DECISION", False),
+            doc_bridges_collection=_env_str(
+                "MONGO_DOC_BRIDGES_COLLECTION", cls.doc_bridges_collection
+            ),
             tensegrity_doc=Path(doc) if doc else None,
         )

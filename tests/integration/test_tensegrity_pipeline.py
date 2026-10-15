@@ -7,7 +7,9 @@ tev1 decision model, then asserts the graph invariants the pipeline promises:
 * L15 sentence nodes and L14 title nodes exist with the right levels,
 * L14 titles carry *derived* vectors (t05) rather than the t03 placeholder,
 * L15/L14 BaryEdges carry a tev1 role + probability,
-* at least one MetaBary is formed at L13 with a role.
+* at least one MetaBary is formed at L13 with a role,
+* every node/BaryEdge/MetaBary is reachable from its source document through
+  the ``doc_bridges`` provenance index.
 
 Skips automatically when no project Mongo is configured (see the
 ``mongo_test_db`` fixture).
@@ -17,7 +19,9 @@ from __future__ import annotations
 
 import pytest
 
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline._base import main
+from tensegrity_pipeline.config import TensegritySettings
 
 FIXTURE_DOC = """\
 # Neural Networks
@@ -112,6 +116,19 @@ def test_pipeline_end_to_end(tens_env):
         assert coll.count_documents({"_id": e["cm1_id"]}) == 1
         assert coll.count_documents({"_id": e["cm2_id"]}) == 1
 
+    # --- document provenance (doc_bridges) ---
+    # One entry per ingested document; t03 registers the nodes and
+    # t04/t06/t07/t08/t09 propagate it up to every edge and MetaBary.
+    bridge = doc_bridge.get_bridge_collection(TensegritySettings.load())
+    entries = list(bridge.find({}))
+    assert [e["_id"] for e in entries] == ["neural_nets"]
+    registered = set(entries[0]["node_ids"])
+    graph_docs = {d["_id"] for d in coll.find({}, {"_id": 1})}
+    assert graph_docs, "pipeline produced no documents"
+    assert graph_docs <= registered, "every graph doc must trace to its source document"
+    assert doc_bridge.docs_for_node(bridge, l15_edges[0]["_id"]) == ["neural_nets"]
+    assert doc_bridge.docs_for_node(bridge, mbs[0]["_id"]) == ["neural_nets"]
+
 
 def test_multi_doc_ingestion_preserves_source_identity(tens_env_vars, mongo_test_db):
     """Two documents in one t01 run → distinct doc_ids in the collection."""
@@ -143,3 +160,42 @@ def test_multi_doc_ingestion_preserves_source_identity(tens_env_vars, mongo_test
     assert len(labels) == len(set(labels))
     assert any(label.startswith("alpha:") for label in labels)
     assert any(label.startswith("beta:") for label in labels)
+
+
+def test_multi_doc_provenance_partitions_by_document(tens_env_vars, mongo_test_db):
+    """Two documents in one run → two provenance entries, and every graph doc
+    traces to the document(s) it came from."""
+    tmp = tens_env_vars
+    # Enough sentences that at least one positive-cosine pair is certain with the
+    # fake embedder's near-orthogonal random vectors (Q_MIN_L15=0.0 here).
+    alpha_lines = "\n".join(f"Alpha sentence number {k} about topic {k}." for k in range(6))
+    beta_lines = "\n".join(f"Beta sentence number {k} about subject {k}." for k in range(6))
+    alpha = tmp / "alpha.md"
+    alpha.write_text(f"# Alpha Doc\n\n{alpha_lines}\n", encoding="utf-8")
+    beta = tmp / "beta.md"
+    beta.write_text(f"# Beta Doc\n\n{beta_lines}\n", encoding="utf-8")
+
+    assert main(["01_parse", "--doc", str(alpha), "--doc", str(beta)]) == 0
+    assert main(["02_embed"]) == 0
+    assert main(["03_insert_nodes"]) == 0
+    assert main(["04_l15_edges"]) == 0
+
+    coll = mongo_test_db
+    bridge = doc_bridge.get_bridge_collection(TensegritySettings.load())
+    entries = {d["_id"]: set(d["node_ids"]) for d in bridge.find({})}
+    assert set(entries) == {"alpha", "beta"}
+
+    # Nodes live under exactly their own document — no cross-contamination.
+    for node in coll.find({"doc_type": "node"}):
+        doc_id = node["properties"]["doc_id"]
+        assert node["_id"] in entries[doc_id]
+        for other in entries:
+            if other != doc_id:
+                assert node["_id"] not in entries[other]
+
+    # Every edge is covered by at least one document (cross-doc edges by both).
+    edges = list(coll.find({"doc_type": "baryedge"}))
+    assert edges, "no L15 edges formed"
+    for edge in edges:
+        assert any(edge["_id"] in ids for ids in entries.values())
+

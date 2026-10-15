@@ -19,6 +19,7 @@ from pymongo import UpdateOne
 from lib.bary_vec import normalize  # noqa: F401
 from lib.match import greedy_unique_match, top_k_pairs
 from lib.vector import unpack_vec
+from tensegrity_pipeline import doc_bridge
 from tensegrity_pipeline.docs import tensegrity_baryedge
 from tensegrity_pipeline.tev1 import DecisionModel, classify_role
 from tensegrity_pipeline.tg_vec import (
@@ -91,12 +92,18 @@ def form_level_edges(
 ) -> int:
     """Pair nodes at ``level`` by cosine and write role-tagged BaryEdges.
 
+    Each new BaryEdge is also propagated into the ``doc_bridges`` provenance
+    index (the union of its two participants' documents).
+
     ``parents_only`` restricts the pool to unparented nodes (t07's orphan pair
     phase). Returns the number of BaryEdges written (or that *would* be written
     in dry-run mode).
     """
     log = log or _log
     batch_n = settings.batch_size
+    # Sibling collection carrying document provenance (see doc_bridge); deriving
+    # it here keeps every caller propagating, the way s04/s06 look it up once.
+    bridge_coll = doc_bridge.get_bridge_collection(settings)
     ids, texts, V = load_level_nodes(coll, level, limit=limit, parents_only=parents_only)
     n_nodes = len(ids)
     if n_nodes < 2:
@@ -135,6 +142,8 @@ def form_level_edges(
                             {"$set": {"parent_edge_id": eid, "updated_at": now}},
                         )
                     )
+                # Union the documents of both participants onto the new edge.
+                doc_bridge.propagate(bridge_coll, eid, [ids[i], ids[j]])
             coll.bulk_write(ups, ordered=False)
         n_written += len(docs)
         docs = []

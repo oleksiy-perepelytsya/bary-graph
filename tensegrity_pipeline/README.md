@@ -143,6 +143,40 @@ BaryEdges / MetaBarys:
 MetaBarys (`level ≤ 13`) use `metabary()`: same shape minus `q`/`type_vector`,
 with `connection_strength = q_mb_raw` and `accumulated_weight = q_mb_raw · level_factor(L)`.
 
+### Document provenance (`doc_bridges`)
+
+A **sibling collection** to `tensegrity` (not a field on the graph docs),
+adapted from the PoC's `doi_bridges` (`lib/doi_bridge.py`) with the paper DOI
+swapped for the document name (`doc_id` = the t01 filename stem):
+
+```jsonc
+// tensegrity.doc_bridges
+{ "_id": "2601.03812v1", "node_ids": [ObjectId, …], "created_at": …, "updated_at": … }
+```
+
+`_id` is the document name; `node_ids` lists **every node, BaryEdge and
+MetaBary whose ancestry includes that document** — so a retrieved node can be
+traced back to the paper(s) it came from, and a paper can be expanded to its
+whole subtree. Wiring (`tensegrity_pipeline/doc_bridge.py`):
+
+| stage | call | meaning |
+|---|---|---|
+| t03 | `register_nodes_for_docs` | root: each document ↔ the nodes it produced |
+| t04/t06 | `propagate` (in `pairing.form_level_edges`) | new edge inherits both participants' documents |
+| t07 | `propagate` (absorb phase) | new (orphan, BaryEdge) edge inherits both sides |
+| t08/t09 | `propagate` (in `_form_level`) | MetaBary inherits both children + the bridge |
+
+Read side: `docs_for_node(coll, node_id)` / `docs_for_nodes(coll, node_ids)`
+(reverse lookup, multikey index on `node_ids`, ensured by t03 and t10).
+`propagate_up_chain` covers the late-arrival case (an existing branch gains a
+new document); t03's upsert key embeds `doc_id`, so the current stages never
+trigger it, but it is kept for parity with the PoC and future re-ingest/merge.
+
+Entries appear **as the pipeline runs** — t03 creates them, the edge/MetaBary
+stages extend them. A graph built before this mechanism existed has no entries
+until it is rebuilt (t03 refuses to re-insert nodes over existing BaryEdges
+without `--force`, so that means a drop-and-rebuild).
+
 ### Role semantics
 
 * `role` is the **argmax** of the tev1 probabilities. `role_probability` is the
@@ -180,6 +214,7 @@ Role classification goes through `POST /v1/systemone` on the ollama host
 ```ini
 MONGO_DB=tensegrity
 MONGO_COLLECTION=tensegrity
+MONGO_DOC_BRIDGES_COLLECTION=doc_bridges   # document-name -> node provenance
 EMBED_MODEL=qwen3-embedding:0.6b
 EMBED_DIM=1024
 PARSED_DIR=data/parsed_tensegrity
@@ -197,7 +232,10 @@ BARY_FAKE_DECISION=0
 * Unit: `tests/unit/test_tensegrity_{parse,tg_vec,tev1,docs}.py`
 * Integration: `tests/integration/test_tensegrity_pipeline.py` — runs t01→t10
   end-to-end against an isolated `barygraph_test_*` DB with fakes enabled
-  (requires a project Mongo; `make up`).
+  (requires a project Mongo; `make up`); asserts the `doc_bridges` provenance
+  index covers every graph document.
+* Integration: `tests/integration/test_tensegrity_doc_bridge.py` — the
+  provenance module itself (register/propagate/up-chain/batched lookups).
 
 ## Design notes / differences from the PoC
 
