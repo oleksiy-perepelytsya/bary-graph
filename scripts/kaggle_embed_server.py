@@ -12,6 +12,9 @@ Endpoints (all behind a bearer token):
 Ollama proxy (also behind same bearer token):
     GET  /api/*                          → forward to next Ollama backend
     POST /api/*                          → forward to next Ollama backend
+    ANY  /v1/systemone                   → forward to next Ollama backend
+        (Ollama's Jev decision endpoint, ollama >= 0.35 — remote clients use
+         it for tev1 role decisions, e.g. TEV1_URL=<this server>)
 
 Backends come from OLLAMA_BACKENDS (comma-separated, round-robin per request,
 failover on connection errors); OLLAMA_FORWARD_URL / OLLAMA_URL_BASE keep
@@ -61,6 +64,17 @@ def _backend_order() -> list[str]:
         start = _RR_IDX % len(OLLAMA_BACKENDS)
         _RR_IDX += 1
     return OLLAMA_BACKENDS[start:] + OLLAMA_BACKENDS[:start]
+
+
+def _is_ollama_path(path: str) -> bool:
+    """True when the path belongs to the Ollama backend, not to this job API.
+
+    ``/api/*`` covers embed/generate; ``/v1/systemone`` is Ollama's Jev
+    decision endpoint (tev1 role classification) and must reach the GPU too —
+    without it a remote ``TEV1_URL`` 404s. Every other ``/v1/*`` route
+    (health/jobs/run/download) is this server's own job API.
+    """
+    return path.startswith("/api/") or path == "/v1/systemone"
 
 
 def _tail(path: Path, n: int = 40) -> str:
@@ -203,7 +217,7 @@ class Handler(BaseHTTPRequestHandler):
         if not self._auth_ok():
             return
         url = urlparse(self.path)
-        if url.path.startswith("/api/"):
+        if _is_ollama_path(url.path):
             self._proxy_ollama()
             return
         self._send(405, {"error": "method not allowed"})
@@ -212,7 +226,7 @@ class Handler(BaseHTTPRequestHandler):
         if not self._auth_ok():
             return
         url = urlparse(self.path)
-        if url.path.startswith("/api/"):
+        if _is_ollama_path(url.path):
             self._proxy_ollama()
             return
         if url.path == "/v1/health":
@@ -256,7 +270,7 @@ class Handler(BaseHTTPRequestHandler):
         if not self._auth_ok():
             return
         url = urlparse(self.path)
-        if url.path.startswith("/api/"):
+        if _is_ollama_path(url.path):
             self._proxy_ollama()
             return
         length = int(self.headers.get("Content-Length", "0"))

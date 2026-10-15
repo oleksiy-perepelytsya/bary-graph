@@ -18,10 +18,16 @@ reached through a cloudflared tunnel **created by the Kaggle notebook itself**.
 ```
 
 This installs ollama (CUDA), starts `ollama serve`, pulls
-`qwen3-embedding:0.6b`, starts the job API on :8765, and prints:
+`qwen3-embedding:0.6b` **and `tev1:0.8b`**, starts the job API on :8765, and
+prints:
 
 - a **token** (save it), and
 - a **https://<random>.trycloudflare.com** URL.
+
+The notebook also prints a WARN line if `/v1/systemone` (the tev1 decision
+model) is not reachable — a missing tev1 is not fatal on a Kaggle run, since
+`scripts/kaggle_start.sh` only needs it when the local machine drives
+tensegrity pairing stages through the tunnel (below).
 
 (For a stable domain instead of a random one, create a named tunnel +
 Cloudflare DNS record and replace the `cloudflared tunnel --url ...` line.)
@@ -53,6 +59,28 @@ touches files under `kaggle_work/` and runs whitelisted stage modules.
 Security note: the tunnel URL is a bearer-token gate. Use a long random
 token (`kaggle_start.sh` generates one by default) and treat the URL like a
 password — no TLS client auth beyond that.
+
+## Driving tev1 + embeddings through the tunnel (tensegrity)
+
+The job API also **proxies ollama paths** on the same base URL: any `/api/*`
+request (embeddings) and `/v1/systemone` (the tev1 decision model) are
+forwarded verbatim to the notebook's ollama; everything else hits the job
+API (`/run`, `/poll`, `/upload`, ...). That lets the local machine keep the
+Mongo-driven stages where Mongo lives (the laptop) while GPU-serving the two
+slow model calls:
+
+```bash
+BASE=https://<random>.trycloudflare.com
+# local .env.tensegrity, pointed at the Kaggle GPU:
+OLLAMA_URL=$BASE        # t02 embed (via /api/embed)
+TEV1_URL=$BASE          # t07/t08 role decisions (via /v1/systemone)
+```
+
+Route contract is pinned by `tests/unit/test_kaggle_proxy.py` (`/api/*` and
+`/v1/systemone` forward, `/` and `/v1/chat` are not ollama paths). If the
+notebook did not pull `tev1:0.8b`, systemone calls fail and tensegrity falls
+back to `role=None` / `role_source="unclassified"` — same contract as an
+unreachable local tev1.
 
 ## ⚠️ Session persistence
 

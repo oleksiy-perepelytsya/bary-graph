@@ -46,6 +46,15 @@ for _ in $(seq 1 60); do
   curl -sf http://localhost:11434/api/version >/dev/null && break || sleep 2
 done
 ollama pull qwen3-embedding:0.6b
+# tev1 is the decision model for edge roles (tensegrity t04..t09); it is served
+# through Ollama's Jev endpoint, which needs ollama >= 0.35.
+ollama pull tev1:0.8b
+syscode=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+    http://localhost:11434/v1/systemone -d '{}' || true)
+case "$syscode" in
+    404|000|"")
+        echo "== WARN: /v1/systemone unavailable (HTTP ${syscode:-no response}) — install/upgrade ollama >= 0.35 for tev1 role decisions ==" ;;
+esac
 
 # 3. job API + proxy
 if ! curl -sf -H "Authorization: Bearer $KAGGLE_API_TOKEN" "http://localhost:$KAGGLE_API_PORT/v1/health" >/dev/null 2>&1; then
