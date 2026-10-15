@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import json
+
 from tensegrity_pipeline.tev1 import (
     ROLE_CRITERIA,
     ROLE_INSTRUCTION,
     FakeDecision,
+    Tev1Client,
     classify_role,
     role_questions,
 )
@@ -91,3 +94,55 @@ def test_role_questions_offer_every_relation():
     assert q["role"]["instructions"] == ROLE_INSTRUCTION
     assert set(q["role"]["criteria"]) == set(ROLES)
     assert q["role"]["criteria"] == ROLE_CRITERIA
+
+
+class _CapturingOpener:
+    """Stand-in urlopen that records the Request and returns a canned body."""
+
+    def __init__(self) -> None:
+        self.requests: list = []
+
+    def __call__(self, req, timeout=None):
+        self.requests.append(req)
+        return _FakeResponse(json.dumps({"answers": {}}).encode())
+
+
+class _FakeResponse:
+    def __init__(self, body: bytes) -> None:
+        self._body = body
+
+    def read(self) -> bytes:
+        return self._body
+
+    def __enter__(self) -> _FakeResponse:
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        return None
+
+
+def test_tev1_client_sends_no_auth_header_when_no_token(monkeypatch):
+    for var in ("OLLAMA_API_KEY", "OLLAMA_AUTH_TOKEN", "TEV1_API_KEY", "KAGGLE_API_TOKEN"):
+        monkeypatch.delenv(var, raising=False)
+    opener = _CapturingOpener()
+    Tev1Client("http://localhost:11435", "tev1:0.8b", opener=opener).decide("s", {})
+    assert "Authorization" not in opener.requests[0].headers
+    assert opener.requests[0].full_url.endswith("/v1/systemone")
+
+
+def test_tev1_client_auth_header_from_env_token(monkeypatch):
+    monkeypatch.delenv("OLLAMA_API_KEY", raising=False)
+    monkeypatch.delenv("OLLAMA_AUTH_TOKEN", raising=False)
+    monkeypatch.delenv("TEV1_API_KEY", raising=False)
+    monkeypatch.setenv("KAGGLE_API_TOKEN", "tok123")
+    opener = _CapturingOpener()
+    Tev1Client("https://tunnel.example", "tev1:0.8b", opener=opener).decide("s", {})
+    # urllib capitalizes header keys on the Request object.
+    assert opener.requests[0].headers["Authorization"] == "Bearer tok123"
+
+
+def test_tev1_client_explicit_bearer_wins(monkeypatch):
+    monkeypatch.setenv("KAGGLE_API_TOKEN", "envtok")
+    opener = _CapturingOpener()
+    Tev1Client("https://tunnel.example", "m", bearer="argtok", opener=opener).decide("s", {})
+    assert opener.requests[0].headers["Authorization"] == "Bearer argtok"

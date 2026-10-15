@@ -100,6 +100,7 @@ class Tev1Client:
         *,
         timeout: float = 300.0,
         retries: int = 2,
+        bearer: str | None = None,
         opener=urllib.request.urlopen,
     ) -> None:
         self._url = url.rstrip("/") + "/v1/systemone"
@@ -107,6 +108,18 @@ class Tev1Client:
         self._timeout = timeout
         self._retries = retries
         self._opener = opener
+        # A remote tev1 (e.g. the Kaggle GPU behind the token-gated tunnel)
+        # needs the same bearer the embedder sends; local ollama needs none.
+        # Same env chain as lib.embed.OllamaEmbedder so one token serves both.
+        token = bearer or (
+            os.environ.get("OLLAMA_API_KEY")
+            or os.environ.get("OLLAMA_AUTH_TOKEN")
+            or os.environ.get("TEV1_API_KEY")
+            or os.environ.get("KAGGLE_API_TOKEN")
+        )
+        self._headers = {"Content-Type": "application/json"}
+        if token:
+            self._headers["Authorization"] = f"Bearer {token}"
 
     def decide(self, state: str, questions: dict) -> dict:
         payload = json.dumps(
@@ -116,7 +129,7 @@ class Tev1Client:
         for attempt in range(self._retries + 1):
             req = urllib.request.Request(
                 self._url, data=payload, method="POST",
-                headers={"Content-Type": "application/json"},
+                headers=self._headers,
             )
             try:
                 with self._opener(req, timeout=self._timeout) as resp:
