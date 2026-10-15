@@ -11,7 +11,7 @@ from __future__ import annotations
 import threading
 import time
 
-from tensegrity_pipeline.pairing import classify_pairs
+from tensegrity_pipeline.pairing import classify_pairs, classify_states
 from tensegrity_pipeline.tev1 import FakeDecision
 from tensegrity_pipeline.tg_vec import ROLES
 
@@ -29,6 +29,16 @@ def test_classify_pairs_matches_serial_result_for_any_worker_count():
         assert parallel == serial
         assert len(parallel) == len(pairs)
         assert all(c["role"] in ROLES for c in parallel)
+
+
+def test_classify_states_matches_serial_result_for_any_worker_count():
+    states = [f"orphan {i} against its nearest edge" for i in range(20)]
+    serial = list(classify_states(FakeDecision(), states, workers=1))
+    for workers in (2, 8):
+        parallel = list(classify_states(FakeDecision(), states, workers=workers))
+        assert parallel == serial
+        assert len(parallel) == len(states)
+    assert [c["role_source"] for c in serial] == ["fake"] * len(states)
 
 
 def test_classify_pairs_uses_threads_when_workers_gt_1():

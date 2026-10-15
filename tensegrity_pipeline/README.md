@@ -277,7 +277,13 @@ wants more transport patience than the local default — `TEV1_RETRIES` (default
 warm vs 10.92 s local for the same sentence states (≈20×). Each call is short
 and latency-dominated, so the GPU idles between them: `TEV1_WORKERS` (default
 1) fans the per-pair decisions out to a thread pool while preserving pair
-order — 8 workers measured **4.7×** (0.55 → 0.12 s/pair) on the tunnel.
+order — 8 workers measured **4.7×** (0.55 → 0.12 s/pair) on the tunnel. The
+same helper (`classify_states`) drives t07's orphan-absorb loop, where the
+decision count is one per orphan (~11k for the 100-opinion corpus).
+
+Note: `--dry-run` skips the DB writes but **still asks tev1 for every pair /
+orphan**, so a preview costs full GPU time. Set `BARY_FAKE_DECISION=1` as well
+to preview pair counts for free.
 `tev1.py` exposes:
 
 * `Tev1Client` — transport client with retries;

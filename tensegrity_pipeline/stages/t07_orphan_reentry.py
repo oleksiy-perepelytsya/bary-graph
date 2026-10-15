@@ -29,12 +29,13 @@ from tensegrity_pipeline._base import bootstrap, finish
 from tensegrity_pipeline.db import get_collection
 from tensegrity_pipeline.docs import tensegrity_baryedge
 from tensegrity_pipeline.pairing import (
+    classify_states,
     form_level_edges,
     load_level_nodes,
     role_type_vectors,
     text_resolver,
 )
-from tensegrity_pipeline.tev1 import classify_role, get_decision_model
+from tensegrity_pipeline.tev1 import get_decision_model
 from tensegrity_pipeline.tg_vec import SAME_PHENOMENON, compute_bary_vec
 
 STAGE = "07_orphan_reentry"
@@ -101,14 +102,27 @@ def absorb_orphans(
         orphan_ids = []
         orphan_bes = []
 
-    for k, oid in enumerate(ids):
-        qv = V[k]
-        sims = BE @ qv  # vectors are unit-normalized
+    # Nearest existing BaryEdge per orphan — pure vector math, no tev1 calls.
+    nn: list[tuple[int, float]] = []
+    for k in range(len(ids)):
+        sims = BE @ V[k]  # vectors are unit-normalized
         bi = int(np.argmax(sims))
-        q = float(sims[bi])
+        nn.append((bi, float(sims[bi])))
+
+    # One decision per orphan; concurrent when TEV1_WORKERS > 1. The states are
+    # precomputed so the pool spends its time on the network call, and results
+    # stream back in orphan order.
+    states = [
+        "\n".join(t for t in (texts[k], resolve(be_ids[bi])) if t)
+        for k, (bi, _q) in enumerate(nn)
+    ]
+    workers = max(1, int(getattr(settings, "tev1_workers", 1)))
+    log.info("L%d: classifying %d orphans (workers=%d)", level, len(states), workers)
+    classified = classify_states(model, states, workers=workers)
+
+    for k, (oid, (bi, q), cls) in enumerate(zip(ids, nn, classified, strict=True)):
         be_id = be_ids[bi]
-        state = "\n".join(t for t in (texts[k], resolve(be_id)) if t)
-        cls = classify_role(model, state)
+        qv = V[k]
         role = cls["role"]
         v_role = role_vecs.get(role or SAME_PHENOMENON, role_vecs[SAME_PHENOMENON])
         bv = compute_bary_vec(qv, be_vecs[be_id], v_role, q, role)
