@@ -290,6 +290,20 @@ to preview pair counts for free.
 * `FakeDecision` — deterministic offline stand-in;
 * `classify_role(model, state)` — never raises; returns the role contract above.
 
+## Matching cost (`ANN_THRESHOLD`)
+
+Pairing runs through `lib.match.top_k_pairs`, which is **brute force when the
+pool is ≤ `ANN_THRESHOLD`** (default 20,000) and HNSW above it. Brute force
+materialises an `n × n` similarity matrix plus `triu_indices`, so it is memory-
+and CPU-bound at the sizes this pipeline reaches: matching 10,937 L15 orphans
+(t07) took ~3.5 min, and 16,705 L15 BaryEdges (t08) reached ~5.4 GB RSS and was
+still climbing — against ~5 GB available on a 23 GB box — so t08 was restarted
+with `ANN_THRESHOLD=2000` to take the HNSW path and finished its matching in
+seconds. The env var is read at import time. Set it for any stage that pairs a
+pool in the ~2k-20k range (t07, t08, t09); HNSW is what t04's 22,883-node L15
+pool already used, so this keeps the graph on the same footing as the rest of
+the run.
+
 ## Configuration (`.env.tensegrity`)
 
 ```ini
