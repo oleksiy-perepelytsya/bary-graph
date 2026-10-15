@@ -46,7 +46,9 @@ from lib.bary_vec import level_factor, normalize  # noqa: F401  (re-exported)
 # order (spec §7.1: rarer, more informative relations matched first). Every
 # tensegrity BaryEdge's ``role`` is one of these. There is deliberately no
 # "complement" role: it was tensegrity's own invention, and ``same_phenomenon``
-# now plays the affirmative/default part it used to.
+# now plays the affirmative/default part it used to. There is also no
+# "not_related" role — an absent relation is the absence of an edge (the
+# pairing cosine floor); see the README, "Why there is no `not_related` role".
 CONTRADICTS = "contradicts"
 APPLIES_TO = "applies_to"
 IS_INSTANCE_OF = "is_instance_of"

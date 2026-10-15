@@ -208,6 +208,39 @@ without `--force`, so that means a drop-and-rebuild).
   a relation. The vector then falls back to the `same_phenomenon` role term with
   the attractive (`+`) sign.
 
+### Why there is no `not_related` role
+
+"Not related" is a different axis from "which relation", so it is deliberately
+**not** in the vocabulary. Two probes on the live model (one example per class)
+argued against widening the argmax:
+
+* a sixth `not_related` option in the same question flipped two of five correct
+  reads — a contradiction (0.78 → `not_related` 0.61 vs `contradicts` 0.30) and
+  a paraphrase (0.84 → 0.49 vs 0.44) — and a tightened criterion only brought the
+  contradiction back to a coin flip;
+* a second question in the same call (the Jev payload takes a *dict* of
+  questions, so this would still be one round trip) was answered badly — `no`
+  for plainly related pairs — **and** perturbed the role readout.
+
+Instead, an absent relation is the **absence of an edge**: a pair whose cosine is
+below `settings.q_min_l15` (default 0.72, from the PoC) never enters
+`top_k_pairs` / `greedy_unique_match`, so nothing is written. Measured cosines
+agree with that split — unrelated pairs 0.30 / 0.34 / 0.46 vs related pairs
+0.72–0.91 — and a contradiction sits **high** (0.737: same topic, opposite
+meaning), which is why the floor must not be raised blindly: it would start
+discarding the contradiction band.
+
+Residual case: a pair above the floor that stands in none of the five relations
+keeps a forced label, usually a low-`role_probability` `same_phenomenon`. That is
+deliberate — the role sets one sign (only `contradicts` is negative) and one term
+in a vector the two participants dominate, so a mildly-off label on a genuinely
+similar pair costs less than the measured degradation of real relations.
+
+Caveats: these are hand-made pairs, not a corpus benchmark, and the floor is
+inherited from kaikki *sense* pairs (`Q_MIN_L15`) yet applied at every level —
+including the *derived* L14 title vectors. Re-calibrating it per level on a real
+corpus is the open follow-up, independent of this decision.
+
 ## Title detection (t01)
 
 Programmatic, no model call (`parse.py`):
