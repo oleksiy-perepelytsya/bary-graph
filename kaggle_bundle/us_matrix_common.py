@@ -560,9 +560,10 @@ class OllamaChat:
                         return {"content": "".join(parts), "meta": meta}
                 except urllib.error.HTTPError as e:
                     last = e
-                    if e.code != 404:
-                        break
-                    continue
+                    # Try other endpoints on 404/401/403 (auth/path variants)
+                    if e.code in (404, 401, 403):
+                        continue
+                    break
                 except Exception as exc:
                     last = exc
                     break
