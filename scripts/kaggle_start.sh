@@ -85,25 +85,34 @@ if [ "$ollama_up" != "1" ]; then
 fi
 
 # --- model pulls -----------------------------------------------------------
+# Exact-name check against the first column of `ollama list` (a substring match
+# would treat qwen3-embedding:0.6b as satisfying a request for qwen3:14b).
+have_model() { "$OLLAMA_BIN" list 2>/dev/null | awk 'NR>1{print $1}' | grep -qx "$1"; }
+
 # embedding model (tensegrity t02)
-if ! "$OLLAMA_BIN" list | grep -q 'qwen3-embedding:0.6b'; then
+if ! have_model 'qwen3-embedding:0.6b'; then
   echo "== pulling qwen3-embedding:0.6b =="
   "$OLLAMA_BIN" pull qwen3-embedding:0.6b
 fi
 # tev1 is the decision model for edge roles (tensegrity t04..t09); it is served
 # through Ollama's Jev endpoint, which needs ollama >= 0.35.
-if ! "$OLLAMA_BIN" list | grep -q 'tev1:0.8b'; then
+if ! have_model 'tev1:0.8b'; then
   echo "== pulling tev1:0.8b =="
   "$OLLAMA_BIN" pull tev1:0.8b
 fi
 # LLM used by the US-matrix extraction eval arms
 LLM_MODEL="${LLM_MODEL:-qwen3:14b}"
-if ! "$OLLAMA_BIN" list | grep -q "${LLM_MODEL%%:*}"; then
+if ! have_model "$LLM_MODEL"; then
   echo "== pulling $LLM_MODEL (this is large; needs several GB free) =="
   df -h / | tail -1 || true
   if ! "$OLLAMA_BIN" pull "$LLM_MODEL"; then
     echo "== WARN: could not pull $LLM_MODEL — the eval arms will fail unless you set LLM_MODEL to an available model =="
   fi
+fi
+if ! have_model "$LLM_MODEL"; then
+  echo "== ERROR: LLM '$LLM_MODEL' is still not installed; aborting before the eval =="
+  "$OLLAMA_BIN" list || true
+  exit 1
 fi
 
 syscode=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
