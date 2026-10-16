@@ -413,12 +413,21 @@ class OllamaChat:
         self.chat([{"role": "user", "content": "ok"}], temperature=0.0)
         return time.monotonic() - t0
 
+    def _messages_to_prompt(self, messages: list[dict]) -> str:
+        parts = []
+        for m in messages:
+            role = m.get("role", "")
+            content = m.get("content", "")
+            parts.append(f"{role}: {content}")
+        parts.append("assistant:")
+        return "\n".join(parts)
+
     def chat(self, messages: list[dict], *, schema: dict | None = None,
              temperature: float = 0.0, think: bool = False) -> dict[str, Any]:
         options: dict[str, Any] = {"num_ctx": self.num_ctx, "temperature": temperature}
         if self.num_predict is not None:
             options["num_predict"] = self.num_predict
-        payload: dict[str, Any] = {
+        payload_chat: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
             "stream": True,
@@ -427,19 +436,19 @@ class OllamaChat:
             "options": options,
         }
         if schema is not None:
-            payload["format"] = schema
-        data = json.dumps(payload).encode()
+            payload_chat["format"] = schema
+        data_chat = json.dumps(payload_chat).encode()
         last: Exception | None = None
         for attempt in range(self.retries):
-            req = urllib.request.Request(
-                f"{self.base}/api/chat", data=data,
-                headers={"Content-Type": "application/json",
-                         **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
-            )
-            t0 = time.monotonic()
-            parts: list[str] = []
-            meta: dict[str, Any] = {}
             try:
+                req = urllib.request.Request(
+                    f"{self.base}/api/chat", data=data_chat,
+                    headers={"Content-Type": "application/json",
+                             **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
+                )
+                t0 = time.monotonic()
+                parts: list[str] = []
+                meta: dict[str, Any] = {}
                 with urllib.request.urlopen(req, timeout=self.timeout) as r:
                     for raw in r:
                         line = raw.strip()
@@ -463,10 +472,54 @@ class OllamaChat:
                 self.calls += 1
                 self.seconds += time.monotonic() - t0
                 return {"content": "".join(parts), "meta": meta}
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    payload_gen: dict[str, Any] = {
+                        "model": self.model,
+                        "prompt": self._messages_to_prompt(messages),
+                        "stream": True,
+                        "keep_alive": self.keep_alive,
+                        "options": options,
+                    }
+                    if schema is not None:
+                        payload_gen["format"] = schema
+                    data_gen = json.dumps(payload_gen).encode()
+                    req2 = urllib.request.Request(
+                        f"{self.base}/api/generate", data=data_gen,
+                        headers={"Content-Type": "application/json",
+                                 **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
+                    )
+                    t0 = time.monotonic()
+                    parts = []
+                    meta = {}
+                    with urllib.request.urlopen(req2, timeout=self.timeout) as r:
+                        for raw in r:
+                            line = raw.strip()
+                            if not line:
+                                continue
+                            obj = json.loads(line)
+                            if obj.get("error"):
+                                raise RuntimeError(str(obj["error"]))
+                            chunk = obj.get("response")
+                            if chunk:
+                                parts.append(chunk)
+                            if obj.get("done"):
+                                meta = {
+                                    "eval_count": obj.get("eval_count"),
+                                    "prompt_eval_count": obj.get("prompt_eval_count"),
+                                    "total_duration_ns": obj.get("total_duration"),
+                                }
+                                break
+                    if not parts and not meta:
+                        raise RuntimeError("empty stream")
+                    self.calls += 1
+                    self.seconds += time.monotonic() - t0
+                    return {"content": "".join(parts), "meta": meta}
+                last = e
             except (urllib.error.URLError, TimeoutError, json.JSONDecodeError,
                     RuntimeError) as exc:
                 last = exc
-                time.sleep(2 * (attempt + 1))
+            time.sleep(2 * (attempt + 1))
         raise RuntimeError(f"ollama chat failed after {self.retries} attempts: {last}")
 
 
