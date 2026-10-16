@@ -667,7 +667,12 @@ class OllamaChat:
                         self.seconds += dt
                         return {"content": "".join(parts), "meta": meta}
                 except urllib.error.HTTPError as e:
-                    last = e
+                    body = ""
+                    try:
+                        body = e.read().decode(errors="replace")[:600]
+                    except Exception:
+                        pass
+                    last = RuntimeError(f"{e} — response body: {body!r}")
                     # Try other endpoints on 404/401/403 (auth/path variants)
                     if e.code in (404, 401, 403):
                         continue
@@ -676,7 +681,33 @@ class OllamaChat:
                     last = exc
                     break
             time.sleep(2 * (attempt + 1))
-        raise RuntimeError(f"ollama chat failed after {self.retries} attempts: {last}")
+        raise RuntimeError(
+            f"ollama chat failed after {self.retries} attempts: {last}\n"
+            f"  base={self.base} model={self.model} token={'set' if self.token else 'unset'}\n"
+            f"  {self._diagnose()}"
+        )
+
+    def _diagnose(self) -> str:
+        """Probe the server so failures say *why* (auth vs missing model)."""
+        hdr = {"Content-Type": "application/json"}
+        if self.token:
+            hdr["Authorization"] = f"Bearer {self.token}"
+        out = []
+        for path in ("/api/version", "/api/tags"):
+            try:
+                req = urllib.request.Request(f"{self.base}{path}", headers=hdr)
+                with urllib.request.urlopen(req, timeout=15) as r:
+                    out.append(f"{path} -> {r.read(400).decode(errors='replace')}")
+            except urllib.error.HTTPError as he:
+                b = ""
+                try:
+                    b = he.read().decode(errors="replace")[:300]
+                except Exception:
+                    pass
+                out.append(f"{path} -> HTTP {he.code} {b!r}")
+            except Exception as ee:
+                out.append(f"{path} -> {ee}")
+        return " | ".join(out)
 
 
 def parse_json_loose(text: str) -> dict[str, Any]:

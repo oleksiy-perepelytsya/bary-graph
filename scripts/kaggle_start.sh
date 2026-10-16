@@ -140,6 +140,19 @@ echo "  tev1   (tensegrity t04+): TEV1_URL=${TUNNEL:-http://localhost:$KAGGLE_AP
 echo "  LLM:    $LLM_MODEL (local: http://localhost:$KAGGLE_API_PORT)"
 echo "=================================================="
 
+# Preflight: make sure the chat endpoint + LLM actually answer through the
+# proxy before kicking off the (long) eval. A 404 here means "model not found".
+echo "== preflight: chat via http://localhost:$KAGGLE_API_PORT/api/chat =="
+curl -sS -m 120 "http://localhost:$KAGGLE_API_PORT/api/chat" \
+  -H "Authorization: Bearer $KAGGLE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"model\":\"$LLM_MODEL\",\"messages\":[{\"role\":\"user\",\"content\":\"ping\"}],\"stream\":false,\"options\":{\"num_predict\":1}}" \
+  | head -c 500
+echo
+echo "== installed models =="
+"$OLLAMA_BIN" list || true
+echo "=================================================="
+
 # 5. US-matrix extraction eval (run locally on this host, no tunnel)
 if [ "${RUN_US_MATRIX:-1}" = "1" ]; then
   BUNDLE="$REPO_DIR/kaggle_bundle"
