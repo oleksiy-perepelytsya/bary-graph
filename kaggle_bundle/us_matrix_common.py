@@ -476,28 +476,44 @@ class OllamaChat:
                         try:
                             parts, meta, dt = _do()
                         except urllib.error.HTTPError as ee:
-                            if ee.code == 401 and self.token:
-                                # retry without token
-                                headers_noauth = {"Content-Type": "application/json"}
-                                h = headers_noauth
-                                r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
-                                t0 = time.monotonic()
-                                parts, meta = [], {}
-                                with urllib.request.urlopen(r, timeout=self.timeout) as resp:
-                                    for raw in resp:
-                                        line = raw.strip()
-                                        if not line:
-                                            continue
-                                        obj = json.loads(line)
-                                        if obj.get("error"):
-                                            raise RuntimeError(str(obj["error"]))
-                                        chunk = (obj.get("message") or {}).get("content")
-                                        if chunk:
-                                            parts.append(chunk)
-                                        if obj.get("done"):
-                                            meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
-                                            break
-                                dt = time.monotonic() - t0
+                            if ee.code == 401:
+                                tried = []
+                                # try variants
+                                variants = []
+                                variants.append({})  # no auth
+                                if self.token:
+                                    variants.append({"Authorization": f"Bearer {self.token}"})
+                                    variants.append({"Authorization": self.token})
+                                    variants.append({"X-API-Key": self.token})
+                                for v in variants:
+                                    try:
+                                        h = {"Content-Type": "application/json"}
+                                        h.update(v)
+                                        r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                        t0 = time.monotonic()
+                                        parts, meta = [], {}
+                                        with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                            for raw in resp:
+                                                line = raw.strip()
+                                                if not line:
+                                                    continue
+                                                obj = json.loads(line)
+                                                if obj.get("error"):
+                                                    raise RuntimeError(str(obj["error"]))
+                                                chunk = (obj.get("message") or {}).get("content")
+                                                if chunk:
+                                                    parts.append(chunk)
+                                                if obj.get("done"):
+                                                    meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                                    break
+                                        dt = time.monotonic() - t0
+                                        break
+                                    except urllib.error.HTTPError as ee2:
+                                        if ee2.code != 401:
+                                            raise
+                                        continue
+                                else:
+                                    raise  # no variant worked
                             else:
                                 raise
                         if not parts and not meta:
