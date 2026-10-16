@@ -366,8 +366,21 @@ def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
     if arm == "llm_graph" and overlays_dir is None:
         coll, _ = connect()
     t_start = time.monotonic()
-    with out_jsonl.open("w") as fh:
-        for i, cid in enumerate(case_ids, 1):
+    # Resume: append to the jsonl and skip case_ids already finished, so an
+    # interrupted run continues instead of redoing hours of GPU work.
+    done: set[str] = set()
+    if out_jsonl.exists():
+        for ln in out_jsonl.read_text(errors="replace").splitlines():
+            try:
+                done.add(json.loads(ln).get("case_id"))
+            except Exception:
+                pass
+        done.discard(None)
+    todo = [c for c in case_ids if c not in done]
+    if done:
+        log.info("[%s] resuming: %d already done, %d remaining", arm, len(done), len(todo))
+    with out_jsonl.open("a") as fh:
+        for i, cid in enumerate(todo, 1):
             sents: list[str] = []
             meta_txt = metadata_block(cid, meta)
             if arm == "llm_graph":
@@ -381,25 +394,28 @@ def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
             if dry_run:
                 chars = sum(len(m["content"]) for m in msgs)
                 log.info("[%s] %d/%d %s prompt %d chars (~%d tok)",
-                         arm, i, len(case_ids), cid, chars, chars // 4)
+                         arm, i, len(todo), cid, chars, chars // 4)
                 continue
             t0 = time.monotonic()
             try:
                 resp = chat.chat(msgs, schema=schema)
                 raw = parse_json_loose(resp["content"])
-                meta = resp["meta"]
+                rmeta = resp["meta"]
             except Exception as exc:  # a failed case is a zero, not a crash
                 log.warning("[%s] %s failed: %s", arm, cid, exc)
-                raw, meta = {}, {}
+                raw, rmeta = {}, {}
             m = complete_matrix(cid, raw)
             m["case_id"] = cid
             if snap:
                 snap_quotes(m, sents)
             dt = time.monotonic() - t0
             log.info("[%s] %d/%d %s in %.0fs (prompt %s tok, out %s tok)",
-                     arm, i, len(case_ids), cid, dt, meta.get("prompt_eval_count"),
-                     meta.get("eval_count"))
+                     arm, i, len(todo), cid, dt, rmeta.get("prompt_eval_count"),
+                     rmeta.get("eval_count"))
+            m["_elapsed_s"] = round(dt, 1)
+            m["_eval_count"] = rmeta.get("eval_count")
             fh.write(json.dumps(m, ensure_ascii=False) + "\n")
+            fh.flush()
             (out_dir / f"{cid}.json").write_text(json.dumps(m, ensure_ascii=False, indent=2))
     if chat.calls:
         log.info("[%s] done: %d cases in %.1f min; %d calls, %.1f s/call",
@@ -421,6 +437,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--base-url", default="http://localhost:11434")
     ap.add_argument("--token", default="")
     ap.add_argument("--num-ctx", type=int, default=24576)
+    ap.add_argument("--num-predict", type=int, default=None,
+                    help="cap generated tokens per case (0/None = unlimited)")
     ap.add_argument("--keep-alive", default="30m")
     ap.add_argument("--no-warmup", action="store_true",
                     help="skip the throwaway warm-up call at the target num_ctx")
@@ -451,7 +469,7 @@ def main(argv: list[str] | None = None) -> None:
 
     chat = OllamaChat(args.base_url, args.model, token=args.token or None,
                       num_ctx=args.num_ctx, keep_alive=args.keep_alive,
-                      timeout=args.timeout)
+                      timeout=args.timeout, num_predict=args.num_predict)
     if not args.no_warmup and not args.dry_run:
         wt = chat.warmup()
         log.info("warm-up at num_ctx=%d took %.1fs", args.num_ctx, wt)
