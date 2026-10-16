@@ -13,8 +13,10 @@ ARMS="${ARMS:-llm_fulltext llm_graph}"
 LIMIT_ARGS=()
 if [ "$LIMIT" != "0" ]; then LIMIT_ARGS=(--limit "$LIMIT"); fi
 mkdir -p "$US_MATRIX_RESULTS_DIR"
-echo "ollama check..."
-curl -s -m 20 "$BASE/api/ps" || true
+echo "=== ollama check (base=$BASE token=${TOKEN:+set}${TOKEN:-unset}) ==="
+AUTH_ARGS=()
+if [ -n "${TOKEN:-}" ]; then AUTH_ARGS=(-H "Authorization: Bearer $TOKEN"); fi
+curl -s -m 20 "${AUTH_ARGS[@]}" "$BASE/api/ps" || true
 echo
 TOKEN_ARGS=()
 if [ -n "${TOKEN:-}" ]; then TOKEN_ARGS=(--token "$TOKEN"); fi

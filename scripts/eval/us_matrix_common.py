@@ -413,60 +413,269 @@ class OllamaChat:
         self.chat([{"role": "user", "content": "ok"}], temperature=0.0)
         return time.monotonic() - t0
 
+    def _messages_to_prompt(self, messages: list[dict]) -> str:
+        parts = []
+        for m in messages:
+            role = m.get("role", "")
+            content = m.get("content", "")
+            parts.append(f"{role}: {content}")
+        parts.append("assistant:")
+        return "\n".join(parts)
+
     def chat(self, messages: list[dict], *, schema: dict | None = None,
              temperature: float = 0.0, think: bool = False) -> dict[str, Any]:
         options: dict[str, Any] = {"num_ctx": self.num_ctx, "temperature": temperature}
         if self.num_predict is not None:
             options["num_predict"] = self.num_predict
-        payload: dict[str, Any] = {
-            "model": self.model,
-            "messages": messages,
-            "stream": True,
-            "think": think,
-            "keep_alive": self.keep_alive,
-            "options": options,
-        }
-        if schema is not None:
-            payload["format"] = schema
-        data = json.dumps(payload).encode()
+        endpoints = [
+            ("chat", "/api/chat"),
+            ("generate", "/api/generate"),
+            ("v1chat", "/v1/chat/completions"),
+        ]
         last: Exception | None = None
         for attempt in range(self.retries):
-            req = urllib.request.Request(
-                f"{self.base}/api/chat", data=data,
-                headers={"Content-Type": "application/json",
-                         **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
-            )
-            t0 = time.monotonic()
-            parts: list[str] = []
-            meta: dict[str, Any] = {}
-            try:
-                with urllib.request.urlopen(req, timeout=self.timeout) as r:
-                    for raw in r:
-                        line = raw.strip()
-                        if not line:
-                            continue
-                        obj = json.loads(line)
-                        if obj.get("error"):
-                            raise RuntimeError(str(obj["error"]))
-                        chunk = (obj.get("message") or {}).get("content")
-                        if chunk:
-                            parts.append(chunk)
-                        if obj.get("done"):
-                            meta = {
-                                "eval_count": obj.get("eval_count"),
-                                "prompt_eval_count": obj.get("prompt_eval_count"),
-                                "total_duration_ns": obj.get("total_duration"),
-                            }
-                            break
-                if not parts and not meta:
-                    raise RuntimeError("empty stream")
-                self.calls += 1
-                self.seconds += time.monotonic() - t0
-                return {"content": "".join(parts), "meta": meta}
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError,
-                    RuntimeError) as exc:
-                last = exc
-                time.sleep(2 * (attempt + 1))
+            for ep_name, ep_path in endpoints:
+                try:
+                    if ep_name == "chat":
+                        payload = {
+                            "model": self.model,
+                            "messages": messages,
+                            "stream": True,
+                            "think": think,
+                            "keep_alive": self.keep_alive,
+                            "options": options,
+                        }
+                        if schema is not None:
+                            payload["format"] = schema
+                        data = json.dumps(payload).encode()
+                        headers = {"Content-Type": "application/json"}
+                        if self.token:
+                            headers["Authorization"] = f"Bearer {self.token}"
+                        # try with auth, retry without on 401
+                        def _do():
+                            h = dict(headers)
+                            r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                            t0 = time.monotonic()
+                            parts: list[str] = []
+                            meta: dict[str, Any] = {}
+                            with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                for raw in resp:
+                                    line = raw.strip()
+                                    if not line:
+                                        continue
+                                    obj = json.loads(line)
+                                    if obj.get("error"):
+                                        raise RuntimeError(str(obj["error"]))
+                                    chunk = (obj.get("message") or {}).get("content")
+                                    if chunk:
+                                        parts.append(chunk)
+                                    if obj.get("done"):
+                                        meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                        break
+                            return parts, meta, time.monotonic() - t0
+                        try:
+                            parts, meta, dt = _do()
+                        except urllib.error.HTTPError as ee:
+                            if ee.code == 401:
+                                tried = []
+                                # try variants
+                                variants = []
+                                variants.append({})  # no auth
+                                if self.token:
+                                    variants.append({"Authorization": f"Bearer {self.token}"})
+                                    variants.append({"Authorization": self.token})
+                                    variants.append({"X-API-Key": self.token})
+                                for v in variants:
+                                    try:
+                                        h = {"Content-Type": "application/json"}
+                                        h.update(v)
+                                        r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                        t0 = time.monotonic()
+                                        parts, meta = [], {}
+                                        with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                            for raw in resp:
+                                                line = raw.strip()
+                                                if not line:
+                                                    continue
+                                                obj = json.loads(line)
+                                                if obj.get("error"):
+                                                    raise RuntimeError(str(obj["error"]))
+                                                chunk = (obj.get("message") or {}).get("content")
+                                                if chunk:
+                                                    parts.append(chunk)
+                                                if obj.get("done"):
+                                                    meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                                    break
+                                        dt = time.monotonic() - t0
+                                        break
+                                    except urllib.error.HTTPError as ee2:
+                                        if ee2.code != 401:
+                                            raise
+                                        continue
+                                else:
+                                    raise  # no variant worked
+                            else:
+                                raise
+                        if not parts and not meta:
+                            raise RuntimeError("empty stream")
+                        self.calls += 1
+                        self.seconds += time.monotonic() - t0
+                        return {"content": "".join(parts), "meta": meta}
+                    elif ep_name == "generate":
+                        payload = {
+                            "model": self.model,
+                            "prompt": self._messages_to_prompt(messages),
+                            "stream": True,
+                            "keep_alive": self.keep_alive,
+                            "options": options,
+                        }
+                        if schema is not None:
+                            payload["format"] = schema
+                        data = json.dumps(payload).encode()
+                        headers = {"Content-Type": "application/json"}
+                        if self.token:
+                            headers["Authorization"] = f"Bearer {self.token}"
+                        def _do():
+                            h = dict(headers)
+                            r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                            t0 = time.monotonic()
+                            parts: list[str] = []
+                            meta: dict[str, Any] = {}
+                            with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                for raw in resp:
+                                    line = raw.strip()
+                                    if not line:
+                                        continue
+                                    obj = json.loads(line)
+                                    if obj.get("error"):
+                                        raise RuntimeError(str(obj["error"]))
+                                    chunk = obj.get("response")
+                                    if chunk:
+                                        parts.append(chunk)
+                                    if obj.get("done"):
+                                        meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                        break
+                            return parts, meta, time.monotonic() - t0
+                        try:
+                            parts, meta, dt = _do()
+                        except urllib.error.HTTPError as ee:
+                            if ee.code == 401 and self.token:
+                                h = {"Content-Type": "application/json"}
+                                r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                t0 = time.monotonic()
+                                parts, meta = [], {}
+                                with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                    for raw in resp:
+                                        line = raw.strip()
+                                        if not line:
+                                            continue
+                                        obj = json.loads(line)
+                                        if obj.get("error"):
+                                            raise RuntimeError(str(obj["error"]))
+                                        chunk = obj.get("response")
+                                        if chunk:
+                                            parts.append(chunk)
+                                        if obj.get("done"):
+                                            meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                            break
+                                dt = time.monotonic() - t0
+                            else:
+                                raise
+                        if not parts and not meta:
+                            raise RuntimeError("empty stream")
+                        self.calls += 1
+                        self.seconds += dt
+                        return {"content": "".join(parts), "meta": meta}
+                    elif ep_name == "v1chat":
+                        payload = {
+                            "model": self.model,
+                            "messages": messages,
+                            "stream": True,
+                            "temperature": temperature,
+                        }
+                        if self.num_predict is not None:
+                            payload["max_tokens"] = self.num_predict
+                        data = json.dumps(payload).encode()
+                        headers = {"Content-Type": "application/json"}
+                        if self.token:
+                            headers["Authorization"] = f"Bearer {self.token}"
+                        def _do():
+                            h = dict(headers)
+                            r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                            t0 = time.monotonic()
+                            parts: list[str] = []
+                            meta: dict[str, Any] = {}
+                            with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                for raw in resp:
+                                    line = raw.strip()
+                                    if not line:
+                                        continue
+                                    if line.startswith(b"data: "):
+                                        line = line[6:]
+                                    if line == b"[DONE]":
+                                        break
+                                    try:
+                                        obj = json.loads(line)
+                                    except Exception:
+                                        continue
+                                    if obj.get("error"):
+                                        raise RuntimeError(str(obj["error"]))
+                                    choice = (obj.get("choices") or [{}])[0]
+                                    delta = choice.get("delta") or {}
+                                    chunk = delta.get("content") or ""
+                                    if chunk:
+                                        parts.append(chunk)
+                                    if obj.get("usage"):
+                                        meta = {"eval_count": obj.get("usage", {}).get("completion_tokens"), "prompt_eval_count": obj.get("usage", {}).get("prompt_tokens")}
+                            return parts, meta, time.monotonic() - t0
+                        try:
+                            parts, meta, dt = _do()
+                        except urllib.error.HTTPError as ee:
+                            if ee.code == 401 and self.token:
+                                h = {"Content-Type": "application/json"}
+                                r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                t0 = time.monotonic()
+                                parts, meta = [], {}
+                                with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                    for raw in resp:
+                                        line = raw.strip()
+                                        if not line:
+                                            continue
+                                        if line.startswith(b"data: "):
+                                            line = line[6:]
+                                        if line == b"[DONE]":
+                                            break
+                                        try:
+                                            obj = json.loads(line)
+                                        except Exception:
+                                            continue
+                                        if obj.get("error"):
+                                            raise RuntimeError(str(obj["error"]))
+                                        choice = (obj.get("choices") or [{}])[0]
+                                        delta = choice.get("delta") or {}
+                                        chunk = delta.get("content") or ""
+                                        if chunk:
+                                            parts.append(chunk)
+                                        if obj.get("usage"):
+                                            meta = {"eval_count": obj.get("usage", {}).get("completion_tokens"), "prompt_eval_count": obj.get("usage", {}).get("prompt_tokens")}
+                                dt = time.monotonic() - t0
+                            else:
+                                raise
+                        if not parts and not meta:
+                            raise RuntimeError("empty stream")
+                        self.calls += 1
+                        self.seconds += dt
+                        return {"content": "".join(parts), "meta": meta}
+                except urllib.error.HTTPError as e:
+                    last = e
+                    # Try other endpoints on 404/401/403 (auth/path variants)
+                    if e.code in (404, 401, 403):
+                        continue
+                    break
+                except Exception as exc:
+                    last = exc
+                    break
+            time.sleep(2 * (attempt + 1))
         raise RuntimeError(f"ollama chat failed after {self.retries} attempts: {last}")
 
 
