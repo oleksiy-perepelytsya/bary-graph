@@ -519,31 +519,56 @@ class OllamaChat:
                         headers = {"Content-Type": "application/json"}
                         if self.token:
                             headers["Authorization"] = f"Bearer {self.token}"
-                        req = urllib.request.Request(
-                            f"{self.base}{ep_path}", data=data,
-                            headers=headers,
-                        )
-                        t0 = time.monotonic()
-                        parts: list[str] = []
-                        meta: dict[str, Any] = {}
-                        with urllib.request.urlopen(req, timeout=self.timeout) as r:
-                            for raw in r:
-                                line = raw.strip()
-                                if not line:
-                                    continue
-                                obj = json.loads(line)
-                                if obj.get("error"):
-                                    raise RuntimeError(str(obj["error"]))
-                                chunk = obj.get("response")
-                                if chunk:
-                                    parts.append(chunk)
-                                if obj.get("done"):
-                                    meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
-                                    break
+                        def _do():
+                            h = dict(headers)
+                            r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                            t0 = time.monotonic()
+                            parts: list[str] = []
+                            meta: dict[str, Any] = {}
+                            with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                for raw in resp:
+                                    line = raw.strip()
+                                    if not line:
+                                        continue
+                                    obj = json.loads(line)
+                                    if obj.get("error"):
+                                        raise RuntimeError(str(obj["error"]))
+                                    chunk = obj.get("response")
+                                    if chunk:
+                                        parts.append(chunk)
+                                    if obj.get("done"):
+                                        meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                        break
+                            return parts, meta, time.monotonic() - t0
+                        try:
+                            parts, meta, dt = _do()
+                        except urllib.error.HTTPError as ee:
+                            if ee.code == 401 and self.token:
+                                h = {"Content-Type": "application/json"}
+                                r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                t0 = time.monotonic()
+                                parts, meta = [], {}
+                                with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                    for raw in resp:
+                                        line = raw.strip()
+                                        if not line:
+                                            continue
+                                        obj = json.loads(line)
+                                        if obj.get("error"):
+                                            raise RuntimeError(str(obj["error"]))
+                                        chunk = obj.get("response")
+                                        if chunk:
+                                            parts.append(chunk)
+                                        if obj.get("done"):
+                                            meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                            break
+                                dt = time.monotonic() - t0
+                            else:
+                                raise
                         if not parts and not meta:
                             raise RuntimeError("empty stream")
                         self.calls += 1
-                        self.seconds += time.monotonic() - t0
+                        self.seconds += dt
                         return {"content": "".join(parts), "meta": meta}
                     elif ep_name == "v1chat":
                         payload = {
@@ -558,39 +583,72 @@ class OllamaChat:
                         headers = {"Content-Type": "application/json"}
                         if self.token:
                             headers["Authorization"] = f"Bearer {self.token}"
-                        req = urllib.request.Request(
-                            f"{self.base}{ep_path}", data=data,
-                            headers=headers,
-                        )
-                        t0 = time.monotonic()
-                        parts: list[str] = []
-                        meta: dict[str, Any] = {}
-                        with urllib.request.urlopen(req, timeout=self.timeout) as r:
-                            for raw in r:
-                                line = raw.strip()
-                                if not line:
-                                    continue
-                                if line.startswith(b"data: "):
-                                    line = line[6:]
-                                if line == b"[DONE]":
-                                    break
-                                try:
-                                    obj = json.loads(line)
-                                except Exception:
-                                    continue
-                                if obj.get("error"):
-                                    raise RuntimeError(str(obj["error"]))
-                                choice = (obj.get("choices") or [{}])[0]
-                                delta = choice.get("delta") or {}
-                                chunk = delta.get("content") or ""
-                                if chunk:
-                                    parts.append(chunk)
-                                if obj.get("usage"):
-                                    meta = {"eval_count": obj.get("usage", {}).get("completion_tokens"), "prompt_eval_count": obj.get("usage", {}).get("prompt_tokens")}
+                        def _do():
+                            h = dict(headers)
+                            r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                            t0 = time.monotonic()
+                            parts: list[str] = []
+                            meta: dict[str, Any] = {}
+                            with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                for raw in resp:
+                                    line = raw.strip()
+                                    if not line:
+                                        continue
+                                    if line.startswith(b"data: "):
+                                        line = line[6:]
+                                    if line == b"[DONE]":
+                                        break
+                                    try:
+                                        obj = json.loads(line)
+                                    except Exception:
+                                        continue
+                                    if obj.get("error"):
+                                        raise RuntimeError(str(obj["error"]))
+                                    choice = (obj.get("choices") or [{}])[0]
+                                    delta = choice.get("delta") or {}
+                                    chunk = delta.get("content") or ""
+                                    if chunk:
+                                        parts.append(chunk)
+                                    if obj.get("usage"):
+                                        meta = {"eval_count": obj.get("usage", {}).get("completion_tokens"), "prompt_eval_count": obj.get("usage", {}).get("prompt_tokens")}
+                            return parts, meta, time.monotonic() - t0
+                        try:
+                            parts, meta, dt = _do()
+                        except urllib.error.HTTPError as ee:
+                            if ee.code == 401 and self.token:
+                                h = {"Content-Type": "application/json"}
+                                r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                t0 = time.monotonic()
+                                parts, meta = [], {}
+                                with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                    for raw in resp:
+                                        line = raw.strip()
+                                        if not line:
+                                            continue
+                                        if line.startswith(b"data: "):
+                                            line = line[6:]
+                                        if line == b"[DONE]":
+                                            break
+                                        try:
+                                            obj = json.loads(line)
+                                        except Exception:
+                                            continue
+                                        if obj.get("error"):
+                                            raise RuntimeError(str(obj["error"]))
+                                        choice = (obj.get("choices") or [{}])[0]
+                                        delta = choice.get("delta") or {}
+                                        chunk = delta.get("content") or ""
+                                        if chunk:
+                                            parts.append(chunk)
+                                        if obj.get("usage"):
+                                            meta = {"eval_count": obj.get("usage", {}).get("completion_tokens"), "prompt_eval_count": obj.get("usage", {}).get("prompt_tokens")}
+                                dt = time.monotonic() - t0
+                            else:
+                                raise
                         if not parts and not meta:
                             raise RuntimeError("empty stream")
                         self.calls += 1
-                        self.seconds += time.monotonic() - t0
+                        self.seconds += dt
                         return {"content": "".join(parts), "meta": meta}
                 except urllib.error.HTTPError as e:
                     last = e
