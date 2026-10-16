@@ -1,0 +1,324 @@
+MEMORANDUM OF DECISION AND ORDER
+  
+
+
+  SPATT, District Judge.
+ 
+
+  This case arises out of claims by Barry Mendelsohn (“Mendelsohn” or the “plaintiff’) against the University Hospital, State University of New York at Stony Brook (the “Hospital”) (collectively, the “defen
+   
+   *325
+   
+  dants”) and Dennis Sheppard (“Sheppard”). Mendelsohn asserts that Sheppard failed to promote him in retaliation for complaints he made to his union and the Hospital regarding alleged misconduct in his department in violation of 42 U.S.C. § 1988. Mendelsohn also claims that the Hospital discriminated against him on the basis of his sex in regard to the terms, conditions, and privileges of his employment, and that the Hospital eliminated his teaching responsibilities in retaliation for his filing a charge of sex discrimination in violation of Title VII of the Civil Rights Act of 1964, 42 U.S.C. § 2000
+  
+   et seq.
+  
+  (“Title VII”), and the New York State Human Rights Law, Executive Law § 296
+  
+   et seq.
+  
+  (“NYHRL”). Presently before the Court is a motion by the Hospital and Sheppard to dismiss the complaint in its entirety pursuant to Rules 12(b)(1) and 12(b)(6) of the Federal Rules of Civil Procedure (“Fed.R.Civ.P.”).
+ 
+
+
+  I.
+  
+   BACKGROUND
+  
+
+
+  The following facts are taken from the plaintiffs amended complaint. Mendel-sohn has been employed by the Hospital as a Clinical Laboratory Technologist in the Microbiology Department since May 1988. Prior to commencing his employment with the Hospital, Mendelsohn was employed for approximately ten years by the State of New York conducting microbiology testing. Mendelsohn is categorized as an “SL3”-level employee, and his duties have included teaching medical technology students, physicians, and other health care professionals. Defendant Sheppard is also employed by the Hospital and is Mendel-sohn’s supervisor.
+ 
+
+
+  In 1996, Mendelsohn and an unnamed co-worker advised their union of alleged problems in their department. Mendel-sohn and his colleague informed the union that the department’s “SL4”-level employee had committed mistakes that resulted in compromised patient care. Mendelsohn and his coworker also alleged that Sheppard and one Dr. George Tortora had, for many years, engaged in the practice of over-ordering a medical supply known as “media plate” and then discarding the excess quantities. Mendelsohn and his union brought these matters to the attention of the Hospital’s executive administration. During department meetings in the two years following Mendelsohn’s complaint to the union, Sheppard made statements referring to “troublemakers trying to raise issues” (Am. Comply 12) and said that he “would not take the blame” for the issues raised by the “troublemakers” (Am. Comply 12).
+ 
+
+
+  In August 1998, a position became available in Mendelsohn’s department for Microbiology Lead Technologist, an “SL4”-level position. This was the third time during Mendelsohn’s employment with the Hospital that this position had become available. On the two prior occasions in 1992 and 1995, the availability of the “SL4” position was not posted and, therefore, Mendelsohn did not apply for this promotion opportunity. Ultimately, these positions in 1992 and 1995 were awarded to female employees with less hospital experience than Mendelsohn.
+ 
+
+
+  Mendelsohn and nineteen other candidates applied for the promotion to Microbiology Lead Technologist in response to the August 1998 posting. Of the twenty applicants, the Hospital asked seven women and two men to interview. After four of the female candidates withdrew their applications, the remaining applicant pool consisted of three women and two men, one of whom was Mendelsohn.
+ 
+
+
+  Sheppard and four other people interviewed Mendelsohn for the Microbiology Lead Technologist position. Following each interview, the applicant received an
+   
+   *326
+   
+  interview score. Of the five applicants, the two males received the lowest scores. The interviewers said that although the two men were technically competent, they lacked “interpersonal skills” (Am. Complaint ¶ 16). The interviewers also stated that Mendelsohn lacked the maturity required for the position of Microbiologist Lead Technologist. In December 1998, the promotion was awarded to a female applicant. The successful female candidate possessed no “tertiary university hospital experience, while Mendelsohn had many years of such experience”
+  
+   (id.).
+  
+
+
+  On February 4, 1999, Mendelsohn filed a charge of discrimination with the Equal Employment Opportunity Commission (“EEOC”) and with the New York State Division of Human Rights (“DHR”). Mendelsohn amended the charge on March 7, 2000, and again on June 13, 2000. A fact-finding conference was held at the DHR on May 17, 2000. The following week, the Hospital informed Mendelsohn that he would no longer teach the medical technology students because he had made ethnically insensitive remarks and had improperly left the students unsupervised. Mendelsohn contends that he “did not make any improper statements and merely followed long-standing practice in his supervision of the students” (Am. Complaint ¶ 19).
+ 
+
+
+  The plaintiff received right to sue letters on March 6, 2001 and commenced this action by filing a complaint on March 21,-2001. An amended complaint was filed on July 6, 2001. The amended complaint pleads three causes of action. The first cause of action is a Section 1983 First Amendment retaliation claim against Sheppard. Mendelsohn alleges that Sheppard’s decision not to promote him was in retaliation for Mendelsohn’s complaints to the union and hospital administration regarding the conduct of employees in their department. As a second cause of action, Mendelsohn alleges that the hospital discriminated against him based on his sex and in violation of Title VII by failing to promote him in December 1998. Mendel-sohn also includes a Title VII retaliation claim in his second cause of action, asserting that the hospital’s decision to relieve him of his teaching duties was made in retaliation for Mendelsohn’s filing his discrimination charge with the EEOC. The third cause of action contains the same factual allegations as the second cause of action, but claims violations of the NYHRL as opposed to Title VII.
+ 
+
+
+  Presently before the court is the defendants’ motion to dismiss the amended complaint pursuant to Rules 12(b)(6) and 12(b)(1) of the Federal Rules of Civil Procedure (“Fed.R.Civ.P.”). The defendants raise the following arguments: (1) the first cause of action, asserted against Sheppard under 42 U.S.C. § 1983, must be dismissed because it fails to state a claim upon which relief can be granted, in that the plaintiff has failed to allege any wrongful conduct on the part of Sheppard; (2) the second cause of action, asserted against the Hospital under Title VII, must be dismissed because it fails to state a claim upon which relief can be granted, in that the plaintiff has failed to allege the necessary elements of his sex discrimination and retaliation claims; and (3) the third cause of action, asserted against the Hospital under the NYHRL, must be dismissed for lack of subject matter jurisdiction, in that the claim is barred by the Eleventh Amendment of the United States Constitution.
+ 
+
+
+  II.
+  
+   DISCUSSION
+  
+
+
+  On a motion to dismiss for failure to state a claim pursuant to Rule 12(b)(6), the Court should dismiss the complaint pursuant to Rule 12(b)(6) if it appears beyond doubt that the plaintiff can prove no set of
+   
+   *327
+   
+  facts in support of his complaint which would entitle him to relief.
+  
+   See King v. Simpson,
+  
+  189 F.3d 284, 286 (2d Cir.1999);
+  
+   Bernheim v. Litt,
+  
+  79 F.3d 318, 321 (2d Cir.1996). The Court must accept all factual allegations in the complaint as true and draw all reasonable inferences in favor of the plaintiff.
+  
+   See Koppel v. 4987 Corp.,
+  
+  167 F.3d 125, 127 (2d Cir.1999);
+  
+   Jaghory v. Neto York State Dep’t of Educ.,
+  
+  131 F.3d 326, 329 (2d Cir.1997). The issue is not whether a plaintiff will ultimately prevail but whether the claimant is entitled to offer evidence to support the claims.
+  
+   See Villager Pond, Inc. v. Town of Darien,
+  
+  56 F.3d 375, 378 (2d Cir.1995). The Court must confine its consideration “to facts stated on the face of the complaint, in documents appended to the complaint or incorporated in the complaint by reference, and to matters of which judicial notice may be taken.”
+  
+   Leonard F. v. Israel Discount Bank of N.Y.,
+  
+  199 F.3d 99, 107 (2d Cir.1999);
+  
+   Hayden v. County of Nassau,
+  
+  180 F.3d 42, 54 (2d Cir.1999).
+ 
+
+
+  A. The First Cause of Action — Section 1983
+ 
+
+
+  In order to state a claim for First Amendment retaliation, a public employee such as Mendelsohn must allege: (1) that he engaged in speech that can be “fairly characterized as constituting speech on a matter of public concern”; and (2) that the speech at issue was a “substantial,” or “motivating” factor in an adverse employment decision by his employer.
+  
+   See Locurto v. Safir,
+  
+  264 F.3d 154, 166 (2d Cir.2001);
+  
+   Hellstrom v. U.S. Dept. of Veterans Affairs,
+  
+  201 F.3d 94, 97 (2d Cir.2000). It is well-settled that “[pjersonal involvement of defendants in alleged constitutional deprivations is a prerequisite to an award of damages under § 1983.”
+  
+   McKinnon v. Patterson,
+  
+  568 F.2d 930, 934 (2d Cir.1977); see
+  
+   Sealey v. Giltner,
+  
+  116 F.3d 47, 51 (2d Cir.1997). A defendant is personally involved if he directly participated in the infraction. See
+  
+   Williams v. Smith,
+  
+  781 F.2d 319, 323 (2d Cir.1986); see
+  
+   also, Sealey,
+  
+  116 F.3d at 51. Even if a defendant did not directly participate in the constitutional deprivation, he is still liable under Section 1983, if he is a supervisory official, and he (1) failed to remedy the wrong after learning of the violation though a report or appeal; (2) created or continued a custom or policy under which unconstitutional practices occurred; or (3) was grossly negligent in managing subordinates who caused the unlawful condition or event.
+  
+   Williams,
+  
+  781 F.2d at 323-24 (citations omitted);
+  
+   Sealey,
+  
+  116 F.3d at 51.
+ 
+
+
+  The Court finds that the amended complaint fails to allege that Sheppard was personally involved in the constitutional deprivation, which is the alleged failure to promote Mendelsohn in retaliation for his complaints of matters of public concern to the union and the Hospital administration. The amended complaint claims that Sheppard was one of five people who interviewed Mendelsohn and the other four applicants for the SL-4 level position. The amended complaint also states that Sheppard scored the interviews he conducted, and that the scores of every interviewer were used in making the promotion decision. Notably, the amended complaint does not allege who was responsible for making the ultimate decision, nor does it describe Sheppard’s role, if any, in the decision-making process. The amended complaint does not even suggest that Sheppard was included in a general discussion involving which candidate should advance to the SL-4 level position.
+ 
+
+
+  Thus, although the amended complaint alleges that Sheppard was personally involved in the promotion process, it does not contend that he directly participated in the actual decision about whom would be
+   
+   *328
+   
+  promoted. Nor does the amended complaint allege that Sheppard had supervisory responsibility over the promotion process. Because the amended complaint fails to allege that Sheppard directly participated in the adverse employment decision, the Court finds that it fails to state a claim upon which relief can be granted pursuant to Section 1983. Accordingly, the defendants’ motion to dismiss the first cause of action is granted, and that cause of action is dismissed.
+ 
+
+
+  B. The Second Cause of Action — Title VII
+ 
+
+
+  The second cause of action consists of two different Title VII claims. In the first claim, Mendelsohn asserts that the Hospital failed to promote him based on his sex in violation of 42 U.S.C. § 2000e. The second claim alleges that the elimination of the plaintiffs teaching responsibilities constitutes retaliation against him for his filing a charge of discrimination. The defendants move to dismiss both of these claims.
+ 
+
+
+  1. The Title VII Gender Discrimination Claim
+ 
+
+
+  To establish a prima facie Title VII claim for failure to promote, an employee must allege that: (1) he is a member of a protected class; (2) he is qualified for the job to which he or she applied; (3) he was denied the promotion or transfer; and (4) the denial occurred under circumstances giving rise to an inference of discrimination.
+  
+   See Byrnie v. Town of Cromwell, Bd. of Educ.,
+  
+  243 F.3d 93, 101 (2d Cir.2001);
+  
+   Howley v. Town of Stratford,
+  
+  217 F.3d 141, 150 (2d Cir.2000);
+  
+   Cruz v. Coach Stores, Inc.,
+  
+  202 F.3d 560, 565 (2d Cir.2000). As a man, the plaintiff belongs to the protected class of men and, therefore, has satisfied the first requirement.
+  
+   See Oncale v. Sundowner Offshore Services, Inc.,
+  
+  523 U.S. 75, 77, 118 S.Ct. 998, 1001, 140 L.Ed.2d 201 (1998) (“Title VII’s prohibition of discrimination ‘because of ... sex’ protects men as well as women.”).
+ 
+
+
+  However, the Court finds that the amended complaint fails to allege the second requirement of a failure-to-promote claim, namely, that Mendelsohn was qualified for the Microbiology Lead Technologist position.
+  
+   See Cruz,
+  
+  202 F.3d at 565 (affirming the district court’s dismissal of a failure-to-promote claim where the complaint lacked, among other things, information about the responsibilities of the sought-after position and information about the plaintiffs employment skills that could support the inference that the plaintiff was qualified for the position). Although the plaintiffs burden of alleging that he is qualified for the position is a minimal one, “it is still a burden.”
+  
+   Tappe v. Alliance Capital Management, L.P.,
+  
+  2001 WL 1297799 *5, — F.Supp.2d —, — (S.D.N.Y. Oct. 25, 2001);
+  
+   Breland-Starling v. Disney Publishing Worldwide,
+  
+  166 F.Supp.2d 820, 824 (S.D.N.Y.2001) (“Plaintiff cannot establish her
+  
+   prima facie
+  
+  case without setting forth either the responsibilities of [the] position or plaintiffs skills applicable to this position.”);
+  
+   Alban-Davies v. Credit Lyonnais Securities, Inc.,
+  
+  2001 WL 884113 *4 (S.D.N.Y. Aug. 8, 2001) (holding that the plaintiff must show that he “ ‘possesses the basic skills necessary for the performance of [the] job’ ” (quoting
+  
+   Slattery v. Swiss Reinsurance America Corp.,
+  
+  248 F.3d 87, 92 (2d Cir.2001))). Mendelsohn fails to meet this burden, because his amended complaint does not contain even a conclusory allegation that the plaintiff was qualified for the position of Microbiology Lead Technologist.
+ 
+
+
+  Nor does the amended complaint contain a description of the responsibilities or duties of the Microbiology Lead Technologist from which one could infer that the
+   
+   *329
+   
+  plaintiff was qualified for that position. Rather, the amended complaint only states that Mendelsohn: (i) possesses a Master’s Degree; (ii) has worked at the Hospital for ten years; (iii) has worked in the field for twenty years; (iv) has trained residents, fellows, and other students; and (v) was the “Charge Technologist.” Nothing in the amended complaint suggests that this background, education, and experience qualified Mendelsohn for the position of Microbiology Lead Technologist.
+  
+   Cruz,
+  
+  202 F.3d at 566 (finding that the complaint failed to allege that the plaintiff was qualified for a position where the complaint did not describe the responsibilities of the position, did not contain information supporting an inference that the plaintiff was qualified for the position).
+ 
+
+
+  Because the amended complaint fails to contain a statement that Mendelsohn was qualified for the promotion or facts that would support such an inference, the Court finds that the amended complaint fails to state a Title VII claim for discriminatory failure to promote.
+  
+   See id.
+  
+  (dismissing claim for failure to promote where the complaint did not contain an allegation that the plaintiff was qualified for the promotion and lacked facts from which such an inference could be drawn). Accordingly, that claim is dismissed without prejudice.
+  
+   See Tappe,
+  
+  2001 (dismissing failure to promote claim where the plaintiff fails to show that he is qualified for the promotion);
+  
+   Breland-Starling,
+  
+  166 F.Supp.2d at 824;
+  
+   Alban-Davies,
+  
+  2001 WL 884113 *4.
+ 
+
+
+  However, the Court notes that leave to amend a complaint should be given freely.
+  
+   See
+  
+  Fed.R.Civ.P. 15(a). Based on this fact, together with the factual allegations presented by the amended complaint, the Court grants the plaintiff leave to file a second amended complaint for the sole purpose of alleging that he was qualified for the Microbiology Lead Technologist position. The plaintiff shall file the second amended complaint within 30 days of the date of this order, and failure to do so will result in a dismissal of this claim with prejudice.
+ 
+
+
+  2. The Title VII Retaliation Claim
+ 
+
+
+  To state a prima facie claim for retaliation under Title VII, a plaintiff must allege that: (1) he was engaged in an activity protected under Title VII; (2) the defendant was aware of the plaintiffs participation in the protected activity; (3) the plaintiff suffered an adverse employment action; and (4) there was a causal connection between the adverse employment action and the protected activity.
+  
+   See Gordon v. New York City Bd. of Educ.,
+  
+  232 F.3d 111, 116 (2nd Cir.2000). In then-motion to dismiss the amended complaint pursuant to Rule 12(b)(6), the defendants argue that the amended complaint fails to satisfy the third requirement of a claim for retaliation under Title VII. The Court disagrees.
+ 
+
+
+  A plaintiff sustains an “adverse employment action if he or she endures a ‘materially adverse change’ in the terms and conditions of employment.”
+  
+   See Galdbya v. New York City Bd. of Educ.,
+  
+  202 F.3d 636, 640 (2nd Cir.2000) (citation omitted). A materially adverse change in employment conditions may exist where there are “significantly diminished material responsibilities, or other indices ... unique to a particular situation.”
+  
+   Id.
+  
+  (quoting
+  
+   Crady v. Liberty Nat’l Bank and Trust Co.,
+  
+  993 F.2d 132, 136 (7th Cir.1993)). In the amended complaint, Mendelsohn states that his duties as a Clinical Laboratory Technologist include teaching medical technology students, physicians, and other health professionals. He further explains that one week after the fact-finding conference at the New York State Division of Human Rights, the Hospital informed him
+   
+   *330
+   
+  that his job no longer included the responsibility of teaching the medical technology students. Drawing all reasonable inferences in the plaintiffs favor, the Court finds that the reduction in Mendelsohn’s teaching duties constitutes a significant diminishment in the plaintiffs material responsibilities so that he has alleged an adverse employment action. Accordingly, the defendants’ motion to dismiss the retaliation claim on that ground is denied.
+ 
+
+
+  C. The Third Cause of Action
+ 
+
+
+  The plaintiffs third cause of action consists of claims of discrimination and retaliation against the Hospital based on the same factual allegations as the second cause of action, but alleges violations of the NYHRL as opposed to Title VII. The Hospital moves to dismiss this cause of action on the ground that it is immune from suit pursuant to the Eleventh Amendment. In his memorandum in opposition, the plaintiff states, “Mendelsohn will not oppose that part of defendants’ motion [that seeks to dismiss the state-law claims], although he reserves the right to bring the HRL claims in state court.” The Court construes this statement, together with the fact that the plaintiff does not mention the third cause of action anywhere else in the complaint, to mean that Mendelsohn consents to the dismissal of the third cause of action. Accordingly, the Court grants the defendants’ motion to dismiss the third cause of action.
+ 
+
+
+  III.
+  
+   CONCLUSION
+  
+
+
+  Based on the foregoing, it is hereby
+ 
+
+
+  ORDERED, that the defendants’ motion to dismiss the complaint pursuant to Rule 12(b)(6) is GRANTED in regard to the First Amendment retaliation claim against Sheppard; the Title VII claim against the Hospital for failure to promote based on gender; and the cause of action brought pursuant to state law, and those claims are dismissed; and it is further
+ 
+
+
+  ORDERED, that the defendants’ motion to dismiss the complaint pursuant to Rule 12(b)(6) is DENIED in regard to the Title VII claim against the Hospital for retaliation; and it is further
+ 
+
+
+  ORDERED, that the plaintiff is granted leave to file a second amended complaint for the sole purpose of amending the Title VII gender discrimination claim to include allegations, if any, that the plaintiff was qualified for the Microbiology Lead Technologist position.
+ 
+
+
+  SO ORDERED.

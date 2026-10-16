@@ -1,0 +1,838 @@
+MEMORANDUM and ORDER
+  
+
+
+  YOHN, District Judge.
+ 
+
+  The Boroughs of Lansdale, Blakely, Ca-tawissa, Duncannon, Hatfield, Kutztown, Leighton, Mifflinburg, Olyphant, Quaker-town, Schuylkill Haven, St. Clair, Watson-town, and Weatherly, Pennsylvania (“the Boroughs”) bring this action against PP & L, Inc., PPL Electric Utilities Corp., PPL Energy Plus, L.L.C., and PPL Generation, L.L.C. (collectively, “PPL”) alleging various antitrust violations and asserting a claim for breach of contracts approved by
+   
+   *733
+   
+  the Federal Energy Regulatory Commission (“FERC”). (Compl.lffl 14-19, 20-22.) Defendants asserted counterclaims for breach of contract as to all plaintiffs, (Counterchlffl 19-24), and tortious interference with existing and ongoing contractual relations as to Olyphant, (CountercLIffl 25-36). On March 30, 2006, I granted defendants summary judgment
+  
+   as to liability only
+  
+  on defendants’ breach of contract counterclaims as to each plaintiff, except the Borough of Olyphant.
+  
+   See Borough of Lansdale v. PP & L, Inc.,
+  
+  2006 WL 859431, 2006 U.S. Dist. LEXIS 14972 (E.D.Pa. Mar. 30, 2006). On April 5, 2006, I granted defendants summary judgment on many of plaintiffs’ claims.
+  
+   See Borough of Lansdale v. PP & L, Inc.,
+  
+  426 F.Supp.2d 264 (E.D.Pa.2006).
+ 
+
+
+  Now before me are the Boroughs’ motions for reconsideration of both orders, defendants’ responses, and the Boroughs’ replies. The Boroughs contend that there were clear errors of law in the decisions and that reconsideration is necessary to prevent manifest injustice. For the reasons stated herein, the Boroughs’ motions for reconsideration will be granted in part and denied in part.
+ 
+
+
+  STANDARD OF REVIEW
+ 
+
+
+  “The purpose of a motion for reconsideration is to correct manifest errors of law or fact or to present newly discovered evidence.”
+  
+   Harsco Corp. v. Zlotnicki,
+  
+  779 F.2d 906, 909 (3d Cir.1985). Reconsideration is proper where the moving party demonstrates one of three grounds: “(1) an intervening change in the controlling law; (2) the availability of new evidence that was not available when the court granted the motion for summary judgment; or (3) the need to correct a clear error of law or fact or to prevent manifest injustice.”
+  
+   Max’s Seafood Café ex rel. Lou-Ann, Inc. v. Quinteros,
+  
+  176 F.3d 669, 677 (3d Cir.1999) (citing
+  
+   N. River Ins. Co. v. CIGNA Reinsurance Co.,
+  
+  52 F.3d 1194, 1218 (3d Cir.1995));
+  
+   see also
+  
+  Local Rule 7.1(g).
+ 
+
+
+  DISCUSSION
+ 
+
+
+  Plaintiffs argue pursuant to the third ground for reconsideration that this court overlooked certain law and facts and that these deficiencies resulted in manifest errors of law and fact. Plaintiffs ask this court to grant their motions for reconsideration and to vacate the March 31 and April 5, 2006 orders.
+  
+   1
+  
+
+
+  I. March 31, 2006 Order — Summary Judgment on Defendants’ Counterclaim
+ 
+
+
+  Plaintiffs argue that the court did not take into consideration evidence on record that indicated the existence of genuine issues of material fact regarding whether or not they breached the dispute resolution clause of the power supply contracts. (PI. Mot. Reconsideration Mar. 31 Order 2.) However, they fail to demonstrate grounds under which the court may properly grant reconsideration.
+ 
+
+
+  First, without arguing any intervening change in the controlling law, plaintiffs provide new evidence with their motion for reconsideration. Plaintiffs’ evidence consists of a letter PPL produced in discovery, which was also the subject of deposition testimony. (PI. Mem. Supp. Reconsideration Mar. 31 Order 7 n. 4; Pl.Ex. 1.) Plaintiffs also present a fax sent by PPL to the Boroughs on October 17, 2002. (Pl.Ex. 2.) Though these exhibits
+   
+   *734
+   
+  were available to plaintiffs at the time the court granted summary judgment, the Boroughs did not provide these documents as part of the record. As such, these exhibits do not constitute “newly discovered evidence” and the court will not consider them.
+  
+   See Bailey v. United Airlines,
+  
+  279 F.3d 194, 201 (3d Cir.2002) (“A district court may properly refuse to consider evidence presented in a motion for reconsideration when the evidence was available prior to summary judgment”).
+ 
+
+
+  Second, plaintiffs’ contention that the prior order contains manifest errors of law or fact is unpersuasive. The remainder of plaintiffs’ motion for reconsideration presents nothing convincing to controvert this court’s grant of summary judgment and merely seeks to rehash the same issues by citing different case law. The court already considered these arguments in the motion for summary judgment and will not revisit them again here. Accordingly, plaintiffs’ motion for reconsideration of this court’s order of March 30, 2006 will be denied.
+ 
+
+
+  II. April 5, 2006 Order—Summary Judgment on Plaintiffs’ Claims
+ 
+
+
+  Plaintiffs request that this court reconsider its order of April 5, 2006, granting in part and denying in part defendants’ motion for summary judgment on plaintiffs’ claims.
+  
+   See Borough of Lansdale v. PP & L, Inc.,
+  
+  426 F.Supp.2d 264 (E.D.Pa.2006).
+ 
+
+
+  A. Plaintiffs’ Price Squeeze Claim under Sherman Act § 2
+ 
+
+
+  Plaintiffs alleged two claims under Sherman Act § 2 in their complaint: 1) that defendants “monopolized the sale of electric power in the wholesale power market available to the Boroughs ... resulting in increases in the cost of power to the Boroughs,” and 2) that defendants created a “price squeeze” by requiring plaintiffs “to pay wholesale prices for electric power substantially higher than the retail prices Defendants charge for comparable service to its commercial and industrial customers, based on the charge demanded of Plaintiffs by Defendants.” (Compl.1ffl 14, 15, 18.)
+ 
+
+
+  In the April 5, 2006 memorandum and order, I found that defendants were immune under the filed rate doctrine from antitrust liability on plaintiffs’ Sherman Act § 2 claims.
+  
+   Lansdale,
+  
+  426 F.Supp.2d at 283-89. I explained that plaintiffs’ price squeeze claim was barred by the filed rate doctrine because both the wholesale rate and retail rates were filed with and approved by the federal and state government agencies.
+  
+   Id.
+  
+  at 283-84. Therefore, I found that a claim based on the interaction between the two rates was barred.
+  
+   Id.
+  
+  With regard to plaintiffs’ second, more general monopolization claim, I also found that the claim was barred by the filed rate doctrine because PPL’s alleged monopolistic behavior took place in the FERC and PJM-approved ICAP market.
+  
+   Id.
+  
+  at 284.
+ 
+
+
+  Plaintiffs contend that the court erred in finding that their price squeeze claim is barred by the filed rate doctrine. First, plaintiffs claim that the court erred in not recognizing that their price squeeze claim falls within an exception to the filed rate doctrine for non-rate activities. Second, plaintiffs argue that the court was incorrect to rely on
+  
+   Utilimax.com, Inc. v. PPL Energy Plus, LLC,
+  
+  273 F.Supp.2d 573 (E.D.Pa.2003),
+  
+   aff'd,
+  
+  378 F.3d 303 (3d Cir. 2004), because the plaintiff in that case did not assert a price squeeze claim.
+ 
+
+
+  In response, defendants maintain that the court’s April 5, 2006 ruling is consistent with applicable authority, and that “the filed rate doctrine precludes a court from entertaining damage claims that are predicated on challenges to the level of rates filed with and subject to the jurisdic
+   
+   *735
+   
+  tion of federal and state regulatory agencies.” (Def. Opp’n Reconsideration Apr. 5 Order 3 (citing
+  
+   Utilimax.com,
+  
+  378 F.3d 303).) Defendants argue that because FERC and the Pennsylvania Public Utility Commission (“PUC”) may consider the interaction of the wholesale and retail rates in deciding upon a reasonable rate, the filed rate doctrine should apply to the price squeeze claim. (Def. Opp’n Reconsideration Apr. 5 Order 3.) Defendants also argue that plaintiffs’ price squeeze claim falls within the heart of the filed rate doctrine because plaintiffs seek antitrust damages in the form of a trebling of the alleged overcharges stemming from the FERC-approved rates, rather than profits on retail sales lost due to the alleged price squeeze.
+  
+   (Id.
+  
+  at 4.) Finally defendants claim that even if the filed rate doctrine does not apply, their “summary-judgment papers demonstrated a multitude of alternative grounds for dismissal of plaintiffs’ § 2 claims.”
+  
+   (Id.
+  
+  at 5.)
+ 
+
+
+  1.
+  
+   Application of the Filed Rate Doctrine to Price Squeeze Claims
+  
+
+
+  Section 2 of the Sherman Act sanctions those “who shall monopolize, or attempt to monopolize, or combine or conspire with any other person or persons, to monopolize any part of the trade or commerce among the several states, or with foreign nations.” 15 U.S.C. § 2. Conduct that constitutes a “price squeeze” may violate the Sherman Act § 2.
+  
+   United States v. Aluminum Co. of Am.,
+  
+  148 F.2d 416, 437-38 (2d Cir.1945). It is generally accepted that a “price squeeze involves a defendant who as a monopolist supplies the plaintiff at one level (e.g., wholesale), competes at another (e.g., retail), and seeks to destroy the plaintiff by holding up the wholesale price to the plaintiff while depressing the retail price to common customers.”
+  
+   Utilimax.com,
+  
+  273 F.Supp.2d at 582 (quoting
+  
+   Town of Norwood v. New England Power Co.,
+  
+  202 F.3d 408, 418 (1st Cir.2000)).
+ 
+
+
+  The filed rate doctrine “bars antitrust suits based on rates that have been filed and approved by federal agencies” and' state agencies.
+  
+   Utilimax.com,
+  
+  378 F.3d at 306 (citations omitted);
+  
+   see also Keogh v. Chicago & Nw. Ry. Co.,
+  
+  260 U.S. 156, 43 S.Ct. 47, 67 L.Ed. 183 (1922). “Under the filed rate doctrine, a plaintiff may not sue the supplier of electricity based on rates that, though alleged to be the result of anticompetitive conduct, were filed with the federal agency responsible for overseeing such rates.”
+  
+   Utilimax.com,
+  
+  378 F.3d at 306 (citing
+  
+   Mo.-Dakota Utils. Co. v. Nw. Pub. Serv. Co.,
+  
+  341 U.S. 246, 251-52, 71 S.Ct. 692, 95 L.Ed. 912 (1951)). The doctrine operates as a defense to both federal and state law actions based on the regulated rates.
+  
+   See Ark. La. Gas Co. v. Hall,
+  
+  453 U.S. 571, 578, 101 S.Ct. 2925, 69 L.Ed.2d 856 (1981) (finding that under the filed rate doctrine, “courts lack authority to impose a different rate than the one approved by the Commission”). The purpose of the filed rate doctrine is to preserve the regulatory agency’s authority to determine the reasonableness of rates and to insure that the regulated entities charge only those rates that the agency has approved.
+  
+   Id.
+  
+  at 577-78, 101 S.Ct. 2925. The form or details of the filed rate are not relevant to the application of the doctrine; the rate need only be filed with an agency responsible for overseeing such rates.
+  
+   See Am. Tel. & Tel. Co. v. Ctr. Office Tel,
+  
+  524 U.S. 214, 222, 118 S.Ct. 1956, 141 L.Ed.2d 222 (1998) (stating the doctrine applies even if it results in the application of the filed rate when a defendant intentionally misrepresented the promised rate).
+ 
+
+
+  Plaintiffs’ price squeeze claim rests on the combined effect of two different tariffs: the retail rates PPL was required to
+   
+   *736
+   
+  charge provider of last resort (“POLR”) customers and the wholesale rates offered to the Boroughs pursuant to the Power Supply Agreements. Plaintiffs allege that PPL purposely increased the price of wholesale electricity to the Boroughs in the last two years of the Power Supply Agreements, while the retail rates PPL charged its POLR customers were locked in under the Joint Petition. FERC approved the wholesale rates charged by PPL when it approved the Power Supply Agreements between the Boroughs and PPL.
+  
+   Lansdale,
+  
+  426 F.Supp.2d at 273. The PUC approved PPL’s POLR retail rates.
+  
+   Id.
+  
+
+
+  Plaintiffs argue that the filed rate doctrine does not bar their price squeeze claim because the claim is based on non-rate activity, which is unrelated to the rates filed with FERC and the PUC.
+  
+   See In re Lower Lake Erie Iron Ore Antitrust Litig.,
+  
+  998 F.2d 1144, 1159 (3d Cir.1993) (stating that the filed rate doctrine “does not preclude liability based on non-rate anticompetitive activity”). Plaintiffs claim that because neither FERC nor the PUC has “jurisdiction over the
+  
+   interaction
+  
+  of the wholesale and retail rates as manipulated by the defendants, the interaction between the rates that creates the price squeeze cannot properly be said to be a rate-making activity.” (PI. Mem. Supp. Reconsideration Apr. 5 Order 6.)
+ 
+
+
+  However, as this court stated in its April 5, 2006 opinion, the non-rate anticompetitive activity exception does not apply to plaintiffs’ price squeeze claim because the claim is based specifically on the interaction of the retail and wholesale rates.
+  
+   2
+  
+
+   Lansdale,
+  
+  426 F.Supp.2d at 288-89. As the Third Circuit explained in
+  
+   Util-imax.com,
+  
+  the non-rate anticompetitive activity exception applies when a defendant’s activities are “wholly separate from rates,” rather than activities that are closely tied to the rates themselves, such as a defendant positioning “itself in the wholesale capacity market to be able to charge exorbitant rates for capacity.” 378 F.3d at 308. The interaction between the FERC-approved and PUC-approved rates is intrinsically tied to the rates themselves and thus cannot be said to be anticompetitive activity that is wholly separate from rate-based activity.
+ 
+
+
+  Though the non-rate anticompetitive activity exception does not apply the Seventh and Eighth circuits, as described below, have developed a separate, limited exception to the filed rate doctrine in situations where no regulatory agency can afford full relief. These courts have found that price squeeze claims are not barred by the filed rate doctrine where the challenge falls “within a lacuna of state and federal regulation.” IA Areeda, Hovenkamp, & El-hauge, Antitrust Law ¶ 244e (2d ed.2004). However, the First Circuit has rejected the exception created by the Seventh and Eight Circuits and has been reluctant to recognize price squeeze antitrust violations. The Third Circuit has yet to address whether an antitrust claim asserting that the interaction of two properly filed and approved rates resulted in an anticom-petitive price squeeze is barred by the filed rate doctrine.
+ 
+
+
+  In
+  
+   City of Mishawaka v. Indiana & Michigan Electric Co. (Mishawaka I),
+  
+  560 F.2d 1314 (7th Cir.1977),
+  
+   cert. denied,
+  
+  436
+   
+   *737
+   
+  U.S. 922, 98 S.Ct. 2274, 56 L.Ed.2d 765 (1978), on facts involving a virtually identical dual rate structure creating a price squeeze between the wholesale and retail sale of electric power, the Seventh Circuit concluded that antitrust immunity against the plaintiffs price squeeze claim was not necessary to the functioning of the regulatory process because the Federal Power Commission (“FPC”), the predecessor of FERC, did not control both ends of the alleged discriminatory conduct.
+  
+   Id.
+  
+  at 1321. Though the FPC controlled the wholesale rates, only the state energy commissions had jurisdiction over the retail rates.
+  
+   Id.
+  
+  The opinion never mentions the filed rate doctrine; however, the reasoning behind the Seventh Circuit’s decision takes into account the considerations underlying the doctrine. The court found that if the plaintiff proved it was entitled to relief on the price squeeze claim, the FPC’s “regulatory process would not be disturbed by the court’s awarding damages for past anti-competitive conduct or by enjoining future anti-competitive conduct by [the] defendant in making and promoting its rate applications. Thus relief could be granted without the district court’s actually becoming involved in the process of setting rates.”
+  
+   Id.
+  
+
+
+  In
+  
+   City of Kirkwood v. Union Electric Co.,
+  
+  671 F.2d 1173 (8th Cir.1982), the Eighth Circuit followed the Seventh Circuit’s analysis in
+  
+   Mishmvaka I
+  
+  and was the first to adopt a dual rate interaction exception to the filed rate doctrine for price squeeze claims.
+  
+   Id.
+  
+  at 1178-79. In
+  
+   Kirk-wood,
+  
+  the plaintiff brought a price squeeze claim under Sherman Act § 2, asserting that the FERC-approved wholesale rate the plaintiff paid to the defendant exceeded the state-approved retail rate paid by the defendant’s large retail customers.
+  
+   Id.
+  
+  at 1176. The court noted that “the Supreme Court has announced that ‘since our decision in
+  
+   Otter Tail Power Co. v. United States,
+  
+  [410 U.S. 366, 93 S.Ct. 1022, 35 L.Ed.2d 359 (1973),] there can be no doubt about the proposition that the federal antitrust laws are applicable to electrical utilities,’ ”
+  
+   Kirkwood,
+  
+  671 F.2d at 1177, and recognized that “past precedent cautions that the courts should be reluctant to imply antitrust immunity,”
+  
+   id.
+  
+  at 1178 (citing
+  
+   Cantor v. Detroit Edison Co.,
+  
+  428 U.S. 579, 596 n. 35, 96 S.Ct. 3110, 49 L.Ed.2d 1141 (1976)). The Eighth Circuit held that the filed rate doctrine did not preclude the City of Kirkwood’s price squeeze claim because
+ 
+
+
+  Kirkwood does not quarrel with the reasonableness determinations of the FERC and PSC as to any individual wholesale or retail rate. Instead, Kirk-wood complains of anti-competitive effects resulting from the interaction of rates which, taken separately, may be reasonable. As discussed above, neither the FERC nor the [state administrative agency] has plenary authority over the interaction of wholesale and retail rates, because each commission can affect only one category of those rates. Thus, neither an award of antitrust damages nor the granting of properly conditioned in-junctive relief for the price squeeze would interfere with either commission’s regulatory authority.
+ 
+
+
+
+   Kirkwood,
+  
+  671 F.2d at 1179. Therefore, the Eighth Circuit concluded that the plaintiffs price squeeze claim was not barred “because the question is not whether the rates themselves are anticom-petitive, but whether the defendant utility acted illegally in proposing a certain anti-competitive combination of rates.”
+  
+   Id.
+  
+
+
+    3
+   
+
+
+
+ 
+   *738
+   
+  The First Circuit has taken the opposite approach to the Seventh and Eighth Circuits and has invoked the filed rate doctrine to bar a price squeeze claim against an electric utility.
+  
+   Norwood,
+  
+  202 F.3d at 420. In
+  
+   Norwood,
+  
+  the local municipality’s price squeeze claim rested on the combined effect of two different tariffs, both of which were approved by FERC.
+  
+   Id.
+  
+  at 418. The First Circuit found that the filed rate doctrine barred the price squeeze claim.
+  
+   Id.
+  
+  at 420. The court found the Town of Norwood’s situation was distinguishable from
+  
+   Kirkwood
+  
+  and
+  
+   Mishawaka I
+  
+  because FERC actively regulated both of the tariffs in question, thus there was no concern that a regulatory agency could not afford full relief.
+  
+   Id.
+  
+  at 418. However the court said that the filed rate doctrine applied even though one of the tariffs filed with FERC was a market-based rate, reasoning that, “[i]t is the filing of the tariffs, and not any affirmative approval or scrutiny by the agency, that triggers the filed rate doctrine.”
+  
+   Id.
+  
+  at 419. The court also held that the filed rate doctrine applied to both equitable relief and damages claims because
+ 
+
+
+  any meaningful relief as to the price squeeze would require the alteration of tariffs — and not merely tariffs subject to regulation but tariffs actually scrutinized repeatedly by FERC in the companion-case proceedings. In part, the rationale for the filed rate doctrine is to protect the exclusive authority of the agency to accept or challenge such tariffs.
+ 
+
+
+
+   Id.
+  
+  at 420 (citing
+  
+   Ark. La. Gas Co.,
+  
+  453 U.S. at 577-78, 101 S.Ct. 2925). Though the First Circuit found the law “extremely creaky,” the court affirmed the district court’s dismissal of the price squeeze claim under the filed rate doctrine.
+  
+   Norwood,
+  
+  202 F.3d at 420.
+ 
+
+
+  Two district courts in this circuit, in cases with virtually identical facts to
+  
+   Kirk-wood,
+  
+  came to opposite conclusions about the application of the filed rate doctrine to a price squeeze created by properly filed and approved state and federal electricity rates. In
+  
+   Ellwood City v. Pennsylvania Power Co.,
+  
+  462 F.Supp. 1343, 1348 (W.D.Pa.1979), the Western District of Pennsylvania came to the same conclusion as the Eighth Circuit in
+  
+   Kirkwood;
+  
+  however, the court did not explicitly base its decision on the filed rate doctrine. The court concluded that
+ 
+
+
+  [bjecause, however, no regulatory agency has jurisdiction over the complete rate structure complained of by plaintiffs, it is improper to accord antitrust immunity to the rate related complaints raised here .... There is no mechanism which accords overall review of ratemak-ing and its potential anticompetitive effect. There is no indication that overall district court antitrust review of rates (at least with regard to price squeeze
+   
+   *739
+   
+  allegations) is in any way repugnant to any regulatory scheme.
+ 
+
+
+
+   Id.
+  
+  at 1350.
+ 
+
+
+  Four days later, the District Court of Delaware came to the opposite conclusion and applied the filed rate doctrine to bar a price squeeze claim.
+  
+   City of Newark v. Delmarva Power & Light Co.,
+  
+  467 F.Supp. 763, 771 (D.Del.1979). In
+  
+   Newark,
+  
+  the plaintiffs raised the same argument as in
+  
+   Kirkwood,
+  
+  claiming that antitrust relief for their price squeeze claim must be available to fill the gap where “neither the FPC nor the [state energy commission] has full authority over the relationship between a utility’s retail and wholesale rates.”
+  
+   Id.
+  
+  at 768. In concluding that antitrust damages were not available to the plaintiffs, the court focused on whether such an award might undermine Congressional intent with respect to the work of the FPC and the work of the state regulatory agencies.
+  
+   Id.
+  
+  at 769. The court noted that this inquiry was distinguishable from
+  
+   Misha-waka I,
+  
+  where the court had focused on the unprovided-for gap in regulatory authority.
+  
+   Newark,
+  
+  467 F.Supp. at 769. The
+  
+   Neioark
+  
+  court determined that imposition of damages in a situation where the plaintiffs had alleged a price squeeze resulting from rates set by two regulatory agencies “would constitute no less of an interference with the [state] regulatory program ... than it would in a suit where [the plaintiffs] had attacked only the state regulated rate.”
+  
+   Id.
+  
+  Similarly, Congress could not have intended a federal court to impose liability on a public utility for charging wholesale rates authorized by the FPC because, “[a]t the heart of the [Federal Power Act] is the concept that no one has a right to pay or to receive any price other than a price fixed or accepted by the FPC.”
+  
+   Id.
+  
+  at 770. The court found that a wholesale customer in a price squeeze situation still has the remedy of intervening “when a rate is proposed” and the customer may “seek to have it become effective subject to a refund after the Commission has had the opportunity to pass upon the price squeeze allegations.”
+  
+   Id.
+  
+  at 771. Accordingly, the court held “that an award of antitrust damages measured by the difference between the filed rate and whatever rate this Court might determine would have prevailed but for a defendant’s anti-competitive conduct is foreclosed.”
+  
+   4
+  
+
+   Id.
+  
+  However, the court found that other possible forms of damage relief may be available to plaintiffs.
+  
+   Id.
+  
+
+
+  Though the law on the filed rate doctrine has not been settled by Third Circuit, I am now persuaded that plaintiffs’ price squeeze claim is not barred by the filed rate doctrine. Overall district court review of the interaction between FERC-approved and PUC-approved rates, at least with regard to allegations of price squeezes in violation of the antitrust laws, may not be repugnant to the regulatory scheme. The Supreme Court has held that an implied exemption from the antitrust laws by regulatory legislation would be found only if the “exemption was necessary in order to make the regulatory Act work ‘and even then only to the minimum extent necessary.’”
+  
+   Cantor,
+  
+  428 U.S. at 597, 96 S.Ct. 3110 (quoting
+  
+   Otter Tail,
+  
+  410 U.S. at 389, 93 S.Ct. 1022). Thus the filed rate doctrine may only apply as an exemp
+   
+   *740
+   
+  tion to the antitrust laws to the minimum extent necessary for FERC and the PUC to fulfill their functions.
+ 
+
+
+  The Supreme Court has found that electric utilities that are regulated by FERC are not immune from the antitrust laws, largely on the grounds that the regulation was not sufficiently “pervasive.”
+  
+   Otter Tail,
+  
+  410 U.S. at 374, 93 S.Ct. 1022. If regulation of the electricity industry was not sufficiently pervasive when
+  
+   Otter Tail
+  
+  was decided in 1973, it has become even less so today, creating more opportunities for anticompetitive behavior to occur. Since 1978, Congress and FERC have taken numerous steps toward deregulating the electricity industry. See Public Utility Regulatory Policy Act of 1978, Pub.L. No. 95-617, 92 Stat. 3117 (1978) (codified as amended at scattered sections of title 16 of the United States Code) (permitting new, non-regulated parties to enter the electric generation market); Energy Policy Act of 1992, Pub.L. No. 102-486, 106 Stat. 2776 (1992) (codified in scattered sections of 15 U.S.C. and 16 U.S.C.) (allowing FERC to force regulated electric utilities to grant other parties access to their transmission systems); FERC Order No. 888, 61 Fed. Reg. 21,540 (May 10, 1996) (codified at 18 C.F.R. pt. 35-385) (acting upon the Energy Policy Act’s mandate to promote wholesale competition through open access nondiscriminatory transmission services). Effective January 1, 1997, Pennsylvania adopted the Electric Generation Customer Choice and Competition Act, which effectively deregulated the business of generating electricity in the state.
+  
+   See
+  
+  66 Pa. Cons.Stat. Ann. § 2802 (declaring the policy behind the act). With the advent of deregulation in the electricity industry, the antitrust laws play a larger role in dealing with anticompetitive pressures that arise.
+ 
+
+
+  One justification for the filed rate doctrine is that to establish injury plaintiffs must prove that hypothetically lower wholesale rates or higher retail rates would have prevailed but for the anticom-petitive behavior.
+  
+   Keogh,
+  
+  260 U.S. at 163-64, 43 S.Ct. 47. The question of predicting administrative approval of public utility rates is a question best left to the agency itself, rather than the courts.
+  
+   Utilimax.com,
+  
+  273 F.Supp.2d at 580 (citing
+  
+   Keogh,
+  
+  260 U.S. at 162-64, 43 S.Ct. 47.) A court’s lack of institutional expertise in determining electricity rates may interject an element of speculation into a plaintiffs damage calculation, but it is difficult to see how this threatens FERC’s authority. A court’s determination that a defendant is immune from the antitrust laws is an assertion of jurisdiction that is separate from the calculation of damages, at which point the court has already determined that it has jurisdiction.
+  
+   See
+  
+  Steven E. Bunnell,
+  
+   The Use of Hypothetical Rates in Antitrust Damages Calculations: Reforming the Keogh Doctrine,
+  
+  38 Stan. L.Rev. 1141, 1147-48 (1986). An award of damages in an antitrust suit based on a court’s estimate of what a hypothetical rate would have been if there had been no anticompet-itive behavior does not prevent FERC or the PUC from performing its regulatory duties of approving or proscribing rates that a regulated entity may charge. Additionally, such a justification for the filed rate doctrine is offset by the specifics raised by a price squeeze claim where the alternative is to have no regulatory agency with the power to affect an anticompetitive rate differential. Nothing indicates that a court should not fill in the gap created in such a situation.
+ 
+
+
+  As described above, in
+  
+   Kirkwood,
+  
+  the Eighth Circuit stated that an exception to the filed rate doctrine is necessary where no regulatory mechanism accords overall review of rate making and its potential anticompetitive effects. Wholesale electricity rates are controlled by FERC; the
+   
+   *741
+   
+  retail rates are controlled by the PUC. Neither FERC nor the PUC has jurisdiction over the interaction between wholesale and retail rates; each agency has authority over only one end of the alleged price squeeze. Though FERC can take the possibility of a price squeeze into account when reviewing the reasonableness-of a rate, it can do nothing to force a state commission to change the retail electricity rates.
+  
+   5
+  
+
+   See FPC v. Conway,
+  
+  426 U.S. 271, 96 S.Ct. 1999, 48 L.Ed.2d 626 (1976); 18 C.F.R. § 2.17 (dealing with the anti-competitive effects of price squeezes). The same truth exists for the PUC. Plus, the federal and state regulatory systems do not work in perfect harmony, so it is possible for a utility to time or manipulate its rate filings in a way that causes a price squeeze.
+  
+   6
+  
+  Even though FERC and the PUC might review rates
+  
+   for
+  
+  the possibility of a price squeeze, because simultaneous approval of retail and wholesale rates by the agencies is not required and rates can change with a later filing, it is very difficult for the agencies to predict a price
+   
+   *742
+   
+  squeeze. This court’s ruling is thus not inconsistent with the reasoning of the court in
+  
+   Norwood
+  
+  because, unlike the price squeeze claim asserted by plaintiffs in this ease, the claim in
+  
+   Norwood
+  
+  was based on the interaction of two rates, both of which were approved by FERC, thus the full mechanism of the price squeeze was under federal control. 202 F.3d at 418. Here only the wholesale rate is approved by FERC; the retail rate is controlled by the PUC. Therefore neither regulatory agency could afford full relief.
+  
+   7
+  
+
+
+  As such, the court believes that the concerns addressed by the filed rate doctrine, involving the possibility of incompatibility between the antitrust laws and a statutory scheme charging regulatory agencies with fixing reasonable rates, are not implicated here. Though there is no question that PPL is subject to regulation by both FERC and the PUC, because neither agency has “jurisdiction over the complete rate structure complained of by plaintiffs, it is improper to accord antitrust immunity” to the price squeeze claim raised here.
+  
+   Ellwood City,
+  
+  462 F.Supp. at 1350. If the filed rate doctrine applied, there would be no mechanism to review overall ratemak-ing and its potential anticompetitive effects. There is no indication that district court antitrust review of rates, at least with regard to price squeeze allegations involving the interaction of state and federally approved rates, is repugnant to any regulatory scheme. Though FERC may lower wholesale rates and the PUC may raise retail rates to compensate for a price squeeze, neither entity has the power to adjust both rates at the same time. Nor does the court have the power to revise agency-approved rates. However, this court could award damages if the relationship between the wholesale and retail rates, rather than the unreasonableness of either the wholesale or the retail rates standing alone, was found to result in an antitrust violation. Applying antitrust review to the interaction between these two rates is not inconsistent with the federal and state regulatory regimes because the resulting interaction falls outside the regulatory scheme. For these reasons, the court now concludes that plaintiffs’ price squeeze claim is not barred by the filed rate doctrine.
+ 
+
+
+  2.
+  
+   Alternative grounds for summary judgment
+  
+
+
+  Although the court has determined that plaintiffs’ price squeeze claim under the Sherman Act § 2 is not barred by the filed rate doctrine, defendants have asserted several alternative grounds for granting summary judgment against plaintiffs on that claim.
+  
+   (See
+  
+  Def. Opp’n Reconsideration Apr. 5 Order 5.) Because those alternative grounds were not briefed fully, the court will give the parties the opportunity to brief them at this juncture. The briefs may be by page reference to previous briefs filed in this action or, if necessary, by filing a new brief.
+ 
+
+
+  B. All Other Claims in April 5, 2006 Opinion
+ 
+
+
+  Plaintiffs request that the court reconsider its decision with regard to their
+   
+   *743
+   
+  Sherman Act § 1, Clayton Act § 2, and' breach of contract claims. However, the Boroughs’ motion for reconsideration does not meet the standard required by our Court of Appeals. There has been no intervening change of controlling law since April 5, 2006. Also, no new evidence is available that could not easily have been previously provided to the court.
+ 
+
+
+  Plaintiffs’ contention that the pri- or order contains manifest errors of law or fact is unpersuasive. Plaintiffs’ Sherman Act § 1 claims are barred by the Noerr-Pennington doctrine and, even if they were not, the evidence provided by plaintiffs does not show the existence of a contract to fix prices or allocate markets. Sales between PPL’s two subsidiaries may not form the basis of a Clayton Act § 2 claim. With regard to the breach of contract claims, the Boroughs, other than Catawis-sa, failed to provide evidence that created a genuine issue of material fact. Accordingly, the plaintiffs’ motion for reconsideration of the remainder of this Court’s order of April 5, 2006 will be denied.
+ 
+
+
+  CONCLUSION
+ 
+
+
+  For the foregoing reasons, the motions for reconsideration are granted in part and denied in part. An appropriate order follows.
+ 
+
+
+  ORDER
+ 
+
+
+  AND NOW, this _ day of May, 2007, upon consideration of plaintiffs’ Motion for Reconsideration of Summary Judgment in favor of Defendants on Defendants’ Breach of Contract Counterclaim and Motion for Reconsideration of the Courts’ Granting in Part and Denying in Part Summary Judgment on Plaintiffs’ Claims, defendants’ responses, and plaintiffs’ replies, IT IS HEREBY ORDERED that:
+ 
+
+
+  1. Plaintiffs’ motion for reconsideration of summary judgment in favor of defendants on defendants’ breach of contract counterclaim (Doc. No. 105) is DENIED.
+ 
+
+
+  2. Plaintiffs motion for reconsideration of the court’s granting in part and denying in part summary judgment on plaintiffs’ claims (Doc. No. 106) is GRANTED to the extent that the plaintiffs’ price squeeze claim under the Sherman Act § 2 is not barred by the filed rate doctrine. The balance of the motion is denied.
+ 
+
+
+  3. Defendants shall file a brief within 20 days of the date hereof with reference to their alternative grounds for seeking summary judgment on plaintiffs’ Sherman Act § 2 claims. Plaintiffs shall file a response within 20 days thereafter. Both briefs may be submitted by page references to prior briefs only or, if necessary, they may be briefed in full.
+ 
+
+
+
+
+
+
+
+
+
+
+   1
+  
+
+   . For the purposes of this opinion, the court will assume a familiarity with the facts underlying this case.
+   
+    See Lansdale,
+   
+   426 F.Supp.2d at 269-74 (laying out the factual background behind the case).
+  
+
+
+
+   2
+  
+
+   . Plaintiffs incorrectly claim that the court required them to calculate actual damages to avoid summary judgment. In the April 5 decision, this court reviewed plaintiffs' damage request as evidence as to whether their price squeeze claim was an example of non-rate anticompetitive behavior and thus the filed rate doctrine applied.
+   
+    Lansdale,
+   
+   426 F.Supp.2d at 288 n. 18. Review of plaintiffs’ alleged damages only reinforced the court’s view that plaintiffs’ price squeeze claim was rate-related.
+   
+    Id.
+   
+
+
+
+   3
+  
+
+   . Plaintiffs also argue that the Second Circuit’s decision in
+   
+    City of Groton v. Connecticut Light & Power Co.,
+   
+   662 F.2d 921 (2d Cir. 1981) supports their claim that the filed rate doc
+    
+    *738
+    
+   trine does not bar a price squeeze claim based . on the interaction of FERC and state approved rates. However, there is no indication that the retail rates at issue in
+   
+    Groton
+   
+   were ever approved by a state energy commission.
+   
+    Id.
+   
+   Additionally, the Second Circuit did not base its decision on the absence of FERC's ability to relieve the price squeeze. Rather, the court found that the filed rate doctrine did not bar plaintiff’s price squeeze claims because the filed rates were later disapproved by FERC, thus the rates at issue were not "filed and approved,” as required by the doctrine.
+   
+    Id.
+   
+   at 931. The court also found the competitor exception to the filed rate doctrine applied because the litigants were competitors under the definition adopted by the Second Circuit.
+   
+    Id.
+   
+   at 929. As noted in the April 5, 2006 memorandum, under Third Circuit precedent, the competitor exception does not apply in the instant case.
+   
+    Lansdale,
+   
+   426 F.Supp.2d at 286 n. 15 (citing
+   
+    Utilimax.com,
+   
+   378 F.3d at 308).
+  
+
+
+
+   4
+  
+
+   . The court did find that injunctive relief could be granted in this case without interfering with the stale and federal regulatory scheme because plaintiffs did not “seek in-junctive relief against [the defendantl’s charging the filed rate, but rather against multifaceted anticompetitive activities of [the defendant] which are unrelated to its conduct at the time of sale.”
+   
+    Newark,
+   
+   467 F.Supp. at 768. However, as discussed in the April 5, 2006 opinion, the Boroughs' basis for injunc-tive relief is now moot and their only available relief is in the form of money damages.
+   
+    Lansdale,
+   
+   426 F.Supp.2d at 285 n. 14.
+  
+
+
+
+   5
+  
+
+   . PPL argues that since FERC may consider an alleged price squeeze in the setting of wholesale rates, and the PUC is sensitive to maintaining competitive retail rates, the interaction between the two rates is monitored by the agencies. (Def. Opp'n Reconsideration Apr. 5 Order 3-4.) PPL bases part of its argument upon
+   
+    FPC v. Conway Corp.,
+   
+   426 U.S. 271, 96 S.Ct. 1999, 48 L.Ed.2d 626 (1976). In
+   
+    Conway,
+   
+   the Supreme Court held that the FPC had a duty to consider price squeeze allegations when deciding whether a proposed wholesale rate was just, reasonable, and nondiscriminatory.
+   
+    Id.
+   
+   at 279, 96 S.Ct. 1999. Though the FPC could not order an increase in the state-supervised retail rate when a price squeeze was found to exist, the FPC could afford relief by fixing the wholesale rate in "the lower range of the zone of reasonableness” and directing a refund of the charges previously collected subject to refund.
+   
+    Id.
+   
+   On March 21, 1977, FERC issued regulations to comply with the
+   
+    Conway
+   
+   decision.
+   
+    See
+   
+   18 C.F.R. § 2.17 (dealing with the anti-competitive effects of price squeezes).
+  
+
+
+
+    Conway
+   
+   does not bar a district court’s review of a plaintiff’s price squeeze claim. "[T]he mere fact that FERC may consider arguments based on antitrust concepts does not preclude later antitrust review,” because "[tjhere is no certainty that use of the limited powers of [ ] FERC can fully remedy an antitrust violation.”
+   
+    Ellwood City,
+   
+   462 F.Supp. at 1349-1350. "[Tjhe only remedy [] FERC can grant is to reduce the wholesale price ... which, depending on where the retail price is set, may or may not be enough to eliminate a price squeeze.”
+   
+    Kirkwood,
+   
+   671 F.2d at 1178. FERC does not provide a mechanism equivalent to the antitrust laws
+   
+    “to
+   
+   safeguard a strong public interest in free and open competition.”
+   
+    Ellwood City,
+   
+   462 F.Supp. at 1349 (citing
+   
+    Gordon
+   
+   v.
+   
+    N.Y. Stock Exch., Inc.,
+   
+   422 U.S. 659, 692, 95 S.Ct. 2598, 45 L.Ed.2d 463 (1975)). District court review is necessary to preserve the more extensive remedies a court can provide, including equitable relief and awarding damages.
+   
+    Id.
+   
+   at 1350.
+  
+
+
+   With regard to state regulation of the rate interaction, though the PUC considers questions that arise regarding the effect of retail rates on competition, this does not prevent this court from also reviewing such claims. Therefore, this court cannot conclude that the PUC and FERC's ability to review the interaction between the retail and wholesale rates was an intended substitute for the antitrust laws in a situation involving the alleged monopolizing effect of a dual price structure.
+  
+
+
+
+   6
+  
+
+   . The facts in this case counsel against application of the filed rate doctrine. FERC approved the wholesale rate structure in the Settlement Agreement (which resulted in the five-year Power Supply Agreements) on May 29, 1998.
+   
+    Lansdale, 426
+   
+   F.Supp.2d at 273. The Joint Petition, which specified PPL’s POLR retail rates, was approved by the PUC on August 27, 1998.
+   
+    Id.
+   
+   Thus, because the Settlement Agreement was approved before PPL’s POLR retail rates were approved, FERC could not have considered the potential of a price squeeze with the rates that later became effective. Also, because the Settlement Agreement and Power Supply Agreements provided for wholesale rate changes from February 1, 2002 to January 31, 2004 and the Joint Petition provided a variable fixed retail rate range as of 2002, it would be impossible for the agencies to predict the movement of the energy markets and the possibility of a price squeeze situation arising.
+  
+
+
+
+   7
+  
+
+   . Though the court finds that plaintiffs' price squeeze claim is not barred by the filed rate doctrine, plaintiffs’ second Sherman Act § 2 claim, that PPL monopolized the ICAP market, is still barred by the doctrine. The filed rate doctrine bars antitrust claims “based on rates that have been filed and approved by federal agencies,” thus the monopolization of the ICAP market itself may not be the basis for a Sherman Act § 2 claim because FERC had power to oversee the rates.
+   
+    See Utilimax.com,
+   
+   378 F.3d at 306. The problems that arise where a plaintiff asserts a price squeeze based on the interaction of a federally-approved wholesale rate and state-approved retail rate are not an issue where a single administrative agency is charged with oversight.

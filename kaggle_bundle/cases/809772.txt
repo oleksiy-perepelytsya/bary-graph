@@ -1,0 +1,962 @@
+PRECEDENTIAL
+
+    IN THE UNITED STATES COURT OF APPEALS
+             FOR THE THIRD CIRCUIT
+
+                    _____________
+
+                     No. 11-3896
+                    _____________
+
+           UNITED STATES OF AMERICA
+
+                            v.
+
+             MICHAEL EUGENE BEGIN,
+                   a/k/a Mike
+
+                 Michael Eugene Begin,
+
+                             Appellant
+                    _____________
+
+            On Appeal from the District Court
+         for the Western District of Pennsylvania
+                      (No. 10-CR-22)
+     District Judge: Honorable Maurice B. Cohill, Jr.
+                     _____________
+
+                  Argued July 13, 2012
+
+Before: FUENTES, HARDIMAN, and ROTH, Circuit Judges
+
+            (Opinion Filed: October 9, 2012)
+Karen S. Gerlach, Esq. [ARGUED]
+Office of Federal Public Defender
+1001 Liberty Avenue
+1500 Liberty Center
+Pittsburgh, PA 15222
+
+Thomas W. Patton, Esq.
+Office of Federal Public Defender
+1001 State Street
+1111 Renaissance Centre
+Erie, PA 16501
+
+      Counsel for Appellant, Michael Eugene Begin
+
+Michael L. Ivory, Esq. [ARGUED]
+Rebecca R. Haywood, Esq.
+Office of the United States Attorney
+700 Grant Street
+Suite 4000
+Pittsburgh, PA 15219
+
+Christian A. Trabold, Esq.
+Office of United States Attorney
+17 South Park Row
+Room A330
+Erie, PA 16501
+
+      Counsel for Appellee, the United States of America
+
+
+
+
+                              2
+                OPINION OF THE COURT
+
+
+FUENTES, Circuit Judge:
+
+       Michael Eugene Begin appeals from a final judgment
+of conviction and sentence on charges related to his use of the
+internet and a cellular phone to send sexual messages and
+photographs to a minor in order to persuade her to have sex
+with him. Begin pled guilty and was sentenced to 240
+months‟ imprisonment, representing a 30-month upward
+departure from the top of his advisory Sentencing Guidelines
+range. On appeal, Begin argues that his sentence is
+unreasonable because the District Court failed to consider his
+request for a downward variance based on the asserted
+disparity between his sentence for attempting to induce
+statutory rape and the lower maximum sentences for actually
+committing statutory rape under state and federal law. We
+will vacate Begin‟s sentence and remand for the District
+Court to consider his request.
+
+                               I
+
+      In January 2010, a concerned mother contacted the
+FBI regarding sexually suggestive messages that her 14-year-
+old daughter had received through MySpace, a social-
+networking website. These messages came from someone
+named “Mike,” who described himself as a 20-year-old
+Marine sniper. Both the girl and the FBI agent who
+subsequently assumed her online identity repeatedly informed
+Mike that she was 14 years old, but Mike was undeterred. He
+
+
+
+
+                              3
+continued to write her sexually explicit messages and sent
+two photographs of himself to her cellular phone: one of his
+face and chest, the other of his penis. Ultimately, the FBI
+agent and Mike agreed to meet at a restaurant in Bradford,
+Pennsylvania. Michael Eugene Begin, then 33 years old and
+not a Marine, showed up for the rendezvous, and FBI agents
+took him into custody. In his possession they found a knife,
+handcuffs, and a condom. Waiving his Miranda rights, Begin
+admitted that he had sent the sexually explicit messages and
+photographs and that he had intended to take the 14-year-old
+girl back to his room at the Riddle House, a boarding house in
+Bradford, in order to have sex with her.
+
+       A federal grand jury sitting in the Western District of
+Pennsylvania returned a two-count indictment against Begin.
+Count One charged that Begin violated 
+18 U.S.C. § 2422
+(b)
+by using the internet and a cellular phone to attempt to
+persuade a minor “to engage in any sexual activity for which
+any person can be charged with a criminal offense, to wit,
+statutory sexual assault, in violation of [
+18 Pa. Cons. Stat.
+§ 3122.1
+], aggravated indecent assault, in violation of [
+18 Pa.
+Cons. Stat. § 3125
+(a)(8)], and indecent assault[,] in violation
+of [
+18 Pa. Cons. Stat. § 3126
+(a)(8)].” App. 17. Count Two
+charged that Begin violated 
+18 U.S.C. § 1470
+ by using a
+cellular phone to transfer an obscene image to a minor. Begin
+pled guilty to both counts of the indictment at a change-of-
+plea hearing in October 2010.
+
+       In advance of sentencing, the United States Probation
+Office conducted an investigation and prepared a pre-
+sentence report (“PSR”). According to the PSR, Begin‟s
+counts of conviction grouped together and carried a base
+offense level of 28. He received a two-level increase for his
+
+
+
+
+                              4
+use of a computer to commit the offense and a three-level
+decrease for his acceptance of responsibility. In addition, he
+qualified as a “repeat and dangerous sex offender against
+minors” under U.S.S.G. § 4B1.5(b)(1) and therefore received
+a five-level increase pursuant to that section. His resulting
+total offense level was 32.
+
+       The PSR calculated Begin‟s criminal history category
+by assigning points to his adult criminal convictions. In
+1999, Begin committed several crimes involving minor girls.
+He was convicted of corruption of minors after it was
+discovered that he was harboring a 14-year-old runaway in
+his apartment, despite having told police that he had not seen
+her. He was convicted of indecent assault for having sex with
+a “mentally deficient” 16-year-old girl on a public park
+bench. PSR p. 10.1 Finally, he was convicted of indecent
+exposure for mooning four minors in a public park, asking
+them whether they wanted to “scratch [his] balls,” and calling
+them “sluts.” Id. p. 11. In 1995, Begin received a stolen
+bicycle and was subsequently convicted of theft by receipt of
+stolen property. No points were assigned to a juvenile
+adjudication for Begin‟s rape of a seven-year-old girl in 1993,
+when he was sixteen. According to the PSR, Begin‟s
+criminal history category was IV.
+
+       Begin‟s Guidelines range was therefore 168 to 210
+months, or 14 to 17½ years. On Count One, he faced a
+statutory mandatory minimum term of 10 years‟
+imprisonment, and a statutory maximum term of life
+
+1
+  The PSR recites that this conviction was for “indecent
+exposure,” but Begin has conceded that it was actually for
+“indecent assault.” App. 62.
+
+
+
+
+                              5
+imprisonment. On Count Two, he faced no mandatory
+minimum and a statutory maximum of 10 years.
+
+       The Government filed a motion for an upward
+departure from the advisory Guidelines range, arguing that
+criminal history category IV underrepresented the severity of
+Begin‟s criminal history. According to the Government,
+Begin was a “serial sex offender whose criminal history score
+represents only a fraction of his prior criminal conduct.”
+App. 51. In particular, the Government observed that Begin‟s
+criminal history score did not take into account his 1993 rape,
+and the Government presented newly obtained information
+that Begin had perpetrated other sexual assaults on minors in
+early 2010. The Government further argued that the five-
+level § 4B1.5(b)(1) enhancement that Begin received as a
+“repeat and dangerous sex offender against minors”
+underrepresented Begin‟s repeat offenses. Section 4B1.5(b)
+applies to defendants with at least two prior instances of
+criminal sexual conduct with minors, and the Government
+submitted that Begin had engaged in many more than two
+such instances and therefore deserved more punishment than
+the section provided. It was the Government‟s position that a
+range of 360 months to life imprisonment more accurately
+reflected Begin‟s criminal character and past.
+
+       Begin, on the other hand, sought a downward variance
+from the advisory Guidelines range based on the disparity
+between that range and the sentence that he would have faced
+in either state or federal court had he actually committed
+statutory rape. First, Begin observed that his Count One
+conviction for inducement under 
+18 U.S.C. § 2422
+(b) was
+expressly linked to Pennsylvania state statutory rape offenses
+that carry a maximum penalty of 10 years‟ imprisonment.
+
+
+
+
+                              6
+See 
+18 Pa. Cons. Stat. § 3122.1
+ (2000) (establishing the
+elements of statutory sexual assault); 
+18 Pa. Cons. Stat.
+§ 1103
+ (establishing the maximum sentences for different
+classes of felonies).2 Second, he observed that the federal
+offense of statutory rape within the special maritime and
+territorial jurisdiction of the United States carries a maximum
+penalty of 15 years‟ imprisonment. See 
+18 U.S.C. § 2243
+(a).
+He argued that it would be inequitable to impose “a longer
+sentence of imprisonment for using a means of interstate
+communication to help facilitate the commission of a crime
+than would apply to the crime facilitated,” and he drew an
+analogy to the Sentencing Guidelines for drug offenses,
+which set the penalty for a facilitation offense equal to the
+penalty that would have been applicable to underlying
+offense. App. 44 (citing U.S.S.G. § 2D1.6). Begin asked the
+District Court for a sentence of 120 months, which is the
+mandatory minimum under § 2422(b) and the maximum
+penalty he could have faced in Pennsylvania for statutory
+rape.
+
+       At Begin‟s sentencing hearing, the District Court
+began by observing that neither Begin nor the Government
+had filed factual objections to the PSR but there was serious
+disagreement about the appropriate Guidelines calculation
+
+
+2
+   After Begin was sentenced, Pennsylvania revised its
+statutory rape statute to classify Begin‟s attempted conduct—
+“sexual intercourse with a complainant under the age of 16
+years when that person is 11 or more years older than the
+complainant”—as a felony in the first degree, punishable by
+20 years‟ imprisonment. 2011 Pa. Legis. Serv. Act. 2011-
+111.
+
+
+
+
+                              7
+and ultimate sentence. Briefly summarizing the parties‟
+written submissions, the Court stated:
+
+      The Defendant . . . has filed a position with
+      respect to sentencing factors in which he argues
+      that we should vary from the guidelines based
+      on the disparity between the sentence the
+      Defendant would have received in state court
+      had he actually committed statutory rape
+      compared to the sentence he is facing in federal
+      court for engaging in the crime of attempting to
+      induce and inducing a minor to engage in
+      essentially statutory rape. The Defendant is
+      seeking a sentence of 120 months.
+
+App. 96. The Court determined that it should formally rule
+on the Government‟s motion for an upward departure before
+it addressed Begin‟s request for a variance.
+
+       In support of its motion, the Government presented the
+testimony of Bradford City Police Officer Todd Erickson who
+had investigated allegations that Begin had engaged in
+prohibited sexual contact with three minors that were not
+included in the PSR. According to Erickson, one of these
+girls told him that Begin had inappropriately touched her
+through her clothes and asked her over MySpace to have sex
+with him. The other two girls had been together in Begin‟s
+room in Riddle House on several occasions. One reported
+that Begin had thrust his hand down the front of her pants,
+and each reported Begin had vaginally raped her, though
+inconsistencies between their accounts made it hard for
+Officer Erickson to form a clear picture of exactly what had
+transpired.
+
+
+
+
+                             8
+       After Officer Erickson‟s testimony and the parties‟
+oral arguments, the District Court granted the Government‟s
+motion for an upward departure. The Court explained that it
+found, by a preponderance of the evidence, that Begin had
+engaged in several sexual assaults that were not accounted for
+in the PSR. In addition, the Court noted the “particularly
+egregious” details of Begin‟s juvenile rape of a seven-year-
+old. App. 152. Altogether, the Court found that Begin‟s
+“lengthy, continuous” criminal history, “primarily focused on
+sexually assaulting minor females,” supported the conclusion
+that    criminal     history   category    IV     substantially
+underrepresented the seriousness of his criminal history and
+the likelihood that he would commit other crimes. App. 152-
+53. Therefore, the Court found, pursuant to U.S.S.G.
+§ 4A1.3, that the appropriate criminal history category for
+Begin was category V, making the applicable Guidelines
+range 188 to 235 months‟ imprisonment. In addition, the
+Court found that the five-level enhancement that Begin had
+received under U.S.S.G. § 4B1.5(b)(1) for his repeat sex
+offenses against minors did not adequately reflect the
+seriousness of the sexual abuse in which Begin had engaged.
+Therefore, the Court made a further upward departure and
+arrived at a range of 188 to 240 months‟ imprisonment.
+
+       Having determined the applicable advisory Guidelines
+range, the District Court indicated that it would next consider
+the sentencing factors set forth in 
+18 U.S.C. § 3553
+(a),
+including Begin‟s request for a downward variance. The
+Court heard oral argument from defense counsel and the
+Government but did not ask the attorneys any questions or
+make any comments on their presentations. Immediately
+following these arguments, the intended victim‟s mother
+
+
+
+
+                              9
+made a statement concerning the impact of Begin‟s actions on
+her family and her daughter. The Court also heard a
+statement from Begin, who apologized for his actions.
+
+       The District Court then sentenced Begin to an
+aggregate term of 240 months‟ imprisonment, at the top of his
+adjusted Guidelines range, to be followed by a lifetime term
+of supervised release with a number of special conditions.
+The Court stated its belief that the sentence of 240 months
+was “sufficient but not greater than necessary” under 
+18
+U.S.C. § 3553
+(a), and in light of “the nature and
+circumstances of this offense, as well as the history and
+background of the Defendant.” App. 166. The Court further
+explained:
+
+      In particular, the Court has taken into account
+      that Mr. Begin is a 34-year-old man who has
+      pled guilty to two counts, both of which
+      concerned his attempt to induce a minor to
+      engage in illegal sexual activity.            The
+      circumstances of this case are serious and if not
+      for the intervention of the victim‟s mother could
+      have resulted in serious and long-standing harm
+      to the victim. We have also taken into account
+      [that] Mr. Begin has a long criminal history that
+      involves a disturbing amount of sex crimes
+      against minors. We encourage Mr. Begin to
+      participate in any available education and/or
+      vocational training opportunities while he is
+      incarcerated. . . . In imposing this sentence, we
+      have also considered the kind of sentences
+      available and in the sentencing range set forth in
+      the guidelines, including any relevant policy
+
+
+
+
+                             10
+      statements  issued       by    the      Sentencing
+      Commission.
+
+App. 166-67. Regarding the need to avoid unwarranted
+sentencing disparities under § 3553(a)(6) and the need for the
+sentence imposed under § 3553(a)(2), the Court stated:
+
+      This sentence also takes into account the need
+      to avoid unwarranted disparities in sentencing
+      among defendants with similar records who
+      have been found guilty of similar conduct. At
+      the same time, we find that the sentence does
+      reflect the seriousness of his offense and
+      provides just punishment for it and also will
+      hopefully promote respect for the law and
+      afford adequate deterrence to criminal conduct
+      while protecting the public from further crimes
+      by this Defendant.
+
+App. 167-68. The Court never directly addressed the
+arguments raised by Begin‟s counsel nor explicitly ruled on
+his request for a downward variance.
+
+      Begin timely appealed to this Court.3
+
+                              II
+
+       On appeal, Begin challenges the reasonableness of his
+sentence. Our review of a district court‟s sentencing
+
+3
+  We have appellate jurisdiction under 
+18 U.S.C. § 3742
+(a)
+and 
+28 U.S.C. § 1291
+. The District Court had original
+jurisdiction under 
+18 U.S.C. § 3231
+.
+
+
+
+
+                             11
+decisions is for abuse of discretion and proceeds in two
+stages. United States v. Tomko, 
+562 F.3d 558, 567
+ (3d Cir.
+2009) (en banc) (citing Gall v. United States, 
+552 U.S. 38
+, 51-
+52 (2007)). First, we review for procedural error at each step
+of the district court‟s sentencing process. Id.; United States v.
+Wright, 
+642 F.3d 148, 152
+ (3d Cir. 2011). Thus, we ensure
+that the district court (1) correctly calculated the defendant‟s
+advisory Guidelines range, (2) appropriately considered any
+motions for a departure under the Guidelines, and (3) gave
+meaningful consideration to the sentencing factors set forth in
+18 U.S.C. § 3553
+(a). Wright, 
+642 F.3d at 152
+. If the district
+court has made a procedural error, “we will generally remand
+the case for re-sentencing, without going any further.” 
+Id.
+
+(quoting United States v. Merced, 
+603 F.3d 203, 214
+ (3d Cir.
+2010)) (internal quotation marks omitted). But, if the district
+court‟s procedures pass muster, then we move forward to the
+second stage, and we review the substantive reasonableness
+of the sentence. Tomko, 
+562 F.3d at 567
+. Our substantive
+review focuses on the totality of the circumstances and is
+highly deferential. 
+Id. at 567-68
+.
+
+       Our deferential substantive review of sentences is
+enabled by our insistence, as part of our procedural review,
+that the district court produce a record sufficient to
+demonstrate its rational and meaningful consideration of the
+§ 3553(a) factors. Merced, 
+603 F.3d at 215
+. The record as a
+whole must make clear that the district judge “has considered
+the parties‟ arguments and has a reasoned basis for exercising
+his own legal decisionmaking authority.” 
+Id.
+ at 215-16
+(quoting Rita v. United States, 
+551 U.S. 338, 356
+ (2007)).
+The district court need not raise every conceivable issue on its
+own initiative or even make explicit findings as to each
+sentencing factor if the record makes clear that the court took
+
+
+
+
+                               12
+all the factors into account. Id. at 215. “However, if a party
+raises a colorable argument about the applicability of one of
+the § 3553(a) factors, the district court may not ignore it.” Id.
+In this, “we have stated at least one concrete requirement to
+establish that the sentencing court gave meaningful
+consideration to the relevant § 3553(a) factors: the court must
+acknowledge and respond to any properly presented
+sentencing argument which has colorable legal merit and a
+factual basis.” United States v. Ausburn, 
+502 F.3d 313, 329
+
+(3d Cir. 2007). A rote statement that the court has considered
+each of the § 3553(a) factors is not a sufficient response to a
+specific colorable argument. United States v. Jackson, 
+467
+F.3d 834, 841
+ (3d Cir. 2006); United States v. Cooper, 
+437
+F.3d 324, 329
+ (3d Cir. 2006), abrogated on other grounds by
+Kimbrough v. United States, 
+552 U.S. 85
+ (2007).
+
+                              III
+
+        Begin argues primarily that his sentence is
+procedurally unsound because the District Court failed to
+discuss, or even rule on, his request for a downward variance
+in light of “the need to avoid unwarranted sentence disparities
+among defendants with similar records who have been found
+guilty of similar conduct.” 
+18 U.S.C. § 3553
+(a)(6). The
+Government argues that Begin‟s request so obviously lacked
+legal merit that the District Court was not required to address
+it, and that, in any event, the Court did in fact give it
+meaningful consideration. We address these issues in turn.
+
+                               A
+
+      Before we reach Begin‟s contention that the District
+Court made a procedural error by failing to respond to his
+
+
+
+
+                               13
+request for a downward variance, we must satisfy ourselves
+that Begin‟s disparity arguments have colorable legal merit.
+“The court need not discuss every argument made by a
+litigant if an argument is clearly without merit.” Cooper, 
+437
+F.3d at 329
+ (citing United States v. Cunningham, 
+429 F.3d
+673, 678
+ (7th Cir. 2005)). Begin raised two distinct
+§ 3553(a)(6) disparity arguments before the District Court:
+first, he asked the Court to consider the 10-year maximum
+sentence that could be imposed for statutory rape under
+Pennsylvania state law; second, he asked it to consider the 15-
+year maximum sentence that could be imposed under federal
+law for statutory rape within the special and maritime
+jurisdiction of the United States.
+
+                              1
+
+       Begin‟s state-federal disparity argument lacks
+colorable legal merit. As several of our sister circuits have
+observed, “Section 3553(a)(6) addresses unwarranted
+sentence disparities among federal defendants who are
+similarly situated instead of disparate federal and state
+sentences.” United States v. Docampo, 
+573 F.3d 1091, 1102
+
+(11th Cir. 2009); see United States v. Clark, 
+434 F.3d 684,
+687
+ (4th Cir. 2006) (“The sole concern of section 3553(a)(6)
+is with sentencing disparities among federal defendants.”
+(emphasis omitted)); United States v. Branson, 
+463 F.3d
+1110, 1112
+ (10th Cir. 2006) (“Adjusting federal sentences to
+conform to those imposed by the states where the offenses
+occurred would not serve the purposes of § 3553(a)(6).”);
+United States v. Jeremiah, 
+446 F.3d 805, 808
+ (8th Cir. 2006)
+(“Unwarranted sentencing disparities among federal
+defendants remains the only consideration under
+§ 3553(a)(6)—both before and after Booker.”). This is so
+
+
+
+
+                              14
+because the purpose of § 3553(a)(6) is to promote national
+uniformity in the sentences imposed by federal courts. See
+United States v. Parker, 
+462 F.3d 273, 277
+ (3d Cir. 2006).
+Indeed, “[r]educing a federal prisoner‟s sentence to accord
+with that of a similarly situated state convict may decrease
+one sentencing disparity but simultaneously enlarges another:
+that between the federal convict and all similarly situated
+federal convicts. Because penalties vary from state to state,
+sentence reductions to approach state penalties similarly vary
+with the state in which the federal sentencing court sits,
+unjustifiably creating disparities among federal convicts.”
+United States v. Wurzinger, 
+467 F.3d 649, 654
+ (7th Cir. 2006)
+(citation omitted). In other words, “[a]djusting federal
+sentences to conform to those imposed by the states where the
+offenses occurred would not serve the purposes of
+§ 3553(a)(6), but, rather, would create disparities within the
+federal system, which is what § 3553(a)(6) is designed to
+discourage.” Branson, 
+463 F.3d at 1112
+.
+
+        Begin attempts to distinguish these authorities on the
+ground that the indictment in this case specifically refers to
+state law. Under 
+18 U.S.C. § 2422
+(b), it is unlawful to use
+means of interstate or foreign commerce to persuade or
+attempt to persuade “any individual who has not attained the
+age of 18 years, to engage in prostitution or any sexual
+activity for which any person can be charged with a criminal
+offense.” Count One of the indictment against Begin charged
+that he intended to engage in sexual relations with a 14-year-
+old girl, which would support statutory rape charges under
+Pennsylvania law. According to Begin, this reference to a
+Pennsylvania criminal offense makes Pennsylvania criminal
+penalties relevant to his federal sentencing.
+
+
+
+
+                             15
+       Tellingly, Begin has adduced no authorities in support
+of his novel proposition that when Congress refers to state
+law to define some of the elements of a federal crime, it
+intends to incorporate state sentencing considerations. In
+their absence, we will not follow Begin down a rabbit hole.
+The federal government and the states are separate sovereigns
+with concurrent jurisdiction over various offenses, and they
+may therefore apply disparate punishments to similar
+conduct. See Branson, 
+463 F.3d at 1112
+. State-federal
+disparities are simply irrelevant under § 3553(a)(6), and the
+District Court was not required to address them.
+
+                              2
+
+       Begin‟s federal-federal disparity argument is more
+plausible. Begin argued that the sentence for his attempt to
+induce statutory rape under 
+18 U.S.C. § 2422
+(b) should not
+exceed the fifteen-year statutory maximum penalty for
+actually committing statutory rape within the special maritime
+and territorial jurisdiction of the United States under 
+18
+U.S.C. § 2243
+.
+
+       In United States v. Ausburn, we vacated a district
+court‟s sentence for procedural error when the court failed to
+consider or discuss the defendant‟s disparity argument under
+§ 3553(a)(6). 
+502 F.3d at 330-31
+. Ausburn, like Begin, was
+convicted of violating § 2422(b) by using e-mail and a
+telephone to facilitate his sexual relationship with a minor.
+Id. at 316. At sentencing, Ausburn argued that the district
+court should consider the lenient sentences imposed in two
+prior criminal cases from the same district. Id. at 317-18. In
+particular, Ausburn‟s defense counsel argued that the district
+court should avoid an unwarranted disparity with the 46-
+
+
+
+
+                             16
+month sentence imposed in the Kenrick case, id. at 320-21, in
+which the defendant had violated a different statute, 
+18
+U.S.C. § 2423
+(b), by traveling in interstate commerce for the
+purpose of having sex with a 15-year-old. See United States
+v. Kenrick, 241 F. App‟x 10, 12 (3d Cir. 2007). The district
+court failed to discuss the merits of this argument, instead
+merely reciting that it had considered the need to avoid
+unwarranted sentencing disparities. Ausburn, 
+502 F.3d at
+330
+. On appeal, we determined that the district court was
+obliged to discuss, consider, and rule on the defendant‟s
+§ 3353(a)(6) argument and that its failure to do so constituted
+procedural error. Id. at 330-31.
+
+       Similarly, in this case, Begin has argued that an
+appropriate sentence should take into account the sentences
+imposed for similar federal offenses. Under Ausburn, this
+type of argument has colorable legal merit. We emphasize
+that colorable legal merit is distinct from actual merit. There
+is reason to believe that the predatory nature of Begin‟s
+conduct and the knife and handcuffs found in his possession
+distinguish his offense from a run-of-the-mill statutory rape.
+Indeed, the stiff penalties under § 2422(b) are intended to
+punish and deter predators who use the reach and anonymity
+of the internet to perpetrate sex crimes against children. See
+H.R. Rep. No. 105-557, at 11-12 (1998), as reprinted in 1998
+U.S.C.C.A.N. 678, 680; see also Andriy Pazuniak, A Better
+Way to Stop Online Predators: Encouraging a More
+Appealing Approach to § 2422(b), 
+40 Seton Hall L. Rev. 691
+,
+694-98 (2010) (reviewing the legislative history § 2422(b)).
+Thus, when we say that Begin‟s claim has colorable legal
+merit, we mean only that, upon appropriate findings of fact,
+the District Court would be within its discretion to accept the
+argument and to factor it into the ultimate sentence.
+
+
+
+
+                              17
+                              B
+
+       Having concluded that Begin‟s federal-federal
+disparity argument has colorable legal merit under
+§ 3553(a)(6), we agree with him that the District Court failed
+to make a sufficient record to demonstrate its consideration of
+that argument. Though the Court summarized Begin‟s state-
+federal disparity argument at the beginning of the sentencing
+hearing, it did not acknowledge that he had also made a
+federal-federal disparity argument. The Court asked no
+questions during defense counsel‟s oral argument in favor of
+downward variance on this ground and made no comments
+about the issue following that presentation. Strikingly, the
+Court did not even specifically rule on Begin‟s request for a
+variance.
+
+        Nevertheless, the Government submits that the District
+Court‟s on-the-record explanation of its sentence
+demonstrates its meaningful consideration of the § 3553(a)
+factors. To be sure, the Court articulated its consideration of
+several of these factors, including the nature and
+circumstances of the offense and the history and
+characteristics of the defendant. But we have held that “a
+district court‟s failure to analyze § 3553(a)(6) may constitute
+reversible procedural error, even where . . . the court engages
+in thorough and thoughtful analysis of several other
+sentencing factors.” Merced, 
+603 F.3d at 224
+. In this case,
+the Court stated simply that its sentence “takes into account
+the need to avoid unwarranted disparities in sentencing
+among defendants with similar records who have been found
+guilty of similar conduct.” App. 167-68. This rote recitation
+of § 3553(a)(6) is insufficient to permit us to review the
+
+
+
+
+                              18
+Court‟s resolution of Begin‟s disparity arguments.           See
+Jackson, 
+467 F.3d at 841
+.
+
+       The Government has suggested various justifications
+for denying Begin‟s request for a downward variance. But
+“the question is not how we ourselves would have resolved
+the factors identified as relevant by section 3553(a) . . . . We
+are not sentencing judges.” Cooper, 
+437 F.3d at 330
+
+(quotation marks and alteration omitted).              We have
+recognized that “the sentencing judge, not the court of
+appeals, „is in a superior position to find facts and judge their
+import under § 3553(a) in the individual case.‟” Merced, 
+603
+F.3d at 214
+ (quoting Tomko, 
+562 F.3d at 566
+)). Therefore,
+“[w]here the record is inadequate, we do not fill in the gaps
+by searching the record for factors justifying the sentence.”
+Ausburn, 
+502 F.3d at 331
+. Instead, we vacate procedurally
+unsound sentences and remand for the district court to
+exercise its discretion in a way that we can evaluate, and
+defer to, on appeal.
+
+                               IV
+
+      Accordingly, we will vacate Begin‟s sentence and
+remand for resentencing.
+
+
+
+
+                               19
+                   United States v. Begin
+
+                        No. 11-3896
+
+_________________________________________________
+
+ROTH, Circuit Judge, dissenting in part:
+
+       I concur with the majority’s conclusion regarding the
+issue of federal/state sentencing disparities. I disagree,
+however, with the majority’s decision to vacate the sentence
+and remand to the District Court for consideration of the
+alleged federal/federal sentencing disparity. I would hold, as
+a matter of law, that the disparity between the two federal
+statutes raised here is irrelevant to the consideration of
+sentence disparities under 
+18 U.S.C. § 3553
+(a)(6). I would,
+therefore, affirm the sentence imposed.
+
+      Begin pled guilty to 
+18 U.S.C. § 2422
+(b), which states:
+
+      Whoever, using the mail or any facility or
+      means of interstate or foreign commerce, or
+      within the special maritime and territorial
+      jurisdiction of the United States knowingly
+      persuades, induces, entices, or coerces any
+      individual who has not attained the age of 18
+      years, to engage in prostitution or any sexual
+      activity for which any person can be charged
+      with a criminal offense, or attempts to do so,
+      shall be fined under this title and imprisoned
+      not less than 10 years or for life.
+
+
+
+
+                              1
+
+18 U.S.C. § 2422
+(b). Begin contends that the District Court
+should have considered the potential sentence he would have
+faced had he actually committed statutory rape in the special
+maritime or territorial jurisdiction of the United States and
+been prosecuted pursuant to 
+18 U.S.C. § 2243
+, which states:
+
+      Whoever, in the special maritime and territorial
+      jurisdiction of the United States . . . knowingly
+      engages in a sexual act with another person who
+      (1) has attained the age of 12 years but has not
+      attained the age of 16 years; and (2) is at least
+      four years younger than the person so engaging;
+      or attempts to do so, shall be fined under this
+      title, imprisoned not more than 15 years or both.
+
+18 U.S.C. § 2243
+(a).
+
+       These are diverse statutes. Section 2422(b) was
+enacted as part of the Telecommunications Act of 1996 and
+subsequently rewritten by the Child Protection and Sexual
+Predator Punishment Act of 1998, which was intended as “a
+comprehensive response to the horrifying menace of sex
+crimes against children, particularly assaults facilitated by
+computers.” United States v. Tykarsky, 
+446 F.3d 458
+, 467 &
+n.4 (3d Cir. 2006) (discussing the statutory text, legislative
+purpose and history). It clearly contemplates situations
+involving the use of force or persuasion. See 
+18 U.S.C. §
+2422
+(b) (specifying that perpetrator “knowingly persuades,
+induces, entices, or coerces” the minor).
+
+       By contrast, § 2243 was enacted as part of the Sexual
+Abuse Act of 1986, which modernized federal rape statutes
+by, inter alia, defining the offenses in gender neutral terms
+
+
+
+
+                              2
+and expanding the offenses to reach all forms of sexual abuse
+of another. H.R. Rep. No. 99-594, at 10-11 (1986), as
+reprinted in 1986 U.S.C.C.A.N. 6186, 6190-91. Whereas
+other sections of the Act apply to sexual abuse involving
+threats or force, § 2243(a) “reaches noncoercive conduct” and
+prohibits sexual acts based on the victim’s age. Id. at 16-17,
+1986 U.S.C.C.C.A.N. at 6196-97. Compare 
+18 U.S.C. §
+2243
+(a) (requiring only that perpetrator “knowingly engages
+in a sexual act” with the victim and specifying age
+requirements), with 
+18 U.S.C. § 2241
+ (requiring that the
+perpetrator use force or threats to engage in sexual acts and
+omitting any reference to the victim’s age). Indeed, § 2243(a)
+“applies to behavior that the participants voluntarily and
+willingly engage in” and “is intended to reach older, mature
+persons who take advantage of younger, immature persons,
+but not to reach sexual activity between persons of
+comparable age.” H.R. Rep. No. 99-594, at 16, 1986
+U.S.C.C.A.N. at 6197. It thus provides for a “young lovers”
+exception by requiring at least a four-year age difference
+between the perpetrator and the victim, thereby excluding
+consensual sex between teenagers.          See 
+18 U.S.C. §
+2243
+(a)(2); see also United States v. White Calf, 
+634 F.3d
+453, 457
+ (8th Cir. 2011) (explaining that § 2243(c)(1) also
+provides a narrow affirmative defense that the defendant
+reasonably believed that the victim had attained the age of 16,
+“ostensibly to ameliorate the harsh effects of the statute in
+cases of otherwise consensual teenage sex”).
+
+       Because these two federal statutes do not address
+similar conduct, the disparity in their penalties is not within
+the scope of § 3553(a)(6), which is concerned only with “the
+need to avoid unwarranted sentence disparities among
+defendants with similar records who have been found guilty
+
+
+
+
+                              3
+of similar conduct.” 
+18 U.S.C. § 3553
+(a)(6). I believe it is
+within this Court’s power to make this determination as a
+matter of law. See, e.g., Mahmood v. Gonzales, 
+427 F.3d
+248, 253
+ (3d Cir. 2005) (“When the outcome is clear as a
+matter of law, however, remand is not necessary.”); In re Ben
+Franklin Hotel Assocs., 
+186 F.3d 301, 306
+ (3d Cir. 1999)
+(“Because the record has been sufficiently developed for us to
+resolve this legal issue, we need not remand to the District
+Court to consider it in the first instance.”). I would, therefore,
+affirm the sentence that the District Court imposed.
+
+
+
+
+                                4

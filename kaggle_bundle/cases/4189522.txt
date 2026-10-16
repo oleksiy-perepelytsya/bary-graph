@@ -1,0 +1,101 @@
+SHEPHERD, Circuit Judge.
+ 
+
+  State prisoner Charles Odom appeals the district court’s
+  
+   1
+  
+  grant of summary judgment and dismissal with prejudice in favor of Kenan Kaizer, a former Bismarck police officer, in Odom’s 42 U.S.C. § 1983 action seeking monetary damages. Odom alleges that Kaizer violated his constitutional rights by deliberately or recklessly giving partially inaccurate testimony in a probable cause hearing. After two prior remands—see Odom v. Kaizer, 638 Fed.Appx. 553 (8th Cir. 2016) (per curiam); Odom v. Kaizer, 417 Fed.Appx. 611 (8th Cir. 2011) (per curiam)—the district court found that Kaizer is entitled to qualified immunity. Having jurisdiction under 28 U.S.C. § 1291, we affirm.
+ 
+
+
+  I. Background
+ 
+
+
+  We review de novo the district court’s grant of summary judgment, “viewing all evidence and drawing all reasonable inferences in favor of the nonmoving party.” Jones v. Frost, 770 F.3d 1183, 1185 (8th Cir. 2014). “Summary judgment is proper when there is no genuine dispute of material fact and the prevailing party is entitled to judgment as a matter of- law.” Id.
+ 
+
+
+  On April 25, 2005, Kaizer gave partially inaccurate oral testimony in a probable cause hearing that generated an arrest warrant for' Odom for charges to which Odom eventually pled guilty, including felony possession of drug paraphernalia and misdemeanor possession of marijuana.
+ 
+
+
+  The incident relevant to Kaizer’s testimony occurred fifteen months earlier in January 2004 after Bismarck police responded to a 911 call from Riddle Johnson who had locked himself in a hotel bathroom at the Select Inn and was seeking police assistance because Odom was threatening him with physical harm for failing to pay a drug debt. Upon entering the hotel room- where Johnson was locked in the bathroom, officers found drug paraphernalia in plain view along with Odom, Johnson, and Galen Smith—to whom the room-was registered. Kaizer,-a Bismarck drug task force detective, was' called to the scene by responding officers and assumed the role of lead investigator. Odom adihit-ted owning a duffel bag containing a small amount of marijuana located in a vehicle in the hotel parking lot. Odom was the registered occupant of a different hotel room in the Select Inn at the time of the incident.
+ 
+
+
+  During the probable cause hearing fifteen months later in April 2005, Kaizer accurately gave sworn oral testimony’ that (1) Johnson told officers that Odom threatened to physically harm him if he didn’t pay his drug debt, and (2) drug paraphernalia with visible drug residue was found in the room in which Odom was present. However, Kaizer inaccurately testified (1) from memory, that the room was regis
+   
+   *922
+   
+  tered to Odom when it was actually registered to Smith, and (2) from faulty interpretation of an evidence receipt, that the marijuana was found in the hotel room when it was actually found in Odom’s duffel bag in a vehicle in the parking lot.
+ 
+
+
+  On March 20, 2007, Odom filed his first § 1983 action against multiple defendants, including Kaizer, alleging false information was provided to support his arrest and seeking dismissal of state charges along with damages for pain, suffering, and mental anguish. We summarily affirmed the district court’s preservice dismissal of that case. Odom v. Burleigh Cnty. Detention Ctr., 369 Fed.Appx. 767, 768 (8th Cir. 2010) (per curiam).
+ 
+
+
+  On December 2, 2010, Odom filed this § 1983 action
+  
+   pro se
+  
+  seeking monetary damages and naming only Kaizer as a defendant. Odom alleged that Kaizer violated his constitutional rights by intentionally or recklessly providing false information in support of the arrest. After the district court’s preservice dismissal, this court reversed and remanded finding that Odom’s allegations that Kaizer “knowingly gave false information while testifying in support of issuance of an arrest warrant ... were sufficient to state a claim that his Fourth Amendment rights were violated.” Odom, 417 Fed.Appx. 611 (noting that a “warrant based on [an] affidavit containing deliberate falsehood or reckless disregard for truth violates [the] Fourth Amendment; [an] official who causes such deprivation is subject to § 1983 liability” (citing Bagby v. Brondhaver, 98 F.3d 1096, 1098 (8th Cir. 1996))).
+ 
+
+
+  Subsequently, the district court granted summary judgment to Kaizer concluding that Odom’s guilty plea was a complete defense to Odom’s § 1983 claim. However, we reversed and remanded again, finding that Odom’s guilty plea did not foreclose his § 1983 claim because Odom’s claim was for violation of his constitutional rights in connection with the issuance of the arrest warrant—not for arrest without probable cause. Odom v. Kaizer, 638 Fed.Appx. at 554. We observed that an official is subject to § 1983 liability for violation of the Fourth Amendment if he or she obtains a “warrant based upon an affidavit containing ‘deliberate falsehood’ or ‘reckless disregard for the truth,’ ” citing Bagby, 98 F.3d at 1098 (quoting Franks v. Delaware, 438 U.S. 154, 171, 98 S.Ct. 2674, 57 L.Ed.2d 667 (1978)). H. (internal quotation marks omitted). However, we noted that “qualified immunity is appropriate for [a] defendant accused of submitting [a] recklessly false affidavit if a corrected affidavit would still provide probable cause to arrest or search,” again citing Bagby. Id. (internal quotation marks omitted). We advised that “the district court should decide whether Kaizer is entitled to qualified immunity on the record before the court.” Id. at 554 n.l.
+ 
+
+
+  Following our instructions to rule on the qualified immunity claim, the district court found that Kaizer is entitled to qualified immunity, and therefore, to summary judgment, because his faulty testimony was not knowing, reckless, or intentional. Odom now appeals the district court’s adverse grant of summary judgment.
+ 
+
+
+  II. Analysis
+ 
+
+
+  “Officer [Kaizer] is entitled to qualified immunity unless the evidence viewed favorably to [Odom] supports a finding that Officer [Kaizer’s] conduct violated a constitutional right, and that constitutional right was so ‘clearly established’ at the time of the alleged violation that a reasonable officer would have known that his conduct was unlawful.” Rohrbough v. Hall, 586 F.3d 582, 585 (8th Cir. 2009).
+ 
+
+
+  A reasonable officer would know that it is unlawful to use deliberate or reckless falsehoods in a probable cause hearing,
+   
+   *923
+   
+  and therefore, Odom’s right to be free from such conduct by officers was “clearly established,” fulfilling part of the qualified immunity test. Bagby, 98 F.3d at 1098-99 (“A warrant based upon an affidavit containing deliberate falsehood or reckless disregard for the truth violates the Fourth Amendment.” (internal quotation marks omitted)).
+ 
+
+
+  However, Kaizer is entitled to qualified immunity because probable cause for the arrest warrant for Odom on the charges of possession of marijuana and drug paraphernalia would have been present even if Kaizer’s testimony had been completely accurate at the time. Id. at 1099 (noting that even if defendant is accused of submitting reckless testimony, “qualified immunity is appropriate ... if a corrected affidavit would still provide probable cause to arrest or search”); see also Block v. Dupic, 758 F.3d 1062, 1064 (8th Cir. 2014) (noting that an officer “is entitled to qualified immunity if his affidavit, supplemented by the omitted facts, still supports a probable cause finding”).
+ 
+
+
+  Probable cause for an arrest warrant exists when there is a “substantial probability that a crime has been commit ted and that a specific individual committed the crime.” Bruner v. Baker, 506 F.3d 1021, 1026 (10th Cir. 2007) (internal quotation marks omitted). “The inquiry is a commonsense, practical one based on the totality-of-the-circumstances.” Block, 758 F.3d at 1064 (internal quotation marks omitted) (citing Illinois v. Gates, 462 U.S. 213, 230, 103 S.Ct. 2317, 76 L.Ed.2d 527 (1983)). “Whether probable cause existed is a legal question reviewed de novo.” United States v. Harris, 617 F.3d 977, 978 (8th Cir. 2010) (internal quotation marks omitted).
+ 
+
+
+  Ample facts supported the issuance of the arrest warrant for Odom without Kaizer’s inaccuracies. First, Odom admitted ownership of the duffel bag where marijuana was found, and that fact alone was enough for probable cause to arrest Odom on the charge of marijuana possession. Cf. United States v. Perdoma, 621 F.3d 745, 749 (8th Cir. 2010) (finding that even the smell of marijuana on an individual provided probable cause to arrest that person). Likewise, Odom’s presence in a room with drug paraphernalia in plain view—including metal smoking devices with cocaine residue, a spoon with burned cocaine residue, a glass marijuana smoking pipe with burned residue, and other paraphernalia— and a person at the scene accusing Odom of being a drug enforcer provided probable cause for issuance of the arrest warrant for possession of drug paraphernalia whether the room was registered to Odom or not. See United States v. Holm, 836 F.2d 1119, 1122-25 (8th Cir. 1988) (finding defendant had constructive possession of drugs seized at a third-party’s residence where there was circumstantial evidence that defendant was a source of the drugs, participated in transportation of the drugs to the house, and exercised joint control over the drugs).
+ 
+
+
+  Thus, for the reasons noted above, Kaizer is entitled to qualified immunity as a matter of law.
+ 
+
+
+  III. Conclusion
+ 
+
+
+  Finding no genuine dispute of material fact and that Kaizer is entitled to qualified immunity as a matter of law, we affirm the district court’s grant of summary judgment and dismissal with prejudice in favor of Officer Kaizer.
+ 
+
+
+
+
+   1
+  
+
+   . The Honorable Daniel L. Hovland, Chief Judge, United States District Court for the District of North Dakota.

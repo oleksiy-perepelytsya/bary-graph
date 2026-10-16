@@ -1,0 +1,262 @@
+Caplinger, J.:
+ 
+
+  Jesus Ruiz-Reyes, Jr., appeals the district court’s
+   
+   *76
+   
+  denial of his objection to the use of a previous conviction to enhance the severity level of his current offense for possession of cocaine with intent to sell pursuant to K.S.A. 65-4161. He argues his previous conviction should not have been used because it did not occur until after the commission of the current offense. We agree and reverse and remand for resentencing.
+ 
+
+
+
+   Procedural and factual background
+  
+
+
+  On December 5,2000, Ruiz-Reyes was arrested in Reno County for various drug crimes, including possession of cocaine with intent to sell in violation of K.S.A. 65-4161. After the State filed formal charges, the case was continued indefinitely to allow for the resolution of matters pending against Ruiz-Reyes in other counties.
+ 
+
+
+  On April 15, 2004, Ruiz-Reyes was convicted in Ford County of possessing methamphetamine with intent to sell in violation of K.S.A. 65-4161, based on an offense committed in 1999. The State then filed an amended complaint in the Reno County action modifying the charge of possession of cocaine with intent to sell from a severity level 3 to a severity level 2 felony based on the previous Ford County conviction and K.S.A. 65-4161(b).
+ 
+
+
+  After pleading guilty in Reno County to the cocaine charge and an additional charge of possession of methamphetamine pursuant to K.S.A. 65-4160, Ruiz-Reyes objected to the classification of the cocaine charge as a severity level 2 offense for sentencing purposes because at the time he committed the crime, he did not have a prior conviction under K.S.A. 65-4161(b).
+ 
+
+
+  The district court denied Ruiz-Reyes’ objection and imposed concurrent sentences of 56 months for the severity level 2 possession of cocaine with intent to sell conviction and 11 months for the methamphetamine conviction.
+ 
+
+
+  The issue presented by this appeal is whether K.S.A. 65-4161(b) permits enhancement of the severity level of a defendant’s current crime based on a conviction that did not occur until after the commission of the instant offense. Resolution of this issue requires interpretation of K.S.A. 65-6141(b). The interpretation of a statute is a question of law over which this court exercises unlimited review. See
+  
+   State v.
+  
+  Taylor, 262 Kan. 471, Syl. ¶ 4, 939 P.2d 904
+   
+   *77
+   
+  (1997). The rules of statutoiy construction were recently summarized in
+  
+   State v. Banning,
+  
+  34 Kan. App. 2d 783, 785, 125 P.3d 573 (2005),
+  
+   rev. denied
+  
+  281 Kan. 1379 (2006):
+ 
+
+
+  “ ‘ “The fundamental rule of statutory construction to which all other rules are subordinate is that the intent of the legislature governs if that intent can be ascertained. The legislature is presumed to have expressed its intent through the language of the statutory scheme it enacted. When a statute is plain and unambiguous, tire court must give effect to the intention of the legislature as expressed, rather than determine what the law should or should not be.” ’ [Citation omitted.]
+ 
+
+
+  “The general rule is that a criminal statute must be strictly construed in favor of the accused, which simply means that words are given their ordinary meaning. Any reasonable doubt about the meaning is decided in favor of anyone subjected to the criminal statute. This rule of strict construction, however, is subordinate to the rule that judicial interpretation must be reasonable and sensible to effect legislative design and intent.” ’ [Citation omitted.]”
+ 
+
+
+  K.S.A. 65-4161(b) provides: “If any person who violates this section has one prior conviction under this section . . . , then that person shall be guilty of a drug severity level 2 felony.” Ruiz-Reyes argues that if we apply the rules of statutoiy construction, as we must, the statute’s use of the present tense of the verb “to violate” requires the court to consider the existence of prior convictions at the time the instant offense occurs, rather than at the time of sentencing.
+ 
+
+
+  In support, Ruiz-Reyes cites
+  
+   State v. Kirk,
+  
+  No. 89,599, unpublished opinion filed December 24, 2003. There, a panel of this court considered the meaning of nearly identical language in K.S.A. 65-4160(c), which provides: “If any person who violates this section has two or more prior convictions under this section . . . , then such person shall be guilty of a drug severity level 1 felony.” The
+  
+   Kirk
+  
+  panel concluded the clear language of the statute requires that “the presence of prior convictions is to be viewed at the time of violation, rather than at the time of conviction.” Slip op. at 3.
+ 
+
+
+  In arguing the district court properly enhanced the severity level of Ruiz-Reyes’ current offense based upon a conviction occurring after the commission of the instant offense, the State relies upon
+  
+   State v. Bandy,
+  
+  25 Kan. App. 2d 696, 700, 971 P.2d 749 (1998),
+  
+   rev. denied
+  
+  266 Kan. 1100 (1999). There, this court was faced with
+   
+   *78
+   
+  the issue of whether a prior driving while suspended (DWS) conviction that followed the defendant’s current DWS offense could be used to enhance the severity level of his current offense under K.S.A. 1997 Supp. 8-262(a)(l). That statute provided:
+ 
+
+
+  “Any person who drives a motor vehicle on any highway of this state at a time when such person’s privilege so to do is canceled, suspended or revoked shall be guilty of a: (A) Class B nonperson misdemeanor on the first conviction; (B) class A nonperson misdemeanor on the second conviction; and (C) severity level 9, nonperson felony on a third or subsequent conviction.”
+ 
+
+
+  The defendant in
+  
+   Bandy
+  
+  sought to rely upon
+  
+   State v. Wilson,
+  
+  6 Kan. App. 2d 302, 306, 627 P.2d 1185,
+  
+   aff'd
+  
+  230 Kan. 287, 634 P.2d 1078 (1981), which held that the enhancement of a defendant’s sentence as a third-time offender under K.S.A. 1980 Supp. 21-4504(2), the Habitual Criminal Act (HCA), required “each succeeding offense [to] be committed after the conviction for the preceding offense.”
+  
+   Bandy,
+  
+  25 Kan. App. 2d at 697-98. The
+  
+   Bandy
+  
+  court rejected this argument, opining that the enactment of the Kansas Sentencing Guidelines Act (KSGA) signaled a change in “legislative intent with regard to prior convictions.” 25 Kan. App. 2d at 699. Relying on the legislature’s definition of “prior conviction” in K.S.A. 21-4710(a), this court in
+  
+   Bandy
+  
+  concluded:
+ 
+
+
+  “The intent of the legislature in determining a defendant’s criminal history in the KSGA is to allow all prior convictions regardless of the timing of the previous offense(s). We extend by analogy this intention and apply it to other self-contained habitual violator statutes, such as the driving with a suspended license statute .... This provides a harmonious application of all habitual violator statutes regardless of whether an individual statute is silent as to the timing of prior offenses.” 25 Kan. App. 2d at 700.
+ 
+
+
+  Despite
+  
+   Bandy’s
+  
+  rather all-encompassing language, Ruiz-Reyes argues
+  
+   Bandy
+  
+  is distinguishable, and he again turns to
+  
+   Kirk
+  
+  for support. There, the court found
+  
+   Bandy
+  
+  did not support the State’s argument that the definition of “prior conviction” in K.S.A. 21-4710(a) should be applied to K.S.A. 65-4160(c). Regarding
+  
+   Bandy’s
+  
+  broad holding, the
+  
+   Kirk
+  
+  court succinctly stated:
+ 
+
+
+  ‘While harmony in the universe may be a desirable goal, its attainment was unnecessary for the resolution of the issue presented to the
+  
+   Bandy
+  
+  court. Therefore, we view
+  
+   Bandy
+  
+  as precedent for its required finding only,
+  
+   i.
+  
+  e., all prior driving
+   
+   *79
+   
+  while suspended convictions are applied to enhance a current driving while suspended sentence, regardless of when the respective unlawful driving occurred.” Slip op. at 3.
+ 
+
+
+
+   Kirk
+  
+  further observed that applying the definition of “prior conviction” in K.S.A. 21-4710(a) to the determination of severity levels “is not logically required” because “[s]everity level enhancement is separate and distinct from criminal history classification.” Slip op. at 2.
+ 
+
+
+  We find
+  
+   Kirk
+  
+  persuasive for several reasons. First, the statute at issue in
+  
+   Kirk,
+  
+  K.S.A. 65-4160(c), contained essentially the same language as the statute at issue here, K.S.A. 65-4161(b). Significantly, the language of both statutes contemplates a violation committed by an individual who “has” at least one prior conviction at the time the individual “violates” the law.
+ 
+
+
+  Further, this interpretation of the statute complies with two fundamental rules of statutory construction: (1) we must give effect to the intent of the legislature as expressed; and (2) we must resolve any reasonable doubt about the meaning of a statute in favor of those subjected to its provisions. See
+  
+   State v. McCurry,
+  
+  279 Kan. 118, 121, 105 P.3d 1247 (2005).
+ 
+
+
+  Additionally, as
+  
+   Kirk
+  
+  recognized, criminal history classification and crime severity level enhancement are separate and distinct factors used in determining a defendant’s sentence. The Kansas Supreme Court discussed this distinction in
+  
+   State v. Ivory,
+  
+  273 Kan. 44, 46, 41 P.3d 781 (2002):
+ 
+
+
+  “The determination of a felony sentence is based on two factors: the current crime of conviction and the offender’s criminal history. The sentence contained in the grid box at the juncture of the severity level of the crime of conviction and the offender’s criminal history category is the presumed sentence.”
+ 
+
+
+  Clearly, the legislature was aware of the dichotomy it created when it enacted the KSGA. For more than a decade before the KSGA was established, the HCA had been interpreted to permit enhancement of penalties only when the defendant’s prior convictions preceded the offense for which the defendant was being sentenced. See
+  
+   Wilson,
+  
+  6 Kan. App. 2d at 306. Presumably, the legislature was aware of this interpretation when it created an
+   
+   *80
+   
+  inclusive definition of “prior conviction” for use in calculating criminal history, but retained more restrictive language in K.S.A. 65-4161(b) for use in determining a crime’s severity level. As Ruiz-Reyes argues, if the legislature intended the definition of “prior conviction” in K.S.A. 21-4710(a) to apply to 65-4161(b), then it could have explicitly so indicated.
+ 
+
+
+  The State unsuccessfully attempts to distinguish
+  
+   Kirk
+  
+  by pointing out that there the defendant’s four current convictions were entered on the same day in the same jurisdiction and could not be used to enhance the severity level of each other. However, this ignores the basis for the court’s holding in
+  
+   Kirk, i.e.,
+  
+  that the defendant’s “prior” convictions did not occur until after he committed his current offense. A change in the sequential order of the defendant’s convictions would not have changed the result in
+  
+   Kirk.
+  
+
+
+  Moreover, we are not persuaded by the State’s argument that our adoption of
+  
+   Kirk’s
+  
+  rationale will permit defendants to manipulate sentences by controlling the order in which convictions are imposed. To the contrary, pursuant to
+  
+   Kirk,
+  
+  a crime’s severity level under K.S.A. 65-4161(b) will be determined at the time it is committed.
+ 
+
+
+  Based upon the plain language of K.S.A. 65-4161(b), we hold that the severity level of the defendant’s instant offense may not be enhanced based upon a prior conviction that did not occur until after commission of the instant offense. Accordingly, we conclude the district court erred in enhancing for sentencing purposes the severity level of Ruiz-Reyes’ cocaine conviction based on his Ford County conviction, which occurred after the cocaine offense in this case.
+ 
+
+
+  Reversed and remanded for resentencing.

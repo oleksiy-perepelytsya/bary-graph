@@ -1,0 +1,586 @@
+Affirmed by Supreme Court, January 26, 2004
+
+
+
+Petition for cert granted by order
+filed 3/10/03
+                  PUBLISHED
+
+           UNITED STATES COURT OF APPEALS
+
+                FOR THE FOURTH CIRCUIT
+
+4444444444444444444444444444444444444444444444447
+In Re: EQUIPMENT SERVICES,
+INCORPORATED,
+Debtor.
+
+UNITED STATES TRUSTEE,                           No. 01-1779
+
+      Plaintiff-Appellant,
+
+      v.
+
+EQUIPMENT SERVICES, INCORPORATED,
+      Defendant-Appellee.
+4444444444444444444444444444444444444444444444448
+4444444444444444444444444444444444444444444444447
+In Re: EQUIPMENT SERVICES,
+INCORPORATED,
+Debtor.
+
+UNITED STATES TRUSTEE,                           No. 01-1780
+
+      Plaintiff-Appellee,
+
+      v.
+
+EQUIPMENT SERVICES, INCORPORATED,
+     Defendant-Appellant.
+4444444444444444444444444444444444444444444444448
+
+Appeals from the United States District Court
+
+for the Western District of Virginia, at Abingdon.
+
+      James P. Jones, District Judge.
+        (CA-00-143, BK-98-4851)
+
+           Argued: April 2, 2002
+
+           Decided: May 31, 2002
+Before NIEMEYER, WILLIAMS, and MICHAEL, Circuit Judges.
+
+
+____________________________________________________________
+
+Affirmed in part and reversed in part by published opinion. Judge
+Niemeyer wrote the opinion, in which Judge Williams joined. Judge
+Michael wrote an opinion concurring in part and dissenting in part.
+
+____________________________________________________________
+
+                           COUNSEL
+
+ARGUED: P. Matthew Sutko, Office of the General Counsel, Execu-
+tive Office for United States Trustees, UNITED STATES DEPART-
+MENT OF JUSTICE, Washington, D.C., for Appellant. John Michel
+Lamie, BROWNING, LAMIE & GIFFORD, P.C., Abingdon, Vir-
+ginia, for Appellee. ON BRIEF: Joseph A. Guzinski, Acting General
+Counsel, Office of the General Counsel, Executive Office for United
+States Trustees, UNITED STATES DEPARTMENT OF JUSTICE,
+Washington, D.C.; Margaret K. Garber, Trial Attorney, Office of the
+United States Trustee, UNITED STATES DEPARTMENT OF JUS-
+TICE, Roanoke, Virginia; David R. Duncan, Regional Assistant
+United States Trustee, Office of the United States Trustee, UNITED
+STATES DEPARTMENT OF JUSTICE, Columbia, South Carolina,
+for Appellant.
+
+____________________________________________________________
+
+                           OPINION
+
+NIEMEYER, Circuit Judge:
+
+   John M. Lamie, an attorney retained to represent Equipment Ser-
+vices, Inc. in bankruptcy, applied to the bankruptcy court for the pay-
+ment of his legal fees incurred (1) pre-petition, (2) during the Chapter
+11 proceeding, and (3) after conversion to a Chapter 7 proceeding.
+Applying the current version of the Bankruptcy Code (as amended in
+1994), 
+11 U.S.C. § 330
+(a) (2000), we affirm the district court's
+approval of fees incurred before the conversion to Chapter 7 and
+reverse its approval for fees incurred after. In reaching this conclu-
+sion, we reject Lamie's argument that § 330(a) included a "scrivener's
+
+                      2
+error" when it was amended in 1994 to delete the "debtor's attorney"
+from the list of persons eligible to be paid from bankruptcy estate, and
+we join two circuits that have reached the same conclusion. Regret-
+fully, this decision also widens the split on this issue with three other
+circuits.
+
+                      I
+
+   Equipment Services, Inc. retained John Lamie to prepare for the
+company a voluntary petition for relief under Chapter 11 of the Bank-
+ruptcy Code and to represent the company in the bankruptcy proceed-
+ings. Equipment Services paid Lamie a $6,000 "retainer," of which
+$1,000 was used to pay the fees and costs of filing the Chapter 11
+petition. Consistent with the arrangement reached with Equipment
+Services, Lamie deposited the remaining $5,000 in his client escrow
+account, to be drawn upon as Lamie earned fees. This retainer
+arrangement was not documented, but Lamie explained it to the bank-
+ruptcy court as follows:
+
+          The Court: What was your understanding, as far as the
+          retainer was concerned?
+
+          Mr. Lamie: Well, the retainer was to pay me in advance
+          for fees that I would earn during the case,
+          Your Honor. And it was to assure some pay-
+          ment of those fees. That is the reason. That is
+          the way we explained to the client.
+
+          The Court: Was it your understanding that any unused fees
+          at the end of the case would be, in effect,
+          refunded back to the Debtor?
+
+          Mr. Lamie: Oh, it would be the Debtor's property at the
+          end of the case, yes, Your Honor.
+
+          The Court: So, the effect it [sic] to protect you . . . you
+          know, your ability to get paid, is that what you
+          were doing?
+
+                      3
+         Mr. Lamie: Yes. Yes, the money was put into trust and is
+         billed against it. That is the way we have han-
+         dled it.
+
+    Lamie filed the Chapter 11 petition on December 24, 1998, and,
+pursuant to Federal Rule of Bankruptcy Procedure 2016(b), he
+informed the bankruptcy court that he had received the remaining
+$5,000 from Equipment Services. He also obtained the bankruptcy
+court's permission to represent Equipment Services as the debtor-in-
+possession. Thereafter, during the Chapter 11 proceeding and before
+it was converted into a Chapter 7 proceeding, Lamie earned $1,325
+in fees and incurred $3.85 in costs.
+
+    On March 17, 1999, on the motion of the United States Trustee,
+Equipment Services' Chapter 11 proceeding was converted into a
+Chapter 7 proceeding, and Robert E. Wick, Jr., was appointed to
+administer the bankruptcy estate. Lamie earned another $1,000 repre-
+senting Equipment Services during the Chapter 7 proceeding. On June
+5, 2000, Lamie filed an application with the bankruptcy court, seeking
+approval of attorneys fees in the amount of $2,325 ($1,325 earned
+during the Chapter 11 proceeding and $1,000 earned during the Chap-
+ter 7 proceeding) and $3.85 in costs incurred during the Chapter 11
+proceeding. The United States Trustee objected to the award of fees
+to the extent that they included compensation for services rendered
+after the case was converted to a Chapter 7 proceeding. The Trustee
+argued that 
+11 U.S.C. § 330
+(a) "makes no provision for counsel of the
+debtor to be compensated by the estate" in a Chapter 7 proceeding.
+Moreover, the Trustee asserted that the application for fees did not
+specify what benefit the estate, as distinct from Equipment Services,
+received as the result of Lamie's work.
+
+    The bankruptcy court agreed with the Trustee that, under 
+11 U.S.C.
+§ 330
+(a), a debtor's attorney is not authorized to be paid funds from
+the bankruptcy estate for services rendered after the case is converted
+to a Chapter 7 proceeding. The court nonetheless awarded Lamie all
+of his requested fees, in the amount of $2,325, plus $3.85 in costs,
+concluding that the pre-petition retainer held by Lamie was property
+of the bankruptcy estate only to the extent that it exceeded the total
+fees allowed to the debtor's counsel for all services rendered in the
+case, including services rendered after the Chapter 7 conversion.
+
+                     4
+    The United States Trustee appealed this ruling to the district court,
+and Lamie cross-appealed the bankruptcy court's ruling that 
+11
+U.S.C. § 330
+(a) prohibits a debtor's attorney from obtaining compen-
+sation from a Chapter 7 estate. The district court affirmed the bank-
+ruptcy court on both issues, and the parties filed these cross-appeals,
+raising two issues: (1) whether 
+11 U.S.C. § 330
+(a) (2000) allows a
+Chapter 7 debtor's attorney to be compensated from the estate; and
+(2) whether Lamie was entitled to deduct his post-Chapter 7 fees from
+the retainer notwithstanding any lack of authorization from § 330(a)
+to pay the debtor's attorney from the bankruptcy estate.
+
+                      II
+
+    We first resolve whether 
+11 U.S.C. § 330
+(a) (2000) allows a Chap-
+ter 7 debtor's attorney to be compensated from the bankruptcy estate,
+an issue on which the courts of appeals have split. Both the bank-
+ruptcy court and the district court concluded that the plain language
+of § 330(a) does not authorize a debtor's attorney to be compensated
+from the estate in a Chapter 7 proceeding. Lamie contends that these
+courts' conclusions fail to recognize that when the Bankruptcy Code
+was amended in 1994, Congress made a scrivener's error in omitting
+authorization to pay fees to the debtor's attorney from a Chapter 7
+estate — an authorization that existed prior to the 1994 revisions.
+
+   The 1986 version of § 330(a) stated in relevant part:
+
+          (a) After notice to any parties in interest and to the United
+          States trustee and a hearing, and subject to sections 326,
+          328, and 329 of this title, the court may award to a trustee,
+          to an examiner, to a professional person employed under
+          section 327 or 1103 of this title, or to the debtor's attorney
+          —
+
+          (1) reasonable compensation for actual, necessary
+          services rendered by such trustee, examiner, pro-
+          fessional person, or attorney, as the case may be,
+          and by any paraprofessional persons employed by
+          such trustee, professional person, or attorney, as
+          the case may be, based on the nature, the extent,
+          and the value of such services, the time spent on
+
+                      5
+          such services, and the cost of comparable services
+          other than in a case under this title.
+
+11 U.S.C. § 330
+(a) (1988) (emphasis added). The Bankruptcy Reform
+Act of 1994 amended § 330(a) to read in relevant part as follows:
+
+          (a)(1) After notice to the parties in interest and the United
+          States Trustee and a hearing, and subject to sections 326,
+          328, and 329, the court may award to a trustee, an examiner,
+          a professional person employed under section 327 or 1103
+          —
+
+          (A) reasonable compensation for actual, necessary
+          services rendered by the trustee, examiner, profes-
+          sional person, or attorney and by any paraprofes-
+          sional person employed by any such person.
+
+11 U.S.C. § 330
+(a) (2000). Thus, § 330(a), as revised in 1994, omits
+the phrase "or the debtor's attorney" from the list of persons to whom
+a court may award "reasonable compensation" from the bankruptcy
+estate for services rendered in a Chapter 7 proceeding.
+
+    Lamie argues that the deletion of the reference to debtor's attorneys
+was inadvertent and that the omission renders the statute ambiguous,
+permitting courts to look to the legislative history in interpreting the
+statute. He maintains that the ambiguity arises from the fact that the
+1994 version, while omitting "debtor's attorney" from its enumeration
+of persons whom bankruptcy courts can compensate from the estate,
+nonetheless retains a reference to attorneys in subpart (A). See 
+11
+U.S.C. § 330
+(a)(1)(A) (2000) (allowing "reasonable compensation for
+actual, necessary services rendered by the trustee, examiner, profes-
+sional person, or attorney . . ."). Lamie also argues that a grammatical
+error supports his conclusion that the 1994 version of § 330(a) is
+ambiguous. He notes that there is no conjunction "or" between "ex-
+aminer" and "a professional person" in the list of persons authorized
+to receive fees in § 330(a)(1), supporting the conclusion that the dele-
+tion of "or the debtor's attorney" was inadvertent. Based on this
+ambiguity, he maintains that the court should look to the legislative
+history and conclude that Congress expressed no intent to omit debt-
+or's attorneys from § 330(a) when it enacted the Bankruptcy Reform
+
+                      6
+Act of 1994. Lamie's argument is supported by decisions in three cir-
+cuits. See In re Top Grade Sausage, Inc., 
+227 F.3d 123, 130
+ (3d Cir.
+2000) (holding that Chapter 7 debtor's attorneys may be compensated
+from the estate because the current version of § 330 is ambiguous and
+"the legislative history does not manifest an intent by Congress to
+change the long-standing practice of compensating debtors' attor-
+neys"); In re Century Cleaning Servs., Inc., 
+195 F.3d 1053, 1056-61
+
+(9th Cir. 1999) (finding § 330 to be "substantially ambiguous" and
+concluding that Chapter 7 debtor's attorney may be compensated
+from the estate based on legislative history and policy consider-
+ations); see also In re Ames Dep't Stores, Inc., 
+76 F.3d 66
+, 72 (2d Cir.
+1996) (holding that the omission of debtor's attorney from § 330 was
+inadvertent and noting that "[w]here the benefits of services to the
+estate are the same, it makes no sense to treat performances of such
+benefits by debtors' attorneys differently than performances by other
+retained professionals").
+
+   On the other hand, the Trustee argues that the plain language of
+§ 330(a), as it is now written, does not authorize compensation from
+the estate for the debtor's attorney in a Chapter 7 proceeding and that
+we should enforce the statute in its current form. As written,
+§ 330(a)(1) plainly limits recovery of fees to "trustees," "examiners,"
+and "professional persons employed under section 327 and 1103."
+While an attorney may be compensated from the estate as a profes-
+sional person employed by the Trustee under § 330(a)(1)(A), he is not
+directly payable as the debtor's attorney.
+
+    The Trustee also asserts that there are policy reasons supporting the
+1994 change. He points out that in Chapter 7 proceedings, unlike pro-
+ceedings under Chapters 11, 12, and 13, the debtors and creditors do
+not act like a team. Moreover, in a Chapter 7 proceeding, the Trustee
+is authorized to hire attorneys at estate expense as needed to help liq-
+uidate the estate, negating the need for the assistance of the debtor's
+attorney. Finally, the Trustee points out that in a Chapter 7 proceed-
+ing, a debtor's attorney cannot do the type of good work that could
+enlarge the estate in a Chapter 11 proceeding because a Chapter 7
+proceeding is a zero-sum game. Inherent in the Trustee's argument is
+the fact that, unlike a proceeding under Chapter 11, where the debtor-
+in-possession is the trustee of the estate, in a Chapter 7 proceeding the
+debtor and the Trustee are distinct. In sum, the Trustee argues that
+
+                      7
+Congress deliberately, and for good reason, excluded the debtor's
+attorney from the list of parties that may be compensated from the
+debtor's estate in a Chapter 7 proceeding. The Trustee's argument is
+supported by decisions in two circuits. See In re Am. Steel Products,
+Inc., 
+197 F.3d 1354, 1355-56
+ (11th Cir. 1999) (finding § 330 to be
+unambiguous and holding that a debtor's attorney cannot be compen-
+sated from the estate in a Chapter 7 proceeding); In re Pro-Snax Dis-
+tributors, Inc., 
+157 F.3d 414, 424-26
+ (5th Cir. 1998) (recognizing the
+likelihood that Congress inadvertently deleted debtor's attorneys from
+§ 330, but nonetheless finding the language of the statute to be unam-
+biguous in its exclusion of debtor's attorneys from those parties that
+may be compensated from the estate).
+
+    While we recognize that the circuits are split and that arguments
+may reasonably be made that Congress made an inadvertent error in
+amending § 330(a), we conclude that we should follow the plain lan-
+guage of the 1994 version of § 330(a), particularly because applica-
+tion of that plain language supports a reasonable interpretation of the
+Bankruptcy Code. The 1994 version clearly omits the prior authoriza-
+tion to compensate the debtor's attorney from a Chapter 7 estate. And
+the reference to "attorney" in § 330(a)(1)(A) does not make the statute
+ambiguous. "[A] professional person employed under section 327 or
+1103," 
+11 U.S.C. § 330
+(a)(1) (2000), could be the antecedent to "at-
+torney" as used in § 330(a)(1)(A), because the Trustee is authorized
+to hire an attorney as a professional person. Section 327(a) specifi-
+cally states that "the trustee, with the court's approval, may employ
+one or more attorneys, accountants, appraisers, auctioneers, or other
+professional persons . . . to represent or assist the trustee in carrying
+out the trustee's duties under this title." 
+11 U.S.C. § 327
+(a) (emphasis
+added). While the reference in § 330(a)(1)(A) to "attorney" may be
+superfluous, it does not render the statute ambiguous. In addition, the
+omission of the conjunction "or" in § 330(a)(1) after the word "exam-
+iner," is an oversight that is as consistent with the deliberate deletion
+of the words "debtor's attorney" as it is with the inadvertent deletion
+of those words from that section. Thus, this oversight does not render
+the language ambiguous.
+
+  We agree with the Fifth Circuit, that "[w]e must presume . . . that
+Congress intended what it said when it revised § 330 to delete any
+
+                      8
+provision for the award of compensation to a debtor's attorney in
+. . . a Chapter 7 . . . case." Am. Steel Products, 
+197 F.3d at 1356
+.
+When a statute is unambiguous, canons of construction prevent us
+from considering outside sources, such as legislative history, to
+attempt to discern what Congress may or may not have intended to
+do. Id.; Pro-Snax Distributors, 
+157 F.3d at 425
+.
+
+   The current version of § 330(a) has been in force now for eight
+years and Congress has not elected to recognize that it made a scriv-
+ener's error when it amended the statute in 1994. If Congress did
+indeed make an error, the error should be corrected by Congress, not
+by us. Because the plain language of § 330(a) as it is now written is
+unambiguous and is reasonable in application, we are constrained to
+enforce the language as written. Hartford Underwriters Ins. Co. v.
+Union Planters Bank, N.A., 
+530 U.S. 1, 6
+ (2000). In doing so, we join
+the Fifth and the Eleventh Circuits that have done likewise.
+
+                     III
+
+   Despite the district court's conclusion that § 330(a) does not autho-
+rize Lamie, as the debtor's attorney, to be compensated from the
+bankruptcy estate, the court concluded that the pre-petition retainer
+was property of the estate only to the extent that it exceeded the total
+fees and services allowed to the debtor's counsel for all services ren-
+dered in the case, including services rendered after its conversion to
+a Chapter 7 proceeding.
+
+   The Trustee appeals this ruling, contending that the retainer
+became the property of the bankruptcy estate at the time the original
+Chapter 11 petition was filed because it was a "security retainer" and
+thus remained the property of the debtor until it was earned by Lamie.
+The Trustee therefore argues that any unearned portion of the retainer
+became property of the estate when the initial petition was filed, and
+Lamie was not entitled to fees from the estate with respect to services
+rendered after the Chapter 7 conversion. Lamie, on the other hand,
+responds by arguing that all fees with respect to the bankruptcy pro-
+ceeding were paid in advance by Equipment Services in the form of
+the retainer. Thus, he was entitled to bill all of his fees, including
+those incurred after the Chapter 7 conversion, against the retainer. He
+asserts that only the portion of the retainer remaining after payment
+
+                      9
+of all attorneys fees and costs belongs to the estate, i.e., $5,000 minus
+$2,328.85, or $2,671.15.
+
+    The parties do not dispute the general principle that, at the time the
+Chapter 11 proceeding was filed, the property of Equipment Services,
+"wherever located and by whomever held," became the bankruptcy
+estate. 
+11 U.S.C. § 541
+(a). And Equipment Services' property inter-
+ests at the time it filed the petition are generally determined as a mat-
+ter of state law; both parties recognize that "courts look to state law
+when determining a debtor's interest in property." See In re Shearin,
+224 F.3d 346, 349
+ (4th Cir. 2000). In this case, the applicable Vir-
+ginia law is simply the law of contracts under which fee arrangements
+between clients and lawyers are enforced, subject to ethical and pub-
+lic policy restrictions not applicable here.
+
+    Thus, the question becomes what the arrangement between Lamie
+and Equipment Services was, because only with that understood can
+we determine whether any amount of the retainer constituted property
+of Equipment Services at the time the Chapter 11 petition was filed.
+Retainer agreements can take various forms. For example, a retainer
+can be paid simply to ensure an attorney's availability to represent the
+client, whether or not services are ever performed. Or a retainer can
+be a prepayment for all future services to be performed, amounting
+to a flat fee. Under either one of these arrangements, the attorney
+acquires title to the retainer fee at the time he receives it, regardless
+of whether he thereafter performs legal services for the client. See
+Indian Motocycle Assocs. v. Mass. Housing Finance, 
+66 F.3d 1246,
+1254
+ (1st Cir. 1995). On the other hand, if the relationship is a trust
+arrangement in which the attorney holds the retainer for the client as
+security for the payment of future fees, then the retainer so held, less
+any fees charged against it, constitutes the property of the client. See
+Indian Motocycle, 
+66 F.3d at 1255
+; see also 
+11 U.S.C. § 541
+(a).
+Indeed, Virginia's disciplinary rules demand that an attorney hold a
+retainer of this type in trust for the client. See In re Prudoff, 
+186 B.R.
+64, 67
+ (Bankr. E.D. Va. 1995) (citing Va. Rules Discip. P. § 9-102).
+
+   In this case, the facts relating to the fee arrangement are not in dis-
+pute. Lamie was paid $6,000 to secure fees that he thereafter earned,
+and under the arrangement, as he earned fees, he became entitled to
+pay himself from the $6,000 sum. But until he earned fees, the
+
+                      10
+account remained the property of Equipment Services so that in the
+end, if any of the $6,000 remained, Lamie would be required to return
+the balance to Equipment Services.
+
+    Accordingly, at the commencement of this action, Lamie had
+earned, charged, and paid himself $1,000 in fees for the preparation
+and filing of the Chapter 11 petition. The remaining $5,000 in
+Lamie's trust account therefore became property of the bankruptcy
+estate, under 
+11 U.S.C. § 541
+(a), when the Chapter 11 petition was
+filed.
+
+    During the Chapter 11 proceeding, Lamie worked for the debtor-in-
+possession, and the bankruptcy court authorized that arrangement.
+Accordingly, the sum of $1,325 in fees earned and the $3.85 in costs
+incurred by Lamie while Equipment Services was "in Chapter 11"
+was payable from the $5,000 held by Lamie as part of the bankruptcy
+estate. Payment of that amount has been approved by the bankruptcy
+court and the district court, and it is not disputed by the Trustee. Thus,
+at the time the Chapter 11 proceeding was converted to a Chapter 7
+proceeding, the $5,000 escrow account was subject to charges of
+$1,328.85, leaving the remaining $3,671.15 as part of the bankruptcy
+estate.
+
+   When the Chapter 11 proceeding was converted to a Chapter 7 pro-
+ceeding, however, the bankruptcy estate became committed to the
+custody and control of the United States Trustee, and the $3,671.15
+in Lamie's escrow account remained part of that estate. Under 
+11
+U.S.C. § 330
+(a), as we have construed it, Lamie could not be paid
+fees from the estate while the proceeding was under Chapter 7. More-
+over, the Trustee did not exercise his authority to retain Lamie during
+the Chapter 7 proceeding. Accordingly, even though Lamie incurred
+an additional $1,000 in fees on behalf of Equipment Services after the
+Chapter 7 conversion, he was not entitled to recover that amount from
+the estate. See Indian Motocycle, 
+66 F.3d at 1255
+; In re Prudoff, 
+186
+B.R. at 67
+.
+
+   In sum, of the $6,000 retainer held by Lamie on behalf of Equip-
+ment Services, $1,000 was properly paid to him for pre-petition work;
+$1,328.85 is payable to him for work performed during the Chapter
+11 proceeding; and $3,617.15 belongs to the estate. The judgment of
+
+                     11
+the district court is, accordingly, affirmed in its construction of 
+11
+U.S.C. § 330
+(a) and insofar as it awarded Lamie fees before the
+Chapter 7 conversion and is reversed insofar as it awarded Lamie fees
+for work performed after the Chapter 7 conversion.
+
+AFFIRMED IN PART, REVERSED IN PART
+
+
+MICHAEL, Circuit Judge, concurring in part and dissenting in part:
+
+    I respectfully dissent from part II of the majority's opinion, but oth-
+erwise concur. Specifically, I agree with the majority's conclusion in
+part III of its opinion that the unearned portion of Lamie's retainer
+became property of the bankruptcy estate when Equipment Services
+filed its Chapter 11 petition. It follows that if Lamie can be compen-
+sated at all for the legal services he rendered after the conversion of
+the company's bankruptcy proceeding from Chapter 11 to Chapter 7,
+his compensation must come from the bankruptcy estate. As the
+majority acknowledges, the question of whether 
+11 U.S.C. § 330
+(a)
+allows a Chapter 7 debtor's attorney to be paid professional fees from
+the bankruptcy estate is a close one. Because the arguments on both
+sides of this question have been well developed by the majority and
+by panels from other circuits, there is nothing left for me to do but
+choose a side. I cannot side with the majority. Rather, I agree with the
+Third and Ninth Circuits, which hold that when Congress amended
+§ 330(a) in 1994, it inadvertently deleted debtors' attorneys from the
+existing statutory list of those who could be paid from the bankruptcy
+estate for services rendered in bankruptcy proceedings. See In re Top
+Grade Sausage, Inc., 
+227 F.3d 123, 130
+ (3d Cir. 2000); In re Century
+Cleaning Servs., Inc., 
+195 F.3d 1053, 1061
+ (9th Cir. 1999). This draft-
+ing error should not prevent a Chapter 7 debtor's attorney from being
+paid with funds from the estate, just as he could be before the error
+occurred.
+
+    Here, Lamie is entitled to reasonable compensation from the bank-
+ruptcy estate for the legal services he rendered after the Chapter 7
+conversion to the extent that those services were "reasonably likely to
+benefit the debtor's estate" or were "necessary to the administration
+of the case." 
+11 U.S.C. § 330
+(a)(4)(ii). Because neither the bank-
+ruptcy court nor the district court regarded Lamie's post-Chapter 7
+fees as compensation from the bankruptcy estate, they did not evalu-
+
+                      12
+ate his fee application under this standard. Accordingly, I would
+vacate the award of attorney's fees to Lamie for his post-Chapter 7
+services and would remand for the bankruptcy court to evaluate
+Lamie's fee application under the proper standard. I concur in the
+majority's opinion insofar as it affirms the award of attorney's fees
+to Lamie for his services before the Chapter 7 conversion.
+
+                     13

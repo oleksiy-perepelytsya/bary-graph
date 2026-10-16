@@ -1,0 +1,42 @@
+OPINION AND ORDER
+
+KOELTL, District Judge:
+The defendants move to strike the plaintiffs jury demand, claiming that the conduct of the plaintiffs counsel waived the plaintiffs right to a jury. The plaintiff denies that the conduct of his counsel satisfies the waiver requirements of Federal Rule of Civil Procedure 39(a), and, in the alternative, requests that the court use its discretion under Federal Rule of Civil Procedure 39(b) to reinstate the plaintiffs jury demand.
+
+The plaintiff brings this employment discrimination action pursuant to Title VII of the Civil Rights Act of 1964. He alleges that, because of his race and national origin, the defendants refused to promote him and subjected him to a hostile work environment. In his original complaint, the plaintiff, acting pro se, requested a jury trial. After he filed the complaint, he obtained the services of an attorney. During a pre-trial conference on May 4, 1995, the plaintiffs counsel told the defendants’ counsel and the Court that the plaintiff was willing to waive his right to a jury. The defendants did not agree to the withdrawal of the jury demand during this conference, but, agreed to advise the plaintiff and the Court by May 26,1995, whether they would consent to a non-jury trial,
+
+The defendants argue that their counsel orally advised the Court and the plaintiffs counsel of their acceptance of the plaintiffs proposal for a non-jury trial. The plaintiff does not dispute that the defendants’ counsel advised his counsel by telephone that the defendants would consent to a non-jury trial. The parties disagree, however, as to whether the defendants notified the Court. The defendants claim, on information and belief, that they did orally notify the Court by May 26, 1995, but it is clear that this was never done at a formal conference or even by a written advice. The defendants are even unable to reconstruct how the Court was informed. The parties do agree that sometime after May 1995, in the process of settlement negotiations before Magistrate Judge Bernikow, the plaintiff advised the defendants that he no longer wished to waive his right to a jury trial, and Magistrate Judge Bernikow advised the parties that they should raise the issue with the Court.
+
+
+I.
+
+The defendants argue that the conduct of the plaintiffs counsel satisfies the waiver requirements of Federal Rule of Civil Procedure (“FRCP”) 39(a).
+
+FRCP 39(a) “cloak[s] the waiver process in a ritual that is almost sacramental.” Tray-Wrap, Inc. v. Six L’s Packing Co., Inc., 984 F.2d 65, 67 (2d Cir.1993). This rule provides that:
+
+When trial by jury has been demanded ... the action shall be designated on the docket as a jury action. The trial of all issues so demanded shall be by jury, unless (1) the parties or their attorneys of record, by written stipulation filed with the court or by an oral stipulation made in open court, consent to a trial by the court sitting without a jury ...
+
+According to a literal interpretation of FRCP 39(a), a waiver may not be granted in the absence of (1) a written stipulation or (2) an oral stipulation made in open court. The Court of Appeals for the Second Circuit has held, however, that a formalistic application *294of FRCP 39(a) is not required, and that a waiver may be inferred by the conduct of the parties or their counsel. Royal American Managers, Inc. v. IRC Holding Corporation, 885 F.2d 1011, 1018 (2d Cir.1989). Because the Seventh Amendment right to a jury trial is fundamental, however, a court should “indulge every reasonable presumption against a waiver.” Aetna Ins. Co. v. Kennedy, 301 U.S. 389, 393, 57 S.Ct. 809, 812, 81 L.Ed. 1177 (1937); See National Equipment Rental, Ltd. v. Hendrix, 565 F.2d 255, 258 (2d Cir.1977). “The right to a jury trial is too important,” the Court of Appeals has explained, “and the usual procedure for the waiver of the right too clearly set out by the federal rules for the courts to find a knowing and voluntary relinquishment of the right in a doubtful situation.” Heyman v. Kline, 456 F.2d 123, 129 (2d Cir.1972).
+
+Because a waiver should never be lightly inferred, the “conduct said to constitute a waiver must be clear and unequivocal.” Tray-Wrap, Inc., 984 F.2d at 68. (Waiver denied because impossible for court to reconstruct what occurred during pre-trial conference conducted by conference call.) The Court of Appeals for the Second Circuit has found, for example, that acquiescence in a bench trial, without objection, constitutes a waiver of the right to a jury. Royal American Managers, Inc., 885 F.2d at 1018; Kahn v. General Motors Corp., 865 F.Supp. 210, 212 (S.D.N.Y.1994) (Silence at pre-trial conference, and unambiguous depositions and letters expressing plaintiffs understanding that he has waived his right to a jury satisfy the requirements of FRCP 39(a)).
+
+The defendants claim that their acceptance of the plaintiffs proposal to waive his right to a jury trial satisfies the requirements of FRCP 39(a). Their alleged acceptance, however, was never reduced to a stipulation or made orally in court. There is certainly no clear evidence of a fully consummated agreement to waive a jury trial. Similarly, although the defendants claim that a waiver must be inferred from the conduct of the parties, the activities of the parties do not reflect agreement on a waiver of a jury trial. In fact, the plaintiffs counsel withdrew his proposal long before the completion of a pre-trial discovery, the completion of a pretrial order, or the beginning of a trial. The conduct of the parties, therefore, does not support an inference of a waiver.
+
+
+II.
+
+Even if a waiver could be inferred from the conduct of the parties, the plaintiff persuasively argues that the Court should use its discretion to reinstate the plaintiffs jury demand. FRCP 39(b) provides that:
+
+Notwithstanding the failure of any party to demand a jury in an action in which such a demand might have been made of right, the court in its discretion upon motion may order a trial by jury of any and all issues.
+
+When considering Rule 39(b) motions, the district court will consider (1) whether the action is typically the type of case tried to a jury; (2) whether the parties have proceeded on the assumption that the case would be tried before a jury; and (3) whether the party opposing the jury request would be unduly prejudiced if the action were tried before a jury. Reliance Electric Co. v. Exxon Capital Corp., 932 F.Supp. 101, 103 (S.D.N.Y.1996). Any prejudice alleged must arise from the untimeliness of the jury demand and not simply from the possibility of a jury trial. Id.
+
+Several factors in this case weigh strongly in favor of granting the plaintiffs request to reinstate his jury demand. First, employment discrimination cases are, now, routinely tried before a jury. Second, the plaintiff requested a jury trial in his original and amended complaint, and therefore had timely demanded a jury. There was only a brief period of time after May, 1995, during which the parties may not have been on notice that this would be a jury trial. The defendants, therefore, cannot claim that they have proceeded on the assumption that this would be a non-jury trial. See Reliance Electric Co., 932 F.Supp. at 103. Finally, the defendants provide no evidence that they would be prejudiced by the granting of the plaintiffs jury demand. Nor is there any credible likelihood of prejudice to the defendants. Id.
+
+
+*295
+CONCLUSION
+
+Therefore the motion to strike the plaintiffs jury demand is denied because the parties have not satisfied the waiver requirements of FRCP 39(a). In the alternative, the plaintiffs cross-motion to reinstate his jury demand under FRCP 39(b) is granted.
+
+SO ORDERED.

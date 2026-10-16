@@ -1,0 +1,258 @@
+JUSTICE HARTMAN
+ 
+
+  delivered the opinion of the court:
+ 
+
+
+  Plaintiff, Deanne Smith, as administratrix of the estate of Thomas Smith, Jr., deceased, appeals from the circuit court’s denial of her motion for a new trial following a jury verdict in favor of defendants Silver Cross Hospital (SCH), Habib Abbasi, M.D. (Dr. Abbasi), and Fischer Mangold Group (Fischer), in this medical malpractice action. On appeal plaintiff contends that the circuit court erred in: (1) granting defendants’ objection to plaintiffs motion to impeach Dr. Abbasi with his prior deposition testimony; (2) denying plaintiffs motion for a new trial based on the testimony of Margaret Johnson, R.N.; and (3) prohibiting the introduction into evidence of the 1998 version of SCH’s policies and procedures.
+ 
+
+
+  At 1 a.m. on November 27, 1996, Thomas Smith, Jr. (decedent), presented at the emergency room (ER) at SCH complaining of flu-like symptoms including nausea, dizziness, cough, difficulty breathing, and fever. He was treated by Dr. Abbasi and diagnosed with fever, bronchitis, upper respiratory tract infection or flu, and vertigo. Decedent was discharged at 5:50 a.m with instructions to return if his condition worsened. Decedent was picked up and taken home by his brother, Daniel Smith, at 7 a.m. Decedent’s condition worsened during the day and he was taken to Palos Community Hospital at 1:25 p.m. The doctor there determined that decedent had a severe infection. Decedent died at 8 a.m. the next morning. It is undisputed that decedent died from an infectious disease called meningococcemia caused by the neisseria meningitides bacteria.
+ 
+
+
+  Meningococcemia is a blood-borne disease that can affect all organs of the body. The early stages of meningococcemia can appear as a viral cold, flu, or upper respiratory infection. It was undisputed that a definitive diagnosis of meningococcemia could not have been made in the ER. One of the tell-tale signs of meningococcemia is skin lesions, including purplish bruises and petechiae (red dots on the skin). Dr. Abbasi testified that decedent did not have any skin lesions.
+ 
+
+
+  On April 1, 1998, plaintiff filed her wrongful death/medical negligence complaint against defendants to recover damages for the death of decedent, her husband. Plaintiff alleged that defendants failed to diagnose properly and treat decedent.
+ 
+
+
+  On December 9, 1998, plaintiff sent a Supreme Court Rule 214 (166 Ill. 2d R. 214) request to produce to SCH, requesting, inter alia, SCH’s nurses manual and all other rules and regulations of SCH “which were in effect at the time of the occurrence of medical malpractice alleged in Plaintiffs Complaint,” as well as any subsequent revisions to those documents. In February 1999, SCH responded in writing to plaintiffs request to produce and informed plaintiff that the policy and procedure manuals she sought were voluminous and that arrangements should be made for plaintiffs counsel to inspect the contents of these manuals to determine more specifically what was needed. SCH also informed plaintiff that the policy and procedure manuals were updated periodically and that the policies in effect on the date of the occurrence may not have been preserved.
+ 
+
+
+  SCH provided plaintiffs counsel with a table of contents for all the policy and procedure manuals. In August 2001, plaintiffs counsel identified the sections he wished to review and they were made available for inspection and photocopying. Many of the policies and procedures requested by plaintiff were adopted and effective in 1998. The policies and procedures that were in existence at the time of decedent’s treatment (the 1996 policies and procedures) were destroyed during the normal updating and revision process at SCH. Because SCH did not keep copies of the 1996 policies and procedures, it is unclear if or how they differ from the 1998 policies and procedures.
+ 
+
+
+  Plaintiff sought to introduce four 1998 policies and procedures as being the policies and procedures that were in effect at the time of decedent’s treatment in 1996. SCH successfully moved in limine to bar three of the four 1998 policies on the ground of relevance as plaintiff had failed to establish that the 1998 policies were the same as those in existence in 1996. The court allowed introduction of the fourth policy based on testimony that it was probably in existence at the time decedent was hospitalized. Plaintiff unsuccessfully moved for reconsideration.
+ 
+
+
+  At trial, Margaret Johnson, R.N., the nurse who triaged and discharged decedent, testified that at the time of discharge decedent was in good condition. He was able to walk and talk, had no skin rash, and subjectively felt better. Johnson stated that it was the nurses’ responsibility to check on discharged patients who were in the waiting room waiting for rides home. On cross-examination, Johnson stated that patient care in the waiting room is usually up to the patient. There are no nurses stationed in the waiting room.
+ 
+
+
+  Patricia Inch, R.N., testified that she treated decedent in the ER at SCH. Decedent did not exhibit any signs or symptoms of meningococcemia, including the tell-tale sign of skin rash or petechial hemorrhages, while in the ER. Decedent’s condition improved throughout his stay in the ER. According to Inch, once a patient was discharged the nurses no longer were responsible for him unless the patient brought information to the nurses’ attention regarding a change in condition. Nurses had no responsibility to check on a discharged patient in the waiting room.
+ 
+
+
+  Daniel Smith, decedent’s brother, testified that when he picked up decedent from the waiting room at SCH at 7 a.m., decedent’s speech was not normal, he was having difficulty walking, and had red marks on his face and a purplish discoloration just below his cheek and another one under his ear. He described decedent’s appearance as scary and alarming, yet he did not speak to anyone at the hospital or get a nurse or doctor to look at decedent.
+ 
+
+
+  Dr. Gregory S. Johnston, plaintiff’s expert, testified that decedent would not have died if he had been treated with intravenous (IV) antibiotics at SCH. Plaintiffs expert witness, Dr. Stephen Sokalski, stated that if decedent had been treated with IV antibiotics early in the course of the disease he would have lived.
+ 
+
+
+  Dr. John Segreti, a defense expert, testified that if IV antibiotics had been given at SCH “they would not have been effective in altering the picture and the outcome in this particular patient.” Decedent would have died from meningococcemia no matter what was done at SCH.
+ 
+
+
+  On October 16, 2001, the jury returned a verdict in favor of defendants. Plaintiff unsuccessfully moved for a new trial.
+ 
+
+
+  I
+ 
+
+
+  Plaintiff first contends that the circuit court erred in granting defendants’ objection to plaintiffs motion to impeach Dr. Abbasi with his prior deposition testimony.
+  
+   1
+  
+  According to plaintiff, two of the main issues in the case were whether decedent presented at the ER with symptoms that should have alerted defendants to decedent’s septic condition and whether decedent would have lived if he had been given IV antibiotics while in the ER. Plaintiffs theory was that decedent would have survived had he been given broad-based IV antibiotics while in the ER. Plaintiff argues Dr. Abbasi’s deposition testimony that decedent would have survived had he been given broad-based IV antibiotics while in the ER was relevant to this issue and therefore should have been admissible.
+ 
+
+
+  It is appropriate to test the credibility of a witness by demonstrating that on a prior occasion the witness made statements inconsistent with his trial testimony. Schiff v. Friberg, 331 Ill. App. 3d 643, 771 N.E.2d 517 (2002) (Schiff). To be used for impeachment, a witness’s prior statement must be materially inconsistent with his or her trial testimony. Schiff, 331 Ill. App. 3d at 656. For deposition testimony to be admissible for impeachment, that testimony must contradict an in-court statement of the witness on a material matter. Preston v. Simmons, 321 Ill. App. 3d 789, 747 N.E.2d 1059 (2001). Before any impeachment can occur, the witness first must testify at trial in a manner inconsistent with his prior out-of-court testimony. Defendants point out that plaintiff never elicited testimony from Dr. Abbasi that was inconsistent with an earlier out-of-court statement.
+ 
+
+
+  The record reveals that plaintiff called Dr. Abbasi as an adverse witness during her case in chief and asked him:
+ 
+
+
+  “Q. Now, Doctor, I want to ask you a question. Based upon a reasonable degree of medical certainty, had you started [decedent] on an I.V, the appropriate I.V antibiotics for a meningeal infection while he was in your emergency room would he have lived?”
+ 
+
+
+  Before Dr. Abbasi could answer the court sustained counsel’s objection to the question on the basis of relevance. Plaintiff’s counsel then requested a sidebar, during which he indicated that Dr. Abbasi had been asked the same question at his deposition.
+ 
+
+
+  A transcript of Dr. Abbasi’s deposition is not part of the record on appeal. The relevant portion of the deposition was read into the record during the sidebar on this issue:
+ 
+
+
+  “Q. Do you have an opinion, Doctor, based upon a reasonable degree of medical certainty that had you started the IV antibiotics during the time that [decedent] was in the ER, would he be alive today?
+ 
+
+
+  A. Probably not, no.
+ 
+
+
+  Q. The question is, do you have an opinion?
+ 
+
+
+  A. Yes.
+ 
+
+
+  Q. What’s the opinion?
+ 
+
+
+  A. Probably not. It’s one of those kinds of infections that[’s] really virulent and really — and very extreme and for his condition. If I would have treated him with an [sic] antibiotics for bronchitis and everything else, no, even then, it wouldn’t have covered it.
+ 
+
+
+  Q. I’m asking you in a hypothetical based upon a reasonable degree of certainty, had you started him on I.Vs, the appropriate I.Vs for meningeal infection, while he was in your ER, would he have lived?
+ 
+
+
+  A. Yeah. Hypothetically, yes. I mean, anybody treated with antibiotics with similar problem would have, yes.”
+ 
+
+
+  The circuit court found that the evidence was irrelevant because the deposition testimony at issue referred to a meningeal infection and it was undisputed that decedent did not have a meningeal infection. The court interpreted Dr. Abbasi’s testimony to be that decedent may have survived if his illness had been a meningeal infection and he was given the appropriate IV antibiotics while in the ER.
+ 
+
+
+  Plaintiff argues that the circuit court’s ruling was based on an incorrect interpretation of the deposition testimony. Dr. Abbasi was not referring to a meningeal infection when he answered the question; rather, his testimony was that decedent would have survived if given broad-based TV antibiotics while in the ER. Plaintiff argues that the court ignored the fact that the standard treatment for a patient suspected to have either a meningeal infection or meningococcemia is the same — administration of broad-based IV antibiotics. That both diseases might require the same initial treatment does not, however, indicate that a patient with a meningeal infection who is given that treatment has the same chance of survival as a patient suffering from meningococcemia who is given that treatment.
+ 
+
+
+  The circuit court’s interpretation of the testimony was not unreasonable. It was undisputed that decedent died from meningococcemia. It was further undisputed that decedent did not have a meningeal infection. There was testimony from Dr. Abbasi that meningococcemia was a completely different entity from meningeal disease; not even within the family of meningeal disease. When Dr. Abbasi’s deposition testimony is considered in context it is clear that he distinguished between the effect of antibiotics on decedent’s chances for surviving a meningeal infection and on his chances of surviving the condition he had, meningococcemia. Immediately prior to the question at issue, Dr. Abbasi was asked if decedent would be alive today if IV antibiotics had been administered during the time decedent was in the ER to which he responded probably not. At trial, Dr. Abbasi again testified that he did not believe decedent would have lived had he been given IV antibiotics in the ER.
+ 
+
+
+  Relevant evidence is evidence “having any tendency to make the existence of any fact that is of consequence to the determination of the action more or less probable than it would be without the evidence.” Wojcik v. City of Chicago, 299 Ill. App. 3d 964, 971, 702 N.E.2d 303 (1998). The relevance and admission of evidence at trial are within the discretion of the circuit court and its ruling will not be reversed absent a clear abuse of that discretion. Hernandez v. Paschen Contractors, Inc., 335 Ill. App. 3d 936, 781 N.E.2d 1083 (2002). An abuse of discretion may be found only where no reasonable man would take the view adopted by the circuit court. Hilgenberg v. Kazan, 305 Ill. App. 3d 197, 711 N.E.2d 1160 (1999); King v. American Food Equipment Co., 160 Ill. App. 3d 898, 513 N.E.2d 958 (1987).
+ 
+
+
+  The circuit court did not abuse its discretion in excluding irrelevant evidence regarding meningeal infections.
+ 
+
+
+  II
+ 
+
+
+  In a related argument, plaintiff next contends that the circuit court erred in denying her motion for a new trial based on Johnson’s testimony that the nurses at SCH had an absolute duty to go into the waiting room and check on patients like decedent who had been discharged but had not yet left the hospital. This testimony, according to plaintiff, required a jury determination that SCH breached its duty of care by not going into the waiting room to check on decedent. The only way that SCH escaped liability, therefore, was because the jury believed that decedent would not have survived regardless of whether or not the nurses had brought his deteriorating condition while in the waiting room to the attention of Dr. Abbasi, or whether or not Dr. Abbasi started IV antibiotic treatment while decedent was in the ER. Plaintiff reiterates her argument that the court’s ruling regarding Dr. Abbasi’s deposition testimony directly affected the jury’s opinion regarding the survivability of decedent. As discussed under point I, the circuit court did not err in excluding that deposition testimony.
+ 
+
+
+  A circuit court’s decision to grant or deny a new trial will not be disturbed on review absent an abuse of discretion. Jones v. Chicago Osteopathic Hospital, 316 Ill. App. 3d 1121, 738 N.E.2d 542 (2000). A new trial should be granted only when the verdict is against the manifest weight of the evidence. Maple v. Gustafson, 151 Ill. 2d 445, 603 N.E.2d 508 (1992) (Maple). A verdict is against the manifest weight of the evidence where the opposite conclusion clearly is evident or the jury’s findings are unreasonable, arbitrary, or not based on the evidence. Maple, 151 Ill. 2d at 454.
+ 
+
+
+  The evidence supported the jury’s verdict. As the circuit court noted in denying the motion for a new trial, even if the nurses deviated from the standard of care by failing to go to the waiting room to check on decedent, there was no proximate cause because there was testimony that even if IV antibiotics had been administered to decedent at SCH he would have died. The jury heard testimony from experts on both sides regarding decedent’s survivability had he been administered IV antibiotics at SCH. The jury also heard testimony from experts on both sides regarding whether or not defendants breached the standard of care. It was for the jury to assess the credibility of this testimony, weigh the evidence, and resolve any conflicts. Pantaleo v. Our Lady of the Resurrection Medical Center, 297 Ill. App. 3d 266, 696 N.E.2d 717 (1998).
+ 
+
+
+  The circuit court did not abuse its discretion in refusing to grant plaintiff a new trial based on Johnson’s testimony.
+ 
+
+
+  Ill
+ 
+
+
+  Finally, plaintiff contends that the circuit court erred in excluding the 1998 version of SCH’s policies and procedures regarding the handling of ER patients with respiratory distress and asthmatic conditions as evidence of the standard of care that existed at the time of decedent’s hospitalization in 1996.
+  
+   2
+  
+  The court excluded the evidence as irrelevant because plaintiff failed to establish that the policies and procedures she wished to admit were the same as the ones that were in effect in 1996 at the time of decedent’s treatment.
+ 
+
+
+  Relying on Adams v. Family Planning Associates Medical Croup, Inc., 315 Ill. App. 3d 533, 733 N.E.2d 766 (2000) (Adams), plaintiff argues that it was prejudicial error for the court to refuse to allow plaintiff to submit the 1998 policies as evidence of the standard of care applicable in 1996. In Adams, the court noted that “[w]hen considering the standard of care to which a clinic should be held, the clinic’s internal policies and procedures are an appropriate source of evidence, and the failure of a clinic to follow its policies can be evidence of a breach of the clinic’s duty to a patient.” Adams, 315 Ill. App. 3d at 548. Adams did not hold, however, that policies adopted subsequent to the time of treatment were relevant or admissible to establish the standard of care at the time of treatment.
+  
+   3
+  
+
+
+  In Smith v. South Shore Hospital, 187 Ill. App. 3d 847, 543 N.E.2d 868 (1989) (Smith), plaintiff sought to introduce into evidence the 1983 standards of the Joint Commission on Accreditation of Hospitals to establish the standard of care for administering a spinal anesthetic for a 1979 surgery. The appellate court found that because the 1983 standards were not in effect on the date of the surgery, they were inapplicable to establish a standard of care for a 1979 occurrence.
+ 
+
+
+  The admission of evidence is within the discretion of the circuit court and its ruling will not be reversed absent an abuse of that discretion. Nassar v. County of Cook, 333 Ill. App. 3d 289, 775 N.E.2d 154 (2002). All evidence must be relevant to be admissible. Wiker v. Pieprzyca-Berkes, 314 Ill. App. 3d 421, 732 N.E.2d 92 (2000). Evidence is relevant if it tends to prove a fact in controversy or render a matter in issue more or less probable. Bachman v. General Motors Corp., 332 Ill. App. 3d 760, 776 N.E.2d 262 (2002). Plaintiff failed to show that the 1998 policies and procedures were applicable to establish the standard of care for treatment rendered in 1996 and, therefore, were relevant.
+ 
+
+
+  Plaintiff further argues that the circuit court incorrectly placed the burden on her to show that the 1998 policies and procedures were the same as the ones in existence at the time of decedent’s treatment. According to plaintiff, because SCH destroyed the 1996 policies and procedures, the burden should have been on SCH to show that the 1998 policies and procedures were not the same as the policies and procedures in effect at the time of decedent’s treatment.
+ 
+
+
+  In support of this argument plaintiff cites Boyd v. Travelers Insurance Co., 166 Ill. 2d 188, 652 N.E.2d 267 (1995) (Boyd), where the supreme court held that to state a cause of action for the negligent spoliation of evidence, a plaintiff must plead the existence of a duty owed by defendant to plaintiff, a breach of that duty, an injury proximately caused by the breach, and damages.
+  
+   4
+  
+  The court noted, in general, that there is no duty to preserve evidence. A duty to preserve evidence may arise, however, through an agreement, contract, statute, or another special circumstance. “In any of the foregoing instances, a defendant owes a duty of due care to preserve evidence if a reasonable person in the defendant’s position should have foreseen that the evidence was material to a potential civil action.” Boyd, 166 Ill. 2d at 195.
+ 
+
+
+  Plaintiff argues that SCH had a duty to preserve the 1996 policies and procedures because the filing of the lawsuit in April 1998 was a special circumstance giving rise to such a duly. According to plaintiff, once SCH received the complaint they had to have known that the policies and procedures would be an issue in the case.
+ 
+
+
+  The policies and procedures plaintiff wished to use concerned the handling of ER patients with respiratory distress and asthmatic conditions. Plaintiffs complaint alleged that decedent presented at SCH complaining of “general malaise, illness or malady.” The complaint did not allege that decedent suffered from respiratory distress or an asthmatic condition. Based on the allegations in the complaint, a reasonable person in SCH’s position would not have foreseen that the policies and procedures at issue were material to the litigation. SCH had no duty to preserve the 1996 policies and procedures regarding the handling of ER patients with respiratory distress and asthmatic conditions. Even if SCH had a duty to preserve the 1996 policies and procedures, Boyd does not stand for the proposition that evidence can be admitted without a proper foundation. Nor does Boyd address or support plaintiffs burden-shifting argument. The burden of establishing the relevancy of evidence is always on the proponent of the evidence. Vojas v. K mart Corp., 312 Ill. App. 3d 544, 727 N.E.2d 397 (2000).
+ 
+
+
+  The circuit court properly excluded the 1998 policies and procedures as irrelevant to the applicable standard of care where plaintiff failed to establish that those policies and procedures were in effect at the time of decedent’s treatment at SCH.
+ 
+
+
+  Accordingly for the reasons set forth above, the judgment of the circuit court of Cook County is affirmed.
+ 
+
+
+  Affirmed.
+ 
+
+
+  GREIMAN and KARNEZIS, JJ., concur.
+ 
+
+
+
+
+
+
+
+   1
+  
+
+   Without merit is Dr. Abbasi and Fischer’s argument that plaintiff waived this issue by failing to make an offer of proof at trial of the excluded testimony. Specifically, they argue that plaintiff asks this court to speculate as to what Dr. Abbasi’s answer would have been had the objection not been sustained and that the answer would have been inconsistent with his deposition testimony. An offer of proof was not necessary because the circuit court and opposing counsel were aware of the substance of the proffered evidence. Dillon v. Evanston Hospital, 199 Ill. 2d 483, 771 N.E.2d 357 (2002).
+  
+
+
+
+   2
+  
+
+   The record on appeal does not contain copies of the policies and procedures plaintiff sought to admit. According to plaintiff, the policies and procedures at issue required certain evaluations to be done at certain intervals and that all medical evaluations and vital signs be reduced to writing in the patient’s chart. Plaintiff argues that these policies and procedures were critical to her case because they involved the requirements and timing for reevaluating decedent during his stay in the ER. These reevaluations were critical to the jury’s determination of whether decedent’s condition deteriorated to the point where Dr. Abbasi should have diagnosed sepsis.
+  
+
+
+
+   3
+  
+
+   In Adams, the appellate court found that the circuit court erred in refusing to give plaintiffs tendered instruction that the jury could consider the defendants’ internal policies and procedures as evidence of the standard of care. Issues of foundation and admission were not addressed.
+  
+
+
+
+   4
+  
+
+   It should be noted that plaintiffs complaint does not plead a cause of action for negligent spoliation of evidence.

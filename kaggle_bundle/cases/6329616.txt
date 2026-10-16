@@ -1,0 +1,890 @@
+UNITED STATES DISTRICT COURT
+                            FOR THE DISTRICT OF COLUMBIA
+
+
+    NATHAN M.F. CHARLES,
+              Plaintiff
+                                                          Civil Action No. 21-0864 (CKK)
+         v.
+    UNITED STATES OF AMERICA,
+              Defendant.
+
+
+                                 MEMORANDUM OPINION
+                                     (April 7, 2022)
+        This matter comes before the Court on Plaintiff’s [31] Motion for Reconsideration.
+
+Plaintiff moves the Court, pursuant to Federal Rule of Civil Procedure 60(b), to vacate its [30]
+
+Memorandum Opinion and Order dismissing this case for lack of jurisdiction. Insofar as
+
+Plaintiff clarifies his defamation claim to center on alleged conduct the Court did not analyze in
+
+its [30] Memorandum Opinion and Order granting Defendant’s [3] Motion to Dismiss, the Court
+
+will exercise its discretion to revisit its [30] Memorandum Opinion and Order and reanalyze
+
+dismissal on Plaintiff’s proposed basis. Even doing so, however, the Court concludes it still
+
+lacks jurisdiction over this case. Accordingly, upon consideration of the pleadings, 1 the relevant
+
+
+
+
+1
+ This Memorandum Opinion focuses on the following documents:
+   • Plaintiff’s Complaint, ECF No. 1-1 (“Compl.”);
+   • Plaintiff’s sealed Reply to Defendant’s Motion to Dismiss, ECF No. 6 (“Pl.’s Opp.”);
+   • Plaintiff’s proposed Amended Compaint, ECF No. 19-1 (“Am. Compl.’);
+   • Plaintiff’s Motion for Reconsideration, ECF No. 29 (“Mot.”);
+   • Defendant’s Opposition to Plaintiff’s Motion for Reconsideration, ECF No. 32 (“Def.’s
+       Opp.”); and
+   • Plaintiff’s Reply to Opposition to Motion for Reconsideration, ECF No. 33 (“Pl.’s
+       Repl.”).
+   In an exercise of its discretion, the Court finds that holding oral argument in this action
+would not be of assistance in rendering a decision. See LCvR 7(f).
+                                                 1
+legal authorities, and the entire record, the Court shall DENY Plaintiff’s [31] Motion for
+
+Reconsideration.
+
+                                       I.   BACKGROUND
+
+          Before turning to the circumstances underlying Plaintiff’s most recent Motion, the Court
+
+shall pause to repeat some of the general background in this case. On February 25, 2021,
+
+Plaintiff, previously employed as an attorney at the National Security Division (“NSD”) of the
+
+United States Department of Justice, filed a complaint for defamation against two of his
+
+coworkers in the District of Columbia Superior Court. Notice of Removal at ¶ 2. Plaintiff’s
+
+operative complaint is threadbare; it characterizes his coworkers’ statements as “false” and made
+
+to “Plaintiff’s direct supervisor and other managerial officials of [NSD].” Compl. at ¶¶ 3-4. The
+
+complaint’s only other factual allegation is that, “[a]s a result of [his coworkers’] publication of
+
+these defamatory statements, [] Plaintiff was suspended from his position as a federal
+
+prosecutor,” resulting in lost wages. See id. at ¶ 5. On March 31, 2021, Defendant filed their
+
+notice of removal, arguing that it was the true party in action as Plaintiff’s former coworkers
+
+were acting in their official capacity when they uttered the allegedly defamatory statements. Id.
+
+at ¶ 5.
+
+          A week after removal, Defendant filed its motion to dismiss for lack of subject matter
+
+jurisdiction. In support thereof, Defendant argued: (1) the Court did not have derivative
+
+jurisdiction because federal courts have exclusive jurisdiction over claims arising under the
+
+FTCA; (2) contrarily, Plaintiff cannot bring an FTCA claim because the FTCA does not waive
+
+sovereign immunity for intentional torts; and (3) Plaintiff had yet to effect proper service.
+
+          It was not until Plaintiff’s opposition2 that Plaintiff offered some factual development in
+
+
+2
+  Upon Defendant’s motion, the Court sealed Plaintiff’s opposition as, Defendant represented,
+Plaintiff revealed the existence of sensitive, ongoing national security investigations. Order at 1,
+                                                   2
+response to Defendant’s jurisdictional arguments. Broadly, Plaintiff’s conflict with his
+
+coworkers seems to have begun when, Plaintiff alleges, they ignored concerns he raised about
+
+
+
+                                                                                                 Pl.’s
+
+Opp. at 4-6. In its [30] Memorandum Opinion and Order, the Court focused on Plaintiff’s
+
+allegation that he submitted a draft report on the subject to his supervisor, that she directed him
+
+not to share the draft outside of the Department of Justice, and when he did, she reported his
+
+actions to upper management within NSD. Charles v. United States, 
+2022 WL 558181
+ at *2.
+
+The Court focused on that fact mainly because neither Plaintiff’s complaint nor proposed
+
+amended complaint identified what false statement gave rise to his defamation claim (and his
+
+proposed claim for intentional infliction of emotional distress). See 
+id.
+ Indeed, both Plaintiff’s
+
+original complaint and proposed amended complaint had very few factual allegations, while
+
+Plaintiff’s 73-page opposition, as Plaintiff writes in the instant Motion, “was particularly
+
+lengthy,” “included a variety of minimally relevant details of the case,” and some of which “was
+
+mere plot exposition––perhaps even ‘surplusage.’” Mot. at 3.
+
+       Considering mainly Plaintiff’s failure to follow his supervisor’s instructions not to share
+
+the draft memorandum, the Court concluded that a superior charging Plaintiff with failure to
+
+follow instructions was an “action[] ‘of the kind [they] [were] employed to perform.’” Charles,
+
+2022 WL 558181
+ at *4 (quoting Council on Am. Islamic Relations v. Ballenger, 
+444 F.3d 659,
+
+664
+ (D.C. Cir. 2006)). As a result, the Court held that Plaintiff’s complaint fell within the ambit
+
+of the Federal Tort Claims Act, 
+28 U.S.C. §§ 2671
+ et seq. (“FTCA”) and dismissed Plaintiff’s
+
+complaint because the defamation claim, as the Court understood it to be pled, did not fall within
+
+
+ECF No. 28 (Feb. 22, 2022). The Court has redacted the same detail here that it redacted in its
+[30] Memorandum Order and Opinion.
+                                                  3
+the federal government’s waiver of sovereign immunity. Id. at *5. Additionally, the Court
+
+denied Plaintiff leave to amend his complaint to add a claim for intentional infliction of
+
+emotional district because, as the Court understood it to be pled, the proposed amended
+
+complaint failed to state such a claim. Id. at *5.
+
+         Plaintiff’s present Motion insists that the Court focused on the wrong allegations laid out
+
+in his [6] Reply to Defendant’s Motion to Dismiss (which, again, were included in neither his
+
+original complaint nor proposed amended complaint). In the present Motion, Plaintiff includes a
+
+chart––reproduced almost verbatim below––delineating which allegations on which Plaintiff
+
+would have had the Court’s analysis focus. 3
+
+            Date                   Event                     Significance         Citation to the
+                                                                                Record of this Case
+    August 20-September The Plaintiff authors            [No entry]            ECF No. 6, ¶¶ 7-8,
+    16, 2019            the aforementioned                                     20-23
+                        “draft memo”
+    September 16, 2019  Julie Edelstein                  [No entry]            ECF No. 6, ¶ 24
+                        instructs the Plaintiff
+                        not to distribute the
+                        “draft memo” outside
+                        of his immediate
+                        office
+    September 18, 2019  The Plaintiff                    The Plaintiff has      ECF No. 6, ¶¶ 25-27.
+                        distributes the “draft           never disputed that he
+                        memo” outside of his             disobeyed Julie
+                        immediate office.                Edelstein’s
+                                                         instructions in this
+                                                         situation. He thought
+                                                         he was justified based
+                                                         on the circumstances.
+                                                         However, his
+                                                         supervisors later
+                                                         counseled him
+                                                         otherwise, the
+                                                         Plaintiff never did it
+                                                         again.
+
+3
+  Some cells in the chart are empty of content. The Court has added “[No entry]” in a cell that
+Plaintiff left empty.
+                                                     4
+October 1, 2019, at   Jay Bratt, Julie               [No entry]             [No entry]
+4:30 PM EDT           Edelstein, and the
+                      Plaintiff’s direct
+                      supervisor
+                      (hereinafter “Direct
+                      Supervisor” counsel
+                      the Plaintiff that it
+                      was inappropriate to
+                      send a draft memo
+                      outside of his
+                      immediate office
+                      after being told not
+                      to, and that his
+                      perceived
+                      justification for doing
+                      so was insufficient.
+                      The counseling
+                      session ended with a
+                      discussion of several
+                      other issues in the
+                      office, none of which
+                      pertained to
+                      substantive legal
+                      issues.
+October 3, 2019       Direct Supervisor              The statement from       ECF No. 6 ¶ 35.
+                      sends the Plaintiff an         this email, “We
+                      email to memorialize           consider constructive
+                      the counseling                 conversations, like
+                      session on October 1,          the one we had on
+                      2019. The email                Tuesday, to be the
+                      included the                   appropriate method to
+                      statement, “We                 handle confusion,
+                      consider constructive          disagreements, and
+                      conversations, like            frustration, that we all
+                      the one we had on              inevitably experience
+                      Tuesday, to be the             as we work together
+                      appropriate method to          to advance CES’s
+                      handle confusion,              mission,” is the
+                      disagreements, and             “instruction” Jay
+                      frustration, that we all       Bratt and Julie
+                      inevitably experience          Edelstein would later
+                      as we work together            claim was an
+                      to advance CES’s [a            instruction not to
+                      sub-office within              question Julie’s legal
+                      NSD] mission.                  analysis.
+February 19, 2020     The Plaintiff                  Edelstein’s legal        [No entry]
+
+                                                 5
+                           highlighted some text         reasoning – is the act
+                           in a draft search             that Julie Edelstein
+                           warrant affidavit and         and Jay Bratt stated
+                           added to the margin           violated their
+                           comment, “NMC,                instructions to the
+                           02/19/20: Per Julie’s         Plaintiff on October
+                           orders, this has to           1-3, 2019.
+                           come out. I
+                           vehemently disagree
+                           with her. I event
+                           went so far as to raise
+                           the issue with two
+                           Deputy Assistant
+                           Attorneys General.
+                           However, I was
+                           ultimately overruled.”
+ March 30, 2020            Direct Supervisor             At no point had          ECF No. 23 ¶¶ 52-57.
+                           Issued the Plaintiff a        anyone issued the
+                           Notice of Proposed            Plaintiff an order to
+                           Suspension. The               “refrain from
+                           charge in the notice          challenging Deputy
+                           was “Failure to               Chief Edelstein’s
+                           Follow Instructions”          litigation and
+                           the Notice claimed            strategy-related
+                           that the Plaintiff had        decisions in
+                           been instructed to            communications
+                           “refrain from                 outside of the
+                           challenging Deputy            Counterintelligence
+                           Chief Edelstein’s             and Export Control
+                           litigation and                Section’s (CES)
+                           strategy-related              management chain”
+                           decisions in                  or anything like it.
+                           communications                Nor did the Notice
+                           outside of the                contain any details on
+                           Counterintelligence           when or by what
+                           and Export Control’s          manner anyone might
+                           (CES) management              have issued the
+                           chain.”                       Plaintiff such an
+                                                         instruction.
+
+Mot. at 7-9. Based on Plaintiff’s chart, and as far as the Court can tell, it appears that Plaintiff
+
+offers the following allegation as the actionable conduct at issue (i.e., as the false statement(s)
+
+that Plaintiff “failed to follow instructions”): Plaintiff inserted a critical comment on a draft
+
+
+
+                                                     6
+document; both Edelstein and Bratt falsely claimed to an unnamed supervisor that either Bratt,
+
+Edelstein, or both had instructed him not to do so; and that false statement caused Plaintiff’s
+
+separation from the Department of Justice. Plaintiff further alleges in the instant Motion that the
+
+alleged statements “were felony violations of 
+18 U.S.C. § 1001
+ because they were misstatements
+
+made in the course of an official proceeding before the Executive Branch of the United States
+
+Government.” Mot. at 4.
+
+                                   II.      LEGAL STANDARD
+
+       Pursuant to Federal Rule of Civil Procedure 60(b), a district court may “relieve a party or
+
+its legal representative from a final judgment, order, or proceeding” on one of six grounds: (1)
+
+mistake, inadvertence, surprise, or excusable neglect; (2) newly discovered evidence; (3) fraud;
+
+(4) that the judgment is void; (5) applying the judgment prospectively is no longer equitable; or
+
+(6) any other reason that justifies relief. The party seeking relief under Rule 60(b) bears the
+
+burden of showing that they are entitled to the relief sought, and the decision to grant such a
+
+motion “‘is committed to the discretion of the District Court.’” United States v. Dynamic
+
+Visions, Inc., 
+321 F.R.D. 14, 17
+ (D.D.C. 2017). Motions for reconsideration are generally
+
+“disfavored” and granting them are an “unusual measure.” Walsh v. Hagee, 
+10 F. Supp. 3d 15,
+
+18
+ (D.D.C. 2013). Indeed, a Rule 60(b) motion may only be granted if the movant can establish
+
+upon vacatur, “some prospect of proceeding on the merits.” Thomas v. Holder, 
+750 F.3d 899,
+
+903
+ (D.C. Cir. 2014).
+
+                                         III.   DISCUSSION
+
+       A. Pleading
+
+       Before moving to the merits, a word on the law of pleading and the Court’s original
+
+approach to this case is in order. A complaint must give a defendant “fair notice of the basis for
+
+
+
+                                                  7
+petitioner’s claims.” Swierkiewicz v. Sorema N. A., 
+534 U.S. 506, 514
+ (2002). As the Supreme
+
+Court has explained, “[a] pleading that offers ‘labels and conclusions’ or a ‘formulaic recitation
+
+of the elements of a cause of action will not do.’ Nor does a complaint suffice if it tenders
+
+‘naked assertion[s]’ devoid of ‘further factual enhancement.’” Ashcroft v. Iqbal, 
+556 U.S. 662,
+
+678
+ (2009) (citations omitted) (quoting Bell Atl. Corp. v. Twombly, 
+550 U.S. 544, 678
+ (2009)).
+
+More specific to this case, under District of Columbia law, defamation must be pled with
+
+particularity. Vreven v. Am. Ass’n of Retired Persons, 
+604 F. Supp. 2d 9, 15
+ (D.D.C. 2009). That
+
+means, in practice, that a plaintiff must “‘allege specific defamatory comments . . . by pleading
+
+the time, place, content, speaker, and listener of the alleged defamatory matter.’” Von Kahl v.
+
+Bureau of Nat’l Affairs, Inc., 
+934 F. Supp. 2d 204, 217
+ (D.D.C. 2013) (quoting Caudle v.
+
+Thomason, 
+942 F. Supp. 635, 638
+ (D.D.C. 1986)).
+
+       As the Court noted in its [30] Memorandum Opinion and Order, Plaintiff’s operative
+
+complaint veered closer to a case of what “will not do.” See Charles, 
+2022 WL 558181
+ at *1.
+
+Plaintiff’s operative complaint stated, in one paragraph, that Edelstein and Bratt “published
+
+statements to the Plaintiff’s direct supervisor and other managerial officials of the National
+
+Security Division of the U.S. Department of Justice claiming the Plaintiff had failed to follow
+
+instructions.” ECF 1-1 at 13. As a result, it was nigh impossible for the Court to discern, from
+
+the face of the complaint, what statement alleged that Plaintiff failed to follow which instruction,
+
+not to mention the identity of the other individuals to whom Bratt and/or Edelstein uttered these
+
+mysterious statements. However, because Defendant moved to dismiss the complaint for lack of
+
+jurisdiction, and not failure to state a claim, it was within the Court’s discretion to move beyond
+
+the complaint’s “four corners” and “consider the complaint supplemented by undisputed facts
+
+evidenced in the record.” Compare Coal. for Underground Expansion v. Mineta, 
+333 F.3d 193
+,
+
+
+
+                                                 8
+198 (D.C. Cir. 2003) (citations omitted) (Rule 12(b)(1) motion) with Hamilton v. United States,
+
+502 F. Supp. 3d 266
+, 273 (D.D.C. 2020) (court limited to “four corners of the complaint” and
+
+attachments in 12(b)(6) motion).
+
+       So, the Court moved to Plaintiff’s prolix 73-page opposition to determine what Plaintiff
+
+considered to be the actionable conduct at issue. The Court also did so in light of “Plaintiff’s pro
+
+se status.” See Charles, 
+2022 WL 558181
+ at *4. Plaintiff seems to think that even mentioning
+
+that Plaintiff has proceeded pro se cut against him. See Mot. at 9-10. Quite the opposite. Any
+
+“document filed pro se is to be liberally construed,” Erickson v. Pardus, 
+551 U.S. 89, 94
+ (2007), 4
+
+and the Court attempted to construe all of Plaintiff’s filings as broadly and liberally as possible.
+
+See also Greenhill v. Spellings, 
+482 F.3d 569, 572
+ (D.C. Cir. 2007) (court “may consider
+
+supplemental material filed by a pro se litigant in order to clarify the precise claims being
+
+urged”). Even doing so, the opposition itself did not make clear what conduct Plaintiff
+
+considered actionable for defamation. Of the paragraphs that Plaintiff now states constitute his
+
+defamation claim, none of them characterizes the factual allegations as those underpinning the
+
+complaint’s defamation claim. Indeed, the only new characterization of Plaintiff’s defamation
+
+claim came in paragraph 66, in which Plaintiff wrote that his “Complaint highlighted that Jay
+
+Bratt and Julie Edelstein made materially false statements when they claimed they issued the
+
+Plaintiff an unambiguous set of instructions and the Plaintiff disobeyed them.” The opposition
+
+
+
+4
+   In Erickson, the Supreme Court continued that sentence to say, “a pro se complaint, however
+inartfully pleaded, must be held to less stringent standards than formal pleadings drafted by
+lawyers.” 
+551 U.S. at 94
+ (emphasis added) (quoting Estelle v. Gamble, 
+429 U.S. 97, 106
+
+(1976)). Plaintiff is, of course, a lawyer. The law in this Circuit is less settled as to whether, and
+to what degree, a pro se attorney’s filings should be construed liberally. Nevertheless, given
+Plaintiff’s practice appears to have been entirely prosecutorial, the Court shall extend him the
+same deference as it would any other pro se litigant. See Cooper v. Farmers New Century Ins.
+Co., 
+667 F. Supp. 2d 175, 179
+ (D.D.C. 2009) (CKK) (Court “construe[d] the plaintiff’s filings
+liberally” even though pro se plaintiff was “an attorney representing himself”).
+                                                  9
+was entirely silent as to which of the factual allegations were those “materially false statements.”
+
+Nevertheless, and in light of Plaintiff’s pro se status, the Court shall exercise its discretion to
+
+reconsider its [30] Memorandum Opinion & Order and construe the operative complaint and
+
+proposed amended complaint as Plaintiff asks.
+
+        B. Merits
+
+            1. Scope of Employment
+
+        As the parties agree, the crux of this case is and has always been whether Bratt and
+
+Edelstein were acting within the course of their employment when they uttered the alleged
+
+defamatory statements. Compare Mot. at 10 with Def.’s Opp. at 2-3. If they were, Plaintiff’s
+
+defamation claim (and proposed claim for intentional infliction for emotional distress) are barred
+
+under the Federal Tort Claims Act both for failure to exhaust administrative remedies and for the
+
+statutory refusal to waive sovereign immunity for such claims. See Charles, 
+2022 WL 558181
+ at
+
+*4. If Bratt and Edelstein were not acting within the course of their employment, however, the
+
+United States is not the proper defendant in action and the Court, at present time, lacks removal
+
+jurisdiction over this case. See Charles, 
+2022 WL 558181
+ at *3.
+
+        Turning to that question, the Westfall Act, 
+28 U.S.C. § 2679
+, governs when a federal
+
+official is immunized from state tort liability for that official’s purportedly tortious act. In
+
+relevant part, the Act provides:
+
+        Upon certification by the Attorney General that the defendant was acting within the scope
+        of his office or employment at the time of the incident out of which the claim arose, any
+        civil action or proceeding commenced upon such a claim in a United States district court
+        shall be deemed an action against the United States under the provisions of this title and
+        all references thereto, and the United States shall be substituted as the party defendant.
+
+28 U.S.C. § 2679
+(d)(1). 5 Although the Attorney General’s declaration that an official was acting
+
+
+5
+   As the Court explained in the last Memorandum Opinion and Order, a Westfall Declaration
+filed in state court necessarily removes the action to federal court as the federal court has original
+                                                  10
+in the course of their employment is not “conclusive,” it does “constitute prima facie evidence
+
+the employee was [in fact] acting within the scope of [their] employment.” Council of Am.
+
+Islamic Relations v. Ballenger, 
+444 F.3d 659, 662
+ (D.C. Cir. 2006). As such, the Act establishes
+
+an evidentiary question that a defendant must contest by “coming forward with specific facts
+
+rebutting the certification.” See Stokes v. Cross, 
+327 F.3d 1210, 1214
+ (D.C. Cir. 2003). As
+
+Plaintiff notes, relying on Stokes, sometimes an evidentiary hearing is necessary to determine
+
+whether the official was acting within the scope of their employment. See 
+id. at 1216
+. Usually,
+
+however, it is more appropriate for the Court to decide the question on the papers. See Wuterich
+
+v. Murtha, 
+562 F.3d 375, 381
+ (D.C. Cir. 2009). 6
+
+       In either case, the question is governed by the law of respondeat superior in the state in
+
+which the alleged tort occurred––here, the District of Columbia. Wilson v. Libby, 
+535 F.3d 697,
+
+711
+ (D.C. Cir. 2008). The District of Columbia follows the Second Restatement of Agency in
+
+delineating scope of employment:
+
+       (1) Conduct of a servant is within the scope of employment if, but only if:
+
+           (a) it is of the kind he is employed to perform;
+
+           (b) it occurs substantially within the authorized time and space limits;
+
+           (c) it is actuated, at least in part, by a purpose to serve the master; and
+
+           (d) if force is intentionally used by the servant against the other, the use of force is not
+
+           unexpectable by the master.
+
+       (2) Conduct of a servant is not within the scope of employment if it is different in kind
+       from that authorized, far beyond the authorized time or space limits, or too little actuated
+       by a purpose to serve the master.
+
+
+
+jurisdiction over the matter. Charles, 
+2022 WL 558181
+ at *1.
+6
+  Accord Singleton v. United States, 
+277 F.3d 864, 871
+ (6th Cir. 2002); Davric Maine Corp. v.
+USPS, 
+238 F.3d 58, 67
+ (1st Cir. 2001).
+                                                 11
+Schechter v. Merchants Home Delivery, Inc., 
+892 A.2d 415, 427-28
+ (D.C. 2006). “Although
+
+scope of employment is generally a question for the jury, it ‘becomes a question of law for the
+
+court, however, if there is not sufficient evidence from which a reasonable juror could conclude
+
+that the action was within the scope of employment.’” District of Columbia v. Bamidele, 
+103
+
+A.3d 516, 525
+ (D.C. 2014) (Fisher, J.) (quoting Weinberg v. Johnson, 
+518 A.2d 985, 991
+ (D.C.
+
+1986)). “‘However, if the employee acts in part to serve his employer’s interest, the employer
+
+will be held liable for the intentional torts of his employee even if prompted partially by personal
+
+motives, such as revenge.’” 
+Id.
+ (quoting Hechinger Co. v. Johnson, 
+761 A.2d 15, 24
+ (D.C.
+
+2000).
+
+         In its February 26, 2022 Minute Order, the Court asked the parties to address whether and
+
+to what degree Plaintiff’s classification of Bratt and Edelstein’s conduct as “felonious” affected
+
+the scope-of-employment analysis. Essentially, whether an employee’s activity was criminal is
+
+probative, but not determinative, of whether their conduct was within the scope of their
+
+employment. See Harbury v. Hayden, 
+522 F.3d 413, 422
+ (D.C. Cir. 2008) (“seriously criminal
+
+and violent conduct can still fall within the scope of a defendant’s employment under D.C. law”).
+
+The key question is not whether conduct was criminal, but whether it fits within the strictures of
+
+Second Restatement of Agency. See, e.g., Johnson v. Weinberg, 
+434 A.2d 404, 409
+ (D.C. 1981)
+
+(laundromat employee acted within scope of employment in shooting customer during dispute
+
+over removing clothes from washing machine).
+
+         Plaintiff relies mainly on Stokes v. Cross, 
+327 F.3d 1210
+ (D.C. Cir. 2003). In that case,
+
+an officer of the Uniform Police Branch of the United States Government Printing Office
+
+claimed that his coworkers defamed him by alleging that he failed to provide “necessary
+
+assistance in dealing with [a] trespasser.” 
+Id. at 1212
+. He further alleged that his co-workers
+
+
+
+                                                 12
+“destroyed and ignored critical [and exonerating] evidence” and also “threatened [another
+
+officer’s] career and livelihood if he did not make a statement adverse” to the plaintiff. 
+Id.
+ The
+
+Court concluded that an evidentiary hearing was necessary to determine whether “destroying
+
+critical evidence, preparing and submitting false affidavits by use of threat and coercion, and
+
+engaging in other criminal acts” acted within the scope of their employment. 
+Id. at 1216
+
+
+(emphasis added). In other words, the Court of Appeals reversed mainly for the district court’s
+
+failure to properly determine whether the conduct alleged fell within the employees’ scope of
+
+employment when the district court instead summarily treated the government’s Westfall
+
+Declaration as determinative. See 
+id.
+ So, on remand, the district court considered the question
+
+and concluded that “destroying critical evidence, preparing and submitting false affidavits by use
+
+of threat and coercion, and engaging in other [unnamed] criminal acts” were, in fact, within the
+
+scope of the police officers’ employment. See Stokes v. Cross, 
+2005 WL 79036
+ (D.C. Cir. Jan.
+
+13, 2005). The Court of Appeals then summarily affirmed that conclusion in an unpublished
+
+opinion. 
+Id.
+
+
+        In any event, Plaintiff’s allegations are quite distinct from those in Stokes. Plaintiff
+
+alleges no threats or coercion nor any destruction of evidence. Rather, Plaintiff alleges that Bratt
+
+and Edelstein falsely stated that Plaintiff’s addition of critical comments in a draft search warrant
+
+constituted “failure to follow [prior] instructions” not to do so. In that regard, this case is much
+
+more akin to Jacobs v. Vrobel, 
+724 F.3d 217
+ (D.C. Cir. 2013). In that case, an employee of the
+
+General Services Administration sued her supervisor for defamation by falsely “criticiz[ing] her
+
+work abilities when a potential employer calls for a reference.” 
+Id. at 219
+ (cleaned up). The
+
+court held that the references, even if false, fell within the natural job responsibilities of a
+
+manager and that they were “actuated, at least in part, by a purpose to serve the master.” See 
+id.
+
+
+
+
+                                                   13
+at 222.
+
+          Turning, then, to the Restatement’s factors, the Court finds that the alleged defamatory
+
+statements are “of the kind that [Bratt and Edelstein] [were] employed to perform.” “Courts
+
+routinely find that a federal employee’s statements made during the course of government
+
+investigations fall within the scope of that employee’s duties, even when the statements are
+
+alleged to be false or defamatory.” Minnick v. Carlile, 
+946 F. Supp. 2d 128, 132
+ (D.D.C. 2013);
+
+see also Hosey v. Jacobik, 
+966 F. Supp. 12, 14-15
+ (D.D.C. 1997) (finding that federal
+
+employee’s allegedly defamatory statements during a government security clearance
+
+investigation were made within the scope of employment). Plaintiff offers no authority to the
+
+contrary, and it strikes the Court as axiomatic that the review of an employee’s work is part of a
+
+supervisor’s job.
+
+          Second, Plaintiff does not appear to contest that the allegedly defamatory statements were
+
+made “substantially within the authorized time and space limits.” Construing Plaintiff’s filings
+
+liberally, it appears that Bratt and Edelstein made their statements while within the Department
+
+of Justice and during working hours.
+
+          As to the third and final factor, the Court of Appeals has made clear that “even a partial
+
+desire to serve the master” is sufficient to satisfy this prong. Ballenger, 44 F.3d at 664. Even
+
+drawing all inferences in Plaintiff’s favor, Plaintiff’s filings establish that no reasonable jury
+
+could find either Bratt or Edelstein uttered the allegedly defamatory statements solely for selfish
+
+purposes. Each and every instance of friction between Plaintiff and Bratt and/or Edelstein
+
+involved aspects of Plaintiff’s work that Bratt and/or Edelstein thought deficient or improper.
+
+See, e.g., Pl.’s Opp. at ¶ 27 (email sent outside NSD); ¶ 30 (Bratt thought Plaintiff’s
+
+characterization of Edelstein’s management as being “kept in the dark and fed a steady die[t] of
+
+
+
+                                                  14
+garbage” “unprofessional”); ¶ 47 (Edelstein thought Plaintiff’s edits to search warrant affidavit
+
+deficient). Plaintiff’s own filings establish that a motivation, if not the motivation, for Bratt and
+
+Edelstein’s allegedly defamatory statements were to incur an adverse employment action of
+
+some sort against Plaintiff for what they evidently viewed as bad work. Whether Plaintiff’s work
+
+was in fact poor, and whether Bratt and/or Edelstein committed a tortious or felonious action to
+
+accomplish that end, the motivation was nevertheless to serve their master, the United States
+
+Department of Justice. See Kelley v. FBI, 
+67 F. Supp. 3d 240, 286-87
+ (D.D.C. 2014) (subjective
+
+ends, not objective means, is relevant inquiry for third agency factor). Like the employment
+
+references in Jacobs, the pleadings demonstrate that the allegedly defamatory statements served,
+
+at least in part, a workplace purpose. Moreover, like for the first factor, Plaintiff offers no
+
+authority supporting a different finding.
+
+           2. Jurisdiction
+
+       As the Court explained in its [30] Memorandum Opinion and Order, having concluded
+
+that Plaintiff has not carried his burden to show that Bratt and Edelstein were not acting within
+
+the course of their employment, the rest of Plaintiff’s case falls. As the FTCA waives immunity
+
+only for non-intentional torts, Plaintiff cannot maintain either a defamation claim or a claim for
+
+intentional infliction of emotional distress against the United States. 7 See Jackson v. United
+
+States, 
+857 F. Supp. 2d 158, 161
+ (D.D.C. 2012) (defamation); Koch v. United States, 
+209 F.
+
+Supp. 2d 89, 94
+ (D.D.C. 2002) (intentional infliction of emotional distress). Even if the FTCA
+
+did waive immunity for these torts, the Court would not have subject matter jurisdiction because
+
+
+
+7
+  Ultimately, Plaintiff’s proposed claim for intentional infliction of emotional distress is no
+longer an issue in this case because Plaintiff has not in the instant Motion asked the Court to
+reconsider its holding that his proposed amended complaint failed to state a claim for intentional
+infliction of emotional distress. Charles, 
+2022 WL 558181
+ (citing Kassem v. Wash. Hosp. Ctr.,
+513 F.3d 251, 255
+ (D.C. Cir. 2008).
+                                                  15
+Plaintiff has not, as he appears to concede, exhausted his administrative remedies. See Totten v.
+
+Norton, 
+421 F. Supp. 2d 115, 122
+ (D.D.C. 2006); 
+28 U.S.C. § 2675
+(a). Accordingly, as Plaintiff
+
+has failed to show Bratt and Edelstein were not acting within the course of their employment
+
+when they uttered the allegedly defamatory statements, the Court must deny Plaintiff’s request
+
+for reconsideration dismissing this case for lack of jurisdiction.
+
+                                       IV.    CONCLUSION
+
+        For the foregoing reasons, the Court has concluded that Plaintiff’s [31] Motion for
+
+Reconsideration should be DENIED. Given Plaintiff’s insistence that he has only “br[ought]
+
+this case . . . to clear his name, get his job back, and obtain a modicum of vindication over the
+
+way the Justice Department’s National Security Division was led and managed during his
+
+tenure,” Mot. at 10 n.4, the Court shall stress what it has held. The Court has held only that, per
+
+Plaintiff’s allegations, Bratt and Edelstein acted within the course of their employment when
+
+they uttered the allegedly tortious statements, and that, as such, the Federal Tort Claims Act
+
+removes Plaintiff’s claims from the Court’s jurisdiction. It has not passed judgment on any other
+
+aspect of Plaintiff’s case or allegations.
+
+        An appropriate order accompanies this memorandum opinion.
+
+Dated: April 7, 2022
+                                                         /s/
+                                                      COLLEEN KOLLAR-KOTELLY
+                                                      United States District Judge
+
+
+
+
+                                                 16

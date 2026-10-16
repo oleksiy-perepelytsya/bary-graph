@@ -1,0 +1,300 @@
+UNITED STATES DISTRICT COURT
+                            FOR THE DISTRICT OF COLUMBIA
+
+                                                  )
+HITHAM ABUHOURAN,                                 )
+                                                  )
+       Plaintiff,                                 )
+                                                  )
+               v.                                 )                 Civil Action No. 11-271 (ESH)
+                                                  )
+JULIE THRONTON NICKLIN, et al.,                   )
+                                                  )
+       Defendants.                                )
+                                                  )
+
+                                  MEMORANDUM OPINION
+
+I.     INTRODUCTION
+
+       Plaintiff is currently imprisoned at Federal Correctional Institution (FCI) Schuylkill in
+
+Minersville, Pennsylvania. He has commenced this action against numerous officials at the
+
+United States Penitentiary (USP) Canaan in Wymart, Pennsylvania (the “USP Canaan
+
+defendants”), see Compl. ¶¶ 2–12, ECF No. 1; numerous officials at FCI Fort Dix in Fort Dix,
+
+New Jersey (the “FCI Fort Dix defendants”), id. ¶¶ 13–18; the alleged accreditation agency of all
+
+federal prisons, id. ¶ 19; the United States State Department and officials thereof (the “State
+
+Department defendants”), id. ¶¶ 20–24; the United States, id. ¶ 25; and a John Doe, id. at 1
+
+(listing John Doe in the case caption). Against various combinations of the USP Canaan
+
+defendants and the FCI Fort Dix defendants, and presumably also against the accreditation
+
+agency and the United States, Plaintiff alleges in Counts 1–9 cruel and unusual punishment;
+
+violations of due process; retaliation; discrimination; “violation of a constitutionally protected
+
+right”; conspiracy; equal-protection violations; “fraud, fraudulent misrepresentation,
+
+concealment[,] and nondisclosure”; and further conspiracy. Id. ¶¶ 232–87. In Count 10, Plaintiff
+alleges that the State Department defendants violated the Freedom of Information Act (FOIA).
+
+Id. ¶¶ 288–91.
+
+       Concerning Plaintiff’s claims in Counts 1–9, this judicial district is an improper venue
+
+because the events giving rise to these claims allegedly took place at USP Canaan and FCI Fort
+
+Dix. Because the majority of Plaintiff’s focus appears to be on events at USP Canaan, the Court
+
+will transfer Counts 1–9 to the Middle District of Pennsylvania. But before doing so, the Court
+
+will sever the FOIA claim from all other claims because to transfer some, but not all, claims—
+
+i.e., to transfer an action partially—the part of the action to be transferred must be severed from
+
+the part of the action to remain.
+
+       Concerning Plaintiff’s FOIA claim, which will remain before this Court as a separate
+
+action, the Court will sua sponte dismiss the claim against individually named State Department
+
+officials for failure to state a claim upon which relief may be granted. Because Plaintiff is
+
+proceeding in forma pauperis, the Court is obliged to sua sponte dismiss a claim as soon as the
+
+Court determines that no relief may be granted on that claim. And because only a federal agency
+
+is the proper defendant in a FOIA action, Plaintiff fails to state a FOIA claim upon which relief
+
+may be granted as to individually named State Department defendants. Finally, the Court will
+
+invite Plaintiff to identify whether he wishes to continue to pursue only his FOIA action against
+
+only the State Department in this Court.
+
+II.    VENUE, SEVERANCE, AND TRANSFER OF COUNTS 1–9
+
+       Plaintiff asserts that this Court has jurisdiction based on federal statutes, as opposed to
+
+diversity of the parties. Compl. at 2. 
+28 U.S.C. § 1391
+(b) sets forth the general venue
+
+requirements for such a situation:
+
+       A civil action wherein jurisdiction is not founded solely on diversity of citizenship
+       may, except as otherwise provided by law, be brought only in (1) a judicial
+
+                                                 2
+        district where any defendant resides, if all defendants reside in the same State, (2)
+        a judicial district in which a substantial part of the events or omissions giving rise
+        to the claim occurred, or a substantial part of property that is the subject of the
+        action is situated, or (3) a judicial district in which any defendant may be found, if
+        there is no district in which the action may otherwise be brought
+
+Not all defendants in this action reside in the same state, because the USP Canaan defendants
+
+presumably reside in the Pennsylvania area and the FCI Fort Dix defendants presumably reside
+
+in the New Jersey area. Few, if any, of the events giving rise to the claims made in Counts 1–9
+
+occurred in the District of the District of Columbia. However, a substantial part of the events
+
+giving rise to these claims against these defendants occurred in the Middle District of
+
+Pennsylvania, the judicial district in which USP Canaan is located. See Compl. ¶¶ 232–87; Fed.
+
+Bureau of Prisons, USP Canaan, http://www.bop.gov/locations/institutions/caa/index.jsp (last
+
+visited Feb. 10, 2011) (identifying “Middle Pennsylvania” as the judicial district encompassing
+
+USP Canaan). Therefore, venue is not proper in this judicial district, but is proper in the Middle
+
+District of Pennsylvania.
+
+        “The district court of a district in which is filed a case laying venue in the wrong division
+
+or district shall dismiss, or if it be in the interest of justice, transfer such case to any district or
+
+division in which it could have been brought.” 
+28 U.S.C. § 1406
+(a). The Court finds it in the
+
+interest of justice to transfer Counts 1–9 to the Middle District of Pennsylvania to avoid the
+
+inefficiency of dismissing and requiring the refilling of the claims made in those counts. But
+
+because § 1406(a) contemplates the transfer of a “case,” as opposed to a claim, it does not permit
+
+the partial transfer of only some claims made in a case. Instead, the claims must first be severed
+
+into separate cases, so that one entire case may be transferred and the other entire case may
+
+remain. See, e.g., Barnes Group, Inc. v. Midwest Motor Supply Co., No. 2:07-cv-1164, 
+2008 WL
+
+509193
+, *4 (S.D. Ohio Feb. 22, 2008) (severing claims prior to partial transfer under § 1406(a)).
+
+
+
+                                                     3
+       “The Court may . . . sever any claim against a party” that is misjoined. Fed. R. Civ. P.
+
+21. As recently elucidated, the guidelines for such an evaluation are clear:
+
+       Whether a party is misjoined is a function of [Federal] Rule [of Civil Procedure]
+       20(a)’s permissive joinder standards. Montgomery v. STG Int’l, Inc., 
+532 F. Supp.
+       2d 29, 35
+ (D.D.C. 2008) (citing Disparte v. Corporate Exec. Bd., 
+223 F.R.D. 7, 12
+
+       (D.D.C. 2004)). Under Rule 20(a), claims against multiple defendants may be
+       joined if: (1) the claims arise out of the same transaction, occurrence, or series of
+       transactions or occurrences; and (2) any question of law or fact common to all
+       defendants will arise in the action. Fed. R. Civ. P. 20(a); see also Montgomery,
+       
+532 F. Supp. 2d at 35
+. To satisfy the first prong, the claims must be logically
+       related. Disparte, 
+223 F.R.D. at 10
+ (citing Moore v. N.Y. Cotton Exch., 
+270 U.S.
+       593, 610
+ (1926)). The second prong “requires only that there be some common
+       question of law or fact.” 
+Id.
+ (citing Mosley v. Gen. Motors Corp., 
+497 F.2d 1330,
+       1334
+ (8th Cir. 1974)). These two prongs are construed in light of Rule 20’s
+       purpose: “to promote trial convenience and expedite the final resolution of
+       disputes, thereby preventing multiple lawsuits, extra expense to the parties, and
+       loss of time to the court as well as the litigants appearing before it.” Tenet, 216
+       F.R.D. at 137.
+
+Bederson v. United States, No. 09-cv-688, 
+2010 WL 5168829, at *10
+ (D.D.C. Dec. 21, 2010)
+
+(footnote omitted). Applying these standards, the Court concludes that the FOIA claim in Count
+
+10 against the State Department defendants is misjoined with all other claims against all other
+
+defendants.
+
+       Whether the State Department properly searched for and disclosed records to Plaintiff in
+
+response to a FOIA request simply has nothing to do with whether USP Canaan defendants, the
+
+FCI Fort Dix defendants, or any other defendant in this action unconstitutionally violated the
+
+Eighth Amendment rights of, violated the due process rights of, retaliated against, discriminated
+
+against, conspired against, violated the equal protection rights of, committed fraud against, or
+
+violated any other constitutional rights of Plaintiff. The FOIA claim in Count 10 shares neither a
+
+common question of law nor fact with any other claim in Counts 1–9. The Court will therefore
+
+sever Counts 1–9 from Count 10, thus creating two separate and independent actions, which the
+
+Court will refer to as the “prison action” and “FOIA action,” respectively. In re Brand-Name
+
+                                                 4
+Prescription Drugs Antitrust Litig., 
+264 F. Supp. 2d 1372, 1376
+ (J.P.M.L. 2003) (“[S]everance of
+
+claims under Rule 21 results in the creation of separate actions.”). As concluded above, the
+
+FOIA action will then be transferred to the Middle District of Pennsylvania.
+
+III.    PARTIAL DISMISSAL OF COUNT 10
+
+        Remaining before the Court will be Count 10—the FOIA action—against the United
+
+States State Department and Department officials Mary Therese Castro, Thomas W. Evertt,
+
+Patric D. Scholl, and Margaret P. Grafeld. “[T]he only proper defendant in a FOIA action is a
+
+federal agency.” Isasi v. Jones, 
+594 F.Supp.2d 1, 4
+ (D.D.C. 2009) (citation omitted); see 5
+
+U.S.C. § 552a(g)(1) (providing that an “individual may bring an action against the agency” for a
+
+FOIA violation). Plaintiff has therefore failed to state a FOIA claim upon which relief may be
+
+granted as to Mary Therese Castro, Thomas W. Evertt, Patric D. Scholl, and Margaret P. Grafeld.
+
+        Plaintiff is proceeding in forma pauperis. See Order at 2, ECF No. 4. Under the statute
+
+concerning such proceedings, “the court shall dismiss the case at any time if the court determines
+
+that . . . the action . . . fails to state a claim on which relief may be granted.” 
+28 U.S.C.
+
+§ 1915
+(e)(2), (2)(B), (2)(B)(ii). “Once such a determination is made, dismissal is mandatory.”
+
+Rogler v. U.S. Dept. of Health and Human Servs., 
+620 F. Supp. 2d 123, 128
+ (D.D.C. 2009). The
+
+Court will therefore dismiss the FOIA claims against Mary Therese Castro, Thomas W. Evertt,
+
+Patric D. Scholl, and Margaret P. Grafeld.
+
+        All that will remain before this Court will be Plaintiff’s FOIA claim against the State
+
+Department, for which Plaintiff has sought money damages. Compl. ¶ 291. However, “[i]t is
+
+well[ ]settled that monetary damages are not available under FOIA,” and therefore Plaintiff
+
+cannot recover money for any claim under FOIA. Ross v. United States, 
+460 F. Supp. 2d 139,
+
+151
+ (D.D.C. 2006) (citing Johnson v. Exec. Office for U.S. Attorneys, 
+310 F.3d 771, 777
+ (D.C.
+
+
+
+                                                   5
+Cir. 2002) (“FOIA . . . provides requesters with the potential for injunctive relief only . . . .”)).
+
+The Court will therefore order Plaintiff to identify, on or before March 10, 2011, whether he
+
+wishes to proceed with this FOIA action. Failure to respond may result in dismissal of the FOIA
+
+action for failure to prosecute. See LCvR 83.23.
+
+IV.     Conclusion.
+
+        For the reasons set forth above, the Court will sever claims made in Counts 1–9 from the
+
+claim made in Count 10, creating a prison action and a FOIA action; will transfer the prison
+
+action to the Middle District of Pennsylvania; will dismiss claims against individually named
+
+officials in the FOIA action; and will invite Plaintiff to identify whether he wishes to proceed
+
+with the FOIA action. A separate order shall issue this date.
+
+                                                                        /s/
+                                                                        ELLEN SEGAL HUVELLE
+DATE: February 11, 2011                                                 United States District Judge
+
+
+
+
+                                                   6

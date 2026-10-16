@@ -1,0 +1,159 @@
+In the
+    United States Court of Appeals
+                For the Seventh Circuit
+                           ____________
+
+No. 01-3019
+SALLIE N. PEELER,
+                                              Plaintiff-Appellant,
+                                 v.
+
+MCI, INC., and MCI WORLDCOM
+NETWORK SERVICES, INC.,
+                                           Defendants-Appellees.
+                           ____________
+         Appeal from the United States District Court for the
+         Southern District of Indiana, Indianapolis Division.
+          No. IP 01-983-C-Y/G—Richard L. Young, Judge.
+                           ____________
+       ARGUED JANUARY 24, 2002—DECIDED MAY 8, 2006
+                      ____________
+
+
+    Before EASTERBROOK and WOOD, Circuit Judges.†
+  PER CURIAM. Sallie Peeler filed this action in a state
+court seeking an injunction against the installation of fiber-
+optic cable along the Monon Trail, an abandoned railroad
+right-of-way in which Peeler claims an interest as the
+owner of an adjacent parcel. After the suit’s removal under
+the diversity jurisdiction, the district court denied Peeler’s
+
+
+
+†
+   Circuit Judge Ripple, the third member of the panel originally
+assigned to this appeal, recused himself on April 20, 2006,
+following a change of counsel and took no further part in the
+proceedings.
+2                                                No. 01-3019
+
+request for a preliminary injunction. Events during the
+pendency of Peeler’s appeal make it unnecessary to decide
+whether the district judge erred.
+  First, MCI completed the installation of the cable, so that
+step cannot be enjoined. Second, the corporation formerly
+known as MCI WorldCom, Inc. (the original defendant)
+became a debtor in bankruptcy, leading us to stay consider-
+ation of Peeler’s appeal. 
+11 U.S.C. §362
+. Peeler did not file
+a claim in WorldCom’s bankruptcy, so the general discharge
+that WorldCom eventually received extinguishes her
+principal claims—that Indiana law requires a deposit of
+compensation before a public utility may lay cable under a
+railroad right-of-way, and that the existence and use of the
+cable without compensation are trespasses. Similar claims
+have been considered, and held to be discharged, not only
+by the district court that handled the WorldCom bank-
+ruptcy but also by our colleagues on the eighth circuit. See
+International Paper Co. v. MCI WorldCom Network Ser-
+vices, Inc., 
+442 F.3d 633
+ (8th Cir. 2006); Browning v. MCI,
+Inc., 
+2006 U.S. Dist. LEXIS 14228
+ (S.D.N.Y. Mar. 30, 2006).
+We agree with these decisions and need not add to their
+exposition. Claims based on the existence of the under-
+ground conduit, and the cable’s use to transmit photons
+that carry voice and data traffic, have been discharged.
+  Peeler’s situation differs in one respect from that of the
+landowners in International Paper and Browning. MCI
+installed a “fiber box” on land in which Peeler asserts an
+interest. This structure, which permits workers to access
+the cable should it need repair or replacement, occupies
+about 15 square feet of the surface. Any obligation to pay
+compensation on account of the box’s existence has been
+discharged; but if MCI should use the box in the future to
+access the underground cable then the repair teams would
+re-enter Peeler’s land. MCI lacks Peeler’s consent to do this.
+Cf. Leo Sheep Co. v. United States, 
+440 U.S. 668
+ (1979). A
+discharge does not permit the debtor to engage in fresh
+No. 01-3019                                                 3
+
+injurious acts after a bankruptcy’s conclusion. See Ohio v.
+Kovacs, 
+469 U.S. 274
+ (1985); In re CMC Heartland Partners,
+966 F.2d 1143
+ (7th Cir. 1992); In re Torwico Electronics,
+Inc., 
+8 F.3d 146
+ (3d Cir. 1993); In re Chateaugay Corp., 
+944
+F.2d 997
+ (2d Cir. 1991).
+  Because the possibility of future entries to repair existing
+cable was not the basis of Peeler’s motion for equitable
+relief in 2001, it does not provide any basis for disturbing
+the district court’s decision. But it does show that the case
+is not moot. We therefore affirm rather than vacate the
+district court’s decision—limited as it is to an order (now
+five years old) declining to enjoin MCI’s installation and use
+of the cable.
+  Before the district court takes up whether Indiana law
+entitles Peeler to either an injunction against future
+entry or compensation for an easement, it must decide
+whether Peeler has the ownership interest she asserts. MCI
+denies that she has any legal interest in the land on which
+the fiber box sits. If Peeler does have a property inter-
+est—and if MCI has not secured an easement through
+condemnation proceedings in state court, see 
+Ind. Code §32
+-
+24-4-1—the district court must decide whether to certify the
+proceeding as a class action, as Peeler has proposed. See
+Smith v. Sprint Communications Co., 
+387 F.3d 612
+ (7th Cir.
+2004); Uhl v. Thoroughbred Technology & Telecommunica-
+tions, Inc., 
+309 F.3d 978
+ (7th Cir. 2002); Isaacs v. Sprint
+Corp., 
+261 F.3d 679
+ (7th Cir. 2001).
+  Decisions on these questions may be unnecessary if the
+district judge relinquishes supplemental jurisdiction. 
+28
+U.S.C. §1367
+(c). When WorldCom removed the case, federal
+jurisdiction was supplied by the fact that an injunction
+against completing and using the cable would have cost
+WorldCom more than $75,000. All controversy about the
+cable’s existence and use having been resolved by the
+bankruptcy, however, the remaining dispute about access
+4                                               No. 01-3019
+
+to the fiber boxes (the one near Peeler’s land and 12 others
+along the Monon Trail) likely is worth less than $75,000. If
+so, that claim would depend on the supplemental jurisdic-
+tion, for it would not have supported removal independ-
+ently. If the jurisdictional amount is not satisfied with
+respect to this distinct claim for relief, the district court
+should consider returning this case to state court.
+                                 AFFIRMED AND REMANDED
+
+A true Copy:
+      Teste:
+
+                        ________________________________
+                        Clerk of the United States Court of
+                          Appeals for the Seventh Circuit
+
+
+
+
+                    USCA-02-C-0072—5-8-06

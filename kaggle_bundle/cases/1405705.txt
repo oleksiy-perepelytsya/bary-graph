@@ -1,0 +1,262 @@
+Melton, Justice.
+ 
+
+  This is the second appearance of this case before this Court. In
+  
+   Bridges v. State,
+  
+  279 Ga. 351 (613 SE2d 621) (2005), we found that the evidence overwhelmingly supported Roy Bridges’ dual convictions for murder, but we remanded the case to the trial court solely to consider Bridges’ timely-raised allegations of ineffective assistance of counsel. In our prior opinion, we set forth the facts of this case as follows:
+ 
+
+
+  On December 27, 1997, the severely beaten body of [Bridges’] wife, JoAnn Bridges, was found in the Whigham, Georgia, home of her mother, a butcher knife lodged in her chest. Upstairs lay the body of [Bridges’] invalid mother-in-law, Christine Ulmer, her trachea cut open. Authorities soon determined the murders had occurred sometime after 10:00 p.m. the previous night. Although evidence initially indicated the murders may have been associated with a violent burglary, that theory was soon abandoned as no property appeared to be missing from the home.
+ 
+
+
+  When asked about his whereabouts on the night of the murders, [Bridges] told investigators that he had been
+   
+   *536
+   
+  hunting near Opelika, Alabama, yet it was determined that he never checked into the hunting club where he claimed to have stayed, [n. 2. [Bridges] later conceded to investigators that he had not stayed at the hunting club, stating instead that he had stayed at an Opelika motel located near the club.] [Bridges] told authorities that he was in Alabama from approximately 3:00 p.m. on December 26th until 5:00 a.m. on December 27th, and that he had made no phone calls on the night of the 26th. However, cell phone records revealed that shortly after 10:00 p.m. on that night, [Bridges] placed a cell phone call that originated within ten to twelve miles of Arlington, Georgia, which is located approximately forty miles northwest of the crime scene.
+ 
+
+
+  On the same day the murders were discovered, [Bridges] asked JoAnn Bridges’ employer whether JoAnn had any financial benefits payable upon her death. Bridges later told his son-in-law that he was anxious to settle JoAnn’s estate because he “needed that money.” After his arrest and before trial, [Bridges] asked a cellmate to kill two potential State witnesses and/or to assist [Bridges] in crafting a false alibi. Moreover, investigators learned that shortly before the murders, [Bridges] had begun an adulterous affair with Marcy Garvin, his previous wife, whom he asked to re-marry him. [Bridges] also asked a female friend to stage an adulterous scene with Garvin’s husband in order to make a divorce easier to obtain — and more lucrative — for Garvin.
+ 
+
+
+  At trial, three witnesses testified that after his arrest, [Bridges] told them how he had killed his wife and mother-in-law. Cooper, who was incarcerated with appellant, testified that appellant told him he had cut one of the women’s throat and had beaten the other; that he had disposed of the murder weapons in the nearby Flint River; and that he was receiving more than $200,000 in insurance proceeds due to his wife’s death. Thomas, who also was incarcerated with appellant, testified that [Bridges] told him he had killed his wife and mother-in-law with a “slapjack” and a knife, [n. 3. A “slapjack” is described in the transcript as a leather thong or strap filled with lead.] Another fellow inmate, Smith, testified that [Bridges] told him he had planned the hunting trip as a ruse, then went to his mother-in-law’s house where JoAnn admitted him inside; that [Bridges] hit JoAnn in the head, then went upstairs and stabbed his mother-in-law; that [Bridges] had staged the scene to look like a robbery; and that [Bridges] would receive insurance
+   
+   *537
+   
+  proceeds for his wife’s death. Much of this information had not been made public by authorities at the time the witnesses learned of it.
+ 
+
+
+  Id. at 352-353.
+ 
+
+
+  1. In this appeal, Bridges contends that his trial counsel were ineffective in six separate ways.
+ 
+
+
+  To prevail on a claim of ineffective assistance of counsel, a defendant must show that counsel’s performance was deficient and that the deficient performance so prejudiced the defendant that there is a reasonable likelihood that, but for counsel’s errors, the outcome of the trial would have been different.
+  
+   Terry v. State,
+  
+  284 Ga. 119 (663 SE2d 704) (2008), citing
+  
+   Strickland v. Washington,
+  
+  466 U. S. 668, 687 (104 SC 2052, 80 LE2d 674) (1984). If an appellant fails to meet his or her burden of proving either prong of the
+  
+   Strickland
+  
+  test, the reviewing court does not have to examine the other prong. Id. at 697 (IV);
+  
+   Fuller v. State,
+  
+  277 Ga. 505 (3) (591 SE2d 782) (2004). In reviewing the trial court’s decision, “ ‘we accept the trial court’s factual findings and credibility determinations unless clearly erroneous, but we independently apply the legal principles to the facts.’ [Cit.]”
+  
+   Robinson v. State,
+  
+  277 Ga. 75, 76 (586 SE2d 313) (2003).
+ 
+
+
+
+   Rector v. State, 285
+  
+  Ga. 714, 716-717 (6) (681 SE2d 157) (2009). Furthermore,
+ 
+
+
+  there is a strong presumption that the performance of counsel was within the wide range of reasonable professional lawyering, and we cannot reach a contrary conclusion unless defendant successfully rebuts the presumption by clear and convincing evidence.
+  
+   Flanigan v. State,
+  
+  269 Ga. 160 (2) (496 SE2d 255) (1998). “Judicial scrutiny of counsel’s performance must be highly deferential.”
+  
+   Strickland,
+  
+  supra at 689 (III) (A). The test “has nothing to do with what the best lawyers would have done. Nor is the test even what most good lawyers would have done. We ask only whether some reasonable lawyer at the trial could have acted, in the circumstances, as defense counsel acted.”
+  
+   Jefferson v. Zant,
+  
+  263 Ga. 316, 318 (3) (a) (431 SE2d 110) (1993).
+ 
+
+
+
+   Anderson v. State,
+  
+  285 Ga. 496, 499 (3) (678 SE2d 84) (2009). Under these standards, especially in light of the overwhelming evidence of
+   
+   *538
+   
+  guilt, we find, as set forth below, that Bridges has failed to prove his claims of ineffective assistance. See
+  
+   Washington v. State,
+  
+  285 Ga. 541 (3) (b) (678 SE2d 900) (2009).
+ 
+
+
+  2. Bridges contends that his trial counsel rendered ineffective assistance by failing to object to pre-voir dire instructions given by the trial court to the jury pool. The record shows that, prior to a jury being chosen and sworn, the trial court gave the pool of potential jurors pre-voir dire instructions based on the suggested pattern instructions on intent. Bridges maintains that this charge prejudiced his defense because it implied to the potential jurors that Bridges had committed the crime and that he would be putting up an affirmative defense.
+  
+   1
+  
+  In short, he contends that the instruction shifted the burden of proof to him to prove that he did not commit the crimes in question. A review of the charge as a whole, however, shows that it fully informed the jurors on intent, the presumption of innocence, and the State’s burden of proof. “Where ... a [pre-evidentiary] charge is informative, accurate, and not prejudicial to the rights of the parties, then it is to be encouraged, not discouraged.”
+  
+   Decker v. State,
+  
+  139 Ga. App. 707, 709 (4) (229 SE2d 520) (1976). The pre-trial charge, as a whole, did not shift the burden of proof to Bridges as he contends. Moreover, one of Bridges’ trial counsel testified that he believed that Bridges actually benefitted from the instruction, as it sounded as if it were in Bridges’ favor, and trial counsel further testified that the giving of this instruction aided him in effectively questioning the jurors regarding their viewpoints on the law during voir dire. Given that the pre-trial instruction was proper and that Bridges’ trial counsel found it advantageous, the trial court did not err in finding that Bridges’ trial counsel were not deficient in failing to object to it. Moreover, given the overwhelming nature of the evidence, Bridges has also failed to show that, even if trial counsel were deficient in this regard, he was prejudiced.
+  
+   Washington,
+  
+  supra.
+ 
+
+
+  3. Bridges argues that his trial counsel rendered ineffective assistance by failing to object when the trial court issued the pre-voir dire instructions in Bridges’ absence. More specifically, Bridges contends that, by not procuring his presence, trial counsel caused Bridges to be absent from the courtroom at a critical stage of trial, thereby violating his constitutional rights under both federal and state law. Even if we assume without deciding that Bridges correctly contends that he was absent at a critical stage of trial, he has failed
+   
+   *539
+   
+  to show prejudice.
+ 
+
+
+  The denial of the federal constitutional right to be present at a critical stage of trial is subject to harmless error review on appeal. Under Georgia law, however, a denial of the right to be present pursuant to the Georgia Constitution is not.
+  
+   Peterson v.
+  
+  State, 284 Ga. 275, 279 (663 SE2d 164) (2008). This stricter Georgia rule does not apply, however, in an appeal limited to the issue of ineffective assistance of counsel.
+ 
+
+
+  [I]n this subsequent appeal, we are not reviewing on direct appeal a trial court’s rejection of a straightforward constitutional right-to-be-present claim. Instead, we are reviewing the denial of the right to be present solely as an instance of professionally deficient performance by counsel in the context of an ineffective assistance of counsel claim. [Bridges] is correct when he says that harmless error review is inapplicable to a pure right-to-be-present claim under the Georgia Constitution raised on direct appeal. However, where, as here, a defendant is not challenging his conviction directly based on an alleged violation of the right to be present, but instead raises the issue only indirectly under the aegis of an ineffective assistance of counsel claim, he or she must satisfy both prongs of the
+  
+   Strickland
+  
+  test for constitutional ineffective assistance of counsel claims.
+ 
+
+
+  (Footnote omitted.) Id. at 280. In this case, the evidence of Bridges’ guilt was overwhelming, and there is no reasonable probability that the outcome would have been more favorable if counsel had objected to his absence during the pretrial instructions.
+  
+   Washington,
+  
+  supra.
+ 
+
+
+  4. Bridges contends that his trial counsel rendered ineffective assistance by failing to object to the State’s evidence regarding life insurance policies covering his wife, arguing that there was no nexus shown between the life insurance and his wife’s murder. When the defendant in a murder trial is the beneficiary of an insurance policy on the life of the deceased, “in order to admit evidence of [the] insurance policy there must be some independent evidence of a nexus between the crime charged and the existence of the insurance policy.”
+  
+   Stoudemire v. State,
+  
+  261 Ga. 49, 50 (3) (401 SE2d 482) (1991). In this case, there was such a nexus. Bridges asked his wife’s employer about insurance proceeds on the day the murder was discovered, he made it clear to others that he wanted and needed the insurance money, and he explained to fellow inmates that, as a result of his commission of the murder, he would be receiving a large sum in insurance proceeds. This independent evidence directly related the existence of the insurance policies to Bridges’ motive for murder.
+   
+   *540
+   
+  See
+  
+   Slakman v. State,
+  
+  280 Ga. 837 (4) (632 SE2d 378) (2006);
+  
+   Bagwell v. State,
+  
+  270 Ga. 175 (1) (a) (508 SE2d 385) (1998). As a result, Bridges’ trial counsel did not render ineffective assistance by failing to object to this admissible evidence.
+ 
+
+
+  5. Bridges contends that his trial counsel rendered ineffective assistance by failing to object to FBI Agent White’s testimony that the crime scene appeared to have been staged and that, based on this scene, burglary was an unlikely motive. Bridges argues that this opinion testimony improperly went to the ultimate issue in the case. Again, even if this were the basis for a finding that trial counsel were deficient, Bridges has failed to show that, had trial counsel objected to this testimony, there is a reasonable probability that the outcome of his trial would have been different, given the overwhelming nature of the evidence against him.
+  
+   See Johnson v. State,
+  
+  281 Ga. 770 (2) (b) (642 SE2d 827) (2007);
+  
+   Fulton v. State,
+  
+  278 Ga. 58 (8) (597 SE2d 396) (2004). “Moreover, the expert testimony was as consistent with the defense theory that the victim[s were killed] by a mysterious stranger [in a railroad gang] as with the prosecution’s theory.”
+  
+   McAllister v. State,
+  
+  258 Ga. 795, 797 (3) (375 SE2d 36) (1989).
+  
+   2
+  
+
+
+  6. Bridges argues that his trial counsel rendered ineffective assistance by failing to object to comments made during the State’s closing argument in which the prosecutor conveyed his personal assessment of the evidence. Bridges maintains that, throughout his closing argument, the prosecutor used the phrase “I think” numerous times without objection, thereby expressing his personal opinion to the jury. Bridges contends that his trial counsel should have objected to these improper statements and either requested a mistrial or curative instructions. See OCGA § 17-8-75. Again, even if we assume that trial counsel were deficient in the manner suggested by Bridges, he has failed to show actual prejudice. The evidence against Bridges was overwhelming, and, in light of this evidence, he has not shown that, had trial counsel objected to the State’s closing argument, there was a reasonable probability that the outcome of his trial would be different. See
+  
+   Lloyd v. State,
+  
+  280 Ga. 187 (2) (d) (ii) (625 SE2d 771) (2006).
+ 
+
+
+  7. Finally, Bridges contends that his trial counsel rendered ineffective assistance by failing to object to testimony concerning incriminating statements he made to Ronnie Thomas, a jail cell informant. More specifically, Bridges contends that FBI Agent White recruited Thomas to obtain incriminating statements from Bridges in violation of
+  
+   Massiah v. United States,
+  
+  377 U. S. 201 (84 SC 1199,
+   
+   *541
+   
+  12 LE2d 246) (1964). Even if Bridges’ trial counsel rendered ineffective assistance in this regard, Thomas’ testimony was merely cumulative of the admissible testimony of two other fellow inmates, Cooper and Smith. As a result, Bridges has failed to show the requisite prejudice to support his claim of ineffective assistance, and the trial court did not err in its determination that, had trial counsel objected to the testimony, there was not a reasonable probability that the outcome of the trial would have been different. See, e.g.,
+  
+   Timmreck v. State,
+  
+  285 Ga. 39 (3) (673 SE2d 198) (2009);
+  
+   White v. State,
+  
+  283 Ga. 566 (4) (662 SE2d 131) (2008).
+ 
+
+
+  Decided January 25, 2010
+ 
+
+  Reconsideration denied March 1, 2010.
+ 
+
+
+   Billy L. Spruell, Melinda D. Taylor,
+  
+  for appellant.
+ 
+
+
+   Joseph K. Mulholland, District Attorney, Thurbert E. Baker, Attorney General, Paula K. Smith, Senior Assistant Attorney General,
+  
+  for appellee.
+ 
+
+
+   Judgment affirmed.
+  
+
+
+
+   All the Justices concur.
+  
+
+
+
+
+
+   1
+  
+
+   Bridges’ trial was the only case on the trial calendar that day. Therefore, Bridges contends that the instructions given to the jury pool were equivalent to instructions given specifically to his jury.
+  
+
+
+
+   2
+  
+
+   During trial, Bridges argued that the murders were committed randomly by unknown members of a railroad gang who had broken into his home for no apparent reason.

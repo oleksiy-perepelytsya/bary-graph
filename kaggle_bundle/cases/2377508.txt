@@ -1,0 +1,525 @@
+POST-TRIAL FINDINGS OF FACT AND CONCLUSIONS OF LAW
+  
+
+
+  JORDAN, District Judge.
+ 
+
+  I. INTRODUCTION
+ 
+
+
+  Webloyalty.com, Inc. (“Webloyalty”) brought this action against Consumer Innovations, LLC (“Cl”), alleging that Cl willfully infringed Webloyalty’s copyrights, U.S. Copyright Registration Nos. TX 5842219 and TX 5875671, and that Cl’s use in commerce of Webloyalty’s materials caused confusion such that Cl’s activities constituted unfair competition and a false designation of origin in violation of the Lanham Act, 15 U.S.C. § 1125(a). Web-loyalty is asking for statutory damages for copyright infringement, actual damages under the Lanham Act, injunctive relief, and attorneys’ fees and costs. This matter was tried before me on February 22, 2005. The following are my post-trial findings of fact and conclusions of law, issued pursuant to Federal Rule of Civil Procedure 52(a).
+ 
+
+
+  II. FINDINGS OF FACT
+  
+   1
+  
+
+
+  1. Webloyalty is a Delaware corporation with its principal place of business in Norwalk, Connecticut. Webloyalty is a provider of membership discount programs. (Trial Transcript [“Tr.”] at 37-38.)
+ 
+
+
+  2. Cl is a limited liability company organized under the laws of Arizona with its principal place of business in Phoenix, Arizona. Cl is also a provider of membership discount programs. (Tr. at 88.)
+ 
+
+
+  3. Webloyalty is the owner of U.S. Copyright Registration No. TX 5842219, registered on November 20, 2003, for material "titled “Reservation Rewards ‘COF’ — Coupon” that was first published on Sep
+   
+   *439
+   
+  tember 15, 2003. (Plaintiffs Trial Exhibit [“PTX”] 1.) The material protected by this copyright is referred to herein as the “Webloyalty Sell Page” or “Sell Page.” (Tr. at 73-74.)
+ 
+
+
+  4. Webloyalty is the owner of U.S. Copyright Registration No. TX 5875671, registered on February 17, 2004, for material titled “Special Offer Banner” that was first published on December 9, 2003. (PTX 67.) The material protected by this copyright is referred to herein as the “Webloyalty Banner” or “Banner.” (Tr. at 91.)
+ 
+
+
+  5. On November 24, 2003, Webloyalty began using its Sell Page with the sales confirmation web page of a company called Walter Drake that sells products online. (Tr. at 89.) The Webloyalty Sell Page displayed a copyright symbol. (PAX 2; Tr. at 123-24.) On December 9, 2003, Webloyalty began using its Banner with the Walter Drake confirmation page. (Tr. at 92.) Webloyalty used its Sell Page and Banner to market its Reservation Rewards program in the following way: Webloyalty displayed its Banner on Walter Drake’s sales confirmation page so that the Banner is visible to consumers after they make a purchase from Walter Drake. The Banner reads in part, “Click here to claim your Special Offer,” and, if consumers click the Banner, they are directed to the Webloyalty Sell Page and are able to sign up for Webloyalty’s program. (Tr. at 45-46, 79-80.)
+ 
+
+
+  6. In late 2003, Cl was approached by a company called List Services that informed Cl about a potential marketing opportunity with Walter Drake. (Tr. at 125.) Walter Drake would give Cl the opportunity to connect its own sell page to the Walter Drake confirmation page, setting up a head-to-head test between the sell pages of Cl and Webloyalty. (Tr. at 48, 125.)
+ 
+
+
+  7. Matthew Gordon, Director of Interactive Marketing at Cl (Tr. at 151), testified that he created a Cl sell page for use with the Walter Drake confirmation page in December 2003 and January 2004. (Tr. at 126).
+ 
+
+
+  8. On December 16, 2003, Gordon made an online purchase from Walter Drake, clicked on the Webloyalty Banner, examined the Webloyalty Sell Page, and joined Webloyalty’s Reservation Rewards program. (Tr. at 53, 122-23; PTX 36.)
+ 
+
+
+  9. On December 17, 2003, Gordon sent an e-mail to Hungry Mind, a company that designs internet sites, attaching a first draft of text for a Cl Sell Page. (Tr. at 130; PTX 43.) This draft was nearly identical to Webloyalty’s Sell Page, except for seven paragraphs which described the particular terms of the Cl Traveler Innovations reward program (which differed from the terms of Webloyalty’s program). (Tr. at 121-22; PTX 43A). Within this identical language, the Cl draft sell page actually included Webloyalty’s customer service telephone number in the following sentence: “If, at any time, you are not completely satisfied during your trial [membership in the program] or thereafter simply call Traveler Innovations toll free at 1-888-688-5995 to let us know you wish to cancel ....” (Tr. at 133; PTX 43A.)
+ 
+
+
+  10. Before connecting its sell page to the Walter Drake site on January 15, 2004, Cl generated additional drafts. In one intermediate draft of January 13, 2004, the language on Cl’s sell page contained slight differences from the Webloyalty Sell Page. (PTX 44.) But the final version that was connected to the Walter Drake site on January 15 (PTX 3) was revised in a manner that made the text in certain portions virtually identical to the Webloyalty Sell Page (PTX 2). (Tr. at 139-45.) The final Cl Sell Page was connected with the Walter Drake site for approximately one
+   
+   *440
+   
+  month — from January 15 to February 16, 2004. (Tr. at 208.)
+ 
+
+
+  11. To connect Walter Drake customers to the Cl Sell Page, Cl used a banner (PTX 7) that is identical to the Webloyalty Banner except that “Reservation Rewards” was replaced by “Traveler Innovations.”
+ 
+
+
+  12. Gordon and Jason Edwards (Cl’s President) testified that, as of December 2003, they knew that copying was wrong. (Tr. at 122, 124, 176-78.) Gordon understood the meaning of the copyright symbol. (Tr. at 122-24.)
+ 
+
+
+  III. CONCLUSIONS OF LAW
+ 
+
+
+  1. The Court has jurisdiction over the subject matter of this action under 28 U.S.C. § 1338(a); jurisdiction over the parties and venue for this action are uncontested.
+ 
+
+
+  A.
+  
+   Copyright Infringement
+  
+
+
+  2. In an action for copyright infringement under 17 U.S.C. § 501, the plaintiff must show by a preponderance of the evidence that its copyright registrations are valid and that the defendant copied the registered works.
+  
+   Dam Things from Denmark v. Russ Berrie & Co.,
+  
+  290 F.3d 548, 561 (3d Cir.2002). Copying is proven by showing that the defendant had access to the protected work and that there is a substantial similarity between the two works.
+  
+   Id.
+  
+  The test for substantial similarity is subdivided into two considerations.
+  
+   Id.
+  
+  at 562. The first consideration, actual copying, is established by showing the defendant’s access to the copyrighted work coupled with “probative” similarity between the two works.
+  
+   Id.
+  
+  The second consideration is whether the copying is actionable, which requires the fact finder to “determine whether a ‘lay-observer’ would believe that the copying was of protectable aspects of the copyrighted work.”
+  
+   Id.
+  
+
+
+  3. Copyright registrations are prima facie evidence of validity of the copyrights and ownership of the copyrighted material.
+  
+   Ford Motor Co. v. Summit Motor Prods., Inc.,
+  
+  930 F.2d 277, 290-91 (3d Cir.1991). To overcome the presumption of validity and ownership, the defendant must present evidence to challenge the validity of the copyrights.
+  
+   Yamate USA Corp. v. Sugerman,
+  
+  20 U.S.P.Q.2d 1590, 1594 (D.N.J.1991) (citing
+  
+   Carol Barnhart, Inc. v. Economy Cover Corp.,
+  
+  773 F.2d 411, 414 (2d Cir.1985)).
+ 
+
+
+  1.
+  
+   Copyright Validity and Ownership
+  
+
+
+  4. Since Webloyalty has copyright registrations for its Banner and Sell Page, Cl must overcome the presumption that Web-loyalty owns valid copyrights for these materials.
+ 
+
+
+  5. When denying Cl’s motion for summary judgment, I held that the defenses of merger and
+  
+   scenes a faire
+  
+  were not available in this case: “For either doctrine to apply, [Cl] must establish that there is a limited, if not singular, manner to express the ideas presented on the sell page.... These [examples of] sell pages clearly show that there are other ways in which those ideas can be expressed.” Memorandum Order denying Defendant’s Motion for Summary Judgment, Jan. 13, 2005 (Docket Item [“D.I.”] 101 at 11-12). After these arguments failed, Cl presented no evidence sufficient to rebut the presumption of copyright validity and ownership.
+ 
+
+
+  6. Thus, for the purposes of this infringement action, Webloyalty’s copyrights for its Sell Page (No. TX 5842219) and Banner (No. TX 5875671) are valid.
+ 
+
+
+  2.
+  
+   Actual Copying
+  
+
+
+  7. The evidence is overwhelming that Cl actually copied the Webloyalty Sell Page and Banner.
+ 
+
+
+  8. First, Gordon reviewed the Webloy-alty Banner and Sell Page by making a
+   
+   *441
+   
+  purchase from Walter Drake and joining Reservation Rewards.
+  
+   (Supra
+  
+  C.I.F. 8.) Thus, Cl had access to Webloyalty’s Banner and Sell Page.
+ 
+
+
+  9. Second, large sections of the Cl Sell Page are identical to the Webloyalty Sell Page. The identical language in the final versions of the two Sell Pages reveals a probative similarity — and this, coupled with Cl’s access to the Webloyalty page, is sufficient to show that Cl engaged in actual copying. The presence of Webloyalty’s telephone number on the Cl first draft is compelling additional evidence of copying; in fact, copying is the only reasonable explanation for the phone number to appear on Cl’s draft. As noted at the bench trial, Cl was caught “red-handed.” (Tr. at 217.)
+ 
+
+
+  10. The Cl Banner is identical to the Webloyalty Banner, except for the substitution of the words “Traveler Innovations” for the words “Reservation Rewards.”
+  
+   (Supra
+  
+  C.I.F. 11.) This identity obviously reveals a probative similarity. Coupled with Cl’s access to the Webloyalty Banner, this probative similarity is sufficient to show that Cl engaged in actual copying of the Banner.
+ 
+
+
+  3.
+  
+   The Copying of the Sell Page and Banner is Actionable
+  
+
+
+  11. The near-identity of the Cl Sell Page and Banner to those copyrighted by Webloyalty is compelling. An ordinary lay observer comparing the materials would determine that the pages were copied almost in their entirety, including the protectable expression found in the text and in the arrangement of elements on the pages. The wholesale copying of the Web-loyalty materials is sufficient to show that the copying in this case is actionable.
+ 
+
+
+  12. In sum, Cl had access to the Web-loyalty Sell Page and Banner; Cl engaged in actual copying of these materials; and this copying is actionable under the Copyright Act. Therefore, Cl has infringed Webloyalty’s copyrights in the Webloyalty Sell Page and Banner.
+ 
+
+
+  B.
+  
+   Willfulness
+  
+
+
+  13. Copyright infringement is willful when the defendant “actually knew it was infringing the plaintiffs copyrights or recklessly disregarded that possibility.”
+  
+   Schiffer Publ’g, Ltd. v. Chronicle Books, LLC,
+  
+  No. CIV.A.03-4962, 2005 WL 67077, at *5 (E.D.Pa. Jan.11, 2005);
+  
+   Original Appalachian Artworks, Inc. v. J.F. Reichert, Inc.,
+  
+  658 F.Supp. 458, 463-64 (E.D.Pa.1987). While the plaintiff bears the burden of proving willfulness,
+  
+   Schiffer,
+  
+  2005 WL 67077, at *5, this need not be shown directly; “rather, it may be inferred from defendant’s conduct.”
+  
+   Id.
+  
+  at *5;
+  
+   Bly v. Banbury Books, Inc.,
+  
+  638 F.Supp. 983, 986 (E.D.Pa.1986). Also, willfulness may be shown by the defendant’s attempts to hide the infringement from the plaintiff or the court.
+  
+   Odegard, Inc. v. Costikyan Classic Carpets, Inc.,
+  
+  963 F.Supp. 1328, 1341 (S.D.N.Y.1997).
+ 
+
+
+  14. Cl’s infringement of the Web-loyalty Sell Page and Banner was indeed willful. First, Gordon testified that he understood copyright protection. (Tr. at 122-24.) Gordon and Edwards each testified that they understood that copying expressive material was wrong. (Tr. at 122, 124, 176-78.) The knowledge of these Cl principals strongly indicates that the wholesale copying of the Webloyalty Banner and Sell Page was done with knowledge of or reckless disregard for the possibility that this copying would be copyright infringement.
+ 
+
+
+  15. Second, Gordon and Edwards testified repeatedly in depositions and at trial that Cl did not copy portions of the Web-loyalty Sell Page in the Cl Sell Page. (Tr. at 126-27, 132-33, 140-42, 144-45, 169, 180, 199.) In the face of the overwhelming evidence of copying, including the Cl
+   
+   *442
+   
+  draft of a sell page containing Webloyalty’s telephone number, this testimony appears deliberately deceitful. That Gordon and Edwards persisted in testifying that no copying took place demonstrates their willingness to deceive and their consciousness of their culpability for infringement. As I said at the trial:
+ 
+
+
+  It borders ... if not crosses the border, into ... perjury, to look at a sheet of paper ... which contains Webloyalty’s phone number in it and assert that that is not an instance of copying. It’s a stunning position to take. I do not understand what motivated that testimony here in court today but it is, to put it mildly, incredible.
+ 
+
+
+  (Tr. at 216.) As in
+  
+   Odegard,
+  
+  the defendant’s willingness to hide their infringement strongly suggests that they acted willfully. 963 F.Supp. at 1341.
+ 
+
+
+  16. In short, Cl’s infringement of the Webloyalty Sell Page and Banner copyrights was willful.
+  
+   2
+  
+
+
+  C.
+  
+   Statutory Damages for Copyright Infringement
+  
+
+
+  17. Webloyalty has asked for statutory damages as a result of Cl’s willful infringement of the Webloyalty Sell Page and Banner copyrights. The copyright statute allows damages of up to $150,000 for the willful infringement of each of the two copyrights in this case.
+  
+   3
+  
+  17 U.S.C. § 504(c).
+ 
+
+
+  18. “[A]n award of statutory damages serves two purposes. It compensates the plaintiff for the infringement of its copyright while, at the same time, serving as a deterrent by punishing the defendant for its unlawful conduct.”
+  
+   Compendia Songs v. On Top Communications, LLC,
+  
+  No. CIV.A.04-252-GMS, 2004 WL 2898070, at *4 (D.Del. Nov.15, 2004). The factors used to determine the level of statutory damages include: “the expenses saved and the profits earned by the defendant, the revenues lost by the plaintiff, and the defendant’s state of mind.”
+  
+   Id.
+  
+  “Normally, it is the blameworthiness of the defendant which weighs the heaviest in the court’s analysis.”
+  
+   Id.
+  
+
+
+  19. Here, Cl’s willful copying of the Webloyalty materials and the persistent and willful deception by Cl at trial about this copying support the award of
+   
+   *443
+   
+  significant statutory damages. These facts unmistakably demonstrate Cl’s blameworthiness in this case. Deterring similar conduct is also an important justification for an award, considering Cl’s persistent deception and lack of remorse.
+ 
+
+
+  20. However, the amount of a statutory damages award must also take into account the actual profits earned by the defendant and revenues lost by the plaintiff.
+  
+   Id.
+  
+  Here, Webloyalty was not able to prove any lost revenues directly caused by Cl’s infringement. While Webloyalty argued that $24,500 was lost during the month when the Cl page was connected to the Walter Drake site, this loss was, at least in part, the inevitable result of Walter Drake’s test of the two Sell Pages and was not attributable to Cl’s infringement. (Tr. at 211-12.) Gordon testified that Cl generated only $1000 in revenue through its use of its infringing Sell Page. (Tr. at 166.) While these considerations do not override Cl’s blameworthiness, they do suggest that compensation, which along with deterrence is the purpose for statutory damages, does not require an award near the $150,000 maximum allowed by the statute.
+ 
+
+
+  21. Thus, I conclude that Webloyalty should be awarded $25,000 in total for the willful infringement of the Webloyalty Sell Page and $25,000 in total for the willful infringement of the Webloyalty Banner. These awards are each 25 times the revenue generated by Cl as a result of its infringement, and so should act as a deterrent and reflection of my judgment that Cl’s conduct was entirely unsupportable. At the same time, the awards do not amount to a windfall for Webloyalty in a case where no actual damages have been shown.
+ 
+
+
+  D.
+  
+   Attorneys’ Fees and Costs
+  
+
+
+    4
+   
+
+
+
+  22.Webloyalty has also asked for an award of attorneys’ fees and costs under the Copyright Act. 17 U.S.C. § 505.
+ 
+
+
+  23. “[A]n award of reasonable fees and costs tends to be the rule rather than the exception in actions for copyright infringement.”
+  
+   Compendia,
+  
+  2004 WL 2898070, at *5. The court should account for considerations of deterrence and compensation when determining the amount of an award.
+  
+   Id.
+  
+  The court should also consider whether the losing party advanced a position that was objectively unreasonable (either in the legal or factual components of the case).
+  
+   Lieb v. Topstone Indus., Inc.,
+  
+  788 F.2d 151, 156 (3d Cir.1986). And, as for statutory damages, “the court should focus its analysis on whether the defendant was acting intentionally, willfully, or in bad faith.”
+  
+   Compendia,
+  
+  2004 WL 2898070, at *5.
+ 
+
+
+  24. Here, Cl’s infringement was willful
+  
+   (supra
+  
+  C.I.L. 16). As I discussed above, the willfulness determination was heavily based on Cl’s deception about its copying of Webloyalty’s materials. Cl’s blameworthiness and the need to deter conduct that borders on or constitutes per
+   
+   *444
+   
+  jury strongly support an award of attorneys’ fees and costs in this case.
+ 
+
+
+  25. Webloyalty also argues in its motions for attorneys’ fees (D.I.134) that Cl’s pretrial conduct, including the filing of a motion to dismiss for lack of personal jurisdiction (D.I.16), the filing of a motion for summary judgment (D.I.91), and various discovery disputes, are also evidence of Cl’s blameworthiness. I do not agree, however, that Cl’s litigation decisions on these points rise to a level of blameworthiness that supports an award of fees and costs associated with those motions and disputes.
+ 
+
+
+  26. Nevertheless, once I denied Cl’s motion for summary judgment and held that the copyright defenses of merger and
+  
+   scenes a faire
+  
+  were unavailable in this case, Cl provided no other substantial evidence or argument that its copying was not actionable copyright infringement. Instead, Cl went to trial armed only with obviously incredible assertions that it did not actually copy Webloyalty’s materials. Again, on the record presented, these assertions were so outlandish as to offend any reasonable concept of the truth. (Tr. at 216.) Cl wasted the resources of its opponent and this court by persisting with an objectively unreasonable strategy. Therefore, I conclude that for reasons of compensation and deterrence, Cl must pay to Webloyalty reasonable attorneys’ fees and costs for the work required after the denial of Cl’s summary judgment motion on January 13, 2005.
+ 
+
+
+  27. Webloyalty’s attorneys spent a total of 783.55 hours in preparation for trial after the denial of Cl’s summary judgment motion, at trial, and in post-trial matters. While preparation for trial was necessitated by Cl’s continued denial of actual copying, the number of hours spent was excessive for the one day bench trial, with four witnesses, that was required in this case. Therefore, I find that 75% of these hours would have been a reasonable amount in this case, leading to a total of 587.7 hours. Cl does not challenge the hourly rate reported by Webloyalty, so a pro rata adjustment of the total fee amount by 75% results in a total award of $226,611.75 in attorneys’ fees, of which $21,460.12 is awarded for local counsel and $205,151.63 for lead counsel. The costs associated with this time period are also awarded, and total $42,727.79, of which $4,144.45 are for costs incurred by local counsel and $38,583.34 for costs incurred by lead counsel.
+ 
+
+
+  E.
+  
+   Injunctive Relief
+  
+
+
+  28. Based on Cl’s willful infringement of Webloyalty’s copyrights and on the attempt to hide the infringement by Gordon and Edwards, I find that there is a appreciable danger of future infringement. Thus, I find it appropriate to enter a permanent injunction against Cl prohibiting it from using the Cl Sell Page, Cl Banner, and any other material substantially similar to the Webloyalty Sell Page and Banner depicted in Copyright Nos. TX 5842219 and TX 5875671.
+ 
+
+
+  F.
+  
+   Trade Dress Infringement
+  
+
+
+  29. To prove infringement of unregistered trade dress under § 43(a) of the Lanham Act, the plaintiff must show that: “(1) the allegedly infringing feature is nonfunctional, (2) the feature is inherently distinctive or has acquired secondary meaning, and (3) consumers are likely to confuse the source of the plaintiffs product with that of the defendant’s product.”
+  
+   Shire U.S., Inc. v. Barr Labs., Inc.,
+  
+  329 F.3d 348, 353 (3d Cir.2003) (citing
+  
+   Wal-Mart Stores, Inc. v. Samara Bros., Inc.,
+  
+  529 U.S. 205, 210-11, 120 S.Ct. 1339, 146 L.Ed.2d 182 (2000)). Here, Webloyalty’s trade dress claim fails because Webloyalty has failed to show that the features of its
+   
+   *445
+   
+  Sell Page and Banner are inherently distinctive or that they have acquired secondary meaning.
+ 
+
+
+  30. An inherently distinctive trade dress is one that almost automatically tells a consumer that it refers to a brand or a source for a product, such that consumers will be predisposed to equate the trade dress with the source of a product.
+  
+   Wal-Mart,
+  
+  529 U.S. at 211-12, 120 S.Ct. 1339. Webloyalty has presented no evidence to show that the text and arrangement of the Sell Page and Banner will be perceived in this way by consumers of its Reservation Rewards program. Therefore, Webloyalty has not shown that its materials are inherently distinctive.
+ 
+
+
+  31. Trade dress that is not inherently distinctive may acquire distinctiveness through secondary meaning, “which occurs when, in the minds of the public, the primary significance of a mark is to identify the source of the product rather than the product itself.”
+  
+   Id.
+  
+  at 211, 120 S.Ct. 1339 (internal quotations omitted). The presence of secondary meaning is determined by considering several factors, including:
+ 
+
+
+  (1) the extent of sales and advertising leading to buyer association; (2) length of use; (3) exclusivity of use; (4) the fact of copying; (5) customer surveys; (6) customer testimony; (7) the use of the mark in trade journals; (8) the size of the company; (9) the number of sales; (10) the number of customers; and, (11) actual confusion.
+ 
+
+
+
+   Commerce Nat'l Ins. Servs., Inc. v. Commerce Ins. Agency, Inc.,
+  
+  214 F.3d 432, 438 (3d Cir.2000).
+ 
+
+
+  32. Webloyalty argues that Sell Page and Banner have secondary meaning, as shown by the following: (1) Cl’s copying of these materials; (2) the testimony that the Sell Page was viewed 18,000 times between November 24, 2003 (when this version of the Sell Page was linked to Walter Drake’s page) and January 15, 2004 (when Cl’s page was linked to Walter Drake’s page) (Tr. at 89); (3) the testimony that the Banner was viewed on Walter Drake’s page 28,000 times between those dates (Tr. at 89); and (4) testimony about customer confusion that happened several months after the Cl Sell Page was removed (Tr. at 209). But this evidence is insufficient to support a finding of secondary meaning.
+ 
+
+
+  33. First, the number of views of the Sell Page and Banner reported by Webloy-alty do not convince me that customers were associating the appearance of these materials with the source of the Reservation Rewards program. Any Walter Drake customer making a purchase will apparently view only one Banner, and given the lack of options for these customers, the number of views does not suggest that a connection has been made in the customers’ minds between the appearance of the Banner and Sell Page and Webloyalty.
+ 
+
+
+  34. Second, the confusion reported by Webloyalty occurred months after the Cl Sell Page was removed from the internet. (Tr. at 209.) And nonspecific, conclusory statements about confusion are not convincing in any event.
+ 
+
+
+  35. Third, Cl’s copying of the Banner and Sell Page is one factor to consider. But in the absence of any other evidence of secondary meaning, I do not conclude that Cl was motivated to copy by a desire to take advantage of secondary meaning in the Webloyalty materials.
+ 
+
+
+  36. Of the eleven factors to be considered in an evaluation of secondary meaning, Cl’s copying is the only one that has been demonstrated in this case: I therefore find that Webloyalty has failed to show secondary meaning, and so its trade dress infringement claim must fail.
+ 
+
+
+ 
+   *446
+   
+  IV. SUMMARY OF CONCLUSIONS
+ 
+
+
+  To summarize, for the reasons expressed herein, Cl is liable to Webloyalty for the willful infringement of its copyrighted Sell Page and Banner. Webloyalty is awarded $25,000 in statutory damages for the infringement of the Sell Page, $25,000 in statutory damages for the infringement of the Banner, $226,611.75 in attorneys’ fees, $42,727.79 in costs, and injunctive relief. Cl is not liable to Web-loyalty for trade dress infringement because Webloyalty has failed to show that its materials have acquired secondary meaning. The parties shall confer and, within ten days, submit a form of judgment order giving effect to the foregoing conclusions.
+ 
+
+
+
+
+
+
+
+   1
+  
+
+   . Throughout these Findings of Fact and Conclusions of Law, I may have adopted without attribution language suggested by one side or the other in this dispute. In any such instance, the finding or conclusion in question has become my own, based upon my review of the evidence and the law.
+  
+
+
+
+   2
+  
+
+   . In addition to finding that Gordon and Edwards prevaricated about the copying of the Webloyalty materials, I am compelled to point out instances in the trial where Cl's counsel participated in eliciting testimony from these witnesses when counsel should have been doing everything possible to prevent such testimony or, at a bare minimum, should have done nothing to facilitate it. (See,
+   
+    e.g.,
+   
+   Tr. at 163, 193.)
+  
+
+
+   Considering the Cl first draft with Webloy-alty’s phone number and the near identity of the final version with the Webloyalty Sell Page, Gordon’s testimony about how he created the Sell Page by careful thought is simply incredible, as should have been obvious to Cl's counsel in preparing for trial. So too was the following exchange between Edwards and Cl's counsel:
+  
+
+
+   Q: Have you ever believed at any point from late 2003 up until today that Mr. Gordon copied the whole language verbatim paragraphs from Webloyalty's Sell Page?
+  
+
+
+   A: No.
+  
+
+
+   (Tr. at 193.) There is nothing in a lawyer's duty of zealous advocacy that requires him or her to advance palpably preposterous testimony.
+   
+    Cf. Nix v. Whiteside,
+   
+   475 U.S. 157, 170-71, 106 S.Ct. 988, 89 L.Ed.2d 123 (1986) ("The essence of the brief
+   
+    amicus
+   
+   of the American Bar Association reviewing practices long accepted by ethical lawyers is that under no circumstance may a lawyer either advocate or passively tolerate a client's giving false testimony.”).
+  
+
+
+
+   3
+  
+
+   . While the Webloyalty Banner copyright was registered on February 17, 2004, after Cl's infringement, statutory damages are available because the registration was made within three months of first publication. 17 U.S.C. § 412.
+  
+
+
+
+   4
+  
+
+   . For the reasons stated herein, Webloyalty's Motion for Attorneys' Fees and Costs (D.I. 134) is granted. Webloyalty's Motion for Leave to File a Reply to Cl's Opposition and to Strike Jardini’s declaration from Cl’s Opposition to Application for Attorneys' Fees (D.I. 144) is granted in part and denied in part. Because Cl released Webloyalty's attorneys' bills to a third party, Andre Jardini, in violation of the Protective Order in this case, the Motion to Strike Jardini’s declaration is granted. Because further briefing on the issue was not necessary, Webloyalty is not given leave to reply, and so the remainder of the motion is denied. Again because further briefing was not necessary, Webloyalty’s Motion to Strike Cl’s Supplemental Opposition (D.I. 155) is granted. Cl’s Supplemental Opposition included unnecessary argument supplemental to Cl’s original Opposition, rather than being limited to responding to Webloyalty’s updated report of fees and costs.

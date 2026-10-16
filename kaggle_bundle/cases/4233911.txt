@@ -1,0 +1,260 @@
+REAVLEY, Circuit Judge:
+ 
+
+  Patrick Lanier was indicted and charged with conspiracy to commit wire fraud, in violation of 18 U.S.C. §§ 1343 and 1349 (Count 1); wire fraud, in violation of 18 U.S.C. § 1343 (Counts 2-15); harboring and concealing a person from arrest, in violation of 18 U.S.C. § 1071 (Count 16); and assisting a federal offender, in violation of 18 U.S.C. § 3 (Count 17). A jury convicted him on each count save Count 14. Lanier received a sentence of 204 months in prison based on the fraud-related convictions and a concurrent 22-month sentence based on the Counts 16 and 17 convictions. The district court also sentenced him to three years of supervised release and ordered a $1,600 special assessment and restitution in the amount of $37,544,944.16. Challenging his conviction and sentence, Lanier appeals.
+ 
+
+
+  I. BACKGROUND
+ 
+
+
+  This case features complex facts spanning several years. We supply only those necessary to make sense of the following discussion. Patrick Lanier was once a successful securities lawyer practicing in Austin, Texas. Somewhere along the way, Harris Dempsey Ballow became a client. Lanier provided Ballow with legal services relating to criminal cases and SEC investigations. In 2000, Ballow was involved with a company called EpicEdge and paid Lanier in EpicEdge stock. EpicEdge turned out to be part of a fraud scheme, and Lanier sold all of his shares just before their value cratered. In 2003, Ballow was permanently enjoined from “engaging in the promotion of securities,” and Lanier (who was representing Ballow’s co-defen-darit) knew of this.
+ 
+
+
+  Lanier’s initial involvement with Ballow did not lead him into legal trouble. Their union ended, for a time, in late 2004 when Ballow pleaded guilty to an 18 U.S.C. § 1957 violation then fled the country while released on bond, becoming a fugitive. The men renewed their relationship in 2006. Ballow was hiding in Mexico, and he needed a lawyer.
+ 
+
+
+  In mid-2006, Lanier visited Ballow in Mexico for the first time. From that point on, he was Ballow’s attorney once more. He assisted on numerous projects, providing legal assistance as problems arose. Ballow used false names during this period, and Lanier incorporated these false names into his work product. While Lanier and Ballow often communicated directly, sometimes long-time Ballow associate Ruben Garza Perez (“Garza”) acted as an intermediary. Garza even set up a special email account for Lanier (the “patlawbest account”), and Lanier used this account rather than his professional account when working with Ballow.
+ 
+
+
+  Ballow had not reformed. He was still engineering and implementing fraudulent schemes to bilk unsuspecting “investors.” In Mexico, he primarily used E-SOL International Corporation (“E-SOL”), Medra Corporation (“Medra”), and Aztec Technology Partners, Inc. (“Aztec”). Lanier provided legal services for each of these fraud-facilitating corporations.
+ 
+
+
+  Law enforcement never stopped looking for Ballow. Lanier monitored the manhunt and repeatedly supplied Ballow with updates on its progress. For example, in 2008 he provided Ballow with a link to a news article describing the ongoing search and indicating the FBI’s belief that Ballow was in Mexico.
+ 
+
+
+  The, investigation eventually bore fruit. Ballow was arrested, and so was Lanier. With four other defendants, Lanier was charged in a thirty-five-count indictment. He faced 17 counts including wire fraud, conspiracy to commit wire fraud, harboring and concealing a fugitive, and assisting a federal offender. Unlike his co-defendants, Lanier went to trial. The jury convicted him on 16 of the charged counts, securing an acquittal only with respect to one count of fraud. In addition to a period of supervised release and a special assessment, the district court sentenced him to 204 months imprisonment. Lanier timely appealed.
+ 
+
+
+  II. DISCUSSION
+ 
+
+
+  Lanier advances numerous arguments. They can be classified as follows: sufficiency of the evidence challenges, Brady challenges, evidentiary challenges, attorney-disqualification challenges, and sentencing challenges. We address them in that order.
+ 
+
+
+  A. Sufficiency of the Evidence Challenges
+ 
+
+
+  1. Standard of Review
+ 
+
+
+  Ordinarily, sufficiency-of-the-evidence challenges are reviewed de novo, with all evidence viewed in the light most favorable to the government and all reasonable inferences made in support of the verdict. United States v. Grant, 850 F.3d 209, 219 (5th Cir. 2017). If, under this standard, “any rational trier of fact could have found the essential elements'of the crime beyond a reasonable doubt,” the conviction must stand. Id. (quoting United States v. Vargas-Ocampo, 747 F.3d 299, 301 (5th Cir. 2014) (en banc)). Our review is circumscribed still further when error is unpreserved. In such cases, “review is only for a manifest, miscarriage of justice.” United States v. McDowell, 498 F.3d 308, 312 (5th Cir. 2007). When this standard applies, the conviction will stand “unless the record'is devoid of evidence pointing to guilt or if the evidence is so tenuous that a conviction is shocking.” United States v. Delgado, 672 F.3d 320, 330-31 (5th Cir. 2012) (en banc) (quoting United States v.. Phillips, 477 F.3d 215, 219 (5th Cir. 2007)).
+ 
+
+
+  A motion for acquittal generally preserves sufficiency, arguments for the purposes of appeal. See, e.g., United States v. Beacham, 774 F.3d 267, 272 (5th Cir. 2014). Here, Lanier moved for acquittal, but only with respect to Counts 16 and 17. Accordingly, his sufficiency challenge to those counts will be reviewed de novo, but his fraud-related sufficiency challenge will be reviewed only for a manifest miscarriage of justice.
+ 
+
+
+  2. The Fraud-Related Counts
+ 
+
+
+  Lanier attacks the sufficiency of the evidence supporting his convictions for wire fraud and conspiracy to commit wire fraud. The challenge is limited to one element common to each conviction—intent to commit fraud. See United States v. Kuhrt, 788 F.3d 403, 413-14 (5th Cir. 2015). Under the circumstances, the question of intent reduces to a factual question of attorney knowledge. See United States v. Beckner, 134 F.3d 714, 718-19 (5th Cir. 1998). Ultimately, we must determine whether the record is devoid of evidence that Lanier “was aware [Ballow] was engaged-in a fraudulent activity and knowingly worked to further it.” Id. at 720.
+ 
+
+
+  In Beckner, we determined that the lawyer-defendant inadvertently contributed to his client’s fraudulent scheme in the course of providing routine and proper legal services. Lanier contends that his case is the same. But Beckner does no more for Lanier than sharpen our focus on the key factual question—knowledge vel non. La-nier’s claimed lack of knowledge rests on his assertion that his involvement with Ballow was very limited—he “acted only as an attorney to unwind” oñe Medra transaction.
+ 
+
+
+  The record does not support this claim of limited representation. Lanier was involved with Medra from its earliest stages, giving advice on reinstatement of the forfeited corporate charter, providing his own address as an address at which Medra could receive mail within the United States, and assisting with tax matters. And his work for Ballow was not limited to Medra. To provide but one example each for E-SOL and Aztec: He prepared a “Letter of Non-Distributive Intent” that paved the way for the sale of 1 million shares of restricted E-SOL stock, He either prepared or had a significant role in preparing Aztec’s business plan. These examples merely scrape the surface of Lanier’s work for Ballow.
+ 
+
+
+  Given that Lanier’s sufficiency argument proceeds on a false factual premise, it is unsurprising that there is plenty of evidence from which a jury could infer attorney knowledge,- Even Lanier’s role in the one transaction he is willing to acknowledge suggests knowledge of the fraud. After being issued 40 million Medra shares and appointed as corporate officials, two men sought to- disassociate themselves from the entity, contending they had never agreed to any involvement with Medra. The men were represented by Aaron Ghais, a Maryland attorney who worked with Lanier to undo the stock issuance and appointment. Lanier told Ghais that he represented a Medra shareholder name “John Gel,” but Gel is a Ballow alias. He also held “Lorraine Barrowcliff ’ out as the president of Medra, but Barrowcliff was one of multiple aliases belonging to Bal-low’s wife.
+  
+   1
+  
+
+
+  False names were a repeated ingredient of Lanier’s work product. Further, with knowledge that Ballow was enjoined from promoting securities, Lanier assisted with stock-related schemes, even drafting an “E-SÓL International 2007 Stock Option Agreement.” On a separate occasion, he did counsel Ballow to stay away from the word investment on E-SOL brochures relating to a real estate scam. But his motivation was not compliance with the injunction, a la Beckner, 134 F.3d at 716, but rather a concern that “the word investment ... will bring focus on the managers almost immediately.” Scrutiny of the managers was something to be feared because E-SOL’s purported managers included Gel and an entirely fictitious person, Robert Remington.
+ 
+
+
+  The record contains more evidence, plenty to support the jury’s finding that Lanier knowingly acted to further Sallow’s scheme. The government has set forth evidence that Lanier was “not only aware of the fraud, but actually helped perpetrate the fraud.” Kuhrt, 788 F.3d at 416. And Lanier has certainly not shown a manifest miscarriage of justice.- See United States v. Oti, 872 F.3d 678, 689 (5th Cir. 2017). Lanier’s sufficiency arguments fail as to the fraud-related counts.
+ 
+
+
+  3. Venue, Counts 16 & 17 (Harboring and Assisting a Federal Offender)
+ 
+
+
+  Because Lanier preserved his sufficiency of the evidence challenge as it relates to venue and Counts 16 (harboring) and 17 (assisting a federal offender), our review is de novo. Venue need be proven only by a preponderance of the evidence. United States v. Strain, 396 F.3d 689, 692 (5th Cir. 2005). Thus, the question before us is whether any rational finder of fact could have found venue proper by a preponderance of the evidence. See id. The parties agree that the analysis germane to Count 16 controls the outcome of Count 17, and so our focus is on the harboring offense.
+ 
+
+
+  “In all criminal prosecutions, the accused shall enjoy the right to a speedy and public trial, by an impartial jury of the State and district wherein the crime shall have been committed, which district shall have been previously ascertained by law..;.” U.S. Const, amend. VI. When the relevant' criminal statute lacks a venue provision, the Sixth Amendment controls and requires that trial occur in the “the district or districts within which' the offense is committed.” United States v. Anderson, 328 U.S. 699, 705, 66 S.Ct. 1213, 1217, 90 L.Ed. 1529 (1946) (footnote omitted). Where, as here, “the Government alleges a single continuing offense.committed in multiple districts, it must show that the trial is taking place ‘in any district in which [the] offense was begun, continued, or completed.’” Strain, 396 F.3d at 693 (alteration in original) (quoting 18 U.S.C. § 3237(a)).
+ 
+
+
+  To determine if the harboring offense was begun, continued, or completed in the Southern District, we must first determine which acts constitute harboring acts. Criminal harboring of a fugitive occurs when a defendant (1) knows a federal arrest warrant has been issued, (2) engages in physical acts that help the fugitive avoid detection and apprehension, and (3) intends “to prevent the fugitive’s discovery.” United States v. Green, 180 F.3d 216, 220 (5th Cir. 1999); see also 18 U.S.C. § 1071.
+ 
+
+
+  The government contends that each of Lanier’s criminal acts qualify for one reason or another. We place Lanier’s acts in two categories. First, there are traditional acts of harboring, as when Lanier repeatedly emailed Ballow information about the government’s investigation, which a jury could infer had the purpose and effect of keeping Ballow one step ahead of law enforcement. Second, there are general conspiracy-furthering acts. The government acknowledges that these acts are “not typical, straightforward acts of harboring” but contends they qualify nonetheless because acts aiding the conspiracy inevitably “helped Ballow avoid detection and arrest and to obtain money and stock.”
+ 
+
+
+  We do not agree that Lanier’s conspiracy-furthering acts qualify as harboring acts simply because they provided Ballow with a revenue stream that funded his life on the lam. This court has already observed that direct financial assistance to a fugitive does not necessarily amount to harboring. United States v. Stacey, 896 F.2d 75, 77 (5th Cir. 1990). The same is necessarily true of any indirect financial assistance Lanier provided by dint of his participation in the conspiracy. The key is intent. Further, by declining the government’s invitation to conflate the conspiracy and harboring offenses for purpose of the venue analysis, we dutifully uphold the Sixth Amendment’s offense-specific approach to venue. See United States v. Davis, 666 F.2d 195, 198 (5th Cir. 1982) (“Venue may properly be laid in one district with respect to one count of an indictment, but still be improper with respect to the other counts.”); United States v. Schlei, 122 F.3d 944, 979 (11th Cir. 1997) (“Venue must exist for each offense charged.”).
+ 
+
+
+  As already noted, Lanier sent several emails that a jury could find rendered him criminally liable for harboring a fugitive. The evidence, however, is that these emails were sent from Austin, which is not in the Southern District of Texas. Accordingly, the government rightly cites these emails to show harboring generally, but not for the purpose of showing that venue was proper. Instead, [he government draws our attention to five acts and seeks to persuade us that the acts both bore the requisite connection with the Southern District of Texas and continued the harboring offense.
+ 
+
+
+  The government has not shown that any of these acts continued the harboring offense, however. Rather, in each case, the government tries to bootstrap venue from an act that, at most, furthered the fraud conspiracy. Three of the acts speak for themselves in this regard. While in Houston, Lanier tried unsuccessfully to check his patlawbest account. On another occasion, Lanier drafted a release for the signature of one Chaz Robertson, a Ballow employee located in Houston. And, finally, Lanier received an email containing a forged document that had been notarized by a Harris County, Texas notary.
+ 
+
+
+  The final alleged acts fail for the same reason but require a bit of explanation. In November 2006, Lanier traveled through Houston to meet Ballow. This episode, if it would otherwise create venue, cannot represent a continuation of the harboring offense because it occurred prior to the beginning of that offense. Our review of the record shows the first act of harboring did not occur until mid-2007, when Lanier first provided Ballow with an update ¿n the FBI’s investigation and information that he was being sought in Panama. Accordingly, Lanier’s travel through Houston can only be associated with the already-ongoing conspiracy. Finally, Lanier and Ballow routinely communicated at what the government labels a “Houston telephone number” due to its Houston area code. Again, even assuming the phone calls might somehow establish venue, without evidence regarding the calls’ contents, they cannot be said to represent harboring. See Strain, 396 F.3d at 696. The government appears to recognize this, urging not that an inference of direct harboring was warranted but instead that “the purpose of Lanier’s communications,” including the phone calls, “was to assist Ballow in operating” the fraud scheme. We could accept this argument only if we were willing to conflate the conspiracy and harboring offense, but we have already held such intermixing to be inappropriate.
+ 
+
+
+  The government has attempted to draw several links between Lanier, the Southern District, and the harboring offense.
+  
+   2
+  
+  On inspection, however, the government has not shown that Lanier continued the harboring offense in that district. Accordingly, the convictions as to Counts 16 and 17 must be vacated.
+ 
+
+
+  B. Brady Challenges
+ 
+
+
+  We review de novo “the Brady question” of whether the prosecution withheld material evidence favorable to the defendant, but any underlying factual findings are entitled to deference. United States v. Severns, 559 F.3d 274, 278 (5th Cir. 2009). Lanier alleges two Brady violations. First, he complains that prosecutors “failed to disclose that Assistant U.S. Attorney Belinda Beek had previously represented Harris Dempsey Ballow in matters in which Lanier was involved (but unaware of her representation).”
+  
+   3
+  
+  This allegedly undisclosed fact was discovered by Lanier in his own files, so there was no Brady violation. See United States v. Dvorin, 817 F.3d 438, 450 (5th Cir. 2016). Second, Lanier complains that the prosecution “failed to disclose its methodology in calculating the damages suffered by the victims.” But La-nier fails to develop any non-disclosure theory and instead quibbles with the calculation itself, thus failing to establish a Brady violation. See United States v. Brown, 650 F.3d 581, 588 (5th Cir. 2011) (“suppressed evidence” is an integral element of any Brady violation).
+ 
+
+
+  C. Evidentiary Challenges
+ 
+
+
+  Lanier chose to take the stand. The cross-examining prosecutor elicited Lanier’s testimony that he had once been paid by Ballow in EpicEdge stock, then zeroed in bn the timing of its subsequent sale: “And you weren’t worried at all that there would be a connection between the fact that you sold the last-• EpicEdge stock when the stock collapsed?” According to Lanier, “[b]y stating or implying Lanier had engaged previously in an illegal scheme to defraud with the same actor, Harris Ballow, the Government successfully destroyed Lanier’s entire defense”—i.e., the lack of specific intent to commit fraud. Of course, the government may attempt to destroy a defendant’s entire defense and counts it as a pretty good day when successful. And so, for his gripe to have traction, Lanier .must demonstrate wliy the question was improper. He perceives two errors.
+ 
+
+
+  First, Lanier contends that the question violated Rule 404(b) of the Federal Rules of Evidence, which governs the admissibility .of “[ejvidence of a crime, wrong, or other act.” Fed. R. Evid. 404. The Rule 404 argument found .in Lanier’s brief was largely copied and pasted from his original motion for a new trial. This is problematic because the district court explained in a written order that its decision to. admit the evidence:was not based on Rule 404 at all but instead on Rule 608, which “applies when other-acts evidence is, offered to impeach a witness, ‘to show the character of. the witness for untruthfulness,’ or to show bias.” United States v. Tomblin, 46 F.3d 1369, 1388 (5th Cir. 1995) (quoting United States v. Schwab, 886 F.2d 509, 511 (2d Cir. 1989)). Because Lanier’s appellate brief ignores the very ruling that is being appealed from, he has abandoned the issue, which was not “briefed properly to address the basis of the district court’s ruling.” United States v. Tavera-Jaimes, 609 Fed.Appx. 254, 255 (5th Cir. 2015) (per curiam); see also Friend v. Valley View Cmty. Unit Sch Dist. 365U, 789 F.3d 707, 712 (7th Cir, 2015) (striking argument sections from an appellate’brief that did “not inform [the court] why the district court erred” and, indeed, could not. “respond to the district court’s decision, since each section [was] directly copied and pasted, essentially word for word from”'the underlying filings).
+ 
+
+
+  Lanier also asserts that the question violated the Confrontation Clause because it assumed facts not in,evidence thus transforming the prosecutor into an unconfronted fact witness. When combined with a witness’s testimony, the questions of a prosecutor designed to introduce testimony about out-of-court testimony that would otherwise be inadmissible hearsay, can violate the Confrontation Clause. United States v. Kizzee, No. 16-20397, 877 F.3d 650, 655-56, 2017 WL 6398243, at *3 (5th Cir. Dec. 15, 2017). But see United States v. Solis, 299 F.3d 420, 442 (5th Cir. 2002) (holding that because closing arguments do not constitute evidence, a prosecutor’s statement did not implicate the Confrontation Clause). Here, the prosecutor’s questioning was not designed to introduce inadmissible hearsay evidence but to impeach the witness. Moreover, the district court found that “documents in evidence provided support for the decline in the stock price,” meaning the prosecutor’s reference to the decline was not objectionable at all. Lanier has- shown no error relating to the EpicEdge question.
+ 
+
+
+  D. Attorney Disqualification Challenges
+ 
+
+
+  Generally, the existence of a conflict of interest is a legal question subject to de novo review.
+  
+   4
+  
+  See, e.g., United States v. Garza, 429 F.3d 165, 171 (5th Cir. 2005) (conflict between defendant and own counsel). With respect to criminal matters, the Supreme Court “establish[ed] a categorical rule against the appointment of an interested prosecutor, adherence to which requires no subtle calculations of judgment,” Young v. U.S. ex rel. Vuitton et Fils S.A., 481 U.S. 787, 814, 107 S.Ct. 2124, 2141, 95 L.Ed,2d 740 (1987). Accordingly, our standard of review is de novo with respect to the legal question of conflict, and reversal is automatic if conflict is found. See id. (holding “that harmless-error analysis is inappropriate in reviewing the appointment of an interested prosecutor”).
+ 
+
+
+  Prior to trial, the district court rejected Lanier’s efforts to disqualify prosecutor John Lewis; Lanier assigns error, alleging Lewis was conflicted out of the prosecution. Lanier advances two theories.
+ 
+
+
+  First, Lanier alleges that Lewis disclosed “materials obtained through a criminal investigation for the benefit, of a party in a civil action” and then teamed up with that party to pursue an indictment of Lanier. We have reviewed the record as it relates to this accusation and find that Lewis acted at all times with a proper investigative purpose, in the clear interest of his office, and in an open and forthright manner. What information he shared was for the documented purpose of “ad-vanc[ing] the government’s investigation of Mr. Ballow,” and the decision was made only after giving Ballow’s counsel an opportunity to object. Indeed, the episode of which Lanier complains was fully documented across five letters between the parties, and we can ..find nothing resembling objectionable conduct on Lewis’s part,
+ 
+
+
+  Lanier’s second attorney-disqualification theory is nearly as risible. Years ago, when acting as an attorney for Bal-low, Lanier accused Lewis of prosecutorial misconduct. The accusation was frivolous and incomprehensible; it went nowhere. Lanier’s unilateral act—an unfounded, un-pursued, difficult-to-parse accusation—did not create a conflict of interest forever disqualifying Lewis from prosecuting Lanier.
+  
+   5
+  
+
+
+  E. Sentencing Challenges
+ 
+
+
+  Lanier contends the district court erred by failing to classify him as a “minimal” or “minor” participant in the conspiracy for purposes of sentencing. Such a designation would have rendered him eligible for a lighter sentence recommendation under the Guidelines. The standard of review is clear error. United States v. Torres-Hernandez, 843 F.3d 203, 207 (5th Cir. 2016). Wé have already rejected Lanier’s attempts to minimize his role in the conspiracy. While he doubtless played a lesser role than did Ballow, the conspiracy’s ringleader, Lanier has not shown that he was “substantially less culpable” than the conspiracy’s “average participant.’ ” Id. at 205, 207 (quoting § 3B1.2 cmt. n.3(A)). His related, but broader, argument that the sentence was substantively unreasonable is also unavailing. The 204-month sentence was within the properly calculated Guidelines range and enjoys a presumption of reasonableness that Lanier has failed to rebut. See United States v. Cooks, 589 F.3d 173, 186 (5th Cir. 2009).
+ 
+
+
+  The district court found that victims of Ballow’s fraudulent scheme lost more than $37 million and ordered restitution in the amount of $37,544,944.16. Alleging that E-SOL shares retain value, Lanier contends that this loss calculation is flawed to the extent that it treats the victims’ E-SOL investments as a total loss. Assuming the soundness of the argument’s premise, La-nier has failed to show that the district court clearly erred. United States v. Brown, 727 F.3d 329, 341 (5th Cir. 2013). To the contrary, the evidence in the record indicates that E-SOL investments are entirely worthless.
+  
+   6
+  
+
+
+  III. CONCLUSION
+ 
+
+
+  The convictions as to Counts 16 and 17 are VACATED. In all other respects, the judgment is AFFIRMED. As the sentence imposed on Counts 16 and 17 was to run concurrently with the sentence imposed on the remaining counts, resentencing is not necessary. Nonetheless, we REMAND so that the district court can issue a judgment reducing the special assessment and otherwise reflecting our decision.
+ 
+
+
+
+
+
+
+
+
+
+   1
+  
+
+   . There is evidence that Lanier knew Barrow-cliff did not exist. Even as he was working with Ghais, Lanier continued to work with Garza and Ballow on reviving Medra. Because of Barrowcliff’s purported status with Medra, the corporation could not obtain a federal tax identification number without providing her social security number. Lanier promised to find a “solution” to the problem. Of course, if she were a legitimate person, the obvious answer would have been simply to ask her for the social security number. Lanier’s ultimate proposal was to use someone's social security number and hope to not get caught. In his words: the "only way to get fed tax id is to go ahead and use someone’s ss# on the officer line-... [they] didn’t use to require such but no way around having some # in that slot—not sure if its cross matched later for tax purposes should corp not pay its taxes etc,”
+  
+
+
+
+   2
+  
+
+   . Each asserted act fails for multiple reasons. For purposes of efficiency, we have discussed only the common reason shared by all of them. This opinion should not be read to suggest that the government's theories found traction with this court in any respect. •
+  
+
+
+
+   3
+  
+
+   . We present the allegation as made by Lanier. The actual evidence in the record belies the substance of the accusation.
+  
+
+
+
+   4
+  
+
+   . Lanier states that questions regarding attorney disqualification are reviewed for plain error, citing U.S. ex rel. S.E.C. v. Carter, 907 F.2d 484, 488 (5th Cir. 1990). He fails to note, however, that in Carter, the appellant did not seek disqualification before the trial court or even raise the issue on appeal. See 907 F.2d at 485, 488. The plain-error standard applied in that case because the court raised the issue sua sponte. See id.
+  
+
+
+
+   5
+  
+
+   . Regrettably, this very appeal shows how loose counsel can be with accusation of prose-cutorial misconduct. While attorneys must zealously represent their clients, we lament the willingness of Lanier’s counsel to distort the record and challenge opposing counsel’s integrity with accusations that (in our view) ‘ could not have been made in good faith.
+  
+
+
+
+   6
+  
+
+   . Lanier also argues that the loss calculation included losses beyond what Lanier, could have foreseen. But this argument rests on the already-rejected contention that Lanier’s role in the conspiracy was limited to “unwinding a transaction involving Medra."

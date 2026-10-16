@@ -1,0 +1,1254 @@
+FOR PUBLICATION
+
+    UNITED STATES COURT OF APPEALS
+         FOR THE NINTH CIRCUIT
+
+
+ ESTATE OF BRUCE H. BARTON,*                        No. 13-56379
+                Plaintiff-Appellant,
+                                                      D.C. No.
+                      v.                           2:12-cv-06971-
+                                                      BRO-CW
+ ADT SECURITY SERVICES PENSION
+ PLAN, a pension plan; TYCO
+ INTERNATIONAL MANAGEMENT                             OPINION
+ COMPANY, as plan sponsor; TYCO
+ INTERNATIONAL MANAGEMENT
+ COMPANY, LLC, Administrative
+ Committee,
+               Defendants-Appellees.
+
+
+       Appeal from the United States District Court
+           for the Central District of California
+     Beverly Reid O’Connell, District Judge, Presiding
+
+                   Argued and Submitted
+           October 23, 2015—Pasadena, California
+
+                       Filed April 21, 2016
+
+    Before: Alex Kozinski, Sandra S. Ikuta, and John B.
+                  Owens, Circuit Judges.
+
+
+   *
+     The Estate of Bruce H. Barton is substituted as Plaintiff-Appellant
+pursuant to Fed. R. App. P. 43(a).
+2                  ESTATE OF BARTON V. ADT
+
+                    Opinion by Judge Owens;
+                     Dissent by Judge Ikuta
+
+
+                           SUMMARY**
+
+
+        Employee Retirement Income Security Act
+
+    The panel reversed the district court’s judgment after a
+bench trial in favor of the defendants in an action under the
+Employee Retirement Income Security Act, challenging a
+denial of pension benefits on the basis that the plaintiff did
+not have sufficient years of service with an employer or its
+affiliates.
+
+    The panel held that the burden of proving entitlement to
+benefits was not properly placed on the plaintiff because the
+defendants were in a better position to ascertain whether an
+entity was a participating employer in the ERISA plan. The
+panel held that when a claimant has made a prima facie case
+that he is entitled to a pension benefit but lacks access to the
+key information about corporate structures or hours worked
+needed to substantiate his claim, and the defendant controls
+such information, the burden shifts to the defendant to
+produce this information. The panel remanded the case to the
+district court to apply the correct burden of proof.
+
+    Dissenting, Judge Ikuta wrote that the majority’s burden-
+shifting rule was contrary to the abuse of discretion review
+applicable to the plaintiff’s claim.
+
+  **
+     This summary constitutes no part of the opinion of the court. It has
+been prepared by court staff for the convenience of the reader.
+                 ESTATE OF BARTON V. ADT                       3
+
+                         COUNSEL
+
+Morris S. Getzels (argued), Morris S. Getzels Law Office,
+Tarzana, California, for Plaintiff-Appellant.
+
+Stuart D. Tochner (argued), Ogletree, Deakins, Nash, Smoak
+& Stewart, P.C., Los Angeles, California, for Defendants-
+Appellees.
+
+
+                          OPINION
+
+OWENS, Circuit Judge:
+
+    Bruce Barton appeals from the district court’s judgment
+concluding that the ADT Security Services Pension Plan
+Administrator did not abuse its discretion in denying Barton’s
+request for pension benefits. Because the district court did
+not have the benefit of our analysis regarding the burden of
+proof in a case such as this, we reverse and remand for
+proceedings consistent with this opinion.
+
+                       I. BACKGROUND
+
+    A. Barton’s Employment History
+
+    The parties dispute Bruce Barton’s employment history
+with the American District Telegraph Company (ADT)
+and/or its affiliates (ADT-related entities). Barton asserts that
+he worked for ADT from November 1967 until he resigned
+in September 1986. The parties agree that he also worked for
+4                  ESTATE OF BARTON V. ADT
+
+a moving company for a short period in 1968 and served in
+the Marine Reserves from 1965–1971.1
+
+    The three named defendants in this case—ADT Security
+Services Pension Plan (pension plan), Tyco International
+Management Company (plan sponsor), and Tyco
+International Management Company, LLC Administrative
+Committee (plan administrator)—maintain that they have
+access to the pension records passed on by ADT, Inc., which
+Tyco acquired in 1997.
+
+        B. Relevant Pension Plans
+
+    Because Barton’s employment spanned eighteen years,
+two different plans govern his eligibility for a pension
+benefit: the plan in effect January 1, 1968 (1968 Plan) and the
+plan in effect January 1, 1985 (1985 Plan). Under the terms
+of the 1985 Plan, the 1968 Plan governs Barton’s service
+through December 31, 1975, and the 1985 Plan governs his
+service as of January 1, 1976. Barton maintains that his right
+to a pension vested because, although he stopped working
+before normal retirement age, he completed at least ten years
+of “continuous service” with the company.
+
+   The 1985 Plan defines “Company” as “American District
+Telegraph Company and such of its Affiliated Companies as
+
+    1
+   Contrary to the dissent’s characterization of Barton’s “sporadic” work
+history, Barton’s FICA records indicate that he received consistent wages
+from an ADT-related entity from the fourth quarter of 1967 through his
+resignation in 1986. See Dissent at 24. Through 1971, he received
+additional wages from his service in the Marine Reserves. Also while
+employed at an ADT-related entity, in the fourth quarter of 1968 he
+worked briefly for a moving company to earn $162.72 in extra “Christmas
+money.”
+                ESTATE OF BARTON V. ADT                      5
+
+have adopted the Plan and have been admitted to participation
+therein by the Board or any one or more of them, and any
+corporation succeeding to the rights and assuming the
+obligations of any such company.” An “Affiliated Company”
+is “a company which is a member of a controlled group of
+corporations of which the American District Telegraph
+Company is also a member.” The 1968 Plan defines
+“Company” as the “American District Telegraph Company
+and those controlled companies authorized by the Board of
+Directors to participate in the Plan.”
+
+    The 1985 Plan defines “Continuous Service” as follows.
+For employment through December 31, 1975, “Continuous
+Service shall be that service determined under the terms of
+the Plan as it was constituted on December 31, 1975.” After
+January 1, 1976, “[o]ne year of Continuous Service shall be
+recorded for any Plan Year during which an Employee has
+1,000 or more Hours of Service.” A plan year in which an
+employee works 500 hours or less is considered a “break in
+service.” Additionally, to the extent required by ERISA or
+determined by the Board of Directors, if an employee
+transfers to a participating company from an affiliated
+company after January 1, 1976, he will receive credit for his
+continuous service to that affiliate prior to 1976, even if the
+affiliate had not adopted the Plan.
+
+   The 1968 Plan does not define “continuous employment,”
+save for the following provision regarding absence without
+pay:
+
+       Any absence from the service without pay . . .
+       shall be considered as a break in the
+       continuity of service, and persons re-
+       employed after such a break shall be
+6               ESTATE OF BARTON V. ADT
+
+       considered as new employees and the term of
+       employment reckoned from the date of such
+       re-employment; except that any such person
+       reemployed for at least ten continuous years
+       after such a break shall have his term of
+       employment reckoned from the date of his
+       initial employment less the entire period of
+       such break.
+
+    C. Barton’s Request for Pension Benefits
+
+     In 2010, Barton reached age sixty-five and contacted the
+pension record keeper about benefits. A December 13, 2010
+letter from a pension benefit administrator in response stated
+that the administrator “could not find any information on
+[Barton’s] employment with ADT Security Services, Inc.,”
+and enclosed instructions for navigating the pension claim
+procedure. Barton then provided documentation regarding
+his employment with ADT-related entities. In a June 24,
+2011 letter, the pension record keeper said the documents
+Barton had sent failed to establish that he had a vested
+pension, and that if Barton had additional documentation—
+for example, a letter of vested benefits—he could file a claim
+with the Employee Benefits Committee. In response to a
+telephone inquiry, Barton was again informed that he was
+ineligible for a pension benefit.
+
+    Barton filed a claim with the Committee on October 3,
+2011. He stated that two former colleagues from the ADT
+office in Portland, Maine had provided similar documentation
+and received ADT pensions. He included copies of
+correspondence from the pension record keeper and the
+following documents:
+                  ESTATE OF BARTON V. ADT                            7
+
+    •   November 11, 1977 letter from R.B. Carey, Jr.,
+        President of ADT, on ADT letterhead listing an
+        address of One World Trade Center, Suite 9200, NY,
+        NY, addressed to “Mr. B. N. Barton, American
+        District Telegraph Company” at the same World
+        Trade Center address and suite.           The letter
+        congratulates Barton on his completion, on November
+        13, 1977, of ten years of service as a “member of the
+        ADT organization.”
+
+    •   Copies of key cards and identification/business cards
+        issued by “ADT.”
+
+    •   W-2 statements from 1980–1983 and 1986, listing
+        employer as “American District Telegraph Co.” at
+        1 World Trade Center, NY, NY and showing an X
+        marking the “Pension Plan” box.
+
+    •   Pay stubs from 1981 and 1985 listing “American
+        District Telegraph” at the bottom.
+
+    •   Personnel Data Maintenance forms from 1984, 1985,
+        and 1986 listing Barton’s current annual salary, raise,
+        and new annual salary.
+
+    •   Social Security Administration documentation
+        summarizing Federal Insurance Contributions Act
+        (FICA) withholding from 1968–1980.2
+
+
+
+
+ 2
+   Barton provided more detailed FICA records during his administrative
+appeal.
+8               ESTATE OF BARTON V. ADT
+
+    D. Committee’s Denial of Barton’s Claim
+
+   The Committee denied Barton’s claim on January 10,
+2012. It reported that it had reviewed the documents listed
+above as well as the following documents that Barton had
+provided earlier:
+
+    •   Barton’s September 11, 1986 resignation letter on
+        ADT letterhead.
+
+    •   September 12, 1986 Memorandum on ADT letterhead
+        confirming receipt of a credit card, tools, and
+        company truck.
+
+    •   Barton’s September 12, 1986 Exit Interview
+        Questionnaire that listed a November 10, 1967 date of
+        employment.
+
+    •   Handwritten telephone conversation record describing
+        Barton’s July 6, 2011 call to the pension record
+        keeper.
+
+   The Committee detailed the relevant plan provisions and
+wrote:
+
+        [T]here are no Plan records indicating your
+        eligibility for participation in the Plan, your
+        actual participation in the Plan, or your
+        eligibility for benefits under the Plan. In
+        addition, it was unclear from the information
+        you provided whether you had a continuous
+        term of employment or earned the required
+        service to earn at least 10 Years of Continuous
+        Service so as to be vested in a Plan benefit.
+                 ESTATE OF BARTON V. ADT                       9
+
+The Committee further explained that it was “not clear based
+on the information” that Barton provided that he met the
+terms of continuous employment. In particular, the
+Committee noted that the FICA records and W-2s did not
+cover each year of claimed employment, and that some
+documents lacked identifying information. Such information
+“did not override or contradict the Plan records.” The letter
+detailed the appeals procedure and suggested Barton could
+“supply copies of any further evidence . . . that would indicate
+that [he is] entitled to a Plan benefit, such as certified Social
+Security records for the entire period of time from 1967
+through 1986 or a pension benefit statement or written
+evidence that [he was] eligible to receive a Plan benefit.”
+
+     On January 19, 2012, Barton responded and requested
+copies of “all plan documents, records and other information
+affecting the claim per your document concerning Applying
+for Benefits and Claim and Appeal Procedures.” He
+specifically requested a Tyco International Summary Plan
+Description booklet, the Committee’s copy of the Social
+Security records, an example of a pension benefit statement
+and written evidence statement, and “application forms that
+should have been provided by the service center.” The
+Committee responded by letter and enclosed a memorandum
+prepared by outside counsel summarizing key provisions of
+the 1968 and 1985 Plans, and the full text of the Plans.
+Nothing in the record indicates that the Committee included
+the full 1983 Summary Plan Description (SPD) (referenced
+in the memorandum drafted by outside counsel) or exemplars
+of a pension benefit statement or “written evidence
+statement” as Barton requested.
+10               ESTATE OF BARTON V. ADT
+
+     E. Barton’s Appeal of the Committee’s Denial
+
+   Barton appealed the Committee’s denial on April 29,
+2012. He presented additional FICA records, broken down
+quarterly from 1967–1977 when he was an hourly employee
+and annually from 1978–1986 when he was a salaried
+employee.
+
+    The Committee denied Barton’s appeal on June 29, 2012.
+The Committee again noted there was no official record of
+Barton’s participation in the Plan and that the documentation
+he submitted “was insufficient to override the Plan records.”
+As with the initial denial, the appeal notice stated that “[i]t is
+not clear based on the information you provided that you
+were continuously employed with American District
+Telegraph Company.” The Committee also noted that the
+FICA records revealed that Barton had worked for companies
+in addition to ADT, which “could indicate that [he] did not
+have a continuous term of employment.” (emphasis added).
+In other words, because Barton could not document that he
+worked 1000 hours or more for each of the nearly twenty
+years he was employed by ADT and its affiliates, or that his
+employers participated in the Plans, he could not prove he
+was entitled to a pension.
+
+     F. Procedural History
+
+    On August 13, 2012, Barton filed suit in the Central
+District of California pursuant to the Employee Retirement
+Income Security Act of 1974 (ERISA), 
+29 U.S.C. § 1132
+. He
+sought (1) declaratory relief that he was entitled to a pension;
+(2) pension benefits based on his employment with ADT;
+and (3) recovery of statutory penalties under 29 U.S.C.
+                 ESTATE OF BARTON V. ADT                       11
+
+§ 1132(c)(1) based on the pension administrator’s failure to
+comply with ERISA’s disclosure obligations.
+
+    After a bench trial, the district court issued its Findings of
+Fact and Conclusions of Law on July 19, 2013. It held that
+the applicable standard of review was abuse of discretion and
+that the Committee did not abuse its discretion in denying
+Barton pension benefits. It declined to award Barton
+statutory penalties, holding that he lacked standing to assert
+a violation of ERISA’s disclosure requirements because he
+did not have a colorable claim to pension benefits. Barton
+timely appealed.
+
+                       II. ANALYSIS
+
+    A. Standard of Review
+
+    “We review de novo a district court’s choice and
+application of the standard of review to decisions by
+fiduciaries in ERISA cases. We review for clear error the
+underlying findings of fact.” Abatie v. Alta Health & Life Ins.
+Co., 
+458 F.3d 955, 962
+ (9th Cir. 2006) (en banc) (citation
+omitted). We also review de novo a district court’s allocation
+of the burden of proof. See Molski v. Foley Estates Vineyard
+& Winery, LLC, 
+531 F.3d 1043, 1046
+ (9th Cir. 2008) (citing
+Ferrari, Alvarez, Olsen & Ottoboni v. Home Ins. Co.,
+940 F.2d 550, 555
+ (9th Cir. 1991)).
+
+    B. Burden of Proof
+
+    The district court faithfully applied our precedent in
+reviewing the Committee’s denial of benefits for abuse of
+discretion. See Abatie, 
+458 F.3d at 963
+ (citing Firestone Tire
+& Rubber Co. v. Bruch, 
+489 U.S. 101, 115
+ (1989)). But
+12                 ESTATE OF BARTON V. ADT
+
+because the district court incorrectly placed the burden of
+proof on Barton for matters within defendants’ control, we
+remand to the district court in light of this opinion. We
+express no view on Barton’s eligibility for pension benefits.3
+
+    A claimant may bear the burden of proving entitlement to
+ERISA benefits. See, e.g., Muniz v. Amec Constr. Mgmt.,
+Inc., 
+623 F.3d 1290
+, 1294–95 (9th Cir. 2010) (holding that
+where a court reviews a plan administrator’s decision de
+novo, the claimant has the burden of proof). This rule makes
+sense in cases where the claimant has better—or at least
+equal—access to the evidence needed to prove entitlement.
+For example, where an employee must establish an illness to
+qualify for disability benefits, the burden lies most sensibly
+with the claimant, who can provide test results, physician
+reports, and other evidence about her condition. See, e.g., 
+id.
+at 1298
+ (holding that the claimant failed to establish he was
+“totally disabled” within the meaning of a long-term
+disability insurance plan). But in other contexts, the
+defending entity solely controls the information that
+determines entitlement, leaving the claimant with no
+meaningful way to meet his burden of proof. This is one of
+those cases.
+
+
+
+  3
+    Although not central to our resolution of this case, we note that on
+remand, the district court also may wish to consider whether defendants
+met the standard of meaningful dialogue in the administrative claims
+process, including whether the Committee’s denial letters dated January
+10, 2012 and June 29, 2012 were written in common-sense language that
+a lay person could understand or respond to, and whether the Committee
+sought the information it needed to make a reasoned decision. See Booton
+v. Lockheed Med. Benefit Plan, 
+110 F.3d 1461, 1463
+ (9th Cir. 1997); see
+also Saffon v. Wells Fargo & Co. Long Term Disability Plan, 
+522 F.3d
+863
+, 870–74 (9th Cir. 2008).
+                   ESTATE OF BARTON V. ADT                            13
+
+    The district court placed the burden of proof on Barton to
+establish that his various ADT-related employers participated
+in defendants’ Plan, and that he worked the requisite hours
+per year. There are two problems with this approach. First,
+defendants are in a far better position to ascertain whether an
+entity was a participating employer. After all, they determine
+which employers participate in the plan. Indeed, both Plans
+state that affiliates or controlled companies may only
+participate if the company’s Board of Directors authorizes
+them to do so. Yet defendants asserted in the district court
+that they “have no records indicating whether the entities
+[identified as Barton’s employers in the Social Security
+records] were Participating Subsidiaries in the Plan at any
+time.” If Barton has made a prima facie case that he is
+eligible for a pension, his claim does not fail simply because
+he cannot initially prove whether defendants’ Board of
+Directors authorized his employers to participate in the Plans.
+Defendants never explain how the long-retired Barton could
+possibly answer this question if even they have no relevant
+records, particularly when, during his many years of
+employment, the corporate sub-entities were not evident from
+the company materials provided to Barton.4 It is illogical and
+unfair for us to require Barton to close this gap, and the
+dissent points to nothing in ERISA that supports such a
+Kafkaesque regime where corporate restructuring can license
+a plan administrator to throw up his hands and say “not my
+problem.”
+
+
+
+  4
+    Defendants argue that the absence of recorded service by Barton in
+their records proves that he did not work for a participating employer and
+is not entitled to a pension benefit. But they fail to explain why they
+cannot identify which affiliated companies they approved to participate in
+their Plans, nor how Barton could obtain such information.
+14              ESTATE OF BARTON V. ADT
+
+    It should not greatly burden an ERISA-compliant entity
+to determine what companies were authorized as
+“participating employers,” so the entity, not the claimant,
+should bear the risk of insufficient records. See, e.g.,
+Anderson v. Mt. Clemens Pottery Co., 
+328 U.S. 680, 687
+
+(1946) (“When the employer has kept proper and accurate
+records the employee may easily discharge his burden by
+securing the production of those records. But where the
+employer’s records are inaccurate or inadequate and the
+employee cannot offer convincing substitutes a more difficult
+problem arises.”). As we explained in Brick Masons Pension
+Trust v. Industrial Fence & Supply, Inc.:
+
+       The records that employers are required to
+       keep by the FLSA [Fair Labor Standards Act]
+       and by ERISA may be the only evidence
+       available to employees to prove that their
+       employers have failed to compensate them in
+       accordance with the statute. An employer
+       cannot escape liability for his failure to pay
+       his employees the wages and benefits due to
+       them under the law by hiding behind his
+       failure to keep records as statutorily required.
+
+839 F.2d 1333
+, 1338 (9th Cir. 1988).
+
+    This shift also follows naturally from ERISA’s disclosure
+requirements. Section 502(c)(1) provides for the imposition
+of penalties on a plan administrator who has not complied
+with disclosure requirements. 
+29 U.S.C. § 1132
+(c)(1). One
+such requirement, section 104(b)(4), mandates supplying
+participants with certain plan information, such as the
+summary plan description, annual report, or “other
+instruments under which the plan is established or operated.”
+                   ESTATE OF BARTON V. ADT                            15
+
+29 U.S.C. § 1024
+(b)(4). These disclosure requirements and
+the corresponding penalties function to ensure that an
+individual is duly informed of basic information relating to
+his pension plan:
+
+         As the legislative history bears out, the
+         documents contemplated by § 104(b)(4) are
+         those that allow “the individual participant
+         [to] know [ ] exactly where he stands with
+         respect to the plan—what benefits he may be
+         entitled to, what circumstances may preclude
+         him from obtaining benefits, what procedures
+         he must follow to obtain benefits, and who are
+         the persons to whom the management and
+         investment of his plan funds have been
+         entrusted.”
+
+Hughes Salaried Retirees Action Comm. v. Adm’r of Hughes
+Non-Bargaining Ret. Plan, 
+72 F.3d 686, 690
+ (9th Cir. 1995)
+(en banc) (quoting S. Rep. No. 127, 93d Cong., 2d Sess.
+(1974), reprinted in 1974 U.S.C.C.A.N. 4838, 4863).5
+
+    It follows that if Barton has made a prima facie case that
+he is entitled to pension benefits, it is properly defendants’
+burden to clarify what entities are covered under the Plans in
+the first instance. Employers, plans, and plan administrators
+must know the terms and conditions of the benefits they offer
+
+
+ 5
+    Section 104(b) illustrates ERISA’s underlying policies of “promoting
+informed financial decision making” and “protecting the reliance interests
+of plan participants and beneficiaries.” Peter Joseph Wiedenbeck, ERISA
+in the Courts 17 (Federal Judicial Center 2008). We do not address
+whether the plan administrator here failed to comply with the specific
+disclosure requirements of section 104(b).
+16                   ESTATE OF BARTON V. ADT
+
+and be able to identify covered employers and participating
+employees.6 Cf. Cent. States, Se. & Sw. Areas Pension Fund
+v. Cent. Transp., Inc., 
+472 U.S. 559, 572
+ (1985) (“[ERISA’s]
+reporting and disclosure standards require benefit plans to
+furnish all participants with various documents informing
+them of their rights and obligations under the plan . . . a task
+that would certainly include the duty of determining who is
+in fact a plan participant.” (citation omitted)).
+
+   Additionally, the district court faulted Barton for not
+proving that he worked over 1000 hours a year for the twenty
+years he was employed by ADT or its affiliates. But
+requiring Barton to prove his hours over the course of two
+
+
+  6
+    Defendants cite several cases to argue that Barton has the burden “to
+provide the Committee with information sufficient to show an entitlement
+to a benefit under the plan.” These cases are inapposite. In Mitchell v.
+Eastman Kodak Co., 
+113 F.3d 433, 439
+ (3d Cir. 1997), the plan itself
+allocated the burden to the claimants. Defendants assert for the first time
+in their supplemental briefing that the 1985 Plan similarly allocates the
+burden of proof to the claimant. Their argument is based solely on
+language contained in an informational document entitled “Applying for
+Benefits and Claim and Appeal Procedures.” While it is not clear from
+the record whether this document provides terms of the 1985 Plan, it is
+clear that defendants waived this argument when they failed to raise it in
+their answering brief. See, e.g., United States v. McEnry, 
+659 F.3d 893,
+902
+ (9th Cir. 2011) (holding an argument waived when available at the
+time an answering brief is filed but not raised in it). In the other cases, the
+district court found that the plaintiffs bore the burden of providing
+evidence of a personal medical problem—information within their
+possession—to claim disability benefits. See Schwartz v. Metro. Life Ins.
+Co., 
+463 F. Supp. 2d 971, 982
+ (D. Ariz. 2006); Jordan v. Northrop
+Grumman Corp. Welfare Benefit Plan, 
+63 F. Supp. 2d 1145, 1157
+ (C.D.
+Cal. 1999), aff’d, 
+370 F.3d 869
+ (9th Cir. 2004) (holding that it was not
+improper to place the initial burden on the claimant where the insurance
+company informed her of the information it needed and advised her to call
+them if she had questions).
+                ESTATE OF BARTON V. ADT                      17
+
+decades is unreasonable and inconsistent with the goals of
+ERISA. That is especially so where, as here, nothing
+indicates that Barton was warned at the start of his career that
+he needed to retain a log of his hours to obtain pension
+benefits a generation or two later. We have previously
+shifted the burden of proving the number of hours an
+employee works where the calculation of damages is
+uncertain due to defendants’ failure to keep statutorily
+required records. Brick Masons, 839 F.2d at 1337–39.
+
+    We find the reasoning of Brick Masons persuasive in this
+context. Brick Masons involved two wholly owned
+subsidiaries of one parent company. Id. at 1335. One,
+Industrial, had a collective bargaining agreement requiring it
+to contribute to the union’s fringe benefit trust funds (Trust)
+based on hours that union employees worked. Id. The other,
+Harris, was non-union. Id. The Trust sued to recover
+contributions for hours that Harris masons had worked on
+Industrial jobs. Id. It was undisputed that non-union masons
+had performed work for Industrial, but the Trust could not
+prove the exact number of hours because Industrial had failed
+to maintain certain records required under ERISA. Id. at
+1337–38. This court held that “once the Trust Funds proved
+the fact of damage and Industrial’s failure to keep adequate
+records, the burden shifted to Industrial to come forward with
+evidence of the extent of covered work performed by the 35
+Harris employees.” Id. at 1338–39. Industrial could not do
+so, and consequently was required to pay contributions for all
+hours that non-union masons worked during the time period
+where they were shown to have performed some covered
+work. Id. at 1339.
+
+    The Brick Masons court also found support in Anderson
+v. Mt. Clemens Pottery Co. There, the Supreme Court held
+18                 ESTATE OF BARTON V. ADT
+
+that where an employer fails to keep adequate records of
+hours worked as required by FLSA, the employee carries his
+burden of establishing damages “if he proves that he has in
+fact performed work for which he was improperly
+compensated and if he produces sufficient evidence to show
+the amount and extent of that work as a matter of just and
+reasonable inference.” 
+328 U.S. at 687
+. The Court reasoned
+that, where it was the employer’s duty to keep the relevant
+records, the employer could not complain that the related
+damages were inexact. 
+Id. at 688
+.
+
+    Accordingly, we hold that where a claimant has made a
+prima facie case that he is entitled to a pension benefit but
+lacks access to the key information about corporate structure
+or hours worked needed to substantiate his claim and the
+defendant controls such information, the burden shifts to the
+defendant to produce this information.7 Assuming that
+Barton can establish a prima facie case on remand, defendants
+will then bear the burden of production as to whether he
+worked sufficient hours for a participating employer to
+collect a pension.
+
+    We recognize that fiduciaries of a defined benefit pension
+plan have a duty to protect the pooled funds and distribute
+benefits only to those who qualify. See, e.g., Boyd v. Bert
+Bell/Pete Rozelle NFL Players Ret. Plan, 
+410 F.3d 1173,
+1178
+ (9th Cir. 2005) (“An ERISA fiduciary is ‘obligated to
+guard the assets of the [Plan] from improper claims, as well
+
+
+ 7
+   This does not require defendants to produce records listing entities not
+covered by their pension plans. Cf. Dissent at 25–26, 27. It requires only
+that they reveal which companies did in fact participate in their
+plans—information they must know to fulfill their fiduciary duty to only
+distribute pension funds to qualified individuals.
+                 ESTATE OF BARTON V. ADT                     19
+
+as to pay legitimate claims.’” (alteration in original) (quoting
+Brogan v. Holland, 
+105 F.3d 158, 164
+ (4th Cir. 1997))). We
+do not suggest that anyone can force a company to produce
+this corporate information by merely asserting that he is owed
+a pension—a plaintiff must put forth objective proof. See,
+e.g., Nigro v. Sears, Roebuck & Co., 
+784 F.3d 495, 497
+ (9th
+Cir. 2015) (“[A] self-serving declaration does not always
+create a genuine issue of fact for summary judgement: The
+district court can disregard a self-serving declaration that
+states only conclusions and not facts that would be admissible
+evidence.”).
+
+    Where a claimant, through documentary or other
+objective evidence, has made a prima facie case that he is
+entitled to a pension but has no means except for information
+in the defendant’s control to establish that his work was for
+a “covered employer” and of sufficient duration, the burden
+then shifts to the defendant to produce such information. A
+plaintiff claiming pension benefits will often have access to
+at least some objective documentation of prior
+employment—such as Social Security records, W-2
+statements, income tax returns, and pay stubs—to make his
+prima facie case. Cf. Motion Picture Indus. Pension &
+Health Plans v. N.T. Audio Visual Supply, Inc., 
+259 F.3d
+1063
+, 1066–67 (9th Cir. 2001) (holding that the burden does
+not shift under Brick Masons where the plaintiff did not
+produce sufficient evidence to meet the required threshold
+showing).
+
+    We leave it to the district court to determine in the first
+instance whether Barton has established a prima facie case.
+In doing so, it can consider the evidence available at trial,
+such as Barton’s Social Security records, W-2 statements, pay
+20              ESTATE OF BARTON V. ADT
+
+stubs with the pension box marked, and letter thanking him
+for ten years of service.
+
+     C. Statutory Penalties
+
+    The district court correctly held that to recover statutory
+penalties based on a plan administrator’s refusal to comply
+with ERISA’s disclosure obligations, a plaintiff must qualify
+as a plan participant. See 
+29 U.S.C. § 1132
+(c)(1). Thus, if
+Barton does not set forth a colorable pension claim, he cannot
+assert a violation of ERISA’s disclosure requirements. See
+Johnson v. Buckley, 
+356 F.3d 1067, 1077
+ (9th Cir. 2004). As
+this issue turns on the ultimate merits of Barton’s claim for
+pension benefits, we reverse the judgment for defendants.
+
+                    III. CONCLUSION
+
+    This case ultimately is about burdens—to qualify for his
+pension, must a former employee who quit working for the
+company more than twenty-five years ago decipher the
+corporate structure of his former employer from documents
+that were not disclosed to him? Should he have saved all of
+his pay stubs in the off chance that his employer would
+demand proof that he met the hours requirement for obtaining
+a pension? Or should the corporate defendant bear this load?
+ERISA, our precedent, and common sense dictate that the
+corporate defendant should not lay that arduous task at the
+feet of former employees. To hold otherwise would
+essentially reward Lucy for pulling the football away from
+Charlie Brown, something that we do not believe Congress
+intended when it enacted ERISA. See It’s Your First Kiss,
+Charlie Brown (CBS television broadcast Oct. 24, 1977).
+                 ESTATE OF BARTON V. ADT                     21
+
+   Accordingly, we REVERSE the judgment and
+REMAND this matter to the district court so it can apply the
+now-clarified burden of proof in this case.
+
+
+
+IKUTA, Circuit Judge, dissenting:
+
+    Today the majority goes off the rails. Its one-off burden-
+shifting rule, apparently specially designed to let Barton win
+on one element of his claim for benefits under an ERISA
+plan, is not only contrary to the Supreme Court’s direction
+that courts should not make “ad hoc exceptions” to the broad
+abuse of discretion standard applicable in this context,
+Conkright v. Frommert, 
+559 U.S. 506, 513
+ (2010), but it
+also does damage to our precedent and basic principles
+of ERISA law. Under the abuse of discretion review
+applicable to Barton’s claim, Barton must show that the plan
+administrator’s decision was “(1) illogical, (2) implausible, or
+(3) without support in inferences that may be drawn from the
+facts in the record.” Salomaa v. Honda Long Term Disability
+Plan, 
+642 F.3d 666, 676
+ (9th Cir. 2011). There is no other
+burden of proof. And even when de novo review is
+applicable, we have held that only the claimant—not the plan
+administrator—has the burden of proof. Muniz v. Amec
+Constr. Mgmt., Inc., 
+623 F.3d 1290
+, 1294–95 (9th Cir. 2010).
+I dissent.
+
+                               I
+
+   Under our precedent, when a claimant challenges the
+denial of benefits under 
+29 U.S.C. § 1132
+(a)(1) and the
+ERISA plan at issue grants discretion to the plan
+administrator, the district court conducts a bench trial to
+22              ESTATE OF BARTON V. ADT
+
+determine if the plan administrator abused its discretion.
+Abatie v. Alta Health & Life Ins. Co., 
+458 F.3d 955
+, 962–65
+(2006). The scope of evidence considered at such a trial is
+generally limited to the administrative record. 
+Id. at 970
+
+(“Today, we continue to recognize that, in general, a district
+court may review only the administrative record when
+considering whether the plan administrator abused its
+discretion, but may admit additional evidence on de novo
+review.”). There are exceptions to the rule, as when the
+district court needs to consider extrinsic evidence to
+determine how much weight to give to a claimed conflict of
+interest on the part of a plan administrator, or when the
+administrator failed to follow procedural requirements, 
+id. at
+970
+, 972–73, but the majority does not suggest that these
+exceptions are applicable here.
+
+    In reviewing the plan administrator’s decision in light of
+the administrative record, a court may not “substitute [its]
+view for that of the factfinder.” Salomaa, 
+642 F.3d at 676
+.
+Rather, the scope of review is limited: the court may
+consider only whether the plan administrator’s decision
+was “(1) illogical, (2) implausible, or (3) without support
+in inferences that may be drawn from the facts in the
+record.” 
+Id.
+ This standard of review applies to the plan
+administrator’s factual determinations as well as its ultimate
+decision. Walker v. American Home Shield Long Term
+Disability Plan, 
+180 F.3d 1065
+, 1069–70 (9th Cir. 1999).
+Under deferential review, a district court considers only
+whether the claimant showed that the plan administrator’s
+benefit decision was unreasonable, and the court must uphold
+                   ESTATE OF BARTON V. ADT                             23
+
+the decision so long as it is logical, plausible, and supported
+by the record, id; there is no other burden of proof.1
+
+    Only when a district court reviews a plan administrator’s
+decision denying benefits under a de novo standard of review
+does our precedent require a district court to impose the
+proper burden of proof. Doing so makes sense in this
+context: instead of deferring to the plan administrator’s
+decision, the district court must evaluate the evidence de
+novo, and therefore must determine which party has the
+burden of establishing each fact required for eligibility under
+an ERISA plan. Under such de novo review, the burden of
+proof remains firmly on the claimant. Muniz, 623 F.3d at
+1294–95 (“As concluded by other circuit courts which have
+addressed the question, when the court reviews a plan
+administrator’s decision under the de novo standard of
+review, the burden of proof is placed on the claimant.”). And
+we have rejected the argument that the claimant may shift the
+burden of proof to the plan administrator. 
+Id.
+ (rejecting the
+claimant’s argument that once he met the initial burden of
+proving disability, the burden of proof shifts to the plan to
+justify its decision to terminate benefits).
+
+                                    II
+
+     The district court correctly followed our precedent. It
+first determined that the plan gave discretion to the
+administrators. The majority concedes that determination
+
+
+   1
+      Different rules may apply when there is evidence that “a plan
+administrator’s self-interest caused a breach of the administrator’s
+fiduciary obligations to the claimant,” see Tremain v. Bell Indus., Inc.,
+196 F.3d 970
+, 976 (9th Cir. 1999), but this case does not give rise to such
+an issue, and the majority does not hold otherwise.
+24              ESTATE OF BARTON V. ADT
+
+was correct. Maj. op. at 11. It then reviewed the evidence of
+conflict of interest and concluded that it would review the
+plan administrator’s decisions with a low level of skepticism.
+The majority does not say this was in error. Id. at 13.
+Finally, the court determined that there were no procedural
+irregularities present. Therefore, the district court correctly
+limited its review to the administrative record.
+
+    The plans at issue here require a claimant to establish,
+among other things, that: (1) he worked for one or more
+covered employers, as defined in the plans, (2) for a
+continuous term of at least ten years. The evidence in the
+administrative record showed that Barton was employed by
+various ADT companies, as well as other companies, from
+1967 to 1986, but did not show that he had continuous service
+for ten years with any ADT company, nor that any of the
+ADT companies were “covered” as required by the Plan.
+Specifically, documents in the record showed that in 1967,
+Barton started working at ADT of Maine. From 1967 to
+1976, Barton received sporadic wages from ADT of
+Massachusetts, Mittman Realty Co, Inc., Pentate Filtration,
+Inc., the Marine Reserves, and Ginn-Marvin Moving &
+Storage Co. In 1982 he started working for ADT Diversified
+Service, Inc., in New Jersey, where he worked until 1985. In
+1985, Barton worked for ADT of Illinois, where he stayed
+until he resigned on September 11, 1986. His resignation
+took effect on September 25, 1986.
+
+    The administrative record also included evidence that the
+plan administrator had a system to maintain and update
+records regarding pension benefit eligibility for employees
+and had an incentive for keeping accurate records. A
+declaration from a member of the plan administration
+committee stated that those records contained no evidence
+                ESTATE OF BARTON V. ADT                     25
+
+that Barton was a participant in the pension plan or that ADT
+of Massachusetts or ADT of Maine were participating
+employers. The declaration also set forth the committee’s
+determination that Barton’s evidence was inconsistent with a
+claim of continuous employment by a participating entity
+with no break in service.
+
+    Based on its review of the administrative record, the court
+made the factual finding that Barton did not establish that he
+had worked for a ten-year continuous period for a covered
+employer. This factual finding is not clearly erroneous.
+Accordingly, the court’s conclusion that the plan
+administrator’s benefits denial was not illogical, implausible,
+or without support in inferences that may be drawn from the
+facts in the record is correct.
+
+     Indeed, there is no way to reach a different conclusion
+under our precedent. Although in Salomaa we concluded that
+a plan administrator’s decision to deny benefits was illogical,
+implausible, and without support in the record where virtually
+all the evidence in the record pointed in the other direction,
+Salomaa, 
+642 F.3d at 676
+, the evidence here is more than
+adequate to support the plan administrator’s decision. Nor
+could we reverse the district court’s decision on the ground
+that the plan administrator abused its discretion because it
+knew or should have known of additional information that
+would substantiate Barton’s claim. See, e.g., Hess v.
+Hartford Life & Accident Ins. Co., 
+274 F.3d 456
+, 462–63 (7th
+Cir. 2001). Even if we adopted such a standard, no one has
+argued that the plan administrator is aware of evidence that
+would identify Barton’s employers as “covered employers.”
+Indeed, given ADT’s multiple acquisitions, mergers, and
+divisions since 1986, it would be unsurprising if the plan
+26                 ESTATE OF BARTON V. ADT
+
+lacks records proving that certain ADT entities were not
+covered during the period from 1967 to 1986.
+
+    Nor did ADT have a legal duty to maintain such
+information. As the majority implicitly acknowledges, no
+ERISA provision requires a plan administrator to maintain a
+record of covered companies. Maj. op. at 15 n.5. The
+majority suggests that 
+29 U.S.C. § 1024
+(b)(4) illustrates the
+recordkeeping and disclosure requirements imposed on a plan
+administrator, Maj. op. at 14–16, but by its terms it does not
+require a plan administrator to keep the sorts of records at
+issue here.2 The administrative record shows that the plan
+administrator provided the information required under
+§ 1024(b)(4) to the extent Barton requested it and the
+majority does not suggest otherwise, see Maj. op. at 15 n.5.
+
+                                    III
+
+    Rather than follow our ERISA precedent, which requires
+us to affirm the district court, the majority abandons it
+entirely.
+
+    First, the majority invents a burden-of-proof standard
+(along with a burden-shifting approach) that is in direct
+conflict with our abuse of discretion standard. The majority
+holds that: “Where a claimant, through documentary or other
+objective evidence, has made a prima facie case that he is
+entitled to a pension but has no means except for information
+
+
+ 2
+    
+29 U.S.C. § 1024
+(b)(4) provides that “[t]he administrator shall, upon
+written request of any participant or beneficiary, furnish a copy of the
+latest updated summary, plan description, and the latest annual report, any
+terminal report, the bargaining agreement, trust agreement, contract, or
+other instruments under which the plan is established or operated.”
+                   ESTATE OF BARTON V. ADT                             27
+
+in the defendant’s control to establish that his work was for
+a ‘covered employer’ and of sufficient duration, the burden
+then shifts to the defendant to produce such information.”
+Maj. op. at 19. Under this rule, if Barton has established a
+“prima facie case that he is entitled to a pension” (and the
+majority does not specify what this means), the burden shifts
+to the plan administrator to prove that the claimant’s work
+was not “for a covered employer.”3 If the plan administrator
+does not have information relevant to the claimant’s work
+history, this may mean (again, the majority is unclear) that the
+claimant prevails, and the district court must invalidate the
+plan administrator’s denial of benefits even if the plan
+administrator’s decision was not illogical, implausible, or
+without support in the record. This is directly contrary to our
+deferential standard, Abatie, 
+458 F.3d at 965
+, and contrary to
+the Supreme Court’s direction that courts should not make
+“ad hoc exceptions” to the abuse of discretion standard,
+Conkright, 
+559 U.S. at 513
+.
+
+    Here, for instance, if the district court on remand
+determined that Barton has made a “prima facie case that he
+is entitled to a pension,” and the plan administrator cannot
+introduce any extrinsic evidence establishing that ADT of
+Massachusetts, ADT of Maine, or ADT of Illinois were not
+“covered employers” as defined in the plans,4 the district
+
+
+  3
+    Of course, such a burden-shifting approach is contrary to our burden
+of proof standard even under de novo review, see Muniz, 623 F.3d at
+1294–95, let alone on abuse of discretion review, where the court does not
+assign a burden of proof at all.
+ 4
+   The majority’s burden-shifting rule presumably contemplates that the
+plan administrator will have an opportunity to introduce extrinsic evidence
+on this issue, which is also contrary to our precedent. Abatie, 
+458 F.3d at
+970
+, 972–73.
+28                 ESTATE OF BARTON V. ADT
+
+court would have to credit Barton’s allegations that these
+companies are covered employers, which could compel the
+conclusion that Barton is entitled to benefits under the plan.5
+But such a result would be directly contrary to our and
+Supreme Court case law, see Conkright, 
+559 U.S. at 513
+;
+Abatie, 
+458 F.3d at 965
+, because it would require the plan
+administrator to provide benefits to Barton even though the
+plan administrator did not abuse its discretion in determining
+that Barton did not work for covered employers for ten years
+of continuous service.
+
+    The majority argues that its new burden-shifting rule does
+not require the plan administrator to carry the burden of
+producing “records listing entities not covered by their
+pension plans,” but rather requires the plan administrator to
+“reveal which companies did in fact participate in their
+plans.” Maj. op. at 18 n.7. According to the majority, plan
+administrators must know this information in order to “fulfill
+their fiduciary duty to only distribute pension funds to
+qualified individuals.” 
+Id.
+ But the plan administrator here
+elected to fulfill its fiduciary duty by maintaining and
+updating a record of past and present employees who are
+entitled to pensions, rather than by listing covered companies.
+The majority provides no explanation as to why this approach
+breached the plan administrator’s fiduciary duty or what
+authority required the plan administrator to maintain a
+
+
+
+ 5
+   The majority is unclear whether a determination that some of Barton’s
+former employers must be deemed to be “covered employers” under a
+burden-shifting approach also compels the conclusion that Barton is per
+se entitled to benefits. Since the plan requires Barton to have engaged in
+ten years of continuous service with a covered employer, such a ruling
+would directly contradict the terms of the plans.
+                ESTATE OF BARTON V. ADT                     29
+
+complete list of covered companies in order to comply with
+the majority’s unprecedented new rule.
+
+    Moreover, assuming that administrators of multi-
+employer plans like this one (ADT instituted its first plan on
+April 1, 1913) frequently lack information about which
+historical companies are “covered” as defined in the plan, the
+majority’s new rule does not just shift a burden, but as a
+practical matter, could make the claimant eligible for benefits
+whenever the historical information is scanty or unavailable.
+Putting the “risk of insufficient records” on the ERISA plan,
+as required by the majority, enhances the risk that uninsured
+claimants will draw funds away from the legitimate
+beneficiaries. That risk is in derogation of one of ERISA’s
+core policies: to protect the “soundness and stability of plans
+with respect to adequate funds to pay promised benefits.”
+29 U.S.C. § 1001
+(a); see also Boyd v. Bert Bell/Pete Rozelle
+NFL Players Ret. Plan, 
+410 F.3d 1173, 1178
+ (9th Cir. 2005)
+(holding that fiduciaries of benefit plans are “obligated to
+guard the assets of the Plan from improper claims”) (internal
+quotation marks and alteration omitted).
+
+   Lacking any support for its new rule in our ERISA case
+law, the majority is forced to justify its rule by reference to
+cases addressing inapposite issues. See Brick Masons
+Pension Trust v. Industrial Fence & Supply, Inc., 
+839 F.2d
+1333
+, 1337–39 (9th Cir. 1988); see also Anderson v. Mt.
+Clemens Pottery Co., 
+328 U.S. 680
+, 686–87 (1946).
+
+    In Brick Masons, a masonry company entered into a
+contract to make contributions to multi-employer welfare
+plans based on hours worked by covered employees.
+839 F.2d at 1335
+. The welfare plans proved that during the
+relevant time period, the company had breached the contract
+30              ESTATE OF BARTON V. ADT
+
+by using covered employees to perform covered work and
+failing to make the required contributions, which resulted in
+damage to the welfare plans. 
+Id.
+ Although there was only
+limited evidence as to the extent of the covered work (and
+hence, limited evidence of the amount of the missing
+contributions), the welfare plans proved that this data was
+unavailable because the company had violated a statutory
+requirement to keep adequate records of its employees’ hours.
+Id. at 1338
+. We held that because the welfare plans had
+proved “the fact of damage” and had also proved that the
+company failed to keep statutorily required records, the
+burden shifted to the company to come forward with evidence
+that would show the extent of damages. 
+Id.
+ at 1338–39.
+Because the company did not have records regarding the
+amount of covered work performed by the covered
+employees, this in effect required the company to pay the full
+amount estimated by the welfare plans. 
+Id.
+
+
+    The majority also cites Anderson v. Mt. Clemens Pottery
+Co., 
+328 U.S. 680
+, 686–87 (1946), which involved a suit by
+employees under the Fair Labor Standards Act claiming that
+they were deprived of overtime compensation. 
+Id. at 684
+.
+The Court held that where an employee proved that he “has
+in fact performed work for which he was improperly
+compensated,” and “the amount and extent of that work,” but
+the employer violated its statutory duty to keep adequate and
+accurate records, the burden shifted to the employer to
+disprove the employees’ estimate of the work performed. 
+Id.
+
+at 686–88.
+
+    Brick Masons and Mt. Clemens have nothing to do with
+the question presented here, whether a plan administrator
+abused its discretion in denying a claimant’s demand for
+benefits. The district courts in Brick Masons and Mt.
+                 ESTATE OF BARTON V. ADT                      31
+
+Clemens were not considering whether a plan administrator’s
+decision was illogical, implausible, or without support in the
+record, but rather were conducting a de novo review of the
+amount of damages to which claimants were entitled. The
+courts shifted the burden to the defendant to show the extent
+of damages only after the plaintiffs had both: (1) successfully
+proven all elements of their claims; and (2) established that
+the defendant’s violation of a statutory requirement to
+maintain necessary records precluded them from proving the
+precise amount of damages caused by the defendant. Here,
+by contrast, Barton has not successfully proven any element
+of his claim: The question is not the “amount of damages”
+owed to Barton, but rather whether he is owed anything at all.
+Moreover, Barton has not pointed to any violation of a
+statutory recordkeeping requirement. Even if the majority’s
+Brick Masons theory were otherwise applicable in the context
+of abuse of discretion review, the lack of any statutory
+violation would preclude a court from shifting the burden of
+proof. See Motion Picture Indus. Pension & Health Plans v.
+N.T. Audio Visual Supply, Inc., 
+259 F.3d 1063
+, 1066–67 (9th
+Cir. 2001) (noting that the “first threshold burden” for
+switching the burden of proof under Brick Masons is proving
+that the plan administrator “failed to keep adequate records”
+under ERISA).
+
+                               IV
+
+    In short, the majority’s ad hoc rule designed to help
+Barton in this case is a disaster. The majority’s requirement
+that the district court allocate a burden of proof when it is
+supposed to be reviewing a plan administrator’s decision
+for abuse of discretion makes no sense and is contrary to
+our case law. And the rule itself, which verges on the
+incomprehensible, will defy district courts’ efforts to apply it.
+32              ESTATE OF BARTON V. ADT
+
+Given that this rule was apparently developed to help a single
+claimant, one can only hope that this strange rule will be
+confined to the limited facts of this case. I dissent.

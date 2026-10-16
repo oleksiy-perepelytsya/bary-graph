@@ -1,0 +1,134 @@
+PER CURIAM.
+ 
+
+  Paul Kevin Pierce pleaded guilty to conspiracy to distribute and possess with the intent to distribute 100 grams or more of a mixture or substance containing a detectable amount of methamphetamine, in violation of 21 U.S.C. § 841(a)(1), (b)(l)(B)(viii). At sentencing the district court
+  
+   1
+  
+  set Pierce’s base offense level at 30, increased it by three levels based upon his managerial role in the offense pursuant to Sentencing Guideline § 3Bl.l(b), decreased it by two levels based upon his acceptance of responsibility pursuant to § 3E1.1, and departed from the guideline range based upon his substantial assistance pursuant to the government’s filing a § 5K1.1 motion. The district court subsequently imposed a sentence of ninety-six months imprisonment and a four-year term of supervised release. The court also levied a fifty dollar assessment.
+ 
+
+
+  Pierce argues on appeal that the district court erred in increasing his base offense score by three levels. Pierce maintains the district court’s error stems from its finding that he was a manager in criminal activity involving five or more participants.
+  
+   2
+  
+
+   See
+  
+  § 3Bl.l(b). We accept the district court’s factual determinations unless they are clearly erroneous, 18 U.S.C. § 3742(e), and affirm the sentence if the “facts are properly applied to the guidelines.”
+  
+   Id.
+  
+
+
+  In
+  
+   United States v. Vasquez,
+  
+  874 F.2d 250 (5th Cir.1989), the Fifth Circuit noted that the district court had “increased defendant’s offense level pursuant to [§ 3B1.-1(c)] because he recruited and directed a codefendant, was the main participant in the negotiations with an undercover officer, and used his apartment as a base of operations.”
+  
+   Id.
+  
+  at 252. Taken together, the
+  
+   Vasquez
+  
+  court held, “these factors
+   
+   *57
+   
+  without question justify an increase under § 3Bl.l(c).”
+  
+   3
+  
+
+   Id.
+  
+
+
+  The findings which support the district court's conclusion that Pierce was a manager or supervisor are at least as strong as the findings which led the Fifth Circuit to find that Vasquez was at least a manager or supervisor. Pierce recruited Stan Roda-maker into the methamphetamine conspiracy in the fall of 1985. Pierce argues that this finding is a perversion of the testimony at sentencing because Rodamaker had distributed marijuana and used metham-phetamines prior to his involvement with Pierce. This argument is without merit. Merely because Rodamaker had used meth-amphetamines and dealt marijuana in the past is not relevant to whether Pierce recruited him into the present methamphetamine conspiracy. The record clearly shows the recruitment did occur. This finding provides strong support for the conclusion that Pierce played a managerial or supervisory role under § 3Bl.l(b).
+  
+   See Vasquez,
+  
+  874 F.2d at 252.
+ 
+
+
+  The record also indicates that Pierce was the main contact person in California, his place of residence. He was the key link between the source of supply in California and the distributors and customers in Iowa. He was able to supply on a regular basis quarter-pound quantities of methamphet-amines over the course of the conspiracy. Furthermore, an undercover government agent approached Pierce in California and sought to buy two pounds of methamphet-amines from him. Pierce informed the agent he was willing to set up a deal. Merely because Pierce would then bow out of the picture does not diminish his role as the key link in the conspiracy between the undercover agent and the California suppliers, nor does it affect his role as the key link between the California suppliers and the Iowa distributors and consumers.
+  
+   See id.
+  
+
+
+  Finally, Pierce set the price for the meth-amphetamines, telling Rodamaker that it would be $1,600 per ounce, which included a $200 profit for himself. Determination of the price to be charged for narcotics is further evidence of his managerial or supervisory role.
+  
+   See United States v. Ortiz,
+  
+  878 F.2d 125, 127 (3d Cir.1989).
+  
+   4
+  
+
+
+  Considering the record as a whole, we find that the district court’s finding that Pierce was a manager or supervisor under § 3B 1.1(b) is not clearly erroneous. Accordingly, we affirm.
+ 
+
+
+
+
+
+
+
+   1
+  
+
+   . The Honorable David R. Hansen, United States District Judge for the Northern District of Iowa.
+  
+
+
+
+   2
+  
+
+   . Pierce does not dispute the finding that his criminal activity involved five or more participants or was otherwise extensive. Brief of Appellant at 17. The only dispute in this appeal is whether Pierce was a manager or supervisor.
+  
+
+
+
+   3
+  
+
+   . Although
+   
+    Vasquez
+   
+   involved the interpretation of organizer, leader, manager or supervisor under § 3B 1.1(c), it applies with equal force to the interpretation of manager or supervisor under § 3Bl.l(b). First, § 3Bl.l(b) provides for a three-level increase if the "defendant was a manager or supervisor ... and the criminal activity involved five or more participants or was otherwise extensive.” Section 3B 1.1(c) provides for a two-level increase if the "defendant was an organizer, leader, manager, or supervisor in any criminal activity other than described in ... (b).” Although only subsection (b) applies if the criminal activity involved five or more persons or was otherwise extensive, both subsections (b) and (c) are implicated if the defendant was a manager or supervisor. Therefore, there is no difference between subsection (b) and (c)’s use of the terms manager or supervisor.
+  
+
+
+   Second, the
+   
+    Vasquez
+   
+   court held that the district court properly imposed a two-level increase pursuant to subsection (c). Therefore, the Fifth Circuit did not explicitly state whether the increase was based upon its finding that Vasquez was an organizer, leader, manager or supervisor. Because Vasquez must have been at least a manager or supervisor or a two-level increase could not have been imposed, it is not important for our purposes that the Fifth Circuit did not explicitly find that he was a manager or supervisor.
+   
+    Compare
+   
+   § 3Bl.l(a) (“If the defendant was an organizer or leader ... increase by 4 levels”) with § 3Bl.l(b) ("If the defendant was a manager or supervisor (but not an organizer or leader) ... increase by 3 levels”). Our result would be the same even if it had found the evidence supported an even greater role of organizer or leader.
+  
+
+
+
+   4
+  
+
+   . At sentencing, the district court placed the burden on the government to prove by clear and convincing evidence the facts supporting an increase in the base offense level. Although we find that this burden was met, we note that the Constitution does not require such a standard. In fact, the Constitution does not impose '“a particular standard of proof for factual determinations at sentencing hearings.' "
+   
+    United States v. Luster,
+   
+   896 F.2d 1122, 1129 (8th Cir.1990) (quoting
+   
+    United States v. Gooden,
+   
+   892 F.2d 725, 728 (8th Cir.1989)).

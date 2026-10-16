@@ -1,0 +1,762 @@
+*164
+   
+
+   Opinion
+  
+
+
+  NORCOTT, J.
+ 
+
+  The sole issue in this consolidated certified appeal is whether the expiration of a six month domestic violence restraining order renders an appeal from that order moot. The defendant, Christopher Kennedy, appeals, following our grant of his petitions for certification,
+  
+   1
+  
+  from the judgments of the Appellate Court dismissing his appeals from the trial court’s grant of two separate applications by the plaintiff, Leanna Putman,
+  
+   2
+  
+  for domestic violence restraining orders pursuant to General Statutes § 46b-15.
+  
+   3
+  
+  We conclude that the expiration of a domestic violence restraining order
+   
+   *165
+   
+  does not render an appeal from that order moot because it is reasonably possible that there will be significant collateral consequences for the person subject to the order. Accordingly, we reverse the judgments of the Appellate Court and remand these cases for consideration of the merits of the defendant’s appeals.
+ 
+
+
+  The record reveals the following facts and procedural history. The plaintiff and the defendant were divorced in May, 2002, and have two daughters and a son, all of whom are minors. On January 7, 2004, the plaintiff filed an application pursuant to § 46b-15, for relief from abuse against the defendant, requesting that the court suspend his visitation with the children and order him not to restrain, threaten, harass, molest or attack the plaintiff or her boyfriend.
+  
+   4
+  
+  On January 8, 2004, the trial court,
+  
+   Kaplan, J.,
+  
+  issued an ex parte domestic violence restraining order granting the relief requested and scheduled a hearing for January 20, 2004. See General Statutes § 46b-15 (b). After that hearing, the trial court extended the initial domestic violence restraining order for six months, but modified it to restore the defendant’s contact and visitation with his daughters only. The trial
+   
+   *166
+   
+  court then denied the defendant’s motions for reargument and for clarification. Thereafter, the defendant filed a timely appeal to the Appellate Court.
+ 
+
+
+  On March 19, 2004, the plaintiff filed another application for relief from abuse pursuant to § 46b-15 against the defendant, requesting that the court suspend his visitation with his daughters and bar the defendant from entering the children’s respective school buildings.
+  
+   5
+  
+  On that same date, the trial court,
+  
+   Kaplan, J.,
+  
+  issued an ex parte restraining order granting the relief requested and scheduled a hearing for March 29, 2004.
+  
+   6
+  
+  After the March 29 hearing, the trial court,
+  
+   Graziani, J.,
+  
+  extended the initial order pending another hearing to be held on April 5, 2004. After the April 5 hearing, the trial court,
+  
+   Klaczak, J.,
+  
+  extended that same order for six months, and then denied the defendant’s motion for dismissal on the grounds of a mistrial caused by judicial bias and misconduct. The trial court also denied the defendant’s subsequent motions for reargument, which challenged its factual findings, and for clarification of its findings of fact and conclusions of law. The defendant filed a timely appeal to the Appellate Court from the second domestic violence restraining order.
+ 
+
+
+  Thereafter, the Appellate Court, sua sponte, ordered the defendant to appear and show cause why his appeals should not be dismissed as moot pursuant to that court’s decision in
+  
+   In re Jeffrey C.,
+  
+  64 Conn. App. 55, 64-67, 779 A.2d 765 (2001), rev’d on other grounds, 261 Conn. 189, 802 A.2d 772 (2002).
+  
+   7
+  
+  Following that
+   
+   *167
+   
+  hearing, on November 17, 2004, the Appellate Court dismissed both appeals as moot, and denied the defendant’s motions for reconsideration en banc. Thereafter, we granted the defendant’s petitions for certification to appeal from both dismissals; see footnote 1 of this opinion; and subsequently consolidated both certified appeals for briefing and argument pursuant to Practice Book § 61-7.
+ 
+
+
+  The defendant claims that the Appellate Court improperly dismissed his appeals because domestic violence restraining orders present questions that are, by nature of their brief duration and the significant issues that they present, reviewable under the “capable of repetition, yet evading review” exception to the mootness doctrine. See generally
+  
+   Loisel
+  
+  v.
+  
+   Rowe,
+  
+  233 Conn. 370, 382, 660 A.2d 323 (1995).
+  
+   8
+  
+  Although we agree that the Appellate Court improperly dismissed the defendant’s appeals from the domestic violence restraining orders, we conclude that the defendant’s appeals are rescued from mootness by the “collateral consequences” doctrine articulated in
+  
+   State
+  
+  v.
+  
+   McElveen,
+  
+  261 Conn. 198, 205, 802 A.2d 74 (2002), rather than by the more limited “capable of repetition, yet evading review” exception.
+  
+   9
+  
+  See footnotes 8 and 14 of this opinion.
+ 
+
+
+ 
+   *168
+   
+  Our inquiry begins with some basic principles. “Mootness is a question of justiciability that must be determined as a threshold matter because it implicates [this] court’s subject matter jurisdiction . . . .” (Internal quotation marks omitted.)
+  
+   Wallingford
+  
+  v.
+  
+   Dept. of Public Health,
+  
+  262 Conn. 758, 766, 817 A.2d 644 (2003). The mootness doctrine “is founded on the same policy interests as the doctrine of standing, namely, to assure the vigorous presentation of arguments concerning the matter at issue. . . . [T]he standing doctrine is designed to ensure that courts and parties are not vexed by suits brought to vindicate nonjusticiable interests and that judicial decisions which may affect the rights of others are forged in hot controversy, with each view fairly and vigorously represented. . . . Indeed, we note that courts are called upon to determine existing controversies, and thus may not be used as a vehicle to obtain advisory judicial opinions on points of law. . . .
+ 
+
+
+ 
+   *169
+   
+  “[A]n actual controversy must exist not only at the time the appeal is taken, but also throughout the pen-dency of the appeal. . . . When, during the pendency of an appeal, events have occurred that preclude an appellate court from granting any practical relief through its disposition of the merits, a case has become moot. . . . However, under this court’s long-standing mootness jurisprudence . . . despite developments during the pendency of an appeal that would otherwise render a claim moot, the court may retain jurisdiction when a litigant shows that there is a reasonable possibility that prejudicial collateral consequences will occur. . . .
+ 
+
+
+  “[T]o invoke successfully the collateral consequences doctrine, the litigant must show that there is a reasonable possibility that prejudicial collateral consequences will occur. Accordingly, the litigant must establish these consequences by more than mere conjecture, but need not demonstrate that these consequences are more probable than not. This standard provides the necessary limitations on justiciability underlying the mootness doctrine itself. Where there is no direct practical relief available from the reversal of the judgment, as in this case, the collateral consequences doctrine acts as a surrogate, calling for a determination whether a decision in the case can afford the litigant some practical relief in the future.
+  
+   State
+  
+  v.
+  
+   McElveen,
+  
+  supra, 261 Conn. 208.” (Citations omitted; internal quotation marks omitted.)
+  
+   Wallingford
+  
+  v.
+  
+   Dept. of Public Health,
+  
+  supra, 262 Conn. 767-68.
+ 
+
+
+  The array of collateral consequences that will preclude dismissal on mootness grounds is diverse, and includes harm to a defendant’s reputation as a result of the judgment at issue. See, e.g.,
+  
+   Williams
+  
+  v.
+  
+   Ragaglia,
+  
+  261 Conn. 219, 227-31, 802 A.2d 778 (2002) (appeal from revocation of plaintiffs special study foster care license as consequence for violating foster care regulations was not rendered moot by grant to plaintiff of permanent
+   
+   *170
+   
+  custody of foster children at issue because of revocation’s effect on her reputation and fact that revocation could be used against her in future department of children and families proceedings if she wanted to become foster parent again);
+  
+   State
+  
+  v.
+  
+   McElveen,
+  
+  supra, 261 Conn. 212-16 (appeal from conviction of violation of probation was not rendered moot by defendant’s completion of his sentence because conviction could impact his reputation and ability to obtain employment or preconviction bail in future); see also
+  
+   Office of the Governor
+  
+  v.
+  
+   Select Committee of Inquiry,
+  
+  271 Conn. 540, 549-50, 858 A.2d 709 (2004) (appeal not rendered moot by investigative committee statement that it would not enforce subpoena directly “because of the collateral consequence of the potential for an article of impeachment on the basis, at least in part, of the governor’s noncompliance with the subpoena”);
+  
+   Wallingford
+  
+  v.
+  
+   Dept. of Public Health,
+  
+  supra, 262 Conn. 769-70 (appeal not rendered moot by passage of special act addressing issue in case because administrative ruling that town is “water company” for purposes of possible construction of golf course on watershed land “potentially subjects” town to collateral consequences of department jurisdiction and other statutory obligations).
+ 
+
+
+  While arguing the “public importance” element of the “capable of repetition, yet evading review” test; see footnote 8 of this opinion; the defendant contends that his appeal presents an issue of public importance because of the effects of a domestic violence restraining order on the reputation and legal record of a person subject to that order. By themselves, however, these effects do not create a question of public importance. They are characterized more properly as collateral consequences of domestic violence restraining orders for the subject individual. Thus, the present case fits squarely within the bounds of our prior cases recognizing reputation harm and other potential legal disabilities
+   
+   *171
+   
+  as collateral consequences of otherwise moot court orders. The threat of reputation harm is particularly significant in this context because domestic violence restraining orders will not issue in the absence of the showing of a threat of violence, specifically a “continuous threat of present physical pain or physical injury” to the applicant. General Statutes § 46b-15 (a).
+  
+   10
+  
+  Indeed, the controlling statute also requires the dissemination of the orders to multiple law enforcement agencies. See General Statutes (Sup. 2006) § 46b-15 (e).
+  
+   11
+  
+  11 Thus,
+   
+   *172
+   
+  inasmuch as we previously have recognized the importance of reputation damage as a collateral consequence in other contexts, we see no reason not to do so here, for being the subject of a court order intended to prevent or stop domestic violence may well cause harm to the reputation and legal record of the defendant.
+ 
+
+
+  Moreover, as the defendant points out, domestic violence restraining orders have other collateral legal disabilities for their subjects. Once filed, they are available to agencies investigating future allegations involving the same family, and a trial judge making a future custody determination also reasonably might consider the issuance of a domestic violence restraining order in making that sensitive decision. See General Statutes § 46b-56 (b) (1) (“[i]n making or modifying any order with respect to custody or visitation, the court shall ... be guided by the best interests of the child”); see also General Statutes § 46b-56b (“[i]n any dispute as to the custody of a minor child involving a parent and a non-parent, there shall be a presumption that it is in the best interest of the child to be in the custody of the parent, which presumption may be rebutted by showing that it would be
+  
+   detrimental to the child
+  
+  to permit the parent to have custody” [emphasis added]). Thus, in the sensitive and often explosively litigated context of family dysfunction and dissolution, there is a reasonable possibility that a domestic violence restraining order will have prejudicial collateral legal consequences for its subject, even after its expiration. Accordingly, the subject of an improperly rendered domestic violence restraining order is likely to benefit from the vacatur of that order, and dismissal of his or her appeal as moot solely on the basis of that order’s expiration is improper.
+ 
+
+
+ 
+   *173
+   
+  Indeed, the court’s independent research reveals that the majority of the other states that have considered this issue have concluded that appeals from domestic violence restraining orders are not rendered moot by their expiration. We agree with the six states that rely explicitly on the collateral consequences of domestic violence restraining orders.
+  
+   12
+  
+  See
+  
+   Roark
+  
+  v.
+  
+   Roark,
+  
+  551 N.E.2d 865, 868-69 (Ind. App. 1990) (noting “potentially
+   
+   *174
+   
+  devastating” collateral consequences for parent of expired “child in need of services” order, including impacts on future presentence investigations, in-court impeachments and child custody determinations);
+  
+   Piper
+  
+  v.
+  
+   Layman,
+  
+  125 Md. App. 745, 753, 726 A.2d 887 (1999) (“expiration of the protective order does not automatically render the matter moot” because of “[heightened public awareness and sensitivity to the existence of domestic violence, as well as legitimate public contempt for abusers” and enhanced technology for information dissemination);
+  
+   Wooldridge
+  
+  v.
+  
+   Hickey,
+  
+  45 Mass. App. 637, 638, 700 N.E.2d 296 (1998) (appeal from abuse prevention order not rendered moot by order’s expiration because of its collateral consequences, including effect in future bail proceedings and other “stigma”);
+  
+   Smith
+  
+  v.
+  
+   Smith,
+  
+  145 N.C. App. 434, 436-37, 549 S.E.2d 912 (2001) (expired domestic violence protective order not moot because of “ ‘collateral legal consequences’ ” such as consideration in custody determination and “non-legal collateral consequences” such as reputation harm);
+  
+   James
+  
+  v.
+  
+   Hubbard,
+  
+  21 S.W.3d 558, 560 (Tex. App. 2000) (“[although expired temporary protective orders and restraining orders have been considered moot, none of these cases has carried the same social stigma as a protective order granted based on a finding of family violence”);
+  
+   In re Interest of H.Q.,
+  
+  152 Wis. 2d 701, 707-708, 449 N.W.2d 75 (App. 1989) (expired child abuse protective order not moot because of possible effect on custody determination in impending divorce).
+  
+   13
+  
+
+
+ 
+   *175
+   
+  Accordingly, we conclude that it is reasonably possible that adverse collateral consequences of the domestic violence restraining orders may occur, and, therefore, the defendant’s appeals are not rendered moot by virtue of the expiration of the orders during the pendency of the appeals.
+  
+   14
+  
+  The Appellate Court,
+   
+   *176
+   
+  therefore, should have considered the merits of the defendant’s appeals, rather than dismissing them as moot.
+ 
+
+
+  The judgments of the Appellate Court are reversed and the cases are remanded to that court for consideration of the merits of the defendant’s appeals.
+ 
+
+
+  In this opinion the other justices concurred.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   1
+  
+
+   In appeal Docket No. SC 17392, we granted the defendant’s petition for certification to appeal limited to the following issue: “Did the Appellate Court properly dismiss the defendant’s appeal on the ground of mootness?”
+   
+    Putman
+   
+   v.
+   
+    Kennedy,
+   
+   273 Conn. 913, 870 A.2d 1080 (2005).
+  
+
+
+   In appeal Docket No. SC 17396, we granted the defendant’s petition for certification to appeal limited to the following issue: “Whether the Appellate Court properly dismissed this appeal on the ground that the appeal was moot?”
+   
+    Putman
+   
+   v.
+   
+    Kennedy,
+   
+   273 Conn. 915, 870 A.2d 1083 (2005).
+  
+
+
+
+   2
+  
+
+   The plaintiff had been represented by counsel during the proceedings in the trial court and the Appellate Court. After this court granted the defendant’s petitions for certification to appeal, the plaintiffs attorney filed a motion for leave to withdraw pursuant to Practice Book § 62-9. Because the plaintiff subsequently filed a pro se appearance in lieu of her attorney, this court did not act on counsel’s motion to withdraw. We note that the plaintiff did not attend oral argument or file a brief in connection with these certified appeals.
+  
+
+
+
+   3
+  
+
+   General Statutes § 46b-15 provides in relevant part: “(a) Any family or household member as defined in section 46b-38a who has been subjected to a continuous threat of present physical pain or physical injury by another family or household member or person in, or has recently been in, a dating relationship who has been subjected to a continuous threat of present physical pain or physical injury by the other person in such relationship may make an application to the Superior Court for relief under this section.
+  
+
+
+   “(b) The application form shall allow the applicant, at the applicant’s option, to indicate whether the respondent holds a permit to carry a pistol or revolver or possesses one or more firearms. The application shall be accompanied by an affidavit made under oath which includes a brief statement of the conditions from which relief is sought. Upon receipt of the application the court shall order that a hearing on the application be held not later than fourteen days from the date of the order. The court, in its discretion, may make such orders as it deems appropriate for the protection
+    
+    *165
+    
+   of the applicant and such dependent children or other persons as the court sees fit. Such order may include temporary child custody or visitation rights and such relief may include but is not limited to an order enjoining the respondent from (1) imposing any restraint upon the person or liberty of the applicant; (2) threatening, harassing, assaulting, molesting, sexually assaulting or attacking the applicant; or (3) entering the family dwelling or the dwelling of the applicant. If an applicant alleges an immediate and present physical danger to the applicant, the court may issue an ex parte order granting such relief as it deems appropriate. If a postponement of a hearing on the application is requested by either party and granted, the order shall not be continued except upon agreement of the parties or by order of the court for good cause shown. . . .
+  
+
+
+   “(h) An action under this section shall not preclude the applicant from seeking any other civil or criminal relief.”
+  
+
+
+
+   4
+  
+
+   The plaintiff alleged that, during a scheduled holiday visitation, the defendant had a physical altercation with his then fifteen year old son that was witnessed by the two daughters, which led to the defendant throwing his son on the ground and striking him on the head.
+  
+
+
+
+   5
+  
+
+   The plaintiff alleged that the defendant had disregarded court orders regarding custody and visitation by taking his daughters from their schools, and attempting to take his son from his school, leading to a family dispute that required resolution by the police.
+  
+
+
+
+   6
+  
+
+   On March 29, 2004, the defendant filed a motion seeking the recusal of Judge Kaplan on the basis of judicial bias. The trial court did not take action on that motion.
+  
+
+
+
+   7
+  
+
+   We note that both the defendant, who at the time was pro se, and the plaintiff had addressed the mootness issue in their merits briefs filed with the Appellate Court.
+  
+
+
+
+   8
+  
+
+   In
+   
+    Loisel
+   
+   v.
+   
+    Rowe,
+   
+   supra, 233 Conn. 382-83, we articulated the “three requirements” that “an otherwise moot question” must satisfy to qualify for review under the “ ‘capable of repetition, yet evading review’ ” exception: “First, the challenged action, or the effect of the challenged action, by its very nature must be of a limited duration so that there is a strong likelihood that the substantial majority of cases raising a question about its validity will become moot before appellate litigation can be concluded. Second, there must be a reasonable likelihood that the question presented in the pending case will arise again in the future, and that it will affect either the same complaining party or a reasonably identifiable group for whom that party can be said to act as surrogate. Third, the question must have some public importance. Unless all three requirements are met, the appeal must be dismissed as moot.”
+  
+
+
+
+   9
+  
+
+   We first must determine whether a domestic violence restraining order is an appealable final judgment, which is an issue that the defendant has not addressed. We, therefore, undertake this inquiry, sua sponte, because it implicates our subject matter jurisdiction. See, e.g.,
+   
+    Peters
+   
+   v.
+   
+    Dept. of
+   
+ 
+    *168
+    
+
+    Social Services,
+   
+   273 Conn. 434, 441, 870 A.2d 448 (2005). We agree with the Appellate Court’s conclusion in
+   
+    Hartney
+   
+   v.
+   
+    Hartney,
+   
+   83 Conn. App. 553, 565 n.6, 850 A.2d 1098, cert. denied, 271 Conn. 920, 859 A.2d 578 (2004), that a § 46b-15 domestic violence restraining order is an appealable final judgment. Because of the potentially irreparable effects of § 46b-15 restraining orders on relationships within the family unit, the Appellate Court’s conclusion in
+   
+    Hartney
+   
+   is consistent with our decisions applying
+   
+    State
+   
+   v.
+   
+    Curcio,
+   
+   191 Conn. 27, 31, 463 A.2d 566 (1983), with respect to the appealability of other temporary orders in the domestic context. See, e.g.,
+   
+    Madigan
+   
+   v.
+   
+    Madigan,
+   
+   224 Conn. 749, 757, 620 A.2d 1276 (1993) (“temporary custody orders are immediately appealable because an immediate appeal is the only reasonable method of ensuring that the important rights surrounding the parent-child relationship are adequately protected”); see also
+   
+    Sweeney
+   
+   v.
+   
+    Sweeney,
+   
+   271 Conn. 193, 210-11, 856 A.2d 997 (2004) (pendente lite order that child attend parochial school is appealable final judgment because “consequences of the enrollment of a minor child in an educational institution that a joint legal custodian believes to be academically inadequate and religiously objectionable are irreparable”);
+   
+    State
+   
+   v.
+   
+    Curcio,
+   
+   supra, 31 (“[a]n otherwise interlocutory order is appealable in two circumstances: [1] where the order or action terminates a separate and distinct proceeding, or [2] where the order or action so concludes the rights of the parties that further proceedings cannot affect them”).
+  
+
+
+
+   10
+  
+
+   General Statutes § 46b-15 (a) provides: “Any family or household member as defined in section 46b-38a who has been subjected to a
+   
+    continuous threat of present physical pain or physical injury
+   
+   by another family or household member or person in, or has recently been in, a dating relationship who has been subjected to a
+   
+    continuous threat of present physical pain or physical injury
+   
+   by the other person in such relationship may make an application to the Superior Court for relief under this section.” (Emphasis added.)
+  
+
+
+
+   11
+  
+
+   General Statutes (Sup. 2006) § 46b-15 (e) provides: “The applicant shall cause notice of the hearing pursuant to subsection (b) of this section and a copy of the application and the applicant’s affidavit and of any ex paite order issued pursuant to subsection (b) of this section to be served on the respondent not less than five days before the hearing. The cost of such service shall be paid for by the judicial branch. Upon the granting of an ex parte order, the clerk of the court shall provide two certified copies of the order to the applicant. Upon the granting of an order after notice and hearing, the clerk of the court shall provide two certified copies of the order to the applicant and a copy to the respondent. Every order of the court made in accordance with this section after notice and hearing shall contain the following language: ‘This court had jurisdiction over the parlies and the subject matter when it issued this protection order. Respondent was afforded both notice and opportunity to be heard in the hearing that gave rise to this order. Pursuant to the Violence Against Women Act of 1994, 18 USC 2265, this order is valid and enforceable in all fifty states, any territory or possession of the United States, the District of Columbia, the Commonwealth of Puerto Rico and tribal lands.’
+   
+    Immediately after making service on the respondent, the proper officer shall send or cause to be sent, by facsimile or other means, a copy of the application stating the date and time the respondent was served, to the law enforcement agency or agencies for the town in which the applicant resides, the town in which the applicant is employed and the town in which the respondent resides. The clerk of the court shall send, by facsimile or other means, a copy of any ex parte order and of any order after notice and hearing, or the information contained in any such order, to the law enforcement agency or agencies for the town in
+   
+ 
+    *172
+    
+
+    which the applicant resides, the town in which the applicant is employed and the town in which the respondent resides, within forty-eight hours of the issuance of such order."
+   
+   (Emphasis added.)
+  
+
+
+
+   12
+  
+
+   We note that still other states have relied either on the “capable of repetition, yet evading review” exception or state specific “public importance” tests in holding that the expiration of a domestic violence restraining order did not render an appeal therefrom moot. These exceptions generally have been applied in cases that presented significant legal questions under the states’ respective domestic violence statutes. See
+   
+    Robinson
+   
+   v.
+   
+    Robinson,
+   
+   886 A.2d 78, 85-86 (D.C. 2005) (relying on “ ‘capable of repetition, yet evading review exception’ ” in case raising discretionary issues);
+   
+    Buchheit v. Stinson,
+   
+   260 Ga. App. 450, 452-53, 579 S.E.2d 853 (2003) (relying on “capable of repetition, yet evading review” test to review factual basis for expired family violence protective order);
+   
+    Ellibee
+   
+   v.
+   
+    Ellibee,
+   
+   121 Idaho 501, 503, 826 P.2d 462 (1992) (capable of repetition, yet evading review exception applied in case raising first impression issues with respect to applicant’s burden of proof and statute’s applicability in cases of alleged child abuse);
+   
+    Hedrick-Koroll
+   
+   v.
+   
+    Bagley,
+   
+   352 Ill. App. 3d 590, 592, 816 N.E.2d 849 (2004) (addressing expired order under “public interest” exception to mootness doctrine in case wherein trial court failed to make statutorily required factual findings);
+   
+    Smith
+   
+   v.
+   
+    Martens,
+   
+   279 Kan. 242, 245, 106 P.3d 28 (2005) (using “capable of repetition” exception to address vagueness constitutional challenge to civil enforcement provision, but rejecting other case specific claims as moot);
+   
+    Burkstrand
+   
+   v.
+   
+    Burkstrand,
+   
+   632 N.W.2d 206, 208 n.2 (Minn. 2001) (issue of whether trial court’s failure to comply with statutory time frame for holding hearing deprived it of subject matter jurisdiction reviewed as issue “capable of repetition, yet evading judicial review”);
+   
+    Gernstein
+   
+   v.
+   
+    Allen,
+   
+   10 Neb. App. 214, 219-20, 630 N.W.2d 672 (2001) (rejecting collateral consequences argument of reputation harm because case did not involve criminal conviction, but finding appeal not moot under “capable of repetition” exception because of due process issues presented, specifically scope of required hearing);
+   
+    Marquette
+   
+   v.
+   
+    Marquette,
+   
+   686 P.2d 990, 992-93 (Okla. App. 1984) (protective order appeal not moot under either “ ‘capable of repetition’ ” or “public interest” tests because of order’s short duration and “wide-ranging ramifications” of domestic violence);
+   
+    Snyder
+   
+   v.
+   
+    Snyder,
+   
+   427 Pa. Super. 494, 500 n.1, 629 A.2d 977 (1993) (rejecting claim that expired order would have collateral consequences of “impact on the way atrial court views the equities in a divorce or child custody proceeding,” but holding appeal not moot under “capable of repetition” standard based on important issues of required
+    
+    *174
+    
+   quantum of evidence to justify relief); cf.
+   
+    Strollo
+   
+   v.
+   
+    Strollo,
+   
+   828 P.2d 532, 533-34 (Utah App. 1992) (denial of protective order mooted when party obtained order from different judge, but court addressed case under “capable of repetition” standard because of public interest in first impression question of whether applicant needed to be in “immediate peril”).
+  
+
+
+
+   13
+  
+
+   The minority view, held by seven states, is that the expiration of a domestic violence restraining order renders an appeal from that order moot. See
+   
+    Siemonsma
+   
+   v.
+   
+    Siemonsma,
+   
+   Docket No. 01-0247, 2002 Iowa App. LEXIS 691 (Iowa App. June 19, 2002) (order of protection moot because of expiration);
+   
+    Young
+   
+   v.
+   
+    Young,
+   
+   810 A.2d 418, 422-23 (Me. 2002) (rejecting collateral
+    
+    *175
+    
+   consequences argument, and stating that case did not satisfy “public importance” element of “capable of repetition” test because of unique factual record);
+   
+    Reay
+   
+   v.
+   
+    Philips,
+   
+   169 S.W.3d 896, 897 (Mo. App. 2005) (rejecting collateral consequences argument based on “blemish” to subject’s record, and stating that specific case presented no issues to satisfy “general public interest” exception);
+   
+    Lucero
+   
+   v.
+   
+    Pino,
+   
+   124 N.M. 28, 31-32, 946 P.2d 232 (App.) (rejecting collateral consequences argument because order would have no legal impact on pending adoption or custody proceedings), cert. denied, 123 N.M. 626, 944 P.2d 274 (1997);
+   
+    Noor
+   
+   v.
+   
+    Noor,
+   
+   15 App. Div. 3d 788, 790 N.Y.S.2d 299 (2005) (“this appellate challenge to the issuance of the orders of protection is moot as any determination herein will not directly affect the rights of the parties”);
+   
+    State
+   
+   v.
+   
+    Mott,
+   
+   166 Vt. 188, 197-98, 692 A.2d 360 (1997) (declining to address civil claim regarding propriety of issuance of expired order because resolution in defendant’s favor would have no bearing on related criminal case). We disagree with these courts because a conclusion that the expiration of a domestic violence restraining order renders an appeal from that order moot ignores the gravity of these orders for the individuals involved, and is, therefore, inconsistent with our developing collateral consequences jurisprudence.
+  
+
+
+
+   14
+  
+
+   We address briefly the defendant’s reliance on the “capable of repetition, yet evading review” exception, which we conclude is misplaced because “[t]he key analytical distinction lies in the type of ipjury; the collateral consequences doctrine applies when the collateral consequences of the contested court action, such as the continuing stigma of a criminal conviction, constitute a continuing injury to the specific litigant, justifying the court’s retention of jurisdiction over the dispute, despite the lack of any consequences flowing from the adjudication directly at issue in the appeal.
+  
+
+
+   . . . Thus, alive controversy continues to exist between the parties because of that continuing ipjury.
+  
+
+
+   “By contrast, the capable of repetition, yet evading review rule reflects the functionally insurmountable time constraints present in certain types of disputes. . . . Paradigmatic examples are abortion cases and other medical treatment disputes. . . . Thus, this exception to the mootness doctrine is rooted in a determination that, when its requirements are met, public policy requires that we decide the question, despite the fact that our decision will have no direct consequences in the case before us.” (Citations omitted; internal quotation marks omitted.)
+   
+    Wallingford
+   
+   v.
+   
+    Dept. of Public Health,
+   
+   supra, 262 Conn. 770-71 n.12.
+  
+
+
+ 
+    *176
+    
+   In our view, correct application of the “public interest” element in the domestic violence restraining order context is illustrated by those sister state cases that have relied on the “capable of repetition, yet evading review” analysis after identifying questions of statutory construction or constitutional dimension that would have a broad public impact beyond the resolution of that specific case. See
+   
+    Ellibee
+   
+   v.
+   
+    Ellibee,
+   
+   121 Idaho 501, 503, 826 P.2d 462 (1992) (first impression issues with respect to applicant’s burden of proof and statute’s applicability in cases of alleged child abuse);
+   
+    Smith
+   
+   v.
+   
+    Martens,
+   
+   279 Kan. 242, 245, 106 P.3d 28 (2005) (civil enforcement provision of domestic violence order statute challenged as unconstitutionally vague);
+   
+    Burkstrand
+   
+   v.
+   
+    Burkstrand,
+   
+   632 N.W.2d 206, 208 n.2 (Minn. 2001) (whether statutory time frame in domestic violence statute is subject matter jurisdictional); Gern
+   
+    stein
+   
+   v.
+   
+    Allen,
+   
+   10 Neb. App. 214, 219-20, 630 N.W.2d 672 (2001) (due process issues regarding scope of hearing required);
+   
+    Snyder
+   
+   v.
+   
+    Snyder,
+   
+   427 Pa. Super. 494, 500 n.1, 629 A.2d 977 (1993) (issue regarding quantum of evidence required to justify relief); cf.
+   
+    Strollo
+   
+   v.
+   
+    Strollo,
+   
+   828 P.2d 532, 533-34 (Utah App. 1992) (denial of protective order case raising first impression question of whether applicant needs to be in “immediate peril”).
+  
+
+
+   In this consolidated appeal, the defendant’s claim fails under the “public interest” element of the “capable of repetition, yet evading review” test; see footnote 8 of this opinion; because, as demonstrated by his appellant’s brief filed in the Appellate Court, his claims, although undeniably important to him personally, are by their very nature limited to these cases. Specifically, although the defendant claims numerous due process and statutory violations, his pro se brief filed before the Appellate Court indicates that they all are rooted in the trial court’s exercise of its discretion
+   
+    with respect to the facts of these particular cases,
+   
+   and his brief to this court, filed by counsel, does not indicate otherwise. Thus, although the “capable of repetition, yet evading review” exception might well be applicable in a domestic violence restraining order case raising broader issues than those presented here, the Appellate Court properly concluded that the exception did not apply to this appeal. It, therefore, appropriately relied on its decision in
+   
+    In re Jeffrey C.,
+   
+   supra, 64 Conn. App. 66-67, in which it rejected application of the “capable of repetition, yet evading review” exception to a case that also was limited to record specific claims.

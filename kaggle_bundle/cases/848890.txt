@@ -1,0 +1,120 @@
+647 N.W.2d 498 (2002)
+466 Mich. 440
+PEOPLE of the State of Michigan, Plaintiff-Appellee-Cross-Appellant,
+
+v.
+
+Clinton Wayne REESE, Defendant-Appellant-Cross-Appellee.
+
+Docket No. 117891, Calendar No. 7.
+Supreme Court of Michigan.
+
+Argued December 5, 2001.
+Decided July 9, 2002.
+Jennifer M. Granholm, Attorney General, Thomas L. Casey, Solicitor General, William A. Forsyth, Prosecuting Attorney, Timothy K. McMorrow, Chief Appellate Attorney, and T. Lynn Hopkins, Assistant Prosecuting Attorney, Grand Rapids, MI, for the people.
+
+William A. Van Eck, W. Todd Van Eck, C. Erik Holt, and Randy A. Norton, Belding, MI, for the defendant.
+
+Jeffrey L. Sauter, President, Michael E. Duggan, Prosecuting Attorney, and Timothy A. Baughman, Chief, Research, Training and Appeals, Detroit, MI, for the Prosecuting Attorneys Association of Michigan.
+
+WEAVER, J.
+
+Defendant was convicted by a jury in the Kent Circuit Court of armed robbery. MCL 750.529. He was sentenced as an habitual offender to life imprisonment. MCL 769.12. The issue presented is whether the trial court erred in refusing to give a requested instruction on unarmed *499 robbery. Applying the analysis of People v. Cornell, 466 Mich. 335, 646 N.W.2d 127 (2002) to the facts of this case, we conclude that the trial court did not err in refusing to give the requested instruction because the element differentiating armed robbery from unarmed robbery-namely, whether the perpetrator was armed-was not disputed. Therefore, we affirm defendant's conviction.
+
+Defendant's conviction stems from an incident occurring September 27, 1997, at a Wesco gas station in Kent County. Michelle Livernois, an employee who was working at the gas station at the time of the robbery, testified that at approximately 3:45 p.m., a bald, stocky man entered the gas station wearing a nylon over his face and a green and white sweatshirt turned inside out. He was holding a knife. Ms. Livernois was standing behind the counter and had just finished dropping some money in the safe. She testified that she recognized the man immediately as a previous customer. Although she did not know his name, she recalled that on previous occasions he had purchased beer and Pall Mall cigarettes. She later identified defendant as the perpetrator after he was taken into police custody.
+
+Ms. Livernois testified that after defendant entered the store, he pushed her against the wall and began taking money from the register. After about ten seconds, Ms. Livernois was able to escape and run out of the gas station, across the street to the Hot `N Now. She returned to the station after she observed defendant run across Daniel Street into a yard. She and her co-worker, Chris McCune, then reentered the store and waited for the police to arrive. Ms. Livernois stated that approximately $1,095 was taken from the register.
+
+Mr. McCune testified that when defendant entered the store carrying a knife, he was on the "customer side" of the counter fixing a cigarette display rack.[1] He ran out of the store to a pay phone to call 911. He then got into a truck with one of the customers who was present at the gas station.[2] They followed the defendant for a few minutes before Mr. McCune returned to the gas station.
+
+Michael Noren and his girlfriend, Sabina Borowka, stopped at the Wesco gas station to buy a pair of sunglasses. As he was driving into the station, he observed defendant crouching near a wall. After making their purchases and returning to their car, an employee ran out of the gas station, screaming that he had been robbed. Mr. Noren observed defendant run out of the store and over to Daniel Street. He testified that defendant's hands were full, and he was trying to shove things into his pocket as he ran. A few things dropped to the ground as he ran. Mr. Noren and Ms. Borowka went around to the south side of the station, where they observed money on the ground and a knife sitting in the dirt. He and Ms. Borowka stayed near the knife until the police arrived.
+
+Vivian Shepard, the manager of the gas station, explained that the gas station had eight cameras that recorded twenty-four hour surveillance of the gas station. The jury was shown the video tape of the robbery while Ms. Shepard explained what was happening on the tape. Ms. Shepard testified that the tape showed Ms. Borowka looking at sunglasses and paying for her purchase. Ms. Livernois was behind the register completing a safe drop and Mr. McCune was near a display of cigarettes. *500 The perpetrator entered the gas station wearing a blue hat with a red button on the top.[3] Ms. Shepard testified that as the perpetrator entered the store, one could observe a stick-like object-the knife-in his hand.
+
+Paulette VanKirk testified that as she drove into the gas station to get gas, she observed defendant run out of the station shoving money into his pocket. The money was falling to the ground, but defendant did not stop to pick it up. She and Mr. McCune followed defendant for a few minutes in her truck down a dead-end street. After she turned around, she let Mr. McCune out at the station and continued to follow defendant. She observed defendant enter the parking lot of Diemer's Motors, a car dealership. She then flagged down two police officers who were approaching the area and told them that the Wesco gas station had been robbed and that she had observed the suspect in the parking lot.
+
+Defendant was eventually discovered in a home near the car dealership. Robert Neuman, who resided in the home, testified that he heard defendant trying to get into his home. Defendant was perspiring. Neuman let defendant come inside. Defendant told him that he had been robbed at knife-point by two white men. Defendant used the bathroom and telephone while in Neuman's home. Defendant was wearing a green and white sweatshirt when he entered the home, but changed into one of Neuman's Express Autowash shirts that were drying in the bathroom.[4] About ten to fifteen minutes after defendant entered his home, police officers arrived and asked Neuman to come. After Neuman came out of the house, the officers asked defendant to come out. He eventually came out and was apprehended.
+
+At trial, defense counsel requested the court to instruct the jury on unarmed robbery. The trial court denied the request, stating:
+
+You did [request an unarmed robbery instruction], and I concluded not to. The prosecutor objected, and I agreed with his objection that on these facts that was not a reasonable assessment of the evidence, but would merely have opened the door to compromise somewhere between guilty and not guilty. And while juries have the right to exercise leniency and to find someone guilty of less than they are in fact guilty of, if that's the situation, we're not to invite it, which I think would have been done in this case. But your objection is duly noted.
+
+Defendant appealed, arguing that the trial court erred in refusing the instruction on unarmed robbery. In a two-to-one decision,[5] the Court of Appeals affirmed defendant's conviction.[6] Questioning whether an instruction on a necessarily included lesser offense should be required where a rational view of the evidence would not support a conviction under the instruction, the Court of Appeals agreed that existing precedent required it to hold that the trial *501 court had erred in refusing the instruction on the necessarily lesser included offense of unarmed robbery. The Court of Appeals urged this Court to adopt the federal model and apply a "rational view of the evidence standard" to all requests for lesser included instructions. Id. at 633, 619 N.W.2d 708.
+
+Despite the error, the Court of Appeals determined that reversal was not required because the error was harmless. The Court of Appeals explained that there was no dispute concerning the existence of the knife. Uncontroverted eyewitness testimony demonstrated that the perpetrator of the robbery used a knife, that a knife was found in an area where the perpetrator had dropped some items, and that a stick-like or knife-like object was observable on the tape from the video-surveillance camera.
+
+This Court granted leave "on the issue of the standard to be used by the trial court in determining whether necessarily lesser included offense instructions must be given when requested." The order instructed the parties to
+
+specifically address whether M.C.L. § 768.32 prevents the Supreme Court from adopting the federal model for necessarily lesser included offense instructions and, if it does, whether such prohibition violates Const. 1963, art. 6, § 5.[[7]]
+
+Resolution of this case is controlled by our recent opinion in People v. Cornell, supra. In Cornell, we concluded that M.C.L. § 768.32(1) only permits instructions on necessarily included lesser offenses, not cognate lesser offenses. Moreover, such an instruction is proper if the charged greater offense requires the jury to find a disputed factual element that is not part of the lesser included offense and it is supported by a rational view of the evidence. Id. at 357-58, 646 N.W.2d at 139-40.[8] Unarmed robbery is clearly a necessarily included lesser offense of armed robbery. Thus, the issue in this case is whether the evidence supported such an instruction. We conclude that it did not and therefore affirm defendant's conviction.[9]
+
+The element distinguishing unarmed robbery from the offense of armed robbery is the use of a weapon or an article used as weapon.[10] In the present case, there is no *502 real dispute concerning whether defendant was armed. Rather, the evidence that he was armed is overwhelming. Both employees of the gas station testified that defendant was armed with a knife when he entered the store, a knife-like or stick-like object can be observed in defendant's hand in the surveillance video tape, and a knife was found outside the gas station in the same area where defendant had dropped money. Indeed, defense counsel did not explicitly argue that defendant was not armed. Rather, he questioned the lack of fingerprints on the knife, argued that defendant was mistakenly identified as the perpetrator, and suggested that the prosecution failed to prove that the "perpetrator" used or threatened to use violence because no testimony established that the employees felt threatened by the knife. The closest counsel came to challenging the existence of a knife was to suggest that eyewitness testimony was unreliable because the witnesses were excited. A rational view of the undisputed evidence in this case requires us to conclude that the trial court did not err in refusing to give an instruction on unarmed robbery. Defendant's conviction is affirmed.[11]
+
+CORRIGAN, C.J., and TAYLOR, YOUNG, and MARKMAN, JJ., concurred with WEAVER, J.
+
+MARILYN J. KELLY, J. (concurring in part and dissenting in part).
+
+The majority applies the framework for lesser included offense instructions that it recently adopted in People v. Cornell 466 Mich. 335, 646 N.W.2d 127 (2002). There, a majority of this Court overruled longstanding precedent to require that the lesser offense for which a jury instruction is given be supported by substantial evidence. Id. at 365, 646 N.W.2d at 144. The issue in Cornell was whether the trial court erred in refusing to give a requested lesser included misdemeanor offense instruction.
+
+The issue in this case is whether the trial court erred in refusing to give a requested necessarily lesser included felony offense instruction. In the past, this Court has distinguished between necessarily lesser included felony offenses and necessarily lesser included misdemeanor offenses and treated them differently. See People v. Stephens, 416 Mich. 252, 330 N.W.2d 675 (1982). Cornell rejected the distinction and addressed itself to both types of offenses. In so doing, it strayed far beyond the issue presented. Properly applied, Cornell should not control the outcome of this case.
+
+This case represents a new and more broad application of the rule in Cornell. Therefore, I again write separately to dissent. However, because I believe that any error in this case was harmless, I concur in the result reached in the majority opinion.
+
+In People v. Kamin,[1] this Court recognized that our previous decisions required a judge to automatically instruct the jury on necessarily lesser included offenses. Refusal to give the requested instruction *503 was error. This Court reiterated the automatic instruction rule more recently in People v. Mosko, 441 Mich. 496, 495 N.W.2d 534 (1992):
+
+"Pursuant to People v. Ora Jones, 395 Mich. 379, 236 N.W.2d 461 (1975), and People v. Chamblis, 395 Mich. 408, 236 N.W.2d 473 (1975), it is clear that a defendant has a right upon request to have the jury instructed on necessarily included offenses. Further, a defendant has a right upon request to jury instructions on those cognate lesser included offenses which are supported by record evidence.
+
+"The automatic instruction rule for necessarily lesser included offenses removed the need for the trial judges to review the record in order to determine whether or not there is evidence to support a verdict on the lesser offenses. Review of the record for evidentiary support is now in order only when the defense requests that the jury be instructed on a cognate lesser included offense." [Mosko at 501, 495 N.W.2d 534, quoting Kamin at 493, 275 N.W.2d 777.]
+
+At the time Ora Jones, Chamblis, and Kamin were decided, the automatic instruction rule applied to all necessarily included offenses. The Stephens Court altered that when it adopted the rational basis test for lesser misdemeanor offense instructions, derived from the federal rule established in United States v. Whitaker, 144 U.S. App DC 344, 447 F.2d 314 (1971). Stephens expressly refused to extend the rational basis test to lesser included felony offense instructions, noting that People v. Ora Jones still controlled. Stephens at 264, 330 N.W.2d 675.
+
+The Mosko Court stated, just ten years ago, that "[t]hese principles remain sound." Id. at 501, 495 N.W.2d 534. The majority has not persuaded me that something has occurred in the interim to render them illogical.
+
+The trial judge in this case denied defendant's request to instruct the jury on unarmed robbery, stating that it "would merely have opened the door to compromise somewhere between guilty and not guilty." However, the Chamblis Court addressed this very concern, thereby precluding a trial judge from refusing a lesser included offense instruction for fear of a compromise verdict. Chamblis acknowledged that the possibility of compromise exists, but quoted Justice Holmes "[t]hat the verdict may have been the result of compromise, or of a mistake on the part of the jury is possible. But verdicts cannot be upset by speculation or inquiry into such matters." Chamblis at 426, 236 N.W.2d 473, quoting Dunn v. United States, 284 U.S. 390, 394, 52 S.Ct. 189, 76 L.Ed. 356 (1932).
+
+As I stated in Cornell, I disagree with the majority's disregard for the well reasoned and supported precedent of this Court. It expressly adopted the automatic instruction rule for necessarily lesser included felony offenses and articulated sound reasoning for doing so. I also disagree with the application of Cornell to this case because, traditionally, we treated necessarily lesser included felony offenses and necessarily lesser included misdemeanor offenses differently, as stated in Stephens. Moreover, I would adhere to the longstanding rule for necessarily lesser included felony offense instructions and find error in the trial court's refusal to deliver instructions on unarmed robbery.
+
+Nevertheless, I agree with the Court of Appeals that it was harmless error for the trial judge to refuse to give the unarmed *504 robbery instructions.[2] The only disputed fact was whether the robber was defendant. There was no question that the robber was armed. That fact is the element that distinguishes the greater and lesser offenses. Because it was not disputed, the judge's failure to deliver the instructions on the lesser offense, although erroneous, was harmless. See Mosko, supra at 502-506, 495 N.W.2d 534.
+
+This is the rare case where the facts comprising the element distinguishing the charged offense and the lesser included offense are undisputed. Therefore, under the facts of this case, the majority's change in the law appear innocuous. More often, however, the issue is not so clear.
+
+Today, in this case and in Cornell, the majority erodes the fact-finding powers of the jury, allowing judges to weigh the evidence in place of the jury. In so doing, it rewards overcharging by the prosecution. Once again it departs from the precedent of this Court and makes a wrong turn.
+
+MICHAEL F. CAVANAGH, J., concurred with MARILYN F. KELLY, J.
+
+NOTES
+
+[1]  Mr. McCune also identified defendant after he was taken into custody.
+
+[2]  Mr. McCune got into the truck before he completed the call to 911. Another customer picked up the phone and finished the call.
+
+[3]  Laura Clark, a fifth grader who lived in the area where defendant was apprehended, testified that at about 4:00 or 4:30 p.m., she observed a black man kneel by the raspberry bushes in their yard and throw his gloves there. A short time later, Laura informed her mother, who went outside to check the area near the raspberry bushes. She discovered a blue hat, some nylons, and a pair of gloves. The next day, after learning about the robbery of the Wesco gas station, Mrs. Clark called the police, who came and retrieved the items.
+
+[4]  The green and white sweatshirt was found in Mr. Neuman's bathroom.
+
+[5]  One judge concurred in the result only.
+
+[6]  242 Mich.App. 626, 619 N.W.2d 708 (2000).
+
+[7]  465 Mich. 851, 631 N.W.2d 343 (2001).
+
+[8]  We note that the Court of Appeals decision in this case urged this Court to consider adopting the "federal model" regarding included offense instructions. However, as our decision in Cornell makes clear, it unnecessary to do so because resolution of this matter is governed by M.C.L. § 768.32, which, when given its intended meaning, happens to be similar to the federal model.
+
+[9]  The concurrence/dissent criticizes our majority decision in Cornell as one disregarding precedent from this Court and straying "far beyond the issue presented." Op. at 376, 646 N.W.2d at 149. However, as we explained in Cornell, the cases that we overruled in that matter (and which the concurrence/dissent relies on in this matter) were cases that blatantly disregarded M.C.L. § 768.32(1)a statute that had been in existence since 1846as well the prior case law interpreting that statute. "The interests in the "evenhanded, predictable, consistent development of legal principles" and the "integrity of the judicial process" require[d] that we rectify the conflict that our case law ha[d] created." Cornell at 358, n. 14, 646 N.W.2d at 140, n. 14.
+
+[10]  The armed robbery statute reads in pertinent part:
+
+Any person who shall assault another, and shall feloniously rob, steal and take from his person, or in his presence, any money or other property, which may be the subject of larceny, such robber being armed with a dangerous weapon, or any article used or fashioned in a manner to lead the person so assaulted to reasonably believe it to be a dangerous weapon, shall be guilty of a felony .... [MCL 750.529.]
+
+The unarmed robbery statute reads:
+
+Any person who shall, by force and violence, or by assault or putting in fear, feloniously rob, steal and take from the person of another, or in his presence, any money or other property which may be the subject of larceny, such robber not being armed with a dangerous weapon shall be guilty of a felony.... [MCL 750.530.]
+
+[11]  While the trial court's decision was correct under the law existing at the time it refused to give the instruction, as we explained in Cornell, this case law improperly ignored M.C.L. § 768.32. Under a proper application of this statute, the instruction was not required.
+
+[1]  405 Mich. 482, 493, 275 N.W.2d 777 (1979).
+
+[2]  The Mosko Court applied the harmless error rule to errors involving a failure to provide a requested instruction on a necessarily lesser included felony offense. Id. at 503, 495 N.W.2d 534.
+
+As I stated in Cornell, I disagree with the majority's new harmless error test, which increases the burden on a defendant by requiring that the instructions be supported by substantial evidence. Id. at ___, 646 N.W.2d 127. The new rule increases the likelihood that juries will convict defendants of greater offenses than they believe them guilty of as an alternative to acquitting them altogether.

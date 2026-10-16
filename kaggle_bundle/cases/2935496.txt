@@ -1,0 +1,659 @@
+*427
+   
+  OPINION
+ 
+
+
+  KEM THOMPSON FROST, Justice.
+ 
+
+  Appellant Mervyn Lopez Aldaba challenges his capital murder conviction, claiming (1) egregious harm in the trial court’s failure to give instructions in the jury charge as to the voluntariness of appellant’s custodial statement, and (2) ineffective assistance of counsel in handling the alleged jury-charge error and the appellant’s custodial statement. We affirm.
+ 
+
+
+  I. Factual and Procedural Background
+ 
+
+
+  Appellant and complainants, Angelito Montemayor and Eloísa Cruz, arranged to meet on a street in front of a home for the purpose of selling narcotics to Cloefe En-nis, who lived there. As they waited for Ennis to arrive at the home, appellant shot and killed Montemayor and Cruz. A neighborhood resident saw the shooting through a window in his home and saw the shooter leave the scene in a white truck. Police arrived on the scene in response to calls regarding a shooting in progress.
+ 
+
+
+  Another neighborhood resident heard noises outside his home and heard a vehicle leave the scene in front of his home. This man recognized the sound of the vehicle’s muffler as belonging to appellant’s white truck. This man gave appellant’s cell phone number to investigating officers.
+ 
+
+
+  Investigating officers who arrived on the scene discovered the bodies of Montema-yor and Cruz, as well as a number of spent shell casings and cigarette butts, one of which was later linked by DNA to appellant. Investigators did not find any weapons at the scene.
+ 
+
+
+  On the same night, appellant gave a gun to a friend and asked the friend to hold on to it. Investigators later recovered the weapon as part of an unrelated narcotics investigation and determined the weapon had been used in the shootings of Monte-mayor and Cruz.
+ 
+
+
+  Appellant was charged with capital murder, to which he pleaded “not guilty.” At a jury trial that followed, appellant testified that he killed the complainants in self-defense because he saw Montemayor pointing a gun at him.
+ 
+
+
+  On cross-examination, the State questioned appellant about his interview with homicide detectives on the day of his arrest,
+  
+   1
+  
+  prompting the following exchange:
+ 
+
+
+  [PROSECUTOR]: ... But you recall a conversation with two homicide detectives?
+ 
+
+
+  [APPELLANT]: Yes, sir.
+ 
+
+
+  [PROSECUTOR]: During that interview they specifically asked you if you heard a shooting about a Phillippino [sic] couple didn’t you?
+ 
+
+
+  [APPELLANT]: Yes, sir.
+ 
+
+
+  [PROSECUTOR]: You lied to them about that?
+ 
+
+
+  [APPELLANT]: I exercised my right to remain silent yes, sir.
+ 
+
+
+  [PROSECUTOR]: That’s actually not true. You lied and said no didn’t you?
+ 
+
+
+  [APPELLANT]: I told him no yes [sic] ’cause I didn’t have a lawyer.
+ 
+
+
+  [PROSECUTOR]: In fact they got more specific with you. They asked if you heard through any conversations in the Phillippino [sic] community about the murders, whether you heard any news reports about the murders. Even asked you if you were familiar with the location of the murder and
+   
+   *428
+   
+  each time you said no. Isn’t that true?
+ 
+
+
+  [APPELLANT]: The location sir. Yes, I remember that question, but the rest of it I don’t remember them talking about that sir.
+ 
+
+
+  [PROSECUTOR]: All right. But you said you weren’t even familiar with the location of the murder didn’t you?
+ 
+
+
+  [APPELLANT]: Yes, sir. I told them that.
+ 
+
+
+  [PROSECUTOR]: So again you lied to them. You knew about that location didn’t you?
+ 
+
+
+  [APPELLANT]: Yes, sir I lied to them.
+ 
+
+
+  [PROSECUTOR]: Now they continued asking you whether or not you killed anybody and you said no.
+ 
+
+
+  [APPELLANT]: No I didn’t. They didn’t get to that question sir.
+ 
+
+
+  [PROSECUTOR]: Well, yes they did Mr. Aldaba. Do you not l’ecall them asking you that question?
+ 
+
+
+  [APPELLANT]: No sir.
+ 
+
+
+  [PROSECUTOR]: How about the fact that at some point you denied killing the Phillippino [sic] couple when they asked you. You recall that?
+ 
+
+
+  [APPELLANT]: No, sir.
+ 
+
+
+  [PROSECUTOR]: Do you recall denying even hearing anything about it?
+ 
+
+
+  [APPELLANT]: No, sir.
+ 
+
+
+  [PROSECUTOR]: Okay. And you deny that you told these detectives you know absolutely nothing about a murder?
+ 
+
+
+  [APPELLANT]: No, sir.
+ 
+
+
+  [PROSECUTOR]: Would you agree with me this would have been an opportunity for you to share with the detectives the version of events that you’re sharing with this jury today?
+ 
+
+
+  [APPELLANT]: Yes, sir. If I had my lawyer present I would sir.
+ 
+
+
+  [PROSECUTOR]: And that’s fine but lawyer or no lawyer you had an opportunity to tell these detectives what had happened, the version of events you’re telling this jury today you chose rather to lie about it didn’t you?
+ 
+
+
+  [DEFENSE ATTORNEY]: Judge that was asked and answered.
+ 
+
+
+  [TRIAL COURT]: Overruled.
+ 
+
+
+  [APPELLANT]: Sir?
+ 
+
+
+  [PROSECUTOR]: You chose to lie about it didn’t you?
+ 
+
+
+  [APPELLANT]: Yes, sir.
+ 
+
+
+  The jury found appellant guilty as charged. He was sentenced to a life of confinement. On appeal, appellant challenges his conviction, presenting two issues.
+ 
+
+
+  II. Issues and Analysis
+ 
+
+
+  A. Did the trial court err in failing to instruct the jury on the voluntariness of appellant’s custodial statement?
+ 
+
+
+  In his first issue appellant claims egregious harm because the trial court did not instruct the jury under sections 6 and 7 of article 38.22 of the Texas Code of Criminal Procedure as to the voluntariness of appellant’s statements made to police.
+  
+   2
+  
+  Appellant points to the State’s cross-examination as evidence that he claims raised a fact issue about the voluntariness of his statements to the detectives, warranting a jury instruction under sections 6 and 7.
+ 
+
+
+  A trial judge has the absolute duty to
+  
+   sua sponte
+  
+  prepare a jury charge
+   
+   *429
+   
+  that accurately sets out the law applicable to the case.
+  
+   Oursbourn v. State,
+  
+  259 S.W.3d 159, 179-81 (Tex.Crim.App.2008);
+  
+   see
+  
+  Tex.Code Crim. Proc. Ann. art. 36.14 (Vernon 2007). When statutes such as Articles 38.22 and 38.23 require an instruction under certain circumstances, that instruction is “law applicable to the case,” and the trial court must instruct the jury of what is required under the statute.
+  
+   Oursboum,
+  
+  259 S.W.3d at 180-81. Although a “voluntariness” issue must be raised, and an accused should request a jury instruction that relates to the theory of involuntariness, if the accused fails to present a proposed jury instruction or fails to object to the lack of one, any potential error in the charge is reviewed for egregious harm, as set forth in
+  
+   Almanza. Id.
+  
+  at 174;
+  
+   see Almanza v. State,
+  
+  686 S.W.2d 157, 174 (Tex.Crim.App.1985) (op. on reh’g),
+  
+   overruled on other grounds, Rodriquez v. State,
+  
+  758 S.W.2d 787, 788 (Tex.Crim.App.1988).
+ 
+
+
+  1.
+  
+   Article 38.22, section 6
+  
+
+
+  Article 38.22, section 6 of the Code of Criminal Procedure governs the admissibility of an accused’s custodial and non-custodial statements, and provides that only voluntary statements may be admitted. Tex.Code Crim. Proc. Ann. art. 38.22, § 6 (Vernon 2005);
+  
+   see Oursbourn,
+  
+  259 S.W.3d at 171. A claim under section 6 that an accused’s statement was made involuntarily may include situations involving police overreaching, youth, intoxication, illness or medication, mental incapacitation, or other disabilities.
+  
+   See Oursboum,
+  
+  259 S.W.3d at 172-73. Although, alone, these fact scenarios are not enough to render a statement inadmissible, they are factors a jury is entitled to consider when armed with a proper instruction.
+  
+   Id.
+  
+  at 173.
+ 
+
+
+  Article 38.22, section 6, becomes “law applicable to a case” once a question is raised and actually litigated as to the general voluntariness of an accused’s statement; however, a factual dispute is not necessary.
+  
+   Id.
+  
+  at 175-76, 180. A question of voluntariness is raised when a party notifies the trial judge or the trial judge raises the issue on her own.
+  
+   Id.
+  
+  at 175. Under section 6, when a question is raised, the trial judge is then required to (1) make an independent determination outside of the jury’s presence that the statement was made under “voluntary” conditions, and (2) instruct the jurors that they shall not consider any statement for any purpose unless they believe beyond a reasonable doubt that the statement was made voluntarily.
+  
+   Id.
+  
+  at 180-81;
+  
+   see
+  
+  Tex. Code Crim. Prog Ann. art. 38.22, § 6.
+ 
+
+
+  In the case at hand, nothing in the State’s cross-examination suggests that appellant’s statements to the homicide detectives were made involuntarily as contemplated by section 6.
+  
+   See Vasquez v. State,
+  
+  225 S.W.3d 541, 545 (Tex.Crim.App.2007) (“Under article 38.22, there is no error in refusing to include a jury instruction where there is no evidence before the jury to raise the issue.”). Appellant has not pointed to any evidence of police overreaching or presented evidence suggesting that his statements to detectives were given under duress of hallucinations, illness, medication, or a private threat.
+  
+   See Oursbourn,
+  
+  259 S.W.3d at 172 (providing that claims of involuntariness may turn on police overreaching and evidence of psychological abnormalities). Therefore, a question of voluntariness was not raised by the parties that would have triggered the trial court’s duties under section 6.
+  
+   See id.
+  
+  at 175 (raising a question to notify a trial court of an issue about voluntariness triggers trial court’s duties under section 6 to conduct hearing outside of jury’s presence). Moreover, because the parties did not litigate the voluntariness of appellant’s
+   
+   *430
+   
+  statements in some manner, the trial judge was not on notice that the instruction under section 6 might be required.
+  
+   See id.
+  
+  at 176. An instruction under section 6 was not “law applicable to a case.”
+  
+   See id.
+  
+  at 175. Accordingly, appellant was not entitled to a jury instruction under section 6.
+  
+   See White v. State,
+  
+  779 S.W.2d 809, 827 (Tex.Crim.App.1989). Therefore, the trial court did not err in failing to give such an instruction.
+ 
+
+
+  2.
+  
+   Article 38.22, section 7
+  
+
+
+  If an accused’s statement was made as a result of custodial interrogation, when the issue is raised by the evidence, the accused is entitled to have the jury decide whether he was adequately warned of his rights and knowingly and intelligently waived those rights.
+  
+   Oursboum,
+  
+  259 S.W.3d at 176. Section 7 of article 38.22 provides, “When the issue is raised by the evidence, the trial judge shall appropriately instruct the jury, generally, on the law pertaining to such statement.” Tex.Code Crim. Proc. Ann. art. 38.22, § 7. “The phrase ‘the issue’ refers to compliance with the statutory warnings set out in ... [article] 38.22, §§ 2 & 3, and the voluntariness of the defendant’s waiver of rights.”
+  
+   Oursboum,
+  
+  259 S.W.3d at 176;
+  
+   see
+  
+  Tex. Code Crim. Proc. Ann. §§ 2, 3 (incorporating requirements of
+  
+   Miranda).
+  
+  For the issue to be “raised by the evidence,” there must be a genuine factual dispute.
+  
+   Oursb-oum,
+  
+  259 S.W.3d at 176.
+ 
+
+
+  We presume without deciding that appellant’s statements were made during a custodial interrogation.
+  
+   3
+  
+  Appellant characterizes his answers during cross-examination as creating “a fact issue regarding whether he invoked his right to remain silent or right to counsel during interrogation.” However, there was no factual dispute raised by the evidence as contemplated by section 7.
+  
+   See id.
+  
+  Contrary
+  
+   to
+  
+  appellant’s assertions, although appellant made reference to conversations he had with detectives at a time when he was not accompanied by an attorney as well as discussions in which appellant indicated that he exercised his right to remain silent by lying to detectives, the cross-examination did not reveal that appellant actually asked for counsel or invoked his right to remain silent. Rather, the line of questioning revealed that appellant lied to the police because he did not have a lawyer present with him. Although appellant argues that an issue of voluntariness was raised by the State’s cross-examination, no evidence before the jury raised a factual dispute concerning the voluntariness of appellant’s statements.
+  
+   See Brownlee v. State,
+  
+  944 S.W.2d 463, 467, 468 (Tex.App.Houston [14th Dist.] 1997, pet. ref'd) (concluding issue of section 7 voluntariness was not raised by an accused’s testimony on cross-examination when he explained, “The only reason I talked to the police because they wouldn’t let me leave. I just told them something so they would go ahead and process me that night because I asked for my lawyer a bunch of times and they told me I was going to get the death penalty for capital murder.”). Appellant has cited no other evidence that he claims placed in dispute the voluntariness of appellant’s statements to the detectives.
+  
+   See id.
+  
+  We conclude no issue was raised by the evidence to warrant an instruction under section 7.
+  
+   See id.
+  
+
+
+  Because appellant was not entitled to instructions under sections 6 and 7, the
+   
+   *431
+   
+  trial court did not err in failing to submit a jury charge on the question of voluntariness.
+  
+   See id.
+  
+  (concluding no error occurred in failing to submit a section 7 instruction on voluntariness);
+  
+   see also White,
+  
+  779 S.W.2d at 827 (concluding appellant was not entitled to section 6 instruction). Therefore, we overrule appellant’s first issue.
+ 
+
+
+  B. Did appellant receive ineffective assistance of counsel?
+ 
+
+
+  In his second issue, appellant complains that he received ineffective assistance of counsel based on the following conduct during the guilt-innocence phase, all of which involve his statements to detectives:
+ 
+
+
+  • Trial counsel did not object to the State’s cross-examination on the basis of article 88.22 of the Texas Code of Criminal Procedure.
+ 
+
+
+  • Trial counsel did not object to testimony revealing that appellant had exercised his constitutional right to counsel and to remain silent.
+ 
+
+
+  • Trial counsel did not request a hearing on the voluntariness and admissibility of appellant’s statements to detectives.
+ 
+
+
+  • Trial counsel did not request a limiting instruction so that the testimony could be used only for impeachment purposes, but not for general evidence.
+ 
+
+
+  • Trial counsel did not request a jury instruction nor object to the omission of jury instructions mandated by sections 6 and 7 of article 38.22.
+ 
+
+
+  Both the United States and Texas Constitutions guarantee an accused the right to assistance of counsel. U.S. Const, amend. VI; Tex. Const, art. I, § 10; Tex.Code CRiM. Proc. art. 1.051 (Vernon 2005). This right necessarily includes the right to reasonably effective assistance of counsel.
+  
+   Strickland v. Washington,
+  
+  466 U.S. 668, 686, 104 S.Ct. 2052, 2064, 80 L.Ed.2d 674 (1984);
+  
+   Ex parte Gonzales,
+  
+  945 S.W.2d 830, 835 (Tex.Crim.App.1997). To prove ineffective assistance of counsel, appellant must show that (1) trial counsel’s representation fell below an objective standard of reasonableness, based on prevailing professional norms; and (2) there is a reasonable probability that the result of the proceeding would have been different but for trial counsel’s deficient performance.
+  
+   Strickland,
+  
+  466 U.S. at 688-92, 104 S.Ct. at 2064-67. Moreover, appellant bears the burden of proving his claims by a preponderance of the evidence.
+  
+   Jackson v. State,
+  
+  973 S.W.2d 954, 956 (Tex.Crim.App.1998).
+ 
+
+
+  In assessing appellant’s claims, we apply a strong presumption that trial counsel was competent.
+  
+   Thompson v. State,
+  
+  9 S.W.3d 808, 813 (Tex.Crim.App.1999). We presume counsel’s actions and decisions were reasonably professional and were motivated by sound trial strategy.
+  
+   See Jackson v. State,
+  
+  877 S.W.2d 768, 771 (Tex.Crim.App.1994). When, as in this case, no proper evidentiary record is developed at a hearing on a motion for new trial, it is extremely difficult to show that trial counsel’s performance was deficient.
+  
+   See Bone v. State,
+  
+  77 S.W.3d 828, 833 (Tex.Crim.App.2002). If there is no hearing or if counsel does not appear at the hearing, an affidavit from trial counsel becomes almost vital to the success of an ineffective-assistance claim.
+  
+   Stults v. State,
+  
+  23 S.W.3d 198, 208-09 (Tex.App.Houston [14th Dist.] 2000, pet. ref'd). The Court of Criminal Appeals has stated that it should be a rare case in which an appellate court finds ineffective assistance on a record that is silent as to counsel’s trial strategy.
+  
+   See Andrews v. State,
+  
+  159 S.W.3d 98, 103 (Tex.Crim.App.2005). On such a silent record, this court can find ineffective assistance of counsel only if the challenged conduct was “‘so outrageous that no competent attorney would have
+   
+   *432
+   
+  engaged in it.’ ”
+  
+   Goodspeed v. State,
+  
+  187 S.W.3d 390, 392 (Tex.Crim.App.2005) (quoting
+  
+   Garcia v. State,
+  
+  57 S.W.3d 436, 440 (Tex.Crim.App.2001)). No motion for new trial was filed in this case.
+ 
+
+
+  As discussed above, appellant was not entitled to submission of an instruction as to voluntariness under either section 6 or section 7.
+  
+   See White,
+  
+  779 S.W.2d at 827;
+  
+   Brownlee,
+  
+  944 S.W.2d at 468;
+  
+   see also Randall v. State,
+  
+  No. 14-06-00468-CR, 2008 WL 5262738, at ⅜8 (Tex.App.Houston [14th Dist.] Dec. 18, 2008, no pet.) (mem. op., not designated for publication) (rejecting ineffective-assistance claim for failure to object to admissible testimony). Therefore, appellant’s trial counsel did not render ineffective assistance in failing to request or object to the omission of the instructions in the jury charge when he reasonably could have determined that the instructions were not applicable to the case.
+  
+   See generally Hardin v. State,
+  
+  951 S.W.2d 208, 211 (Tex.App.-Houston [14th Dist.] 1997, no pet.) (rejecting appellant’s claim for ineffective assistance when trial counsel failed to request article 38.23 instruction when appellant was not entitled to instruction);
+  
+   see also Randall,
+  
+  2008 WL 5262738, at *8 (rejecting ineffective assistance claim for failure to secure instructions under section 6 and section 7 when the accused was not entitled to the instructions).
+ 
+
+
+  Appellant complains that his trial counsel should have objected to the testimony because it purportedly revealed he exercised his right to counsel and right to remain silent. However, as discussed above, the State’s cross-examination did not show that appellant actually requested counsel or invoked his right to remain silent; rather, the testimony revealed that instead of invoking his right to remain silent, he lied to the police about his knowledge because his attorney was not present with him.
+  
+   See Edwards v. State,
+  
+  956 S.W.2d 687, 689 (Tex.App.-Texarkana 1997, no pet.) (“Denials of involvement in response to questioning do not constitute the invocation of the right to silence.”). When, as in this case, appellant did not invoke his right to remain silent, and instead made a statement to police regarding his involvement in the offense and that statement differed significantly from his trial testimony, the prior statement to the police may be developed and argued.
+  
+   See Ewing v. State,
+  
+  971 S.W.2d 204, 208 (Tex.App.-Beaumont 1998, pet. ref'd) (involving an accused who denied involvement when speaking to police, but admitted at trial that he attacked the complainant out of fear for the safety of another). Accordingly, on this basis, appellant has failed to demonstrate his trial counsel was deficient for failing to object.
+  
+   See id.
+  
+
+
+  Even assuming arguendo that appellant’s statements to the detectives were in violation of
+  
+   Miranda
+  
+  or article 38.22, the statements were not rendered inadmissible when, as in this case, the State used the evidence for purposes of impeachment in cross-examination.
+  
+   See
+  
+  Tex.Code Crim. Proc. Ann. § 5;
+  
+   Lykins v. State,
+  
+  784 S.W.2d 32, 35-36 (Tex.Crim.App.1989);
+  
+   Brownlee,
+  
+  944 S.W.2d at 467 (providing that reference to an appellant’s prior statement is permitted for impeachment purposes on cross-examination). Furthermore, on this record, there is no evidence of trial counsel’s strategy in failing to object on article 38.22 grounds.
+  
+   4
+  
+  The record reflects that trial counsel filed a motion to suppress statements under
+   
+   *433
+   
+  article 38.22, section 3, which targets unrecorded statements; however, trial counsel did not obtain a ruling on that motion. In light of appellant’s own testimony at trial, in which he admitted shooting the complainants, his trial counsel reasonably could have determined, by not securing a ruling on the suppression motion and in later not objecting on article 38.22 grounds, that admission of appellant’s statements to detectives would not likely have changed the outcome of the proceeding.
+  
+   See Jackson,
+  
+  973 S.W.2d at 957 (requiring the accused to prove that the motion to suppress would have been granted to satisfy Strickland);
+  
+   see also Martinez v. State,
+  
+  No. 04-04-00057-CR, 2005 WL 2138121, at *2 (Tex.App.-San Antonio Sept.7, 2005, no pet.) (mem. op., not designated for publication) (concluding no ineffective assistance occurred when trial counsel failed to file motion to suppress statement or object under article 38.21 because, in light of the accused’s own testimony, admission of the statements at trial would not have changed the outcome of the proceeding). Because, on this record, the trial outcome was not likely to have turned on the admission of appellant’s statements, his trial counsel’s failure to procure a ruling or object on article 38.22 grounds could not constitute ineffective assistance of counsel.
+  
+   See Jackson,
+  
+  973 S.W.2d at 957;
+  
+   see also Martinez,
+  
+  2005 WL 2138121, at *2.
+ 
+
+
+  Similarly, appellant complains that his trial counsel should have procured a limiting instruction so that the testimony could have been considered only for impeachment purposes. However, when considering the fact that appellant admitted to lying to detectives, no such instruction was necessary.
+  
+   See McKinny v. State,
+  
+  76 S.W.3d 463, 475 (Tex.App.-Houston [1st Dist.] 2002, no pet.) (determining that evidence of prior inconsistent statements that the witness, at trial, conceded were false did not warrant a limiting instruction and no ineffective assistance occurred from failing to secure limiting instruction). Even if, in hindsight, the court were to conclude that a limiting instruction was warranted, it is reasonable, as a matter of trial strategy, that appellant’s trial counsel did not wish to focus the jury’s attention on appellant’s prior statements to police.
+  
+   See Ali v. State,
+  
+  26 S.W.3d 82, 88 (Tex.App.-Waco 2000, no pet.). Nevertheless, because the record does not reflect trial counsel’s reasons for not requesting the limiting instruction, there is no basis for concluding trial counsel did not exercise reasonably professional judgment.
+  
+   See id.
+  
+
+
+  Finally, appellant complains that his trial counsel should have secured a hearing on the issue of voluntariness and admissibility of appellant’s statements to detectives. Given the overwhelming evidence of appellant’s guilt and because, as discussed above, a question of voluntariness was not raised to trigger a hearing under sections 6 or 7, failure to object to the prior inconsistent statements and request a hearing was not so egregious as to undermine the confidence in the result of the trial.
+  
+   See Trybule v. State,
+  
+  737 S.W.2d 617, 621 (Tex.App.-Austin 1987, pet. ref'd) (overruling ineffective-assistance claims when undisputed evidence showed statements were voluntary and overwhelming evidence of guilt was not so egregious as to undermine confidence in result of trial);
+  
+   see also Oursbourn,
+  
+  259 S.W.3d at 175 (indicating that once a question is raised as to volun-tariness, a hearing should be held on the matter outside of the jury’s presence).
+ 
+
+
+ 
+   *434
+   
+  The record in this case is silent concerning appellant’s trial counsel’s reasons for his conduct regarding appellant’s statements to detectives.
+  
+   See Perez v. State,
+  
+  56 S.W.3d 727, 731-32 (Tex.App.-Houston [14th Dist.] 2001, pet. ref'd) (overruling ineffective-assistance claim where trial counsel failed to object on grounds that statement did not comply with article 38.22, but record was silent as to trial counsel’s reasons for conduct). Because the record is silent as to trial counsel’s motivation, we may not speculate to find trial counsel’s performance deficient.
+  
+   See id.
+  
+  Therefore, appellant has failed to rebut the presumption that trial counsel’s actions resulted from reasonable strategy.
+  
+   See id.
+  
+  Furthermore, the allegedly improper actions of which appellant complains do not amount to error sufficiently egregious to satisfy the first prong of
+  
+   Strickland. See id.
+  
+  Accordingly, we overrule appellant’s second issue.
+ 
+
+
+  Having overruled appellant’s two issues on appeal, we affirm the trial court’s judgment.
+ 
+
+
+
+
+
+
+
+   1
+  
+
+   . The record shows that when the State first made reference to appellant's conversation with detectives, appellant lodged an unspecified objection. The State indicated the conversation occurred when appellant was not in custody and not under arrest. The trial court overruled the objection.
+  
+
+
+
+   2
+  
+
+   . Unless otherwise specified, all references to a “section” are to the Texas Code of Criminal Procedure.
+  
+
+
+
+   3
+  
+
+   . If the statement was not a product of custodial interrogation, no warnings were required.
+   
+    See
+   
+   Tex.Code Crim. Proc. Ann. art. 38.22, § 3 (outlining the requirements for statutory warnings and waiver requirements);
+   
+    see also Rodriguez v. State,
+   
+   939 S.W.2d 211, 217 (Tex.App.-Austin 1997, no pet.).
+  
+
+
+
+   4
+  
+
+   . Appellant cites
+   
+    Sanders v. State,
+   
+   715 S.W.2d 771, 775, n. 10 (Tex.App.-Tyler 1986, no pet.) for the proposition that lack of action in regard to an accused's statements to police supports a claim for ineffective assistance.
+   
+    See
+   
+   715 S.W.2d at 776 ("Not a single objection was advanced to the statement, pretrial or during trial.”). We distinguish the facts of
+    
+    *433
+    
+   this case because our record is silent as to trial counsel's strategy and because the record in this case contains no motion for new trial as the
+   
+    Sanders
+   
+   case did. Allegations of ineffective assistance must be firmly grounded in the record.
+   
+    See Bone,
+   
+   77 S.W.3d at 833. Moreover, the record in this case reflects that appellant’s trial counsel filed a motion to suppress statements under article 38.22, section 3.

@@ -1,0 +1,115 @@
+HABHAB, Judge.
+Chris Welker, John F. Langtry, and Norman Heath entered into a partnership to rent and farm certain land in Decatur County for the year 1987. The land was leased from Travelers Insurance Company, which had obtained the land in foreclosure proceedings against Welker in 1984. Welker had leased the land in 1985 and 1986, but financial difficulties prevented him from individually renting it in 1987.
+
+Welker and Heath borrowed $65,000 from Langtry and this money was placed in the partnership and used for rental and start-up costs.1 Langtry was to have control of the income received and expense payments made by the partnership. Welker and Heath were to contribute their farming expertise and machinery, as well as perform the actual farm work. All profits and losses were to be divided equally.
+
+In April 1987, Welker and Heath borrowed $24,960 from Langtry’s wife, Portia Langtry, to obtain a tractor and some discs. The promissory note made out to “Portia H. or John F. Langtry” as explained later was repaid with partnership funds though all of the parties considered Welker and Heath to be the sole owners of the equipment acquired. In fact, Heath and Welker eventually sold the machinery and kept the proceeds. They did not reimburse the partnership for the note repayment made on their behalf.
+
+Just prior to the time of harvest, Welker’s bank repossessed the combine leased to him due to his failure to make required lease payments. Thus the partnership did not have a combine, and it was forced to hire Ray Reno to custom combine the crop. Welker dried the harvested grain and prepared it for storage. During this time Langtry and Welker had a falling out and Langtry informed Welker he could no longer have access to the grain. Langtry and Heath sealed the grain with the Commodity Credit Corporation (CCC) at a price of $1.74 per bushel. Langtry used the proceeds from the CCC loan to pay back the debt to Portia and part of the $65,000 debt to himself.2
+
+In March 1988, Langtry and Heath decided to sell the grain to Cargill, Inc. at prices between $1.92 and $1.94 per bushel. Welker objected to the sale. From the proceeds Langtry repaid the CCC loan. He paid Reno $9,246 for transporting the grain. Langtry used the rest of the proceeds to pay himself back on the partnership loan. In October 1988 the partnership received government program payments. Langtry used this money to pay off the remainder of the partnership loan owed to him.
+
+When Welker had leased the land in 1986, he entered into an arrangement to lease a grain storage building found on the property. The lease ran from November 1, 1986, to November 1, 1989. Payment of $8,000 was due on November 1 of each year. No dispute appears to exist regarding Welker’s right to retain the rental paid in November 1986, despite the fact that the partnership lease of the land began four months later on March 1, 1987. However, *99there is disagreement about Welker’s right to keep the 1987 rental which he collected early in October 1987 at a reduced amount of $7,000. The parties appear to concede that the rental proceeds from residences located on the farm should be turned over to the partnership.
+
+Welker instituted this suit for an accounting. He raised a number of contract and tort claims. Heath and Langtry counterclaimed and cross-claimed. The parties disputed the retention of the rental proceeds from the grain storage facility, the obligation for the combining costs, the propriety of selling the corn in March and whether the partnership was obligated to pay the $24,960 equipment note. At the time of trial, the partnership had only $1,175.41 in its bank account. It owed approximately $11,000 on a seed corn bill and $117.47 on a machine repair bill.
+
+The district court determined the partnership should bear the cost of hiring someone to combine the crops. The court concluded the loan of $24,960 was not a partnership expense and should not have been paid from partnership funds. The trial court ordered Langtry to return the money to the partnership. The court found Welker was entitled to the rent from the grain storage facility, but the rental from the residences was partnership property. By offsetting the individual amounts owed to Langtry on the equipment note from the amounts each party was to return to the partnership, the court ordered Langtry to pay the outstanding seed corn bill and it entered judgment against Heath in favor of Langtry for $15,184.95. Judgment was entered against Langtry in favor of Welker for $766.69.
+
+On appeal, Langtry claims the proceeds from the 1987 rental of the grain storage facility were partnership property. He claims Welker should be solely liable for the combining expense because it was his responsibility to provide the necessary equipment to do the work. Langtry claims it was an error to require him to return the partnership money used to pay off the $24,-960 note to his wife; he claims Welker and Heath should be required to reimburse the partnership for the money advanced on their behalf to pay off the note. Finally, Langtry argues the trial court should not have required him to pay the Gutwein seed bill.
+
+Heath filed a cross-appeal. He joins the arguments of Langtry in his appeal except that he contends that the debt of $24,960 to Portia was a partnership debt and was properly paid with partnership funds. In the alternative, Heath states that if the debt was personal, then the machinery bought with the money is his, and the partnership should reimburse him for repairs made to the machinery while it was used by the partnership.
+
+Welker filed a cross-appeal. He claims the court erred in failing to find Langtry liable for breach of contract, negligence, breach of fiduciary duty, wrongful dissolution, and the resulting loss of income to the partnership. Welker asserts Langtry should be responsible for damages because he sold the partnership grain without Welker’s consent. Welker asks for one-third of the income lost because of the premature sale. He calculates his one-third interest to be $5,895.22.
+
+This proceeding was tried in equity and our review is de novo. Iowa R.App.P. 4. In equity cases, especially when considering the credibility of witnesses, the court gives weight to the fact-findings of the trial court, but is not bound by them. Iowa R.App.P. 14(f)(7). We have reviewed the record in this case and, with minor modifications addressed later in this opinion, we affirm the trial court’s decision.
+
+I. 1987 Rental Proceeds
+
+When Welker’s property was foreclosed in 1984, the decree specified the Commodity Credit Corporation (CCC) had a security interest in grain storage and drying equipment located on the real property. Both the security agreements and the stipulated decree characterized the structures as “personal property.” The decree provided the CCC had a purchase money priority security interest in the structures and the decree reserved to the CCC the right to enter the real property and remove them.
+
+*100Correspondence between the Agricultural Stabilization & Conservation Service (ASCS) and Travelers in 1987, indicates ASCS attempted to sell the grain storage structures located on the foreclosed Welker property. Travelers’ bid was not accepted, and the CCC eventually satisfied the debt owed to it by offsetting payments owed to Welker under the federal feed grain program. Final payments on Welker’s notes to the CCC were made on May 5, and July 11, 1986.
+
+Relying on the fact that the decree of foreclosure had held these structures were personal property exempt from foreclosure and that the CCC’s interest in the property was released upon payment of Welker’s debt, the trial court concluded Welker had a superior claim to any rent proceeds from the storage facilities. We agree. Travelers, by virtue of the foreclosure decree, had no interest in the facilities that could be a subject of its lease with the partnership. In turn, the partnership could have acquired no interest in the facilities, despite the fact that the lease agreements grant the lessee the right to use grain storage facilities located on the farm.
+
+We note that the partnership’s lease agreement with Travelers specifically provided that the tenant was entitled to receive all rental proceeds from residences located on the property. No similar provision existed with regard to the rental proceeds from the grain storage facilities. We also note the evidence suggests the right to the 1987 grain storage rental proceeds was much-discussed among the parties and was the decisive factor in causing Welker to forego entering a partnership with individuals other than Heath and Langtry. The trial court did not err in ruling Welker was entitled to the 1987 grain storage rental payment.3
+
+II. Combining Expense
+
+As a general rule, all partners- are jointly liable for all debts and obligations of a partnership. Iowa Code § 544.15(2) (1987). Langtry and Heath allege Welker should be liable for the cost of combining the partnership corn because the partnership agreement required Welker to provide the machinery necessary for the farm operations.
+
+Insofar as a partnership agreement covers the relationship of parties, it is a contract between them. Wolf v. Murrane, 199 N.W.2d 90, 97 (Iowa 1972). In Iowa, the terms of a partnership agreement need not be formally expressed, but may be inferred or established, in whole or in part, from the acts of the parties. Medd v. Medd, 291 N.W.2d 29, 34 (Iowa 1980).
+
+The parties reduced their partnership agreement to writing on January 22, 1987. Other than mandating that the partnership’s net proceeds were to be divided into three equal shares, the agreement provides little insight as to how the farm operations were to be run or the responsibilities delegated.
+
+The trial court concluded there was no agreement between the parties as to who would bear the expense in the event Welker did not have available equipment necessary to conduct the partnership business. We disagree. The evidence suggests that at the time of the formation of the partnership Langtry was to provide the operating capital and Welker was to provide labor and the equipment to farm the property. It is clear that at the time the parties entered their partnership, Welker had possession of a combine and he did not indicate to his partners that he would not have access to it when harvesting began in the fall. The circumstances surrounding the formation of this partnership convinces this court that Welker’s contribution to the partnership was to provide the equipment necessary to farm the property.
+
+Langtry was to provide the operating capital necessary to lease the land and cover expenses. Heath orchestrated the formation of the partnership and was to contribute his labor to the operation. Welker was to provide the equipment necessary to *101grow and harvest the crop. When he failed to have a combine available to harvest the crop, he created unnecessary expense for the partnership. Welker should be solely responsible for the excess cost incurred by hiring Mr. Reno to combine the crop. We calculate this expense to be $5,470.00.
+
+III. Debt Owed to Mrs. Langtry
+
+All of the parties concede the farm equipment purchased in April 1987 belonged to Heath and Welker and not to the partnership. The opinions diverge with regard to the propriety of the payment of the note with partnership proceeds and who should be liable to reimburse the partnership for the payment. Generally property acquired with partnership funds is partnership property, Iowa Code section 544.8(2) (1987), and likewise, secured property paid off with partnership funds should be regarded as partnership property.
+
+The evidence in this case clearly reveals the farm equipment purchased in April 1987 was the personal property of Heath and Welker. Not only do the parties concur on this subject, but Heath’s and Welker’s subsequent conduct in selling the machinery and keeping the proceeds, establishes that the parties did not intend it to be partnership property. Unlike the initial notes for capitalization from which the entire partnership benefited, the April loan resulted in the acquisition of personal property by Heath and Welker, not by the partnership.
+
+Langtry contends Heath and Welker benefited from the partnership payment of a nonpartnership debt and they should be obligated to reimburse the partnership for the payment. Langtry overlooks the fact that not only was he responsible for this erroneous payment, but that payment of the note directly benefited him and his wife who were listed as obligees on the note.
+
+Heath contends payment of the promissory note was a partnership obligation. In light of our findings with regard to the ownership of the equipment, we find this claim meritless. Nor do we find the partnership converted Heath’s and Welker’s personal obligation to a partnership obligation. We also find the evidence speculative and insufficient to sustain Heath’s claim for expenditures made to repair and maintain the equipment he obtained by virtue of the April promissory note.
+
+Welker argues the trial court correctly required Langtry to reimburse the partnership for his payment of a nonpart-nership debt with partnership funds. We concur. Langtry’s reimbursement, however, is to be accounted for when determining the amounts owed by Welker and Heath on the promissory note.
+
+IV. Gutwein Seed Bill
+
+Langtry contends the trial court erred in ordering him to pay the Gutwein seed bill on behalf of the partnership. We recognize that all partners in a partnership are jointly and severally liable for partnership debts, Iowa Code § 544.15(2), however, the parties stipulated payment of the seed bill was an issue to be submitted to the trial court.
+
+We modify the trial court’s judgment to eliminate that part of the decree which creates a judgment4 against Langtry for Gutwein in the amount of $11,052.80. Entry of a judgment, if any, is reserved for an action in which Gutwein is a party. We affirm, however, that portion of the trial court’s decision which requires Langtry to pay the $11,052.03 seed bill. We have previously decided that Langtry must account to the partnership for the money improperly paid on the equipment note. Rather than return all of the $25,468.24, Langtry shall pay the seed bill and account for the balance to the partnership as hereafter set forth.
+
+Langtry points out there might be some question as to the actual amount of the debt and whether a dealer’s discount might apply to the seed bill. Actual adjudication of the amount owed may ultimately result in a judgment greater or less than the $11,052.03 figure set forth at trial. In the *102case of a greater judgment, the partners will be equally liable for the excess above Langtry’s $11,052.03 payment; if adjudication of the issue results in a lesser judgment, Langtry will return the difference to the partnership. Our decision today requires only that Langtry pay the partnership seed bill on behalf of the partnership in lieu of returning all of the $25,468.24 equipment note payment to the partnership.
+
+V.Langtry’s Liability on Welker’s Other Claims
+
+Welker claims the trial court erred in failing to find Langtry liable for breach of contract, negligence, breach of fiduciary duty, wrongful dissolution and a resulting loss of income to the partnership. These claims revolve around Langtry’s decision to sell the partnership grain in March.
+
+Subject to any agreement the parties may have between them, all partners have equal rights in the management and conduct of the partnership business. Iowa Code § 544.18(5) (1987). Decisions regarding ordinary matters connected with the partnership business may be decided by the majority of the partners. Iowa Code § 544.18(8) (1987).
+
+From our review of the record, we cannot find Langtry’s decision to sell the corn, with the acquiescence of Heath, was in contravention of any agreement made by the parties. Nor can we find the decision to sell the grain was such that it breached a fiduciary duty or amounted to a wrongful dissolution of the partnership. We find the evidence insufficient to support the tort and contract claims proffered by Welker.
+
+VI.Miscellaneous
+
+There appears to be no dispute as to the allocation of the debt under the equipment promissory note. Therefore, we accept the trial court’s figures with the knowledge that the note created joint and several liability. There also appears to be no contest as to the rental payments received by Langtry and Welker, so once again we account for those payments in the same manner as the trial court. The same is true as to the manner in which the trial court determined interest and the commencement date thereof.
+
+Although the parties are ordered to return or account for the funds owed the partnership, for accounting purposes only we have treated those funds as accounts owed the partnership. Since deficiencies exist because of offsets, Mr. Welker is to pay the amounts he owes and is to receive credit on the judgment entered against him.
+
+VII.Conclusion
+
+When we add the amount we note as accounts owed the partnership to the cash on hand, we find the partnership has funds of $33,373.65. The accounts payable total $11,328.68, leaving a balance for distribution, according to Book, of $22,044.97. Each partner’s share is then $7,348.32.
+
+Using the trial court’s accounting method, Langtry will pay on behalf of the partnership the seed bill, the repair bill, and the court costs. This reduces the fund for distribution according to Book to $22,-044.97. Welker’s book value of one-third of the partnership funds ($7,348.32) is offset by his obligation to the partnership to pay the combine expense, his obligation of $520.00 for the Drake rent collected, and his obligation to Langtry on the equipment note, resulting in an amount owed Langtry of $3,399.98. Heath’s right to the partnership proceeds is offset by his debt on the equipment note resulting in an amount owed Langtry of $13,361.62.
+
+There is $1,175.41 in the checking account. After the payment of the repair bill of $117.59 and court costs of $159.08, there is a balance remaining of $898.74. Each partner is entitled to one-third of that amount. Welker and Heath are to be given credit against the amount owed Langtry of $299.58. Thus, Langtry is entitled to judgment against Heath in the amount of $3,100.40 and against Welker in the amount of $13,062.04. The balance of $898.74 then is to be paid to Langtry. ■
+
+The addendum attached to this opinion sets forth in detail the calculations used to reach these judgments.
+
+*103We have considered all arguments advanced by the parties. Except as we have modified, we affirm the trial court in all other respects. Judgment is entered in the amounts set forth with interest thereon at ten percent per annum. And since the commencement date of interest is not disputed, we accept the date of February 17, 1989, as ordered by the trial court. Hereafter the parties should proceed as directed by the trial court. Costs on appeal are assessed one-third to Langtry, one-third to Heath, and one-third to Welker.
+
+AFFIRMED AS MODIFIED.
+
+ADDENDUM
+
+[[Image here]]
+
+*104[[Image here]]
+
+
+. All parties agree that this is a partnership debt. Accordingly, we will treat it as such.
+
+
+
+. The amount applied to the $65,000 debt is not disputed. The amount applied to Portia’s debt is.
+
+
+
+. We note that the stipulated decree does not recognize the storage facilities as "fixtures,” nor do the defendants direct us to anything in the record to support that they raised this possibility before the trial court.
+
+
+
+. We do not necessarily agree with Langtry’s argument that a judgment was created by the court, but to remove doubt we insert this provision.

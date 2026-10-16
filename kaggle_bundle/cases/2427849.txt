@@ -1,0 +1,150 @@
+960 S.W.2d 363 (1998)
+Maurice JOSEPH, Jr., Appellant,
+
+v.
+
+The STATE of Texas, Appellee.
+
+No. 01-96-01345-CR.
+Court of Appeals of Texas, Houston (1st Dist.).
+
+January 8, 1998.
+*364 Steven R. Rosen, Houston, for Appellant.
+
+John B. Holmes, Alan Curry, Houston, for Appellee.
+
+Before HEDGES, COHEN and WILSON, JJ.
+
+
+OPINION
+
+HEDGES, Justice.
+
+Appellant was found guilty of capital murder and sentenced to life imprisonment. In two points of error, appellant complains that there was insufficient evidence to corroborate the testimony of the accomplice witness and that the trial court erred in not allowing appellant to impeach the accomplice witness with prior inconsistent statements. We affirm.
+
+
+STATEMENT OF FACTS
+
+The following facts were testified to solely by the accomplice witness, Willie Crockett. Appellant, Crockett, and Wayman Jackson were together on the morning of September 29, 1994, when Jackson suggested that they rob a neighborhood convenience store. Jackson provided the gun. Appellant was to act as the "lookout" to make sure that the store's doors were not locked during the robbery. The three stole a car[1] from a nearby apartment complex and drove it to the store. All three entered the store at about 11:00 a.m. Jackson pointed a shotgun at the clerk, demanded money, and then shot her. The three then fled in the stolen car. They returned to the apartment of Crockett's aunt, Sherri Crockett, and divided the money.[2]
+
+Police officers testified that a car like the one the robbers used was recovered the same afternoon. They obtained finger and palm prints of Willie Crockett inside the car and appellant's prints only on the outside of the car. Appellant's prints were on the rear fender, the trunk, and the outside of the driver's side window. A tip from Crime Stoppers led to the arrest of Willie Crockett, Jackson, and appellant.
+
+
+Corroboration of Accomplice Witness Testimony
+
+In point of error one, appellant argues that there was insufficient independent evidence to corroborate the testimony of an accomplice witness as required by Tex.Code Crim. P. Ann. art. 38.14 (Vernon 1979).[3]
+
+Standard of Review
+
+In weighing the sufficiency of corroborative evidence, we must first eliminate from consideration the testimony of the accomplice witness. We then examine the testimony of the other witnesses to ascertain if there is independent evidence which tends to connect the accused with the commission of the offense. It is not necessary that the nonaccomplice evidence establish the accused's guilt beyond a reasonable doubt. *365 Nor is it necessary that it directly link the accused to the commission of the offense. There need be only some nonaccomplice evidence which tends to connect the accused to the commission of the offense alleged in the indictment. Hernandez v. State, 939 S.W.2d 173, 176 (Tex.Crim.App.1997).
+
+Crockett, the accomplice witness, reluctantly testified for the State under a grant of immunity. While contradictory, his testimony clearly implicated appellant as a participant in the robbery and murder.
+
+Other State's witnesses provided testimony independently corroborating Crockett's evidence:
+
+Abraham Limone, Jr. testified that he was the only customer in the convenience store before the arrival of the three young men. He saw a small black individual enter first. He described the individual as looking young11 or 12 years old. Seconds later, two other black men wearing masks entered the store and demanded money from the clerk. He heard someone yell, "Give me all the money." He looked up from his paper and saw the three individuals in front of the counter, one of them pointing a shotgun at the clerk. The complainant then raised her hands, and the robber shot her with the shotgun. Fearing for his life, Limone ran from the store. As he fled from the store, he heard two more shots. He then saw the men leave the store and get into a beige Oldsmobile. Limone called 911 from a payphone outside the store. He was unable to identify any of the men.
+
+Elvira Hernandez testified that she pulled into the parking lot of the convenience store shortly after Limone had left the store. He was waving his arms to attract her attention. She testified that she then heard a gunshot and saw three young black males leave the store and get into a beige Oldsmobile. She attempted to drive down the street to a fire station; the Oldsmobile followed her down the street. Fearing for her safety, she turned into a church parking lot while the three men drove past. She proceeded to the fire station, reported the crime, and returned to the convenience store. Ms. Hernandez was unable to identify any of the three men involved in the crime. She identified the Oldsmobile as being similar to the one used by the three.
+
+Officer Cates testified that during his investigation the day of the offense, he recovered an abandoned Oldsmobile near the scene of the crime. The steering column of the car was damaged such that it could be started without its keys.
+
+Officer Schraub testified that after examining the Oldsmobile for latent fingerprints, he found five of appellant's finger and palm prints on the exterior of the vehicle. He also found Crockett's fingerprints and palm prints on the interior and exterior of the car. He found no fingerprints belonging to Jackson.
+
+Ms. Crockett testified that Willie Crockett was living with her at the time of the offense. She testified that she was awakened by Crockett at approximately 1:00 p.m. the afternoon of the offense. He arrived at the apartment with Jackson and appellant. Ms. Crockett testified that she asked Crockett if he had any money, and he responded by giving her some food stamps. He claimed that he had obtained them by "hustling," which she understood to mean selling drugs. She saw appellant pull some money out of his pocket. She testified that appellant was small and appeared to be 11 or 12 years old.
+
+The following testimony tends to connect appellant to the offence sufficiently to independently corroborate the accomplice testimony:
+
+1. Ms. Hernandez identified the Oldsmobile as similar to the one used by the three robbers. She saw three men hurriedly leave the store and three men in the Oldsmobile following her briefly.
+
+2. Officer Schraub testified that he lifted five latent finger and palm prints of appellant from the exterior of the Oldsmobile.
+
+3. Limone saw three black men at the counter at the time of the shooting. He described one as small, appearing eleven or twelve years old.
+
+4. Ms. Crockett saw appellant with Crockett and Jackson at 1:00 the afternoon of the robbery. She described *366 appellant's appearance that morning as small, appearing eleven or twelve years old.
+
+5. Officer Cates testified that the steering column of the abandoned Oldsmobile had been damaged such that it would have been possible to start the automobile without its keys.
+
+We overrule point of error one.
+
+
+Impeachment of Accomplice Witness
+
+In point of error two, appellant argues that the trial court erred by not allowing him to impeach Crockett's testimony with prior inconsistent statements he made to his aunt. In appellant's bill of exception, Crockett admitted speaking with his aunt on the phone approximately one month after he was arrested. Appellant's counsel asked Crockett if he remembered telling his aunt, during this phone conversation, that he was in the car while Jackson alone went inside the convenience store, he heard shots, he went into the convenience store, and he saw the clerk dead behind the counter. To each of these questions Crockett replied, "Not that I recall." Crockett denied telling his aunt that he was outside the convenience store during the robbery. Appellant's counsel asked him, "And in this conversation do you recall telling her that Maurice Josephdidn't even mention Maurice Joseph. Do you recall that?" Crockett replied, "Yes."
+
+In his bill of review, appellant's counsel next questioned Ms. Crockett. She testified that during a phone conversation after Crockett had been arrested, he told her that he was in the car when Jackson went inside the store with the shotgun, that he entered the store only after hearing gunshots, that he entered the store and found the complainant dead, and that he did not mention appellant during the conversation. On cross-examination Ms. Crockett admitted that in further conversations with her nephew, he had told her that appellant was involved in the robbery situation.
+
+At trial, the prosecutor argued that appellant's lawyer was never able to specify the time, during one of the many phone conversations, that Crockett allegedly made these inconsistent statements to his aunt. Therefore, the State argued that appellant's counsel had not laid the proper foundation to introduce the prior inconsistent statements. TEX.R.CRIM. EVID. 612(a).[4]
+
+The purpose of the time and place foundation requirements for rule 612(a) is to put the witness on notice as to which statements are going to be used to impeach his or her credibility. Allen v. State, 788 S.W.2d 637, 640 (Tex.App.Houston [14th Dist.] 1990, pet. ref'd). In this case, appellant laid an adequate foundation. "The rule of admissibility of evidence of prior inconsistent statements should be liberally construed and the trial judge should have discretion to receive any evidence which gives promise of exposing falsehood." Aranda v. State, 736 S.W.2d 702, 707 (Tex.Crim.App.1987); Garcia v. State, 871 S.W.2d 279, 284 (Tex.App.El Paso 1994, no pet.). Ms. Crockett testified that the conversation took place after Crockett's arrest on October 1, 1994 and her grand jury testimony on October 10, 1994. He telephoned her at her home. These facts provide an adequate foundation for her testimony. The trial court erred in refusing to allow appellant to impeach Crockett with the prior inconsistent statements recounted by his aunt.
+
+We now must decide whether the error was harmful. Because the error is one of constitutional dimensions (confrontation of witnesses), the judgment must be reversed unless we determine beyond a reasonable doubt that the error made no contribution to the conviction or to the punishment. TEX. R.APP. P. 44.2(a); Taylor v. State, 755 S.W.2d 548, 550 (Tex.App.Houston [1st Dist.] 1988, *367 pet. ref'd). The impact of the error cannot be properly evaluated without examining its interaction with the other evidence. Harris v. State, 790 S.W.2d 568, 587 (Tex.Crim.App. 1989). The entire record must be considered. Id. The evidence is viewed in a neutral light, impartial, and even-handed fashion, not in the light most favorable to conviction. Id.
+
+We analyze the harm of the trial court's error under the six part standard set forth in Harris. 790 S.W.2d at 587. In this case, the source and nature of the error were the trial court's refusal to allow appellant to impeach an accomplice witness with prior inconsistent statements. The State did not emphasize the error. The probable collateral implication was that the accomplice witness's testimony was perceived by the jury as more credible than it would have had the impeachment been allowed.
+
+In analyzing the weight a juror would probably have placed on the error, we look at the other evidence of appellant's guilt. In this case, the accomplice witness's testimony was the primary evidence of appellant's guilt. However, the credibility of the witness had already been attacked by appellant. The jury knew that the accomplice witness was testifying reluctantly and under a grant of immunity. Appellant had already impeached Crockett with inconsistent statements he had made at the time of his arrest. The jury knew Crockett had been convicted of offenses arising out of this incident. Ms. Crockett testified that, in later conversations, he implicated Maurice Joseph. Therefore, the jury probably would not have given more than negligible weight to the inconsistent statements, such that their impeachment value was de minimus. Finally, there is no indication that the State could repeat this conduct with impunity. We find that the error made no contribution to the conviction or punishment beyond a reasonable doubt.
+
+We overrule point of error two.
+
+We affirm the judgment of the trial court.
+
+COHEN, J., dissents.
+
+COHEN, Justice, dissenting.
+
+Believing that both points of error are meritorious, I respectfully dissent. The majority has correctly stated the facts and the law, but I disagree on how the law should be applied to those facts.
+
+As the majority states, nonaccomplice evidence need not prove appellant's guilt beyond a reasonable doubt; plainly, it does not do so here. Nor must nonaccomplice evidence directly link appellant to the murder; plainly, it does not do so here.
+
+The law requires that we first eliminate the testimony of the accomplice. Hernandez v. State, 939 S.W.2d 173, 176 (Tex.Crim.App. 1997). After that, there must be some nonaccomplice evidence that tends to connect appellant to the offense alleged in the indictment. Id. I believe there is some nonaccomplice evidence that tends to connect appellant to two offenders (Willie Crockett and Waymon Jackson), but none that tends to connect him to the capital murder alleged in the indictment.
+
+I will analyze the five factors listed as sufficient corroborating evidence by the majority. Factors one and two are that five of appellant's fingerprints were on the outside of an Oldsmobile automobile that the police recovered on the afternoon of the robbery. Limone testified that car, pictured in State's exhibits 31-34, fairly and accurately depicted the vehicle that he saw the three men get into at the convenience store. He did not say it was the same car, nor did he point out anything that distinguished it from others like it. Ms. Hernandez testified the car was similar to the one used by the three robbers, but she could not say it was the same car. Factor five is that the car had a broken steering column, allowing it to be started without keys.
+
+The car is pictured in the record. It is a four-door, two-tone Delta 88 Oldsmobile, a type of car of which there must be hundreds or thousands in Harris County. Because the owner did not testify, we do not know that appellant lacked the owner's permission to touch the car. Of course, appellant's fingerprints were found only on the outside. Only the accomplice witness, Willie Crockett, testified *368 that the car was, in fact, stolen.[1] The owner of the car did not testify, and the State produced no evidence showing to whom the car was registered. If it was stolen, there was no nonaccomplice evidence showing who stole it or when. Because we do not know when it was stolen, we cannot say that appellant's fingerprints were placed on it after it was stolen.
+
+The majority's third factor corroborating the accomplice testimony is that Limone saw three black men in the store at the time of the killing. Although he could not identify any of them, he testified that one was small and appeared to be 11 or 12 years old. The fourth factor is Sherri Crockett's testimony that appellant was small and appeared to be 11 or 12 years old on September 29, 1994, and he was with Willie Crockett and Waymon Jackson between 1:00 and 1:30 p.m. on September 29. She stated that appellant had some money then, but she did not say how much nor did she describe the money in any way that would link it to the money taken in the robbery.
+
+Thus, the nonaccomplice corroborating evidence is that appellant had some generic money and was with the robbers 2 to 2½ hours after the robbery; his fingerprints were on the outside rear fender, the trunk, and the driver's window of a car like the robbers used; and he is a small black male appearing to be 11 or 12 years old. Every case must be judged on its own facts. This evidence links appellant to some capital murderers, but in my opinion, it does not sufficiently link him to a capital murder.
+
+I would sustain point of error one.
+
+I would also sustain the second point of error. I agree with the majority's holding that the trial judge erred in refusing to allow appellant to impeach Willie Crockett's testimony by having Sherri Crockett testify to his prior inconsistent statements. I cannot say, however, that the error was harmless beyond a reasonable doubt. Tex.R.App. P. 44.2(a).
+
+This issue is complicated somewhat because the State only objected to appellant calling Sherri Crockett; it did not object to appellant calling Willie Crockett. Appellant's response at trial was that if Sherri Crockett's testimony about Willie Crockett's prior inconsistent statements would be excluded, he did not want to call Willie Crockett as a witness.
+
+I assume that if appellant had called Willie Crockett, Mr. Crockett would have testified as he did on the bill of exceptions, which is quoted in the majority opinion. Thus, he would have told the jury that he did not recall telling Sherri that he stayed in the car while Waymon Jackson alone entered the convenience store and killed the clerk and that he (Crockett) entered the store afterward. Thus, because Willie Crockett would not have admitted making that inconsistent statement, and because appellant would not have been allowed to call Sherri Crockett to impeach him, the jury would have been without evidence of that particular inconsistent statement. This seems harmful to me because it leaves Willie Crockett looking more truthful than if the evidence had been admitted.
+
+The harder decision is whether appellant was harmed in respect to the third question posed to Willie Crockett on the bill of exceptions. In that question, Willie Crockett admitted outside the jury's presence that when he talked to Sherri Crockett on that call from jail, he never mentioned appellant, Maurice Joseph. I assume, as I must, that if appellant had called Willie Crockett to testify before the jury, he would have said the same thing, that is, he would have admitted that he never mentioned Maurice Joseph in his first telephone conversation with his aunt. That admission would have impeached his testimony significantly, and I must assume that appellant could have produced it by calling Willie Crockett as a witness. Of course, if Willie Crockett had testified differently in front of the jury, appellant could have impeached him with his own contrary testimony minutes earlier on the bill of exception. Thus, I do not think appellant was harmed because, in respect to that particular question, *369 he could have gotten the evidence he wanted before the jury through Willie Crockett's testimony, or if he did not, he didn't need Sherri's testimony to impeach Willie. Willie's own testimony on the bill of exceptions would have done that.
+
+The testimony of an accomplice is inherently suspect. That is the policy expressed by the legislature in Tex.Code Crim. P. Ann. art. 38.29 (Vernon 1979). The Court of Criminal Appeals agrees. It has stated:
+
+This Court has held that because such a witness is usually deemed to be corrupt, the witness's testimony should always be looked upon with suspicion. Thus, any available relevant evidence that might affect such a witness's credibility should be admitted so that the jury might use it in making the determination of how much weight it should give the witness's testimony.
+
+Virts v. State, 739 S.W.2d 25, 27 (Tex.Crim. App.1987).
+
+Prior inconsistent statements should be liberally admitted. Aranda v. State, 736 S.W.2d 702, 707 (Tex.Crim.App.1987). Even more so then should prior inconsistent statements be admitted to impeach an accomplice witness, especially when, as here, the accomplice is the State's chief witness. See Posey v. State, 738 S.W.2d 321, 324 (Tex.App. Dallas 1987, pet. ref'd). Recalling the liberal policy towards the admission of prior inconsistent statements as impeachment and the suspicion with which the law views accomplice testimony, I turn to the factors to be considered in determining whether the error was harmless. See Harris v. State, 790 S.W.2d 568, 587 (Tex.Crim.App.1989).
+
+The majority sets out and discusses several of these factors. It points out that the State did not emphasize the error. I think that factor is not helpful in this case, where the error was the exclusion of the defendant's evidence. The State had no motive to emphasize Willie Crockett's prior inconsistent statements to his aunt. The harm is that appellant could not emphasize them.
+
+The majority states that appellant had already impeached Crockett with other inconsistent statements. While that is true, those statements did not, like his statement to Ms. Crockett, describe the offense and mention another robber but totally omit all mention of appellant. While in jail, Willie Crockett sent several letters to appellant. In one, Crockett wrote, "I've been told you they already know you didn't have nothing to do with this." In another, Crockett wrote, "It's a fucked up situation, but I'm not fixing to let you go down for this shit, and you didn't have shit to do with it. I told them white folks that you was never in that...." Crockett admitted that in these letters, he was saying that appellant had nothing to do with it. However, on re-direct, Crockett testified that in the letters, he was referring only to the murder and was not denying appellant's participation in the robbery. However, Crockett had told Sherri Crockett that he remained outside the store during the entire robbery and Waymon Jackson was inside the store during the entire robbery. Sherri Crockett testified that in that conversation, Willie Crockett "did not mention or refer to Maurice Joseph...." I believe that impeaches Willie's trial testimony that appellant was involved in the aggravated robbery, a critical fact that made appellant guilty of murder under the felony murder rule. Tex. Penal Code Ann. 19.02(b)(3) (Vernon 1994). Thus, while the issue is close, I do not think the impeachment that occurred can fully substitute for the impeachment that was erroneously disallowed.
+
+The majority says that Sherri Crockett testified on the bill of exceptions that, in a later conversation, Willie Crockett implicated appellant in this crime. While that is true, those conversations were not as close to the murder. They were later, after Willie may have refined his account and also motive to lie, as the law suspects accomplices of doing. Moreover, the existence of Willie's prior consistent statement does not make his prior inconsistent statement inadmissible. The jury was entitled to hear both statements and to give each whatever weight it deserved.
+
+Our law requires that when constitutional error occurs, as it did here, "the court of appeals must reverse ... unless the court determines beyond a reasonable doubt that *370 the error did not contribute to the conviction...." Tex.R.App. P. 44.2(a). I cannot reach that conclusion with confidence beyond a reasonable doubt.
+
+I would sustain both points of error.
+
+NOTES
+
+[1]  The only testimony that the car was stolen came from the accomplice, Willie Crockett. No owner testified that the car was stolen, and there was no registration evidence of ownership. The car had a broken steering column that allowed it to be operated without a key.
+
+[2]  Sherri Crockett, who was not an accomplice, testified that the men returned to her apartment between 1:00 and 1:30 p.m. that day. Only the accomplice witness, Willie Crockett, testified about division of the money. He testified that each robber received approximately $180 in cash and food stamps. Sherri Crockett testified that Willie Crockett gave her some food stamps and that she saw appellant pull some money from his pocket. Nothing about the amount, denomination, condition, or appearance of appellant's money linked it to the money stolen in this robbery.
+
+[3]  TEX.CODE CRIM. P. art. 38.14, provides that:
+
+A conviction cannot be had upon the testimony of an accomplice unless corroborated by other evidence tending to connect the defendant with the offense committed; and the corroboration is not sufficient if it merely shows the commission of the offense.
+
+[4]  Tex.R.Crim. Evid. 612(a) provides that:
+
+In examining a witness concerning a prior inconsistent statement made by him, whether written or oral, and before further cross-examination concerning, or extrinsic evidence of, such statement may be allowed, the witness must be told the contents of such statement and the time and place and the person to whom it was made, and must be afforded an opportunity to explain or deny such statement.... If the witness unequivocally admits having made such statement, extrinsic evidence of same shall not be admitted....
+
+[1]  Under the law, we must eliminate from consideration the testimony of the accomplice witness, Willie Crockett. Hernandez, 939 S.W.2d at 176.

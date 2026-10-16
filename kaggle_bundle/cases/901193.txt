@@ -1,0 +1,239 @@
+Unified Judicial System
+
+    
+
+    
+        
+DAVID H. LANG, M.D., DAVID W. BOYER, M.D.,
+BRYAN D. DEN HARTOG, M.D., STEPHEN G. J. ECKRICH, M.D.,
+STUART E. FROMM, M.D., TIMOTHY J. GILL, M.D.,
+MARK HARLOW, M.D., LEW W. PAPENDICK, M.D., and
+RAND L. SCHLEUSENER, M.D.,
+Petitioners and Appellees,
+v.
+WESTERN PROVIDERS PHYSICIAN ORGANIZATION, INC.,
+Respondent and Appellant.
+[2004 SD 107]
+
+South Dakota Supreme Court
+Appeal from the Circuit Court of 
+The Seventh Judicial Circuit
+Pennington County, South Dakota
+
+Hon. John J. Delaney, Judge
+
+JENNIFER K. TRUCANO
+PATRICK G. GOETZINGER of
+Gunderson, Palmer, Goodsell & Nelson
+Rapid City, South Dakota
+
+Attorneys for petitioners and appellees.
+
+ 
+
+WILLIAM F. JONES
+PAUL F. LEWIS
+R. HUNTER ELLINGTON of
+Moye, Giles
+Denver, Colorado
+
+BARTON R. BANKS of
+Banks, Johnson, Colbath, Sumner & Kappelman
+Rapid City, South Dakota
+
+Attorneys for respondent and appellant.
+
+ 
+
+Argued on August 25, 2004
+
+Opinion Filed 9/29/2004
+
+#23113
+
+
+MEIERHENRY, Justice
+
+[Â¶1.] This case is an appeal from an Order and Writ of Mandamus issued by the trial court.  The petition for mandamus was brought against Western Providerâs Physician Organization, Inc. (WPPO) by several physician members of the non-profit corporation (Petitioners).  Petitioners were granted a writ requiring WPPO to allow them full inspection of all documents, books, and records relating to the business concerns of the corporation.  WPPO appeals the granting of the writ.  We affirm.
+
+Facts
+
+[Â¶2.]  Petitioners are physicians and charter members of a non-profit corporation WPPO.  WPPO has a fifty percent ownership interest in Western Providers, Inc. (Western).  Western implements managed care plans for employer groups and WPPO physicians contract with Western to provide services under negotiated fee plans.  Western and WPPO are independent non-profit corporations but share the same board of directors and administrative personnel.
+
+[Â¶3.] As part of a routine investment review, Petitioners requested various WPPO corporate documents from the South Dakota Secretary of State.  That request led Petitioners to discover WPPO had failed to file annual reports since 1999 and was not in good standing as a South Dakota corporation.  Petitioners then requested an inspection of WPPO books and records.  WPPO denied the initial request and further requests were made.  Eventually WPPO began turning over some of the requested documents but resisted an unlimited inspection of documents.
+
+[Â¶4.] Initially, WPPO produced minutes from meetings, a âConsent in Lieu of Annual Meeting,â and a receipt from the South Dakota Secretary of State.  Upon inquiry, WPPO indicated that these documents comprised all of the corporate records.  However, WPPO later indicated that additional records were found and these were also provided to Petitioners.  Petitioners attempted several more times to attain further records.  WPPO insisted that the few documents that had been produced represented all documents, but it refused to certify this.
+
+[Â¶5.] Petitioners asked the circuit court for an Order and Writ of Mandamus to compel WPPO to allow review of all corporate documents.  Petitioners relied on SDCL 47-24-2 as authority for their right to inspect the corporate documents.  It provides:
+
+All books and records of a corporation may be inspected by any member, or his agent or attorney, for any proper purpose at any reasonable time.
+
+ 
+
+SDCL 47-24-2.
+
+[Â¶6.] Pursuant to that statute, the court entered an Order and Writ of Mandamus:
+
+            commanding [WPPO] to immediately provide any and all documents, books and records relating to [WPPOâs] business concerns.  The term âdocuments, books and recordsâ is hereby intended to include without limitation, documents in written or electronic form; minutes, bylaws, dividend or other financial ledgers; all journals, books of account, cash books, subsidiary documents, subscribersâ ledgers, and real estate documents; all financial records, tax returns, and tax forms; membership lists and provider lists; and all business communications, including those to the South Dakota Secretary of State, members or owners or providers of Western Providers Physician Organization, Inc., Western Providers, Inc., and Rapid City Regional Hospital administration; all of which relate to the ongoing business concerns of [WPPO] from its inception to the present date.  This writ encompasses any documents concerning [WPPOâs] business concerns held in the possession of [WPPOâs] representatives or which may be held in the files of its related entity, Western Providers, Inc.  This Order is consistent with and follows the law as provided by SDCL Â§Â§ 47-24-2 and 47-30-7.
+
+ 
+
+WPPO appeals the granting of the writ.
+
+ 
+
+STANDARD OF REVIEW
+
+[Â¶7.]  Our standard of review for a Writ of Mandamus is abuse of discretion.  Black Hills Cent. R. Co. v. City of Hill City, 2003 SD 152, Â¶9, 674 NW2d 31, 34.  Statutory interpretation is a question of law reviewed de novo.  First Lady, LLC v. JMF Properties, LLC, 2004 SD 69, Â¶5, 681 NW2d 94, 96.
+
+ISSUES
+
+[Â¶8.] WPPO raises the following issues on appeal:
+
+                                            I.            Whether the trial court abused its discretion by granting an Order and Writ of Mandamus.
+
+                                         II.            Whether the trial court erred as to the scope of the Writ in ordering:
+
+a.       the production of all documents rather than those relevant to Petitionersâ alleged proper purpose.
+
+b.      the production of documents in the possession of a non-party.
+
+c.       production of documents without regard to whether they are confidential, privileged, or otherwise protected.
+
+d.      the production of all documents where the statute provides that inspection is for âall books and records.â
+
+e.       the production of documents from the time of WPPOâs inception to date.
+
+ 
+
+DECISION
+
+[Â¶9.] Initially, we point out that the trial court did not enter findings of fact and conclusions of law.  The record from which the trial court entered an Order and Writ of Mandamus consisted of the petition, a brief in support of petition, the respondentâs brief and oral argument at the motion hearing.
+
+Grant of Order and WritâProper Purpose
+
+[Â¶10.] WWPO contends the trial court failed to require Petitioners to meet their burden of proving a âproper purposeâ for an inspection, thereby abusing its discretion in granting an Order and Writ of Mandamus.[1]  This proposition fails for two reasons.  First, WPPO has not preserved this issue for appeal.  In its response brief to the trial court, WPPO initially made a general statement that Petitioners lacked a proper purpose, but then WPPO went on to clarify this argument by saying that Petitioners âdo not have a proper purpose to request any inspection beyond those documents which they have received.â  This can only be understood to be an admission that Petitioners did have a proper purpose for inspecting some of the records.  In fact, during the prior year WPPO had turned many documents over to Petitioners without questioning whether the purpose was proper, and WPPO has never introduced any evidence of an improper purpose.  Then at the hearing before the trial court, WPPO failed to raise the issue at all.  Since WPPO has not previously disputed the issue of proper purpose for an inspection, it cannot do so for the first time on an appeal before this Court.  We have often held that an issue not raised in trial cannot be raised for the first time on appeal.  See State v. Hays, 1999 SD 89, Â¶16, 598 NW2d 200, 203; see also Breckweg v. Knochenmus, 81 SD 244, 255, 133 NW2d 860, 866 (1965).
+
+[Â¶11.] Although the above finding resolves the proper purpose issue, it is appropriate for this Court to address a second matter introduced by WPPOâs statement of the issue.  WPPO presumes Petitioners had the burden of proving a âproper purposeâ under SDCL 47-24-2.  However, this Court has never addressed whether SDCL 47-24-2 places the burden of proving a proper purpose on the corporate member, here Petitioners, or whether the purpose is presumed to be a proper purpose.  A presumption of proper purpose would place the burden of proving an improper purpose on the corporation resisting inspection of its documents.  Since South Dakota has not addressed the issue, guidance may be helpful from other jurisdictions that have done so.
+
+[Â¶12.] According to the New Mexico Supreme Court, the common-law majority rule is that members are presumed to have a âproper purposeâ in making a document request.  Schein v. Northern Rio Arriba Elec. Coop., Inc., 932 P2d 490, 493 (NM 1997).  âPlacement of the burden of proof in this manner requires that a corporation demonstrate strong and articulable reasons for denying a shareholder/member access to information regarding his proprietary interests and legitimate concerns.â  Id. (citing 5A William M. Fletcher et al., Fletcher Cyclopedia of the Law of Corporations Â§ 2213 at 336 (Perm. Rev. Ed. 1995)).  Consistent with this rationale, the New Mexico Supreme Court adopted the âmajority common-law ruleâ which presumed members had a âproper purpose.â  Id. (citing Fletcher, supra, Â§ 2253.10 at 535).  This Court hereby adopts the same rule.  However, we recognize that a practical application of this rule requires that the party seeking inspection must first give a reason for the inspection.  This avoids putting the corporation in the impossible position of speculating as to the memberâs purpose.  Thus a full statement of our rule is that a member must disclose his purpose for inspecting and this purpose is presumed proper.[2]  The burden is then on the corporation to prove there is an improper purpose.  For this additional reason, WPPOâs first allegation of error fails.
+
+Scope of Writ
+
+[Â¶13.] WPPO argues that the trial courtâs order far exceeded the permissible scope allowed by law.  It does so on a number of grounds, all of which will be addressed separately below.
+
+ScopeâRelevant to Proper Purpose
+
+[Â¶14.] WPPO argues that the trial court erred by not limiting the scope of production to documents relevant to Petitionersâ stated proper purpose.  This argument rests on the position that the âproper purposeâ language in the South Dakota inspection statute serves not only to limit the circumstances under which an inspection may be made, but also serves to limit the scope of any proper shareholder inspection.  Because this Court has not previously addressed this issue, we look to other jurisdictions for guidance.
+
+[Â¶15.] Many states have statutes similar to SDCL 47-24-2.[3]  Illinoisâ statute is nearly identical[4] and its caselaw relating to that statute states:
+
+            The right to examine records may even extend to records for which a proper purpose has not been directly shown, so long as one has been shown for some records: âthe shareholder is not required to establish a proper purpose for each record he requests.  Once that purpose has been established, the shareholderâs right to inspect extends to all books and records necessary to make an intelligent and searching investigation and from which he can derive any information that will enable him to better protect his interests.â
+
+ 
+
+Patel v. Illinois State Med. Socây, 698 NE2d 588, 593 n4 (IllApp3d 1998) (quoting Meyer v. Board of Managers of Harbor House Condominium Assân, 583 NE2d 14, 18 (IllApp3d 1991) (additional citations omitted)).  We adopt the same position; that is, as long as a member has stated a proper purpose, which is presumed, the member may inspect all books and records necessary to make an intelligent and searching investigation.
+[Â¶16.] Here, Petitioners requested access to the following:
+
+            WPPOâs complete books, records, and all business documents and communications, including without limitation, those in electronic form, minutes, bylaws, dividend or other financial ledgers, all journals, books of account, cash books, subsidiary documents, subscribersâ ledgers, real estate documents, all financial records, tax returns, tax forms, membership lists, provider lists, and all business communications including those to the South Dakota Secretary of State, WPPO, Western Providers, Inc., Rapid City Regional Hospital administration, which relate to the ongoing business concerns of WPPO.
+
+ 
+
+Petitionersâ stated purpose for requesting access to these documents was to investigate suspected administrative negligence that potentially placed WPPO at risk âas well as jeopardize[d] its officers, directors, and members for personal liability.â  Petitioners specifically stated in their Affidavit in Support of Petition for Writ of Mandamus that they had grave concerns the following deficiencies existed:
+
+a.       WPPO was administratively dissolved by the SOS [Secretary of State] office.
+
+b.      WPPO failed to file statutorily mandated annual reports.
+
+c.       WPPO failed to hold annual meetings of members and directors.
+
+d.      WPPO bylaws have not been signed.
+
+e.       Meetings of WPPO members were not properly noticed.
+
+f.        WPPO did not file the annual tax returns required of nonprofit corporations.
+
+g.       WPPO failed to maintain an accurate list of its members.
+
+h.       WPPO has discriminated in the payment of distributions to its members.
+
+i.         WPPOâs corporate books and records were in deplorable condition.
+
+j.        WPPOâs corporate books and record [sic] were not available at the address of the principal place of business listed in state filings.
+
+k.      The corporate documents incorrectly listed WPPOâs registered agent and the address of RCRH [Rapid City Regional Hospital] as its principal place of business.
+
+l.         WPPO had not [sic] corporate minutes until our inquiries began.
+
+m.     WPPOâs non-profit status is unclear as no IRS determination letter or Form 1023 was found in the corporate records. Form 1120âs, not Form 990âs, were filed by WPPO. Form 1120âs are filed by for profit corporations, and non-profits who have not yet achieved non-profit status.
+
+ 
+
+Additionally, the hearing record reflects other concerns.[5]  The concerns and suspected deficiencies could affect not only the membersâ investments but also their status as medical practitioners.  Such concerns are not without merit and only a very broad and unlimited inspection would serve to satisfy Petitionersâ concerns of administrative negligence.  The requested documents, although sweeping in breadth, are necessary to make an intelligent and searching investigation into whether administrative negligence was occurring at WPPO.  We find no error.    
+
+ScopeâDocuments held by Non-party
+
+[Â¶17.] WPPO contends that the trial courtâs order is too broad in that it extends to documents in the possession of a non-party entity.  The order states:
+
+            This Writ encompasses any documents concerning [WPPOâs] business concerns held in the possession of [WPPOâs] representatives or which may be held in the files of its related entity, Western Providers, Inc.
+
+ 
+
+(emphasis added).  WPPO cites Carapico v. Philadelphia Stock Exch., Inc., 791 A2d 787 (Del 2000) to support its contention.  In Carapico, the plaintiff requested books and records from the parent corporation of which he was a shareholder and from the parent corporationâs wholly owned subsidiaries.  The court held that there was ânothing in the record to justify ignoring the separate existence of the subsidiaries,â and therefore limited the final order âto books and records of the [parent corporation] in its possession, custody, or control.â  Id. at 793.
+
+[Â¶18.] Initially, the trial courtâs order appears to be as broad as the Carapico writ WPPO compares it to.  However, a review of the record indicates the limits contemplated by the trial court.  Western Providers and WPPO are independent corporations, yet both corporations operate together and share the same board of directors and administrative personnel.  WPPOâs sole administrator, Rick Stracqualursi, was also the chief executive officer of Western Providers and executive director of marketing for Rapid City Regional Hospital (RCRH).  Stracqualursiâs office was at RCRH.  At the trial court hearing WPPOâs attorney was asked, âDoes your organization have an office?â  The attorney responded, âNo it does not maintain a separate infrastructure office.  They use the hospital.â  Moreover, WPPO admitted that its recordkeeping was in disarray.  Here, documents continued to be found up to the day of the hearing.  Finally, at the hearing the court stated:
+
+            I will issue that writ, but it pertains to WPPO.  I perceive that to the extent that they have knowledge of documents that are responsive to it that may be filed someplace else, they will get those documents.  I think they are within your control.  But to direct them to respond in lieu of Western Providers, Inc., I think, is beyond my power at this point.   
+
+ 
+
+[Â¶19.] Our interpretation of the Order is that if WPPO documents are located in Western Providersâ files or locations, by either being purposely or negligently placed there, then WPPO is to locate them and allow Petitionersâ inspection.  The trial court made it clear that it did not have jurisdiction to order documents belonging to a non-party.  Under the unique facts of this case, the trial court did not err in ordering WPPO to produce documents located outside WPPOâs files.  It goes without saying that WPPO cannot shield documents by storing them in the offices of related corporations.
+
+ScopeâProtected Documents
+
+[Â¶20.] WPPO asserts that certain documents are privileged and cannot be released.  It also asserts that releasing certain other documents would be a violation of federal antitrust laws.  While the writ does not specifically restrict Petitionersâ right to inspect specific documents, the hearing transcript indicates that Petitioners are not asking for disclosure of documents in violation of federal law nor are they asking for release of privileged documents.  At the hearing, Petitioners requested only a log of the privileged documents.  We interpret the court order to be in accord with the stipulations and agreements of the parties at the hearing.  Consequently, WPPO only needs to produce a log of the privileged documents and a log of documents or portions of documents which are protected by the anti-competitive and antitrust laws.
+
+ScopeâAll Books and Records
+
+ 
+
+[Â¶21.] WPPO claims the language âall books and recordsâ as contained in SDCL 47-24-2, does not encompass all documents but has a more limited meaning.  However, WPPO did not raise this issue prior to this appeal.  In fact, at the hearing WPPO argued that all WPPO material had been produced and that no other documents existed except for privileged documents and documents protected by federal law.  Further, the trial court asked WPPO counsel, âIs there a problem with a writ as to all?â  Counsel replied, âNo, Your Honor, there is not a problem with the writ as to all.â  We have often held that an issue not raised in trial cannot be raised for the first time on appeal.  See Hays, 1999 SD 89, Â¶16, 598 NW2d at 203; see also Breckweg, 81 SD 244, 255, 133 NW2d at 866 (1965).  WPPO has not preserved this issue for appeal.
+
+ScopeâTime Period
+
+[Â¶22.] WPPO asserts that the trial court erred by not restricting documents to a specific period of time.  WPPO failed to raise this issue before the trial court and may not raise it for the first time here.
+
+[Â¶23.] The Order and Writ of Mandamus are affirmed.
+
+[Â¶24.] GILBERTSON, Chief Justice and SABERS and ZINTER, Justices, and MILLER, Retired Justice, concur.
+
+[Â¶25.] MILLER, Retired Justice, sitting for KONENKAMP, Justice, disqualified.
+
+
+
+
+[1].          âMandamus has traditionally been the method of enforcement of shareholdersâ inspection rights.â  Annotation, Debra T. Landis, J. D., What Corporate Documents Are Subject To Shareholderâs Right To Inspection, 88 ALR3d 663, Â§2 (1978).
+
+
+ 
+
+[2].          South Dakota law adopts the Model Business Corporation Act.  The official comment to Â§ 16.02(c) (formerly Â§ 52), which is similar to SDCL 47-24-2, addresses the meaning of proper purpose as follows:
+            A âproper purposeâ means a purpose that is reasonably
+            relevant to the demanding shareholderâs interest as a
+            shareholder.
+Model Bus. Corp. Act Â§ 16.02 cmt. c (1986 supp).
+
+
+ 
+
+[3].          Alabama, Ala. Code Â§ 10-3A-43 (1975); Alaska, ALASKA STAT. Â§ 10.20.131 (2003); Arkansas, ARK. CODE ANN. Â§ 4-28-218 (West 2003); District of Columbia, D.C. CODE ANN. Â§ 29-301.26 (2001); Florida, FLA. STAT. ANN. Â§ 617.2103 (West 2004); Illinois, 805 ILL. COMP. STAT. ANN. 105/107.75 (West 2004); Iowa, IOWA CODE ANN. Â§ 504A.25 (West 1999); Kentucky, KY. REV. STAT. ANN. Â§ 273.233 (Banks-Baldwin 2003); New Mexico, N.M. Stat. Ann. Â§ 53-8-27 (West 2004); Rhode Island, R.I. GEN. LAWS Â§ 7-6-30 (1956); Washington, WASH. REV. CODE ANN. Â§ 24.06.160 (West 1994).
+
+
+ 
+
+[4].          âAll books and records of a corporation may be inspected by any member entitled to vote, or that memberâs agent or attorney, for any proper purpose at any reasonable time.â  805 ILCS 105/107.75.
+
+
+ 
+
+[5].          Rapid City Regional Hospital settled a case under the False Claims Act on December 18, 2002.  Various federal health law violations were alleged against the hospital.  United States v. Rapid City Regâl Hosp., 252 FSupp2d 892.

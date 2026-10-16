@@ -1,0 +1,792 @@
+HULL, Circuit Judge:
+ 
+
+  Upon consideration, we grant in part Petitioner Shariff Bula Lopez's petition for panel rehearing. We vacate the prior opinion in this case, issued on November 21, 2018 and published at
+  
+   909 F.3d 388
+  
+  (11th Cir. 2018), and hereby substitute the following opinion in its place.
+ 
+
+
+  Shariff Bula Lopez petitions for review of the Board of Immigration Appeals' ("BIA") decision affirming the Immigration Judge's ("IJ") order of removal. After review, and with the benefit of oral argument, we dismiss in part and deny in part Bula Lopez's petition.
+ 
+
+
+
+   I. BACKGROUND
+  
+
+
+
+   A. Immigration Proceedings
+  
+
+
+  In 1989, Bula Lopez, a native and citizen of Colombia, moved to the United States, and in 1993 he became a lawful permanent resident ("LPR") of the United States. In
+  
+   *1295
+  
+  1997, Bula Lopez pled guilty "in his best interest" in Florida state court to one count of possession with intent to deliver Flunitrazepam
+  
+   1
+  
+  and was sentenced to two years' probation. Upon returning from a trip abroad in April 2010, Bula Lopez applied for admission to the United States as an LPR and was paroled into the United States pending removal proceedings based on his prior drug conviction.
+ 
+
+
+  In September 2010, the Department of Homeland Security ("DHS") issued Bula Lopez a Notice to Appear ("NTA") charging him as removable, in relevant part: (1) under Immigration and Nationality Act ("INA") § 212(a)(2)(A)(i)(I),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(I), for having been convicted of a crime involving moral turpitude ("CIMT"); and (2) under INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II), for having been convicted of violating a law relating to a controlled substance, as defined in the federal Controlled Substances Act ("CSA"). Both charges were based on Bula Lopez's 1997 Florida conviction for possession with intent to deliver Flunitrazepam.
+ 
+
+
+  Bula Lopez, through counsel, denied these charges of removability. Before the IJ, Bula Lopez argued, among other things, that his 1997 Florida conviction was for simple possession of Flunitrazepam, not possession with intent to deliver, and thus his prior conviction did not constitute a CIMT.
+ 
+
+
+
+   B. IJ's Order
+  
+
+
+  In a written order, the IJ found that Bula Lopez's Florida conviction was for possession with intent to deliver, not simple possession. Florida Statute § 893.13(1)(a) criminalizes possession with intent to deliver, whereas Florida Statute § 893.13(6)(a) criminalizes simple possession.
+ 
+
+
+  The IJ noted that DHS bears the burden of proving Bula Lopez's inadmissibility by clear and convincing evidence. The IJ acknowledged there was "some ambiguity" regarding the statutory basis for Bula Lopez's Flunitrazepam conviction. The language of the guilty plea form, plea hearing transcript, sentencing documents, and arrest warrant affidavit all described his offense as possession with intent to deliver. However, one document-the information-referred to § 893.13(6)(a), although it also described the offense as possession with intent to deliver. The IJ therefore found "that the preponderance of the evidence supports the conclusion that [Bula Lopez] was convicted under
+  
+   Fla. Stat. § 893.13
+  
+  (1), and not
+  
+   Fla. Stat. § 893.13
+  
+  (6)(a)."
+ 
+
+
+  Having determined that Bula Lopez's prior conviction was for possession with intent to deliver Flunitrazepam under § 893.13(1)(a), the IJ then determined that his conviction qualified as a CIMT under the INA and sustained that charge of removability. The IJ did not, however, sustain Bula Lopez's second charge of removability, for having violated a law relating to a controlled substance, as defined in the CSA. The IJ concluded that Bula Lopez's conviction did not qualify as a controlled substance violation because Flunitrazepam was not listed in the CSA schedules found in
+  
+   21 U.S.C. § 812
+  
+  and, thus, Bula Lopez's Flunitrazepam conviction did not "relate to a controlled substance" within the meaning of the INA.
+ 
+
+
+
+   C. Appeal to the BIA
+  
+
+
+  Bula Lopez, through counsel, appealed to the BIA. On appeal, Bula Lopez argued
+  
+   *1296
+  
+  that the IJ applied the wrong standard of proof in determining that his 1997 Florida conviction was for possession with intent to deliver, rather than mere possession. Bula Lopez asserted that DHS had the burden to prove his conviction was a CIMT by clear and convincing evidence, but the IJ erroneously applied a preponderance of the evidence standard. Bula Lopez also argued that the IJ erred in sustaining the CIMT charge because Flunitrazepam was not a federally controlled substance, and his offense, whether under § 893.13(6)(a) or § 893.13(1)(a), lacked the requisite "evil intent" mens rea requirement. Bula Lopez also requested a remand to pursue a waiver of inadmissibility under INA § 212(h).
+ 
+
+
+  In response, DHS moved for summary affirmance of the IJ's order. DHS argued that the IJ correctly found Bula Lopez was convicted of possession with intent to deliver Flunitrazepam and that his conviction constituted a CIMT. In addition, DHS argued that, contrary to the IJ's finding, Flunitrazepam is a federally controlled substance under the CSA.
+ 
+
+
+  In his reply brief, Bula Lopez contended, among other things, that the BIA could not consider the IJ's finding that Flunitrazepam is not a controlled substance because DHS did not file a cross-appeal.
+ 
+
+
+
+   D. BIA Decision
+  
+
+
+  The BIA dismissed Bula Lopez's appeal and denied his motion to remand. First, the BIA addressed Bula Lopez's argument that the IJ applied the wrong burden of proof. The BIA noted that the IJ identified the correct clear and convincing evidence standard in its decision, but also referred to the incorrect preponderance of the evidence standard in making its finding regarding Bula Lopez's statute of conviction. The BIA concluded, however, that "this misstatement [was] not material" because the record provided clear and convincing evidence that Bula Lopez was convicted under § 893.13(1)(a) for possession with intent to deliver Flunitrazepam.
+ 
+
+
+  Next, the BIA affirmed the IJ's determination that Bula Lopez's conviction was a CIMT. In the course of that analysis, the BIA "address[ed] the [IJ's] erroneous determination that Flunitrazepam is not a controlled substance under immigration law." The BIA explained that: (1) although Flunitrazepam is "not directly listed at
+  
+   21 U.S.C. § 812
+  
+  (listing scheduled substances), this section of the law specifically provides for updating of the schedules by the Attorney General, under specified administrative procedures"; (2) "the additions and deletions are then to be listed in the Code of Federal Regulations at
+  
+   21 C.F.R. § 1308
+  
+  "; and (3) "Flunitrazepam is listed at
+  
+   21 C.F.R. § 1308.14
+  
+  (c)(23) and is a controlled substance under schedule IV." Because it concluded that Flunitrazepam is a controlled substance, the BIA found Bula Lopez also was removable for having violated a law relating to a controlled substance under INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II).
+ 
+
+
+  Further, the BIA expressly rejected Bula Lopez's argument that it could not consider the IJ's finding regarding Flunitrazepam on appeal because DHS had not cross-appealed. The BIA stated: "No separate appeal is required where, as here, the non-appealing party seeks to defend the [IJ's] decision based on different reasons."
+ 
+
+
+  The BIA also denied Bula Lopez's request for a remand to pursue a § 212(h) waiver. The BIA concluded that Bula Lopez was ineligible for such relief because his Flunitrazepam conviction was a "drug trafficking crime" and, therefore, an aggravated felony under the INA.
+ 
+
+
+  Bula Lopez now petitions this Court for review.
+ 
+
+
+
+   *1297
+  
+
+   II. STANDARD OF REVIEW
+  
+
+
+  When the BIA issues its own decision, we review only that decision, except to the extent the BIA expressly adopts the IJ's opinion or reasoning.
+  
+   Seck v. U.S. Att'y Gen.
+  
+  ,
+  
+   663 F.3d 1356
+  
+  , 1364 (11th Cir. 2011). We review the BIA's legal conclusions
+  
+   de novo
+  
+  and its factual determinations under the substantial evidence test.
+  
+   Gonzalez v. U.S. Att'y Gen.
+  
+  ,
+  
+   820 F.3d 399
+  
+  , 403 (11th Cir. 2016). We apply the substantial evidence test even when, as here, DHS was required to prove removability by clear and convincing evidence in the administrative proceedings.
+  
+   Adefemi v. Ashcroft
+  
+  ,
+  
+   386 F.3d 1022
+  
+  , 1028 (11th Cir. 2004) (en banc). Under the substantial evidence test, we will affirm the BIA's factual findings as long as they are "supported by reasonable, substantial, and probative evidence on the record considered as a whole."
+  
+   Indrawati v. U.S. Att'y Gen.
+  
+  ,
+  
+   779 F.3d 1284
+  
+  , 1297 (11th Cir. 2015) (internal quotations omitted). We will reverse the BIA's factual findings only if the record compels reversal, and the mere fact that the record may support a contrary conclusion is insufficient to justify reversal of the BIA's findings.
+  
+
+    Id.
+   
+
+
+
+  Bula Lopez argues that the BIA erred: (1) in concluding his prior conviction was for possession with intent to deliver Flunitrazepam because the records of his conviction are ambiguous; (2) in considering DHS's argument on appeal that, contrary to the IJ's determination, Bula Lopez was removable for having committed a controlled substance violation because DHS did not file a cross-appeal; and (3) in concluding that Flunitrazepam is a controlled substance for purposes of the INA, such that his conviction qualifies as a CIMT, controlled substance violation, and aggravated felony. We address each issue in turn.
+ 
+
+
+
+   III. STATUTE OF CONVICTION
+  
+
+
+  As a preliminary matter, we must address whether we have jurisdiction to review the BIA's factual determination that Bula Lopez was convicted of possession with intent to deliver under
+  
+   Fla. Stat. § 893.13
+  
+  (1)(a), rather than simple possession under
+  
+   Fla. Stat. § 893.13
+  
+  (6)(a). Section 242 of the INA limits our jurisdiction to review final orders of removal against criminal aliens who have been found removable for having committed a controlled substance violation.
+  
+   See
+  
+  INA § 242(a)(2)(C),
+  
+   8 U.S.C. § 1252
+  
+  (a)(2)(C) ("[N]o court shall have jurisdiction to review any final order of removal against an alien who is removable by reason of having committed a criminal offense covered in section 1182(a)(2)... of this title ...."); INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II) (controlled substance violation). In such cases, our jurisdiction is limited to constitutional claims and questions of law. INA § 242(a)(2)(D),
+  
+   8 U.S.C. § 1252
+  
+  (a)(2)(D) ("Nothing in subparagraph ... (C) ... shall be construed as precluding review of constitutional claims or questions of law raised upon a petition for review filed with an appropriate court of appeals in accordance with this section.").
+ 
+
+
+  However, even in cases involving criminal aliens, we "have jurisdiction to determine underlying facts that establish our jurisdiction or lack of it."
+  
+   Garces v. U.S. Att'y Gen.
+  
+  ,
+  
+   611 F.3d 1337
+  
+  , 1343 (11th Cir. 2010). In
+  
+   Garces
+  
+  , for example, we had to answer the underlying factual question of whether the alien "in fact 'committed a criminal offense.' "
+  
+
+    Id.
+   
+
+  Only by answering that question could we determine whether the alien was removable for having committed a covered criminal offense and, therefore, whether INA § 242's jurisdictional limitations applied.
+  
+   See
+  
+
+
+    id.
+   
+
+  Thus, "the jurisdictional question merge[d] into our consideration of the merits."
+  
+   Id.
+  
+  ;
+  
+   see
+  
+
+   *1298
+  
+
+   also
+  
+
+   Adefemi v. Ashcroft
+  
+  ,
+  
+   358 F.3d 828
+  
+  , 833 (11th Cir. 2004) ("Our jurisdictional inquiry thus merges with the merits of Adefemi's challenge, which rests on his assertion that the INS failed to prove a qualifying firearms conviction by sufficient evidence. We therefore proceed to the merits on the understanding that we have jurisdiction to grant relief if the government failed to prove that Adefemi was convicted of a firearms offense."),
+  
+   vacated in part on reh'g en banc
+  
+  ,
+  
+   Adefemi
+  
+  ,
+  
+   386 F.3d at
+  
+  1024 & n.2 (reaffirming the panel's jurisdictional ruling).
+ 
+
+
+  Here, we must answer an underlying factual question-whether Bula Lopez was convicted of possession with intent to deliver Flunitrazepam or merely simple possession of Flunitrazepam-to determine whether he is removable because of that criminal conviction and, therefore, whether INA § 242's jurisdictional limitations apply. Thus, as in
+  
+   Garces
+  
+  and
+  
+   Adefemi
+  
+  , our jurisdictional inquiry merges with the merits of Bula Lopez's challenge, which rests in part on his assertion that DHS failed to prove his statute of conviction by sufficient evidence.
+  
+   See
+  
+
+   Garces
+  
+  ,
+  
+   611 F.3d at
+  
+  1343 ;
+  
+   Adefemi
+  
+  ,
+  
+   358 F.3d at 833
+  
+  .
+ 
+
+
+  We have no trouble concluding, on this record, that substantial evidence supports the BIA's finding that Bula Lopez was convicted under § 893.13(1)(a) (possession with intent to deliver), and not § 893.13(6)(a) (simple possession). Though the information does cite § 893.13(6)(a), it twice refers to Bula Lopez's offense as "possession with intent to deliver flunitrazepam." And aside from this one citation, no other document in the record indicates that Bula Lopez's conviction was for simple possession. Indeed, Bula Lopez's signed guilty plea form likewise refers to the charge as "possession with intent to deliver flunitrazepam," as does the plea hearing transcript. Three state court sentencing documents and the arrest warrant affidavit also refer to Bula Lopez's offense as, respectively, (1) "poss w/ intent to deliver/sell flunitrazepam," (2) "poss with intent to del.," (3) "poss/sell/deliv flunitrazepam," and (4) "poss w/ intent to deliver-flunitrazepam." In short, reasonable, substantial evidence supports a finding that Bula Lopez was convicted of possession with intent to deliver under § 893.13(1)(a), and the single reference in the information to § 893.13(6)(a) does not compel reversal.
+  
+   2
+  
+
+   See
+  
+
+   Indrawati
+  
+  ,
+  
+   779 F.3d at 1297
+  
+  .
+ 
+
+
+  Having concluded that substantial evidence supports the BIA's factual finding regarding Bula Lopez's statute of conviction, we lack jurisdiction under INA § 242 to grant Bula Lopez relief on this claim.
+  
+   See
+  
+  INA § 242(a)(2)(C), (D),
+  
+   8 U.S.C. § 1252
+  
+  (a)(2)(C), (D) ;
+  
+   Adefemi
+  
+  ,
+  
+   358 F.3d at 833
+  
+  (indicating that we have jurisdiction to grant relief in a case such as this only if the government failed to prove the alien's conviction by sufficient evidence). We therefore dismiss Bula Lopez's petition for review in part for lack of jurisdiction as to this claim.
+ 
+
+
+  Bula Lopez's remaining two claims, however, present legal questions over which we have jurisdiction even under INA § 242. INA § 242(a)(2)(D),
+  
+   8 U.S.C. § 1252
+  
+  (a)(2)(D). We next address Bula Lopez's argument concerning DHS's failure to file a cross-appeal before the BIA and then proceed to the merits of his claim that the BIA erred in concluding Flunitrazepam is a controlled substance.
+ 
+
+
+
+   *1299
+  
+
+   IV. FAILURE TO CROSS-APPEAL
+  
+
+
+  The BIA found that Bula Lopez's conviction was both a controlled substance violation and a CIMT. Because the IJ found Bula Lopez removable only on the CIMT ground, Bula Lopez argues the BIA could not reach the controlled substance violation ground without a cross-appeal by DHS. DHS responds that the BIA did not err in considering this alternative basis for Bula Lopez's removability.
+ 
+
+
+  The BIA's regulations do not contain any specific rules regarding the filing of cross-appeals.
+  
+   See, e.g.
+  
+  ,
+  
+   8 C.F.R. §§ 1003.38
+  
+  (providing rules for appeals), 1003.3 (providing requirements for a notice of appeal). In the absence of such rules or BIA precedent on the issue, we look to the general cross-appeal rule applied in federal courts to determine whether the BIA erred by considering DHS's argument on appeal that Flunitrazepam is a controlled substance and that Bula Lopez was removable for having committed a controlled substance violation.
+ 
+
+
+  The Supreme Court has explained that "[a]n appellee who does not take a cross-appeal may urge in support of a decree any matter appearing before the record, although his argument may involve an attack upon the reasoning of the lower court."
+  
+   See
+  
+
+   Jennings v. Stephens
+  
+  , 574 U.S. ----, ----,
+  
+   135 S.Ct. 793
+  
+  , 798,
+  
+   190 L.Ed.2d 662
+  
+  (2015) (internal quotations omitted). In other words, the appellee may argue for affirmance on any ground supported by the record, even one the lower court did not rely on.
+  
+   See
+  
+
+
+    id.
+   
+
+  However, "an appellee who does not cross-appeal may not attack the decree with a view either to enlarging his own rights thereunder or of lessening the rights of his adversary."
+  
+
+    Id.
+   
+
+  (internal quotations omitted).
+ 
+
+
+  To determine whether the cross-appeal rule applies, we must distinguish between the rights of a party and the reasons a court gives for recognizing those rights. Because "[c]ourts reduce their opinions and verdicts to judgments precisely to define the rights and liabilities of the parties," it is the judgment of the court, not its opinion, that matters.
+  
+
+    Id.
+   
+
+
+   at 799
+  
+  . In
+  
+   Jennings
+  
+  , for instance, the district court granted habeas relief to the petitioner on two of his ineffective-assistance-of-counsel theories, but denied relief as to a third theory and entered judgment directing the state either to release him from custody or resentence him.
+  
+
+    Id.
+   
+
+
+   at 798
+  
+  . The state appealed, attacking only the two ineffective-assistance theories on which the district court had granted relief.
+  
+
+    Id.
+   
+
+  Without filing a cross-appeal, the petitioner defended the district court's judgment on all three ineffective-assistance theories.
+  
+
+    Id.
+   
+
+  The Fifth Circuit determined it lacked jurisdiction to consider the third ineffective-assistance theory, on which the district court had not relied in granting relief, because Jennings did not file a cross-appeal.
+  
+
+    Id.
+   
+
+  The Supreme Court granted certiorari and reversed.
+  
+
+    Id.
+   
+
+
+   at 798-802
+  
+  .
+ 
+
+
+  In concluding that Jennings could raise his third ineffective-assistance theory on appeal without filing a cross appeal, the Supreme Court explained:
+ 
+
+
+  Jennings' rights under the judgment [granting habeas relief on the first two theories] were what the judgment provided-release, resentencing, or commutation within a fixed time, at the State's option; the [third] theory would give him the same. Similarly, the State's rights under the judgment were to retain Jennings in custody pending resentencing or to commute his sentence; the [third] theory would allow no less.
+ 
+
+
+
+
+    Id.
+   
+
+
+   at 798-99
+  
+  .
+ 
+
+
+  The Court further explained that "[a] prevailing party seeks to enforce not a district court's reasoning, but the court's
+  
+   judgment
+  
+  ," and that federal appellate courts "do[ ] not review lower courts'
+ 
+
+
+
+   *1300
+  
+  opinions, but their
+  
+   judgments
+  
+  ."
+  
+
+    Id.
+   
+
+
+   at 799
+  
+  (emphasis in original). Accordingly, "[a]ny potential claim that would have entitled Jennings" to the same relief as that provided in the district court's judgment "could have been advanced to urge ... support of the judgment," as long as that alternative ground was present in the record.
+  
+
+    Id.
+   
+
+
+   at 800
+  
+  (internal quotations omitted). And because Jennings's third ineffective-assistance theory "sought the same relief" as was awarded under his first two ineffective-assistance theories, he was not required to file a cross-appeal in order to raise it.
+  
+
+    Id.
+   
+
+
+   at 801-02
+  
+  .
+ 
+
+
+  Here, DHS's controlled substance argument on appeal to the BIA is akin to the alternative argument raised in
+  
+   Jennings
+  
+  . Like the habeas petitioner in
+  
+   Jennings
+  
+  , DHS here prevailed on one theory of removability (CIMT), but not on another (controlled substance violation) and, on appeal, defended the IJ's order of removability on both theories.
+  
+   See
+  
+
+
+    id.
+   
+
+
+   at 798
+  
+  . In arguing to the BIA that Bula Lopez was also removable for having committed a controlled substance violation, DHS "sought the same relief"-Bula Lopez's removal-as was awarded in the IJ's removal order based on the CIMT charge.
+  
+
+    Id.
+   
+
+
+   at 801-02
+  
+  . Thus, DHS was not required to file a cross-appeal to advance its controlled substance argument on appeal to the BIA, and the BIA did not err in considering that argument.
+ 
+
+
+
+   V. CONTROLLED SUBSTANCE VIOLATION
+  
+
+
+  The INA provides that an LPR (such as Bula Lopez) is considered an "applicant for admission," and therefore subject to removal, if he "has committed an offense identified in section 1182(a)(2) of this title." INA § 101(a)(13)(C)(v),
+  
+   8 U.S.C. § 1101
+  
+  (a)(13)(C)(v). One of the offenses identified in § 1182(a)(2) is "a violation of ... any law or regulation of a State, the United States, or a foreign country relating to a controlled substance (as defined in section 802 of Title 21)." INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II). Section 802, in turn, defines the term "controlled substance" as "a drug or other substance, or immediate precursor, included in schedule I, II, III, IV, or V of part B of this subchapter."
+  
+   21 U.S.C. § 802
+  
+  (6).
+ 
+
+
+  Those five schedules of controlled substances are listed at
+  
+   21 U.S.C. § 812
+  
+  , which also instructs that the list of controlled substances shall be updated annually, pursuant to the procedures set out in
+  
+   21 U.S.C. § 811
+  
+  .
+  
+   See
+  
+
+   21 U.S.C. § 812
+  
+  (a), (c) ;
+  
+
+    id.
+   
+
+  § 811(a)(1) (providing that "the Attorney General may by rule add to such a schedule ... any drug or other substance if he finds that such drug or other substance has a potential for abuse"). Section 812 of the CSA further specifies that the "[r]evised schedules are published in the Code of Federal Regulations, Part 1308 of Title 21, Food and Drugs."
+  
+
+    Id.
+   
+
+  § 812(c) n.1;
+  
+   see also
+  
+
+   21 C.F.R. § 1308.01
+  
+  ("Schedules of controlled substances as established by section 202 of the [CSA] ( 21 U.S.C. 812 ) ... as they are changed, updated, and republished from time to time, are set forth in this part."). In other words, the definition of "controlled substance" in
+  
+   21 U.S.C. § 802
+  
+  incorporates the revised schedules as published in
+  
+   21 C.F.R. § 1308
+  
+  .
+ 
+
+
+  Bula Lopez contends that because Flunitrazepam is not listed in the initial schedules of controlled substances contained in § 812 of the CSA, it is not a controlled substance for purposes of the INA.
+  
+   See
+  
+
+   21 U.S.C. § 812
+  
+  (c). Flunitrazepam is, however, listed as a Schedule IV controlled substance in the updated schedules found in the Code of Federal Regulations.
+  
+   21 C.F.R. § 1308.14
+  
+  (c)(23). Flunitrazepam therefore has been incorporated into § 802 of the CSA and is a controlled
+  
+   *1301
+  
+  substance within the meaning of INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II).
+  
+   3
+  
+  Therefore, the BIA did not err in concluding that Flunitrazepam is a controlled substance and that Bula Lopez's conviction for possessing Flunitrazepam with intent to deliver is a "violation of ... [a] law or regulation of a State ... relating to a controlled substance (as defined in section 802 of Title 21 )."
+  
+   4
+  
+  INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II). As such, Bula Lopez was properly considered an "applicant for admission" subject to removal based on his prior conviction.
+  
+   See
+  
+  INA § 101(a)(13)(C)(v),
+  
+   8 U.S.C. § 1101
+  
+  (a)(13)(C)(v). Because the BIA correctly determined that Bula Lopez was removable for having been convicted of a controlled substance violation, we may deny his petition for review on that basis alone and need not address whether his prior conviction is also a CIMT.
+ 
+
+
+  One further issue bears mention. Bula Lopez also argues, based on his contention that Flunitrazepam is not a controlled substance, that his Florida conviction is not an aggravated felony and does not render him ineligible to pursue a waiver of inadmissibility under INA § 212(h). He therefore requests that we remand this case to allow him to pursue a § 212(h) waiver. DHS responds that Flunitrazepam is a controlled substance, and the BIA correctly denied Bula Lopez's request for a remand to pursue a § 212(h) waiver because he is ineligible for such relief. Having found that Flunitrazepam is a controlled substance, we agree that the BIA did not err in denying Bula Lopez's motion for a remand to pursue a § 212(h) waiver, and we must deny his present request for a remand to seek such relief. This is because INA § 212(a)(2)(A)(i)(II) provides that an alien convicted of a violation of any federal or state law or regulation "relating to a controlled substance (as defined in section 802 of Title 21 ), is inadmissible."
+  
+   See
+  
+  INA § 212(a)(2)(A)(i)(II),
+  
+   8 U.S.C. § 1182
+  
+  (a)(2)(A)(i)(II). And while § 212(h) allows the Attorney General to waive the application of that subsection if the controlled substance violation "related to a single offense of simple possession of 30 grams or less of marijuana," Bula Lopez's controlled substance violation involved Flunitrazepam, not marijuana. INA § 212(h),
+  
+   8 U.S.C. § 1182
+  
+  (h).
+ 
+
+
+
+   VI. CONCLUSION
+  
+
+
+  For the foregoing reasons, we dismiss in part and deny in part Bula Lopez's petition for review.
+ 
+
+
+
+   PETITION DISMISSED in part and DENIED in part.
+  
+
+
+
+
+
+
+
+   1
+  
+
+   Flunitrazepam, also known as Rohypnol, is a sedative commonly used as a date rape drug.
+  
+
+
+
+   2
+  
+
+   To the extent Bula Lopez argued at oral argument that his petition must be granted because the IJ applied the wrong burden of proof in resolving this factual question, we note that the BIA applied the correct, clear and convincing evidence standard, and it is the BIA's decision that we are reviewing.
+   
+    Seck
+   
+   ,
+   
+    663 F.3d at 1364
+   
+   .
+  
+
+
+
+   3
+  
+
+   Indeed, Flunitrazepam has been on Schedule IV since late 1984, well before Bula-Lopez's conviction.
+   
+    See
+   
+   Drug Enforcement Administration, Schedules of Controlled Substances,
+   
+    49 Fed. Reg. 39307
+   
+   -01 (Oct. 5, 1984).
+  
+
+
+
+   4
+  
+
+   Bula Lopez argues that the BIA cannot rely on Flunitrazepam's listing in the C.F.R. because that list is compiled by the Drug Enforcement Agency ("DEA"), not Congress, and Congress is the only body with the authority to make and amend laws. Unfortunately for Bula Lopez, that is an argument he needs to take up with the Supreme Court.
+   
+    See
+   
+
+    Touby v. United States
+   
+   ,
+   
+    500 U.S. 160
+   
+   , 169,
+   
+    111 S.Ct. 1752
+   
+   , 1758,
+   
+    114 L.Ed.2d 219
+   
+   (1991) (holding that delegation from Congress to the Attorney General, and from the Attorney General to the DEA, neither violated the Constitution nor the Controlled Substances Act).

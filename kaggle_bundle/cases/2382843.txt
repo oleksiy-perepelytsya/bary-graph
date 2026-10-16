@@ -1,0 +1,105 @@
+Steele Hays, Justice.
+ 
+
+  Bernard J. Truhe brought this appeal from the denial of a motion to set aside a default judgment against him. Mr. Truhe died while the appeal was pending and Mary Engstrom, Special Administratrix, is now substituted as appellant. Having considered the two points for reversal, we find no abuse of discretion by the trial court. Accordingly, we affirm the order appealed from.
+ 
+
+
+  In 1991 vehicles driven by Robert Grimes, appellee, and Bernard Truhe collided. Robert Grimes sued for personal injuries and summons was served on Bernard Truhe on July 14, 1993. No answer was filed and on August 13 Grimes moved for a default judgment. The motion was granted on August 23. A hearing on damages was held and the trial judge awarded a judgment to Grimes for $230,000.
+ 
+
+
+  On September 15, 1993, Truhe moved to set aside the default judgment under Ark. R. Civ. P. 55(c), asserting he had immediately turned over the summons to his insurance company, Farmers Insurance, and had been assured by Farmers’s agent that it would defend the suit. Truhe argued that any negligence was on the part of the insurance company and not attributable to any action or inaction on his part.
+ 
+
+
+  The trial court denied the motion, finding Truhe had depended on his agent, Farmers Insurance Company, which did not relieve him of responsibility. Bernard Truhe appealed from that order.
+ 
+
+
+  Appellant first submits the trial court erred in not setting aside the judgment on grounds of excusable neglect or inadvertence. The argument has three facets: 1) the failure to timely file was excusable; 2) if not excusable, it was not Truhe’s fault but that of the insurance company; 3) there is no evidence the insurance company was Truhe’s agent.
+ 
+
+
+  Since ARCP 55(c) was amended in 1990 only two cases have dealt with excusable neglect relevant to this case: B&F Engineering, Inc. v. Cotroneo, 309 Ark. 175, 830 S.W.2d 835 (1992), and Divelbliss v. Suchor, 311 Ark. 8, 841 S.W.2d 600 (1992).
+ 
+
+
+  The facts in Cotroneo are similar to the case now before us. In Cotroneo, the complaint and summons were served on B&F on January 25, 1991, and B&F forwarded them to its liability insurer. No answer was forthcoming and on February 19, Cotroneo moved for a default judgment. B&F responded with a general denial, maintaining the failure to answer was due to mistake, inadvertence or excusable neglect by its insurer in not notifying its counsel of the action. The reason given by B&F for failing to answer was provided by B&F’s insurer. The affidavit of its claims examiner explained that he had received the complaint styled Michael Cotroneo v. B & F Engineering, Inc., but had failed to recognize it was a separate cause of action from a pending suit styled Martin v. Eisele, Special Administrator for G.W. Franks, Deceased, & B & F Engineering, Inc., arising out of the same accident and which the insurance company was already defending. Due to that misconception he did not notify the company’s attorney of the Cotroneo complaint.
+ 
+
+
+  We noted the 1990 amendment to Rule 55(c) was intended to liberalize Arkansas practice regarding default judgment, but we were not persuaded that the wide discretion of the trial court had been abused under the circumstances, noting particularly that courts had not been liberal in treating defaults attributable to the inaction of insurance companies as excusable. The lapse of time in the case before us is greater than in Cotroneo. More important, no reason was offered to the trial court for the insurance company’s failure to respond. We agree therefore with the trial court that this omission does not constitute excusable neglect under ARCP 55(c) and our cases interpreting that rule. See also Divelbliss, supra.
+ 
+
+
+  Second, appellant submits that if the delay was inexcusable, it was the insurer’s negligence that caused the delay and such negligence should not be imputed to the insured. Looking elsewhere, since we have not addressed this question directly, we note a division among the courts.
+  
+   1
+  
+  We believe the more persuasive opinions support the trial court in this case.
+ 
+
+
+  In Griffey v. Rajan, 514 N.E.2d 1122 (Ohio 1987) the court drew an analogy between the relationship of attorney/client to that of insurer/insured. Quoting from Ward v. Cook United, Inc., 521 S.W.2d 461 (Mo. App. 1975), the court said:
+ 
+
+
+  Reason and logic render impossible the acceptance of any real distinction between the inexcusable neglect of a lawyer (held in Missouri to be imputable to his client) and the inexcusable neglect of a claims manager and attorney for the defendant’s insurer. Both occupy a contractual relationship with the client, the prime purpose of which is to handle the litigation within the framework of judicial proceedings. But even of more significant force is that by undertaking such responsibilities they also assume an obligation to third parties interested in the matter and to the courts administering and judicially determining the controversy.
+ 
+
+
+  The court noted the general rule that an attorney’s negligence is imputable to his or her client and quoted from Link v. Wabash Railroad Co., 370 U.S. 626 (1962):
+ 
+
+
+  Keeping this suit alive merely because . . . [defendant] should not be penalized for the omissions of his own attorney would be visiting the sins of . . . [defendant’s] lawyer upon the [plaintiff].
+ 
+
+
+  The Griffey court concluded the insurer’s negligence was imputable to the insured.
+ 
+
+
+  There is authority supporting the result in Link v. Wabash, as applied to the relationship of insurer and insured, as in this case. See, e.g. Siebert Oxidermo, Inc. v. Shields, 446 N.E.2d 332 (Ind. 1983); Stevens v. Gulf Oil Corp., 108 R.I. 209, 274 A.2d 163 (1963); Chielewski v. Marich, 2 Ill.2d 568, 119 N.E.2d 247 (1954); Griffey v. Rajan, supra; Stephens v. Childers, 236 N.C. 348, 72 S.E.2d 849 (1952); Leslie v. Spencer, 170 Okla. 642, 42 P.2d 119 (1935); Ward v. Cook, supra.
+ 
+
+
+  Furthermore, though we have not directly decided whether the negligence of the insurer may be imputed to the insured, we have long held clients responsible for the acts of omission or commission of their attorneys. Alger v. Beasley, 180 Ark. 46, 20 S.W.2d 317 (1929); Merchants and Planters’ Bank and Trust Co. v. Ussery, 183 Ark. 838, 38 S.W.2d 1087 (1931); Beth v. Hartis, Ex’r, 208 Ark. 903, 118 S.W.2d 119 (1945); Moore v. Robertson, 242 Ark. 413, 413 S.W.2d 872 (1967); Meisch v. Brady, 270 Ark. 652 (Ark. App. 1980) (“The failure of an attorney to file an answer is imputable to the litigant.”) And in Alger v. Beasley, supra, though recognizing a division, the rule was reaffirmed in Arkansas:
+ 
+
+
+  The attorney did not testify and, so far as this court knows, there is no reason why he should not have filed the answer within the time given by the court.
+ 
+
+
+  In light of the reasoning of other jurisdictions and our own cases we reject appellant’s point and hold the negligence of the insurance company is imputed to the appellant.
+ 
+
+
+  Appellant also argues the record does not support a finding that the insurance company had become Truhe’s agent. This argument was not made below, however, and is waived.
+ 
+
+
+  Appellant also argues the trial court erred in failing to give due consideration to appellant’s meritorious defense and the lack of prejudice to appellee. ARCP 55(c) requires that the party seeking to have the judgment set aside must demonstrate “a meritorious defense to the action.” Appellant cites Medunic v. Lederer, 533 F.2d 891 (3rd Cir. 1976), for the proposition that the trial court must consider the meritorious defense before denying the motion to set aside the default judgment. This argument has already been addressed in Maple Leaf Canvas, Inc. v. Rogers, 311 Ark. 171, 842 S.W.2d 22 (1992). Seeking relief from a default judgment, Maple Leaf argued it had a meritorious defense and that no prejudice resulted to the appellees. We responded:
+ 
+
+
+  Appellant contends that no prejudice resulted to the appellees and that it has a meritorious defense. Appellant however must first satisfy the court that a threshold reason exists for denying default judgment. The reason it presents is not convincing. The failure to answer the complaint seems due more to carelessness . . ., a result of not attending to business. [Our emphasis.]
+ 
+
+
+  To reiterate, we are not renouncing the view that default judgments are not favored, that judgments on the merits are preferred. Even so, the issue involves the sound discretion of the trial court [Cammack v. Chalmers, 284 Ark. 161, 680 S.W.2d 689 (1984)], and where the record is bereft of explanation for the failure to respond to a complaint we are hard pressed to hold that an abuse of discretion occurred.
+ 
+
+
+  Affirmed.
+ 
+
+
+
+
+   1
+  
+
+   For cases supporting the proposition that an insurance company’s negligence is not imputable to the insured, see Flexsteel Industries v. Modern Industries, Ltd., 239 S.W.2d 593 (Iowa 1976) (and cases cited therein).

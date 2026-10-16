@@ -1,0 +1,233 @@
+SPRIZZO, District Judge.
+ 
+
+  This is an appeal from a decision of the Bankruptcy Court which essentially seeks to review two issues, which I understand are the only issues presented on appeal: (1) whether the bankruptcy judge erred in denying the motion for summary judgment, and (2) whether the bankruptcy judge erred in denying the motion for reargument. Dealing with them in turn, the Court concludes, for the reasons that follow, that the decision of the bankruptcy judge should in all respects be affirmed.
+ 
+
+
+  The principal threshold issue here is whether Florida law or New York law controls. This is properly before this Court, for notwithstanding the failure of the appel-lee to cross-appeal on that issue, it is well settled that the appellee is entitled to make any argument supported by the record to sustain the decision of the Bankruptcy Court.
+  
+   Massachusetts Mutual Life Insurance Co. v. Ludwig,
+  
+  426 U.S. 479, 481, 96 S.Ct. 2168, 2159, 48 L.Ed.2d 784 (1976);
+  
+   United States v. American Railway Express Co.,
+  
+  265 U.S. 425, 435, 44 S.Ct. 560, 564, 68 L.Ed. 1087 (1924);
+  
+   University Club v. City of New York,
+  
+  842 F.2d 37, 39 (2d Cir.1988). In this case it is clear that the conflicts of law issue was properly before the Bankruptcy Court because the motion for summary judgment was predicated upon Florida law, and appellant had the burden of demonstrating that that law was applicable. Indeed, the Bankruptcy Court specifically dealt with it, although not in great detail.
+  
+   See In re Ionesphere,
+  
+  U.S. Bankruptcy Court Dec., June 15, 1993, R.D. # 23, at 44-51.
+ 
+
+
+  This is especially true since the appeal is from the denial of a motion for summary judgment. Indeed, it is hard to imagine how the appellee could have rationally been expected to cross-appeal from the denial of a motion for summary judgment, which might not have even have been appealable.
+ 
+
+
+  Leaving that aside for the moment, the Court is satisfied that under applicable New York law governing choice of law, New York law and not Florida law should apply to the issues raised by the appeal. Without going into the applicable New York precedents, which have not been briefed extensively in the appellant’s brief but have been briefed somewhat more extensively in appel-
+   
+   *55
+   
+  lee’s brief, under New York law, the Court looks at what are the relevant contacts are.
+  
+   Golotrade Shipping and Chartering, Inc. v. Travelers Indemnity Co.,
+  
+  706 F.Supp. 214, 217-18 (S.D.N.Y.1989);
+  
+   McGinniss v. Employers Reinsurance Corp.,
+  
+  648 F.Supp. 1263, 1267 (S.D.N.Y.1986);
+  
+   Auten v. Auten,
+  
+  308 N.Y. 155, 124 N.E.2d 99 (1954). This Court, as a federal court sitting in New York, must apply the conflicts law of the forum state.
+  
+   Klaxon Co. v. Stentor Electric MFG Co.,
+  
+  313 U.S. 487, 61 S.Ct. 1020, 85 L.Ed. 1477 (1941);
+  
+   In re Koreag, Controle et Revision S.A.,
+  
+  961 F.2d 341, 350-51 (2d Cir.),
+  
+   cert. denied,
+  
+  — U.S. -, 113 S.Ct. 188, 121 L.Ed.2d 132 (1992);
+  
+   Golotrade Shipping,
+  
+  706 F.Supp. at 217-18;
+  
+   McGinniss,
+  
+  648 F.Supp. at 1267. Therefore, the question is, what are the relevant contacts?
+ 
+
+
+  There is no dispute here, as I understand the facts, that the contract was negotiated in New York; that the broker who negotiated the contract on behalf of the appellant lives in New York and that the contract was delivered in New York. There is an argument made that it was also constructively delivered to Eastern in Florida because delivery to its agent in New York constructively delivered it in Florida as well. But even if we assume that it was delivered in Florida, it was also delivered in New York.
+ 
+
+
+  Since the issues raised by this appeal deal only with a question of contract interpretation. as to how the premium should be determined and the impact of a Florida filing requirement upon the validity of the insurance contract at issue, there is no dispute as to whether the nature of the risks covered for Florida insureds violates Florida public policy. I think it is fairly clear, both under New York law and under the law of many other jurisdictions, that where a court is dealing with an issue of whether the coverage provided to an insured violates the public policy of the state where the risk is covered, New York courts would conclude the place of performance would have a more significant impact upon a choice-of-law determination.
+  
+   Restatement (Second) of Conflict of Laws
+  
+  § 193, cmmt. A (1971). Here, however, we have a rather simple issue as to whether or not the contract was a rating contract, or a dividend contract, or both.
+ 
+
+
+  The Court finds no meaningful contact to Florida with respect to that issue. Given that circumstance, neither the Restatement nor applicable New York State law, in my view, supports the view that a New York court would apply Florida law in this case. The Court holds, therefore, that a New York court would apply New York law, especially where we are dealing with two large companies — a major insurance company and Eastern Air Lines — both of which are sophisticated corporations represented by counsel and fully capable, if they wanted to remove the issue from doubt, by placing an appropriate provision into the contract which would provide for the applicability of the law of one state rather than the other with respect to these issues.
+ 
+
+
+  The Court must start with the assumption that parties of equal bargaining strength, especially major companies such as those involved here, make their own contracts. The Court is not going to make contracts for such parties or do for them what they should have done themselves. There would be no issue here if the contract had specifically provided for the application of the law of one state rather than another, and the failure to bargain for that cuts very strongly against the notion of having the Court do by implication what the parties could have done by negotiation.
+ 
+
+
+  However, even assuming that Florida law were to apply here, I am not convinced that a failure to file this contract in accordance with Florida law would invalidate the contract or require the relief which was sought by way of summary judgment in the court below. The Bankruptcy Court concluded that the contract at issue could not be both a rating contract and a dividend contract at the same time. I don’t think I have to reach the merits of that because in any case, I do not believe that a Florida court would invalidate the contract for that reason. Although the appellant has a good argument that if it is not a rating contract, it may not even be a contract of insurance at all.
+ 
+
+
+  An argument is made here by the appellee that in any event, another provision of Flori
+   
+   *56
+   
+  da law, Fla.Stat.Ann. § 627.171 (West 1984 & Supp.1993), allows a contract to be filed which contains a rate other than that specified in the filed rate, where there is consent of the parties.
+  
+   See
+  
+  Appellee’s Brief, at 22-23. However, appellant argues that for that provision to apply, some written consent other than that which is embodied in the contract itself is required.
+ 
+
+
+  The appellee responds to that argument by contending' that there can be no rational basis for not finding consent here because consent is established not only by the contract itself but also by the circumstance that appellant again independently consented, when, after the bankruptcy petition was filed, the trustee had the opportunity to disaffirm the contract but instead sought the authority of the Bankruptcy Court here in New York, on the record, to ratify the provisions of the contract at issue.
+ 
+
+
+  I find appellees argument more persuasive on that issue. Even if I were to assume arguendo that some consent other than the contract would be required, I think under the facts presented here it is clear that there is not only written consent to the rate in the contract itself, but also that an additional consent was made in open court. For both of those reasons I cannot reach the conclusion that the failure to file a separate consent document with both the insured and the regulating agencies affords a basis to provide the relief appellant sought in its motion for summary judgment.
+ 
+
+
+  Moreover, I think that well-settled principles of estoppel dictate that where a party seeks the benefits of a contract, it cannot disaffirm its burdens.
+  
+   Warren v. Hudson Pulp & Paper Corp.,
+  
+  477 F.2d 229, 292 (2d Cir.1973);
+  
+   Fineberg v. E.B. Kline,
+  
+  542 So.2d 1002, 1004 (Fla.Dist.Ct.App. 3d Dist.1988). With respect to the argument that somehow or other — and this is an argument that was made on rebuttal by counsel for Eastern Air Lines — there was a Hobson’s choice between Eastern Air Lines’ electing to get the benefits of the contract and challenging the rate provided in the contract, the fact of the matter is that that is a choice presented by all decisions to affirm or disaffirm a contract. You always have to decide whether the benefits to your client outweigh the burdens of ratifying or disaffirming a contract.
+ 
+
+
+  The Court finds, therefore, that there was adequate consent to a rate other than the filed rate, and that therefore failure to file the rate as set forth in the contract with the rating agencies did not violate Florida law. In any event, principles of estoppel foreclose the issue of consent being raised as a basis to challenge a contract the trustee has chosen to affirm.
+ 
+
+
+  Finally, even assuming that the contract was in violation of Florida regulatory requirements and even assuming that Florida law applied, the relief requested would not be appropriate here. The plaintiff had the burden, on a motion for summary judgment, of demonstrating its right to relief as a matter of law. Plaintiff did not cite in the Bankruptcy Court and did not cite to this Court any Florida case or any Florida statute that requires the Court to select the rate appellant would have this Court accept. All of the cases relied upon, in which the Court disregarded the illegal portions of the contracts in violation of Florida law, involved coverage issues. Therefore, it was a very simple matter for the Court to say that where you have a limitation on coverage in violation of Florida law that it could resolve the matter by eliminating that limitation and by enforcing the contract without it. By contrast, the position taken by appellant on this appeal would put the Court in the position of having to decide that the filed rate is the appropriate rate, although neither party ever agreed to that rate, without any basis to rationally decide that the parties would have selected that rate had they known that the rate set forth in their agreement would later be found to be invalid. I have no authority under Florida law, or any other law, for that matter, which would guide the Court in that rather uncertain effort. Therefore, it seems to me that this also is something that should have been done by appropriate contractual provision, e.g., that if any provision were found in violation of the law, the following filed rate shall be deemed to be the appropriate rate.
+ 
+
+
+  In sum, as I indicated earlier, I am in no position to make the contract for the parties,
+   
+   *57
+   
+  and therefore I cannot do that. I am not satisfied that, merely because the technical regulations with respect to Florida filings were not complied with that, that I can disregard what the parties agreed to or bargained for in negotiating this rather extensive and sophisticated insurance coverage.
+ 
+
+
+  That leads me to the final question as to whether or not the contract supports either appellant’s view or appellee’s view as to when the premiums have to be paid. I think the unambiguous language of the contract supports the appellee’s view that there was no requirement to pay back premiums prior to 90 days after January 31, 1994.
+  
+   1
+  
+  I think the language relied upon by the appellant does not support their interpretation. I think “subject to the maximum premium required by law” means only that they cannot be required to return more than the maximum premium called for by the contract. The Court finds no merit to appellant’s argument that somehow the premiums were required to be paid back sooner based upon provision 4
+  
+   2
+  
+  of the contract as opposed to provision 6
+  
+   3
+  
+  of the contract, which the Court finds to be clearly applicable.
+ 
+
+
+  With respect to the motion for reargument, first of all I think there is strong merit to appellee’s argument that the motion may very well have been untimely. But even assuming it was not untimely, this new information or so-called new evidence was not new evidence at all, would have had no material impact upon the decision of the bankruptcy judge, and indeed has no material impact upon my decision in this case. Since the so-called new evidence was no more than pure legal matters that were already before the Court anyway, I see no purpose in remanding the case to the Bankruptcy Court to resolve that issue, especially since there is no likelihood that it would impact the conclusion the Court has reached.
+ 
+
+
+  The Court finds, in sum, that the Florida law does not apply and that New York law does, and that the filing requirement of Florida has no relevance. Therefore, the Court need not reach the issue of whether it can be a rating and/or dividend contract under Florida law, because under New York law it doesn’t matter. But even assuming that Florida law applied, I am not satisfied that the failure to file with Florida regulatory agencies is fatal to the appellee’s argument, because the consent, both in the negotiation of the contract and before the Bankruptcy Court, and principles of estoppel obviate the need for any relief based upon the Florida requirement.
+ 
+
+
+  Finally, and more important, my ultimate conclusion is that I am not satisfied that, even assuming arguendo that Florida law was violated, the relief which the plaintiff sought by way of summary judgment, which is having the Court select one version of the premium rather than another, is compelled by either Florida statute or Florida precedent. Indeed, there has been no authority
+   
+   *58
+   
+  cited to the Court that has applied the concept of enforcing part of the contract in a context other than that relating to coverage issues.
+ 
+
+
+  For the foregoing reasons, the decision of the Bankruptcy Court is affirmed.
+ 
+
+
+  It is SO ORDERED.
+ 
+
+
+
+
+
+
+   1
+  
+
+   . The only portion of the Dividend Plan which refers to
+   
+    when
+   
+   money would be paid to Eastern is in Paragraph 6 of Addendum 1 (entitled “Plan Termination"). This portion of the agreement provides:
+  
+
+
+   Upon receipt of the January 31, 1994 Loss Report, the calculation of final premium and dividend (if any) will be made according to the formula contained in this plan. Any additional premium, subject to maximum premium limitation, will be immediately due and payable. Any dividend or return of paid-in premium will be immediately credited and the account will, be closed.
+  
+
+
+   Dividend Plan, Addendum 1, ¶ 6.
+  
+
+
+
+   2
+  
+
+   . Paragraph 4 of Addendum 1 to the Dividend Plan provides:
+  
+
+
+
+    PREMIUM ADJUSTMENT PROCEDURES
+   
+   After the initial twelve (12) months, losses will be examined quarterly. Ultimate loss levels will be estimated as in the Table of Loss Development Factors indicated below. Final Premium and Dividend (if any) will be calculated and recorded. If at anytime, the Final Premium indicated by these calculations exceeds the Paid-in Premium, the additional premium will be immediately billed, subject to the Maximum Premium Limitations. All billings will be due and payable within thirty (30) days.
+  
+
+
+
+   3
+  
+
+   .Paragraph 6 of Addendum 1 to the Dividend Plan provides:
+  
+
+
+
+    PLAN TERMINATION
+   
+   Upon receipt of the January 31, 1994 Loss Report, the calculation of final premium and dividend (if any) will be made according to the formula contained in this plan. Any additional premium, subject to maximum premium limitation, will be immediately due and payable. Any dividend or return of paid-in premium will be immediately credited and the account will be closed.

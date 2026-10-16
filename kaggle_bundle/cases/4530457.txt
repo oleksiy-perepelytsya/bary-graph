@@ -1,0 +1,69 @@
+People v Edwards (2020 NY Slip Op 02503)
+
+
+
+
+
+People v Edwards
+
+
+2020 NY Slip Op 02503
+
+
+Decided on April 30, 2020
+
+
+Appellate Division, Third Department
+
+
+
+Published by New York State Law Reporting Bureau pursuant to Judiciary Law § 431.
+
+
+This opinion is uncorrected and subject to revision before publication in the Official Reports.
+
+
+
+Decided and Entered: April 30, 2020
+
+111506
+
+[*1]The People of the State of New York, Appellant,
+v
+Michael Edwards, Respondent.
+
+Calendar Date: February 18, 2020
+
+Before: Egan Jr., J.P., Lynch, Mulvey, Devine and Colangelo, JJ.
+
+
+Robert M. Carney, District Attorney, Schenectady (Chandler Frontero of counsel), for appellant.
+
+Mark J. Gaylord, Schenectady, for respondent.
+
+
+
+
+Devine, J.
+
+Appeal from an order of the Supreme Court (Hogan, J.), entered December 10, 2018 in Schenectady County, which partially granted defendant's motion to dismiss the indictment.
+
+In April 2018, an allegedly intoxicated defendant was driving and rapidly accelerated after seeing a marked patrol cruiser, soon leaving the road, striking a concrete barrier and injuring himself and his two passengers. He was charged in an 11-count indictment with various offenses related to that incident, including two counts of assault in the first degree. The assault in the first degree counts related to the two passengers, whose serious injuries resulted from conduct by defendant that was allegedly reckless, created a grave risk of death and, under the circumstance, "evinc[ed] a depraved indifference to human life" (Penal Law § 120.10 [3]). Defendant filed an omnibus motion contending, as is relevant here, that the evidence before the grand jury was legally insufficient to establish depraved indifference and that the two counts of assault in the first degree must therefore be dismissed. Supreme Court agreed, prompting this appeal by the People.
+
+"To dismiss or reduce an indictment on the basis of insufficient evidence before a [g]rand [j]ury, a reviewing court must consider whether the evidence viewed in the light most favorable to the People, if unexplained and uncontradicted, would warrant conviction by a petit jury" (People v Grant, 17 NY3d 613, 616 [2011] [internal quotation marks, brackets and citations omitted]; see CPL 190.65 [1]; 210.20 [1] [b]; People v Carlin, 173 AD3d 1363, 1363-1364 [2019]; People v Park, 163 AD3d 1060, 1061 [2018]). Legal sufficiency means prima facie proof, as opposed to proof beyond a reasonable doubt, of the elements needed to establish the charged crimes (see People v Grant, 17 NY3d at 616; People v Park, 163 AD3d at 1061; People v Spratley, 152 AD3d 195, 197 [2017]). Our inquiry is accordingly limited "to assessing whether the facts, if proven, and the inferences that logically flow from those facts supply proof of every element of the charged crimes, and whether the grand jury could rationally have drawn the guilty inference" (People v Spratley, 152 AD3d at 197 [internal quotation marks, brackets and citations omitted]; see People v Grant, 17 NY3d at 616; People v Galatro, 84 NY2d 160, 164 [1994]).
+
+The grand jury learned that defendant had been barhopping with the two passengers in the hours leading up to the accident, and testing done after the accident indicated that he was intoxicated. A police officer who was on patrol that night observed defendant driving 68 miles per hour in a 35 mile-per-hour zone, then rapidly accelerate when the officer attempted to effect a traffic stop. Video footage depicts part of the ensuing pursuit — which the officer soon ended due to defendant's excessive speed — during which defendant was driving partially in the wrong lane of traffic. One of the passengers testified that defendant had ignored her initial warning to slow down, as well as that the accident happened when defendant "jerked" the car off the road and into a supermarket parking lot upon learning that this passenger had seen a police cruiser. The subsequent accident reconstruction revealed that defendant was driving 119 miles an hour five seconds before the accident, then slammed on his brakes and steered hard to the right, hurtling into the parking lot and striking a concrete barrier at approximately 60 miles per hour. Defendant undoubtedly behaved recklessly and placed his two passengers at grave risk of death if this proof is credited, and his actions resulted in serious injuries to both. The inquiry is therefore whether the proof also reflected "wanton cruelty, brutality, or callousness, combined with an utter indifference as to whether the victim lives or dies" on defendant's part so as to permit a finding of depraved indifference (People v Wilson, 32 NY3d 1, 6 [2018]; see People v Suarez, 6 NY3d 202, 213 [2005]; see People v Hakim-Peters, 92 AD3d 1030, 1032-1033 [2012]).
+
+Drunk driving cases do not ordinarily lend themselves to a finding of depraved indifference, nor does "every vehicular police chase resulting in death [or serious injury] . . . take place under circumstances evincing" it (People v Maldonado, 24 NY3d 48, 58 [2014]; see People v Heidgen, 22 NY3d 259, 276-277 [2013], cert denied 574 US 1063 [2014]). Unlike in cases where a defendant attempted to avoid harming others in the course of a chase (compare People v Maldonado, 24 NY3d at 55-56; People v Prindle, 16 NY3d 768, 770 [2011]), however, the intoxicated defendant here was warned by one of his passengers that he should slow down and "was well aware that [he] was endangering [their] lives" by flouting traffic laws and fleeing a police officer at ludicrous speeds on local roads (People v King, 116 AD3d 424, 425 [2014], lv denied 24 NY3d 962 [2014]). Moreover, the same passenger testified that defendant knew that the parking lot was a shortcut to another street and that he suddenly "turned into" it when she mentioned seeing a police cruiser. The grand jury could infer from this proof that defendant did not care about the welfare of his passengers and that he lost control of the vehicle not in an unsuccessful effort to navigate a bend in the road, but rather in a near-suicidal gambit to escape police by making an abrupt turn at high speed and trying to traverse the parking lot. It follows from those inferences that defendant "appreciated that he . . . was engaging in conduct that presented a grave risk of death and totally disregarded that risk, with catastrophic consequences" (People v Heidgen, 22 NY3d at 279; see People v Gomez, 65 NY2d 9, 11 [1985]; People v Daniels, 265 AD2d 909, 909 [1999], lv denied 94 NY2d 878 [2000]; People v Padula, 197 AD2d 747, 748-749 [1993], lv denied 82 NY2d 928 [1994]). Although innocent inferences could also be drawn from the evidence presented, legally sufficient proof nevertheless existed for the grand jury's finding that defendant exhibited depraved indifference toward his passengers and, thus, Supreme Court erred in dismissing the two counts of assault in the first degree (see People v Park, 163 AD3d at 1063-1064).
+
+Egan Jr., J.P., Mulvey and Colangelo, JJ., concur.
+
+Lynch, J. (dissenting).
+
+I respectfully dissent. In my view, Supreme Court correctly determined that the evidence before the grand jury was legally insufficient to support the assault charges, premised on defendant's purported operation of the vehicle with depraved indifference. There is no question that defendant was driving in an extremely reckless manner, but recklessness and depraved indifference are not the same mental states. "Depraved indifference is a culpable mental state which is best understood as an utter disregard for the value of human life" (People v Maldonado, 24 NY3d 48, 52-53 [2014] [internal quotation marks and citation omitted]; see People v Heidgen, 22 NY3d 259, 274-275 [2013], cert denied 374 US 1063 [2014]). In automobile cases, the "conscious avoidance of risk is the antithesis of a complete disregard for the safety of others" (People v Maldonado, 24 NY3d at 54). This concept is vividly illustrated by a comparison of the Court of Appeals' decisions in People v Maldonado (supra) and People v Heidgen (supra). The defendants in both cases were driving in a dangerous and reckless manner. In Maldonado, however, the defendant swerved in and out of traffic in an attempt to both avoid a collision and to evade the police — conduct that the Court of Appeals determined "establishes a lack of depraved indifference" (People v Maldonado, 24 NY3d at 53-54; see People v Prindle, 16 NY3d 768, 771 [2011]). In contrast, in Heidgen, the Court of Appeals dealt with three defendants, each of whom drove into the oncoming traffic lanes at high rates of speed, two of those defendants drove without slowing down before causing a fatal head-on collision, and one of them killed a pedestrian (People v Heidgen, 22 NY3d at 268-275). The Court of Appeals concluded that each defendant's failure to take any evasive action to avoid a collision evinced the mens rea of depraved indifference in the circumstances presented (id. at 277-279).
+
+Here, the accident occurred in the area where Altamont Avenue turns to the right into Curry Avenue in the Town of Rotterdam, Schenectady County. Jeremy Shultis, an investigator with the Collision Reconstruction Unit of the State Police, testified that he was able to retrieve crash data information from defendant's vehicle. The recovered data provided information for the five seconds leading up to when the vehicle hit the concrete barrier. Shultis could not specify the exact placement of the vehicle five seconds back, but indicated that it was probably in a straightaway on Altamont Avenue. At that point, the vehicle's speed was 119 miles per hour. According to Shultis, through the "entirety of that five seconds of pre-crash data, there was zero acceleration, there was zero depression of the accelerator and [defendant] was on the brake the whole time." Shultis concluded that "the vehicle was slowing for the entire five seconds of this pre-crash data" and hit the barrier at approximately 60 miles per hour. Shultis further testified that the steering wheel was in a "neutral" position at the five second mark and then turned more and more to the right as the road curved. Nonetheless, the vehicle was unable to navigate the turn and ended up going across the oncoming lane and into the grocery store parking lot across the street, where it crashed into the concrete barrier. Photographs admitted into evidence at trial also depict tire marks in the roadway where defendant was attempting to make a turn. More particularly, Joseph Glasser, a patrol officer with the Schenectady County Sheriff's Office, conducted an accident reconstruction investigation, during which he "observed the marks on the road from Altamont Avenue onto Curry Road." He testified that he "couldn't tell if they were braking or accelerating marks." On the other hand, the passenger testified that defendant slammed on the brakes after she stated that "[t]here's a cop" and then "[defendant's] whole car just jerked, and that's when the accident happened."
+
+Taken together, as Supreme Court duly recognized, this evidence demonstrates that defendant took steps, albeit unsuccessfully, to reduce the vehicle's speed and mitigate the risk of his reckless driving during the five seconds leading up to the collision. Such conduct "is the antithesis of a complete disregard for the safety of others" (People v Maldonado, 24 NY3d at 54). As such, I agree with Supreme Court that the People failed to present prima facie proof that defendant acted with depraved indifference and, thus, I would affirm the court's order.
+
+ORDERED that the order is modified, on the law, by reversing so much thereof as partially granted defendant's motion and dismissed counts 1 and 2 of the indictment; motion denied to that extent and said counts reinstated; and, as so modified, affirmed.

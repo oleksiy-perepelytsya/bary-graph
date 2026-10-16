@@ -1,0 +1,625 @@
+HOLDERMAN, District Judge.
+ 
+
+  John Kelly was found guilty by a jury of two narcotics offenses and two firearms offenses. Kelly challenges his convictions on several grounds, including allegedly improper evidentiary rulings by the district court judge and alleged violations by the prosecution of its obligations under
+  
+   Brady v. Maryland,
+  
+  373 U.S. 83, 83 S.Ct. 1194, 10 L.Ed.2d 215 (1963). After submitting their respective briefs, the parties waived oral argument. We affirm.
+ 
+
+
+
+   PROCEDURAL HISTORY
+  
+
+
+  The four-count indictment filed against defendant-appellant Kelly alleged that he committed the following crimes on November 3, 1988:
+ 
+
+
+
+   Cowrit One
+  
+  — knowing and intentional distribution of cocaine (21 USC § 841(l)(a));
+  
+   Count Two
+  
+  — knowing and intentional possession of heroin and cocaine with intent to distribute (21 USC § 841(l)(a));
+ 
+
+
+
+   Count Three
+  
+  — possession of a firearm by a convicted felon (18 USC § 922(g)(1); 18 USC § 924);
+ 
+
+
+
+   Count Four
+  
+  — possession of a firearm in relation to a narcotics offense (18 USC § 924(c)(1)).
+ 
+
+
+  District Judge James Moody presided over the two-day jury trial. At the conclusion of that trial, the jury found Kelly guilty as charged. Kelly was scheduled to be sentenced on March 20, 1991, but sentencing was postponed on a motion by the government to allow continuing negotiations between the government and Kelly to take place regarding Kelly’s cooperation in connection with other criminal investigations. The government stated in its motion: “To date, the defendant is cooperating, and it is expected that his cooperation will take several months to complete.” (Appellant’s Brief, Appendix, pp. A13-A14.)
+ 
+
+
+  Kelly was originally scheduled to appear for sentencing on June 21,1991, but he failed to appear and a warrant for his arrest was issued. Kelly was apprehended and brought before the court on December 27,1991. Kelly was ordered detained pending sentencing; the sentencing hearing was ultimately held
+   
+   *1172
+   
+  on February 6,1992. Kelly was sentenced to serve eighteen months in prison on each of the first three counts, concurrently, and to serve five years in prison on count four, this sentence to run consecutively to the sentences imposed on the first three counts.
+ 
+
+
+
+   THE FACTS
+  
+
+
+  In 1988, John Kelly was an owner and proprietor of Kelly’s Auto Repair located in Gary, Indiana. During the months of July, August and September 1988, Officer Diaz (“Diaz”) of the Gary Police Department, working undercover, made several narcotics purchases at Kelly’s Auto Repair from a man known only as “Bumblebee”.
+ 
+
+
+  On November 3, 1988, Diaz phoned Kelly’s Auto Repair and asked to speak with “Bumblebee.” Diaz was told “Bumblebee” was not available, so Diaz asked to speak with “John.” Diaz had seen Kelly at the shop during prior narcotics purchases, and Kelly had been introduced to Diaz as “John” by “Bumblebee.” When Diaz informed Kelly that Diaz was to pick up a package that “Bumblebee” had told him to pick up, Kelly invited Diaz to the shop. Diaz testified that Kelly sold him a “pony pack” of white powder, which Diaz paid for with bills whose serial numbers had been recorded. Diaz testified Kelly was carrying a 9 mm. pistol at the time of the purchase. No other officer was in a position to observe the transaction between Diaz and Kelly.
+ 
+
+
+  Shortly after the buy, Diaz signalled other law enforcement officers to execute a previously planned raid on Kelly’s Auto Repair shop. Twelve police officers, with badges in plain view, pulled up in marked and unmarked vehicles and entered the shop in group formation.
+  
+   1
+  
+  The officers secured the area within moments of their entrance. Officer Green confiscated a loaded 9 mm. pistol from Kelly. Other officers confiscated the three bills which Diaz had given to Kelly as payment for the “pony pack”. The officers confiscated an additional “pony pack,” additional cash, a shotgun, and scales from the shop’s office, three cocaine rocks from the office’s safe, and a bottle cap filled with heroin in a trailer parked in a lot adjacent to the shop.
+ 
+
+
+  The officers testified to the sealing of the evidence seized in the raid and to their procedures for storing and analyzing the evidence. Diaz testified to the procedure he followed as to the “pony pack” he had purchased from Kelly, which he inventoried separately from the evidence seized in the raid. Diaz took that “pony pack” and the other seized evidence to the Indiana State Police Laboratory. Chemical analysis indicated the powder in the “pony pack” purchased from Kelly was cocaine, and the other seized narcotics included heroin and cocaine.
+ 
+
+
+  A copy of the search warrant that Diaz had obtained to enable him to search Kelly’s Auto Repair shop and an inventory of the evidence seized in the raid were apparently never provided by the prosecution to Kelly or his defense counsel before the trial. Further, some of the seized evidence was lost prior to trial.
+ 
+
+
+  At trial, Kelly testified on his own behalf and denied that he sold narcotics to Diaz. Kelly testified he was unaware that any narcotic drugs were present at the shop or were being sold at the shop. Kelly also presented witnesses who testified that Kelly was known as “Walt,” not “John,” and that no call for “John” had been received on November 3, 1988. Kelly maintains he only put on the gun, which he testified belonged to a third party, because he believed the plainclothes officers were robbers. Kelly maintained that, on learning the true identity of the individuals, he immediately turned over the gun. Kelly also testified that he had limited access to the office safe, while numerous other individuals used it freely.
+ 
+
+
+
+   APPELLANT KELLY’S ARGUMENTS
+  
+
+
+  On appeal, Kelly makes the following arguments:
+ 
+
+
+  1. the trial court erred in admitting evidence regarding items allegedly seized
+   
+   *1173
+   
+  from appellant’s premises, because the search warrant was defective in both its execution and return under Rule 41 of the Federal Rules of Criminal Procedure;
+ 
+
+
+  2. the trial court erred in admitting evidence regarding material allegedly seized from appellant’s premises, because the government failed to establish a valid chain of custody, failed to produce certain evidence in court, and failed to explain the loss of the evidence;
+ 
+
+
+  3. appellant was deprived of a fair trial because the government failed to disclose that key evidence had been lost in sufficient time to enable appellant and his counsel to prepare an adequate defense;
+ 
+
+
+  4. the trial court incorrectly applied the sentencing guidelines by failing to provide a downward departure in acknowledgment of appellant’s assistance and cooperation with the government.
+ 
+
+
+
+   ANALYSIS
+  
+
+
+
+   Standard of Review
+  
+
+
+  The burden on a defendant-appellant in challenging the evidentiary rulings of the trial court is an extremely heavy one.
+  
+   United States v. Shukitis,
+  
+  877 F.2d 1322, 1327 (7th Cir.1989). Trial court decisions as to the admissibility of evidence require special deference from a reviewing court, and will only be reversed in the case of an abuse of discretion.
+  
+   Id.; United States v. Zapata,
+  
+  871 F.2d 616, 621 (7th Cir.1989). Kelly has not met this burden,
+ 
+
+
+
+   Trial Court Did Not Err by Admitting the Seized Evidence
+  
+
+
+  Kelly first argues that the items seized during the raid should not have been admitted in evidence because the search warrant was defective in its execution and return under Rule 41(d) of the Federal Rules of Criminal Procedure.
+  
+   2
+  
+  Failure to comply with the procedural requirements of Rule 41(d), however, has generally not been held to constitute a deprivation of rights under the fourth amendment which requires exclusion of the seized evidence.
+  
+   United States v. Stockheimer,
+  
+  807 F.2d 610, 613 (7th Cir.1986), ce
+  
+   rt. denied,
+  
+  481 U.S. 1018, 107 S.Ct. 1899, 95 L.Ed.2d 506 (1987). A violation of Rule 41(d) can lead to exclusion, however, when there is a showing of prejudice, or an intentional and deliberate disregard of the rule.
+  
+   Id.
+  
+  Ministerial violations of Rule 41(d) do not warrant suppression of the evidence.
+  
+   United States v. Harrington,
+  
+  504 F.2d 130, 134 (7th Cir.1974).
+  
+   See also, United States v. Homick,
+  
+  815 F.2d 1156, 1158 (7th Cir.1987) (“[F]oibles in the administration of Rule 41 are not grounds for exclusion.”). “[I]t is difficult to anticipate any violation of Rule 41, short of a defect that also offends the Warrant Clause of the fourth amendment, that would call for suppression.”
+  
+   Homick,
+  
+  815 F.2d at 1158.
+ 
+
+
+  Additionally, we note the strict requirements of Rule 12(b) of the Federal Rules of Criminal Procedure.
+  
+   3
+  
+  When the
+   
+   *1174
+   
+  defense does not seek to suppress the evidence as required by Rule 12(b)(3) before the trial, even if defendant later objects to the evidence at trial, the issue is deemed waived under Rule 12(f).
+  
+   4
+  
+
+   United States v. White,
+  
+  718 F.2d 260, 262 (8th Cir.1983);
+  
+   United States v. Hare,
+  
+  589 F.2d 242, 243 (5th Cir.1979).
+ 
+
+
+  Kelly maintains that Rule 41 was not complied with as he never received a copy of the warrant or a receipt for the property taken. Kelly further points out that the requirement that the return be verified was also not met, as Diaz admitted he did not actually perform the search or collect the evidence, as was represented on the return. (Tr. pp. 152-155.) Kelly further contends that none of the officers who testified indicated that they had served a copy of the warrant or return on Kelly. (Tr. pp. 153, 215, 240, 259, 285.) Kelly argues that there was clearly prejudice in this case, as the indictment came 21 months after the search, resulting in a considerable delay in giving him notice of the exact charges against him. Further, Kelly maintains that the police did not follow the “spirit” of Rule 41, given that the seized evidence was mislabelled and lost. Kelly asserts that the violation of Rule 41 prevented him from holding the police accountable for what was taken.
+ 
+
+
+  Kelly’s contentions are not persuasive. First, as noted by the government, Kelly failed to object when evidence which had been seized in the raid was introduced at the trial. (Tr. pp. 250, 296-297.) Further, the record is unclear as to whether a copy of the search warrant was actually served. Twelve officers took part in the raid, but only half of them testified at Kelly’s trial. While none of the testifying officers stated that they personally served a copy of the warrant, they indicated they believed someone had. (Tr. pp. 154, 202, 240.) Given the context, a raid against a drug dealer’s business, knowing in advance the dealer was armed, it is hardly surprising that the officers would be more conscious of safety and tactical necessity than Rule 41’s technical requirements.
+  
+   See Stock-heimer,
+  
+  807 F.2d at 614. Moreover, Kelly has not shown “prejudice, or an intentional and deliberate disregard of the rule,” as is required for exclusion of evidence for a failure to comply with Rule 41.
+  
+   Id.
+  
+  at 613.
+ 
+
+
+
+   The Loss of Certain Seized Evidence Did Not Require Exclusion of the Witnesses’ Testimony Regarding What They Observed
+  
+
+
+  Kelly next argues that testimony regarding the seized evidence should have been excluded, in light of the loss of certain of the seized evidence and an inadequate chain of custody. We disagree.
+ 
+
+
+  A narcotics violation need not be proved by direct evidence; there is no need for a sample of the narcotics seized to be placed before the jury.
+  
+   United States v. Lawson,
+  
+  507 F.2d 433, 438 (7th Cir.1974). While the parties have not cited any Seventh Circuit cases dealing with lost or stolen narcotics evidence, they have cited two cases from other circuits where narcotics evidence was destroyed prior to trial.
+  
+   United States v. Binker,
+  
+  795 F.2d 1218 (5th Cir.1986),
+  
+   cert. denied,
+  
+  479 U.S. 1085, 107 S.Ct. 1287, 94 L.Ed.2d 144 (1987);
+  
+   United States v. Nabors,
+  
+  707 F.2d 1294 (11th Cir.1983),
+  
+   cert. denied,
+  
+  465 U.S. 1021, 104 S.Ct. 1271, 79 L.Ed.2d 677 (1984).
+ 
+
+
+  The Fifth Circuit has held that the deliberate and routine destruction of narcotics evidence after the original indictment, but before trial, in good faith, did not constitute a due process violation, given that the defendant was allowed to cross-examine witnesses
+   
+   *1175
+   
+  regarding the evidence.
+  
+   Binker,
+  
+  795 F.2d at 1229-1230. The Eleventh Circuit has held that the mistaken destruction of narcotics contraband, the identity of which was critical to a drug prosecution, did not necessarily require the exclusion of testimony about the contraband.
+  
+   Nabors,
+  
+  707 F.2d at 1296.
+ 
+
+
+  The
+  
+   Nabors
+  
+  court noted that the government had made a good faith effort to preserve the evidence, and stated that testimony as to the nature of the contraband need not be suppressed absent a showing that testimony by another expert would produce evidence favorable to the defendant.
+  
+   Id.
+  
+  at 1297. The court ruled the testimony had been properly admitted, given that there was no bad faith nor likelihood of prejudice, a reasonable explanation for the destruction of the narcotics was presented, overwhelming evidence that the material was narcotics was presented, and the defendant possessed no evidence the material was anything but narcotics.
+  
+   Id.
+  
+
+
+  Kelly points out that the government at the trial had indicated it would present an explanation for the loss, but never did so. (Tr. pp. 345, 352.) Kelly further argues the unfairness of the situation is exacerbated because Diaz was the only officer to deal with Kelly face to face. Kelly also asserts the delay in disclosing the loss further prejudiced him, by preventing him from preparing an adequate defense.
+ 
+
+
+  Kelly has presented no evidence that the seized narcotics evidence, which disappeared after being analyzed, was lost in bad faith. Further, there is no indication that the contraband was anything but what the chemical analysis indicated it to be — cocaine and heroin. In addition, Kelly had the opportunity to cross-examine all government witnesses, including Diaz, about the seized evidence and the loss.
+ 
+
+
+  The fact the loss of the evidence was never explained, however, is troubling. While the parties have referred to no Seventh Circuit cases dealing with this issue, the eases from the Fifth and Eleventh Circuits indicate an explanation would be appropriate. In light of our previous holding in
+  
+   Lawson,
+  
+  507 F.2d at 438, that seized narcotics need not be placed before the jury, we do not believe the government’s failure to explain the loss of drugs requires suppression of the officers’ testimony. In future cases, however, prosecutors are well advised to provide an explanation if similar losses occur. The integrity of the criminal justice system is too important to allow the questions that are raised by such a disappearance to go entirely unanswered.
+ 
+
+
+
+   The Chain of Custody of the Drugs Introduced in Evidence was Minimally Sufficient
+  
+
+
+  Kelly challenges the chain of custody as to the seized evidence. As to a chain of custody for the proper admission of a physical exhibit, there must be a showing that the physical exhibit is in substantially the same condition as when the crime was committed.
+  
+   United States v. Aviles,
+  
+  623 F.2d 1192, 1197 (7th Cir.1980). When there is no evidence of tampering, a presumption of regularity attends the official acts of public officers in custody of evidence; the courts presume they did their jobs correctly.
+  
+   Id.
+  
+  at 1198. All the government must show is that reasonable precautions were taken to preserve the original condition of evidence; an adequate chain of custody can be shown even if all possibilities of tampering are not excluded.
+  
+   Id.
+  
+  In
+  
+   Aviles,
+  
+  this court concluded that since the seals on the evidence bags were intact when the bags were opened by the chemist who would analyze the evidence, the trial court could reasonably find that the narcotics evidence was in the same condition as when it was purchased.
+  
+   Id.
+  
+  Merely raising the possibility of tampering is not sufficient to render evidence inadmissible; the
+  
+   possibility
+  
+  of a break in the chain of custody of evidence goes to the weight of the evidence, not its admissibility.
+  
+   United States v. Harrington,
+  
+  923 F.2d 1371 (9th Cir.),
+  
+   cert. denied,
+  
+  — U.S. -, 112 S.Ct. 164, 116 L.Ed.2d 128 (1991).
+ 
+
+
+  Kelly argues that the inventory of the seized evidence (Government’s Exhibit 12) and the testimony regarding the seized evidence do not match. In particular, the inventory lists two “pony packs” of white powder as seized, while the testimony indicates only one “pony pack” was actually seized. (Tr. pp. 237, 272.) Kelly also points out
+   
+   *1176
+   
+  there was a chain of custody problem with the currency allegedly paid to Kelly in exchange for the narcotics. (Tr. pp. 189, 250.) As indicated by a question from the jury, there were ambiguities in the evidence presented regarding the initial recording of the serial numbers and the confirmation of the serial numbers. (Tr. pp. 538-540.) Kelly argues these inconsistencies are particularly critical in light of the fact the seized narcotics evidence was lost. Kelly criticized the chain of custody vigorously at trial. (Tr. pp. 317-320.)
+ 
+
+
+  The government notes that Kelly failed to object at the trial to the admission of any of the seized evidence, including the money. (Tr. pp. 250, 296.) The government asserts that the chain of custody was adequate for the trial court to reasonably conclude the evidence was in substantially the same condition as when it was seized. We agree that that requirement was minimally met.
+ 
+
+
+  The government presented testimony detailing the chain of custody. (Government’s Brief pp. 5-7.) As the seals on the evidence bags remained intact until broken by the chemist for laboratory analysis, the chain of custody was adequate under the
+  
+   Aviles
+  
+  decision. 623 F.2d at 1198. The admission of evidentiary testimony was also proper in this case, despite the loss of evidence. The government is not required to introduce narcotics in evidence to obtain a narcotics conviction.
+  
+   Lawson,
+  
+  507 F.2d at 438. Where the chain of custody is minimally adequate, the case may be established by witness’ testimony. The discrepancy between the inventory and the officers’ testimony is not as definitive as Kelly indicates. There are a number of possible explanations for the discrepancy, including pure mistake. Given the total lack of evidence of tampering and the adequate chain of custody, it was not error for the trial court to allow the testimony regarding the seized evidence to be presented to the jury.
+  
+   The Delayed Disclosure of Brady Material Did Not Deny Appellant a Fair Trial
+  
+
+
+  Kelly argues that the prosecutor’s delay in disclosing that certain seized evidence had been lost deprived him of a fair trial. We disagree because, though the
+  
+   Brady
+  
+  disclosure should have been made earlier, the government did disclose the
+  
+   Brady
+  
+  information before the conclusion of the government’s ease-in-chief, and the government’s delay in making that disclosure did not deprive Kelly of due process of law.
+ 
+
+
+  A prosecutor’s due process obligation to disclose exculpatory material to the defense is clearly established.
+  
+   Brady v. Maryland,
+  
+  373 U.S. 83, 83 S.Ct. 1194, 10 L.Ed.2d 215 (1963). The only question here is whether the government’s disclosure, which was made before the government rested its case-in-chief, came so late as to prevent the defendant from receiving a fair trial.
+  
+   United States v. Radix Laboratories, Inc.,
+  
+  963 F.2d 1034, 1041 (7th Cir.1992);
+  
+   United States v. Williams,
+  
+  738 F.2d 172, 178 (7th Cir.1984);
+  
+   United States v. Sweeney,
+  
+  688 F.2d 1131, 1141 (7th Cir.1982). In situations such as this, in which a
+  
+   Brady
+  
+  disclosure is made during trial, the defendant can seek a continuance of the trial to allow the defense to examine or investigate, if the nature or quantity of the disclosed
+  
+   Brady
+  
+  material makes an investigation necessary.
+  
+   Williams,
+  
+  738 F.2d at 178.
+ 
+
+
+  Kelly argues that undercover agent Diaz’s credibility was the key to the prosecutor’s case, inasmuch as Diaz was the only witness to the alleged drug purchase from Kelly. Kelly maintains that the “lost” evidence would have been especially damaging to Diaz’s credibility, in light of the fact Diaz allegedly admitted he falsified the return of service and was the last person to have custody of the missing evidence. Kelly asserts that had he learned about the loss of the seized evidence before trial, he would have then had an opportunity to prepare an adequate defense, but since the disclosure came during trial, he was deprived of that opportunity. Kelly stresses that the trial prosecutor knew about the lost evidence three days before trial, and the loss should have been discovered and disclosed much earlier than that because the evidence had been returned from the Indiana State Police Laboratory in May 1989.
+ 
+
+
+  The government argues that it did not suppress the
+  
+   Brady
+  
+  information and that its disclosure was sufficiently timely. The gov-
+   
+   *1177
+   
+  eminent also maintains the time of disclosure caused no prejudice to Kelly, as the evidence would not have affected the outcome of the trial, since there was more than sufficient evidence upon which the jury could have based Kelly’s conviction.
+ 
+
+
+  The focus of the case against Kelly was Diaz’s testimony. Diaz’s testimony was apparently believed by the jury. When the challenge to sufficiency of the evidence focuses on the believability of oral testimony, a reviewing court should defer to the determination of witness credibility in the trial court.
+  
+   United States v. Gutierrez,
+  
+  978 F.2d 1463, 1469 (7th Cir.1992);
+  
+   United States v. de Soto,
+  
+  885 F.2d 354, 366-67 (7th Cir.1989);
+  
+   United States v. Vega,
+  
+  860 F.2d 779, 794 (7th Cir.1988). Had Kelly desired to make full use of the
+  
+   Brady
+  
+  information when it was disclosed to attack Diaz’s credibility, a continuance could have been sought to enable defense counsel to prepare and Diaz could have been recalled for further questioning. No such requests were made.
+ 
+
+
+  The record indicates that the prosecutor disclosed the loss of the seized narcotic evidence before the government rested on Monday (11-4-88). (Tr. pp. 322-324.) The prosecutor had learned about the loss on Friday (11-2-88) or Saturday (11-3-88). While under ideal circumstances the prosecution would have learned of and disclosed the information well before the trial, the record does not reveal that the delay in disclosure was prompted by prosecutorial bad faith or by a desire to conceal the
+  
+   Brady
+  
+  evidence. Moreover, Kelly has made no substantive showing as how the three day (Friday to Monday) delay between the prosecution learning of the loss and disclosing that information to the defense adversely affected the defense.
+ 
+
+
+  Contrary to the defense arguments here, there is no evidence of record indicating Diaz was in anyway responsible for the loss of the seized evidence. Although evidence bearing on a witness’s credibility can be material to the trial’s outcome when it has significant impeachment value,
+  
+   Giglio v. United States,
+  
+  405 U.S. 150, 154, 92 S.Ct. 763, 766, 31 L.Ed.2d 104 (1972);
+  
+   United States v. Dimas,
+  
+  3 F.3d 1015, 1018 (7th Cir.1993), the
+  
+   Brady
+  
+  evidence here was of almost no value to the defense in attacking Diaz’s credibility and immaterial to the outcome of Kelly’s trial.
+ 
+
+
+  The government had sufficient evidence to convict Kelly without the seized narcotic evidence. The government asserts, accurately, that Diaz’s testimony, plus the “pony pack” Diaz purchased from Kelly (which was not lost), and the firearm Kelly possessed constituted adequate evidence to support each of Kelly’s convictions. Since the
+  
+   Brady
+  
+  information of the lost seized evidence had minimal, at best, impeachment value, no due process violation occurred.
+  
+   See McGeshick v. Fiedler,
+  
+  3 F.3d 1083 (7th Cir.1993).
+ 
+
+
+
+   Downward Departure from Sentencing Guidelines Was Unwarranted
+  
+
+
+  Kelly’s argument that he was entitled to a downward departure from the guideline sentencing range in recognition of his “substantial assistance” to the government is quickly disposed of.
+ 
+
+
+  We note, as a preliminary matter, that such arguments are waived if not raised before the sentencing court.
+  
+   United States v. Macias,
+  
+  930 F.2d 567, 569-70 (7th Cir.1991);
+  
+   United States v. Donatiu,
+  
+  922 F.2d 1331, 1335 (7th Cir.1991). Kelly’s counsel evidently failed to make this argument before the trial court. (Sentencing transcript pp. 8, 10-11, 14-15, 17.)
+ 
+
+
+  A defendant has no constitutionally protected right to a downward departure based on alleged substantial assistance provided to the government.
+  
+   United States v. Burrell,
+  
+  963 F.2d 976, 985 (7th Cir.1992). Further, any downward departure for assistance to the government is contingent upon a motion for such a departure made by the prosecution.
+  
+   Id.
+  
+  at 985. The decision to request the departure is a matter of prosecu-torial discretion, and a prosecutor’s refusal to ask for a downward departure is not renewable for arbitrariness or bad faith.
+  
+   Id.
+  
+  We also note that while federal courts can review a prosecutor’s failure to file a substantial assistance motion, and grant a remedy if the refusal is based on an unconstitutional motive, the burden is on the defendant to make a substantial threshold showing before he
+   
+   *1178
+   
+  becomes entitled to an evidentiary hearing on the matter.
+  
+   United States v. Egan,
+  
+  966 F.2d 328, 332 (7th Cir.1992).
+ 
+
+
+  Kelly has given no specific information regarding his cooperation. His “showing” of substantial assistance is limited to his conclu-sory assertions that he rendered “substantial assistance.” Kelly stresses the fact that the government moved to continue Kelly’s sentencing stating “defendant is cooperating” and that his cooperation will take several months. Vague references to current cooperation and speculation about future cooperation are not particularly probative of substantial assistance under the guidelines. Lastly, Kelly has presented no evidence indicating the government’s decision not to seek a downward departure was based on unconstitutional motives.
+ 
+
+
+  More telling is the fact Kelly became a fugitive during his period of alleged “cooperation.” This is the sort of assistance the government can live without. The prosecution was completely reasonable in electing not to make a motion for a guidelines departure in such circumstances.
+  
+   See United States v. Donatiu,
+  
+  922 F.2d 1331, 1335 (7th Cir.1991) (prosecutor’s failure to make motion for departure was reasonable given extremely limited assistance rendered by defendant).
+ 
+
+
+
+   CONCLUSION
+  
+
+
+  A recurrent theme in this case is a measure of sloppiness on the part of the government. While the conduct does not rise to the level of reversible error under the facts of this case, the government is strongly cautioned that there is nothing optional regarding its duties under
+  
+   Brady
+  
+  and the Federal Rules of Criminal Procedure to the defendant and to the court.
+ 
+
+
+  The appellant’s conviction is AFFIRMED.
+ 
+
+
+
+
+
+
+
+   1
+  
+
+   . “Group formation” is a tactical entry technique which provides the officers maximum self-protection.
+  
+
+
+
+   2
+  
+
+   . Rule 41. Search and Seizure
+  
+
+
+   (d) Execution and Return with Inventory. The officer taking property under the warrant shall give to the person from whom or from whose premises the property was taken a copy of the warrant and a receipt for the property taken or shall leave the copy and receipt at the place from which the property was taken. The return shall be made promptly and shall be accompanied by a written inventory of any property taken. The inventory shall be made in the presence of the applicant for the warrant and the person from whose possession or premises the properly was taken, if they are present, or in the presence of at least one credible person other than the applicant for the warrant or the person from whose possession or premises the property was taken, and shall be verified by the officer. The federal magistrate shall upon request deliver a copy of the inventory to the person from whom or from whose premises the property was taken and to the applicant for the warrant.
+  
+
+
+   F.R.Crim.P. Rule 41(d).
+  
+
+
+
+   3
+  
+
+   . Rule 12. Pleadings and Motions Before Trial; Defenses and Objections
+  
+
+
+   (b) Pretrial Motions. Any defense, objection, or request which is capable of determination without the trial of the general issue may be raised before trial by motion. Motions may be written or oral at the discretion of the judge. The following must be raised prior to trial:
+  
+
+
+   (1) Defenses and objections based on defects in the institution of the prosecution; or
+  
+
+
+ 
+    *1174
+    
+   (2) Defenses and objections based on defects in the indictment or information (other than that it fails to show jurisdiction in the court or to charge an offense which objections shall be noticed by the court at any time during the pendency of the proceedings); or
+  
+
+
+   (3) Motions to suppress evidence; or
+  
+
+
+   (4) Requests for discovery under Rule 16; or
+  
+
+
+   (5) Requests for a severance of charges or defendants under Rule 14.
+  
+
+
+
+   4
+  
+
+   . Federal Rule of Criminal Procedure 12(f) states:
+  
+
+
+   (f) Effect of Failure to Raise Defenses or Objections. Failure by a party to raise defenses or objections or to make requests which must be made prior to trial, at the time set by the court pursuant to subdivision (c), or prior to any extension thereof made by the court, shall constitute waiver thereof, but the court for cause shown may grant relief from the waiver.

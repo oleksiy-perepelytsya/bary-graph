@@ -1,0 +1,206 @@
+57 F.3d 1067
+NOTICE: Fourth Circuit I.O.P. 36.6 states that citation of unpublished dispositions is disfavored except for establishing res judicata, estoppel, or the law of the case and requires service of copies of cited unpublished dispositions of the Fourth Circuit.
+
+    
+Jose OLIVO, Plaintiff-Appellee,
+v.
+David K. MAPP, Jr., Individually and in his official
+capacity as Sheriff of the City of Norfolk,
+Defendant-Appellant,
+and
+City of Norfolk, Defendant.
+
+    
+No. 94-2279.
+
+    
+United States Court of Appeals, Fourth Circuit.
+
+    
+Argued May 3, 1995.
+Decided June 8, 1995.
+
+    
+
+      
+ARGUED:  William McCardell Furr, WILLCOX & SAVAGE, Norfolk, Virginia, for Appellant.
+
+      
+Bradley Phipps Marrs, MEYER, GOERGEN & MARRS, P.C., Richmond, VA, for Appellee.  ON BRIEF:  Lawrence E. Luck, MEYER, GOERGEN & MARRS, P.C., Richmond, Virginia;  Gary C. Byler, Virginia Beach, Virginia, for Appellee.
+
+      
+Before HAMILTON and LUTTIG, Circuit Judges, and LIVELY, Senior Circuit Judge of the United States Court of Appeals for the Sixth Circuit, sitting by designation.
+
+      
+OPINION
+
+      
+PER CURIAM:
+
+    
+
+    
+
+      1
+      
+Plaintiff-appellee, Jose Olivo (Olivo), brought suit under 42 U.S.C. Sec. 1983 against the defendant-appellant, David Mapp (Mapp), Sheriff of the City of Norfolk, alleging that Mapp discharged him in violation of his First and Fourteenth Amendment rights.  Mapp moved for summary judgment on the basis of qualified immunity.  The district court denied the motion, and Mapp appealed.  We now reverse.
+
+    
+
+    
+
+      2
+      
+* In June 1993, when Mapp was campaigning for reelection, Olivo was a deputy sheriff in the Sheriff's Department of the City of Norfolk, performing duties in a non-policy making, non-confidential position.  Olivo, who was one of 270 deputies in the department, had no supervisory responsibilities and had little day-to-day contact with Mapp.
+
+    
+
+    
+
+      3
+      
+To raise funds for his reelection campaign, Mapp organized an all you can eat and drink beer and crab feast as a campaign event, and he asked, through his top deputies, that his deputies attend.  The cost was forty dollars per person, and the crab feast was scheduled for July 10, 1993.  One day late in June, Olivo was instructed not to leave the jail at the end of his shift until Major Sterling (Sterling), a top deputy, could speak to him and the other deputies.  Sterling advised the assembled deputies of the crab feast, its purpose and cost, and asked all to pay and attend.  He also told them that Colonel Ellis (Ellis), the top deputy, would speak to each of them individually to determine if they would attend.  Ellis would also determine if anyone who did not plan to attend would nevertheless contribute to the campaign and, if so, in what amount.  As a result of this information from Sterling, Olivo told Corporal Small (Small), his immediate supervisor, that he did not intend to go to the crab feast because of his religious (Christian) and ethical views.  Olivo told Small that he did not approve of the event because the event encouraged deputies to drink and drive.
+
+    
+
+    
+
+      4
+      
+At the time of these events, Olivo was assigned to the first shift doing office work.  As of June 30, 1993, he had made no contribution to the campaign, and, on that day, Mapp reassigned Olivo to a post on the third shift, the least favorable, and the shift Mapp used as a form of punishment.
+
+    
+
+    
+
+      5
+      
+Sometime during the period of July 4 to July 12, a police officer in the second precinct, Officer Burt Williams (Williams), asked Olivo if he had purchased a ticket for the crab feast.1  Olivo told Williams his reasons for not buying one.  Williams also asked Olivo for his views concerning the election.  Olivo told Williams that he was neutral and, in any event, could not vote in the election because he lived in Virginia Beach.
+
+    
+
+    
+
+      6
+      
+The crab feast was held as scheduled.  Olivo did not attend, and he never contributed to Mapp's campaign.  Olivo was told on July 13 by his shift commander that he had been fired.  The decision to discharge Olivo was made by Mapp.
+
+    
+
+    
+
+      7
+      
+On September 14, 1993, pursuant to 42 U.S.C. Sec. 1983, Olivo filed a complaint in the United States District Court for the Eastern District of Virginia alleging that Mapp had wrongfully discharged him in violation of his First and Fourteenth Amendment rights.  On April 1, 1994, Mapp filed a motion for summary judgment based on the doctrine of qualified immunity.  The district court denied the motion, and Mapp filed a timely notice of appeal.
+
+    
+
+    
+II
+
+    
+
+      8
+      
+Under the doctrine of qualified immunity, government officials are immune from liability "as long as their actions could reasonably have been thought consistent with the rights they are alleged to have violated."  Anderson v. Creighton, 483 U.S. 635, 638 (1987).  Consequently, qualified immunity attaches when the government actor's conduct "does not violate clearly established statutory or constitutional rights of which a reasonable person would have known."  Harlow v. Fitzgerald, 457 U.S. 800, 818 (1982).  The question of qualified immunity, which is a question of law, see id., asks "whether the plaintiff has alleged a violation of law that was clearly established at the time the challenged actions were taken."  DiMeglio v. Haines, 45 F.3d 790, 794-95 (4th Cir.1995);  see also Harlow, 457 U.S. at 818.
+
+    
+
+    
+
+      9
+      
+When examining the right alleged to have been clearly established, we do not focus " 'upon the right at its most general or abstract level, but at the level of its application to the specific conduct being challenged.' "  Wiley v. Doory, 14 F.3d 993, 995 (4th Cir.1994) (quoting Pritchett v. Alford, 973 F.2d 307, 312 (4th Cir.1992)).  "The 'rights must be clearly established under the particular circumstances confronting the official at the time of the questioned action.' "  DiMeglio, 45 F.3d at 803 (quoting Slattery v. Rizzo, 939 F.2d 213, 216 (4th Cir.1991)).  In other words, "[t]he contours of the right must be sufficiently clear that a reasonable official would understand that what he is doing violates that right."   Id. "This is not to say that an official action is protected by qualified immunity unless the very action in question has previously been held unlawful;  but it is to say that in the light of pre-existing law the unlawfulness must be apparent."   Id. "Officials are not liable for bad guesses in gray areas;  they are liable for transgressing bright lines."  Maciariello v. Sumner, 973 F.2d 295, 298 (4th Cir.1992), cert. denied, 113 S.Ct. 1048 (1993).  Accordingly, we must examine whether, at the time of Mapp's decision to discharge Olivo in July 1993, Olivo's speech was constitutionally protected expression.
+
+    
+
+    
+
+      10
+      
+In July 1993, determining whether a public employee's speech was constitutionally protected expression required the application of a balancing test.  See Connick v. Myers, 461 U.S. 138, 142 (1983).  Under this test, we must first consider whether the speech implicates a matter of public concern.  If a matter of public concern is implicated, we must consider "whether the employee's interest in the speech was outweighed by the employer's 'interest in the effective and efficient fulfillment of its responsibilities.' "  Joyner v. Lancaster, 815 F.2d 20, 23 (4th Cir.)  (quoting Connick, 461 U.S. at 150), cert. denied, 484 U.S. 830 (1987);  see also Pickering v. Bd. of Educ., 391 U.S. 563, 568 (1968) ("The problem in any case is to arrive at a balance between the interests of the [employee], as a citizen, in commenting upon matters of public concern and the interest of the State, as an employer, in promoting the efficiency of the public services it performs through its employees.").2  Causation is also required;  that is, a public employer may avoid liability if the employer can establish that the employment action would have been made notwithstanding the employee's exercise of his or her First Amendment rights.  See Mt. Healthy City Bd. of Educ. v. Doyle, 429 U.S. 274, 287 (1977).
+
+    
+
+    
+
+      11
+      
+For speech to implicate a matter of public concern, the speech must relate to a "matter of political, social, or other concern to the community."  Connick, 461 U.S. at 146.  Absent highly unusual circumstances, however, First Amendment protection is unavailable when "a public employee speaks not as a citizen upon matters of public concern, but instead as an employee upon matters only of personal interest."  Id. at 147.  Therefore, we must determine whether Olivo spoke on behalf of the public or himself as an employee.  To resolve this, we examine the content, form, and context of Olivo's speech.  Id. at 147-48.  Courts look to whether the employee attempted to communicate the speech to the public at large and the employee's motivation in speaking.  Id. at 148.
+
+    
+
+    
+
+      12
+      
+In this case, Olivo's complaint alleges that he was fired for four reasons:  (1) he did not buy a ticket to the crab feast;  (2) he expressed disapproval of the crab feast;  (3) he did not contribute to Mapp's campaign;  and (4) he expressed his neutrality with regard to the election.  The district court found that Olivo's speech addressed a matter of public concern:
+
+    
+
+    
+
+      13
+      
+The public had a legitimate political interest in the coercive means by which the sheriff raised his campaign funds.  This was especially true since the speech took place in the context of an election.  Moreover, Olivo's statement of neutrality was of obvious political content, and, therefore implicates the core of First Amendment concern.  Likewise, his failure to contribute to Mapp's campaign, by either donation or by the purchase of a ticket to the crab feast, was of obvious political content.
+
+    
+
+    
+
+      14
+      
+(J.A. 161).
+
+    
+
+    
+
+      15
+      
+While we agree with Olivo and the district court that coercive measures by a sheriff to raise funds for a campaign are matters of public interest, " 'the mere fact that the topic of the employee's speech was one in which the public might or would have had a great interest is of little moment.' "  Kurtz v. Vickrey, 855 F.2d 723, 727 (11th Cir.1988) (quoting Terrell v. University of Texas Sys. Police, 792 F.2d 1360, 1362 (5th Cir.1986), cert. denied, 479 U.S. 1064 (1987)).  Connick teaches that speech "not otherwise of public concern does not attain that status because its subject matter could, in different circumstances, have been the topic of a communication to the public that might be of general interest."  Connick, 461 U.S. at 148 n. 6.  Thus, the proper inquiry is whether the purpose of Olivo's speech was to raise issues of public concern.  See Morgan v. Ford, 6 F.3d 750, 754 (11th Cir.1993), cert. denied, 114 S.Ct. 2708 (1994).
+
+    
+
+    
+
+      16
+      
+In this case, Olivo's speech was by no means an attempt to bring Mapp's alleged coercive practices to the public's attention.  Olivo did not attempt to communicate his speech to the public at large, but rather only to Corporal Small (regarding the crab feast) and a Norfolk police officer (regarding his neutrality in the election).  Nor was Olivo's speech aimed at exposing any misconduct;  his speech is more aptly characterized as an expression of frustration over being asked to pay forty dollars for the crab feast.  In this regard, what is before the court is a simple employee grievance.  As an employee grievance, Olivo's speech did not address a matter of public concern.  See Connick, 461 U.S. at 146-47.  In short, while Olivo's speech may have achieved public concern status if it was conveyed to the public at large, Connick clearly instructs us that speech "not otherwise of public concern does not attain that status because its subject matter could, in different circumstances, have been the topic of a communication to the public that might be of general interest."  Id. at 148 n. 6.  The speech at issue in this case simply did not address a matter of public concern.  Because Olivo failed to establish that his speech addressed a matter of public concern, a reasonable sheriff would not have known that Mapp's actions with respect to Olivo would violate Olivo's First Amendment rights.  Accordingly, Mapp is entitled to qualified immunity.  See Harlow, 457 U.S. at 818.
+
+    
+
+    
+III
+
+    
+
+      17
+      
+For the reasons stated, the judgment of the district court is reversed.
+
+    
+
+    
+
+      18
+      
+REVERSED.
+
+    
+
+    
+
+      
+
+        1
+        
+ A police officer is not a member of the Sheriff's Department
+
+      
+
+      
+
+        2
+        
+ Because this case involves Olivo's expressive conduct, i.e., his speech, the Connick test, rather than the test developed in party affiliation cases such as Elrod v. Burns, 427 U.S. 347 (1976), and Branti v. Finkel, 445 U.S. 507 (1980), controls.  See Jones v. Dodson, 727 F.2d 1329, 1335 n. 6 (4th Cir.1984) ("Where the protected activity involves overt 'expression of ideas,' the more open-ended inquiry prescribed by Pickering and its progeny are required to accomplish the necessary balancing.")

@@ -1,0 +1,1338 @@
+PUBLISHED
+
+
+UNITED STATES COURT OF APPEALS
+             FOR THE FOURTH CIRCUIT
+
+
+NORTH CAROLINA GROWERS’                
+ASSOCIATION, INCORPORATED;
+NATIONAL CHRISTMAS TREE
+ASSOCIATION; FLORIDA FRUIT &
+VEGETABLE ASSOCIATION; VIRGINIA
+AGRICULTURAL GROWERS
+ASSOCIATION, INCORPORATED; SNAKE
+RIVER FARMERS ASSOCIATION;
+NATIONAL COUNCIL OF
+AGRICULTURAL EMPLOYERS; NORTH
+CAROLINA CHRISTMAS TREE
+ASSOCIATION; NORTH CAROLINA
+PICKLE PRODUCERS ASSOCIATION;
+FLORIDA CITRUS MUTUAL; NORTH
+CAROLINA AGRIBUSINESS COUNCIL,
+                                          No. 11-2235
+INCORPORATED; MAINE FOREST
+PRODUCTS COUNCIL; ALTA CITRUS,
+LLC; EVERGLADES HARVESTING &
+HAULING, INCORPORATED; DESOTO
+FRUIT & HARVESTING,
+INCORPORATED; FOREST RESOURCES
+ASSOCIATION; TITAN PEACH FARMS,
+INCORPORATED; H-2A USA,
+INCORPORATED; OVERLOOK
+HARVESTING COMPANY, LLC,
+               Plaintiffs-Appellees,
+                v.
+                                       
+2      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+
+
+UNITED FARM WORKERS; JAMES            
+CEASE; MARIO CENTENO-RODRIGUEZ;
+JUAN CISNEROS-IBARRA; LUIS
+ENRIQUE CISNEROS-IBARRA;
+REYMUNDO GUTIERREZ; CARLOS
+LUIS GUZMAN-CENTENO; JOSE RAUL
+GUZMAN-CENTENO; ABELARDO
+HERNANDEZ-AGUAS; GREGORIO
+HUERTAS-SAMANO; PEDRO IBARRA-
+AVILA; ATANACIO LUGO-RINCON;
+OBDULA MALDONADO-ABELLANEDA;
+MIGUEL ANGEL OLGUIN-HERNANDEZ;
+ARTURO OLGUIN-MONROY; OMERA
+RODRIGUEZ-GUZMAN; DESIDERIO
+TOVAR-ZAPATA; ALEJANDRO TREJO-
+LEON,                                 
+ Intervenors/Defendants-Appellants,
+                and
+HILDA L. SOLIS, in her official
+capacity as United States Secretary
+of Labor; UNITED STATES
+DEPARTMENT OF LABOR; JANET
+NAPOLITANO, in her official
+capacity as United States Secretary
+of Homeland Security; UNITED
+STATES DEPARTMENT OF HOMELAND
+SECURITY,
+                       Defendants.
+
+                                      
+       NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            3
+
+
+
+HOWARD BERMAN; JUDY CHU;            
+GEORGE MILLER; LYNN WOOLSEY,
+     Amici Supporting Appellants,   
+USA FARMERS, INC.,
+    Amicus Supporting Appellees.
+                                    
+       Appeal from the United States District Court
+ for the Middle District of North Carolina, at Greensboro.
+          William L. Osteen, Jr., District Judge.
+                (1:09-cv-00411-WO-LPA)
+
+                Argued: October 23, 2012
+
+               Decided: December 21, 2012
+
+Before WILKINSON, KEENAN, and DIAZ, Circuit Judges.
+
+
+
+Affirmed by published opinion. Judge Keenan wrote the opin-
+ion, in which Judge Wilkinson and Judge Diaz joined. Judge
+Wilkinson wrote a separate concurring opinion.
+
+
+                       COUNSEL
+
+ARGUED: Naomi Ruth Tsu, SOUTHERN POVERTY LAW
+CENTER, Atlanta, Georgia, for Appellants. Robin Elizabeth
+Shea, CONSTANGY, BROOKS & SMITH, LLC, Winston-
+Salem, North Carolina, for Appellees. ON BRIEF: Andrew
+H. Turner, BUESCHER, GOLDHAMMER & KELMAN,
+Denver, Colorado; Gregory S. Schell, MIGRANT FARM-
+WORKER JUSTICE PROJECT, Lake Worth, Florida; Robert
+4       NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+J. Willis, LAW OFFICE OF ROBERT J. WILLIS, Raleigh,
+North Carolina, for Appellants. William R. Loftis, Jr., CON-
+STANGY, BROOKS & SMITH, LLC, Winston-Salem, North
+Carolina, for Appellees. Jonathan G. Cedarbaum, Lillian
+Howard Potter, Annie L. Owens, WILMER CUTLER PICK-
+ERING HALE AND DORR, LLP, Washington, D.C., for
+Amici Supporting Appellants. Leon R. Sequeira, SEYFARTH
+SHAW LLP, Washington, D.C., for Amicus Supporting
+Appellees.
+
+
+                           OPINION
+
+BARBARA MILANO KEENAN, Circuit Judge:
+
+   This appeal involves a regulatory action by the Department
+of Labor (the Department), which suspended various regula-
+tions for temporary agricultural workers and reinstated other
+prior regulations. We primarily consider: (1) whether the
+Department’s action constituted "rule making" under the
+Administrative Procedure Act (the APA), 
+5 U.S.C. §§ 553
+,
+and 701 through 706; and (2) if the action was "rule making,"
+whether the Department satisfied the APA’s "notice and com-
+ment" requirements.
+
+   We conclude that the district court correctly determined
+that the Department: (1) engaged in "rule making" when rein-
+stating the prior regulations; and (2) failed to comply with the
+notice and comment procedures mandated by the APA. We
+also conclude that the Department did not invoke the "good
+cause exception" provided by the APA to excuse its failure to
+comply with these notice and comment requirements. Accord-
+ingly, we hold that the district court did not err in invalidating
+the Department’s action on the ground that it was arbitrary
+and capricious.
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            5
+                               I.
+
+  1.   The 1987 Regulations
+
+   In 1986, Congress passed the Immigration Reform and
+Control Act amendments to the Immigration and Nationality
+Act, which permitted the temporary admission of foreign
+workers to engage in agricultural jobs in the United States
+(the H-2A program). See 
+8 U.S.C. § 1101
+(a)(15)(H)(ii)(a). In
+1987, the Department promulgated regulations governing the
+H-2A program to effectuate Congress’ intent that domestic
+agricultural workers (U.S. workers) be given preference over
+foreign agricultural workers (H-2A workers), and that the
+employment of H-2A workers would not adversely affect the
+wages or working conditions of U.S. workers (collectively,
+the 1987 regulations, or the 1987 rule). See Labor Certifica-
+tion Process for the Temporary Employment of Aliens in
+Agriculture; Adverse Effect Wage Rate Methodology, 
+54 Fed.
+Reg. 28,037
+ (July 5, 1989); Labor Certification Process for
+the Temporary Employment of Aliens in Agriculture and
+Logging, 
+52 Fed. Reg. 20,496
+ (June 1, 1987). An agricultural
+employer seeking to participate in the H-2A program is
+required to apply with the Department and certain other fed-
+eral agencies, certifying that there are insufficient U.S. work-
+ers available to perform work for the employer and agreeing
+to abide by requirements regarding wages, housing, and work-
+ing conditions. See 52 Fed. Reg. at 20,513-20,516.
+
+   The 1987 regulations required, among other things, that
+participating employers pay H-2A workers and similarly-
+situated U.S. workers a wage rate calculated by a formula,
+which is known as an "adverse effect wage rate" (AEWR).
+See 54 Fed. Reg. at 28,038. AEWRs are minimum hourly
+wage rates that must be paid under the H-2A program to for-
+eign and U.S. agricultural workers, and are intended to ensure
+that H-2A workers do not have an adverse effect on the wages
+and working conditions of similarly-employed U.S. workers.
+Feller v. Brock, 
+802 F.2d 722, 724
+ (4th Cir. 1986); 
+54 Fed.
+6
+         NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+Reg. at 28,038. With only minor amendments, such as the
+annual recalculations of the AEWRs, the 1987 regulations
+remained in effect until January 16, 2009.
+
+    2.   The 2008 Regulations
+
+   In February 2008, the Department published a notice of
+proposed rule making, stating that the agency intended to
+make substantial changes to the H-2A program. Temporary
+Agricultural Employment of H-2A Aliens; Modernizing the
+Labor Certification Process and Enforcement, 
+73 Fed. Reg.
+8538
+ (Feb. 13, 2008). A 60-day comment period was pro-
+vided, during which the Department received 11,000 com-
+ments. See Temporary Agricultural Employment of H-2A
+Aliens; Modernizing the Labor Certification Process and
+Enforcement, 
+73 Fed. Reg. 77,110
+, 77,111 (Dec. 18, 2008);
+Extension of Comment Period, 
+73 Fed. Reg. 16,243
+ (Mar. 27,
+2008). A final rule was published in December 2008 and
+became effective on January 17, 2009 (collectively, the 2008
+regulations, or the 2008 rule). See 
+73 Fed. Reg. 77,110
+ (Dec.
+18, 2008). The 2008 regulations changed the method by
+which AEWRs were calculated.1 73 Fed. Reg. at 77,166-
+77,178. Many agricultural employers relied on the terms of
+the 2008 regulations when entering into labor and production
+contracts, and in making other business commitments for the
+2009 growing season. There is no dispute that the 2008 regu-
+lations were validly promulgated.
+
+  The classification of foreign seasonal workers employed on
+Christmas tree farms also is at issue in this appeal. Under the
+Department’s prior practice, such workers were defined as
+"agricultural" employees under the H-2A program, but as
+"non-agricultural," "forestry" employees under the Fair Labor
+    1
+   The Department published the AEWR rates for 2008 in a separate
+notice. See Labor Certification Process for the Temporary Employment of
+Aliens in Agriculture and Logging: 2008 AEWRs and Other Provisions,
+73 Fed. Reg. 10,288
+ (Feb. 26, 2008).
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            7
+Standards Act (FLSA), 
+29 U.S.C. §§ 201
+ through 219. The
+Department’s distinction in this regard was material, because,
+among other things, persons "employed in agriculture" do not
+qualify to receive "overtime" pay under the provisions of the
+FLSA. 
+29 U.S.C. § 213
+(b)(12). Therefore, under the Depart-
+ment’s prior practice, growers of Christmas trees not only
+were required to provide their H-2A workers with housing,
+meals, and transportation benefits set forth in the Immigration
+Reform and Control amendments to the Immigration and
+Nationality Act, but also were required to pay the H-2A work-
+ers for overtime hours worked.
+
+   In 2004, this Court found that the Department’s position
+regarding the classification of H-2A workers on Christmas
+tree farms, adopted without rule making allowing notice and
+comment and without a formal adjudication, lacked any statu-
+tory foundation and was not a persuasive interpretation of the
+FLSA. On that basis, this Court invalidated the Department’s
+determination. Dep’t of Labor v. N.C. Growers’ Ass’n, 
+377
+F.3d 345
+ (4th Cir. 2004). In accordance with this precedent,
+the 2008 regulations defined H-2A workers on Christmas tree
+farms as "agricultural" employees for purposes of both the H-
+2A program and the FLSA. See 73 Fed. Reg. at 77,201-
+77,202.
+
+  3.   The 2009 Suspension
+
+   In March 2009, just two months after the 2008 regulations
+took effect, Hilda Solis, the newly-appointed Secretary of
+Labor, issued a "notice of proposed suspension" of the 2008
+regulations (the 2009 Notice). Temporary Employment of H-
+2A Aliens in the United States, 
+74 Fed. Reg. 11,408
+ (Mar. 17,
+2009). In the 2009 Notice, the Department proposed to sus-
+pend the 2008 regulations, during a nine-month period, for
+further review and reconsideration "in light of issues that have
+arisen since the publication of the [2008 regulations]." 74 Fed.
+Reg. at 11,408. The 2009 Notice also stated that during the
+period that the 2008 regulations would be suspended, the
+8       NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+Department proposed "to reinstate on an interim basis" the
+1987 regulations to avoid a "regulatory vacuum" in the H-2A
+program. Id.
+
+   The Department articulated various reasons in the 2009
+Notice to support the proposed suspension and reinstatement,
+including: (1) a lack of agency resources to implement the
+2008 regulations efficiently; (2) delays resulting from pro-
+cessing increased numbers of H-2A applications under the
+2008 regulations, which volume was expected to impede the
+Department’s performance of its statutory duty "to process H-
+2A applications within a strict timeframe"; (3) the Depart-
+ment’s inability "to implement the sequence of operational
+events" required to process applications under the 2008 regu-
+lations; (4) the Department’s inability to develop an "auto-
+mated review system" for applications, requiring the
+Department to review them manually; (5) the 2008 regula-
+tions were a "complex new regulatory program," the imple-
+mentation of which was proving disruptive and confusing to
+the Department and to stakeholders; (6) avoidance of disrup-
+tion during "the severe economic conditions" facing the coun-
+try; (7) the Department "may differ" with the policy positions
+of the prior Administration, on which the 2008 regulations
+were based; (8) growers "require clear and consistent guid-
+ance" to "plan and staff their operations appropriately for the
+impending growing season"; and (9) continuing to implement
+the 2008 regulations would not be an efficient use of
+resources by stakeholders or the Department in the event that
+the agency soon would issue a different rule. 74 Fed. Reg. at
+11,408-11,409.
+
+   For agricultural employers who submitted H-2A applica-
+tions before the proposed suspension, the Department stated
+that it would process their applications under the 2008 regula-
+tions then in effect. 74 Fed. Reg. at 11,409-11,410; Tempo-
+rary Employment of H-2A Aliens in the United States, 
+74
+Fed. Reg. 25,972
+, 25,979 (May 29, 2009). The Department
+allowed a 10-day period to receive comments on the proposed
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            9
+suspension, citing the need for expediency, and stated that the
+Department only would consider comments concerning the
+suspension action itself, and not regarding the merits of either
+set of regulations (the content restriction):
+
+    Please provide written comments only on whether
+    the Department should suspend the [2008 regula-
+    tions] for further review and consideration of the
+    issues that have arisen since [their] publication.
+    Comments concerning the substance or merits of the
+    [2008 regulations] or the [1987 regulations] will not
+    be considered.
+
+74 Fed. Reg. at 11,408. During this 10-day period, 800 com-
+ments were received. 74 Fed. Reg. at 25,973.
+
+   On May 29, 2009, after two months of consideration, the
+Department published a "final rule; suspension of rule" that
+suspended the 2008 regulations, and reinstated the 1987 regu-
+lations, for a nine-month period effective June 29, 2009 (col-
+lectively, the 2009 Suspension). 
+74 Fed. Reg. 25,972
+ (May
+29, 2009). In addition to the reasons set forth in the 2009
+Notice, the Department also included as grounds supporting
+the decision the likely depressive economic effects of the
+2008 regulations, and the lack of training by the Department,
+state agencies, and H-2A employers. 74 Fed. Reg. at 25,972-
+25,974. Although the Department acknowledged that many
+agricultural employers had planned for the 2009 growing sea-
+son relying on the terms of the 2008 regulations, the Depart-
+ment partly discounted the possibility that the suspension
+would cause excessive disruption, noting that employers had
+operated under the 1987 regulations for several years and
+were familiar with their terms. 74 Fed. Reg. at 25,980.
+
+   Under the 2009 Suspension, agricultural employers hiring
+H-2A workers would be required to pay the higher wage rate
+afforded under the directives contained in the 1987 regula-
+tions. The Department also published higher AEWRs near the
+10       NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+end of May 2009, which were scheduled to take effect one
+month later.2 See Labor Certification Process for the Tempo-
+rary Employment of Aliens in Agriculture and Logging: 2009
+AEWRs and Other Provisions, 
+74 Fed. Reg. 26,016
+ (May 29,
+2009). Additionally, due to the 2009 Suspension, H-2A work-
+ers employed on Christmas tree farms again would be classi-
+fied as "agricultural" employees for purposes of the H-2A
+program, but as "non-agricultural" employees for purposes of
+the FLSA, the same classification invalidated by this Court in
+N.C. Growers’ Ass’n. 74 Fed. Reg. at 25,982.
+
+  4.   The NCGA Files Suit To Enjoin Suspension
+
+   In June 2009, the North Carolina Growers’ Association,
+Inc., and other growers’ associations, farmers, and related lob-
+bying organizations (collectively, the NCGA), filed a com-
+plaint in the district court against the Department and other
+federal agencies (collectively, the federal defendants). The
+NCGA sought to enjoin the Department’s 2009 Suspension,
+arguing that such action violated the APA. The district court
+granted the NCGA’s summary judgment motion, and issued
+a preliminary injunction prohibiting implementation of the
+2009 Suspension.
+
+   As a result of the district court’s injunction, the 2008 regu-
+lations continued to govern administration of the H-2A pro-
+gram, and H-2A and U.S. agricultural workers were paid at
+lower wage rates for nine months based on the 2008 AEWRs
+and the 2008 regulations.3 Thousands of agricultural workers
+and employers were affected by the changes in these regula-
+tions.
+  2
+     This would result in a higher hourly wage both for H-2A workers and
+for U.S. agricultural workers who worked alongside the H-2A workers.
+   3
+     For example, under the 2008 AEWR, an H-2A worker in North Caro-
+lina would be paid $8.85 per hour rather than $9.34 per hour under the
+2009 Suspension. See 74 Fed. Reg. at 26,016 (2009 Suspension AEWR);
+73 Fed. Reg. at 10,289 (2008 AEWR).
+         NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW                   11
+  5.   The 2010 Regulations
+
+   In September 2009, the Department issued another notice
+of proposed rule making in a second attempt to replace the
+2008 regulations.4 See Temporary Agricultural Employment
+of H-2A Aliens, 
+74 Fed. Reg. 45,906
+ (Sept. 4, 2009) After
+issuing notice and receiving comment, the Department pub-
+lished new regulations governing the H-2A program (the 2010
+regulations). See Temporary Agricultural Employment of H-
+2A Aliens, 
+75 Fed. Reg. 6884
+ (Feb. 12, 2010). The 2010 reg-
+ulations largely restored the H-2A program to the status quo
+before 2008, and reinstituted the wages and working condi-
+tions established under the 1987 regulations. The 2010 regula-
+tions are not at issue in this appeal.
+
+  6.   The Claims In The NCGA’s Suit
+
+   The district court held that the NCGA’s claims against the
+federal defendants were moot, in light of the Department’s
+promulgation of the 2010 regulations. In December 2009, the
+district court permitted the United Farm Workers, the Farm
+Labor Organizing Committee, AFL-CIO, and representative
+H-2A workers (collectively, the Farm Workers) to intervene
+as defendants in this case. The Farm Workers filed a pur-
+ported class action counterclaim against the NCGA on behalf
+of H-2A workers and U.S. agricultural workers who had been
+paid at wage rates based on the lower AEWRs in effect during
+the preliminary injunction.
+
+   The Farm Workers sought the difference between the
+higher wages that would have been paid under the reinstated
+1987 regulations, and the lower wages actually received by
+the workers under the 2008 regulations as a result of the dis-
+trict court’s preliminary injunction. The Farm Workers sought
+  4
+   Appeals from the district court’s preliminary injunction order to this
+Court were later withdrawn in light of the Department’s action promulgat-
+ing the 2010 regulations.
+12      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+payment of this wage differential for the period between June
+29, 2009, the date that the reinstatement of the 1987 regula-
+tions would have taken effect, and March 14, 2010, the last
+day before the uncontested 2010 regulations took effect.
+
+   The parties filed cross motions for summary judgment on
+the issue whether the 2009 Suspension was promulgated in
+compliance with the APA. In its summary judgment decision,
+the district court held that issuance of the 2009 Suspension,
+that is, "the suspension of the 2008 Rule and reinstatement of
+the 1987 Rule[,] constituted ‘rule making’" under the APA
+and required compliance with the APA’s notice and comment
+procedures. The court further concluded that the 2009 Sus-
+pension violated the APA, because the Department refused to
+consider comments addressing the substance of either the
+2008 regulations or the 1987 regulations. According to the
+court, these were relevant issues that the Department was
+required to consider before suspending the 2008 regulations
+and reinstating the 1987 regulations.
+
+   The district court held that the Department’s failure to con-
+sider such comments rendered the Department’s action
+imposing the 2009 Suspension arbitrary and capricious. The
+court granted the NCGA’s motion for summary judgment,
+denied the Farm Workers’ motion for partial summary judg-
+ment, and dismissed with prejudice the Farm Workers’ coun-
+terclaims. The Farm Workers timely appealed.
+
+                              II.
+
+   We review de novo a district court’s decision awarding
+summary judgment. Laber v. Harvey, 
+438 F.3d 404, 415
+ (4th
+Cir. 2006) (en banc). Summary judgment is appropriate when
+there is no genuine issue of material fact, and the moving
+party is entitled to judgment as a matter of law. Couch v.
+Jabe, 
+679 F.3d 197, 200
+ (4th Cir. 2012); Fed. R. Civ. P. 56(a).
+
+  The APA requires that agencies follow certain procedures
+before issuing a rule. 
+5 U.S.C. § 553
+. When an agency is
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            13
+engaged in "rule making," the agency must: (1) publish a gen-
+eral notice of proposed rule making in the Federal Register
+that includes "the terms or substance of the proposed rule or
+a description of the subjects and issues involved"; (2) give
+"interested persons an opportunity to participate in the rule
+making through submission of written data, views, or argu-
+ments"; and (3) "[a]fter consideration of the relevant matter
+presented . . . incorporate in the rules adopted a concise gen-
+eral statement of their basis and purpose." 
+5 U.S.C. § 553
+(b),
+(c).
+
+   The important purposes of this notice and comment proce-
+dure cannot be overstated. The agency benefits from the expe-
+rience and input of comments by the public, which help
+"ensure informed agency decisionmaking." Spartan Radio-
+casting Co. v. FCC, 
+619 F.2d 314
+, 321 (4th Cir. 1980). The
+notice and comment procedure also is designed to encourage
+public participation in the administrative process. See Choco-
+late Mfrs. Ass’n v. Block, 
+755 F.2d 1098, 1103
+ (4th Cir.
+1985). Additionally, the process helps ensure "that the agency
+maintains a flexible and open-minded attitude towards its own
+rules," 
+id.
+ (citation omitted), because the opportunity to com-
+ment "must be a meaningful opportunity," Prometheus Radio
+Project v. FCC, 
+652 F.3d 431, 450
+ (3d Cir. 2011) (citation
+omitted).
+
+   Under the APA, a reviewing court will overturn an agency
+action only if it is "arbitrary, capricious, an abuse of discre-
+tion, or otherwise not in accordance with law, . . . [or] without
+observance of procedure required by law." 
+5 U.S.C. § 706
+(2);
+see also Motor Vehicle Mfrs. Ass’n v. State Farm Mut. Auto.
+Ins. Co., 
+463 U.S. 27, 41
+ (1983) (informal rule making proce-
+dures may be set aside if arbitrary, capricious, or not in accor-
+dance with law); Almy v. Sebelius, 
+679 F.3d 297, 302
+ (4th Cir.
+2012) (same). As part of this review process, courts are
+charged with ensuring that agencies comply with the proce-
+dural requirements of the APA. Chrysler Corp. v. Brown, 
+441
+U.S. 281, 313
+ (1979).
+14      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+   We have recognized that courts best provide oversight of
+an agency decision "by scrutinizing process and by determin-
+ing whether the decision was based on a consideration of the
+relevant factors and whether there has been a clear error of
+judgment." Kennecott v. EPA, 
+780 F.2d 445, 449
+ (4th Cir.
+1985) (citing Citizens to Preserve Overton Park, Inc. v.
+Volpe, 
+401 U.S. 402, 416
+ (1971)). These tasks are "the heart
+of the judicial inquiry," 
+id. at 449
+, and fall within courts’
+"special areas of competence," Chamber of Commerce of U.S.
+v. SEC, 
+443 F.3d 890, 899-900
+ (D.C. Cir. 2006) (citation
+omitted). Thus, while our review of an agency’s final decision
+is narrow, "we must be strict in reviewing an agency’s com-
+pliance with procedural rules." Chocolate Mfrs. Ass’n, 
+755
+F.2d at 1103
+ (quoting BASF Wyandotte Corp. v. Costle, 
+598
+F.2d 637, 641
+ (1st Cir. 1979)).
+
+                             III.
+
+   We first consider the issue whether the Department’s sus-
+pension of the 2008 regulations or its reinstatement of the
+1987 regulations qualified as "rule making" under the APA,
+thereby triggering the statute’s notice and comment require-
+ments. If the contested action did not qualify as "rule mak-
+ing," as the Farm Workers contend, the Department was not
+required to provide notice and comment and the district court
+erred in enjoining the 2009 Suspension. However, if the
+Department did engage in "rule making," as the NCGA con-
+tends, the agency was required to comply with regular notice
+and comment procedures barring an express exception
+afforded under the APA.
+
+   The district court assumed, without deciding, that the
+Department’s suspension of the 2008 regulations qualified as
+"rule making." The court held that "[i]n addition to withdraw-
+ing a rule, [the Department] effectively formulated a new rule
+by reinstating the 1987 Rule." (Emphasis added). The court
+further held that "rule making" under the APA "explicitly
+covers rule formulation," and, thus, reinstatement of the 1987
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW              15
+regulations required compliance with regular notice and com-
+ment procedures.
+
+   The Farm Workers contend that the district court’s analysis
+was erroneous in two respects. First, the Farm Workers argue
+that the act of "reinstating" a rule does not fall within the defi-
+nition of "rule making." According to the Farm Workers, "re-
+instating" means restoring something that is not new, while
+"formulating" means creating something new. Second, the
+Farm Workers contend that the Department’s reinstatement of
+regulations that previously had been subject to notice and
+comment procedures did not require a "second rule making
+process before reinstatement." We disagree with the Farm
+Workers’ arguments.
+
+  We begin by considering the relevant statutory language.
+Under the APA, a "rule" is defined as
+
+    the whole or a part of an agency statement of general
+    or particular applicability and future effect designed
+    to implement, interpret, or prescribe law or policy or
+    describing the organization, procedure, or practice
+    requirements of an agency and includes the approval
+    or prescription for the future of rates, wages, corpo-
+    rate or financial structures or reorganizations thereof,
+    prices, facilities, appliances, services or allowances
+    therefor or of valuations, costs, or accounting, or
+    practices bearing on any of the foregoing.
+
+5 U.S.C. § 551
+(4). The APA provides a "broad" definition of
+the term "rule making," Ohio River Valley Envtl. Coal., Inc.
+v. Kempthorne, 
+473 F.3d 94, 102
+ (4th Cir. 2006), which com-
+prises the "agency process for formulating, amending, or
+repealing a rule." 
+5 U.S.C. § 551
+(5) (emphasis added). The
+parties do not dispute that the 1987 and 2008 regulations each
+constitute a "rule" under the APA. Instead, they dispute
+whether the Department’s action qualified as "formulating" a
+rule, thereby constituting "rule making." As described above,
+16      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+an agency engaging in "rule making" is required under the
+APA to provide notice of a proposed rule and the opportunity
+for comment. See 
+5 U.S.C. § 553
+.
+
+    We are not persuaded by the Farm Workers’ textual argu-
+ment that, under the APA, the act of "reinstating" a rule does
+not qualify as "formulating" a rule. This argument is not sup-
+ported by any precedent, and actually is undermined by a def-
+inition of the term "formulating" cited by the Farm Workers,
+which is "to reduce to or express in or as if in a formula," or
+to "put into a systematized statement or expression." See
+Webster’s Third New International Dictionary 894 (1986).
+Notably absent from this definition is any requirement of
+originality or novelty in the substance or text of the subject
+matter expressed. Thus, under this definition of "formulating,"
+it is immaterial whether the rule at issue was newly drafted or
+was drawn from another source.
+
+   When the 2008 regulations took effect on January 17, 2009,
+they superseded the 1987 regulations for all purposes relevant
+to this appeal. As a result, the 1987 regulations ceased to have
+any legal effect, and their reinstatement would have put in
+place a set of regulations that were new and different "formu-
+lations" from the 2008 regulations.
+
+   We also find no merit in the Farm Workers’ argument that
+the Department’s action was not "rule making," but was
+merely a suspension of regulations as occurred in American
+Mining Congress v. EPA, 
+907 F.2d 1179
+, 1191 (D.C. Cir.
+1990) (AMC), and American Federation of Government
+Employees v. OPM, 
+821 F.2d 761
+, 764 (D.C. Cir. 1987)
+(AFGE). Those cases concerned instances in which Congress,
+rather than the agency itself, caused the suspension of the reg-
+ulation at issue. AMC, 907 F.2d at 1183-84; AFGE, 821 F.2d
+at 763-64. This factor, among others, renders these cases inap-
+posite, because the APA’s focus on promoting public notice
+and comment is not affected when Congress steps in and com-
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW         17
+pels agency action. See Chocolate Mfrs. Ass’n, 
+755 F.2d at
+1103
+.
+
+   The Department’s own conduct, however, is highly rele-
+vant and shows that the Department viewed the reinstatement
+of the 1987 regulations as "rule making." The Department
+published the 2009 Notice (entitled "Notice of proposed sus-
+pension of rule"), proposing both to suspend the 2008 regula-
+tions and to reinstate the 1987 regulations, and the
+Department sought and considered comments on such action.
+74 Fed. Reg. at 11,408-11,409. The Department later promul-
+gated the 2009 Suspension (entitled "Final rule; suspension of
+rule"), and explained the basis for its decision. 74 Fed. Reg.
+at 25,972-25,984. Similar attempts by an agency "to comply
+with APA notice-and-comment procedures suggest that the
+agency believed them to be applicable," and support the con-
+clusion that "those procedures were applicable." Manufac-
+tured Housing Inst. v. EPA, 
+467 F.3d 391, 399
+ (4th Cir.
+2006); see also Kempthorne, 
+473 F.3d at 102
+.
+
+   We therefore conclude that, by reinstating the superseded
+and void 1987 regulations (albeit temporarily), the Depart-
+ment engaged in the "formulating" and the "repealing" aspects
+of "rule making" under the APA. See 
+5 U.S.C. § 551
+(5). Thus,
+we hold that the Department’s reinstatement of the 1987 regu-
+lations qualified as "rule making" under the "broad language"
+of that term, and that the Department was required to comply
+with the APA’s notice and comment procedures. See 
+5 U.S.C.
+§ 553
+; Kempthorne, 
+473 F.3d at 102
+.
+
+                             IV.
+
+   The Farm Workers contend, nonetheless, that the Depart-
+ment did not violate the APA, because the Department’s
+action fell within the "good cause" exception to the APA’s
+notice and comment requirements. These notice and comment
+requirements do not apply "when the agency for good cause
+finds (and incorporates the finding and a brief statement of
+18      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+reasons therefor in the rules issued) that notice and public pro-
+cedure thereon are impracticable, unnecessary, or contrary to
+the public interest" (the good cause exception). 
+5 U.S.C.
+§ 553
+(b)(B).
+
+   The APA requires that the agency relying on the good
+cause exception "incorporate[ ] the finding [of good cause]
+and a brief statement of reasons therefor in the rules issued."
+5 U.S.C. § 553
+(b)(B). This requirement, that an agency articu-
+late its basis for dispensing with normal notice and comment,
+is not a procedural formality but serves the crucial purpose of
+ensuring that the exceptions do not "swallow the rule." Cf.
+Mobil Oil Corp. v. Dep’t of Energy, 
+610 F.2d 796, 803
+
+(Temp. Emer. Ct. App. 1979) (conclusory statement or mere
+recital of good cause is not sufficient to qualify as good cause,
+otherwise, an exception to the notice requirement would be
+satisfied upon mere invocation of the rule).
+
+   Under the first statutory ground for good cause, notice and
+comment on a rule may be found to be "impracticable" when
+"the due and required execution of the agency functions
+would be unavoidably prevented by its undertaking public
+rule-making proceedings." Nat’l Nutritional Foods Ass’n v.
+Kennedy, 
+572 F.2d 377, 384-85
+ (2d Cir. 1978) (Friendly, J.)
+(quoting S. Rep. No. 752, at 200 (1945)); see also Util. Solid
+Waste Activities Group v. EPA, 
+236 F.3d 749, 754-55
+ (D.C.
+Cir. 2001) (the "impracticable" basis for good cause applies
+"when an agency finds that due and timely execution of its
+functions would be impeded by the notice and comment oth-
+erwise required" under the APA) (quoting United States
+Department of Justice, Attorney General’s Manual on the
+Administrative Procedure Act 30-31 (1947)). Examples of
+such circumstances under which good cause existed include
+an agency determination that new rules were needed "to
+address threats posing a possible imminent hazard to aircraft,
+persons, and property within the United States," or were "of
+life-saving importance to mine workers in the event of a mine
+explosion," or were necessary to "stave off any imminent
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            19
+threat to the environment or safety or national security." Mack
+Trucks, Inc. v. EPA, 
+682 F.3d 87, 93
+ (D.C. Cir. 2012) (cita-
+tions and internal quotation marks omitted).
+
+   The second statutory ground, the "unnecessary" prong of
+the good cause exception, applies when an administrative rule
+is "a routine determination, insignificant in nature and impact,
+and inconsequential to the industry and to the public." 
+Id.
+ at
+94 (quoting Util. Solid Waste Activities Group, 
+236 F.3d at
+755
+). Congress intended that rule making be exempted as "un-
+necessary" when amendments are "minor or merely techni-
+cal," and of little public interest. Nat’l Nutritional Foods
+Ass’n, 
+572 F.2d at 384
+-85 (quoting S. Rep. No. 752, at 200);
+see also Attorney General’s Manual at 30-31 (the "unneces-
+sary" prong of the good cause exception refers to "the issu-
+ance of a minor rule or amendment in which the public is not
+particularly interested"). Lastly, the third statutory ground for
+good cause addresses circumstances when notice and com-
+ment on a rule are "contrary to the public interest." 
+5 U.S.C.
+§ 553
+(b)(B). This public interest prong of the good cause
+exception "connotes a situation in which the interest of the
+public would be defeated by any requirement of advance
+notice." Util. Solid Waste Activities Group, 
+236 F.3d at 755
+
+(quoting Attorney General’s Manual at 31). Good cause is
+found on this basis "only in the rare circumstances when ordi-
+nary procedures – generally presumed to serve the public
+interest – would in fact harm that interest." Mack Trucks, 
+682
+F.3d at 95
+.
+
+   We construe the good cause exception narrowly. United
+States v. Gould, 
+568 F.3d 459, 469
+ (4th Cir. 2009). There is
+a high bar to invoke the exception because "[t]he legislative
+history of the [APA] demonstrates that Congress intended the
+exceptions in § 553(b)(B) to be narrow ones." Nat’l Nutri-
+tional Foods Ass’n, 
+572 F.2d at 384
+. Indeed, "Congress
+expected, and the courts have held, that the various exceptions
+to the notice-and-comment provisions of section 553 will be
+narrowly construed and only reluctantly countenanced." N.J.
+20      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+Dep’t of Envtl. Prot. v. EPA, 
+626 F.2d 1038, 1045
+ (D.C. Cir.
+1980).
+
+   As a result, the circumstances justifying reliance on the
+good cause exception are "rare," and will be accepted only
+after a reviewing court "examine[s] closely" the proffered rea-
+son for an agency’s deviation from public notice and com-
+ment. Council of the S. Mountains, Inc. v. Donovan, 
+653 F.2d
+573
+, 580 (D.C. Cir. 1981) (citation omitted). The good cause
+exception applies only in "emergency situations," or in cases
+when delay "could result in serious harm." Jifry v. FAA, 
+370
+F.3d 1174, 1179
+ (D.C. Cir. 2004); see also Natural Res. Def.
+Council, Inc. v. Evans, 
+316 F.3d 904
+, 911 (9th Cir. 2003)
+("[N]otice and comment procedures should be waived only
+when delay would do real harm.") (citation and internal quo-
+tation marks omitted); Util. Solid Waste Activities Group, 
+236
+F.3d at 754
+ (good cause exception "should be limited to emer-
+gency situations") (citation omitted).
+
+   We consider an explanation for good cause that the agency
+has advanced at the time of the rule making. See Gould, 
+568
+F.3d at 469-70
+; see also United States v. Garner, 
+767 F.2d
+104, 116-17
+ (5th Cir. 1985) (agency action must be upheld,
+"if at all, on the basis articulated by the agency itself" (quot-
+ing State Farm, 
+463 U.S. at 50
+)). Post-hoc explanations that
+an agency did not have to comply with regular notice and
+comment procedures are viewed with skepticism. See, e.g.,
+United States v. Johnson, 
+632 F.3d 912, 928
+ (5th Cir. 2011);
+Buschmann v. Schweiker, 
+676 F.2d 352, 356-58
+ (9th Cir.
+1982). And, manifestly, we "may not supply a reasoned basis
+for the agency’s action that the agency itself has not given."
+State Farm, 
+463 U.S. at 43
+.
+
+   The present record reveals that the Department did not
+expressly invoke the good cause exception when reinstating
+the 1987 regulations. See 
+5 U.S.C. § 553
+(b)(B). Indeed, in
+undertaking its reinstatement of the 1987 regulations, the
+Department quoted the notice and comment requirements of
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW           21
+§ 553(b) and (c), but omitted the text of the good cause excep-
+tion in subsection (b)(B). See 74 Fed. Reg. at 25,978. More-
+over, nowhere did the Department state that allowing for
+notice and substantive comment on reinstatement of the 1987
+regulations would be "impracticable," "unnecessary," or "con-
+trary to the public interest," the only grounds for good cause
+provided by the statute. 
+5 U.S.C. § 553
+(b)(B).
+
+   We cannot lightly accept arguments that an agency, while
+failing to refer to the good cause exception, nevertheless
+implicitly relied on the exception. The statutory requirements
+in § 553(b)(B) are clear, and they constitute an important part
+of the APA’s procedural safeguards related to agency rule
+making. See Buschmann, 
+676 F.2d at 356-58
+. Although we do
+not impose a rigid requirement that an agency must explicitly
+invoke the good cause exception, the contemporaneous
+agency record must manifest plainly the agency’s reliance on
+the exception in its decision to depart from the required notice
+and comment procedures. See Nat’l Customs Brokers & For-
+warders Ass’n of Am., Inc. v. United States, 
+59 F.3d 1219,
+1224
+ (Fed. Cir. 1995) (excusing agency’s failure to "expressly
+cite section 553(b)(B)," when the agency "expressly noted
+that the interim regulations were not subject to the notice and
+public procedure requirements of 5 U.S.C. 553," and other-
+wise made clear its reliance on the exception (citation omit-
+ted)).
+
+   The Department did not plainly manifest its reliance on the
+good cause exception in this case. Rather, the record reflects
+the Department’s position that the APA’s notice and comment
+provisions were applicable, but that the agency had satisfied
+such obligations.
+
+   The Department actually provided notice and sought com-
+ment on the issue "whether to suspend the [2008 regulations]
+and reinstate on an interim basis the [1987 regulations]." 74
+Fed. Reg. at 11,409. The Department stated the reasons why
+it "believe[d] that the 10-day comment period for this rule-
+22        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+making [was] reasonable." 74 Fed. Reg. at 25,978. The
+Department also stated that "comments on the merits of the
+[2008 and 1987 regulations] would be appropriate when the
+merits of the program are actually at issue," apparently refer-
+ring to a time after the period of suspension if the Department
+decided to engage in further rule making. Id. at 25,979. The
+Department did not justify its content restriction on the basis
+of urgency or exigency, but rather on its stated judgment that
+the merits of either program were not actually "at issue"
+because the 1987 regulations were reinstated only as "a tem-
+porary measure."5 Id. at 25,979.
+
+   The 2009 Notice and Suspension therefore demonstrate that
+the Department attempted to justify its suspension of the 2008
+regulations and its reinstatement of the 1987 regulations on
+the basis that such action complied with the APA’s regular
+notice and comment procedure. Accordingly, we do not
+accept the proposition that "good cause" was invoked by the
+rationale offered by the Department in support of the pro-
+posed rule making. Such a conclusion would undermine the
+good cause exception, by permitting a party to invoke the
+exception only when challenged.
+
+   We hold that the language of the 2009 Notice and Suspen-
+sion fails to show that the Department invoked the good cause
+   5
+     The Department also stated that the suspension of the 2008 regulations
+and the reinstatement of the 1987 regulations would take effect after 30
+days, pursuant to a separate notice and comment procedural rule set forth
+in 
+5 U.S.C. § 553
+(d). 74 Fed. Reg. at 25,978-25,979. The fact that the
+Department provided 30 days’ notice before the effective date of the sus-
+pension and reinstatement, but did not attempt to argue that the agency
+had "good cause" to dispense with this procedural requirement under the
+separate good cause exception found in § 553(d)(3), further demonstrates
+that the Department did not rely upon the good cause exception in any
+aspect of the notice and comment proceedings. See 
+5 U.S.C. § 553
+(d)(3)
+(providing, in relevant part, that "the required publication or service of a
+substantive rule shall be made not less than 30 days before its effective
+date, except . . . as otherwise provided by the agency for good cause found
+and published with the rule").
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            23
+exception, either explicitly or implicitly. Instead, the record
+plainly reflects that the Department concluded that the APA’s
+notice and comment procedures were applicable, but that it
+had complied with such requirements. 
+Id. at 25,978-25,979
+.
+
+                               V.
+
+   Having determined that the Department’s reinstatement of
+the 1987 regulations qualified as "rule making" under the
+APA, and that the Department did not invoke the APA’s good
+cause exception, we turn to consider the issue whether the
+agency action complied with the notice and comment provi-
+sions of the APA. We need not address this issue at length,
+because the record clearly demonstrates that the Department
+did not satisfy its notice and comment obligations.
+
+   The district court focused on the "content restriction" in its
+analysis whether the Department complied with the APA’s
+notice and comment requirements. As recited above, the con-
+tent restriction provided that "[c]omments concerning the sub-
+stance or merits of the [2008 regulations] or the [1987
+regulations] will not be considered." 74 Fed. Reg. at 11,408.
+The court noted that the Department "refused to consider
+comments that it received as to those rules’ substance and
+merits." According to the court, such comments were "rele-
+vant and important" to the Department’s stated basis for its
+decision to suspend the 2008 regulations, namely, the severe
+economic circumstances facing the country. The court further
+explained that the Department’s refusal to consider such com-
+ments was a failure to "give interested persons an opportunity
+to participate in the rule making," and a "failure to consider
+important aspects of the problem."
+
+   The Farm Workers, however, argue that the 10-day com-
+ment period was reasonable, and was adequate to provide
+notice and the opportunity for public comment. They also
+point to the fact that 800 comments were received, contending
+that this volume of response indicates that the Department
+24      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+provided adequate opportunity for comment. According to the
+Farm Workers, the Department adequately explained its
+action and "responded to the public’s comments with rea-
+soned explanations." Thus, the Farm Workers assert that the
+district court improperly attempted to craft additional proce-
+dural requirements, beyond those mandated by the APA, in
+concluding that the content restriction prevented the Depart-
+ment from receiving comments on matters "relevant and
+important" to the "rule making." We disagree with the Farm
+Workers’ arguments.
+
+   The notice and comment provisions of the APA require,
+among other things, that the agency give "interested persons
+an opportunity to participate in the rule making through sub-
+mission of written data, views, or arguments," and that the
+agency shall explain its decision, "[a]fter consideration of the
+relevant matter presented." 
+5 U.S.C. § 553
+(b), (c). In addition,
+the Supreme Court has emphasized that agency action "nor-
+mally" will be deemed arbitrary and capricious when the
+agency "entirely failed to consider an important aspect of the
+problem." State Farm, 
+463 U.S. at 43
+. We likewise have
+explained that during notice and comment proceedings, the
+agency is obligated to identify and respond to relevant, signif-
+icant issues raised during those proceedings. S.C. ex rel. Tin-
+dal v. Block, 
+717 F.2d 874
+, 885-86 (4th Cir. 1983).
+
+   By the very terms of the 2009 Notice, the Department
+stated that it would not receive or consider comments that
+were not only "relevant and important," but were integral to
+the proposed agency action and the conditions that such
+action sought to alleviate. In the 2009 Notice, the Department
+stated that it proposed to suspend the 2008 regulations and
+reinstate the 1987 regulations, because of difficulties in oper-
+ating the H-2A program under the 2008 regulations, including
+a lack of resources, inability to implement operations, and
+processing delays. 74 Fed. Reg. at 11,409. These reasons for
+the 2009 Suspension were significant, substantive matters,
+which raised questions whether the review process provided
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            25
+in the 2008 regulations was more or less efficient than the
+review process provided in the 1987 regulations.
+
+   We therefore agree with the district court that, as a result
+of the Department’s content restriction, the Department
+refused to receive comments on and to consider or explain
+"relevant and significant issues." See 
+5 U.S.C. § 553
+(b), (c);
+Tindal, 717 F.2d at 885. Moreover, the content restriction was
+so severe in scope, by preventing any discussion of the "sub-
+stance or merits" of either set of regulations, that the opportu-
+nity for comment cannot be said to have been "a meaningful
+opportunity." Prometheus Radio Project, 
+652 F.3d at 450
+.
+
+   Our conclusion that the Department did not provide a
+meaningful opportunity for comment further is supported by
+the exceedingly short duration of the comment period.
+Although the APA has not prescribed a minimum number of
+days necessary to allow for adequate comment, based on the
+important interests underlying these requirements, Chocolate
+Mfrs. Ass’n, 
+755 F.2d at 1103
+, the instances actually warrant-
+ing a 10-day comment period will be rare. Such instances are
+generally characterized by the presence of exigent circum-
+stances in which agency action was required in a mere matter
+of days. See, e.g., Omnipoint Corp. v. FCC, 
+78 F.3d 620
+, 629-
+30 (D.C. Cir. 1996) (upholding 15-day comment period given
+the "urgent necessity for rapid administrative action" evi-
+denced by "congressional mandate [to act] without adminis-
+trative or judicial delays" (citation omitted)); Northwest
+Airlines, Inc. v. Goldschmidt, 
+645 F.2d 1309, 1321
+ (8th Cir.
+1981) (upholding 7-day comment period and invocation of the
+good cause exception, when agency needed to resolve expedi-
+tiously dispute among airlines about aircraft landing "time
+slots," or risk widespread flight disruption).
+
+   We also observe that when the Department earlier engaged
+in rule making related to the 2008 regulations, the agency
+received about 11,000 comments over a 60-day comment
+period. See 73 Fed. Reg. at 77,111; 73 Fed. Reg. at 16,243.
+26      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+In this context, the 800 comments received over the 10-day
+comment period allowed here do not support the Farm Work-
+ers’ argument that the Department provided adequate oppor-
+tunity for comment.
+
+   Accordingly, because the Department did not provide a
+meaningful opportunity for comment, and did not solicit or
+receive relevant comments regarding the substance or merits
+of either set of regulations, we have no difficulty in conclud-
+ing that the Department "ignored important aspects of the
+problem." Kempthorne, 
+473 F.3d at 103
+. Therefore, we hold
+that the Department’s reinstatement of the 1987 regulations
+was arbitrary and capricious in that the Department’s action
+did not follow procedures required by law. See 
+5 U.S.C.
+§ 706
+(2); see also Mack Trucks, 
+682 F.3d 95
+-96 (vacating
+agency interim rule when good cause exception did not apply,
+and APA notice and comment procedures were not followed);
+Buschmann, 
+676 F.2d at 358
+ (same); Kollett v. Harris, 
+619
+F.2d 134
+, 144-46 (1st Cir. 1980) (holding "invalid" "proce-
+durally defective" interim regulations that were issued without
+notice and comment, and in the absence of good cause).
+
+                             VI.
+
+   Under the terms of the 2009 Notice and Suspension, the
+Department also proposed that H-2A workers employed on
+Christmas tree farms be defined as "agricultural" workers for
+purposes of the H-2A program, but defined as "non-
+agricultural" workers under the FLSA. 74 Fed. Reg. at
+25,982. As a result of this distinction, Christmas tree workers
+would be entitled to various benefits under the H-2A program,
+and overtime pay benefits under the FLSA. The Farm Work-
+ers contend that the district court improperly applied the
+APA’s notice and comment requirements to this determina-
+tion, which was merely interpretive in character and construed
+the term "agriculture," within the meaning of the FLSA. Thus,
+the Farm Workers contend that the 2009 Notice and Suspen-
+sion lawfully returned Christmas tree farmers to a classifica-
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW             27
+tion they had enjoyed before our N.C. Growers’ Ass’n
+decision. We disagree with the Farm Workers’ arguments.
+
+   "Interpretative rules" are not subject to the APA’s notice
+and comment requirements. 
+5 U.S.C. § 553
+(b)(A). However,
+interpretative rules only are entitled to deference as articulated
+in Skidmore v. Swift & Co., 
+323 U.S. 134
+ (1944). See S. Utah
+Wilderness Alliance v. Dabney, 
+222 F.3d 819, 829-30
+ (10th
+Cir. 2000); Watkins v. Cantrell, 
+736 F.2d 933, 943
+ (4th Cir.
+1984). In our N.C. Growers’ Ass’n decision, applying such
+Skidmore deference, we considered the Department’s similar
+classification of Christmas tree workers under the FLSA. 
+377
+F.3d at 353-54
+. And, in N.C. Growers’ Ass’n, we concluded
+that the Department’s interpretation of the FLSA lacked any
+statutory support and did not have "the power to persuade."
+Id.
+ (citing Skidmore, 
+323 U.S. at 140
+).
+
+   We noted in N.C. Growers’ Ass’n that the Department’s
+interpretation was not the product of "notice and comment
+rulemaking," and thus "lack[ed] the thoroughness of such
+rules." 
+377 F.3d at 354
+. The interpretation of the FLSA set
+forth in the 2009 Suspension fares no better, because the 2009
+Suspension likewise was not subject to notice and comment.
+Accordingly, we adhere to our decision reached in N.C.
+Growers’ Ass’n.
+
+                              VII.
+
+   In sum, we hold that the Department’s reinstatement of the
+1987 regulations for the H-2A program qualified as "rule
+making" under the APA. We further hold that the Department
+did not invoke the "good cause" exception of the APA and,
+therefore, was required to satisfy the APA’s notice and com-
+ment requirements. Because the Department did not comply
+with those statutory requirements, the Department’s action
+was arbitrary and capricious, in that the Department failed to
+follow procedures required by law. Finally, we hold that the
+Department’s action did not validly extend the FLSA’s over-
+28      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+time pay provisions to Christmas tree farmers, and we remain
+bound by our decision in N.C. Growers’ Ass’n.
+
+  For these reasons, we affirm the district court’s award of
+summary judgment to the NCGA.
+
+                                                   AFFIRMED
+
+WILKINSON, Circuit Judge, concurring:
+
+   The different sets of regulations at issue in this case obvi-
+ously reflect a political back-and-forth between employers
+seeking to more easily hire foreign agricultural workers
+through the H-2A program and those representing domestic
+agricultural workers, whose wages and employment prospects
+could be adversely affected by guest workers from abroad.
+The 1987 regulations, 
+54 Fed. Reg. 28,037
+; 
+52 Fed. Reg.
+20,496
+, embodied one set of priorities. The 2008 regulations,
+73 Fed. Reg. 77,110
+, embodied another and very different
+pro-employer set of priorities. The 2009 Suspension, 
+74 Fed.
+Reg. 25,972
+, and 2010 regulations, 
+75 Fed. Reg. 6884
+, then
+signaled a return, in the main, to the earlier 1987 emphasis on
+worker wage protection.
+
+   There is nothing necessarily wrong with this sort of see-
+saw. No one expects agency views to be frozen in time or to
+be immune from electoral mandates that will predictably
+result in alterations and modifications of agency rules and
+regulations.
+
+   Changes in course, however, cannot be solely a matter of
+political winds and currents. The Administrative Procedure
+Act requires that the pivot from one administration’s priorities
+to those of the next be accomplished with at least some fidel-
+ity to law and legal process. Otherwise, government becomes
+a matter of the whim and caprice of the bureaucracy, and reg-
+ulated entities will have no assurance that business planning
+predicated on today’s rules will not be arbitrarily upset tomor-
+        NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW            29
+row. Thus, the APA contemplates what is essentially a hybrid
+of politics and law—change yes, but only with a measure of
+deliberation and, hopefully, some fair grounding in statutory
+text and evidence.
+
+   I readily concur in Judge Keenan’s fine opinion because it
+demonstrates, as did the district court’s decision, that the very
+rudiments of process were absent here. It quite defies belief
+that the 2009 Notice of Proposed Suspension of Rule deemed
+comments on the merits of the regulations to be suspended or
+the regulations to be reinstated out of bounds. See 
+74 Fed.
+Reg. 11,408
+. In other words, the very agency actions that
+would most affect those subject to the varying sets of regula-
+tions were ruled off limits to discussion.
+
+   This all risks giving the impression that the agency had
+already made up its mind and that the comment period was,
+at best, for show and provided only in an effort to do the mini-
+mum necessary to squeak by judicial review. The confusion
+was further compounded when the 2009 Notice invited com-
+ments on whether the Department should suspend the 2008
+regulations, but then stated that comments concerning the
+"substance or merits" of those very same regulations "will not
+be considered." 
+Id.
+ How in the world was a prospective com-
+menter to know what could and could not be commented on,
+or what the agency would or would not deem worthy of its
+attention? The situation was further worsened by the highly
+abbreviated comment period allowed for what was, in reality,
+a complicated matter involving widespread real-world
+impacts on the different participants in the agricultural com-
+munity and the difficulties and problems involved with the
+various regulations’ implementation.
+
+   It is not a matter of tying an agency’s hands in the face of
+a fresh electoral mandate. After all, the Department was able
+to achieve its objectives with the 2010 regulations. To have
+approved the process at issue in this case, however, would
+have been to generate a blueprint for agency unaccountability,
+30      NORTH CAROLINA GROWERS’ ASSOCIATION v. UFW
+at odds with the very idea that government at all levels is sub-
+ject to the written law.

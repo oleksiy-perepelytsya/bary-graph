@@ -1,0 +1,1843 @@
+UNITED STATES COURT OF APPEALS
+
+                          FOR THE FIFTH CIRCUIT
+
+
+
+                    No.   01-41327     through 01-41335
+                    No.   01-41366     (Consolidated)
+                    No.   01-11481     (Consolidated)
+                    No.   01-51209     (Consolidated)
+                    No.   01-51241     (Consolidated)
+
+
+                        BILLY ARNOLD, JR., ET AL.,
+
+                                                        Plaintiffs - Appellees,
+
+
+                                      VERSUS
+
+
+                                GARLOCK, INC.,
+
+                                                         Defendant - Appellant.
+
+
+
+
+          Appeals from the United States District Court
+       for the Southern District of Texas, Corpus Christi
+                            December 28, 2001
+
+
+Before DeMOSS, PARKER and DENNIS, Circuit Judges
+ROBERT M. PARKER, Circuit Judge:
+
+     Before us are 37 nearly identical motions by the Appellant,
+
+Garlock, Inc. (“Garlock”), to stay the proceedings of various
+
+district courts throughout the four federal districts in Texas
+
+pending Garlock’s intended appeal.                Having reviewed the various
+
+motions,   which   we   treat    as    a       single   motion,   the   appellees’
+
+
+
+                                           1
+responses      and     the   amici1    briefs   filed    in   the   case,    we   deny
+
+Garlock’s motion.
+
+I.       Background.
+
+         The cases before us were all originally brought as personal
+
+injury       tort    or   wrongful     death    (“PITWD”)     claims   by     various
+
+plaintiffs against a group of co-defendants which is, by and large,
+
+similar in each case.          The plaintiffs’ claims arise from exposure
+
+to asbestos in one manner or another.              The result of this exposure
+
+has allegedly led to a plaintiffs’, or a plaintiffs decedents’,
+
+developing one or more forms of respiratory disease leading to
+
+severe health          problems   or    death.2    The    defendants,       including
+
+     1
+   Two amici briefs have been filed. The first was “Brief Amici
+Curiae of Baron & Budd, P.C. and Provost Umphrey in Opposition to
+Garlock’s Motion to Stay” purporting to represent the interests of
+“thousands of victims of asbestos-related disease with cases
+pending in the state courts of Texas and elsewhere” who could be
+adversely affected by a stay in Garlock’s case. The second was
+“Memorandum of Amicus Curiae the Official Committee of Asbestos
+Claimants of Federal-Mogul Global, Inc., in Response to Garlock
+Inc.’s Motions for a Stay Pending Appeal,” also arguing that a stay
+in asbestos litigation would adversely affect plaintiffs in other
+cases and is not warranted here as a matter of law.
+     2
+    As of December 13, 2001, appellees asserted that they
+collectively numbered 82 individual plaintiffs and that the
+diseases involved in their various lawsuits included:
+   7    Living plaintiffs with asbestos-related mesothelioma;
+   18   Plaintiffs’ decedents with asbestos-related mesothelioma;
+   17   Living plaintiffs with asbestos-related lung cancer;
+   26   Plaintiffs’ decedents with asbestos-related lung cancer;
+   4    Living plaintiffs with asbestos-related laryngeal or
+        esophageal cancer;
+   3    Plaintiffs’ decedents with asbestos-related laryngeal or
+        esophageal cancer;
+   6    Living plaintiffs with asbestosis;
+   1    Living plaintiff with asbestos-related pleural disease.
+See Appellees’ Additional Response to Appellant’s Motion for Stay
+
+                                           2
+Garlock, number from about 40 to over 60 in the various individual
+
+cases.   Their commonality is to be, or to have been, in a business
+
+either producing or making use of asbestos.3       In each of the
+
+instant cases, both Garlock and Gasket Holdings, Inc. (“Gasket
+
+Holdings”), a subsidiary of Federal-Mogul, Inc. (“Federal-Mogul”),
+
+were named as co-defendants, among the many others.     All of the
+
+cases were originally filed under Texas state law in Texas state
+
+court without implicating federal jurisdiction.
+
+      In October 2001, Federal-Mogul filed for protection pursuant
+
+to reorganization under Chapter 11 of Title 11 of the United States
+
+Code, in bankruptcy.     Federal-Mogul included each of its 156
+
+affiliates and subsidiaries, including Gasket Holdings, in the
+
+Chapter 11 filing.   All of the bankruptcy cases were filed in the
+
+United States Bankruptcy Court for the District of Delaware.
+
+
+
+Pending Appeal (hereinafter, “Appellees’ Additional Response”) at
+2. Motions in additional cases have been filed since these figures
+were compiled.
+  3
+   The specifics of the claims in these cases are not in the record
+before us because we are considering only whether to place a stay
+on the various proceedings to permit a formal appeal and review of
+the individual records on appeal.     There have been hundreds of
+thousands of asbestos-related lawsuits brought in Texas and
+throughout the country in the last three decades, however.        A
+typical claim asserts that the numerous “named defendants either
+made, sold, marketed, brokered, imported, specified or used
+asbestos-containing products in Texas which were defective and
+unreasonably dangerous as designed, manufactured and marketed.”
+See, e.g., Broyles v. U.S. Gypsum Co., 
+266 B.R. 778, 780
+ (E.D. Tex.
+2001).   The claims then generally assert causes of action for
+“negligence, gross negligence, fraud, deceit, misrepresentation,
+battery and defective products theories under Texas state law.”
+Id. at 780-81
+.
+
+                                 3
+      In mid October, Garlock began systematically removing asbestos
+
+cases   in   which   Garlock    and   Gasket   Holdings   appeared   as   co-
+
+defendants. Garlock asserted that because the Federal-Mogul group,
+
+including Gasket Holdings, was in bankruptcy and because Garlock
+
+had made a claim for contribution under Texas state law4 against
+
+Gasket Holdings, invoking federal jurisdiction was appropriate
+
+because the contribution claim was “related to” a claim under Title
+
+11 in accordance with 
+28 U.S.C. § 1334
+(b).                Garlock therefore
+
+proceeded with removal actions in several federal district courts
+
+throughout Texas.      Besides the 37 cases now before us, Garlock
+
+removed about 40 similar cases in the federal districts of Texas.
+
+      In each of the 37 instant cases,5 Garlock moved in the
+
+respective district court for the entire case to be transferred to
+
+the United States District Court for the District of Delaware under
+
+28 U.S.C. § 157
+(b)(5).        Such a transfer would permit that district
+
+court to determine the appropriate venue, either itself or the
+
+federal   district    court    in   which   the   respective   action   arose
+
+originally, in which to adjudicate the PITWD claims against the
+
+debtor and against Garlock as a non-debtor co-defendant who asserts
+
+  4
+   See TEX. CIV. PRAC. & REM. CODE §§ 32.001-003, 33.001-004, 011-017.
+  5
+   In Garlock’s haste to remove cases to federal district court,
+it removed a case in which Garlock and the plaintiffs had already
+reached a settlement.    That erroneously removed case, filed as
+Smith v. Able Supply Co., Civil Action number G-01-673 in the
+United States District Court for the Southern District of Texas,
+Galveston Division, was included in Garlock’s flurry of motions to
+stay under Fifth Circuit Case No. 01-41370.     Garlock has since
+filed a notice of withdrawal of appeal in this one case.
+
+                                       4
+a claim for contribution against the debtor.
+
+     The plaintiffs in every such removed case uniformly responded
+
+with a motion to dismiss debtor Federal-Mogul/Gasket Holdings
+
+(hereinafter, “debtor”) as a defendant, a motion to sever any
+
+remaining claims against the debtor and a motion for the district
+
+court to exercise mandatory or discretionary abstention or to
+
+remand for lack of subject matter jurisdiction or for equitable
+
+reasons.   The district judge in each case ruled for the plaintiffs
+
+and either dismissed the debtor as a defendant or remanded the
+
+remainder of the case to Texas state court or both.   The 37 cases
+
+now under emergency motion for stay to this court originated in the
+
+Corpus Christi Division and Galveston Divisions of the Southern
+
+District, the Beaumont and Paris Divisions of the Eastern District,
+
+the Dallas Division of the Northern District, and the San Antonio
+
+and Austin Divisions of the Western District.
+
+     The district court in Corpus Christi dismissed the debtor with
+
+prejudice, severed all remaining claims against the debtor and
+
+transferred them under 
+28 U.S.C. § 157
+(b)(5) to the United States
+
+District Court for the District of Delaware, and remanded all
+
+remaining claims to Texas state court for lack of subject matter
+
+jurisdiction under 
+28 U.S.C. § 1447
+(c) and/or for equitable reasons
+
+under 
+28 U.S.C. § 1452
+(b).     The district court made no ruling
+
+regarding either mandatory or discretionary abstention.
+
+     The district court in Dallas referred to the Corpus Christi
+
+
+                                 5
+court’s reasoning as “unassailable” and entered an order with
+
+identical results.
+
+     The district court in Galveston determined that bankruptcy
+
+subject matter jurisdiction under 
+28 U.S.C. § 1334
+(a) and (b) did
+
+not exist and that the case had been improperly removed under 
+28
+
+U.S.C. § 1452
+(a). The court therefore remanded the entire case and
+
+all parties to Texas state court for lack of subject matter
+
+jurisdiction.
+
+     The district court which ruled in the Beaumont and Paris
+
+Division cases held that Garlock’s claim for contribution was
+
+“scantily asserted” and unsupported, and even if real, was so
+
+tenuously   related   to   the   debtor’s   bankruptcy   case   as   to   be
+
+virtually immaterial.      The court remanded for lack of subject
+
+matter jurisdiction under § 1447(c) and alternatively for equitable
+
+reasons under § 1452(b).
+
+     The district court in San Antonio cited the decisions of
+
+several other federal district courts, including the Corpus Christi
+
+district court, and determined that subject matter jurisdiction did
+
+not exist, remanded its cases on that basis alone and dismissed the
+
+plaintiffs’ motions to sever as moot.
+
+     The district court in Austin severed all claims against the
+
+debtor and transferred them to the District of Delaware under §
+
+157(b)(5) and remanded all other claims to the Texas state court.
+
+     Following each of the district courts’ rulings, which occurred
+
+between November 9 and December 5, Garlock filed a notice of appeal
+
+                                    6
+and moved in the respective district court for a stay of the
+
+court’s order pending appeal.         Some of the district courts issued
+
+a denial and some had not yet ruled on Garlock’s stay motion;
+
+regardless, Garlock filed emergency motions to stay the respective
+
+district courts’ orders under FED. R. APP. P. 8 before this court.6
+
+      Garlock   asserts   that   it   is   not   attempting   to   appeal   an
+
+unappealable order of remand.         Instead, Garlock states that it is
+
+appealing the “appealable” orders of the various district courts,
+
+including the inherent denials of Garlock’s transfer motion under
+
+§ 157(b)(5), any decision to abstain and any dismissal of the
+
+debtor.   In so doing, Garlock claims that the “automatic stay”
+
+feature of 
+11 U.S.C. § 362
+, relating to cases in bankruptcy, not
+
+only stayed all actions against the debtor when it filed for
+
+bankruptcy, but that it stayed all related actions before the
+
+various district courts as well. Garlock further contends that the
+
+10-day automatic stay of judgment under FED. R. CIV. P. 62 should
+
+have prevented the clerks of the district courts from certifying
+
+the remands back to state courts before Garlock could perfect its
+
+appeal.   Some of the district clerks’ offices mailed certified
+
+copies of the remand orders either before or after Garlock’s notice
+
+  6
+   Initially, Garlock filed documents titled “Petition for Writ of
+Mandamus to the United States District Court for the Southern
+District of Texas [Corpus Christi Division] and Petitioner’s
+Emergency Motion for Stay Pursuant to Federal Rule of Appellate
+procedure 8(a)(1) Pending Appeal.” In later actions, Garlock has
+simply filed an “Emergency Motion for Stay Pending Appeal” from one
+or another federal district court.      We treat all of Garlock’s
+motions as motions for stay.
+
+                                       7
+of appeal; some have not yet certified the remand.
+
+      What Garlock seeks, essentially, is a procedural path that
+
+would invalidate the clerks’ certification of remand and freeze
+
+further action in the district courts while permitting Garlock to
+
+perfect its appeal on the § 157(b)(5) transfer issue, without
+
+frontally challenging an unappealable remand order.                 On the basis
+
+of   such   a   transfer,     Garlock    contends,     it   seeks     a    fair   and
+
+consolidated proceeding for all parties.
+
+      The appellees bring a different view to this court.                         They
+
+contend     that   Garlock’s    true     intent   is   simply    to       delay   any
+
+proceeding against it for as long as possible.                  Such a dilatory
+
+intent, appellees contend, will have a devastating effect on them,
+
+some of whom are dying.
+
+      Appellees further contend that Garlock’s dilatory intent is
+
+focused solely against these appellees because they have refused to
+
+enter into any standardized settlement plan or agreement such as
+
+those allegedly arranged between Garlock and other law firms
+
+engaged in asbestos litigation.              It is true that Garlock has
+
+brought no other, similar case to this court on motions to stay or
+
+transfer except those in which the appellees’ counsel appears for
+
+the plaintiffs.          On that basis, counsel characterizes Garlock’s
+
+interest not as an attempt to legitimately pursue a coordinated
+
+remedy under the bankruptcy law but as a cynical attempt to
+
+minimize its exposure with a law firm which “treats each case
+
+individually       and   attempts   to   achieve     maximum    value      for    its
+
+                                         8
+clients.”    See Appellees’ Additional Response at 3.
+
+     Because of the “emergency” nature of Garlock’s motions, we
+
+implemented a temporary stay in each case to provide sufficient
+
+time to fairly consider whether a formal stay pending appeal should
+
+issue.    We have determined that no such stay should issue and, by
+
+this order, dissolve the temporary stays.
+
+     Our decision in this case is predicated on two primary bases.
+
+First, that Garlock does not have a valid claim for contribution
+
+against Federal-Mogul or its associated business, Gasket Holdings,
+
+upon which to assert “related to” jurisdiction under the bankruptcy
+
+laws.     Second, we find that Garlock has not otherwise met the
+
+elements necessary to obtain a discretionary stay pending appeal by
+
+this court.    We will address each point raised in this complex
+
+matter.
+
+II. Jurisdiction, Stays, Transfer of Claims, and Effect of Remand.
+
+     We will examine the basis for federal bankruptcy jurisdiction
+
+and the framework of Garlock’s contentions therein.
+
+A.   Removal Authority and “Related To” Jurisdiction.
+
+     Authority to remove a case relating to a case under title 11
+
+resides in 
+28 U.S.C. § 1452
+(a):
+
+     A party may remove any claim or cause of action in a
+     civil action other than a proceeding before the United
+     States Tax Court or a civil action by a governmental unit
+     to enforce such governmental unit’s police or regulatory
+     power, to the district court for the district where such
+     civil action is pending, if such district court has
+     jurisdiction of such claim under section 1334 of this
+     title.
+
+                                  9
+       Title 
+28 U.S.C. § 1334
+(a) provides that “the district courts
+
+shall have original and exclusive jurisdiction of all cases under
+
+title 11.”
+
+       Certain matters related to the debtor’s bankruptcy may be
+
+included within the ambit of federal bankruptcy jurisdiction under
+
+28 U.S.C. § 1334
+, et seq. Specifically, “[n]otwithstanding any Act
+
+of Congress that confers exclusive jurisdiction on a court or
+
+courts other than the district courts, the district courts shall
+
+have    original    but   not    exclusive   jurisdiction     of   all   civil
+
+proceedings arising under title 11, or arising in or related to
+
+cases under title 11.”          See 
+id.
+ § 1334(b).
+
+       As the United States Supreme Court has noted, “related to”
+
+bankruptcy proceedings include (1) causes of action owned by the
+
+debtor which become property of the estate pursuant to 
+11 U.S.C. §
+
+541
+, and (2) suits between third parties which have an effect on
+
+the bankruptcy estate. Celotex Corp. v. Edwards, 
+514 U.S. 300
+, 308
+
+n.5 (1995).   Garlock’s asserted claim for contribution against the
+
+debtor falls into the second category.
+
+       Most of the federal circuits, including the Fifth Circuit,
+
+derive   their     “related     to”   jurisprudence   from   Pacor,   Inc.   v.
+
+Higgins, 
+743 F.2d 984
+ (3rd Cir. 1984).           See Celotex, 
+514 U.S. at
+
+308
+ n.6.   In Pacor, the Third Circuit determined that a third-party
+
+controversy not directly involving a debtor in bankruptcy was not
+
+related to the bankruptcy, but was, at best, a precursor to a claim
+
+
+                                        10
+against the debtor.    See Pacor, 
+743 F.2d at 995
+.    The Third Circuit
+
+so ruled on the basis that any judgment between the two third
+
+parties could not have any preclusive effect by either res judicata
+
+or collateral estoppel against the debtor, who would be free to
+
+relitigate any claim brought against it.       
+Id.
+   Thus, “related to”
+
+jurisdiction would not come into play until a litigant brought a
+
+direct claim under bankruptcy jurisdiction based on the result of
+
+the prior judgment.
+
+     Within the Fifth Circuit, the test for whether a proceeding
+
+properly invokes federal bankruptcy jurisdiction is the same as the
+
+Third Circuit’s Pacor test, namely, whether “the outcome of that
+
+proceeding could conceivably have any effect on the estate being
+
+administered in bankruptcy.”    In re Canion, 
+196 F.3d 579, 585
+ (5th
+
+Cir. 1999).    Certainty, or even likelihood of such an effect is not
+
+a requirement.     
+Id.
+ at 587 n.30 (citing Copelin v. Sprico, Inc.,
+
+182 F.3d 174
+ (3rd Cir. 1999)).
+
+     In In re Canion, a judgment creditor of the debtor, Canion,
+
+brought a direct action against several family members, employees,
+
+friends and associates of the debtor, asserting claims of fraud and
+
+tortious interference with the judgment creditor’s recovery of the
+
+judgment.     In re Canion, 
+196 F.3d at 582
+.    Our determination was
+
+that this circumstance fell within the “related to” bankruptcy
+
+jurisdiction at the time the case was referred to the bankruptcy
+
+court (which is the time at which jurisdiction is tested) because
+
+
+                                  11
+the outcome of the proceedings against the defendants conceivably
+
+could have increased the debtor’s estate.             
+Id. at 587
+.   Appellees
+
+argue that Garlock presents no such direct claim and that its claim
+
+for contribution, not based on a contractual relationship, is too
+
+tenuous to connect the underlying asbestos PITWD claims to the
+
+debtor.
+
+       1.   “Contribution” as a basis for “related to” jurisdiction
+
+and the automatic stay provision in bankruptcy.
+
+       The Sixth Circuit has held that a claim for contribution is a
+
+sufficient    basis   for   finding        “related   to”   jurisdiction   in
+
+bankruptcy and, in fact, is a sufficient ground upon which to
+
+direct a transfer of venue for related tort claims under 
+28 U.S.C.
+
+§ 157
+(b)(5), the same relief sought by Garlock here.            In In re Dow
+
+Corning, 
+86 F.3d 482
+ (6th Cir. 1996), where a relatively small
+
+number of non-debtor co-defendants were closely related to the
+
+pending breast implant litigation against debtor Dow Corning, a
+
+claim of contribution by the co-defendants against Dow Corning,
+
+even if only intended and not yet asserted, was sufficient to
+
+invoke “related to” bankruptcy jurisdiction.
+
+       In In re Walker, 
+51 F.3d 562
+ (5th Cir. 1995), a party held
+
+liable to a debtor for a violation of the automatic stay provided
+
+in 
+11 U.S.C. § 362
+ sought to invoke “related to” jurisdiction
+
+against a third party by asserting a claim of contribution under §
+
+362.   Id. at 565-66.   We found no federal contribution right to be
+
+
+                                      12
+invoked in § 362 and denied the appellant’s claim.                     Id. at 567-68.
+
+Here, Garlock has asserted its contribution rights entirely under
+
+Texas state law. As we discuss in Part III, Garlock’s contribution
+
+claim is invalid and therefore no “related to” jurisdiction could
+
+exist in this case.
+
+B.       Transfer of Personal Injury Tort and Wrongful Death Claims
+
+under 
+28 U.S.C. § 157
+(B)(5).
+
+          Garlock seeks to transfer all of the PITWD claims in each of
+
+the lawsuits against it in accordance with 
+28 U.S.C. § 157
+, which
+
+empowers the district court where a bankruptcy is proceeding to
+
+determine        the   venue    for    certain     PITWD   claims     related   to   the
+
+bankruptcy.        Specifically,
+
+          The district court shall order that personal injury tort and
+          wrongful death claims shall be tried in the district court in
+          which the bankruptcy case is pending, or in the district court
+          in the district in which the claims arose, as determined by
+          the district court in which the bankruptcy case is pending.
+
+See 
+28 U.S.C. § 157
+(b)(5).              Use of this transfer provision in the
+
+mass tort context is not strictly novel, but is to date uncommon.7
+
+In       the   cases   before    us,    the    various     district    courts   either
+
+explicitly or implicitly denied Garlock’s motions to transfer all
+
+underlying PITWD claims from the districts in Texas to the District
+
+of Delaware.
+
+          The Sixth Circuit has held that the denial of a motion to
+
+
+     7
+   Section 157(b)(5) was the basis for transferring the PITWD
+claims in A.H. Robins v. Piccinin, 
+788 F.2d 994
+ (4th Cir. 1986) and
+In re Dow Corning, 
+86 F.3d 482
+ (6th Cir. 1996).
+
+                                              13
+transfer under § 157(b)(5) is immediately appealable on different
+
+grounds including a less rigid view of the “finality” requirement
+
+for bankruptcy judgments and under the collateral order doctrine of
+
+Cohen v. Beneficial Indus. Loan Corp., 
+337 U.S. 541
+ (1949).     See In
+
+re Dow Corning, 
+86 F.3d 482, 488
+ (6th Cir. 1996).       Because of our
+
+ultimate holding herein, we need not determine the same issue for
+
+this circuit.      Regardless, Garlock claims it should benefit from a
+
+stay of the district courts’ orders to present an appeal.
+
+C.       Stays Applicable to Bankruptcy Proceedings.
+
+         1.   Title 
+11 U.S.C. § 362
+.
+
+         Once a party files in bankruptcy, under Chapter 11, for
+
+example, 
+11 U.S.C. § 362
+, et seq., stays further actions against
+
+the debtor.       Virtually any act attempting to enforce a judgment
+
+against or obtain property from the estate of the debtor is stayed
+
+once the title 11 proceedings are commenced.      See 
+id.
+ § 362(a)(1)-
+
+(8). In the instant cases, Garlock contends that § 362 should stay
+
+any further actions against the non-debtor co-defendants and should
+
+stay the various district courts from dismissing debtor Federal-
+
+Mogul companies or remanding the related cases to state court.8
+
+         Section 362 is rarely, however, a valid basis on which to stay
+
+actions against non-debtors.       See Wedgeworth v. Fibreboard Corp.,
+
+
+
+     8
+   Such a stay would enable Garlock to perfect an appeal of the
+district courts’ explicit or inherent denials of Garlock’s §
+157(b)(5) transfer motion without having to contend with an order
+of remand.
+
+                                       14
+
+706 F.3d 541, 544
+ (5th Cir. 1983)(“[w]e join [the cited courts] in
+
+concluding that the protections of § 362 neither apply to co-
+
+defendants nor preclude severance”).
+
+     By exception, a bankruptcy court may invoke § 362 to stay
+
+proceedings against nonbankrupt co-defendants where such identity
+
+between the debtor and the third-party defendant exists that the
+
+debtor may be said to be the real party defendant and that a
+
+judgment against the third-party defendant will in effect be a
+
+judgment or finding against the debtor.   A.H. Robins Co., 
+788 F.2d
+
+994
+, 999 (4th Cir. 1986).   In that case, however, the non-debtor
+
+co-defendants were indemnified associates, employees or insureds of
+
+the debtor sole manufacturer of the Dalkon Shield intrauterine
+
+device.   Here, Garlock is one of scores of different asbestos
+
+makers, users, importers, etc., with no interest to establish such
+
+an identity with debtor Federal-Mogul/Gasket Holdings. There is no
+
+claim of a formal tie or contractual indemnification to create such
+
+an identity of interests.
+
+     2.   Federal Rule of Civil Procedure 62.
+
+     Garlock has also asserted that FED. R. CIV. P. 62(a) should have
+
+operated to effect a ten-day stay of the various district courts’
+
+orders before they were executed.     In pertinent part, Rule 62(a)
+
+establishes that “no execution shall issue upon a judgment nor
+
+shall proceedings be taken for its enforcement until the expiration
+
+of 10 days after its entry.”    Garlock’s concern is that, lacking
+
+
+                                 15
+the protection of the ten-day stay, the district clerks’ offices
+
+were free to certify the various remand orders at any time and by
+
+doing   so,   potentially   destroy    federal   jurisdiction    without
+
+possibility of appellate review.9      Garlock contends that it is not
+
+seeking appellate review of an order to remand, but seeks a stay of
+
+the remand order in the district court under FED. R. CIV. P. 62(d)
+
+upon appeal of the § 157(b)(5) issue.
+
+      Rule 62(d) relates to Rule 62(a) in that Rule 62(a) provides
+
+a respite from the immediate execution of a judgment, except for an
+
+interlocutory or final judgment in an action for an injunction or
+
+in a receivership action, or for an accounting in an action for
+
+infringement of letters patent.        Rule 62(d) then provides for a
+
+stay pending appeal, subject to the exceptions in Rule 62(a).
+
+      The stay provisions of Rule 62 pertain to judgments for money.
+
+Hebert v. Exxon Corp, 
+953 F.2d 936, 938
+ (5th Cir. 1992).        That does
+
+not preclude diverse forms of judgment pertaining to monetary
+
+responsibility from a stay under Rule 62(d) pending appeal nor Rule
+
+62(a) for ten-day automatic stay of judgment.       See 
+id. at 938-39
+
+
+(overturning a district court’s denial of a stay of declaratory
+
+
+  9
+   Garlock’s references to FED. R. CIV. P. 62, et seq., in the
+Petitioner’s Motions for Stay are primarily aimed at an argument to
+establish an appeal as a matter of right. Once Garlock discovered,
+however, that the federal district court in Corpus Christi had
+already mailed certified copies of the court’s remand orders
+without waiting the ten-day period specified in Rule 62(a), it
+filed a series of “Emergency Motion[s] for Supplemental Relief”
+asking this court to direct the district clerk’s office to, in
+effect, “de-certify” its certification.
+
+                                  16
+judgment where the declaratory judgment was, in effect, a money
+
+judgment suitable for a Rule 62(d) stay subject to the requirements
+
+of Rule 62(a)).
+
+     In the instant cases, however, the subject matter of Garlock’s
+
+motion is not for a stay of judgment, declaratory or otherwise.              It
+
+is for a stay of remand under Rule 62.          A remand of an ongoing case
+
+is not a final judgment following a full adjudication of a claim,
+
+the result of which may be appealed.         Even if the subject matter of
+
+the underlying litigation is solely money damages, there is no
+
+“money judgment” inherent in its remand.          Accordingly, there is no
+
+basis in Rule 62 for such a stay.         See City of New Orleans v. Nat’l
+
+Serv. Cleaning Corp., No. 96-1601, 
+1997 WL 5915
+, at *1 (E.D. La.
+
+Jan. 6, 1997).
+
+     Further, Rule 62 itself provides no authority to revoke a
+
+remand once it has become effective.            See, e.g., Rivera-Perez v.
+
+Mass. Gen. Hosp., 
+193 F.R.D. 43, 45
+ (D.P.R. 2000).
+
+     On    that   basis,   Garlock   is   not   entitled   to   the   Rule   62
+
+automatic stay.
+
+D.   Effect of Remand.
+
+     We have consolidated many of these cases according to date or
+
+by court, but as indicated in Part I, the orders are not entirely
+
+uniform.    All of them include a remand for lack of subject matter
+
+jurisdiction, citing 
+28 U.S.C. § 1447
+(c).             However, two of the
+
+courts did not make such a finding until after the debtor had been
+
+
+                                     17
+dismissed   with    prejudice    from     the   plaintiffs’   cases   and    the
+
+remaining cross-claims for contribution severed and transferred to
+
+the District of Delaware.        Two others remanded for lack of subject
+
+matter jurisdiction without dismissing the debtor, without detailed
+
+explanation.       One court did not dismiss the debtor but found
+
+Garlock’s claims for contribution to be scanty and, if real, too
+
+tenuous and remanded.       Some courts remanded on equitable grounds.
+
+     1.   Remand for lack of subject matter jurisdiction.
+
+     A remand for lack of subject matter jurisdiction under 
+28
+
+U.S.C. § 1447
+(c) is ordinarily barred from appellate review by 
+28
+
+U.S.C. § 1447
+(d).        See State of Rio de Janeiro v. Philip Morris,
+
+Inc., 
+239 F.3d 714, 716
+ (5th Cir. 2001)(noting that as long as a
+
+district court’s remand order is based on lack of subject matter
+
+jurisdiction, a court of appeals lacks authority to review a remand
+
+under § 1447(d); also referring to “the black hole force of a
+
+remand for want of jurisdiction”).              There are few exceptions.
+
+Notably, remand under a district court’s citation of § 1447(c) for
+
+a reason not embraced within that statute is subject to appellate
+
+review.     Id.     at    715   (citing      Thermtron   Products,    Inc.   v.
+
+Hermansdorfer, 
+423 U.S. 336, 343
+ (1976)).                 That exception is
+
+inapplicable here.
+
+     Rather than fruitlessly attempting an appellate review of a
+
+district court’s remand order, we instead examine the steps leading
+
+from a district judge’s decision to remand to execution of the
+
+
+                                        18
+remand order.
+
+     A § 1447(c) order of remand is not self-executing.    Section
+
+1447(c) provides, in pertinent part, that upon determination that
+
+a case should be remanded, “[a] certified copy of the order of
+
+remand shall be mailed by the clerk to the clerk of the State
+
+court. The State court may thereupon proceed with such case.”   See
+
+McClelland v. Gronwaldt, 
+155 F.3d 507
+, 514 n.5 (5th Cir. 1998).
+
+This provision creates legal significance in the mailing of a
+
+certified copy of the remand order in terms of determining the time
+
+at which the district court is divested of jurisdiction.        
+Id.
+
+
+(citing the discussion and references in Browning v. Navarro, 
+743
+
+F.2d 1069, 1078-79
+ (5th Cir. 1984)).   On that basis, the federal
+
+court is not divested of jurisdiction until the remand order,
+
+citing the proper basis under § 1443(c), is certified and mailed by
+
+the clerk of the district court.
+
+     Once the remand order is certified and mailed, however, the
+
+matter remanded is removed from federal jurisdiction. Of all the
+
+cases brought before us under Garlock’s motions, most have already
+
+been certified and mailed by the respective district clerks.
+
+     2.   Equitable remand.
+
+     Of greater import in this particular case is the effect of an
+
+equitable remand.
+
+     The court to which [claim or cause of action related to
+     bankruptcy cases] is removed may remand such claim or
+     cause of action on any equitable ground.       An order
+     entered under this subsection remanding a claim or cause
+
+                                19
+     of action, or a decision to not remand, is not reviewable
+     by appeal or otherwise by the court of appeals under
+     section 158(d), 1291, or 1292 of this title or by the
+     Supreme Court of the United States under section 1254 of
+     this title.
+
+See 
+28 U.S.C. § 1452
+(b).     This remand statute, unlike § 1447(c),
+
+carries no certification and mailing requirement, nor have we found
+
+authority to require such, as much as that would promote procedural
+
+consistency with § 1447(c).     Whether such an equitable remand is
+
+self-executing is less important than the stricture that, once a
+
+matter related to a bankruptcy case is equitably remanded, it is
+
+not subject to federal appellate review on any basis.   See Hawking
+
+v. Ford Motor Credit Co., 
+213 F.3d 540
+, 550 (5th Cir. 2000); Sykes
+
+v. Texas Air Corp., 
+834 F.2d 488, 490
+ (5th Cir. 1987)(even an
+
+equitable remand based on a substantive law issue such as lack of
+
+subject matter jurisdiction is unreviewable, in part because of the
+
+likelihood of throwing matters into confusion months or years later
+
+after other proceedings, e.g., in state courts).
+
+     Garlock’s emergency petition seeks to halt the progress of a
+
+remand before it leaves the district court for an immediate appeal
+
+of a collateral order.    The determination of venue for PITWD cases
+
+such as these under 
+28 U.S.C. § 157
+(b)(5) would seem to be the type
+
+of matter which could be readily decided without creating the type
+
+of confusion following an order of remand with which we were
+
+concerned in Sykes.      The equitable remand of bankruptcy-related
+
+matters harbors no such opportunity.
+
+
+                                  20
+       Because   some   of   the   various   subject-matter   jurisdiction
+
+remands have not yet been certified and mailed, and because some
+
+have not been remanded equitably, we will proceed with an analysis
+
+of whether Garlock should otherwise be granted a stay pending
+
+appeal under our authority in FED. R. APP. P. 8 in those matters not
+
+barred from further review.
+
+III.    Merits of the Motion for Stay.
+
+       When presented with a motion for a discretionary stay pending
+
+appeal, we employ a four-part test.            See In re First S. Sav.
+
+Assoc., 
+820 F.2d 700, 704
+ (5th Cir. 1987)(citing Ruiz v. Estelle,
+
+666 F.2d 854, 856
+ (5th Cir. 1982)(“Ruiz II”)).           While each part
+
+must be met, the appellant “need not always show a ‘probability’ of
+
+success on the merits; instead, the movant need only present a
+
+substantial case on the merits when a serious legal question is
+
+involved and show that the balance of the equities weighs heavily
+
+in favor of granting the stay.”        
+Id.
+ (quoting Ruiz v. Estelle, 
+650
+
+F.2d 555, 565
+ (5th Cir. Unit A June 1981)(“Ruiz I”)).
+
+A.   Whether the movant has made a showing of likelihood of success
+
+on the merits.
+
+       Despite the possible availability of a discretionary stay
+
+pending appeal, even if Garlock had avoided remand, it could not
+
+show a probability of success on appeal.
+
+       First, there was no 
+11 U.S.C. § 362
+ automatic stay of actions
+
+available to the non-debtor co-defendants of the debtor, Federal-
+
+
+                                      21
+Mogul/Gasket Holdings.         Therefore, while § 362 acted to stay any
+
+claims against the Federal-Mogul entities, including Garlock’s
+
+putative claim of contribution, it carried no force to stay actions
+
+as between the remaining co-defendants, the debtor and the various
+
+plaintiffs.       On that basis, the plaintiffs were free to dismiss
+
+Federal-Mogul and its associated entities under FED. R. CIV. P.
+
+41(a)(1).     Even if Garlock had filed a counterclaim against the
+
+plaintiffs in each such case, which Garlock does not assert, the
+
+district court would have been within its discretion to dismiss by
+
+order of the court under Rule 41(a)(2).
+
+       For those cases in which the debtor was formally dismissed,10
+
+such dismissal was with prejudice and, under Texas law, eliminated
+
+Garlock’s contribution claim against the debtor.                It is well
+
+established under Texas case law that neither contribution nor
+
+indemnification can be recovered from a party against whom the
+
+injured party has no cause of action.          See Safway Scaffold Co. of
+
+Houston, Inc. v. Safway Steel Products, Inc., 
+570 S.W.2d 225
+, 228-
+
+29 (Tex. App.--Houston [1st Dist.] 1978, writ ref’d n.r.e.).                In
+
+modern    Texas    code,   a    “responsible   third   party”    from   whom
+
+contribution is sought must “be liable to the plaintiff for all or
+
+a part of the damages claimed against the named defendant or
+
+defendants.”         See   TEX.    CIV.    PRAC.   &   REM.   CODE   ANN.    §
+
+
+
+  10
+    By our reckoning, this includes all of the cases ruled on by
+the district courts in Corpus Christi and Dallas.
+
+                                      22
+33.011(6)(A)(iii)(Vernon 2001).           Thus, no claim for contribution
+
+may lie in those cases wherein the district court dismissed the
+
+debtor with prejudice.
+
+     Second, the Texas code eliminates a debtor in bankruptcy as a
+
+“responsible third party” from whom contribution may be sought,
+
+except to the extent that liability insurance or other source of
+
+third party funding may be available to pay the claims asserted
+
+against     that   debtor.     Id.   §    33.011(6)(B)(ii).         Garlock    has
+
+addressed the issue of the debtor’s insurance peripherally, but has
+
+not clearly represented whether the insured debtor is Federal-Mogul
+
+itself, Federal-Mogul’s subsidiary Gasket Holdings (successor to
+
+Flexitallic, another gasket-producing company), or whether either
+
+or both of them have liability insurance available to pay any
+
+claims.
+
+     Third, Garlock has relied in part on two past decisions
+
+transferring PITWD claims under § 157(b)(5) to the district in
+
+which a debtor was proceeding in bankruptcy.
+
+     In A.H. Robins, the Fourth Circuit upheld an order of the
+
+United States District Court for the Eastern District of Virginia
+
+transferring, under § 157(b)(5), thousands of PITWD claims against
+
+a   small    number   of     non-debtor       co-defendants   to    itself     for
+
+coordinated    review      while   the   debtor,    A.H.   Robins   Co.,     Inc.,
+
+proceeded in bankruptcy in that district.            A.H. Robins, 788 F.2d at
+
+
+
+
+                                         23
+1016.11           Robins      was    the    manufacturer        of     the     Dalkon    Shield
+
+intrauterine device, a unique product.                           Its co-defendants were
+
+employees         or    other       close   associates         who     were     contractually
+
+indemnified            by     Robins.        Here,       the     various        co-defendants
+
+manufacture,           use,    specify,      or    handle      many    different       asbestos
+
+products without such close relationship.                            Additionally, Garlock
+
+makes no claim of indemnification here whatsoever.
+
+          In In re Dow Corning, the Sixth Circuit reversed and ordered
+
+the United States District Court for the Eastern District of
+
+Michigan to transfer under § 157(b)(5) a relatively small number of
+
+non-debtor co-defendants who had asserted claims for contribution,
+
+or        announced     the        intent   of     doing    so,       against    the     debtor
+
+manufacturer of silicone breast implants.                            In re Dow Corning, 
+86
+
+F.3d at 498
+.           In that case, each of the co-defendants was closely
+
+involved in using the same material, originating with the debtor,
+
+to make the same, singular product, sold to the same market and
+
+incurring         substantially         similar        injuries.        This     circumstance
+
+created       a    unity      of    identity      between      the    debtor    and     the   co-
+
+defendants not present here, where the co-defendants variously use
+
+asbestos for brake friction products, insulation, gaskets, and
+
+other uses.
+
+          Therefore, while we do not disagree that certain mass tort
+
+
+
+     11
+    The circuit court’s ruling remanded for clarification and to
+provide notice for claimants’ objections, but otherwise affirmed.
+
+                                                  24
+claims in some circumstances might be consolidated with bankruptcy
+
+proceedings in a single district in accordance with § 157(b)(5),12
+
+the relationship of the co-defendants in A.H. Robins and In re Dow
+
+Corning is distinguishable from Garlock’s asserted relationship,
+
+through a claim for contribution, to the debtor here.
+
+       Fourth, Garlock’s contribution claim against the debtor is
+
+based on universally-pled claims against all defendants in all
+
+asbestos lawsuits in which Garlock appears as a co-defendant.
+
+Garlock has never litigated a contribution claim to collection in
+
+any of approximately 250,000 previous asbestos lawsuits in which
+
+Garlock was a co-defendant. In the face of this criticism, Garlock
+
+has made a late attempt to color its failure to pursue an actual
+
+payment   of   contribution.13   Garlock   now   asserts   that   in   past
+
+lawsuits, the “larger” or “major” defendants, now in bankruptcy,
+
+had been present to pay their fair share of claims and that it was
+
+
+
+  12
+    Some writers and commentators would bar mass tort parties from
+being transferred for consolidated review under § 157(b)(5). See,
+e.g., Lori J. Forlano, Why Bankruptcy “Related To” Jurisdiction
+Should Not Reach Mass Tort Nondebtor Codefendants, 
+73 N.Y.U. L.
+Rev. 1627
+ (1998)(arguing, generally, against consolidation on
+grounds of comity and federalism). We would not go so far as to
+bar such consolidation in the face of a coordinated federal
+bankruptcy scheme.      Instead, we would balance each case
+individually, as we have herein, for the relationship or unity of
+identity of the co-defendants and the debtor(s), the uniformity of
+source of the injury or wrongful death, and the general status of
+pending cases in the state courts and the effect a consolidation
+would have on them.
+  13
+    See Reply of Garlock, Inc., to Plaintiffs’ Response, filed
+December 19, 2001, at 7-8.
+
+                                   25
+not cost-effective for Garlock to litigate the relatively small
+
+amounts left in controversy.        It is only since the Federal-Mogul
+
+entities proceeded to Chapter 11 protection that, Garlock contends,
+
+it   must   seriously   proceed   with       its   claims   for   contribution.
+
+Garlock has not, however, commenced discovery in any of these
+
+cases, but has spent its time seeking the § 157(b)(5) transfer
+
+addressed herein.       The appellees characterize that as a dilatory
+
+intent and, if such, Garlock’s actions are tantamount to being
+
+frivolous.
+
+      Additionally, the district judges ruling in the various cases
+
+before us found, on the facts before them, no merit in Garlock’s
+
+claims.     One district judge, for example, noted that in his court,
+
+Garlock’s claims were “scantily asserted” and presented no facts to
+
+support them.    As such, the contribution claims were “so tenuously
+
+related to the bankruptcy case” as to be “virtually immaterial.”
+
+All of the district judges ultimately found no verifiable basis in
+
+Garlock’s claims so as to justify a mass transfer to the District
+
+of Delaware.
+
+      We are not prepared to say that Garlock’s motives were purely
+
+dilatory and its motions frivolous.            We need not, however, decide
+
+the issue of motivation when determining the potential for success
+
+on the merits of Garlock’s “related to” jurisdiction assertion and
+
+associated    motion    to   transfer    under     §   157(b)(5).    Given   the
+
+preliminary analysis herein, Garlock would not succeed on the
+
+merits if granted a stay to appeal the § 157(b)(5) transfer issue.
+
+                                        26
+      Our determination in this element is sufficient to deny the
+
+stay pending appeal; however, we will briefly address the remaining
+
+points of analysis.
+
+B.   Whether the movant has made a showing of irreparable injury if
+
+the stay is not granted.
+
+      We   have     determined     that   Garlock      has   no   valid   claim    for
+
+contribution against the debtor.               Therefore, no irreparable harm
+
+will ensue if a stay is not granted.
+
+C.   Whether the granting of the stay would substantially harm the
+
+other parties.
+
+      There may be a danger of inconsistent results in the various
+
+state and federal courts in which Garlock and the other parties
+
+appear if these cases are not consolidated in the District of
+
+Delaware.    That is, however, the circumstance under which asbestos
+
+litigation has proceeded for nearly 30 years.
+
+      What    is    certain    is    that      delay    where     plaintiffs      have
+
+mesothelioma, asbestosis, or pleural disease, or where decedents’
+
+survivors await compensation for support substantially harms those
+
+parties.
+
+      Additionally, delay in or lengthy interruption of state court
+
+proceedings        already    in    progress     for    months     or     years    may
+
+substantially harm the ability of the state courts to resolve the
+
+cases.
+
+      We therefore hold that, in this circumstance, the harm to the
+
+
+                                          27
+plaintiffs in delay substantially outweighs the harm to Garlock if
+
+not delayed.
+
+D.   Whether the granting of the stay would serve the public
+
+interest.
+
+     Consolidation of PITWD cases related to a bankruptcy would
+
+facilitate management of an estate in bankruptcy and potentially
+
+provide an even-handed and fair apportionment of the bankrupt’s
+
+estate to its creditors, including those claiming contribution in
+
+the mass tort scenario.
+
+     Such consolidation would also deprive states and state courts
+
+of their right to conduct proceedings brought under state law.   In
+
+a mass tort case of the scope of asbestos litigation, transferring
+
+cases related to a bankruptcy could well result in depriving the
+
+states of cognizance over thousands of cases.   Many of these cases
+
+are founded on well-developed state law and years of precedent and
+
+represent a significant amount of time in individual litigation.
+
+The negative effect on comity between the federal and state court
+
+systems must be given some account.
+
+     Armstrong Work Industries, U.S. Gypsum, W.R. Grace and Owens
+
+Corning are all proceeding through Chapter 11 in Delaware in
+
+addition to Federal-Mogul.    The burden of these five asbestos-
+
+related bankruptcies and the direct claims against them alone has
+
+resulted in the Third Circuit appointing a district judge full-time
+
+to stewarding those cases in coordination with a bankruptcy judge.
+
+
+                                28
+The transfer of all of the PITWD claims against asbestos co-
+
+defendants to that court has the potential to overload the court
+
+with thousands of individual claims to resolve. It is difficult to
+
+see how the public interest is served in that manner.
+
+       At the bottom, there is justification for aggregation, but the
+
+tenuous   relationship     between   Garlock   and   the   debtor     and    the
+
+insubstantial    claims    of   contribution   reflected     herein    do    not
+
+justify ignoring comity and loading thousands of cases on a single
+
+district in this case.
+
+IV.    Issue Preclusion.
+
+       Garlock contends that a transfer of venue to the District of
+
+Delaware would obtain “a ‘centralized,’ ‘efficient,’ cost-effective
+
+application     of   a    uniform,   fair   system   for     assessing       and
+
+compensating    asbestos-related      claimants”     under    
+28    U.S.C.     §
+
+157
+(b)(5) and the automatic stay feature of 
+11 U.S.C. § 362
+, “to
+
+avoid unnecessary repetition, confusion, inconsistent results in
+
+multiple trials of common issues, cost or delay where these many
+
+cases do not have to be multiplied.”14         In addition to seeking a
+
+
+  14
+    See Petitioner’s Emergency Motion for Stay at 3 (for cases
+consolidated under Fifth Circuit Case No. 01-41327).     In cases
+filed at later dates and consolidated under other case numbers,
+Garlock’s intent is stated in a different location. For example,
+“[a] stay in this action will promote the stated congressional
+public policy reflected in § 157(b)(5) of having all matters
+‘related to’ bankruptcy reviewed toward implementing centralized,
+efficient and expeditious proceedings conserving the debtor’s
+resources and distributing the debtor’s assets for the benefit of
+all creditors alike.” See Petitioner’s Emergency Motion for Stay
+at 14 (for cases consolidated under Fifth Circuit Case No. 01-
+
+                                     29
+centralized forum under federal bankruptcy laws, which, we note,
+
+Garlock may desire as much for perceived protection from judgments
+
+in the state courts, Garlock appears to be contemplating the
+
+availability of coordinated federal court judgments for their
+
+preclusive effect in future actions.
+
+       To the extent that Garlock’s contention can be read to embrace
+
+one    made   more   explicitly   by        the     “Big   Three”        automobile
+
+manufacturers15--that    transfer      to     the     District      of     Delaware
+
+bankruptcy court would facilitate a ruling on the ability of
+
+friction products to be a producing cause of asbestos-related
+
+diseases, a ruling that would be used for purposes of issue
+
+preclusion in other cases--Garlock faces formidable obstacles.                   As
+
+an initial matter, we note that Garlock has not attempted to
+
+certify as a class these and other asbestos cases--the only widely-
+
+
+
+51209). Regardless, all of the motions reflect the same underlying
+general facts, legal theory and intent.
+  15
+    The “Big Three” automobile manufacturers, who are co-defendants
+in many of these same cases, are being sued as users of asbestos
+friction products, such as brakes in automobiles. They moved in
+the District of Delaware to transfer all such claims against them
+under § 157(b)(5) for the specifically stated intent of conducting
+Daubert hearings for the admission of scientific evidence and a
+ruling that brake/friction products are conclusively not a possible
+source of disease-producing asbestos. See Daubert v. Merrell Dow
+Pharmaceuticals, Inc., 
+509 U.S. 579, 589
+ (1993). Such a ruling
+would then be used for issue preclusion in future cases. Garlock
+and amici have briefed the auto manufacturers’ effort from their
+opposing   perspectives   and   counsel   for   Ford   Motor   Co.,
+DaimlerChrysler Corp. and General Motors Corp. has further informed
+us by letter dated December 12, 2001, that the District of Delaware
+has provisionally transferred only those claims to that court for
+further determinations.
+
+                                    30
+credited medium for disposing of multiple claims while barring
+
+relitigation         of    resolved     issues.         Less      well-accepted     is
+
+consolidation under Rule 42, but this approach is complicated by
+
+the cases involved having been filed in multiple courts in diffuse
+
+districts and by the absence of complete uniformity among parties
+
+and interests.            Even more tenuous would be resort to judicial
+
+notice under FED. R. EVID. 201.             For a party to tee up an issue for
+
+decision in a selected court with the expectation that any rulings
+
+would not only be referenced by subsequent courts but also applied
+
+as binding--and in the face of inconsistent decisions previously
+
+rendered elsewhere--is to hope for a most novel application of that
+
+rule indeed.
+
+      But no matter how creative the procedural avenue, and in spite
+
+of the fact that this litigation would benefit from a uniform
+
+approach, at almost every turn this circuit has rejected attempts
+
+at   aggregation      and    issue    preclusion     in     asbestos   cases.      Our
+
+adversity toward group resolution sounds in our concern that no one
+
+be deprived the right to a full and fair opportunity to litigate
+
+their claims.         In C.A. Hardy v. Johns-Manville Sales Corp., 
+681
+
+F.2d 334
+ (5th Cir. 1982), we turned aside a district court’s order
+
+that nonparty asbestos companies were estopped from relitigating
+
+issues    of    dangerousness         and   causation       as    violative   of   the
+
+fundamental right to trial by jury.                 We reached this conclusion
+
+based    on    the   manufacturers’         each   having    an    interest   in   the
+
+
+
+                                            31
+plaintiffs proving the same set of facts.      Indeed, in Hardy we went
+
+so far as to conclude that the presence of inconsistent findings in
+
+other cases on the same questions at issue in Hardy made the
+
+application of collateral estoppel highly problematic even as to
+
+the parties themselves.     Of course Garlock need not be reminded of
+
+Hardy’s place in this circuit’s jurisprudence for it was one of the
+
+defendants that opposed any attempt to bar the relitigation of key
+
+dispositive issues.
+
+     The passage of time has not weakened the teachings of Hardy.
+
+In re Fibreboard, 
+893 F.2d 706
+ (5th Cir. 1990), saw this court
+
+issue a writ of mandamus against the trial of a representative
+
+group of plaintiffs on the issues of duty and damages.           There, we
+
+said that adherence to state substantive law and to the Seventh
+
+Amendment right to trial by jury would not tolerate making the
+
+resolution of a handful of claims binding as to defendant asbestos
+
+manufacturers’ liability with respect to all plaintiffs. In Cimino
+
+v. Raymark Industries, Inc., 
+151 F.3d 297
+ (5th Cir. 1998), we again
+
+revisited   the   same   district   court’s   revised   effort    at   mass
+
+resolution.   There, we emphasized that federal rules providing for
+
+aggregation of claims--specifically, FED. R. CIV. P. 23 and 42--
+
+cannot override the necessity of proving causation as to each
+
+defendant, a requirement of the state law providing the cause of
+
+action and of the right to trial by jury.      As we did in Fibreboard,
+
+we refused to tolerate deviation from fundamental principles of due
+
+
+                                    32
+process simply because asbestos cases threatened to swamp the
+
+resources of the federal courts.
+
+     The closest this circuit has come to utilization of issue
+
+preclusion in the asbestos context is Jenkins v. Raymark, 
+831 F.2d
+
+550
+ (5th Cir. 1987).            In that case, a certified class of 753
+
+claimants were permitted to try common issues in a single trial,
+
+the result of which was applicable to the class.                        The procedure
+
+approved      in   Jenkins,    however,      still     required    individual    jury
+
+determinations of causation and damages.
+
+     The      efficiencies      to     be   obtained    from    issue     preclusion,
+
+therefore, cannot in this circuit serve as a basis for the transfer
+
+of cases under 
+28 U.S.C. § 157
+(b)(5).
+
+V.   Abstention.
+
+     A    §   157(b)(5)       motion    ordinarily      requires    an     abstention
+
+analysis.      In re Dow Corning, 
+86 F.3d 482, 497
+ (6th Cir. 1996).                   
+28
+
+U.S.C. § 1334
+ provides for two types of abstention: discretionary
+
+abstention under § 1334(c)(1) and mandatory abstention under §
+
+1334(c)(2).        See, e.g., Broyles v. U.S. Gypsum Co., 
+266 B.R. 778
+
+
+(E.D.    Tex.      2001)   (finding     both     doctrines     apply,    as   well   as
+
+equitable remand, in circumstances not involving a transfer under
+
+28 U.S.C. § 157
+(b)(5)).
+
+     We agree with the district judge in Corpus Christi.                             Any
+
+abstention issues remaining in these cases regarding claims now
+
+before the bankruptcy court in the District of Delaware may be
+
+
+                                            33
+decided by that district court.
+
+VI.   Conclusion.
+
+      We do not disagree that the transfer provisions of 
+28 U.S.C.
+
+§ 157
+(b)(5) may be applicable to multiple, non-debtor co-defendants
+
+in a mass tort case.   Our holding today is that Garlock, in these
+
+cases and under these circumstances, has not shown that such a
+
+transfer is appropriate.
+
+      It is hereby ORDERED that,
+
+      The Petitioner’s Motions for Stay under FED. R. APP. P. 8 are
+
+DENIED.   It is further ORDERED that,
+
+      The temporary stays issued in our consolidated Orders are
+
+hereby dissolved.
+
+
+
+
+                                   34
