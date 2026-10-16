@@ -20,8 +20,10 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import logging
+import re
 import sys
 import time
 from pathlib import Path
@@ -239,6 +241,113 @@ def build_overlay(coll, case_id: str) -> tuple[str, list[str]]:
     return "\n".join(lines), list(texts.values())
 
 
+def _skel(s: str) -> str:
+    """Aggressive normalisation for duplicate detection (drop case/punctuation)."""
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def build_overlay_struct(coll, case_id: str, *, max_tensions: int = 15,
+                         max_related: int = 25, max_cross: int = 8,
+                         min_len: int = 40) -> tuple[str, list[str]]:
+    """Cleaned *structural* overlay: only signals the raw text does not state.
+
+    Motivated by the finding that the original overlay was dominated by
+    near-duplicate self-pairs, fragment titles and boilerplate cross-opinion
+    matches.  This builder keeps four things and drops the rest:
+
+      * section boundaries (``section_idx`` groups) -- membership is graph
+        metadata, not something the text states explicitly;
+      * ``contradicts`` pairs -- the tensegrity "tension" signal;
+      * de-duplicated role-tagged sentence pairs (near-identical pairs dropped);
+      * substantive, non-paraphrase cross-opinion ties.
+
+    Returns ``(overlay_text, sentences)`` and mirrors :func:`build_overlay` so
+    the two are interchangeable for prompt building and quote snapping.
+    """
+    sents = doc_sentences(coll, case_id)
+    texts = {s["_id"]: (s.get("properties", {}).get("text") or "") for s in sents}
+    sec = {s["_id"]: s.get("properties", {}).get("section_idx") for s in sents}
+    lines: list[str] = ["## Graph structure overlay (tensegrity index; "
+                        "complements -- does not repeat -- the opinion text below)"]
+
+    bysec: dict[Any, list] = collections.defaultdict(list)
+    for sid in texts:
+        bysec[sec[sid]].append(sid)
+    lines.append("\n### Section boundaries (contiguous sentence groups)")
+    for k in sorted(bysec, key=lambda x: (x is None, x)):
+        ids = bysec[k]
+        anchor = next((texts[i] for i in ids if len(texts[i]) >= min_len),
+                      texts[ids[0]] if ids else "")
+        lines.append(f"- section {k}: {len(ids)} sentences | starts: {_clip(anchor, 150)}")
+
+    edges = doc_edges(coll, list(texts.keys()))
+    intra, cross = [], []
+    for e in edges:
+        a, b = e.get("cm1_id"), e.get("cm2_id")
+        role = e.get("role") or "?"
+        q = e.get("connection_strength") or 0.0
+        if a in texts and b in texts:
+            intra.append((role, q, a, b))
+        elif (a in texts) != (b in texts):
+            cross.append((role, q, a, b))
+
+    # 1) tensions -- the one genuinely non-redundant structural signal
+    tensions = sorted([t for t in intra if t[0] == "contradicts"], key=lambda x: -x[1])
+    lines.append(f"\n### Internal tensions (`contradicts`)  [n={len(tensions)}]")
+    seen: set = set()
+    for role, q, a, b in tensions[:max_tensions]:
+        key = tuple(sorted((_skel(texts[a]), _skel(texts[b]))))
+        if key in seen:
+            continue
+        seen.add(key)
+        lines.append(f"- q={q:.2f}\n  A: {_clip(texts[a])}\n  B: {_clip(texts[b])}")
+
+    # 2) related pairs -- drop near-duplicates and fragments
+    lines.append("\n### Related sentence pairs (role, similarity; duplicates removed)")
+    rel = sorted([t for t in intra if t[0] != "contradicts"], key=lambda x: -x[1])
+    seen = set()
+    shown = 0
+    for role, q, a, b in rel:
+        na, nb = _skel(texts[a]), _skel(texts[b])
+        if not na or not nb or na == nb or na in nb or nb in na:
+            continue
+        if min(len(texts[a]), len(texts[b])) < min_len:
+            continue
+        key = tuple(sorted((na, nb)))
+        if key in seen:
+            continue
+        seen.add(key)
+        shown += 1
+        lines.append(f"- {role} ({q:.2f}): {_clip(texts[a], 160)} || {_clip(texts[b], 160)}")
+        if shown >= max_related:
+            break
+
+    # 3) cross-opinion ties -- substantive and not mere paraphrase
+    if cross:
+        far_ids = [(b if a in texts else a) for _, _, a, b in cross]
+        far = {s["_id"]: s for s in coll.find(
+            {"_id": {"$in": far_ids}},
+            {"properties.text": 1, "properties.doc_id": 1})}
+        lines.append("\n### Cross-opinion ties (substantive, non-paraphrase only)")
+        seen = set()
+        shown = 0
+        for role, q, a, b in sorted(cross, key=lambda x: -x[1]):
+            other = b if a in texts else a
+            o = far.get(other, {}).get("properties", {})
+            t = (o.get("text") or "").strip()
+            if len(t) < 80 or role == "same_phenomenon":
+                continue
+            if _skel(t) in seen:
+                continue
+            seen.add(_skel(t))
+            shown += 1
+            lines.append(f"- {role} ({q:.2f}) [{o.get('doc_id', '?')}]: {_clip(t)}")
+            if shown >= max_cross:
+                break
+
+    return "\n".join(lines), list(texts.values())
+
+
 def messages_fulltext(case_id: str, spec: str, meta_txt: str = "") -> list[dict]:
     head = f"{meta_txt}\n" if meta_txt else ""
     return [
@@ -361,9 +470,10 @@ def pick_evidence(sents: list[str], n: int = 3) -> list[str]:
 def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
             chat: OllamaChat, schema: dict, spec: str, snap: bool,
             meta: dict[str, dict[str, str]], overlays_dir: Path | None = None,
-            dry_run: bool = False, prompt_budget: int = 0) -> None:
+            dry_run: bool = False, prompt_budget: int = 0,
+            no_think: bool = False) -> None:
     coll = None
-    if arm == "llm_graph" and overlays_dir is None:
+    if arm in ("llm_graph", "llm_graph_struct") and overlays_dir is None:
         coll, _ = connect()
     t_start = time.monotonic()
     # Resume: append to the jsonl and skip case_ids already finished, so an
@@ -383,14 +493,20 @@ def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
         for i, cid in enumerate(todo, 1):
             sents: list[str] = []
             meta_txt = metadata_block(cid, meta)
-            if arm == "llm_graph":
+            if arm in ("llm_graph", "llm_graph_struct"):
                 if overlays_dir is not None:
                     overlay, sents = load_overlay(overlays_dir / f"{cid}.json")
+                elif arm == "llm_graph_struct":
+                    overlay, sents = build_overlay_struct(coll, cid)
                 else:
                     overlay, sents = build_overlay(coll, cid)
                 msgs = messages_graph(cid, spec, overlay, meta_txt, prompt_budget)
             else:
                 msgs = messages_fulltext(cid, spec, meta_txt)
+            if no_think:
+                # qwen3 soft switch: keeps the reasoning trace out of the
+                # generation (belt-and-braces with the "think": false param).
+                msgs[-1]["content"] = msgs[-1]["content"].rstrip() + "\n/no_think"
             if dry_run:
                 chars = sum(len(m["content"]) for m in msgs)
                 log.info("[%s] %d/%d %s prompt %d chars (~%d tok)",
@@ -430,7 +546,7 @@ def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description="US-matrix extraction benchmark arms")
     ap.add_argument("--arm", required=True,
-                    choices=["graph_regex", "llm_fulltext", "llm_graph"])
+                    choices=["graph_regex", "llm_fulltext", "llm_graph", "llm_graph_struct"])
     ap.add_argument("--limit", type=int, default=0, help="first N cases only")
     ap.add_argument("--ids", default="", help="comma-separated case ids")
     ap.add_argument("--model", default="qwen3:14b")
@@ -447,7 +563,12 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--dry-run", action="store_true",
                     help="build prompts and report their size without calling the model")
     ap.add_argument("--timeout", type=int, default=2400)
+    ap.add_argument("--no-think", action="store_true",
+                    help="append qwen3 '/no_think' to the prompt (disable reasoning)")
     ap.add_argument("--out", default="", help="output jsonl (default per arm)")
+    ap.add_argument("--shard", default="0/1",
+                    help="I/N: process only cases whose index i satisfies i %% N == I "
+                         "(for sharding across multiple GPU/ollama instances)")
     args = ap.parse_args(argv)
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -456,6 +577,10 @@ def main(argv: list[str] | None = None) -> None:
     ids = [x for x in args.ids.split(",") if x] or load_case_ids()
     if args.limit:
         ids = ids[: args.limit]
+    shard_i, shard_n = (int(x) for x in args.shard.split("/"))
+    if shard_n > 1:
+        ids = [c for i, c in enumerate(ids) if i % shard_n == shard_i]
+        log.info("shard %d/%d -> %d cases", shard_i, shard_n, len(ids))
     out_jsonl = Path(args.out) if args.out else RESULTS_DIR / f"{args.arm}.jsonl"
     out_dir = RESULTS_DIR / f"{args.arm}_cases"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -474,9 +599,10 @@ def main(argv: list[str] | None = None) -> None:
         wt = chat.warmup()
         log.info("warm-up at num_ctx=%d took %.1fs", args.num_ctx, wt)
     arm_llm(ids, out_jsonl, out_dir, arm=args.arm, chat=chat, schema=matrix_schema(),
-            spec=task_spec(), snap=(args.arm == "llm_graph"), meta=meta,
+            spec=task_spec(), snap=(args.arm in ("llm_graph", "llm_graph_struct")), meta=meta,
             overlays_dir=Path(args.overlays) if args.overlays else None,
-            dry_run=args.dry_run, prompt_budget=int(args.num_ctx * 3.2))
+            dry_run=args.dry_run, prompt_budget=int(args.num_ctx * 3.2),
+            no_think=args.no_think)
 
 
 if __name__ == "__main__":

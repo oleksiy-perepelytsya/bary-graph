@@ -470,7 +470,8 @@ def pick_evidence(sents: list[str], n: int = 3) -> list[str]:
 def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
             chat: OllamaChat, schema: dict, spec: str, snap: bool,
             meta: dict[str, dict[str, str]], overlays_dir: Path | None = None,
-            dry_run: bool = False, prompt_budget: int = 0) -> None:
+            dry_run: bool = False, prompt_budget: int = 0,
+            no_think: bool = False) -> None:
     coll = None
     if arm in ("llm_graph", "llm_graph_struct") and overlays_dir is None:
         coll, _ = connect()
@@ -502,6 +503,10 @@ def arm_llm(case_ids: list[str], out_jsonl: Path, out_dir: Path, *, arm: str,
                 msgs = messages_graph(cid, spec, overlay, meta_txt, prompt_budget)
             else:
                 msgs = messages_fulltext(cid, spec, meta_txt)
+            if no_think:
+                # qwen3 soft switch: keeps the reasoning trace out of the
+                # generation (belt-and-braces with the "think": false param).
+                msgs[-1]["content"] = msgs[-1]["content"].rstrip() + "\n/no_think"
             if dry_run:
                 chars = sum(len(m["content"]) for m in msgs)
                 log.info("[%s] %d/%d %s prompt %d chars (~%d tok)",
@@ -558,7 +563,12 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--dry-run", action="store_true",
                     help="build prompts and report their size without calling the model")
     ap.add_argument("--timeout", type=int, default=2400)
+    ap.add_argument("--no-think", action="store_true",
+                    help="append qwen3 '/no_think' to the prompt (disable reasoning)")
     ap.add_argument("--out", default="", help="output jsonl (default per arm)")
+    ap.add_argument("--shard", default="0/1",
+                    help="I/N: process only cases whose index i satisfies i %% N == I "
+                         "(for sharding across multiple GPU/ollama instances)")
     args = ap.parse_args(argv)
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -567,6 +577,10 @@ def main(argv: list[str] | None = None) -> None:
     ids = [x for x in args.ids.split(",") if x] or load_case_ids()
     if args.limit:
         ids = ids[: args.limit]
+    shard_i, shard_n = (int(x) for x in args.shard.split("/"))
+    if shard_n > 1:
+        ids = [c for i, c in enumerate(ids) if i % shard_n == shard_i]
+        log.info("shard %d/%d -> %d cases", shard_i, shard_n, len(ids))
     out_jsonl = Path(args.out) if args.out else RESULTS_DIR / f"{args.arm}.jsonl"
     out_dir = RESULTS_DIR / f"{args.arm}_cases"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -587,7 +601,8 @@ def main(argv: list[str] | None = None) -> None:
     arm_llm(ids, out_jsonl, out_dir, arm=args.arm, chat=chat, schema=matrix_schema(),
             spec=task_spec(), snap=(args.arm in ("llm_graph", "llm_graph_struct")), meta=meta,
             overlays_dir=Path(args.overlays) if args.overlays else None,
-            dry_run=args.dry_run, prompt_budget=int(args.num_ctx * 3.2))
+            dry_run=args.dry_run, prompt_budget=int(args.num_ctx * 3.2),
+            no_think=args.no_think)
 
 
 if __name__ == "__main__":

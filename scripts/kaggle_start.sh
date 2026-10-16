@@ -14,9 +14,13 @@
 # Useful knobs (env):
 #   LLM_MODEL=qwen3:14b       model used by the extraction eval arms
 #   LLM_CTX=24576             context window for the eval
+#   LLM_NUM_PREDICT unset     cap generated tokens per case (e.g. 4000)
+#   LLM_NO_THINK=1            append qwen3 '/no_think' (disable reasoning)
 #   RUN_US_MATRIX=1           run the US-matrix eval after bootstrap (0 to skip)
-#   US_MATRIX_ARMS="llm_fulltext llm_graph"
+#   US_MATRIX_ARMS="llm_fulltext llm_graph_struct"
+#   US_MATRIX_IDS_FILE=$BUNDLE/cases_pilot30.txt   case list (one id per line)
 #   US_MATRIX_LIMIT=0         >0 runs only the first N cases
+#   OLLAMA_BASE_PORT=11434    first instance port; one ollama per GPU
 #   KAGGLE_API_TOKEN=...      reuse a fixed token instead of a fresh one
 
 set -euo pipefail
@@ -69,20 +73,38 @@ if [ -z "$OLLAMA_BIN" ]; then
 fi
 echo "== ollama: $OLLAMA_BIN =="
 
-if ! curl -sf http://localhost:11434/api/version >/dev/null 2>&1; then
-  echo "== starting ollama :11434 =="
-  CUDA_VISIBLE_DEVICES=0 OLLAMA_HOST=0.0.0.0:11434 nohup "$OLLAMA_BIN" serve > "$WORK/ollama.log" 2>&1 &
-fi
-ollama_up=0
-for _ in $(seq 1 60); do
-  if curl -sf http://localhost:11434/api/version >/dev/null; then ollama_up=1; break; fi
-  sleep 2
+# Two (or more) GPUs are used by running one ollama instance per GPU and
+# sharding the independent eval cases across them -- ollama's own multi-GPU
+# tensor split is unreliable, and per-case work is embarrassingly parallel.
+NGPU=$(nvidia-smi -L 2>/dev/null | wc -l | tr -d ' ')
+[ "${NGPU:-0}" -lt 1 ] && NGPU=1
+OLLAMA_BASE_PORT="${OLLAMA_BASE_PORT:-11434}"
+echo "== GPUs detected: $NGPU (ollama on ports $OLLAMA_BASE_PORT..$((OLLAMA_BASE_PORT+NGPU-1))) =="
+
+for i in $(seq 0 $((NGPU-1))); do
+  port=$((OLLAMA_BASE_PORT+i))
+  if ! curl -sf "http://localhost:$port/api/version" >/dev/null 2>&1; then
+    echo "== starting ollama on GPU $i :$port =="
+    CUDA_VISIBLE_DEVICES="$i" OLLAMA_HOST="0.0.0.0:$port" \
+      nohup "$OLLAMA_BIN" serve > "$WORK/ollama_$i.log" 2>&1 &
+  fi
 done
-if [ "$ollama_up" != "1" ]; then
-  echo "== ERROR: ollama did not come up on :11434 (see $WORK/ollama.log) =="
-  tail -20 "$WORK/ollama.log" || true
-  exit 1
-fi
+
+for i in $(seq 0 $((NGPU-1))); do
+  port=$((OLLAMA_BASE_PORT+i))
+  ollama_up=0
+  for _ in $(seq 1 60); do
+    if curl -sf "http://localhost:$port/api/version" >/dev/null; then ollama_up=1; break; fi
+    sleep 2
+  done
+  if [ "$ollama_up" != "1" ]; then
+    echo "== ERROR: ollama :$port did not come up (see $WORK/ollama_$i.log) =="
+    tail -20 "$WORK/ollama_$i.log" || true
+    exit 1
+  fi
+done
+# The CLI (list/pull) talks to instance 0; all instances share OLLAMA_MODELS.
+export OLLAMA_HOST="127.0.0.1:$OLLAMA_BASE_PORT"
 
 # --- model pulls -----------------------------------------------------------
 # Exact-name check against the first column of `ollama list` (a substring match
@@ -162,7 +184,9 @@ echo "== installed models =="
 "$OLLAMA_BIN" list || true
 echo "=================================================="
 
-# 5. US-matrix extraction eval (run locally on this host, no tunnel)
+# 5. US-matrix extraction eval (run locally on this host, no tunnel).
+# Each arm is sharded across the NGPU ollama instances and the shards run
+# concurrently; parts are merged into <arm>.jsonl afterwards.
 if [ "${RUN_US_MATRIX:-1}" = "1" ]; then
   BUNDLE="$REPO_DIR/kaggle_bundle"
   export US_MATRIX_GOLD_DIR="$BUNDLE"
@@ -175,23 +199,64 @@ if [ "${RUN_US_MATRIX:-1}" = "1" ]; then
   if [ "${US_MATRIX_LIMIT:-0}" != "0" ]; then LIMIT_ARGS=(--limit "$US_MATRIX_LIMIT"); fi
   NP_ARGS=()
   if [ -n "${LLM_NUM_PREDICT:-}" ]; then NP_ARGS=(--num-predict "$LLM_NUM_PREDICT"); fi
+  IDS_ARGS=()
+  US_MATRIX_IDS_FILE="${US_MATRIX_IDS_FILE:-$BUNDLE/cases_pilot30.txt}"
+  if [ -n "${US_MATRIX_IDS_FILE:-}" ] && [ -f "$US_MATRIX_IDS_FILE" ]; then
+    IDS_ARGS=(--ids "$(paste -sd, "$US_MATRIX_IDS_FILE")")
+    echo "== case list: $US_MATRIX_IDS_FILE ($(wc -l < "$US_MATRIX_IDS_FILE") ids) =="
+  fi
+  THINK_ARGS=()
+  if [ "${LLM_NO_THINK:-1}" = "1" ]; then THINK_ARGS=(--no-think); fi
 
-  echo "== US-matrix eval -> $US_MATRIX_RESULTS_DIR =="
-  for arm in ${US_MATRIX_ARMS:-llm_fulltext llm_graph}; do
+  echo "== US-matrix eval -> $US_MATRIX_RESULTS_DIR (shards=$NGPU) =="
+  for arm in ${US_MATRIX_ARMS:-llm_fulltext llm_graph_struct}; do
     echo "=== arm: $arm ==="
-    if [ "$arm" = "llm_graph" ]; then
+    OV_ARGS=()
+    case "$arm" in
+      llm_graph)        OV_ARGS=(--overlays "$BUNDLE/overlays") ;;
+      llm_graph_struct) OV_ARGS=(--overlays "$BUNDLE/overlays_struct") ;;
+    esac
+    pids=()
+    for i in $(seq 0 $((NGPU-1))); do
+      port=$((OLLAMA_BASE_PORT+i))
+      out="$US_MATRIX_RESULTS_DIR/$arm.part$i.jsonl"
+      echo "  shard $i/$NGPU -> :$port -> $out"
       python3 -u -m scripts.eval.run_eval_us_matrix --arm "$arm" \
-        --base-url "http://localhost:$KAGGLE_API_PORT" --token "$KAGGLE_API_TOKEN" \
+        --base-url "http://localhost:$port" \
         --model "$LLM_MODEL" --num-ctx "${LLM_CTX:-24576}" \
-        --overlays "$BUNDLE/overlays" ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"} ${NP_ARGS[@]+"${NP_ARGS[@]}"}
-    else
-      python3 -u -m scripts.eval.run_eval_us_matrix --arm "$arm" \
-        --base-url "http://localhost:$KAGGLE_API_PORT" --token "$KAGGLE_API_TOKEN" \
-        --model "$LLM_MODEL" --num-ctx "${LLM_CTX:-24576}" ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"} ${NP_ARGS[@]+"${NP_ARGS[@]}"}
-    fi
+        --shard "$i/$NGPU" --out "$out" \
+        ${IDS_ARGS[@]+"${IDS_ARGS[@]}"} ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"} \
+        ${OV_ARGS[@]+"${OV_ARGS[@]}"} ${NP_ARGS[@]+"${NP_ARGS[@]}"} \
+        ${THINK_ARGS[@]+"${THINK_ARGS[@]}"} \
+        > "$US_MATRIX_RESULTS_DIR/$arm.part$i.log" 2>&1 &
+      pids+=($!)
+    done
+    for p in "${pids[@]}"; do wait "$p" || echo "  (a shard exited nonzero; see $arm.part*.log)"; done
+
+    # merge shard parts -> <arm>.jsonl (dedupe by case_id)
+    python3 - "$US_MATRIX_RESULTS_DIR" "$arm" "$NGPU" << 'PYEOF'
+import json, sys
+from pathlib import Path
+d, arm, n = Path(sys.argv[1]), sys.argv[2], int(sys.argv[3])
+seen = {}
+for i in range(n):
+    p = d / f"{arm}.part{i}.jsonl"
+    if not p.exists():
+        continue
+    for ln in p.read_text(errors="replace").splitlines():
+        try:
+            r = json.loads(ln)
+        except Exception:
+            continue
+        if r.get("case_id") is not None:
+            seen[str(r["case_id"])] = r
+(d / f"{arm}.jsonl").write_text(
+    "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in seen.values()))
+print(f"  merged {len(seen)} cases -> {d / (arm + '.jsonl')}")
+PYEOF
   done
 
   echo "== results =="
   ls -la "$US_MATRIX_RESULTS_DIR"
-  echo "== download these: llm_fulltext.jsonl and llm_graph.jsonl =="
+  echo "== download these: llm_fulltext.jsonl and llm_graph_struct.jsonl =="
 fi
