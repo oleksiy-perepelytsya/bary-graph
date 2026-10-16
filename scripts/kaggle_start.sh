@@ -173,6 +173,8 @@ if [ "${RUN_US_MATRIX:-1}" = "1" ]; then
 
   LIMIT_ARGS=()
   if [ "${US_MATRIX_LIMIT:-0}" != "0" ]; then LIMIT_ARGS=(--limit "$US_MATRIX_LIMIT"); fi
+  NP_ARGS=()
+  if [ -n "${LLM_NUM_PREDICT:-}" ]; then NP_ARGS=(--num-predict "$LLM_NUM_PREDICT"); fi
 
   echo "== US-matrix eval -> $US_MATRIX_RESULTS_DIR =="
   for arm in ${US_MATRIX_ARMS:-llm_fulltext llm_graph}; do
@@ -181,11 +183,11 @@ if [ "${RUN_US_MATRIX:-1}" = "1" ]; then
       python3 -u -m scripts.eval.run_eval_us_matrix --arm "$arm" \
         --base-url "http://localhost:$KAGGLE_API_PORT" --token "$KAGGLE_API_TOKEN" \
         --model "$LLM_MODEL" --num-ctx "${LLM_CTX:-24576}" \
-        --overlays "$BUNDLE/overlays" ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"}
+        --overlays "$BUNDLE/overlays" ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"} ${NP_ARGS[@]+"${NP_ARGS[@]}"}
     else
       python3 -u -m scripts.eval.run_eval_us_matrix --arm "$arm" \
         --base-url "http://localhost:$KAGGLE_API_PORT" --token "$KAGGLE_API_TOKEN" \
-        --model "$LLM_MODEL" --num-ctx "${LLM_CTX:-24576}" ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"}
+        --model "$LLM_MODEL" --num-ctx "${LLM_CTX:-24576}" ${LIMIT_ARGS[@]+"${LIMIT_ARGS[@]}"} ${NP_ARGS[@]+"${NP_ARGS[@]}"}
     fi
   done
 
