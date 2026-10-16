@@ -448,28 +448,58 @@ class OllamaChat:
                         if schema is not None:
                             payload["format"] = schema
                         data = json.dumps(payload).encode()
-                        req = urllib.request.Request(
-                            f"{self.base}{ep_path}", data=data,
-                            headers={"Content-Type": "application/json",
-                                     **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
-                        )
-                        t0 = time.monotonic()
-                        parts: list[str] = []
-                        meta: dict[str, Any] = {}
-                        with urllib.request.urlopen(req, timeout=self.timeout) as r:
-                            for raw in r:
-                                line = raw.strip()
-                                if not line:
-                                    continue
-                                obj = json.loads(line)
-                                if obj.get("error"):
-                                    raise RuntimeError(str(obj["error"]))
-                                chunk = (obj.get("message") or {}).get("content")
-                                if chunk:
-                                    parts.append(chunk)
-                                if obj.get("done"):
-                                    meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
-                                    break
+                        headers = {"Content-Type": "application/json"}
+                        if self.token:
+                            headers["Authorization"] = f"Bearer {self.token}"
+                        # try with auth, retry without on 401
+                        def _do():
+                            h = dict(headers)
+                            r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                            t0 = time.monotonic()
+                            parts: list[str] = []
+                            meta: dict[str, Any] = {}
+                            with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                for raw in resp:
+                                    line = raw.strip()
+                                    if not line:
+                                        continue
+                                    obj = json.loads(line)
+                                    if obj.get("error"):
+                                        raise RuntimeError(str(obj["error"]))
+                                    chunk = (obj.get("message") or {}).get("content")
+                                    if chunk:
+                                        parts.append(chunk)
+                                    if obj.get("done"):
+                                        meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                        break
+                            return parts, meta, time.monotonic() - t0
+                        try:
+                            parts, meta, dt = _do()
+                        except urllib.error.HTTPError as ee:
+                            if ee.code == 401 and self.token:
+                                # retry without token
+                                headers_noauth = {"Content-Type": "application/json"}
+                                h = headers_noauth
+                                r = urllib.request.Request(f"{self.base}{ep_path}", data=data, headers=h)
+                                t0 = time.monotonic()
+                                parts, meta = [], {}
+                                with urllib.request.urlopen(r, timeout=self.timeout) as resp:
+                                    for raw in resp:
+                                        line = raw.strip()
+                                        if not line:
+                                            continue
+                                        obj = json.loads(line)
+                                        if obj.get("error"):
+                                            raise RuntimeError(str(obj["error"]))
+                                        chunk = (obj.get("message") or {}).get("content")
+                                        if chunk:
+                                            parts.append(chunk)
+                                        if obj.get("done"):
+                                            meta = {"eval_count": obj.get("eval_count"), "prompt_eval_count": obj.get("prompt_eval_count"), "total_duration_ns": obj.get("total_duration")}
+                                            break
+                                dt = time.monotonic() - t0
+                            else:
+                                raise
                         if not parts and not meta:
                             raise RuntimeError("empty stream")
                         self.calls += 1
@@ -486,10 +516,12 @@ class OllamaChat:
                         if schema is not None:
                             payload["format"] = schema
                         data = json.dumps(payload).encode()
+                        headers = {"Content-Type": "application/json"}
+                        if self.token:
+                            headers["Authorization"] = f"Bearer {self.token}"
                         req = urllib.request.Request(
                             f"{self.base}{ep_path}", data=data,
-                            headers={"Content-Type": "application/json",
-                                     **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
+                            headers=headers,
                         )
                         t0 = time.monotonic()
                         parts: list[str] = []
@@ -523,10 +555,12 @@ class OllamaChat:
                         if self.num_predict is not None:
                             payload["max_tokens"] = self.num_predict
                         data = json.dumps(payload).encode()
+                        headers = {"Content-Type": "application/json"}
+                        if self.token:
+                            headers["Authorization"] = f"Bearer {self.token}"
                         req = urllib.request.Request(
                             f"{self.base}{ep_path}", data=data,
-                            headers={"Content-Type": "application/json",
-                                     **({"Authorization": f"Bearer {self.token}"} if self.token else {})},
+                            headers=headers,
                         )
                         t0 = time.monotonic()
                         parts: list[str] = []
