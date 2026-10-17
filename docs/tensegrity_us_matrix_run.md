@@ -216,3 +216,49 @@ delta conflates the sentence store with snap-on for both graph arms.
 **Operational note.** `/no_think` (qwen3) cut per-case time ~4× (10.6 → ~2.5
 min; ~14 tok/s, ~2,000 out tokens), and sharding one ollama per GPU (2×T4)
 roughly doubled throughput. The 60-case pilot finished in ~80 min.
+
+## Experiment (c): are the graph's *cross-document* claims meaningful?
+
+The graph's only corpus-level ("associative") assertion is its cross-opinion L15
+edges. Question: do they link opinions for a real reason, or for boilerplate?
+
+**Method.** Pull every L15 BaryEdge whose two endpoints are sentence nodes in
+*different* opinions; characterise them; test held-out doctrine signals (do the
+linked opinions share `area_of_law`, a statute, or a precedent vs random pairs);
+and hand-read a random sample of the substantive ones.
+
+**Characterisation** (1,555 cross-opinion edges):
+
+| property | share |
+| --- | --- |
+| one side < 20 chars | 58% |
+| two sides identical after normalisation | 30% |
+| contains a boilerplate marker (caption/"v."/"counsel"…) | 22% |
+| both sides ≥ 40 chars, non-duplicate, non-boilerplate | **15%** (227) |
+
+Role labels: `is_instance_of` 570, `same_phenomenon` 560, `extends` 288,
+`applies_to` 109, `contradicts` **28**. Median `role_probability` **0.45**;
+median `q` 0.84.
+
+**Held-out doctrinal signal** (909 distinct linked opinion pairs):
+
+| signal | linked pairs | random-pair baseline | lift |
+| --- | --- | --- | --- |
+| same `area_of_law` | 25% | 21% | 1.20× |
+| share a statute | 4% | 2% | 1.98× |
+| **share a cited precedent** | 1% | ~0% | 3.8× (tiny base) |
+
+**Hand read of 18 of the 227 substantive links:** ~**39%** are genuine
+same-doctrine parallels (and those are mostly generic standards — "review de
+novo a summary judgment", burden-shifting); ~**39%** are coincidental
+reporter-citations or template sentences ("We have jurisdiction pursuant to …
+and affirm"); ~22% are weak. Dominant false-positive: two *reporter citations*
+("410 U.S. 284…" ‖ "440 U.S. 332…") linked because citation strings embed alike.
+
+**Conclusion.** The graph's cross-document structure has **low precision and
+almost no doctrinal lift**. Estimated genuine fraction ≈ 13% × 39% ≈ **6% of all
+1,555 cross-opinion edges** (binomial range ~2.5–9%). `contradicts` — the one
+"tensegrity" signal — is 1.8% of cross links. So the corpus-level retrieval
+surface the graph offers is mostly boilerplate/citation similarity, not doctrine:
+consistent with (b)'s null result and with the concern that the graph is not
+contributing associative value on this corpus.
