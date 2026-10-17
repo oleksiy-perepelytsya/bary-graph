@@ -164,3 +164,55 @@ Harness details worth keeping: `sentence_id` is a string (`26133:p100:s0`), so
 document order requires parsing the integers out — sorting the ids directly
 scrambles the text; and the overlay is trimmed, never the opinion, when a prompt
 would exceed the context budget.
+
+## Experiment (b): does graph *structure* improve semantic extraction?
+
+The original `llm_graph` arm handed the model the opinion text **plus** an
+overlay that, measured over all 100 documents, was mostly noise: 17% of
+intra-opinion relation lines were exact self-duplicates, 20% had a side under 20
+characters, 79% of cross-opinion "parallel passages" were under 20 characters
+and 45% were empty, and the role labels were dominated by `same_phenomenon`
+(`contradicts` was only ~3% of edges). So `llm_graph` was close to
+`llm_fulltext` + a noisy appendix, and did not cleanly test the graph.
+
+**Design.** `llm_graph_struct` (§ `build_overlay_struct`, commit `a5da782`)
+keeps only the signals the raw text does not state: `section_idx` groups,
+`contradicts` pairs, **de-duplicated** role-tagged sentence pairs, and
+substantive non-paraphrase cross-opinion ties. A 30-case stratified pilot
+(15 high-contradiction + 15 spread; `kaggle_bundle/cases_pilot30.txt`) ran both
+arms with `qwen3:14b`, one ollama per GPU and the arm sharded across them.
+
+**Result** (paired, n=30; metric deltas = `llm_graph_struct − llm_fulltext`):
+
+| metric | fulltext | struct | delta |
+| --- | --- | --- | --- |
+| semantic mean (5 fields) | 0.713 | 0.740 | **+0.027** |
+| `standard_of_review` | 0.533 | 0.667 | +0.133 |
+| `procedure_type` | 0.667 | 0.700 | +0.033 |
+| `area_of_law` | 0.833 | 0.800 | −0.033 |
+| `disposition` / `winning_party` | 0.767 | 0.767 | 0.000 |
+| metadata mean | 0.911 | 0.922 | +0.011 |
+| citation / statute P-R | ~0.24–0.56 | ~0.24–0.56 | ±0.03 (noise) |
+| **`quotes_verbatim`** | 0.573 | **0.967** | **+0.394** |
+
+Per-case semantic mean: G>T 6, G<T 3, tie 21; **paired t-test p=0.255**. Per-field
+paired flips are all non-significant (McNemar: `standard_of_review` 4–0,
+p=0.125; every other field ≤1 flip).
+
+**Conclusion.** The cleaned graph *structure* gives **no statistically
+significant** semantic gain (+0.027, p≈0.26; even the one directional signal,
+`standard_of_review`, is p=0.125 at n=30). The graph's one **large, real**
+contribution is the verbatim-quote guarantee (0.573 → 0.967) — but that comes
+from the L15 **sentence store** (quote snapping), not from the relation/role
+structure. Metadata fields are unchanged (both arms read `cases.csv`), and
+citations/statutes are unchanged.
+
+This vindicates the original concern: in this design the LLM does the semantic
+work from the opinion text, and the graph's *structure* contributes nothing
+measurable. Caveats: n=30 on 5 binary fields is underpowered (ruling out only
+large effects, ≳15–20%); a single model (`qwen3:14b`); the `quotes_verbatim`
+delta conflates the sentence store with snap-on for both graph arms.
+
+**Operational note.** `/no_think` (qwen3) cut per-case time ~4× (10.6 → ~2.5
+min; ~14 tok/s, ~2,000 out tokens), and sharding one ollama per GPU (2×T4)
+roughly doubled throughput. The 60-case pilot finished in ~80 min.
