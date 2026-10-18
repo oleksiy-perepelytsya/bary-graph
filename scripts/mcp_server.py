@@ -6,6 +6,9 @@ Provides sixteen tools:
   human_readable_search — plain search across ALL vectors; top 3 hits rendered
                       in human words only (glosses, relations, hierarchy) —
                       no ids, no parameters, no scores
+  retrieve_phrase   — two-hop per-unit retrieval returning the nodes that BIND
+                      a phrase (maximin over independent-unit cover), plus a
+                      chain of which units each link joins
   find_word        — look up word nodes (all POS variants)
   word_senses      — list all L15 sense glosses for a word
   word_edges       — L14 BaryEdges where the word is a CM
@@ -1000,6 +1003,7 @@ async def enrich_request(
 
 _BRIDGE_EXPAND_HITS = 3  # nearest MetaBary hits per probe that get triad expansion
 _BRIDGE_WORD_CAP = 12    # max words per triad branch (child1/child2/bridge)
+_SOURCE_OVERFETCH = 4    # fetch this many times `limit` when filtering on source
 
 
 def _bridge_hit(doc: dict[str, Any], expand: bool) -> dict[str, Any]:
@@ -1700,6 +1704,570 @@ def _human_readable_search_body(query: str) -> str:
             body = f"(could not expand this hit: {type(e).__name__}: {e})"
         blocks.append(f"[{i}] {body.strip()}")
     return "\n\n".join(blocks)
+
+
+# --- retrieve_phrase: two-hop seed → conjunction retrieval -------------------
+#
+# One query in, one answer shape out. The path is deliberately two hops:
+#
+#   hop 1  every unit of the query is searched on its own (top_k): what the
+#          words point at. A single whole-phrase vector collapses all units
+#          into whichever term dominates the blend — context_search on
+#          "model moment existance" comes back with `moment*` only.
+#   hop 2  the vectors hop 1 returned are themselves searched: the graph
+#          region around the denotations, which is where a binding node
+#          lives. A binder is routinely absent from every seed's own top_k,
+#          which is exactly why a plain intersection misses it.
+#   rank   cover(d) = the independent units that reached d, score(d) =
+#          (|cover| / n) * min(score over cover) — maximin, not mean. A doc
+#          very close to one unit and barely near another may not claim to
+#          bind them.
+#
+#     k = 1        local      one unit's own neighbourhood; not an answer
+#     k = 2..n-1   binder     spans a proper subset: this binds the phrase
+#     k = n        hub        every unit reached everything. Function words
+#                             are meant to be roads — but a road is not a
+#                             destination (the HUB_BRIDGE reasoning, arrived
+#                             at from the retrieval side).
+#
+# Function words are kept as first-class units: they have their own space in
+# the graph, and they are the roads the phrase runs on. To keep them cheap
+# they get an address preset — the L14 word node's own id + stored vector,
+# resolved once and cached — so a repeated call neither embeds nor searches
+# for a word it already knows the coordinates of.
+#
+# haven/heaven is NOT resolved by spelling: it is resolved by vectors. No
+# edit-distance, no synonyms, no language model judgement in the path.
+
+# Membership test for the preset — not a stopword list. These words are
+# searched like any other when the preset misses (word absent from the graph).
+_FUNCTION_WORDS: frozenset[str] = frozenset({
+    # determiners
+    "a", "an", "the", "this", "that", "these", "those", "some", "any", "no",
+    "not", "all", "each", "every", "both", "either", "neither", "another",
+    "one", "ones",
+    # conjunctions / prepositions — the roads
+    "and", "or", "nor", "but", "yet", "so", "of", "to", "for", "in", "on",
+    "at", "by", "with", "from", "as", "into", "onto", "via", "vs", "over",
+    "under", "between", "among", "through", "across", "about", "against",
+    "before", "after", "during", "without", "within", "toward", "towards",
+    "than", "if", "then", "else", "when", "while", "because",
+    "although", "though", "unless", "until", "whether",
+    # pronouns
+    "i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us",
+    "them", "my", "your", "his", "its", "our", "their", "mine", "yours",
+    "ours", "theirs", "myself", "itself", "oneself",
+    # copula / auxiliaries — real predicates, real coordinates
+    "is", "are", "was", "were", "be", "been", "being", "am", "do", "does",
+    "did", "done", "have", "has", "had", "will", "would", "shall", "should",
+    "can", "could", "may", "might", "must",
+    # wh- words
+    "who", "what", "which", "whom", "whose", "how", "where", "why",
+})
+
+# word -> {"id": ObjectId, "vector": list[float]} — the address preset.
+# Populated lazily on first use; a word that is not in the graph is not
+# cached, so it is re-tried rather than remembered as a failure.
+_FUNCTION_ADDRESS: dict[str, dict[str, Any]] = {}
+
+# Cap on how many binders get their leaf words expanded (a single _triad_of
+# or cm_leaf_words walk per binder); the rest are returned label-free.
+_BINDER_WORD_CAP = 12
+_BINDER_EXPAND_CAP = 20
+
+
+def _resolve_function_address(word: str, source: str | None = None) -> dict[str, Any] | None:
+    """Address preset for a function word: its own word node + stored vector.
+
+    One exact-match ``find`` on first sight, then cached for the life of the
+    process — no embed call, no $vectorSearch on subsequent calls. Returns
+    None when the word is not a function word, has no node, or the node
+    carries no vector (then the caller falls through to a normal search).
+
+    When ``source`` is set and the cached node came from elsewhere, the preset
+    is refused too — a filter that held for the vector search must also hold
+    for the shortcut, or the two paths would answer differently.
+    """
+    hit = _FUNCTION_ADDRESS.get(word)
+    if hit is None:
+        if word not in _FUNCTION_WORDS:
+            return None
+        doc = _coll.find_one(
+            {"doc_type": "node", "node_type": "word", "properties.word": word},
+            {"properties.word": 1, "vector": 1, "source": 1},
+        )
+        if doc is None or doc.get("vector") is None:
+            return None
+        hit = {"id": doc["_id"], "vector": unpack_vec(doc["vector"]).tolist(),
+               "source": doc.get("source")}
+        _FUNCTION_ADDRESS[word] = hit
+    if source and hit.get("source") != source:
+        return None
+    return hit
+
+
+def _decompose_units(query: str) -> list[str]:
+    """Ordered, de-duplicated word units. Function words are KEPT.
+
+    Contrary to _search_terms(), nothing is stripped: "all" has its own
+    space in the graph and dropping it would remove part of what the phrase
+    is built from.
+    """
+    out: list[str] = []
+    seen: set[str] = set()
+    for m in _MULTIWORD_WORD_RE.finditer(query):
+        t = m.group(0).lower()
+        if t in seen:
+            continue
+        seen.add(t)
+        out.append(t)
+    return out
+
+
+def _vec_search(
+    qv: list[float], limit: int, doc_type: str, source: str | None = None,
+) -> tuple[list[dict[str, Any]], int]:
+    """$vectorSearch with the doc_type restriction every other search tool uses.
+
+    ``source`` cannot be pushed into the ``$vectorSearch`` filter: the vector
+    index has no filter path for it (``indexes/vector_index.json`` lists only
+    doc_type/level/edge_type/node_type) and Mongo rejects an unknown path in
+    ``$vectorSearch.filter`` outright. ``lib/assoc_search.py``:1125 does the
+    same thing for the same reason — over-fetch, then select client-side.
+    Returns (kept, rejected) so the caller can report what the filter cost.
+    """
+    filt = {"doc_type": doc_type} if doc_type in ("node", "baryedge") else None
+    fetch = limit * _SOURCE_OVERFETCH if source else limit
+    docs = vector_search(
+        _coll, qv, limit=fetch, num_candidates=max(fetch * 10, 200), filter=filt
+    )
+    if not source:
+        return docs, 0
+    kept = [d for d in docs if d.get("source") == source]
+    return kept[:limit], len(docs) - len(kept)
+
+
+def _hop_one(
+    unit: str, top_k: int, doc_type: str, embedder, source: str | None = None,
+) -> dict[str, Any]:
+    """Hop 1 — what this single unit points at.
+
+    Returns the serialisable unit state plus a private ``reps`` list of
+    np.ndarray vectors (the seed vectors, or the preset vector) which is
+    what hop 2 expands from. ``reps`` never reaches the caller.
+    ``dropped_by_source`` counts hop-1 candidates the source filter rejected;
+    each unit counts its own, so no counter is shared across threads.
+    """
+    addr = _resolve_function_address(unit, source)
+    if addr is not None:
+        # Address preset: the word node IS the seed. Skip embed + search.
+        seed: dict[str, Any] = {
+            "id": str(addr["id"]),
+            "score": 1.0,
+            "exact": True,
+            "doc_type": "node",
+            "node_type": "word",
+            "word": unit,
+            "origin": "preset",
+        }
+        return {
+            "unit": unit, "origin": "preset", "exact": True,
+            "coherence": None, "seeds": [seed],
+            "dropped_by_source": 0,
+            "reps": [np.asarray(addr["vector"], dtype=np.float32)],
+        }
+
+    qv = embedder.embed([unit])[0].tolist()
+    docs, dropped = _vec_search(qv, top_k, doc_type, source)
+    seeds: list[dict[str, Any]] = []
+    vecs: list[np.ndarray] = []
+    exact = False
+    for d in docs:
+        hit: dict[str, Any] = {
+            "id": str(d["_id"]),
+            "score": round(float(d.get("_score", 0)), 4),
+            "level": d.get("level"),
+            "doc_type": d.get("doc_type"),
+            "edge_type": d.get("edge_type"),
+            "origin": "search",
+        }
+        props = d.get("properties") or {}
+        if d.get("doc_type") == "node":
+            hit["node_type"] = d.get("node_type")
+            hit["word"] = props.get("word")
+            if d.get("node_type") == "word" and (props.get("word") or "").lower() == unit:
+                hit["exact"] = True
+                exact = True
+        if d.get("vector") is not None:
+            vecs.append(unpack_vec(d["vector"]))
+        seeds.append(hit)
+
+    coherence = None
+    if len(vecs) >= 2:
+        pairs = [
+            cosine(vecs[i], vecs[j])
+            for i in range(len(vecs)) for j in range(i + 1, len(vecs))
+        ]
+        coherence = round(sum(pairs) / len(pairs), 4)
+
+    # Fall back to the query vector when no hit carried one, so a unit whose
+    # seeds are all vector-less can still expand rather than vanish.
+    reps = vecs or [np.asarray(qv, dtype=np.float32)]
+    return {
+        "unit": unit, "origin": "search", "exact": exact,
+        "coherence": coherence, "seeds": seeds,
+        "dropped_by_source": dropped, "reps": reps,
+    }
+
+
+def _binder_words(doc: dict[str, Any]) -> Any:
+    """Leaf words for a binder: triad for MetaBary, flat CM words for L14/L15."""
+    level = doc.get("level")
+    if level is not None and level <= 13 and doc.get("cm1_id") and doc.get("cm2_id"):
+        tri = _triad_of(doc["_id"], doc["cm1_id"], doc["cm2_id"], doc.get("bridge_id"))
+        return {k: list(v.get("words") or [])[:_BRIDGE_WORD_CAP] for k, v in tri.items()}
+    if level is not None and level >= 14:
+        return sorted(cm_leaf_words(_coll, doc["_id"], max_words=32))[:_BRIDGE_WORD_CAP]
+    return None
+
+
+def _build_chain(binders: list[dict[str, Any]], units: list[str]) -> list[dict[str, Any]]:
+    """Order binders so they connect the units (greedy set cover).
+
+    First cut, not a path search: repeatedly take the binder that adds the
+    most still-uncovered units, ties broken by score. The result is an
+    ordering whose elements each state which units they bind; ``units`` left
+    uncovered land in ``unbound`` instead of being silently dropped.
+    """
+    covered: set[str] = set()
+    remaining = [b for b in binders if not b["suspect_hub"]]
+    chain: list[dict[str, Any]] = []
+    while remaining and len(covered) < len(units):
+        best = max(
+            remaining,
+            key=lambda b: (len(set(b["cover"]) - covered), b["score"]),
+        )
+        added = sorted(set(best["cover"]) - covered)
+        if not added:
+            break
+        chain.append({
+            "id": best["id"],
+            "level": best.get("level"),
+            "words": best.get("words"),
+            "binds": added,
+            "score": best["score"],
+        })
+        covered |= set(added)
+        remaining.remove(best)
+    return chain
+
+
+def _verify_chain(chain: list[dict[str, Any]]) -> None:
+    """Tag consecutive chain links that share a parent_edge_id as verified.
+
+    Cheap graph-side check on a vector-built chain: two binders with the same
+    parent sit in one branch together, so the link is corroborated by the
+    hierarchy and not only by geometry. Links without it stay
+    ``chain_verified: false`` — the caller must not read a vector-only chain
+    as a structural claim. The first link has no predecessor, so it reports
+    ``null`` rather than a verdict it cannot have.
+    """
+    if not chain:
+        return
+    try:
+        ids = [ObjectId(c["id"]) for c in chain]
+    except Exception:
+        return
+    parents = {
+        str(d["_id"]): d.get("parent_edge_id")
+        for d in _coll.find({"_id": {"$in": ids}}, {"parent_edge_id": 1})
+    }
+    prev = None
+    for i, c in enumerate(chain):
+        parent = parents.get(c["id"])
+        c["parent_id"] = str(parent) if parent else None
+        if i == 0:
+            c["chain_verified"] = None
+        else:
+            c["chain_verified"] = bool(parent is not None and parent == prev)
+        prev = parent
+
+
+@mcp.tool()
+async def retrieve_phrase(
+    query: str,
+    top_k: int = 3,
+    expand_k: int = 3,
+    doc_type: str = "any",
+    fused: bool = True,
+    verify_tau: float = 0.55,
+    max_binders: int = 20,
+    include_locals: bool = False,
+    source: str | None = None,
+) -> str:
+    """Retrieve what BINDS a phrase, not what each word of it points at.
+
+    Two hops. Hop 1 searches every word of the query separately (top_k hits
+    each) so no single dominant term can collapse the rest. Hop 2 searches the
+    vectors hop 1 returned — the region around the denotations — and a
+    candidate's cover is the set of INDEPENDENT units that reached it. Rank is
+    maximin over the cover, scaled by the share of the phrase covered:
+
+        score = (|cover| / n) * min(score over cover)
+
+    k=1 is a unit's own neighbourhood (local), k=n is a hub (everything
+    reached everything — roads are expected to be hubs, destinations are not),
+    and only 2 <= k <= n-1 counts as a binder. Binders are ordered into a
+    chain that states which units each link joins.
+
+    Function words ("all", "the", "of", …) are kept as real units and get an
+    address preset: their word node's id + stored vector, resolved once and
+    cached, so they cost no embed and no $vectorSearch on repeat calls.
+
+    Variant resolution is done by vectors only — no spelling correction. A
+    query of "haven" reaches whatever its vector reaches.
+
+      query        the phrase
+      top_k        seeds per unit in hop 1 (default 3)
+      expand_k     hop-2 searches per seed vector (default 3)
+      doc_type     'node' | 'baryedge' | 'any' (default) — fed to both hops
+      fused        also search the centroid of one vector per unit, so a node
+                   moderately close to two seeds but in neither's top_k can
+                   still become a candidate. Its cover is re-verified against
+                   the individual unit vectors with verify_tau, because a
+                   centroid score is not evidence of per-unit closeness.
+      verify_tau   min cosine a fused candidate must hold to each unit it
+                   claims (default 0.55)
+      max_binders  cap on binders returned (word expansion is capped too)
+      include_locals  also return the k=1 hits (off by default: they are what
+                    the words already pointed at, not the answer)
+      source       keep only docs whose stored ``source`` field equals this
+                    (e.g. 'structural' for authored SMBs, 'ingested' for the
+                    kaikki/L14 layer, 'inferred'/'reentry' for derived BEs).
+                    The vector index has no filter path for it, so it runs as
+                    a client-side selection over a _SOURCE_OVERFETCH-bigger
+                    fetch — callers see ``counts.dropped_by_source``. None
+                    (default) does no filtering and no over-fetch.
+    """
+    err = _validate_text(query, "query")
+    if err:
+        return err
+    if doc_type not in ("node", "baryedge", "any"):
+        return "doc_type must be 'node', 'baryedge', or 'any'."
+    if source is not None and (not isinstance(source, str) or not source.strip()):
+        return "source must be a non-empty string or null."
+    if source is not None:
+        source = source.strip()
+    top_k = min(max(top_k, 1), 10)
+    expand_k = min(max(expand_k, 1), 10)
+    max_binders = min(max(max_binders, 1), 100)
+
+    try:
+        return await _run_thr(
+            _retrieve_phrase_body, query, top_k, expand_k, doc_type,
+            fused, verify_tau, max_binders, include_locals, source,
+        )
+    except Exception as e:  # pragma: no cover - defensive
+        _log.exception("retrieve_phrase failed for query=%r", query)
+        return _fmt({"status": "error", "query": query, "message": str(e)})
+
+
+def _retrieve_phrase_body(
+    query: str, top_k: int, expand_k: int, doc_type: str,
+    fused: bool, verify_tau: float, max_binders: int, include_locals: bool,
+    source: str | None = None,
+) -> str:
+    units = _decompose_units(query)
+    if not units:
+        return "No word units found in query."
+
+    embedder = get_embedder(_settings)
+
+    # --- hop 1: every unit on its own -------------------------------------
+    from concurrent.futures import ThreadPoolExecutor
+
+    with ThreadPoolExecutor(max_workers=min(len(units) or 1, 8)) as ex:
+        states = list(
+            ex.map(lambda u: _hop_one(u, top_k, doc_type, embedder, source), units)
+        )
+
+    reps_by_unit: dict[str, list[np.ndarray]] = {s["unit"]: s["reps"] for s in states}
+    # Private — never serialised.
+    for s in states:
+        s.pop("reps", None)
+
+    # --- pool: {id -> {doc, cover: {unit: best_cos}}} ---------------------
+    pool: dict[str, dict[str, Any]] = {}
+
+    def _contribute(unit: str, d: dict[str, Any], score: float) -> None:
+        key = str(d["_id"])
+        ent = pool.setdefault(key, {"doc": d, "cover": {}})
+        if score > ent["cover"].get(unit, -1.0):
+            ent["cover"][unit] = float(score)
+
+    for state in states:
+        unit = state["unit"]
+        for hit in state["seeds"]:
+            doc = {"_id": ObjectId(hit["id"]), "level": hit.get("level"),
+                   "doc_type": hit.get("doc_type"), "edge_type": hit.get("edge_type"),
+                   "properties": {"word": hit.get("word")}}
+            _contribute(unit, doc, float(hit["score"]))
+
+    # --- hop 2: expand the retrieved vectors ------------------------------
+    jobs: list[tuple[str, np.ndarray]] = []
+    for state in states:
+        for rep in state["reps"]:
+            jobs.append((state["unit"], rep))
+
+    def _expand(job: tuple[str, np.ndarray]) -> tuple[int, list[tuple[str, dict, float]]]:
+        unit, rep = job
+        out = []
+        docs, dropped = _vec_search(rep.tolist(), expand_k, doc_type, source)
+        for d in docs:
+            out.append((unit, d, float(d.get("_score", 0.0))))
+        return dropped, out
+
+    expand_dropped = 0
+    with ThreadPoolExecutor(max_workers=min(len(jobs) or 1, 8)) as ex:
+        for dropped, batch in ex.map(_expand, jobs):
+            expand_dropped += dropped
+            for unit, d, score in batch:
+                _contribute(unit, d, score)
+
+    # --- fused origin: one centroid vector, cover re-verified -------------
+    fused_used = 0
+    fused_dropped = 0
+    if fused and len(states) >= 2:
+        primary = [state_reps[0] for state_reps in
+                   (reps_by_unit[s["unit"]] for s in states) if state_reps]
+        if len(primary) >= 2:
+            centroid = _norm_vec(np.mean(np.stack(primary), axis=0))
+            docs, fused_dropped = _vec_search(centroid.tolist(), expand_k, doc_type, source)
+            for d in docs:
+                fused_used += 1
+                if d.get("vector") is None:
+                    continue
+                dv = unpack_vec(d["vector"])
+                for s in states:
+                    unit = s["unit"]
+                    reps = reps_by_unit.get(unit) or []
+                    if not reps:
+                        continue
+                    best = max(cosine(dv, r) for r in reps)
+                    if best >= verify_tau:
+                        _contribute(unit, d, best)
+
+    # --- maximin rank -----------------------------------------------------
+    n = len(units)
+    binders: list[dict[str, Any]] = []
+    locals_: list[dict[str, Any]] = []
+    hubs: list[dict[str, Any]] = []
+    coverage: dict[str, int] = {u: 0 for u in units}
+
+    for key, ent in pool.items():
+        cover = ent["cover"]
+        k = len(cover)
+        for unit in cover:
+            coverage[unit] += 1
+        if k == 0:
+            continue
+        score = (k / n) * min(cover.values())
+        rec = {
+            "id": key,
+            "level": ent["doc"].get("level"),
+            "doc_type": ent["doc"].get("doc_type"),
+            "edge_type": ent["doc"].get("edge_type"),
+            "k": k,
+            "cover": sorted(cover),
+            "score": round(score, 4),
+            "weakest": round(min(cover.values()), 4),
+        }
+        word = (ent["doc"].get("properties") or {}).get("word")
+        if word:
+            rec["word"] = word
+        if n >= 2 and k == n:
+            rec["suspect_hub"] = True
+            hubs.append(rec)
+        elif k >= 2:
+            rec["suspect_hub"] = False
+            binders.append(rec)
+        else:
+            locals_.append(rec)
+
+    binders.sort(key=lambda r: -r["score"])
+    hubs.sort(key=lambda r: -r["score"])
+    locals_.sort(key=lambda r: -r["score"])
+
+    # --- leaf words for the binders we actually return --------------------
+    # pool entries built from hop-1 node seeds are synthetic (id/level only),
+    # so re-read each shown binder once to expand its real structure.
+    shown = binders[:max_binders]
+    for rec in shown:
+        raw = _coll.find_one({"_id": ObjectId(rec["id"])})
+        if raw is None:
+            continue
+        props = raw.get("properties") or {}
+        if raw.get("doc_type") == "node" and props.get("word"):
+            rec["word"] = props["word"]
+            rec["words"] = [props["word"]]
+            if raw.get("node_type") == "sense" and props.get("gloss"):
+                rec["gloss"] = props["gloss"]
+        else:
+            rec["words"] = _binder_words(raw)
+
+    chain = _build_chain(shown, units)
+    _verify_chain(chain)
+    # Two different ways a unit can fail to be bound, kept apart:
+    #   unbound             nothing in the pool reached it — not even its seed
+    #   unbound_by_binders  it was seeded, but no returned binder spans it
+    unbound = sorted(u for u in units if coverage.get(u, 0) == 0)
+    bound_by_binder = {u for rec in shown for u in rec["cover"]}
+    unbound_by_binders = sorted(set(units) - bound_by_binder)
+    dropped_total = (
+        sum(int(s.get("dropped_by_source") or 0) for s in states)
+        + expand_dropped + fused_dropped
+    )
+
+    result: dict[str, Any] = {
+        "query": query,
+        "units": units,
+        "params": {
+            "top_k": top_k, "expand_k": expand_k, "doc_type": doc_type,
+            "fused": fused, "verify_tau": verify_tau, "max_binders": max_binders,
+            "source": source,
+            "source_overfetch": _SOURCE_OVERFETCH if source else 1,
+        },
+        "seeds": states,
+        "binders": shown,
+        "chain": chain,
+        "coverage": coverage,
+        "unbound": unbound,
+        "unbound_by_binders": unbound_by_binders,
+        "counts": {
+            "units": n,
+            "pool": len(pool),
+            "binder": len(binders),
+            "local": len(locals_),
+            "suspect_hub": len(hubs),
+            "fused_candidates": fused_used,
+            "dropped_by_source": dropped_total,
+        },
+    }
+    if n < 2:
+        result["note"] = (
+            "Fewer than 2 units — there is no conjunction to retrieve. "
+            "Only seeds/locals are meaningful for this query."
+        )
+    if include_locals:
+        result["locals"] = locals_[:max_binders]
+    if hubs:
+        result["suspect_hubs"] = hubs[:max_binders]
+    if len(shown) < len(binders):
+        result["truncated"] = (
+            f"{len(binders)} binders ranked, {len(shown)} returned "
+            f"(max_binders={max_binders})."
+        )
+    return _fmt(result)
 
 
 # q_seed lookup: edge_type → q_seeds key (same_phenomenon maps to synonyms tier)
