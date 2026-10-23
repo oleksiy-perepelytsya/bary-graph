@@ -61,3 +61,37 @@ checkpoints and any finished-but-not-downloaded artifacts. Rules:
 3. The retry path: new session → `kaggle_start.sh` → re-split input →
    relaunch the job halves; each half resumes from its own checkpoint only
    if the state dir survived (i.e. the session didn't die).
+
+## Float16 embed transport (slow uplink)
+
+Ollama returns embeddings as JSON decimal floats — ~12.7 KB per 1024-d vector
+decoded, ~4.9 KB after Cloudflare gzip. On a slow home uplink that saturates
+the link while the T4 sits idle (measured: 140 KB/s rx, ~12 pairs/s in s04).
+`scripts/kaggle_f16_shim.py` sits between the tunnel and Ollama, converts
+`/api/embed` responses to raw float16 and returns `application/octet-stream`
+(2 KB/vector, ~2.4x more vectors per second at the same bandwidth). Every
+other path is proxied to Ollama verbatim, so it can also serve as
+`OLLAMA_BACKENDS` for the main proxy if one tunnel is preferred.
+
+On Kaggle (prints token + fresh tunnel URL):
+
+```bash
+cd /kaggle/working/bary-graph
+nohup python3 -m scripts.kaggle_f16_shim --tunnel > f16_shim.log 2>&1 &
+sleep 20 && cat f16_shim.log
+```
+
+Locally:
+
+```bash
+EMBED_F16=1 OLLAMA_URL=https://<tunnel> KAGGLE_API_TOKEN=<token> \
+    python3 -m scripts.s04_l15_edges --force --batch-size 512 --embed-concurrency 4
+```
+
+`lib/embed.py` only decodes the binary payload when `EMBED_F16=1`; the JSON
+path is unchanged otherwise. float16 costs ~3e-5 absolute error per component
+(cosine 1.0000 on the round-trip test), far below any q threshold.
+
+Note the T4 must be free: if a chat model (e.g. `qwen3:14b`) is resident,
+unload it first (`POST /api/generate {"model": ..., "keep_alive": 0}`) or
+Ollama will run the embedder on CPU.

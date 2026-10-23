@@ -122,6 +122,11 @@ class OllamaEmbedder:
         # 0.6s with 4). Override with EMBED_NUM_THREAD.
         self._num_thread = settings.embed_num_thread or (os.cpu_count() or 4)
         self._options = {"num_thread": self._num_thread, "num_gpu": 999}
+        # Optional float16 wire format: a remote shim can return raw float16
+        # bytes instead of decimal JSON floats, which is ~2.4x fewer bytes for
+        # a 1024-d vector (4.9 KB -> 2 KB gzipped-over-tunnel). Lossless enough
+        # for cosine work; enable with EMBED_F16=1.
+        self._f16 = os.environ.get("EMBED_F16", "").lower() in ("1", "true", "yes")
         self._headers = {}
         token = os.environ.get("OLLAMA_API_KEY") or os.environ.get("OLLAMA_AUTH_TOKEN") or os.environ.get("KAGGLE_EMBED_TOKEN") or os.environ.get("KAGGLE_API_TOKEN")
         if token:
@@ -169,8 +174,16 @@ class OllamaEmbedder:
                     continue
                 _log.error("embed batch failed after %d attempts", _MAX_RETRIES + 1)
                 raise last_exc from None
-        data = resp.json()
-        arr = np.asarray(data["embeddings"], dtype=np.float32)
+        if self._f16:
+            n = len(texts)
+            arr = np.frombuffer(resp.content, dtype=np.float16)
+            if arr.size != n * self.dim:
+                raise ValueError(
+                    f"f16 embed payload has {arr.size} values, expected {n}x{self.dim}"
+                )
+            arr = arr.reshape(n, self.dim).astype(np.float32)
+        else:
+            arr = np.asarray(resp.json()["embeddings"], dtype=np.float32)
         norms = np.linalg.norm(arr, axis=1, keepdims=True)
         norms[norms == 0.0] = 1.0
         return arr / norms
