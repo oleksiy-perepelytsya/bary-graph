@@ -78,20 +78,42 @@ else
     python3 -m scripts.s01_parse
 fi
 
-# 5. tunnel
+# 5. tunnel (main proxy JSON)
 if ! command -v cloudflared >/dev/null; then
   curl -fsSL -o /tmp/cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
   dpkg -i /tmp/cloudflared.deb || apt-get install -f -y -qq
 fi
-pkill -f "cloudflared tunnel" 2>/dev/null || true
+pkill -f "cloudflared tunnel.*$KAGGLE_API_PORT" 2>/dev/null || true
 nohup cloudflared tunnel --no-autoupdate --url "http://localhost:$KAGGLE_API_PORT" > "$WORK/cloudflared.log" 2>&1 &
 sleep 8
 
 TUNNEL=$(grep -oE 'https://[a-z0-9-]+\.trycloudflare\.com' "$WORK/cloudflared.log" | head -1 || true)
 
+# 6. f16 shim (float16 wire for slow uplink) — preferred for s04
+F16_PORT="${F16_PORT:-8777}"
+F16_TUNNEL=""
+if [ -f "$REPO_DIR/scripts/kaggle_f16_shim.py" ]; then
+  if ! curl -sf -m 3 -H "Authorization: Bearer $KAGGLE_API_TOKEN" "http://127.0.0.1:$F16_PORT/v1/health" >/dev/null 2>&1; then
+    echo "== starting f16 shim on :$F16_PORT =="
+    nohup python3 -m scripts.kaggle_f16_shim --port "$F16_PORT" --token "$KAGGLE_API_TOKEN" --backend "http://localhost:11434" > "$WORK/f16_shim.log" 2>&1 &
+    sleep 5
+  fi
+  pkill -f "cloudflared tunnel.*$F16_PORT" 2>/dev/null || true
+  nohup cloudflared tunnel --no-autoupdate --url "http://localhost:$F16_PORT" > "$WORK/cloudflared_f16.log" 2>&1 &
+  sleep 12
+  F16_TUNNEL=$(grep -oE 'https://[a-z0-9-]+\.trycloudflare\.com' "$WORK/cloudflared_f16.log" | tail -1 || true)
+fi
+
 echo "=================================================="
 echo "  token:  $KAGGLE_API_TOKEN"
-echo "  tunnel: $TUNNEL"
+echo "  tunnel (main JSON, :$KAGGLE_API_PORT): $TUNNEL"
 echo "  API:    ${TUNNEL:-http://localhost:$KAGGLE_API_PORT}/v1/health"
-echo "  OLLAMA_PROXY (for s04 etc): ${TUNNEL:-http://localhost:$KAGGLE_API_PORT}/api/embed"
+echo "  OLLAMA_PROXY: ${TUNNEL:-http://localhost:$KAGGLE_API_PORT}/api/embed"
+if [ -n "$F16_TUNNEL" ]; then
+  echo "--------------------------------------------------"
+  echo "  F16_TUNNEL (:8777, float16 octet-stream): $F16_TUNNEL"
+  echo "  F16 health: ${F16_TUNNEL}/v1/health"
+  echo "  EMBED_F16=1 OLLAMA_URL=$F16_TUNNEL KAGGLE_API_TOKEN=$KAGGLE_API_TOKEN"
+  echo "    python3 -m scripts.s04_l15_edges --force --batch-size 512 --embed-concurrency 4"
+fi
 echo "=================================================="
